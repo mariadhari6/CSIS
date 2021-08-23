@@ -16,14 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('livetable.home');
 });
 
 Route::get('/tes', function () {
     return view('tes');
 });
 
-
+Route::get('/login', function () {
+    return view('partials.v_login');
+});
 
 Route::get('/livetable', [UsernameController::class, 'index']);
 Route::get('/livetable/fetch_data', [UsernameController::class, 'fetch_data']);
