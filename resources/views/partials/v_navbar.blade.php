@@ -15,7 +15,7 @@
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{ asset('images/admin.png') }}" alt="user-img" width="36" class="img-circle"><span >Ambar Nur</span></span> </a>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{ asset('images/admin.png') }}" alt="user-img" width="36" class="img-circle"><span id="user">Ambar Nur</span></span> </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li>
                                 <div class="user-box">

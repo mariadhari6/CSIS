@@ -13,29 +13,28 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right">
-                <button type="button" name="add" id="add" class="btn btn-primary btn-round btn-xs"><i class="fas fa-plus"></i> Add</button>
+                <button type="button" name="add" id="add" class="btn btn-primary btn-round btn-xs   "><i class="fas fa-plus"></i> Add</button>
             </div>
             <br>
 
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
+                <th scope="col">Action</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
-                <th scope="col">Action</th>
-
-
 
               </tr>
             </thead>
             <tbody>
                 @foreach ($Username as $usernames)
                 <tr>
+                    <td>
+
+
+                    </td>
                     <td>{{ $usernames->FirstName }}</td>
                     <td>{{ $usernames->LastName }}</td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-xs delete" id="'{{$usernames->id}}'">Delete</button><div id="edit-btn-' {{$usernames->id}} '"><button type="button" name="edit-btn" class="btn btn-warning btn-xs edit" id="'{{$usernames->id}}'">Edit</button></div><div id="btn-save-'{{$usernames->id}}'"></div>
-                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -50,7 +49,7 @@
     $(document).ready(function() {
       fetch_data();
 
-      $('#table_id').DataTable();
+
 
 
       function fetch_data() {
@@ -62,12 +61,13 @@
           var html = '';
           for (var count = 0; count < data.length; count++) {
             html += '<tr>';
+            html += '<td><div id="edit-btn-' + data[count].id + '"><i class="fas fa-pen edit" name="edit-btn" id="' + data[count].id + '"></i><i class="fas fa-trash delete" id="' + data[count].id + '"></i></div><div id="btn-save-' + data[count].id + '"></div></td>';
             html += '<td><div id="td-FirstName-' + data[count].id + '"></div><div id="value_FirstName-' + data[count].id + '">' + data[count].FirstName + '</div></td>';
             html += '<td><div id="td-LastName-' + data[count].id + '"></div><div id="value_LastName-' + data[count].id + '">' + data[count].LastName + '</div></td>';
-            html += '<td><button type="button" class="btn btn-danger btn-xs delete" id="' + data[count].id + '">Delete</button><div id="edit-btn-' + data[count].id + '"><button type="button" name="edit-btn" class="btn btn-warning btn-xs edit" id="' + data[count].id + '">Edit</button></div><div id="btn-save-' + data[count].id + '"></div></td>';
 
           }
-          $('tbody').html(html);
+          $('tbody').html(html)
+          $('#table_id').DataTable();
         }
       });
     }
@@ -76,12 +76,14 @@
       // Tambah Form Input
       $('#add').click(function() {
         var html = '<tr>';
-        html += '<td><button type="button" id="tambah" class="btn btn-success btn-xs tambah">Insert</button></td>';
-        html += '<td> <input type="text" class="form-control" id="FirstName" placeholder="FirstName"> </td>';
-        html += '<td> <input type="text" class="form-control" id="LastName" placeholder="LastName"> </td>';
+        html += '<td><i class="fas fa-check tambah" id="tambah"></i><i class="fas fa-times cancel" "></i></td>';
+        html += '<td> <div class="input-div"><input type="text" class="input" id="FirstName" placeholder="First Name"></i></div></td>';
+        html += '<td> <div class="input-div"><input type="text" class="input" id="LastName" placeholder="Last Name"></i></td>';
         html += '</tr>';
         $('#table_id tbody').prepend(html);
       });
+
+
 
 
       var _token = $('input[name="_token"]').val();
@@ -105,7 +107,7 @@
             }
           });
         } else {
-          $('#message').html("<div class='alert alert-danger'>Both Fields are required</div>");
+          $('#message').html("<div class='alert alert-danger'>Fields are required</div>");
         }
       });
 
@@ -171,10 +173,10 @@
           }
         });
         button();
-        document.getElementById('btn-save-'+id).innerHTML = '<button type="button" class="btn btn-primary btn-xs update" id="' + id + '">Save</button>';
+        document.getElementById('btn-save-'+id).innerHTML = '<i class="fas fa-check update" id="' + id +'"><i class="fas fa-times ml-2" id="' + id +'">';
 
-        document.getElementById('td-FirstName-' + id).innerHTML = '<input type="text" class="form-control" id="FirstName_val" >';
-        document.getElementById('td-LastName-' + id).innerHTML = '<input type="text" class="form-control" id="LastName_val" >';
+        document.getElementById('td-FirstName-' + id).innerHTML = '<div class="input-div"><input type="text" class="input" id="FirstName_val"></i></div>';
+        document.getElementById('td-LastName-' + id).innerHTML = '<div class="input-div"><input type="text" class="input" id="LastName_val"></i></div>';
         document.getElementById('value_FirstName-' + id).style.display = 'none';
         document.getElementById('value_LastName-' + id).style.display = 'none';
         document.getElementsByName('edit-btn').style.display = 'none';
