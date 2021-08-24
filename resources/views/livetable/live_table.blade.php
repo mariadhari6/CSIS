@@ -103,22 +103,38 @@
       });
 
       // hapus data
-      $(document).on('click', '.delete', function() {
+      $(document).on('click', '.delete', function(event) {
+        event.preventDefault();
+
         var id = $(this).attr("id");
-        if (confirm("Are you sure you want to delete this records?")) {
-          $.ajax({
-            url: "{{ route('livetable.delete_data') }}",
-            method: "POST",
-            data: {
-              id: id,
-              _token: _token
+        swal({
+            title: 'Are you sure?',
+            text: "You want delete to this data!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes Delete',
+            showLoaderOnConfirm: true,
+            preConfirm: function() {
+              return new Promise(function(resolve) {
+                  $.ajax({
+                      url: "{{ route('livetable.delete_data') }}",
+                      method: "POST",
+                      data: {
+                        id: id,
+                        _token: _token
+                      },
+                      success: function(data) {
+                        swal("Done!","It was succesfully deleted!","success");
+                        fetch_data();
+                      }
+                    });
+              });
             },
-            success: function(data) {
-              $('#message').html(data);
-              fetch_data();
-            }
-          });
-        }
+            allowOutsideClick: false
+      });
+
       });
 
     //   $(document).on('click', '.save', function() {
@@ -214,10 +230,6 @@
         }
       });
     });
-
-
-
-
 
   </script>
 
