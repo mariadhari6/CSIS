@@ -27,16 +27,7 @@
               </tr>
             </thead>
             <tbody>
-                @foreach ($Username as $usernames)
-                <tr>
-                    <td>
 
-
-                    </td>
-                    <td>{{ $usernames->FirstName }}</td>
-                    <td>{{ $usernames->LastName }}</td>
-                </tr>
-                @endforeach
             </tbody>
           </table>
           {{ csrf_field() }}
