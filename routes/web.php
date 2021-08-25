@@ -34,3 +34,11 @@ Route::post('/livetable/update_data', [UsernameController::class, 'update_data']
 Route::post('/livetable/delete_data', [UsernameController::class, 'delete_data'])->name('livetable.delete_data');
 Route::post('/livetable/detail_data', [UsernameController::class, 'detail_data'])->name('livetable.detail_data');
 // Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
+
+
+Route::get('/data', [UsernameController::class, 'data']);
+Route::get('/form', [UsernameController::class, 'form']);
+Route::get('/store', [UsernameController::class, 'store']);
+Route::get('/destroy/{id}', [UsernameController::class, 'destroy']);
+Route::get('/show/{id}', [UsernameController::class, 'show']);
+Route::get('/update/{id}', [UsernameController::class, 'update']);
