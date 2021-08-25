@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container-fluid">
-    <h4 class="page-title">Dashboard</h4>
+    <h4 class="page-title">Wellcome to Custommer service </h4>
     <div class="row">
         <div class="col-md-3">
             <div class="card card-stats card-warning">

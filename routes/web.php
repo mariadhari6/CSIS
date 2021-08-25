@@ -1,8 +1,13 @@
 <?php
 
-use App\Http\Controllers\Username;
+
 use App\Http\Controllers\UsernameController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerServiceController;
+use Illuminate\Support\Facades\Auth;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +20,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('livetable.home');
-});
+// Route::get('/', function () {
+//     return view('livetable.home');
+// });
 
-Route::get('/tes', function () {
-    return view('tes');
-});
+// Route::get('/tes', function () {
+//     return view('tes');
+// });
 
 Route::get('/login', function () {
-    return view('partials.v_login');
+    return view('partials.v_landingpage');
 });
 
 Route::get('/livetable', [UsernameController::class, 'index']);
@@ -34,3 +39,15 @@ Route::post('/livetable/update_data', [UsernameController::class, 'update_data']
 Route::post('/livetable/delete_data', [UsernameController::class, 'delete_data'])->name('livetable.delete_data');
 Route::post('/livetable/detail_data', [UsernameController::class, 'detail_data'])->name('livetable.detail_data');
 // Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin', 'auth'], function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.homepage');
+});
+
+Route::group(['prefix' => 'cs', 'middleware' => 'isCs', 'auth'], function () {
+    Route::get('/customer_service', [CustomerServiceController::class, 'index'])->name('cs.homepage');
+});

@@ -28,9 +28,18 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>{{ __('Logout') }}</a>
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                    <i class="fa fa-power-off"></i>
+                                    <button type="submit"> log out</button>
+                                </form>
+
                             </ul>
                             <!-- /.dropdown-user -->
+
+                         </a>
                         </li>
                     </ul>
                 </div>
