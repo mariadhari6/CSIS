@@ -3,5 +3,3 @@
     <td>
         <div class="input-div"><input type="text" class="input" id="FirstName" placeholder="First Name" value="{{ $usernames->FirstName}}"></i></div>
     </td>
-
- 

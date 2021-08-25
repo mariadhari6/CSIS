@@ -93,6 +93,8 @@
     function edit(id){
         var id = id;
         $("#td-button-"+id).slideUp("fast");
+        $("#item-FirstName-"+id).slideUp("fast");
+        $("#item-LastName-"+id).slideUp("fast");
         $.get("{{ url('show') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
