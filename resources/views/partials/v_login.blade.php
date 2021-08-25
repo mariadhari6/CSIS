@@ -23,6 +23,7 @@
                     <form>
                         <div class="form-row">
                             <div class="col-lg-7">
+
                                 <input type="email" placeholder="Email Address" class="form-control my-3 p-4" >
                             </div>
                         </div>

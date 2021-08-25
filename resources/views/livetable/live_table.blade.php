@@ -16,10 +16,17 @@
                 <button type="button" name="add" id="add" class="btn btn-primary btn-round btn-xs   "><i class="fas fa-plus"></i> Add</button>
             </div>
             <br>
-
-          <table class="table table-hover data" class="table_id" id="table_id" >
+            <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
+                <th>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input select-all-checkbox" type="checkbox" data-select="checkbox" data-target=".task-select">
+                            <span class="form-check-sign"></span>
+                        </label>
+                    </div>
+                </th>
                 <th scope="col">Action</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
@@ -52,6 +59,14 @@
           var html = '';
           for (var count = 0; count < data.length; count++) {
             html += '<tr>';
+            html += '<td>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input task-select" type="checkbox">
+                        <span class="form-check-sign"></span>
+                    </label>
+                </div>
+                </td>';
             html += '<td><div id="edit-btn-' + data[count].id + '"><i class="fas fa-pen edit" name="edit-btn" id="' + data[count].id + '"></i><i class="fas fa-trash delete" id="' + data[count].id + '"></i></div><div id="btn-save-' + data[count].id + '"></div></td>';
             html += '<td><div id="td-FirstName-' + data[count].id + '"></div><div id="value_FirstName-' + data[count].id + '">' + data[count].FirstName + '</div></td>';
             html += '<td><div id="td-LastName-' + data[count].id + '"></div><div id="value_LastName-' + data[count].id + '">' + data[count].LastName + '</div></td>';
@@ -67,15 +82,13 @@
       // Tambah Form Input
       $('#add').click(function() {
         var html = '<tr>';
+        html += '<td><div class="form-check"><label class="form-check-label"><input class="form-check-input task-select" type="checkbox"><span class="form-check-sign"></span></label></div></td>';
         html += '<td><i class="fas fa-check tambah" id="tambah"></i><i class="fas fa-times cancel" "></i></td>';
         html += '<td> <div class="input-div"><input type="text" class="input" id="FirstName" placeholder="First Name"></i></div></td>';
         html += '<td> <div class="input-div"><input type="text" class="input" id="LastName" placeholder="Last Name"></i></td>';
         html += '</tr>';
         $('#table_id tbody').prepend(html);
       });
-
-
-
 
       var _token = $('input[name="_token"]').val();
 
@@ -229,6 +242,13 @@
           $('#message').html("<div class='alert alert-danger'>Enter some value</div>");
         }
       });
+
+
+      $('[data-select="checkbox"]').change(function(){
+        $target = $(this).attr('data-target');
+        $($target).prop('checked', $(this).prop("checked"));
+    })
+
     });
 
   </script>
