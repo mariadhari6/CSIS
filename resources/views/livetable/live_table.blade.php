@@ -63,10 +63,14 @@
     // ----- Proses Tambah data ------
     function store() {
         var FirstName = $("#FirstName").val();
+        var LastName = $("#LastName").val();
         $.ajax({
             type: "get",
             url: "{{ url('store') }}",
-            data: "FirstName=" + FirstName,
+            data: {
+              FirstName: FirstName,
+              LastName: LastName
+            },
             success: function(data) {
               read()
             }
@@ -103,11 +107,15 @@
     // ------ Proses Update Data ------
     function update(id) {
         var FirstName = $("#FirstName").val();
+        var LastName = $("#LastName").val();
         var id = id;
         $.ajax({
             type: "get",
             url: "{{ url('update') }}/"+id,
-            data: "FirstName=" + FirstName,
+            data: {
+              FirstName: FirstName,
+              LastName: LastName
+            },
             success: function(data) {
               read()
             }

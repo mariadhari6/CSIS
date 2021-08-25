@@ -35,7 +35,10 @@ class UsernameController extends Controller
 
     public function store(Request $request)
     {
-        $data['FirstName'] = $request->FirstName;
+        $data = array(
+                    'FirstName'    =>  $request->FirstName,
+                    'LastName'     =>  $request->LastName
+                );
         Username::insert($data);
     }
 
@@ -56,7 +59,8 @@ class UsernameController extends Controller
     public function update(Request $request, $id)
     {
         $data = Username::findOrfail($id);
-        $data['FirstName'] = $request->FirstName;
+        $data->FirstName = $request->FirstName;
+        $data->LastName = $request->LastName;
         $data->save(); 
     }
     
