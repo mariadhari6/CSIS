@@ -36,8 +36,8 @@ Route::post('/livetable/detail_data', [UsernameController::class, 'detail_data']
 // Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
 
 
-Route::get('/data', [UsernameController::class, 'data']);
-Route::get('/form', [UsernameController::class, 'form']);
+Route::get('/item_data', [UsernameController::class, 'item_data']);
+Route::get('/add_form', [UsernameController::class, 'add_form']);
 Route::get('/store', [UsernameController::class, 'store']);
 Route::get('/destroy/{id}', [UsernameController::class, 'destroy']);
 Route::get('/show/{id}', [UsernameController::class, 'show']);

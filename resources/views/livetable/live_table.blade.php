@@ -25,7 +25,7 @@
                 <th scope="col">Last Name</th>
               </tr>
             </thead>
-            <tbody  id="data">
+            <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
@@ -39,24 +39,28 @@
       read()
       
     });
-
+    
     
     // ------ Tampil Data ------
     function read(){
-      $.get("{{ url('data') }}", {}, function(data, status) {
-        $("#data").html(data);
+      $.get("{{ url('item_data') }}", {}, function(data, status) {
+        $("#item_data").html(data);
       });
     }
     
+    // ---- Tombol Cancel -----
+    function cancel() {
+      read()
+    }
 
      // ------ Tambah Form Input ------
      $('#add').click(function() {
-        $.get("{{ url('form') }}", {}, function(data, status) {
+        $.get("{{ url('add_form') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
       });
 
-      // ----- Tambah data ------
+    // ----- Proses Tambah data ------
     function store() {
         var FirstName = $("#FirstName").val();
         $.ajax({
@@ -71,14 +75,42 @@
 
     
 
+    // -----Proses Delete Data ------
+    function destroy(id) {
+        var id = id;
+        confirm("Delete ?");
+        $.ajax({
+            type: "get",
+            url: "{{ url('destroy') }}/" + id,
+            data: "id=" + id,
+            success: function(data) {
+              read()
+            }
+        })
+    }
+
+    // ------ Edit Form Data ------
+    function edit(id){
+        var id = id;
+        $("#td-button-"+id).slideUp("fast");
+        $.get("{{ url('show') }}/" + id, {}, function(data, status) {
+            $("#edit-form-"+id).prepend(data)
+        });
+    }
     
-      
-
-   
-
-
-
-
+    // ------ Proses Update Data ------
+    function update(id) {
+        var FirstName = $("#FirstName").val();
+        var id = id;
+        $.ajax({
+            type: "get",
+            url: "{{ url('update') }}/"+id,
+            data: "FirstName=" + FirstName,
+            success: function(data) {
+              read()
+            }
+        })
+    }
 
   </script>
 

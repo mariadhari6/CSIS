@@ -18,17 +18,17 @@ class UsernameController extends Controller
         
     }
 
-    public function form()
+    public function add_form()
     {
 
         return view('livetable.add_form');
         
     }
 
-    public function data()
+    public function item_data()
     {
         $usernames = Username::orderBy('id', 'DESC')->get();
-        return view('livetable.data')->with([
+        return view('livetable.item_data')->with([
             'usernames' => $usernames
         ]);
     }
