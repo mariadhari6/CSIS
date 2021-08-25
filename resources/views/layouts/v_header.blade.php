@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/css/ready.css">
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/css/demo.css">
+
+
         <script src="{{asset('template-admin')}}/assets/js/core/jquery.3.2.1.min.js"></script>
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/js/jquery-ui.min.css">
         <script src="{{asset('template-admin')}}/assets/js/jquery-ui.min.js"></script>
