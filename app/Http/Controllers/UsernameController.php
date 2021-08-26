@@ -176,7 +176,6 @@ class UsernameController extends Controller
     //         echo '<div class="alert alert-success">Data Updated</div>';
     //     }
     // }
-
     public function deleteAll(Request $request)
     {
         if ($request->ajax()) {
