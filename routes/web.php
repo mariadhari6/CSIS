@@ -36,4 +36,4 @@ Route::post('/livetable/detail_data', [UsernameController::class, 'detail_data']
 // Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
 
 // Route::post('/selected-username', [UsernameController::class, 'deleteall'])->name('livetable.delete_all');
-Route::delete('myproductsDeleteAll', 'UsernameController@deleteAll')->name('livetable.delete_all');
+Route::get('/selectedDelete', 'UsernameController@deleteAll')->name('livetable.delete_all');

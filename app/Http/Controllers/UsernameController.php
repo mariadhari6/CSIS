@@ -81,11 +81,16 @@ class UsernameController extends Controller
     // }
     public function deleteAll(Request $request)
     {
-        $ids = $request->ids;
-        DB::table('usernames')
-                ->whereIn('id',explode(",",$ids))
-                ->delete();
-        return response()->json(['success'=>"Products Deleted successfully."]);
+        if ($request->ajax()) {
+            $ids = $request->input('id');
+            DB::table('usernames')->whereIn('id', $ids)->delete();
 
+        }
+
+        // $ids = $request->ids;
+        // DB::table('usernames')
+        //         ->whereIn('id',explode(",",$ids))
+        //         ->delete();
+        //
     }
 }

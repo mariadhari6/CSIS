@@ -17,7 +17,7 @@
                     <button type="button" name="add" id="add" class="btn btn-primary btn-round mr-3"><i class="fas fa-plus"></i> Add</button>
                 </div>
                 <div class="mt-3">
-                    <button  type="button" class="btn btn-success btn-round mr-2"> Edit Selected</button>
+                    <button  type="button" class="btn btn-success btn-round mr-2 edit_all"> Edit Selected</button>
                     <button  type="button" class="btn btn-danger btn-round mr-2 delete_all"> Delete Selected</button>
                 </div>
             </div>
@@ -51,9 +51,11 @@
 
   <script>
     $(document).ready(function() {
+    reload();
 
+    function reload(){
         fetch_data();
-
+    }
 
         function fetch_data() {
             $.ajax({
@@ -63,14 +65,16 @@
                 var html = '';
                 for (var count = 0; count < data.length; count++) {
                     html += '<tr id="tr_'+ data[count].id+' ">';
-                    html += '<td><div class="form-check" ><label class="form-check-label"><input class="form-check-input task-select" type="checkbox" name="ids" data-id ="' + data[count].id + '"><span class="form-check-sign"></span></label></div></td>';
+                    html += '<td><div class="form-check" ><label class="form-check-label"><input class="form-check-input task-select" type="checkbox" id ="' + data[count].id + '"><span class="form-check-sign"></span></label></div></td>';
                     html += '<td><div id="edit-btn-' + data[count].id + '"><i class="fas fa-pen edit" name="edit-btn" id="' + data[count].id + '"></i><i class="fas fa-trash delete" id="' + data[count].id + '"></i></div><div id="btn-save-' + data[count].id + '"></div></td>';
                     html += '<td><div id="td-FirstName-' + data[count].id + '"></div><div id="value_FirstName-' + data[count].id + '">' + data[count].FirstName + '</div></td>';
                     html += '<td><div id="td-LastName-' + data[count].id + '"></div><div id="value_LastName-' + data[count].id + '">' + data[count].LastName + '</div></td>';
 
                 }
                 $('tbody').html(html)
+
                 $('#table_id').DataTable();
+
                 }
             });
         }
@@ -215,6 +219,8 @@
 
       });
 
+
+
       //Update
       $(document).on('click', '.update', function() {
         var FirstName = document.getElementById("FirstName_val").value;
@@ -247,72 +253,124 @@
          if($(this).is(':checked',true))
          {
             $(".task-select").prop('checked', true);
+
          } else {
             $(".task-select").prop('checked',false);
          }
+
+
 
         });
 
 
     // Delete All
 
-        $('.delete_all').on('click', function(e){
+        $('.delete_all').on('click', function(event){
+          event.preventDefault();
 
             var allVals = [];
+
             $(".task-select:checked").each(function() {
-                allVals.push($(this).attr('data-id'));
+                allVals.push($(this).attr("id"));
+
             });
 
-            if (allVals.length <= 0) {
-                alert("Please selected Row");
-            } else {
+                if (allVals.length > 0) {
 
-               var check = confirm("Are you sure you want to delete this row?");
-
-               if(check == true){
-
-                var join= allVals.join(",");
-
-                    $.ajax({
-                        url: "{{ route('livetable.delete_all') }}",
-                        type: 'DELETE',
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        data: {
-                            'ids='+join,
-                            _token: '{{ csrf_token() }}'
+                    alert(allVals);
+                    swal({
+                    title: 'Are you sure?',
+                    text: "You want delete Selected data !",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes Delete',
+                    showLoaderOnConfirm: true,
+                    preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        $.ajax({
+                            url: "{{ route('livetable.delete_all') }}",
+                            method: "GET",
+                            data: {
+                                id: allVals,
+                                _token: _token
                             },
-                        success: function (data) {
-                            if (data['success']) {
-                                // $(".task-select:checked").each(function() {
-                                //     $(this).parents("tr").remove();
-                                // });
-                                // alert(data['success']);
-                                console.log("masuk");
-                            } else if (data['error']) {
-                                alert(data['error']);
-                            } else {
-                                alert('Whoops Something went wrong!!');
+                            success: function(data) {
+                                swal("Done!","It was succesfully deleted!","success");
+                                fetch_data();
                             }
-                        },
-                        error: function (data) {
-                            alert(data.responseText);
-                        }
+                            });
                     });
+                    },
+                    allowOutsideClick: false
+                });
 
-
-                    $.each(allVals, function( index, value ) {
-                    $('table tr').filter("[data-row-id='" + value + "']").remove();
-                    });
-                }
+            }else{
+                alert('Pilih Row yang ingin dihapus')
             }
+
         });
 
-        // $('[data-toggle=confirmation]').confirmation({
-        //     rootSelector: '[data-toggle=confirmation]',
-        //     onConfirm: function (event, element) {
-        //         element.trigger('confirm');
-        //     }
-        // });
+
+
+        $('.edit_all').on('click', function(event){
+          event.preventDefault();
+
+            var allVals = [];
+
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+
+            });
+
+                if (allVals.length > 0) {
+
+                    alert(allVals);
+
+                    $.ajax({
+                        url: "{{ route('livetable.detail_data') }}",
+                        method: "POST",
+                        dataType: "json",
+                        data: {
+                            id: allVals,
+                            _token: _token
+                        },
+                        success: function(data) {
+                            $("#FirstName_val").val(data.FirstName);
+                            $("#LastName_val").val(data.LastName);
+                        }
+                        });
+                        button();
+
+                        document.getElementById('td-FirstName-' + id).innerHTML = '<div class="input-div"><input type="text" class="input" id="FirstName_val"></i></div>';
+                        document.getElementById('td-LastName-' + id).innerHTML = '<div class="input-div"><input type="text" class="input" id="LastName_val"></i></div>';
+                        document.getElementById('value_FirstName-' + id).style.display = 'none';
+                        document.getElementById('value_LastName-' + id).style.display = 'none';
+                        document.getElementsByName('edit-btn').style.display = 'none';
+
+                        function button() {
+                        $.ajax({
+                            url: "/livetable/fetch_data",
+                            dataType: "json",
+                            success: function(data) {
+                            for (var count = 0; count < data.length; count++) {
+                                document.getElementById('edit-btn-' + data[count].id).style.display = 'none';
+                                document.getElementById(data[count].id).style.display = 'none';
+                            }
+                            }
+                        });
+                        }
+
+            }else{
+                alert('Pilih Row yang ingin diedit')
+            }
+
+        });
+
+
+
+
 
 
 
