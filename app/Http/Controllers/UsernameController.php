@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Username;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\DataTables;
 
@@ -80,4 +79,13 @@ class UsernameController extends Controller
     //         return DataTables::of(Username::all())->make(true);
     //     }
     // }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        DB::table('usernames')
+                ->whereIn('id',explode(",",$ids))
+                ->delete();
+        return response()->json(['success'=>"Products Deleted successfully."]);
+
+    }
 }

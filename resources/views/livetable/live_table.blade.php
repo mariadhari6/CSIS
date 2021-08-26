@@ -13,7 +13,13 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right">
-                <button type="button" name="add" id="add" class="btn btn-primary btn-round btn-xs   "><i class="fas fa-plus"></i> Add</button>
+                <div class="">
+                    <button type="button" name="add" id="add" class="btn btn-primary btn-round mr-3"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div class="mt-3">
+                    <button  type="button" class="btn btn-success btn-round mr-2"> Edit Selected</button>
+                    <button  type="button" class="btn btn-danger btn-round mr-2 delete_all"> Delete Selected</button>
+                </div>
             </div>
             <br>
             <table class="table table-hover data" class="table_id" id="table_id" >
@@ -22,7 +28,7 @@
                 <th>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input select-all-checkbox" type="checkbox" data-select="checkbox" data-target=".task-select">
+                            <input class="form-check-input select-all-checkbox" type="checkbox" data-select="checkbox" data-target=".task-select" id="master">
                             <span class="form-check-sign"></span>
                         </label>
                     </div>
@@ -45,38 +51,29 @@
 
   <script>
     $(document).ready(function() {
-      fetch_data();
+
+        fetch_data();
 
 
+        function fetch_data() {
+            $.ajax({
+                url: "/livetable/fetch_data",
+                dataType: "json",
+                success: function(data) {
+                var html = '';
+                for (var count = 0; count < data.length; count++) {
+                    html += '<tr id="tr_'+ data[count].id+' ">';
+                    html += '<td><div class="form-check" ><label class="form-check-label"><input class="form-check-input task-select" type="checkbox" name="ids" data-id ="' + data[count].id + '"><span class="form-check-sign"></span></label></div></td>';
+                    html += '<td><div id="edit-btn-' + data[count].id + '"><i class="fas fa-pen edit" name="edit-btn" id="' + data[count].id + '"></i><i class="fas fa-trash delete" id="' + data[count].id + '"></i></div><div id="btn-save-' + data[count].id + '"></div></td>';
+                    html += '<td><div id="td-FirstName-' + data[count].id + '"></div><div id="value_FirstName-' + data[count].id + '">' + data[count].FirstName + '</div></td>';
+                    html += '<td><div id="td-LastName-' + data[count].id + '"></div><div id="value_LastName-' + data[count].id + '">' + data[count].LastName + '</div></td>';
 
-
-      function fetch_data() {
-
-      $.ajax({
-        url: "/livetable/fetch_data",
-        dataType: "json",
-        success: function(data) {
-          var html = '';
-          for (var count = 0; count < data.length; count++) {
-            html += '<tr>';
-            html += '<td>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input task-select" type="checkbox">
-                        <span class="form-check-sign"></span>
-                    </label>
-                </div>
-                </td>';
-            html += '<td><div id="edit-btn-' + data[count].id + '"><i class="fas fa-pen edit" name="edit-btn" id="' + data[count].id + '"></i><i class="fas fa-trash delete" id="' + data[count].id + '"></i></div><div id="btn-save-' + data[count].id + '"></div></td>';
-            html += '<td><div id="td-FirstName-' + data[count].id + '"></div><div id="value_FirstName-' + data[count].id + '">' + data[count].FirstName + '</div></td>';
-            html += '<td><div id="td-LastName-' + data[count].id + '"></div><div id="value_LastName-' + data[count].id + '">' + data[count].LastName + '</div></td>';
-
-          }
-          $('tbody').html(html)
-          $('#table_id').DataTable();
+                }
+                $('tbody').html(html)
+                $('#table_id').DataTable();
+                }
+            });
         }
-      });
-    }
 
 
       // Tambah Form Input
@@ -120,6 +117,7 @@
         event.preventDefault();
 
         var id = $(this).attr("id");
+
         swal({
             title: 'Are you sure?',
             text: "You want delete to this data!",
@@ -150,30 +148,30 @@
 
       });
 
-    //   $(document).on('click', '.save', function() {
-    //     var column_name = $(this).data("save");
-    //     var column_value = $(this).text();
-    //     var id = $(this).data("id");
+        //   $(document).on('click', '.save', function() {
+        //     var column_name = $(this).data("save");
+        //     var column_value = $(this).text();
+        //     var id = $(this).data("id");
 
-    //     // Update data
-    //     if (column_value != '') {
-    //       $.ajax({
-    //         url: "{{ route('livetable.update_data') }}",
-    //         method: "POST",
-    //         data: {
-    //           column_name: column_name,
-    //           column_value: column_value,
-    //           id: id,
-    //           _token: _token
-    //         },
-    //         success: function(data) {
-    //           $('#message').html(data);
-    //         }
-    //       })
-    //     } else {
-    //       $('#message').html("<div class='alert alert-danger'>Enter some value</div>");
-    //     }
-    //   });
+        //     // Update data
+        //     if (column_value != '') {
+        //       $.ajax({
+        //         url: "{{ route('livetable.update_data') }}",
+        //         method: "POST",
+        //         data: {
+        //           column_name: column_name,
+        //           column_value: column_value,
+        //           id: id,
+        //           _token: _token
+        //         },
+        //         success: function(data) {
+        //           $('#message').html(data);
+        //         }
+        //       })
+        //     } else {
+        //       $('#message').html("<div class='alert alert-danger'>Enter some value</div>");
+        //     }
+        //   });
 
       //edit data
       $(document).on('click', '.edit', function() {
@@ -243,11 +241,80 @@
         }
       });
 
+    //   Checkbox all
 
-      $('[data-select="checkbox"]').change(function(){
-        $target = $(this).attr('data-target');
-        $($target).prop('checked', $(this).prop("checked"));
-    })
+        $('#master').on('click', function(e) {
+         if($(this).is(':checked',true))
+         {
+            $(".task-select").prop('checked', true);
+         } else {
+            $(".task-select").prop('checked',false);
+         }
+
+        });
+
+
+    // Delete All
+
+        $('.delete_all').on('click', function(e){
+
+            var allVals = [];
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr('data-id'));
+            });
+
+            if (allVals.length <= 0) {
+                alert("Please selected Row");
+            } else {
+
+               var check = confirm("Are you sure you want to delete this row?");
+
+               if(check == true){
+
+                var join= allVals.join(",");
+
+                    $.ajax({
+                        url: "{{ route('livetable.delete_all') }}",
+                        type: 'DELETE',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        data: {
+                            'ids='+join,
+                            _token: '{{ csrf_token() }}'
+                            },
+                        success: function (data) {
+                            if (data['success']) {
+                                // $(".task-select:checked").each(function() {
+                                //     $(this).parents("tr").remove();
+                                // });
+                                // alert(data['success']);
+                                console.log("masuk");
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+
+
+                    $.each(allVals, function( index, value ) {
+                    $('table tr').filter("[data-row-id='" + value + "']").remove();
+                    });
+                }
+            }
+        });
+
+        // $('[data-toggle=confirmation]').confirmation({
+        //     rootSelector: '[data-toggle=confirmation]',
+        //     onConfirm: function (event, element) {
+        //         element.trigger('confirm');
+        //     }
+        // });
+
+
 
     });
 
