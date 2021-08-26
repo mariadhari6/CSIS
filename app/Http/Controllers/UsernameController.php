@@ -14,72 +14,6 @@ class UsernameController extends Controller
     {
 
         return view('livetable.live_table');
-<<<<<<< HEAD
-        
-    }
-
-    public function add_form()
-    {
-
-        return view('livetable.add_form');
-        
-    }
-
-    public function item_data()
-    {
-        $usernames = Username::orderBy('id', 'DESC')->get();
-        return view('livetable.item_data')->with([
-            'usernames' => $usernames
-        ]);
-    }
-
-    public function store(Request $request)
-    {
-        $data = array(
-                    'FirstName'    =>  $request->FirstName,
-                    'LastName'     =>  $request->LastName
-                );
-        Username::insert($data);
-    }
-
-    public function show($id)
-    {
-        $usernames = Username::findOrfail($id);
-        return view('livetable.edit_form')->with([
-            'usernames' => $usernames
-        ]);
-    }
-
-    public function destroy($id)
-    {
-        $data = Username::findOrfail($id);
-        $data->delete();
-    }
-
-    public function update(Request $request, $id)
-    {
-        $data = Username::findOrfail($id);
-        $data->FirstName = $request->FirstName;
-        $data->LastName = $request->LastName;
-        $data->save(); 
-    }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-    // batas
-
-    // function add_data(Request $request)
-=======
     }
 
     public function add_form()
@@ -191,7 +125,6 @@ class UsernameController extends Controller
     // }
 
     // public function datatable(Request $request)
->>>>>>> 2f6b413681b184a4af27c51c1490eb7194abdf37
     // {
     //     if ($request->ajax()) {
     //         $data = array(

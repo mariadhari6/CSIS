@@ -35,15 +35,6 @@ Route::get('/login', function () {
 
 // Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
 
-<<<<<<< HEAD
-
-Route::get('/item_data', [UsernameController::class, 'item_data']);
-Route::get('/add_form', [UsernameController::class, 'add_form']);
-Route::get('/store', [UsernameController::class, 'store']);
-Route::get('/destroy/{id}', [UsernameController::class, 'destroy']);
-Route::get('/show/{id}', [UsernameController::class, 'show']);
-Route::get('/update/{id}', [UsernameController::class, 'update']);
-=======
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -68,4 +59,3 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show/{id}', [UsernameController::class, 'show']);
     Route::get('/update/{id}', [UsernameController::class, 'update']);
 });
->>>>>>> 2f6b413681b184a4af27c51c1490eb7194abdf37
