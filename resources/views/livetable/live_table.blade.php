@@ -69,7 +69,7 @@
     function cancel() {
       read()
     }
->>>>>>> 73108bd448551d3e5e69a37932fb8a0bb841c11c
+
 
     // ---- Tombol Cancel -----
     function cancel() {
