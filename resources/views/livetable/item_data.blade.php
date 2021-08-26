@@ -1,5 +1,13 @@
 @foreach ($usernames as $username)
     <tr id="edit-form-{{ $username->id }}">
+        <td>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input task-select" type="checkbox" id="{{$username->id}}">
+                    <span class="form-check-sign"></span>
+                </label>
+            </div>
+        </td>
         <td id="td-button-{{ $username->id }}">
             <div id="button-{{ $username->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $username->id }})"></i>
