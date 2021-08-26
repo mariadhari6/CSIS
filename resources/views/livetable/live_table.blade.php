@@ -36,16 +36,31 @@
 
   <script>
     $(document).ready(function() {
+<<<<<<< HEAD
       read()
       
     });
     
     
+=======
+
+      read()
+
+    });
+
+
+>>>>>>> 2f6b413681b184a4af27c51c1490eb7194abdf37
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data') }}", {}, function(data, status) {
         $("#item_data").html(data);
+<<<<<<< HEAD
+=======
+        $('#table_id').DataTable();
+
+>>>>>>> 2f6b413681b184a4af27c51c1490eb7194abdf37
       });
+
     }
     
     // ---- Tombol Cancel -----
@@ -53,6 +68,14 @@
       read()
     }
 
+<<<<<<< HEAD
+=======
+    // ---- Tombol Cancel -----
+    function cancel() {
+      read()
+    }
+
+>>>>>>> 2f6b413681b184a4af27c51c1490eb7194abdf37
      // ------ Tambah Form Input ------
      $('#add').click(function() {
         $.get("{{ url('add_form') }}", {}, function(data, status) {
@@ -77,7 +100,11 @@
         })
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 2f6b413681b184a4af27c51c1490eb7194abdf37
 
     // -----Proses Delete Data ------
     function destroy(id) {
@@ -92,6 +119,7 @@
             }
         })
     }
+<<<<<<< HEAD
 
     // ------ Edit Form Data ------
     function edit(id){
@@ -104,6 +132,20 @@
         });
     }
     
+=======
+
+    // ------ Edit Form Data ------
+    function edit(id){
+        var id = id;
+        $("#td-button-"+id).slideUp("fast");
+        $("#item-FirstName-"+id).slideUp("fast");
+        $("#item-LastName-"+id).slideUp("fast");
+        $.get("{{ url('show') }}/" + id, {}, function(data, status) {
+            $("#edit-form-"+id).prepend(data)
+        });
+    }
+
+>>>>>>> 2f6b413681b184a4af27c51c1490eb7194abdf37
     // ------ Proses Update Data ------
     function update(id) {
         var FirstName = $("#FirstName").val();
@@ -121,6 +163,10 @@
             }
         })
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2f6b413681b184a4af27c51c1490eb7194abdf37
 
   </script>
 
