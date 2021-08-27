@@ -8,11 +8,11 @@
                 </label>
             </div>
         </td>
-        <td id="td-button-{{ $username->id }}">
-            <div id="button-{{ $username->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $username->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $username->id }})"></i>
-            </div>
+        <td id="td-button-{{ $username->id }}">("#td-button-"+id).slideUp("fast");
+            $("#item-FirstName-"+id).slideUp("fast");
+            $("#item-LastName-"+id).slideUp("fast");
+
+
         </td>
         <td id="item-FirstName-{{ $username->id }}">
                 {{ $username->FirstName}}

@@ -15,9 +15,12 @@
             <div class="text-right">
                 <button type="button" name="add" id="add" class="btn btn-primary btn-round btn-xs"><i class="fas fa-plus"></i> Add</button>
             </div>
-            <div class="text-right mt-3">
+            <div class="text-right mt-3 tambahan">
                 <button class="btn btn-success btn-round mr-2 edit_all">Edit Selected</button>
                 <button class="btn btn-danger btn-round delete_all">Delete Selected</button>
+            </div>
+            <div class="tambahan_lagi">
+
             </div>
             <br>
 
@@ -171,14 +174,12 @@
 
         // checkbox all
         $('#master').on('click', function(e) {
-         if($(this).is(':checked',true))
-         {
-            $(".task-select").prop('checked', true);
+          if($(this).is(':checked',true)){
+              $(".task-select").prop('checked', true);
+          } else {
+              $(".task-select").prop('checked',false);
 
-         } else {
-            $(".task-select").prop('checked',false);
-
-         }
+          }
 
         });
 
@@ -247,14 +248,7 @@
 
             alert(allVals);
 
-            $("#td-button-"+id).slideUp("fast");
-        $("#item-FirstName-"+id).slideUp("fast");
-        $("#item-LastName-"+id).slideUp("fast");
-
-
         })
-
-
 
 
   </script>
