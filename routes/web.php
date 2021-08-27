@@ -4,6 +4,7 @@
 use App\Http\Controllers\UsernameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerServiceController;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,11 +47,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin', 'auth'], function 
 Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/customer_service', [CustomerServiceController::class, 'index'])->name('cs.homepage');
     Route::get('/livetable', [UsernameController::class, 'index']);
-    Route::get('/livetable/fetch_data', [UsernameController::class, 'fetch_data']);
-    Route::post('/livetable/add_data', [UsernameController::class, 'add_data'])->name('livetable.add_data');
-    Route::post('/livetable/update_data', [UsernameController::class, 'update_data'])->name('livetable.update_data');
-    Route::post('/livetable/delete_data', [UsernameController::class, 'delete_data'])->name('livetable.delete_data');
-    Route::post('/livetable/detail_data', [UsernameController::class, 'detail_data'])->name('livetable.detail_data');
+    // Route::get('/livetable/fetch_data', [UsernameController::class, 'fetch_data']);
+    // Route::post('/livetable/add_data', [UsernameController::class, 'add_data'])->name('livetable.add_data');
+    // Route::post('/livetable/update_data', [UsernameController::class, 'update_data'])->name('livetable.update_data');
+    // Route::post('/livetable/delete_data', [UsernameController::class, 'delete_data'])->name('livetable.delete_data');
+    // Route::post('/livetable/detail_data', [UsernameController::class, 'detail_data'])->name('livetable.detail_data');
     //
     Route::get('/item_data', [UsernameController::class, 'item_data']);
     Route::get('/add_form', [UsernameController::class, 'add_form']);
@@ -58,4 +59,13 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/destroy/{id}', [UsernameController::class, 'destroy']);
     Route::get('/show/{id}', [UsernameController::class, 'show']);
     Route::get('/update/{id}', [UsernameController::class, 'update']);
+
+    // Company
+    Route::get('/Company', [CompanyController::class, 'index']);
+    Route::get('/item_data_company', [CompanyController::class, 'item_data']);
+    Route::get('/add_form_company', [CompanyController::class, 'add_form']);
+    Route::get('/store_company', [CompanyController::class, 'store']);
+    Route::get('/destroy_company/{id}', [CompanyController::class, 'destroy']);
+    Route::get('/show_company/{id}', [CompanyController::class, 'show']);
+    Route::get('/update_company/{id}', [CompanyController::class, 'update']);
 });

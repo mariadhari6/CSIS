@@ -14,7 +14,7 @@ class Company extends Model
         'seller_id', 'company_name', 'status', 'customer_code', 'no_po', 'po_date'
     ];
 
-    public function sellers()
+    public function seller()
     {
         return $this->belongsTo(Seller::class);
     }
