@@ -35,6 +35,9 @@ Route::get('/login', function () {
 
 // Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
 
+// Route::post('/selected-username', [UsernameController::class, 'deleteall'])->name('livetable.delete_all');
+Route::get('/selectedDelete', 'UsernameController@deleteAll')->name('livetable.delete_all');
+
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -58,4 +61,11 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/destroy/{id}', [UsernameController::class, 'destroy']);
     Route::get('/show/{id}', [UsernameController::class, 'show']);
     Route::get('/update/{id}', [UsernameController::class, 'update']);
+    Route::get('/selected', [UsernameController::class, 'selected']);
+    Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
 });
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

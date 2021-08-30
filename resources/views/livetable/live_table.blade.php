@@ -12,8 +12,10 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right">
-                <button type="button" name="add" id="add" class="btn btn-primary btn-round btn-xs   "><i class="fas fa-plus"></i> Add</button>
+            <div class="text-right mt-3" id="selected">
+                <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
+                <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <br>
 
@@ -21,12 +23,21 @@
             <thead>
               <tr>
                 <th>
+<<<<<<< HEAD
                   <div class="form-check">
                     <label class="form-check-label">
                         <input class="form-check-input select-all-checkbox" type="checkbox" data-select="checkbox" data-target=".task-select" id="master">
                         <span class="form-check-sign"></span>
                     </label>
                   </div>
+=======
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                            <span class="form-check-sign"></span>
+                        </label>
+                    </div>
+>>>>>>> 9e6e12d6c3f666c5e6a1e73295664a4ca5aa4b48
                 </th>
                 <th scope="col">Action</th>
                 <th scope="col">First Name</th>
@@ -37,10 +48,12 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-        </div>
+
       </div>
     </div>
   </div>
+
+
 
   <script>
     $(document).ready(function() {
@@ -59,16 +72,18 @@
       });
 
     }
-    
-    // ---- Tombol Cancel -----
-    function cancel() {
-      read()
-    }
 
     // ---- Tombol Cancel -----
     function cancel() {
       read()
     }
+
+
+    // ---- Tombol Cancel -----
+    function cancel() {
+      read()
+    }
+
 
      // ------ Tambah Form Input ------
      $('#add').click(function() {
@@ -89,24 +104,43 @@
               LastName: LastName
             },
             success: function(data) {
-              read()
+              read();
             }
         })
     }
 
 
+
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
-        confirm("Delete ?");
-        $.ajax({
-            type: "get",
-            url: "{{ url('destroy') }}/" + id,
-            data: "id=" + id,
-            success: function(data) {
-              read()
-            }
-        })
+
+        swal({
+            title: 'Are you sure?',
+            text: "You want delete to this data!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes Delete',
+            showLoaderOnConfirm: true,
+            preConfirm: function() {
+              return new Promise(function(resolve) {
+                $.ajax({
+                    type: "get",
+                    url: "{{ url('destroy') }}/" + id,
+                    data: "id=" + id,
+                    success: function(data) {
+                        swal("Done!","It was succesfully deleted!","success");
+                        read();
+                    }
+                });
+
+              });
+            },
+            allowOutsideClick: false
+      });
+
     }
 
     // ------ Edit Form Data ------
@@ -121,23 +155,129 @@
     }
 
     // ------ Proses Update Data ------
-    function update(id) {
-        var FirstName = $("#FirstName").val();
-        var LastName = $("#LastName").val();
-        var id = id;
-        $.ajax({
-            type: "get",
-            url: "{{ url('update') }}/"+id,
-            data: {
-              FirstName: FirstName,
-              LastName: LastName
-            },
-            success: function(data) {
-              read()
+        function update(id) {
+
+            var FirstName = $("#FirstName").val();
+            var LastName = $("#LastName").val();
+            var id = id;
+            $.ajax({
+                type: "get",
+                url: "{{ url('update') }}/"+id,
+                data: {
+                FirstName: FirstName,
+                LastName: LastName
+                },
+                success: function(data) {
+                read()
+                }
+
+
+            });
+        }
+
+
+        // checkbox all
+        $('#master').on('click', function(e) {
+          if($(this).is(':checked',true)){
+              $(".task-select").prop('checked', true);
+          } else {
+              $(".task-select").prop('checked',false);
+
+          }
+
+        });
+
+
+         // Delete All
+        $('.delete_all').on('click', function(){
+          event.preventDefault();
+
+            var allVals = [];
+
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+
+            });
+
+                if (allVals.length > 0) {
+
+                    var _token = $('input[name="_token"]').val();
+
+                    // alert(allVals);
+
+                    swal({
+                    title: 'Are you sure?',
+                    text: "You want delete Selected data !",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes Delete',
+                    showLoaderOnConfirm: true,
+                    preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        $.ajax({
+                            url: "{{ route('livetable.delete_all') }}",
+                            method: "GET",
+                            data: {
+                                id: allVals,
+                                _token: _token
+                            },
+                            success: function(data) {
+                                swal("Done!","It was succesfully deleted!","success");
+                                read();
+                                }
+                            });
+                    });
+                    },
+                    allowOutsideClick: false
+                });
+
+            }else{
+                alert('Select the row you want to delete')
             }
-        })
-    }
+
+        });
+
+
+        $('.edit_all').on('click', function(e){
+            e.preventDefault();
+
+            var allVals = [];
+
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+
+            });
+
+            if (allVals.length > 0){
+
+                alert(allVals);
+                $(".edit_all").hide("fast");
+                $(".delete_all").hide("fast");
+                $.get("{{ url('selected') }}", {}, function(data, status) {
+                    $("#selected").prepend(data)
+
+                });
+
+                $.each(allVals, function(index, value){
+
+                    $("#td-checkbox-"+value).hide("fast");
+                    $("#td-button-"+value).hide("fast");
+                    $("#item-FirstName-"+value).hide("fast");
+                    $("#item-LastName-"+value).hide("fast");
+                    $(".add").hide("fast");
+                    $.get("{{ url('show') }}/" + value, {}, function(data, status) {
+                        $("#edit-form-"+value).prepend(data)
+                    });
+                });
+
+            }else{
+                alert('Select the row you want to edit')
+            }
+        });
+
+
 
   </script>
-
    @endsection

@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Username;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\DataTables;
 
@@ -177,12 +176,45 @@ class UsernameController extends Controller
     //         echo '<div class="alert alert-success">Data Updated</div>';
     //     }
     // }
+    public function deleteAll(Request $request)
+    {
+        if ($request->ajax()) {
+            $ids = $request->input('id');
+            DB::table('usernames')->whereIn('id', $ids)->delete();
 
-    // // public function datatable(Request $request)
-    // // {
-    // //     if ($request->ajax()) {
+        }
 
-    // //         return DataTables::of(Username::all())->make(true);
-    // //     }
-    // // }
+        // $ids = $request->ids;
+        // DB::table('usernames')
+        //         ->whereIn('id',explode(",",$ids))
+        //         ->delete();
+        //
+    }
+
+
+    public function datatable(Request $request)
+    {
+        if ($request->ajax()) {
+
+            return DataTables::of(Username::all())->make(true);
+        }
+    }
+
+    public function selected()
+    {
+        $usernames = Username::all();
+        return view('livetable.selected')->with([
+            'usernames' => $usernames
+        ]);
+    }
+
+    public function updateall(Request $request, $id)
+    {
+        $data = Username::findOrfail($id);
+        $data->FirstName = $request->FirstName;
+        $data->LastName = $request->LastName;
+
+        echo $id;
+    }
+
 }

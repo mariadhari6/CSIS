@@ -42,6 +42,8 @@
     <script src="{{asset('template-admin')}}/assets/js/plugin/chart-circle/circles.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 
+
+
     {{-- Datatable --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
