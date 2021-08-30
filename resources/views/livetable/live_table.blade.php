@@ -49,7 +49,9 @@
   <script>
     $(document).ready(function() {
 
-      read()
+      read();
+
+
 
     });
 
@@ -77,7 +79,7 @@
 
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -170,14 +172,15 @@
 
         // checkbox all
         $('#master').on('click', function(e) {
-          if($(this).is(':checked',true)){
-              $(".task-select").prop('checked', true);
+          if($(this).is(':checked',true) ){
+                $(".task-select").prop('checked', true)
           } else {
               $(".task-select").prop('checked',false);
-
           }
 
         });
+
+
 
 
          // Delete All
@@ -217,6 +220,7 @@
                             },
                             success: function(data) {
                                 swal("Done!","It was succesfully deleted!","success");
+                                $("#master").prop('checked', false);
                                 read();
                                 }
                             });
@@ -262,6 +266,7 @@
                     $(".add").hide("fast");
                     $.get("{{ url('show') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
+                        $("#master").prop('checked', false);
                     });
                 });
 
@@ -279,31 +284,35 @@
                 allVals.push($(this).attr("id"));
             });
 
-                $.each(allVals, function(index, value){
-                    var FirstName = $(".FirstName-"+value).val();
-                    var LastName = $(".LastName-"+value).val();
-                    $.ajax({
+            $.each(allVals, function(index, value){
+            var FirstName = $(".FirstName-"+value).val();
+            var LastName = $(".LastName-"+value).val();
+                $.ajax({
                     type: "get",
                     url: "{{ url('update') }}/"+value,
                     data: {
-                    FirstName: FirstName,
-                    LastName: LastName
-                    },
-                    success: function(data) {
-                    read()
-                    }
-                });
-            });
+                      FirstName: FirstName,
+                      LastName: LastName
+                      },
+                      success: function(data) {
+                      $("#master").prop('checked', false);
+                      batal();
+                    });
 
-
+                    });
+            }
         }
 
         //--------Proses Batal--------
-        function cancel(){
+        function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
             read();
+
         }
-
-
 
   </script>
    @endsection
