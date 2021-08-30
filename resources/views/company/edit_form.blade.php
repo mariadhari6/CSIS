@@ -4,7 +4,8 @@
     <td>
        <select class="form-control" id="seller_id" name="seller_id">
        @foreach ($seller as $sellers)
-          <option value="{{ $sellers->seller_name }}">{{ $sellers->seller_name}}</option>
+        <option value="{{ $sellers->id }}" {{ old('seller_id') == $sellers->id ? 'selected':'' }}>{{ $sellers->seller_name }}</option>
+
        @endforeach
     </select></td>
 

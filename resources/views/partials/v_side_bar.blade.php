@@ -32,8 +32,13 @@
                 <div class="collapse in" id="masterData" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#">
+                            <a href="{{url('/Company') }}">
                                 <span class="link-collapse">Company</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/pic') }}">
+                                <span class="link-collapse">PIC</span></span>
                             </a>
                         </li>
                         <li>
@@ -148,7 +153,7 @@
 
             <li class="nav-item">
 
-                <a href="livetable">Example Crud</a>
+                <a href="{{ url('/livetable') }}">Example Crud</a>
             </li>
 
 

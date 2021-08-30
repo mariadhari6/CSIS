@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerServiceController;
+use App\Http\Controllers\PicController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -61,11 +62,20 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update/{id}', [UsernameController::class, 'update']);
 
     // Company
-    Route::get('/Company', [CompanyController::class, 'index']);
+    Route::get('/Company', [CompanyController::class, 'index'])->name('company');
     Route::get('/item_data_company', [CompanyController::class, 'item_data']);
     Route::get('/add_form_company', [CompanyController::class, 'add_form']);
     Route::get('/store_company', [CompanyController::class, 'store']);
     Route::get('/destroy_company/{id}', [CompanyController::class, 'destroy']);
     Route::get('/show_company/{id}', [CompanyController::class, 'show']);
     Route::get('/update_company/{id}', [CompanyController::class, 'update']);
+
+    // pic
+    Route::get('/pic', [PicController::class, 'index'])->name('pic');
+    Route::get('/item_data_pic', [PicController::class, 'item_data']);
+    Route::get('/add_form_pic', [PicController::class, 'add_form']);
+    Route::get('/store_pic', [PicController::class, 'store']);
+    Route::get('/destroy_pic/{id}', [PicController::class, 'destroy']);
+    Route::get('/show_pic/{id}', [PicController::class, 'edit_form']);
+    Route::get('/update_pic/{id}', [PicController::class, 'update']);
 });
