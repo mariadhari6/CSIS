@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Pic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class PicController extends Controller
 {
@@ -68,5 +70,48 @@ class PicController extends Controller
         $data->phone = $request->phone;
         $data->date_of_birth = $request->date_of_birth;
         $data->save();
+    }
+
+    public function selected()
+    {
+        $pic = Pic::all();
+        return view('company.selected')->with([
+            'pic' => $pic
+        ]);
+    }
+
+    public function updateall(Request $request, $id)
+    {
+        $data = Pic::findOrfail($id);
+        $data->company_id = $request->company_id;
+        $data->pic_name = $request->pic_name;
+        $data->email = $request->email;
+        $data->position = $request->position;
+        $data->phone = $request->phone;
+        $data->date_of_birth = $request->date_of_birth;
+        echo $id;
+    }
+
+    public function deleteAll(Request $request)
+    {
+        if ($request->ajax()) {
+            $ids = $request->input('id');
+            DB::table('pics')->whereIn('id', $ids)->delete();
+        }
+    }
+
+
+    public function datatable(Request $request)
+    {
+        if ($request->ajax()) {
+
+            return DataTables::of(Pic::all())->make(true);
+        }
+    }
+
+    public function updateSelected(Request $request)
+    {
+        Company::where('item_type_id', '=', 1)
+            ->update(['colour' => 'black']);
     }
 }

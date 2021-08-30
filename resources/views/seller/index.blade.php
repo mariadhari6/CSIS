@@ -1,5 +1,5 @@
 @extends('layouts.v_main')
-@section('title','PIC Company')
+@section('title','Seller')
 
 @section('content')
 
@@ -12,7 +12,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-             <div class="text-right mt-3" id="selected">
+            <div class="text-right mt-3" id="selected">
                 <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
                 <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
@@ -22,7 +22,7 @@
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                  <th>
+                <th>
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -31,41 +31,35 @@
                     </div>
                 </th>
                 <th scope="col">Action</th>
-                <th scope="col">Company</th>
-                <th scope="col">Pic Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Position</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Date of birth</th>
+                <th scope="col">Seller Name</th>
+                <th scope="col">Seller Code</th>
+                <th scope="col">No Agreement Latter</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-        </div>
+
       </div>
     </div>
   </div>
 
+
+
   <script>
     $(document).ready(function() {
-
       read()
-
     });
-
-
     // ------ Tampil Data ------
     function read(){
-      $.get("{{ url('item_data_pic') }}", {}, function(data, status) {
+
+      $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
         $("#item_data").html(data);
         $('#table_id').DataTable();
-
       });
-
     }
-
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -73,40 +67,32 @@
 
      // ------ Tambah Form Input ------
      $('#add').click(function() {
-        $.get("{{ url('add_form_pic') }}", {}, function(data, status) {
+        $.get("{{ url('add_form_seller') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
       });
-
     // ----- Proses Tambah data ------
     function store() {
-        var company_id = $("#company_id").val();
-        var pic_name = $("#pic_name").val();
-        var email = $("#email").val();
-        var position = $("#position").val();
-        var phone = $("#phone").val();
-        var date_of_birth = $("#date_of_birth").val();
+        var seller_name = $("#seller_name").val();
+        var seller_code = $("#seller_code").val();
+        var no_agreement_letter = $("#no_agreement_letter").val();
+        var status = $("#status").val();
         $.ajax({
             type: "get",
-            url: "{{ url('store_pic') }}",
+            url: "{{ url('store_seller') }}",
             data: {
-              company_id: company_id,
-              pic_name: pic_name,
-              email: email,
-              position: position,
-              phone: phone,
-              date_of_birth:date_of_birth
+              seller_name: seller_name,
+              seller_code: seller_code,
+              no_agreement_letter: no_agreement_letter,
+              status:status
             },
             success: function(data) {
-              read()
+              read();
             }
         })
     }
-
-
-
     // -----Proses Delete Data ------
-   function destroy(id) {
+    function destroy(id) {
         var id = id;
         swal({
             title: 'Are you sure?',
@@ -121,7 +107,7 @@
               return new Promise(function(resolve) {
                 $.ajax({
                     type: "get",
-                    url: "{{ url('destroy_pic') }}/" + id,
+                    url: "{{ url('destroy_seller') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
                         swal("Done!","It was succesfully deleted!","success");
@@ -134,59 +120,50 @@
             allowOutsideClick: false
       });
     }
-
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
-        $("#td-button-"+id).slideUp("fast");
-        $("#item-company_id-"+id).slideUp("fast");
-        $("#item-pic_name-"+id).slideUp("fast");
-        $("#item-email-"+id).slideUp("fast");
-        $("#item-position-"+id).slideUp("fast");
-        $("#item-phone-"+id).slideUp("fast");
-        $("#item-date_of_birth-"+id).slideUp("fast");
-        $.get("{{ url('show_pic') }}/" + id, {}, function(data, status) {
+        $("#td-checkbox-"+id).hide("fast");
+        $("#td-button-"+id).hide("fast");
+        $("#item-seller_name-"+id).hide("fast");
+        $("#item-seller_code-"+id).hide("fast");
+        $("#item-no_agreement_latter-"+id).hide("fast");
+        $("#item-status-"+id).hide("fast");
+        $.get("{{ url('show_seller') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
-
     // ------ Proses Update Data ------
-    function update(id) {
-        var company_id = $("#company_id").val();
-        var pic_name = $("#pic_name").val();
-        var email = $("#email").val();
-        var position = $("#position").val();
-        var phone = $("#phone").val();
-        var date_of_birth = $("#date_of_birth").val();
-        var id = id;
-        // console.log('test');
-        $.ajax({
-            type: "get",
-            url: "{{ url('update_pic') }}/"+id,
-            data: {
-             company_id: company_id,
-              pic_name: pic_name,
-              email: email,
-              position: position,
-              phone: phone,
-             date_of_birth:date_of_birth
-            },
-            success: function(data) {
-              read()
-            // console.log('test');
-            }
-        })
-    }
-
-     $('#master').on('click', function(e) {
+        function update(id) {
+            var seller_name = $("#seller_name").val();
+            var seller_code = $("#seller_code").val();
+            var no_agreement_letter = $("#no_agreement_letter").val();
+            var status = $("#status").val();
+            var id = id;
+            $.ajax({
+                type: "get",
+                url: "{{ url('update_seller') }}/"+id,
+                data: {
+                seller_name: seller_name,
+                seller_code: seller_code,
+                no_agreement_letter: no_agreement_letter,
+                status:status
+                },
+                success: function(data) {
+                read()
+                }
+            });
+        }
+        // checkbox all
+        $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
               $(".task-select").prop('checked', true);
           } else {
               $(".task-select").prop('checked',false);
           }
-    });
-
-      $('.delete_all').on('click', function(){
+        });
+         // Delete All
+        $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
             $(".task-select:checked").each(function() {
@@ -207,7 +184,7 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ route('livetable.delete_all_pic') }}",
+                            url: "{{ route('livetable.delete_all_seller') }}",
                             method: "get",
                             data: {
                                 id: allVals,
@@ -227,6 +204,7 @@
             }
         });
 
+        // Form Edit All
         $('.edit_all').on('click', function(e){
 
             var allVals = [];
@@ -245,14 +223,12 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-company_id-"+value).slideUp("fast");
-                    $("#item-pic_name-"+value).slideUp("fast");
-                    $("#item-email-"+value).slideUp("fast");
-                    $("#item-position-"+value).slideUp("fast");
-                    $("#item-phone-"+value).slideUp("fast");
-                    $("#item-date_of_birth-"+value).slideUp("fast");
+                    $("#item-seller_name-"+value).hide("fast");
+                    $("#item-seller_code-"+value).hide("fast");
+                    $("#item-no_agreement_letter-"+value).hide("fast");
+                    $("#item-status-"+value).hide("fast");
                     $(".add").hide("fast");
-                    $.get("{{ url('show_pic') }}/" + value, {}, function(data, status) {
+                    $.get("{{ url('show_seller') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                     });
                 });
@@ -261,7 +237,8 @@
             }
         });
 
-            function updateSelected() {
+        // ------ Proses Update Data ------
+        function updateSelected() {
             var allVals = [];
 
             $(".task-select:checked").each(function() {
@@ -269,22 +246,18 @@
             });
 
                 $.each(allVals, function(index, value){
-                    var company_id = $(".company_id-"+value).val();
-                    var pic_name = $(".pic_name-"+value).val();
-                    var email = $(".email-"+value).val();
-                    var position = $(".position-"+value).val();
-                    var phone = $(".phone-"+value).val();
-                    var date_of_birth = $(".date_of_birth-"+value).val();
+                    var seller_name = $(".seller_name-"+value).val();
+                    var seller_code = $(".seller_code-"+value).val();
+                    var no_agreement_letter = $(".no_agreement_letter-"+value).val();
+                    var status = $(".status-"+value).val();
                     $.ajax({
                     type: "get",
-                    url: "{{ url('update_pic') }}/"+value,
+                    url: "{{ url('update_seller') }}/"+value,
                     data: {
-                        company_id: company_id,
-                        pic_name: pic_name,
-                        email: email,
-                        position: position,
-                        phone: phone,
-                        date_of_birth:date_of_birth
+                    seller_name: seller_name,
+                    seller_code: seller_code,
+                    no_agreement_letter: no_agreement_letter,
+                    status:status,
                     },
                     success: function(data) {
                     read()
@@ -295,8 +268,13 @@
 
         }
 
+        //--------Proses Batal--------
+        function cancel(){
+            read();
+        }
+
+
 
 
   </script>
-
    @endsection

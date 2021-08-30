@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\PicController;
+use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -88,6 +89,20 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/destroy_pic/{id}', [PicController::class, 'destroy']);
     Route::get('/show_pic/{id}', [PicController::class, 'edit_form']);
     Route::get('/update_pic/{id}', [PicController::class, 'update']);
+    Route::get('/selectedDelete', [PicController::class, 'deleteAll'])->name('livetable.delete_all_pic');
+    Route::get('/selected', [PicController::class, 'selected']);
+    Route::get('/update_all/{id}', [PicController::class, 'updateall']);
+    // seller
+    Route::get('/seller', [SellerController::class, 'index'])->name('seller');
+    Route::get('/item_data_seller', [SellerController::class, 'item_data']);
+    Route::get('/add_form_seller', [SellerController::class, 'add_form']);
+    Route::get('/store_seller', [SellerController::class, 'store']);
+    Route::get('/destroy_seller/{id}', [SellerController::class, 'destroy']);
+    Route::get('/show_seller/{id}', [SellerController::class, 'edit_form']);
+    Route::get('/update_seller/{id}', [SellerController::class, 'update']);
+    Route::get('/selectedDelete', [SellerController::class, 'deleteAll'])->name('livetable.delete_all_seller');
+    Route::get('/selected', [SellerController::class, 'selected']);
+    Route::get('/update_all/{id}', [SellerController::class, 'updateall']);
 });
 
 

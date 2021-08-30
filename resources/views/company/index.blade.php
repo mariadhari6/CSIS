@@ -273,12 +273,12 @@
             });
 
                 $.each(allVals, function(index, value){
-                    var seller_id = $("#seller_id").val();
-                    var company_name = $("#company_name").val();
-                    var status = $("#status").val();
-                    var customer_code = $("#customer_code").val();
-                    var no_po = $("#no_po").val();
-                    var po_date = $("#po_date").val();
+                    var seller_id = $(".seller_id-"+value).val();
+                    var company_name = $(".company_name-"+value).val();
+                    var status = $(".status-"+value).val();
+                    var customer_code = $(".customer_code-"+value).val();
+                    var no_po = $(".no_po-"+value).val();
+                    var po_date = $(".po_date-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_company') }}/"+value,

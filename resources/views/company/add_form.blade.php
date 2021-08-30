@@ -11,10 +11,10 @@
        @endforeach
     </select></i></td>
     {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}
-    <td> <div class="input-div"><input type="text" class="input" id="company_name" placeholder="Company Name"></i></td>
-    <td> <div class="input-div"><input type="text" class="input" id="status" placeholder="status"></i></td>
-    <td> <div class="input-div"><input type="text" class="input" id="customer_code" placeholder="Customer Code"></i></td>
-    <td> <div class="input-div"><input type="text" class="input" id="no_po" placeholder="No Po"></i></td>
-    <td> <div class="input-div"><input type="date" class="input" id="po_date" placeholder="po date"></i></td>
+    <td> <div class="input-div"><input type="text" class="input" id="company_name" placeholder="Company Name" required></i></td>
+    <td> <div class="input-div"><input type="text" class="input" id="status" placeholder="status" required></i></td>
+    <td> <div class="input-div"><input type="text" class="input" id="customer_code" placeholder="Customer Code" required></i></td>
+    <td> <div class="input-div"><input type="text" class="input" id="no_po" placeholder="No Po" required></i></td>
+    <td> <div class="input-div"><input type="date" class="input" id="po_date" placeholder="po date" required></i></td>
 </tr>
 

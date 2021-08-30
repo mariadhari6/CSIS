@@ -33,6 +33,15 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'seller_id' => 'required',
+            'company_name' => 'required',
+            'status' => 'required',
+            'customer_code' => 'required',
+            'no_po' => 'numeric|required',
+            'po_date' => 'required',
+        ]);
         $data = array(
             'seller_id'    =>  $request->seller_id,
             'company_name'     =>  $request->company_name,
