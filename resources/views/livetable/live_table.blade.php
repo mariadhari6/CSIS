@@ -190,14 +190,18 @@
                 alert('Select the row you want to delete')
             }
         });
+
+        // Form Edit All
         $('.edit_all').on('click', function(e){
-            e.preventDefault();
+
             var allVals = [];
+            var _token = $('input[name="_token"]').val();
+
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
             if (allVals.length > 0){
-                alert(allVals);
+                // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
                 $.get("{{ url('selected') }}", {}, function(data, status) {
@@ -217,5 +221,41 @@
                 alert('Select the row you want to edit')
             }
         });
+
+        // ------ Proses Update Data ------
+        function updateSelected() {
+            var allVals = [];
+
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+            });
+
+                $.each(allVals, function(index, value){
+                    var FirstName = $(".FirstName-"+value).val();
+                    var LastName = $(".LastName-"+value).val();
+                    $.ajax({
+                    type: "get",
+                    url: "{{ url('update') }}/"+value,
+                    data: {
+                    FirstName: FirstName,
+                    LastName: LastName
+                    },
+                    success: function(data) {
+                    read()
+                    }
+                });
+            });
+
+
+        }
+
+        //--------Proses Batal--------
+        function cancel(){
+            read();
+        }
+
+
+
+
   </script>
    @endsection
