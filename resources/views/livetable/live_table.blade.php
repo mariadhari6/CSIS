@@ -12,12 +12,10 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right" id="tambah">
-                <button type="button" name="add" id="add" class="btn btn-primary btn-round"><i class="fas fa-plus"></i> Add</button>
-            </div>
             <div class="text-right mt-3" id="selected">
-                <button class="btn btn-success btn-round mr-2 edit_all">Edit Selected</button>
-                <button class="btn btn-danger btn-round delete_all">Delete Selected</button>
+                <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
+                <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <br>
 
@@ -41,7 +39,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-        </div>
+
       </div>
     </div>
   </div>
@@ -149,7 +147,7 @@
     }
 
     // ------ Proses Update Data ------
-    function update(id) {
+        function update(id) {
 
             var FirstName = $("#FirstName").val();
             var LastName = $("#LastName").val();
@@ -181,8 +179,8 @@
 
         });
 
-         // Delete All
 
+         // Delete All
         $('.delete_all').on('click', function(){
           event.preventDefault();
 
@@ -237,8 +235,6 @@
         $('.edit_all').on('click', function(e){
             e.preventDefault();
 
-
-
             var allVals = [];
 
             $(".task-select:checked").each(function() {
@@ -247,6 +243,7 @@
             });
 
             if (allVals.length > 0){
+
                 alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
@@ -257,42 +254,20 @@
 
                 $.each(allVals, function(index, value){
 
-
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
                     $("#item-FirstName-"+value).hide("fast");
                     $("#item-LastName-"+value).hide("fast");
-                    $("#tambah").hide("fast");
+                    $(".add").hide("fast");
                     $.get("{{ url('show') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                     });
-
                 });
-
-                // $.(#saveall).on('click', function(){
-                //     var FirstName = $("#FirstName").val();
-                //     var LastName = $("#LastName").val();
-                //     $.ajax({
-                //         type: "get",
-                //         url: "{{ url('updateall') }}/"+allVals,
-                //         data: {
-                //         FirstName: FirstName,
-                //         LastName: LastName
-                //         },
-                //         success: function(data) {
-                //         read()
-                //         }
-
-
-                //     });
-                // })
 
             }else{
                 alert('Select the row you want to edit')
             }
-
         });
-
 
 
 

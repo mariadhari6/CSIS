@@ -202,8 +202,10 @@ class UsernameController extends Controller
 
     public function selected()
     {
-
-        return view('livetable.selected');
+        $usernames = Username::all();
+        return view('livetable.selected')->with([
+            'usernames' => $usernames
+        ]);
     }
 
     public function updateall(Request $request, $id)
@@ -211,7 +213,8 @@ class UsernameController extends Controller
         $data = Username::findOrfail($id);
         $data->FirstName = $request->FirstName;
         $data->LastName = $request->LastName;
-        $data->save();
+
+        echo $id;
     }
 
 }

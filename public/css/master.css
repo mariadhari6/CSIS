@@ -4,6 +4,14 @@
     color: red;
 }
 
+.delete_all .fa-trash {
+    color: white;
+}
+
+.edit_all .fa-pen {
+    color: white;
+}
+
 .fa-pen {
     color: green;
     margin-right: 20px;
