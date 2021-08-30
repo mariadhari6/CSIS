@@ -61,10 +61,7 @@
     function cancel() {
       read()
     }
-    // ---- Tombol Cancel -----
-    function cancel() {
-      read()
-    }
+
      // ------ Tambah Form Input ------
      $('#add').click(function() {
         $.get("{{ url('add_form') }}", {}, function(data, status) {
@@ -110,6 +107,7 @@
                         read();
                     }
                 });
+
               });
             },
             allowOutsideClick: false
@@ -174,7 +172,7 @@
                     return new Promise(function(resolve) {
                         $.ajax({
                             url: "{{ route('livetable.delete_all') }}",
-                            method: "GET",
+                            method: "get",
                             data: {
                                 id: allVals,
                                 _token: _token
