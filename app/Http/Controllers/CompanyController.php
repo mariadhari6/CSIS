@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Seller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class CompanyController extends Controller
 {
@@ -68,5 +70,48 @@ class CompanyController extends Controller
         $data->no_po = $request->no_po;
         $data->po_date = $request->po_date;
         $data->save();
+    }
+
+    public function selected()
+    {
+        $company = Company::all();
+        return view('company.selected')->with([
+            'company' => $company
+        ]);
+    }
+
+    public function updateall(Request $request, $id)
+    {
+        $data = Company::findOrfail($id);
+        $data->seller_id = $request->seller_id;
+        $data->company_name = $request->company_name;
+        $data->status = $request->status;
+        $data->customer_code = $request->customer_code;
+        $data->no_po = $request->no_po;
+        $data->po_date = $request->po_date;
+
+        echo $id;
+    }
+
+    public function deleteAll(Request $request)
+    {
+        if ($request->ajax()) {
+            $ids = $request->input('id');
+            DB::table('companies')->whereIn('id', $ids)->delete();
+        }
+    }
+
+    public function datatable(Request $request)
+    {
+        if ($request->ajax()) {
+
+            return DataTables::of(Company::all())->make(true);
+        }
+    }
+
+    public function updateSelected(Request $request)
+    {
+        Company::where('item_type_id', '=', 1)
+            ->update(['colour' => 'black']);
     }
 }

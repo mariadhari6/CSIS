@@ -75,6 +75,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/destroy_company/{id}', [CompanyController::class, 'destroy']);
     Route::get('/show_company/{id}', [CompanyController::class, 'show']);
     Route::get('/update_company/{id}', [CompanyController::class, 'update']);
+    Route::get('/selectedDelete', [CompanyController::class, 'deleteAll'])->name('livetable.delete_all');
+    Route::get('/selected', [CompanyController::class, 'selected']);
+    Route::get('/update_all/{id}', [CompanyController::class, 'updateall']);
+
 
     // pic
     Route::get('/pic', [PicController::class, 'index'])->name('pic');

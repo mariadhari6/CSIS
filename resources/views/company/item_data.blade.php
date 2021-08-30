@@ -1,5 +1,13 @@
 @foreach ($company as $companys)
     <tr id="edit-form-{{ $companys->id }}">
+        <td id="td-checkbox-{{ $companys->id }}">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input task-select" type="checkbox" id="{{$companys->id}}">
+                    <span class="form-check-sign"></span>
+                </label>
+            </div>
+        </td>
         <td id="td-button-{{ $companys->id }}">
             <div id="button-{{ $companys->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $companys->id }})"></i>

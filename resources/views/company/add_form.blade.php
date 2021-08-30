@@ -1,4 +1,7 @@
+
+
 <tr id="add_form">
+    <td></td>
     <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
     <td><select class="form-control" id="seller_id" name="seller_id">
        @foreach ($seller as $sellers)
