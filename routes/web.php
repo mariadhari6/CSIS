@@ -54,12 +54,15 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // Route::post('/livetable/delete_data', [UsernameController::class, 'delete_data'])->name('livetable.delete_data');
     // Route::post('/livetable/detail_data', [UsernameController::class, 'detail_data'])->name('livetable.detail_data');
     //
+    Route::get('/selectedDelete', [UsernameController::class, 'deleteAll'])->name('livetable.delete_all');
     Route::get('/item_data', [UsernameController::class, 'item_data']);
     Route::get('/add_form', [UsernameController::class, 'add_form']);
     Route::get('/store', [UsernameController::class, 'store']);
     Route::get('/destroy/{id}', [UsernameController::class, 'destroy']);
     Route::get('/show/{id}', [UsernameController::class, 'show']);
     Route::get('/update/{id}', [UsernameController::class, 'update']);
+    Route::get('/selected', [UsernameController::class, 'selected']);
+    Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
 
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
