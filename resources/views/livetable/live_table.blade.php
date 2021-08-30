@@ -16,10 +16,17 @@
                 <button type="button" name="add" id="add" class="btn btn-primary btn-round btn-xs   "><i class="fas fa-plus"></i> Add</button>
             </div>
             <br>
-
-          <table class="table table-hover data" class="table_id" id="table_id" >
+            <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
+                <th>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input select-all-checkbox" type="checkbox" data-select="checkbox" data-target=".task-select">
+                            <span class="form-check-sign"></span>
+                        </label>
+                    </div>
+                </th>
                 <th scope="col">Action</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
@@ -42,12 +49,12 @@
     });
 
 
+
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data') }}", {}, function(data, status) {
         $("#item_data").html(data);
         $('#table_id').DataTable();
-
       });
 
     }
@@ -56,6 +63,7 @@
     function cancel() {
       read()
     }
+
 
      // ------ Tambah Form Input ------
      $('#add').click(function() {
@@ -81,6 +89,40 @@
         })
     }
 
+      // hapus data
+      $(document).on('click', '.delete', function(event) {
+        event.preventDefault();
+
+        var id = $(this).attr("id");
+        swal({
+            title: 'Are you sure?',
+            text: "You want delete to this data!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes Delete',
+            showLoaderOnConfirm: true,
+            preConfirm: function() {
+              return new Promise(function(resolve) {
+                  $.ajax({
+                      url: "{{ route('livetable.delete_data') }}",
+                      method: "POST",
+                      data: {
+                        id: id,
+                        _token: _token
+                      },
+                      success: function(data) {
+                        swal("Done!","It was succesfully deleted!","success");
+                        fetch_data();
+                      }
+                    });
+              });
+            },
+            allowOutsideClick: false
+      });
+
+      });
 
 
     // -----Proses Delete Data ------
@@ -126,6 +168,7 @@
         })
     }
 
+    });
 
   </script>
 

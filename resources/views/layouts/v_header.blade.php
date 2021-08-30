@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/css/ready.css">
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/css/demo.css">
+
+
         <script src="{{asset('template-admin')}}/assets/js/core/jquery.3.2.1.min.js"></script>
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/js/jquery-ui.min.css">
         <script src="{{asset('template-admin')}}/assets/js/jquery-ui.min.js"></script>
@@ -31,12 +33,11 @@
         {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
 
-        {{-- materialize --}}
-         <!-- Compiled and minified CSS -->
-        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> --}}
+       {{-- sweartalert2 --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
 
-        <!-- Compiled and minified JavaScript -->
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> --}}
+
 
 
 
