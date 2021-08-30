@@ -20,6 +20,14 @@
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
+                <th>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input select-all-checkbox" type="checkbox" data-select="checkbox" data-target=".task-select" id="master">
+                        <span class="form-check-sign"></span>
+                    </label>
+                  </div>
+                </th>
                 <th scope="col">Action</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
@@ -104,9 +112,9 @@
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
-        $("#td-button-"+id).slideUp("fast");
-        $("#item-FirstName-"+id).slideUp("fast");
-        $("#item-LastName-"+id).slideUp("fast");
+        $("#td-button-"+id).hide("fast");
+        $("#item-FirstName-"+id).hide("fast");
+        $("#item-LastName-"+id).hide("fast");
         $.get("{{ url('show') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
