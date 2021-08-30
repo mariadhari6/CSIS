@@ -23,21 +23,12 @@
             <thead>
               <tr>
                 <th>
-<<<<<<< HEAD
                   <div class="form-check">
                     <label class="form-check-label">
                         <input class="form-check-input select-all-checkbox" type="checkbox" data-select="checkbox" data-target=".task-select" id="master">
                         <span class="form-check-sign"></span>
                     </label>
                   </div>
-=======
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
->>>>>>> 9e6e12d6c3f666c5e6a1e73295664a4ca5aa4b48
                 </th>
                 <th scope="col">Action</th>
                 <th scope="col">First Name</th>
