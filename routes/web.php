@@ -61,6 +61,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/destroy/{id}', [UsernameController::class, 'destroy']);
     Route::get('/show/{id}', [UsernameController::class, 'show']);
     Route::get('/update/{id}', [UsernameController::class, 'update']);
+    Route::get('/selected', [UsernameController::class, 'selected']);
+    Route::get('/update/{allVals}', [UsernameController::class, 'updateall']);
 });
 
 

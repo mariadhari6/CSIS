@@ -200,4 +200,18 @@ class UsernameController extends Controller
         }
     }
 
+    public function selected()
+    {
+
+        return view('livetable.selected');
+    }
+
+    public function updateall(Request $request, $id)
+    {
+        $data = Username::findOrfail($id);
+        $data->FirstName = $request->FirstName;
+        $data->LastName = $request->LastName;
+        $data->save();
+    }
+
 }

@@ -12,15 +12,12 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right">
-                <button type="button" name="add" id="add" class="btn btn-primary btn-round btn-xs"><i class="fas fa-plus"></i> Add</button>
+            <div class="text-right" id="tambah">
+                <button type="button" name="add" id="add" class="btn btn-primary btn-round"><i class="fas fa-plus"></i> Add</button>
             </div>
-            <div class="text-right mt-3 tambahan">
+            <div class="text-right mt-3" id="selected">
                 <button class="btn btn-success btn-round mr-2 edit_all">Edit Selected</button>
                 <button class="btn btn-danger btn-round delete_all">Delete Selected</button>
-            </div>
-            <div class="tambahan_lagi">
-
             </div>
             <br>
 
@@ -142,9 +139,10 @@
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
-        $("#td-button-"+id).slideUp("fast");
-        $("#item-FirstName-"+id).slideUp("fast");
-        $("#item-LastName-"+id).slideUp("fast");
+        $("#td-checkbox-"+id).hide("fast");
+        $("#td-button-"+id).hide("fast");
+        $("#item-FirstName-"+id).hide("fast");
+        $("#item-LastName-"+id).hide("fast");
         $.get("{{ url('show') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -185,7 +183,7 @@
 
          // Delete All
 
-        $('.delete_all').on('click', function(event){
+        $('.delete_all').on('click', function(){
           event.preventDefault();
 
             var allVals = [];
@@ -236,8 +234,10 @@
         });
 
 
-        $('.edit_all').on('click', function(event){
-            event.preventDefault();
+        $('.edit_all').on('click', function(e){
+            e.preventDefault();
+
+
 
             var allVals = [];
 
@@ -246,9 +246,54 @@
 
             });
 
-            alert(allVals);
+            if (allVals.length > 0){
+                alert(allVals);
+                $(".edit_all").hide("fast");
+                $(".delete_all").hide("fast");
+                $.get("{{ url('selected') }}", {}, function(data, status) {
+                    $("#selected").prepend(data)
 
-        })
+                });
+
+                $.each(allVals, function(index, value){
+
+
+                    $("#td-checkbox-"+value).hide("fast");
+                    $("#td-button-"+value).hide("fast");
+                    $("#item-FirstName-"+value).hide("fast");
+                    $("#item-LastName-"+value).hide("fast");
+                    $("#tambah").hide("fast");
+                    $.get("{{ url('show') }}/" + value, {}, function(data, status) {
+                        $("#edit-form-"+value).prepend(data)
+                    });
+
+                });
+
+                // $.(#saveall).on('click', function(){
+                //     var FirstName = $("#FirstName").val();
+                //     var LastName = $("#LastName").val();
+                //     $.ajax({
+                //         type: "get",
+                //         url: "{{ url('updateall') }}/"+allVals,
+                //         data: {
+                //         FirstName: FirstName,
+                //         LastName: LastName
+                //         },
+                //         success: function(data) {
+                //         read()
+                //         }
+
+
+                //     });
+                // })
+
+            }else{
+                alert('Select the row you want to edit')
+            }
+
+        });
+
+
 
 
   </script>
