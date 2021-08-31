@@ -3,7 +3,7 @@
         <td>
             <div class="form-check" >
                 <label class="form-check-label">
-                    <input class="form-check-input task-select" type="checkbox" name="ids" data-id ="' + data[count].id + '">
+                    <input class="form-check-input task-select" type="checkbox" name="ids" >
                     <span class="form-check-sign"></span>
                 </label>
             </div>
