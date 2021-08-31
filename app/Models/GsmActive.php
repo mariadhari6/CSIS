@@ -12,7 +12,7 @@ class GsmActive extends Model
     protected $table = 'gsm_actives';
 
     protected $fillable = [
-        'gsm_pre_active_id', 'request_date', 'active_date', 'status_avtive', 'company', 'note'
+        'gsm_pre_active_id', 'request_date', 'active_date', 'status_active', 'company', 'note'
     ];
 
     public function gsmPreActive()
@@ -27,6 +27,6 @@ class GsmActive extends Model
 
     public function company()
     {
-        return $this->hasMany(Company::class);
+        return $this->belongsTo(Company::class);
     }
 }

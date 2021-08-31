@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerServiceController;
+use App\Http\Controllers\GsmActiveController;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Auth;
@@ -76,7 +77,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/destroy_company/{id}', [CompanyController::class, 'destroy']);
     Route::get('/show_company/{id}', [CompanyController::class, 'show']);
     Route::get('/update_company/{id}', [CompanyController::class, 'update']);
-    Route::get('/selectedDelete', [CompanyController::class, 'deleteAll'])->name('livetable.delete_all');
+    Route::get('/selectedDelete_company', [CompanyController::class, 'deleteAll']);
     Route::get('/selected', [CompanyController::class, 'selected']);
     Route::get('/update_all/{id}', [CompanyController::class, 'updateall']);
 
@@ -89,7 +90,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/destroy_pic/{id}', [PicController::class, 'destroy']);
     Route::get('/show_pic/{id}', [PicController::class, 'edit_form']);
     Route::get('/update_pic/{id}', [PicController::class, 'update']);
-    Route::get('/selectedDelete', [PicController::class, 'deleteAll'])->name('livetable.delete_all_pic');
+    Route::get('/selectedDelete_pic', [PicController::class, 'deleteAll']);
     Route::get('/selected', [PicController::class, 'selected']);
     Route::get('/update_all/{id}', [PicController::class, 'updateall']);
     // seller
@@ -100,9 +101,20 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/destroy_seller/{id}', [SellerController::class, 'destroy']);
     Route::get('/show_seller/{id}', [SellerController::class, 'edit_form']);
     Route::get('/update_seller/{id}', [SellerController::class, 'update']);
-    Route::get('/selectedDelete', [SellerController::class, 'deleteAll'])->name('livetable.delete_all_seller');
+    Route::get('/selectedDelete_seller', [SellerController::class, 'deleteAll']);
     Route::get('/selected', [SellerController::class, 'selected']);
     Route::get('/update_all/{id}', [SellerController::class, 'updateall']);
+
+    Route::get('/GsmActive', [GsmActiveController::class, 'index'])->name('GsmActive');
+    Route::get('/item_data_GsmActive', [GsmActiveController::class, 'item_data']);
+    Route::get('/add_form_GsmActive', [GsmActiveController::class, 'add_form']);
+    Route::get('/store_GsmActive', [GsmActiveController::class, 'store']);
+    Route::get('/destroy_GsmActive/{id}', [GsmActiveController::class, 'destroy']);
+    Route::get('/show_GsmActive/{id}', [GsmActiveController::class, 'edit_form']);
+    Route::get('/update_GsmActive/{id}', [GsmActiveController::class, 'update']);
+    Route::get('/selectedDelete_GsmActive', [GsmActiveController::class, 'deleteAll']);
+    Route::get('/selected', [GsmActiveController::class, 'selected']);
+    Route::get('/update_all/{id}', [GsmActiveController::class, 'updateall']);
 });
 
 

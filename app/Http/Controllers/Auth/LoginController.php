@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -28,6 +30,15 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected function redirectTo()
+    {
+        if (Auth()->user()->role == 1) {
+            return route('admin.homepage');
+        } elseif (Auth()->user()->role == 2) {
+            return route('cs.homepage');
+        }
+        // return '/login';
+    }
     /**
      * Create a new controller instance.
      *
@@ -36,5 +47,22 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function login(Request $request)
+    {
+        $input = $request->all();
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+            if (auth()->user()->role == 1) {
+                return redirect()->route('admin.homepage');
+            } elseif (auth()->user()->role == 2) {
+                return redirect()->route('cs.homepage');
+            }
+        } else {
+            return redirect()->route('login')->with('error', 'email and password are wrong');
+        }
     }
 }

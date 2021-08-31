@@ -7,7 +7,7 @@
             <div class="info">
                 <a class="">
                     <span>
-                        Ambar Nur
+                        {{Auth::user()->name}}
                         <span class="user-level">Customer Service</span>
                     </span>
                 </a>
@@ -32,6 +32,11 @@
                 <div class="collapse in" id="masterData" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
+                            <a href="{{url('/seller')}}">
+                                <span class="link-collapse">Seller</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{url('/Company') }}">
                                 <span class="link-collapse">Company</span>
                             </a>
@@ -41,6 +46,7 @@
                                 <span class="link-collapse">PIC</span></span>
                             </a>
                         </li>
+
                         <li>
                             <a href="#edit">
                                 <span class="link-collapse">GPS</span>

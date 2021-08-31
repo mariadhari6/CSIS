@@ -208,7 +208,7 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ route('livetable.delete_all') }}",
+                            url: "{{ url('/selectedDelete_company') }}",
                             method: "get",
                             data: {
                                 id: allVals,

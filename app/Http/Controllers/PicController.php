@@ -75,7 +75,7 @@ class PicController extends Controller
     public function selected()
     {
         $pic = Pic::all();
-        return view('company.selected')->with([
+        return view('pic.selected')->with([
             'pic' => $pic
         ]);
     }

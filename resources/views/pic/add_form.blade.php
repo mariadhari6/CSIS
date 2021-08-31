@@ -5,7 +5,6 @@
        @foreach ($company as $companys)
         <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
 
-          {{-- <option value="{{ $sellers->id }}">{{ $sellers->seller_name}}</option> --}}
        @endforeach
     </select></i></td>
     {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}

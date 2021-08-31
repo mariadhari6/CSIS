@@ -39,7 +39,7 @@ class CompanyController extends Controller
             'company_name' => 'required',
             'status' => 'required',
             'customer_code' => 'required',
-            'no_po' => 'numeric|required',
+            'no_po' => 'required',
             'po_date' => 'required',
         ]);
         $data = array(

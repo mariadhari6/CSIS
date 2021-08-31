@@ -25,6 +25,10 @@ class Company extends Model
 
     public function gsmActive()
     {
-        return $this->belongsTo(GsmActive::class);
+        return $this->hasOne(GsmActive::class);
+    }
+    public function gsmTerminate()
+    {
+        return $this->hasOne(GsmTerminate::class);
     }
 }

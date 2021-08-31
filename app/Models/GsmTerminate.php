@@ -18,4 +18,9 @@ class GsmTerminate extends Model
     {
         return $this->belongsTo(GsmActive::class);
     }
+
+    public function companys()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
