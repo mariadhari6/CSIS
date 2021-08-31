@@ -5,6 +5,7 @@ use App\Http\Controllers\UsernameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerServiceController;
+use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -63,6 +64,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update/{id}', [UsernameController::class, 'update']);
     Route::get('/selected', [UsernameController::class, 'selected']);
     Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
+    Route::get('export', [UsernameController::class, 'export'])->name('export');
 });
 
 
