@@ -80,6 +80,7 @@
      $('.add').click(function() {
         $.get("{{ url('add_form') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
+
         });
       });
 
@@ -95,6 +96,12 @@
               LastName: LastName
             },
             success: function(data) {
+            swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
               read();
             }
         })
@@ -122,7 +129,13 @@
                     url: "{{ url('destroy') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
-                        swal("Done!","It was succesfully deleted!","success");
+                        // swal("Done!","It was succesfully deleted!","success");
+                        swal({
+                            type: 'success',
+                            title: 'Data Deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         read();
                     }
                 });
@@ -160,6 +173,12 @@
                 LastName: LastName
                 },
                 success: function(data) {
+                swal({
+                    type: 'success',
+                    title: ' Data Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 read()
                 }
 
@@ -217,7 +236,13 @@
                                 _token: _token
                             },
                             success: function(data) {
-                                swal("Done!","It was succesfully deleted!","success");
+                                // swal("Done!","It was succesfully deleted!","success");
+                                swal({
+                                    type: 'success',
+                                    title: 'The selected data has been deleted',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
                                 $("#master").prop('checked', false);
                                 read();
                                 }
@@ -274,7 +299,58 @@
             }
         });
 
-        //--------Proses Batal--------
+
+        // --- Proses Update Multiple ---
+        function updateSelected() {
+
+            var allVals = [];
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+            });
+
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to do an update?",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: '#00FF00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Update',
+                showLoaderOnConfirm: true,
+            }).then((willDelete) => {
+                $.each(allVals, function(index, value){
+                    var FirstName = $(".FirstName-"+value).val();
+                    var LastName = $(".LastName-"+value).val();
+                    $.ajax({
+                        type: "get",
+                        url: "{{ url('update') }}/"+value,
+                        data: {
+                        FirstName: FirstName,
+                        LastName: LastName
+                        },
+                        success: function(data) {
+                                // swal("Done!","It was succesfully Update","success");
+                                swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                $(".save").hide("fast");
+                                $(".cancel").hide("fast");
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                read();
+                            }
+                    });
+                });
+
+            });
+
+        }
+
+            //--------Proses Batal--------
         function batal(){
             $(".save").hide("fast");
             $(".cancel").hide("fast");
@@ -284,28 +360,6 @@
             read();
 
             }
-
-            function updateSelected() {
-            var allVals = [];
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-                $.each(allVals, function(index, value){
-                    var FirstName = $(".FirstName-"+value).val();
-                    var LastName = $(".LastName-"+value).val();
-                    $.ajax({
-                    type: "get",
-                    url: "{{ url('update') }}/"+value,
-                    data: {
-                    FirstName: FirstName,
-                    LastName: LastName
-                    },
-                    success: function(data) {
-                    read()
-                    }
-                });
-            });
-        }
 
 
 
