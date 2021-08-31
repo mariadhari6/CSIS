@@ -51,8 +51,6 @@
 
       read();
 
-
-
     });
 
 
@@ -276,33 +274,6 @@
             }
         });
 
-        // ------ Proses Update Data ------
-        function updateSelected() {
-            var allVals = [];
-
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-
-            $.each(allVals, function(index, value){
-            var FirstName = $(".FirstName-"+value).val();
-            var LastName = $(".LastName-"+value).val();
-                $.ajax({
-                    type: "get",
-                    url: "{{ url('update') }}/"+value,
-                    data: {
-                      FirstName: FirstName,
-                      LastName: LastName
-                      },
-                      success: function(data) {
-                      $("#master").prop('checked', false);
-                      batal();
-                    });
-
-                    });
-            }
-        }
-
         //--------Proses Batal--------
         function batal(){
             $(".save").hide("fast");
@@ -312,7 +283,33 @@
             $(".delete_all").show("fast");
             read();
 
+            }
+
+            function updateSelected() {
+            var allVals = [];
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+            });
+                $.each(allVals, function(index, value){
+                    var FirstName = $(".FirstName-"+value).val();
+                    var LastName = $(".LastName-"+value).val();
+                    $.ajax({
+                    type: "get",
+                    url: "{{ url('update') }}/"+value,
+                    data: {
+                    FirstName: FirstName,
+                    LastName: LastName
+                    },
+                    success: function(data) {
+                    read()
+                    }
+                });
+            });
         }
 
+
+
+
   </script>
-   @endsection
+
+  @endsection
