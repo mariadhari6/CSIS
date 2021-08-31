@@ -49,7 +49,7 @@
   <script>
     $(document).ready(function() {
 
-      read()
+      read();
 
     });
 
@@ -77,7 +77,7 @@
 
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -169,19 +169,20 @@
 
         // checkbox all
         $('#master').on('click', function(e) {
-          if($(this).is(':checked',true)){
-              $(".task-select").prop('checked', true);
+          if($(this).is(':checked',true) ){
+                $(".task-select").prop('checked', true)
           } else {
               $(".task-select").prop('checked',false);
-
           }
 
         });
 
 
+
+
          // Delete All
         $('.delete_all').on('click', function(){
-          event.preventDefault();
+        //   event.preventDefault();
 
             var allVals = [];
 
@@ -216,6 +217,7 @@
                             },
                             success: function(data) {
                                 swal("Done!","It was succesfully deleted!","success");
+                                $("#master").prop('checked', false);
                                 read();
                                 }
                             });
@@ -230,11 +232,12 @@
 
         });
 
-
+        // Form Edit All
         $('.edit_all').on('click', function(e){
-            e.preventDefault();
 
             var allVals = [];
+            var _token = $('input[name="_token"]').val();
+
 
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
@@ -243,7 +246,7 @@
 
             if (allVals.length > 0){
 
-                alert(allVals);
+                // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
                 $.get("{{ url('selected') }}", {}, function(data, status) {
@@ -260,15 +263,52 @@
                     $(".add").hide("fast");
                     $.get("{{ url('show') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
+                        $("#master").prop('checked', false);
                     });
                 });
+
 
             }else{
                 alert('Select the row you want to edit')
             }
         });
 
+        //--------Proses Batal--------
+        function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
+
+            }
+
+            function updateSelected() {
+            var allVals = [];
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+            });
+                $.each(allVals, function(index, value){
+                    var FirstName = $(".FirstName-"+value).val();
+                    var LastName = $(".LastName-"+value).val();
+                    $.ajax({
+                    type: "get",
+                    url: "{{ url('update') }}/"+value,
+                    data: {
+                    FirstName: FirstName,
+                    LastName: LastName
+                    },
+                    success: function(data) {
+                    read()
+                    }
+                });
+            });
+        }
+
+
 
 
   </script>
-   @endsection
+
+  @endsection

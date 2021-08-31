@@ -217,4 +217,11 @@ class UsernameController extends Controller
         echo $id;
     }
 
+    public function updateSelected(Request $request)
+    {
+        Username::where('item_type_id', '=', 1)
+                ->update(['colour' => 'black']);
+    }
+
+
 }
