@@ -1,9 +1,9 @@
 @foreach ($usernames as $username)
     <tr id="edit-form-{{ $username->id }}">
-        <td>
-            <div class="form-check" >
+        <td id="td-checkbox-{{ $username->id }}">
+            <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input task-select" type="checkbox" name="ids" >
+                    <input class="form-check-input task-select" type="checkbox" id="{{$username->id}}">
                     <span class="form-check-sign"></span>
                 </label>
             </div>
@@ -22,5 +22,4 @@
         </td>
     </tr>
 @endforeach
-
 
