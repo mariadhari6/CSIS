@@ -23,7 +23,7 @@
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th>
+                <th width="10px">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -31,7 +31,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col">Action</th>
+                <th scope="col" width="80px">Action</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
               </tr>
@@ -44,8 +44,6 @@
       </div>
     </div>
   </div>
-
-
 
   <script>
     $(document).ready(function() {

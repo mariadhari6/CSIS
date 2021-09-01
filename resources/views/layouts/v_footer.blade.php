@@ -1,8 +1,5 @@
 
-
-            {{-- </div>
-            </div> --}}
-
+            </div>
             <footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">
@@ -41,7 +38,7 @@
     <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/plugin/chart-circle/circles.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
+    <script src="{{asset('template-admin')}}/assets/js/ready.js"></script>
 
 
 
