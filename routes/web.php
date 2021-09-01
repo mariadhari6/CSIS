@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\UsernameController;
+use App\Http\Controllers\DetailCustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerServiceController;
@@ -25,9 +26,9 @@ use Illuminate\Support\Facades\Auth;
 //     return view('livetable.home');
 // });
 
-// Route::get('/tes', function () {
-//     return view('tes');
-// });
+Route::get('/', function () {
+    return view('auth.login');
+});
 
 Route::get('/login', function () {
     return view('partials.v_landingpage');
@@ -65,6 +66,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected', [UsernameController::class, 'selected']);
     Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
     Route::get('export', [UsernameController::class, 'export'])->name('export');
+
+    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
 });
 
 

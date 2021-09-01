@@ -86,7 +86,7 @@
                 <div class="collapse in" id="customer" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#profile">
+                            <a href="{{ route('detail_customer')}}">
                                 <span class="link-collapse">Detail Customer</span>
                             </a>
                         </li>
