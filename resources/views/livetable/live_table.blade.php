@@ -4,7 +4,8 @@
 @section('content')
 
 <div align="right">
-  </div>
+    <a class="btn btn-secondary  mr-2" href="{{ route('export') }}"><i class="fas fa-file-excel mr-2"></i>Export</a>
+</div>
   <br>
   <div id="message"></div>
 
@@ -13,15 +14,16 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
-                <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <br>
 
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
+<<<<<<< HEAD
                 <th>
                   <div class="form-check">
                     <label class="form-check-label">
@@ -29,8 +31,17 @@
                         <span class="form-check-sign"></span>
                     </label>
                   </div>
+=======
+                <th width="10px">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                            <span class="form-check-sign"></span>
+                        </label>
+                    </div>
+>>>>>>> 7f697414f00340050a141d12b887ec8010281821
                 </th>
-                <th scope="col">Action</th>
+                <th scope="col" width="80px">Action</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
               </tr>
@@ -44,12 +55,11 @@
     </div>
   </div>
 
-
-
   <script>
     $(document).ready(function() {
 
       read();
+
 
     });
 
@@ -57,11 +67,10 @@
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data') }}", {}, function(data, status) {
-        $("#item_data").html(data);
-        $('#table_id').DataTable();
-
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').DataTable().draw();
       });
-
     }
 
     // ---- Tombol Cancel -----
@@ -103,6 +112,7 @@
                 timer: 1500
             })
               read();
+
             }
         })
     }
@@ -179,6 +189,7 @@
                     timer: 1500
                 })
                 read()
+
                 }
 
 
@@ -244,6 +255,7 @@
                                 })
                                 $("#master").prop('checked', false);
                                 read();
+
                                 }
                             });
                     });
@@ -341,6 +353,7 @@
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
                                 read();
+
                             }
                     });
                 });

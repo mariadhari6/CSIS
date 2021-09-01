@@ -10,6 +10,7 @@
 
 .edit_all .fa-pen {
     color: white;
+
 }
 
 .fa-pen {
@@ -53,3 +54,20 @@
 #user {
     color: white;
 }
+
+.data{
+    text-align: center;
+}
+
+/* .main-header .logo-header .navbar-toggler {
+    padding-left: 0px;
+    padding-right: 0px;
+    opacity: 0;
+}
+.main-header .logo-header .navbar-toggler .navbar-toggler-icon {
+    background: url(../img/menu2.png);
+    background-size: cover;
+    height: 1em;
+    width: 1em;
+    opacity: 0.8;
+} */

@@ -1,8 +1,5 @@
 
-
-            {{-- </div>
-            </div> --}}
-
+            </div>
             <footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">
@@ -41,13 +38,15 @@
     <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/plugin/chart-circle/circles.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="{{asset('template-admin')}}/assets/js/ready.js"></script>
 
 
 
     {{-- Datatable --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="//cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script> --}}
 
 
 </html>
