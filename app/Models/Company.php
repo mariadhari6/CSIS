@@ -25,10 +25,10 @@ class Company extends Model
 
     public function gsmActive()
     {
-        return $this->hasOne(GsmActive::class);
+        return $this->hasMany(GsmActive::class);
     }
     public function gsmTerminate()
     {
-        return $this->hasOne(GsmTerminate::class);
+        return $this->hasMany(GsmTerminate::class);
     }
 }

@@ -1,5 +1,6 @@
 @extends('layouts.v_main')
-@section('title','Gsm Active')
+@section('title','Gps')
+
 
 @section('content')
 
@@ -12,7 +13,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-             <div class="text-right mt-3" id="selected">
+            <div class="text-right mt-3" id="selected">
                 <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
                 <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
@@ -22,7 +23,7 @@
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                  <th>
+                <th>
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -31,41 +32,37 @@
                     </div>
                 </th>
                 <th scope="col">Action</th>
-                <th scope="col">Gsm Pre Active</th></th>
-                <th scope="col">Request Date</th>
-                <th scope="col">Active Date</th>
-                <th scope="col">Status Active</th>
-                <th scope="col">Company</th>
-                <th scope="col">Note</th>
+                <th scope="col">Merk</th>
+                <th scope="col">Type</th>
+                <th scope="col">IMEI</th>
+                <th scope="col">Waranty</th>
+                <th scope="col">Po Date</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody  id="item_data">
-              {{ csrf_field() }}
+              {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-        </div>
+
       </div>
     </div>
   </div>
 
+
+
   <script>
     $(document).ready(function() {
-
       read()
-
     });
-
-
     // ------ Tampil Data ------
     function read(){
-      $.get("{{ url('item_data_GsmActive') }}", {}, function(data, status) {
+
+      $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
         $("#item_data").html(data);
         $('#table_id').DataTable();
-
       });
-
     }
-
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -73,40 +70,36 @@
 
      // ------ Tambah Form Input ------
      $('#add').click(function() {
-        $.get("{{ url('add_form_GsmActive') }}", {}, function(data, status) {
+        $.get("{{ url('add_form_gps') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
       });
-
     // ----- Proses Tambah data ------
     function store() {
-        var gsm_pre_active_id = $("#gsm_pre_active_id").val();
-        var request_date = $("#request_date").val();
-        var active_date = $("#active_date").val();
-        var status_active = $("#status_active").val();
-        var company_id = $("#company_id").val();
-        var note = $("#note").val();
+        var merk = $("#merk").val();
+        var type = $("#type").val();
+        var imei = $("#imei").val();
+        var waranty = $("#waranty").val();
+        var po_date = $("#po_date").val();
+        var status = $("#status").val();
         $.ajax({
             type: "get",
-            url: "{{ url('store_GsmActive') }}",
+            url: "{{ url('store_gps') }}",
             data: {
-              gsm_pre_active_id: gsm_pre_active_id,
-              request_date: request_date,
-              active_date: active_date,
-              status_active: status_active,
-              company_id: company_id,
-              note:note
+              merk: merk,
+              type:type,
+              imei: imei,
+              waranty: waranty,
+              po_date: po_date,
+              status:status
             },
             success: function(data) {
-              read()
+              read();
             }
         })
     }
-
-
-
     // -----Proses Delete Data ------
-   function destroy(id) {
+    function destroy(id) {
         var id = id;
         swal({
             title: 'Are you sure?',
@@ -121,7 +114,7 @@
               return new Promise(function(resolve) {
                 $.ajax({
                     type: "get",
-                    url: "{{ url('destroy_GsmActive') }}/" + id,
+                    url: "{{ url('destroy_gps') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
                         swal("Done!","It was succesfully deleted!","success");
@@ -134,60 +127,56 @@
             allowOutsideClick: false
       });
     }
-
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
-        $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
-        $("#item-gsm_pre_active_id-"+id).slideUp("fast");
-        $("#item-request_date-"+id).slideUp("fast");
-        $("#item-active_date-"+id).slideUp("fast");
-        $("#item-status_active-"+id).slideUp("fast");
-        $("#item-company_id-"+id).slideUp("fast");
-        $("#item-note-"+id).slideUp("fast");
-        $.get("{{ url('show_GsmActive') }}/" + id, {}, function(data, status) {
+        $("#td-button-"+id).hide("fast");
+        $("#item-merk-"+id).hide("fast");
+        $("#item-type-"+id).hide("fast");
+        $("#item-imei-"+id).hide("fast");
+        $("#item-waranty-"+id).hide("fast");
+        $("#item-po_date-"+id).hide("fast");
+        $("#item-status-"+id).hide("fast");
+        $.get("{{ url('show_gps') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
-
     // ------ Proses Update Data ------
-    function update(id) {
-        var gsm_pre_active_id = $("#gsm_pre_active_id").val();
-        var request_date = $("#request_date").val();
-        var active_date = $("#active_date").val();
-        var status_active = $("#status_active").val();
-        var company_id = $("#company_id").val();
-        var note = $("#note").val();
-        var id = id;
-        // console.log('test');
-        $.ajax({
-            type: "get",
-            url: "{{ url('update_GsmActive') }}/"+id,
-            data: {
-               gsm_pre_active_id: gsm_pre_active_id,
-              request_date: request_date,
-              active_date: active_date,
-              status_active: status_active,
-              company_id: company_id,
-              note:note
-            },
-            success: function(data) {
-              read()
-            // console.log('test');
-            }
-        })
-    }
-
-     $('#master').on('click', function(e) {
+        function update(id) {
+            var merk = $("#merk").val();
+            var type = $("#type").val();
+            var imei = $("#imei").val();
+            var waranty = $("#waranty").val();
+            var po_date = $("#po_date").val();
+            var status = $("#status").val();
+            var id = id;
+            $.ajax({
+                type: "get",
+                url: "{{ url('update_gps') }}/"+id,
+                data: {
+                merk: merk,
+                type:type,
+                imei: imei,
+                waranty: waranty,
+                po_date: po_date,
+                status:status
+                },
+                success: function(data) {
+                read()
+                }
+            });
+        }
+        // checkbox all
+        $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
               $(".task-select").prop('checked', true);
           } else {
               $(".task-select").prop('checked',false);
           }
-    });
-
-      $('.delete_all').on('click', function(){
+        });
+         // Delete All
+        $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
             $(".task-select:checked").each(function() {
@@ -208,7 +197,7 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ url('/selectedDelete_GsmActive') }}",
+                            url: "{{ url('/selectedDelete_gps') }}",
                             method: "get",
                             data: {
                                 id: allVals,
@@ -228,6 +217,7 @@
             }
         });
 
+        // Form Edit All
         $('.edit_all').on('click', function(e){
 
             var allVals = [];
@@ -246,14 +236,14 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-gsm_pre_active_id-"+value).slideUp("fast");
-                    $("#item-request_date-"+value).slideUp("fast");
-                    $("#item-active_date-"+value).slideUp("fast");
-                    $("#item-status_active-"+value).slideUp("fast");
-                    $("#item-company_id-"+value).slideUp("fast");
-                    $("#item-note-"+value).slideUp("fast");
+                    $("#item-merk-"+value).hide("fast");
+                    $("#item-type-"+value).hide("fast");
+                    $("#item-imei-"+value).hide("fast");
+                    $("#item-waranty-"+value).hide("fast");
+                    $("#item-po_date-"+value).hide("fast");
+                    $("#item-status-"+value).hide("fast");
                     $(".add").hide("fast");
-                    $.get("{{ url('show_GsmActive') }}/" + value, {}, function(data, status) {
+                    $.get("{{ url('show_gps') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                     });
                 });
@@ -262,7 +252,8 @@
             }
         });
 
-            function updateSelected() {
+        // ------ Proses Update Data ------
+        function updateSelected() {
             var allVals = [];
 
             $(".task-select:checked").each(function() {
@@ -270,22 +261,22 @@
             });
 
                 $.each(allVals, function(index, value){
-                    var gsm_pre_active_id = $(".gsm_pre_active_id-"+value).val();
-                    var request_date = $(".request_date-"+value).val();
-                    var active_date = $(".active_date-"+value).val();
-                    var status_active = $(".status_active-"+value).val();
-                    var company_id = $(".company-"+value).val();
-                    var note = $(".note-"+value).val();
+                    var merk = $(".merk-"+value).val();
+                    var type = $(".type-"+value).val();
+                    var imei = $(".imei-"+value).val();
+                    var waranty = $(".waranty-"+value).val();
+                    var po_date = $(".po_date-"+value).val();
+                    var status = $(".status-"+value).val();
                     $.ajax({
                     type: "get",
-                    url: "{{ url('update_GsmActive') }}/"+value,
+                    url: "{{ url('update_gps') }}/"+value,
                     data: {
-                        gsm_pre_active_id: gsm_pre_active_id,
-                        request_date: request_date,
-                        active_date: active_date,
-                        status_active: status_active,
-                        company: company,
-                        note:note
+                     merk: merk,
+                    type:type,
+                    imei: imei,
+                    waranty: waranty,
+                    po_date: po_date,
+                    status:status
                     },
                     success: function(data) {
                     read()
@@ -296,8 +287,14 @@
 
         }
 
+        //--------Proses Batal--------
+        function cancel(){
+            read();
+        }
+
+
 
 
   </script>
-
    @endsection
+

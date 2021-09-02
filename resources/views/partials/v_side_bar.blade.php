@@ -48,12 +48,12 @@
                         </li>
 
                         <li>
-                            <a href="#edit">
+                            <a href="{{url('/gps')}}">
                                 <span class="link-collapse">GPS</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#settings">
+                            <a href="{{url('/sensor')}}">
                                 <span class="link-collapse">Sensor</span>
                             </a>
                         </li>
@@ -66,17 +66,17 @@
                             <div class="collapse in" id="gsm" aria-expanded="true" style="">
                                 <ul class="nav">
                                     <li>
-                                        <a href="#profile">
+                                        <a href="{{url('/GsmPreActive')}}">
                                             <span class="link-collapse">Pre Active</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#edit">
+                                        <a href="{{url('/GsmActive') }}">
                                             <span class="link-collapse">Active</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#settings">
+                                        <a href="{{url('/GsmTerminate') }}">
                                             <span class="link-collapse">Terminated</span>
                                         </a>
                                     </li>

@@ -6,9 +6,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerServiceController;
+use App\Http\Controllers\GpsController;
 use App\Http\Controllers\GsmActiveController;
+use App\Http\Controllers\GsmPreActiveController;
+use App\Http\Controllers\GsmTerminateController;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SensorController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -32,15 +36,15 @@ use Illuminate\Support\Facades\Auth;
 //     return view('tes');
 // });
 
-Route::get('/login', function () {
-    return view('partials.v_landingpage');
-});
+// Route::get('/login', function () {
+//     return view('partials.v_landingpage');
+// });
 
 
 // Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
 
 // Route::post('/selected-username', [UsernameController::class, 'deleteall'])->name('livetable.delete_all');
-Route::get('/selectedDelete', 'UsernameController@deleteAll')->name('livetable.delete_all');
+// Route::get('/selectedDelete', 'UsernameController@deleteAll')->name('livetable.delete_all');
 
 Auth::routes();
 
@@ -115,6 +119,54 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_GsmActive', [GsmActiveController::class, 'deleteAll']);
     Route::get('/selected', [GsmActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmActiveController::class, 'updateall']);
+    //Gsm Terminate
+    Route::get('/GsmTerminate', [GsmTerminateController::class, 'index'])->name('GsmTerminate');
+    Route::get('/item_data_GsmTerminate', [GsmTerminateController::class, 'item_data']);
+    Route::get('/add_form_GsmTerminate', [GsmTerminateController::class, 'add_form']);
+    Route::get('/store_GsmTerminate', [GsmTerminateController::class, 'store']);
+    Route::get('/destroy_GsmTerminate/{id}', [GsmTerminateController::class, 'destroy']);
+    Route::get('/show_GsmTerminate/{id}', [GsmTerminateController::class, 'edit_form']);
+    Route::get('/update_GsmTerminate/{id}', [GsmTerminateController::class, 'update']);
+    Route::get('/selectedDelete_GsmTerminate', [GsmTerminateController::class, 'deleteAll']);
+    Route::get('/selected', [GsmTerminateController::class, 'selected']);
+    Route::get('/update_all/{id}', [GsmTerminateController::class, 'updateall']);
+
+    //sensor
+    Route::get('/sensor', [SensorController::class, 'index'])->name('sensor');
+    Route::get('/item_data_sensor', [SensorController::class, 'item_data']);
+    Route::get('/add_form_sensor', [SensorController::class, 'add_form']);
+    Route::get('/store_sensor', [SensorController::class, 'store']);
+    Route::get('/destroy_sensor/{id}', [SensorController::class, 'destroy']);
+    Route::get('/show_sensor/{id}', [SensorController::class, 'edit_form']);
+    Route::get('/update_sensor/{id}', [SensorController::class, 'update']);
+    Route::get('/selectedDelete_sensor', [SensorController::class, 'deleteAll']);
+    Route::get('/selected', [SensorController::class, 'selected']);
+    Route::get('/update_all/{id}', [SensorController::class, 'updateall']);
+
+    //Gps
+    Route::get('/gps', [GpsController::class, 'index'])->name('gps');
+    Route::get('/item_data_gps', [GpsController::class, 'item_data']);
+    Route::get('/add_form_gps', [GpsController::class, 'add_form']);
+    Route::get('/store_gps', [GpsController::class, 'store']);
+    Route::get('/destroy_gps/{id}', [GpsController::class, 'destroy']);
+    Route::get('/show_gps/{id}', [GpsController::class, 'edit_form']);
+    Route::get('/update_gps/{id}', [GpsController::class, 'update']);
+    Route::get('/selectedDelete_gps', [GpsController::class, 'deleteAll']);
+    Route::get('/selected', [GpsController::class, 'selected']);
+    Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
+
+    //gsm pre active
+
+    Route::get('/GsmPreActive', [GsmPreActiveController::class, 'index'])->name('GsmPreActive');
+    Route::get('/item_data_GsmPreActive', [GsmPreActiveController::class, 'item_data']);
+    Route::get('/add_form_GsmPreActive', [GsmPreActiveController::class, 'add_form']);
+    Route::get('/store_GsmPreActive', [GsmPreActiveController::class, 'store']);
+    Route::get('/destroy_GsmPreActive/{id}', [GsmPreActiveController::class, 'destroy']);
+    Route::get('/show_GsmPreActive/{id}', [GsmPreActiveController::class, 'edit_form']);
+    Route::get('/update_GsmPreActive/{id}', [GsmPreActiveController::class, 'update']);
+    Route::get('/selectedDelete_GsmPreActive', [GsmPreActiveController::class, 'deleteAll']);
+    Route::get('/selected', [GsmPreActiveController::class, 'selected']);
+    Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
 });
 
 

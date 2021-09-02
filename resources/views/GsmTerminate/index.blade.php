@@ -1,5 +1,5 @@
 @extends('layouts.v_main')
-@section('title','Gsm Active')
+@section('title','Gsm Terminate')
 
 @section('content')
 
@@ -31,7 +31,7 @@
                     </div>
                 </th>
                 <th scope="col">Action</th>
-                <th scope="col">Gsm Pre Active</th></th>
+                <th scope="col">Gsm Active</th></th>
                 <th scope="col">Request Date</th>
                 <th scope="col">Active Date</th>
                 <th scope="col">Status Active</th>
@@ -58,7 +58,7 @@
 
     // ------ Tampil Data ------
     function read(){
-      $.get("{{ url('item_data_GsmActive') }}", {}, function(data, status) {
+      $.get("{{ url('item_data_GsmTerminate') }}", {}, function(data, status) {
         $("#item_data").html(data);
         $('#table_id').DataTable();
 
@@ -73,14 +73,14 @@
 
      // ------ Tambah Form Input ------
      $('#add').click(function() {
-        $.get("{{ url('add_form_GsmActive') }}", {}, function(data, status) {
+        $.get("{{ url('add_form_GsmTerminate') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
       });
 
     // ----- Proses Tambah data ------
     function store() {
-        var gsm_pre_active_id = $("#gsm_pre_active_id").val();
+        var gsm_active_id = $("#gsm_active_id").val();
         var request_date = $("#request_date").val();
         var active_date = $("#active_date").val();
         var status_active = $("#status_active").val();
@@ -88,9 +88,9 @@
         var note = $("#note").val();
         $.ajax({
             type: "get",
-            url: "{{ url('store_GsmActive') }}",
+            url: "{{ url('store_GsmTerminate') }}",
             data: {
-              gsm_pre_active_id: gsm_pre_active_id,
+              gsm_active_id: gsm_active_id,
               request_date: request_date,
               active_date: active_date,
               status_active: status_active,
@@ -121,7 +121,7 @@
               return new Promise(function(resolve) {
                 $.ajax({
                     type: "get",
-                    url: "{{ url('destroy_GsmActive') }}/" + id,
+                    url: "{{ url('destroy_GsmTerminate') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
                         swal("Done!","It was succesfully deleted!","success");
@@ -140,20 +140,20 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
-        $("#item-gsm_pre_active_id-"+id).slideUp("fast");
+        $("#item-gsm_active_id-"+id).slideUp("fast");
         $("#item-request_date-"+id).slideUp("fast");
         $("#item-active_date-"+id).slideUp("fast");
         $("#item-status_active-"+id).slideUp("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-note-"+id).slideUp("fast");
-        $.get("{{ url('show_GsmActive') }}/" + id, {}, function(data, status) {
+        $.get("{{ url('show_GsmTerminate') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
 
     // ------ Proses Update Data ------
     function update(id) {
-        var gsm_pre_active_id = $("#gsm_pre_active_id").val();
+        var gsm_active_id = $("#gsm_active_id").val();
         var request_date = $("#request_date").val();
         var active_date = $("#active_date").val();
         var status_active = $("#status_active").val();
@@ -163,9 +163,9 @@
         // console.log('test');
         $.ajax({
             type: "get",
-            url: "{{ url('update_GsmActive') }}/"+id,
+            url: "{{ url('update_GsmTerminate') }}/"+id,
             data: {
-               gsm_pre_active_id: gsm_pre_active_id,
+               gsm_active_id: gsm_active_id,
               request_date: request_date,
               active_date: active_date,
               status_active: status_active,
@@ -208,7 +208,7 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ url('/selectedDelete_GsmActive') }}",
+                            url: "{{ url('/selectedDelete_GsmTerminate') }}",
                             method: "get",
                             data: {
                                 id: allVals,
@@ -246,7 +246,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-gsm_pre_active_id-"+value).slideUp("fast");
+                    $("#item-gsm_active_id-"+value).slideUp("fast");
                     $("#item-request_date-"+value).slideUp("fast");
                     $("#item-active_date-"+value).slideUp("fast");
                     $("#item-status_active-"+value).slideUp("fast");
@@ -270,21 +270,21 @@
             });
 
                 $.each(allVals, function(index, value){
-                    var gsm_pre_active_id = $(".gsm_pre_active_id-"+value).val();
+                    var gsm_active_id = $(".gsm_active_id-"+value).val();
                     var request_date = $(".request_date-"+value).val();
                     var active_date = $(".active_date-"+value).val();
                     var status_active = $(".status_active-"+value).val();
-                    var company_id = $(".company-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
                     var note = $(".note-"+value).val();
                     $.ajax({
                     type: "get",
-                    url: "{{ url('update_GsmActive') }}/"+value,
+                    url: "{{ url('update_GsmTerminate') }}/"+value,
                     data: {
-                        gsm_pre_active_id: gsm_pre_active_id,
+                        gsm_active_id: gsm_active_id,
                         request_date: request_date,
                         active_date: active_date,
                         status_active: status_active,
-                        company: company,
+                        company_id: company_id,
                         note:note
                     },
                     success: function(data) {

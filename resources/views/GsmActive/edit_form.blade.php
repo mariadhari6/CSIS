@@ -2,9 +2,9 @@
     <td>
         <i class="fas fa-check add" id="edit" onclick="update({{ $GsmActive->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
-     <td><select class="form-control gsm_pre_active-{{$GsmActive->id}}" id="gsm_pre_active_id" name="gsm_pre_active_id">
+     <td><select class="form-control gsm_pre_active_id-{{$GsmActive->id}}" id="gsm_pre_active_id" name="gsm_pre_active_id">
        @foreach ($GsmPreActive as $GsmPreActives)
-        <option value="{{ $GsmPreActives->id }}" {{ old('gsm_pre_active_id') == $GsmPreActives->id ? 'selected':'' }}>{{ $GsmPreActives->gsm_number }}</option>
+        <option value="{{ $GsmPreActives->id }}" {{ old('gsm_pre_active_id') == $GsmPreActives->id ? 'selected':'' }}>{{ $GsmPreActives->gsm_active_id }}</option>
 
        @endforeach
     </select></i></td>
