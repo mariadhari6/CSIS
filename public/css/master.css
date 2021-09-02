@@ -1,3 +1,20 @@
+/* Datatable */
+.dataTables_length {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.dataTables_filter {
+    position: relative;
+    right: 200px;
+    bottom: 35px;
+}
+
+#table_id {
+    position: relative;
+    bottom: 30px;
+}
+
 /* icon */
 
 .fa-trash {
@@ -10,7 +27,6 @@
 
 .edit_all .fa-pen {
     color: white;
-
 }
 
 .fa-pen {
@@ -55,7 +71,7 @@
     color: white;
 }
 
-.data{
+.data {
     text-align: center;
 }
 
