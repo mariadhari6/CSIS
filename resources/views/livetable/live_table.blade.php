@@ -4,7 +4,8 @@
 @section('content')
 
 <div align="right">
-  </div>
+    <a class="btn btn-secondary  mr-2" href="{{ route('export') }}"><i class="fas fa-file-excel mr-2"></i>Export</a>
+</div>
   <br>
   <div id="message"></div>
 
@@ -13,16 +14,16 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
-                <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <br>
 
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th>
+                <th width="10px">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -30,7 +31,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col">Action</th>
+                <th scope="col" width="80px">Action</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
               </tr>
@@ -44,8 +45,6 @@
     </div>
   </div>
 
-
-
   <script>
     $(document).ready(function() {
       read()
@@ -53,8 +52,10 @@
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data') }}", {}, function(data, status) {
-        $("#item_data").html(data);
-        $('#table_id').DataTable();
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').DataTable().draw();
+
       });
     }
     // ---- Tombol Cancel -----
@@ -63,9 +64,10 @@
     }
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
+
         });
       });
     // ----- Proses Tambah data ------
@@ -80,7 +82,14 @@
               LastName: LastName
             },
             success: function(data) {
+            swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
               read();
+
             }
         })
     }
@@ -103,7 +112,13 @@
                     url: "{{ url('destroy') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
-                        swal("Done!","It was succesfully deleted!","success");
+                        // swal("Done!","It was succesfully deleted!","success");
+                        swal({
+                            type: 'success',
+                            title: 'Data Deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         read();
                     }
                 });
@@ -137,14 +152,21 @@
                 LastName: LastName
                 },
                 success: function(data) {
+                swal({
+                    type: 'success',
+                    title: ' Data Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 read()
+
                 }
             });
         }
         // checkbox all
         $('#master').on('click', function(e) {
-          if($(this).is(':checked',true)){
-              $(".task-select").prop('checked', true);
+          if($(this).is(':checked',true) ){
+                $(".task-select").prop('checked', true)
           } else {
               $(".task-select").prop('checked',false);
           }
@@ -178,8 +200,16 @@
                                 _token: _token
                             },
                             success: function(data) {
-                                swal("Done!","It was succesfully deleted!","success");
+                                // swal("Done!","It was succesfully deleted!","success");
+                                swal({
+                                    type: 'success',
+                                    title: 'The selected data has been deleted',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                $("#master").prop('checked', false);
                                 read();
+
                                 }
                             });
                     });
@@ -215,6 +245,7 @@
                     $(".add").hide("fast");
                     $.get("{{ url('show') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
+                        $("#master").prop('checked', false);
                     });
                 });
             }else{
@@ -222,40 +253,73 @@
             }
         });
 
-        // ------ Proses Update Data ------
-        function updateSelected() {
-            var allVals = [];
 
+        // --- Proses Update Multiple ---
+        function updateSelected() {
+
+            var allVals = [];
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
 
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to do an update?",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: '#00FF00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Update',
+                showLoaderOnConfirm: true,
+            }).then((willDelete) => {
                 $.each(allVals, function(index, value){
                     var FirstName = $(".FirstName-"+value).val();
                     var LastName = $(".LastName-"+value).val();
                     $.ajax({
-                    type: "get",
-                    url: "{{ url('update') }}/"+value,
-                    data: {
-                    FirstName: FirstName,
-                    LastName: LastName
-                    },
-                    success: function(data) {
-                    read()
-                    }
+                        type: "get",
+                        url: "{{ url('update') }}/"+value,
+                        data: {
+                        FirstName: FirstName,
+                        LastName: LastName
+                        },
+                        success: function(data) {
+                                // swal("Done!","It was succesfully Update","success");
+                                swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                $(".save").hide("fast");
+                                $(".cancel").hide("fast");
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                read();
+
+                            }
+                    });
                 });
+
             });
 
-
         }
 
-        //--------Proses Batal--------
-        function cancel(){
+            //--------Proses Batal--------
+        function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
             read();
-        }
+
+            }
+
 
 
 
 
   </script>
-   @endsection
+
+  @endsection

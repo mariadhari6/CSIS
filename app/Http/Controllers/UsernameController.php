@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\DataTables;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsernameController extends Controller
 {
@@ -217,6 +219,11 @@ class UsernameController extends Controller
     {
         Username::where('item_type_id', '=', 1)
                 ->update(['colour' => 'black']);
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
 

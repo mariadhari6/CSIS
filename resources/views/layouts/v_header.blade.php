@@ -24,9 +24,10 @@
         <script src="https://kit.fontawesome.com/3288de5ebf.js" crossorigin="anonymous"></script>
 
         {{-- Datatable --}}
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="//cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
+        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
         <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script> --}}
 
         {{-- Ajax --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -49,5 +50,6 @@
         <div class="main-panel">
             <div class="content">
                 <div class="container-fluid">
+                    <div>
 
 
