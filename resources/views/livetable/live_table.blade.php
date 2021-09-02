@@ -1,5 +1,5 @@
 @extends('layouts.v_main')
-@section('title','Tes')
+@section('title','livetable')
 
 @section('content')
 
