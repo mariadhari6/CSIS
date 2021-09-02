@@ -1,129 +1,157 @@
-<div class="wrapper">
-    <div class="main-header">
-        <div class="logo-header">
-            <a href="index.html" class="logo">
-                <img src="{{asset('template-admin')}}/assets/img/logo_db.png" width="150px" height="30px" >
-            </a>
-            <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
+<div class="sidebar">
+    <div class="scrollbar-inner sidebar-wrapper">
+        <div class="user">
+            <div class="photo">
+                <img src="{{ asset('images/admin.png') }}">
+            </div>
+            <div class="info">
+                <a class="">
+                    <span>
+                        Ambar Nur
+                        <span class="user-level">Customer Service</span>
+                    </span>
+                </a>
+
+            </div>
         </div>
-        <nav class="navbar navbar-header navbar-expand-lg">
-            <div class="container-fluid">
+        <ul class="nav">
+            <li class="nav-item active">
+                <a href="/">
+                    <i class="fas fa-home"></i>
+                    <p>Home</p>
 
+                </a>
+            </li>
 
-                <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{asset('template-admin')}}/assets/img/profil3.jpg" alt="user-img" width="36" class="img-circle"><span >Ambar Nur</span></span> </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li>
+            <li class="nav-item">
+                <a class="" data-toggle="collapse" href="#masterData" aria-expanded="true">
+                    <i class="fas fa-table"></i>
+                    <p>Master Data</p>
+                    <span class="caret"></span>
+                </a>
+                <div class="collapse in" id="masterData" aria-expanded="true" style="">
+                    <ul class="nav">
+                        <li>
+                            <a href="#">
+                                <span class="link-collapse">Company</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/Gps')}}">
+                                <span class="link-collapse">GPS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/Sensor')}}">
+                                <span class="link-collapse">Sensor</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class ="" data-toggle="collapse" href="#gsm" aria-expanded="true">
+                                <span class="link-collapse">GSM</span>
+                                <span class="caret"></span>
+                            </a>
 
-                                <div class="user-box">
-                                    <div class="u-img"><img src="{{asset('template-admin')}}/assets/img/profil3.jpg" alt="user"></div>
-                                    <div class="u-text">
-                                        <h4>Ambar Nur Qori</h4>
-                                        <p class="text-muted">AmbarNur@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
-                                    </div>
+                            <div class="collapse in" id="gsm" aria-expanded="true" style="">
+                                <ul class="nav">
+                                    <li>
+                                        <a href="{{url('/gsm_pre_active')}}">
+                                            <span class="link-collapse">Pre Active</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#edit">
+                                            <span class="link-collapse">Active</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#settings">
+                                            <span class="link-collapse">Terminated</span>
+                                        </a>
+                                    </li>
 
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
-                                <a class="dropdown-item" href="#"></i> My Balance</a>
-                                <a class="dropdown-item" href="#"><i class="ti-email"></i> Inbox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="ti-settings"></i> Account Setting</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Logout</a>
-                            </ul>
-                            <!-- /.dropdown-user -->
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
-            </nav>
-        </div>
-        <div class="sidebar">
-            <div class="scrollbar-inner sidebar-wrapper">
-                <div class="user">
-                    <div class="photo">
-                        <img src="{{asset('template-admin')}}/assets/img/profil3.jpg">
-                    </div>
-                    <div class="info">
-                        <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-                            <span>
-                                Ambar Nur Qori
-                                <span class="user-level">Customer Service</span>
-                                <span class="caret"></span>
-                            </span>
-                        </a>
-                        <div class="clearfix"></div>
+            </li>
 
-                        <div class="collapse in" id="collapseExample" aria-expanded="true" style="">
-                            <ul class="nav">
-                                <li>
-                                    <a href="#profile">
-                                        <span class="link-collapse">My Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#edit">
-                                        <span class="link-collapse">Edit Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#settings">
-                                        <span class="link-collapse">Settings</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+            <li class="nav-item">
+                <a class="" data-toggle="collapse" href="#customer" aria-expanded="true">
+                    <i class="fas fa-user-friends"></i>
+                    <p>Customer</p>
+                    <span class="caret"></span>
+                </a>
+                <div class="collapse in" id="customer" aria-expanded="true" style="">
+                    <ul class="nav">
+                        <li>
+                            <a href="#profile">
+                                <span class="link-collapse">Detail Customer</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#edit">
+                                <span class="link-collapse">Summary</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="nav">
-                    <li class="nav-item active">
-                        <a href="index.html">
-                            <i class="la la-dashboard"></i>
-                            <p>Home</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="la la-table"></i>
-                                <span class="menu-title">Data Master</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="collapse" href="#company">
-                                        <span class="menu-title">&ensp; Company</span>
-                                    </a>
-                                    {{-- <div class="collapse" id="company">
-                                        <ul class="nav flex-column sub-menu">
-                                            <li class="nav-item"> <a class="nav-link" href="/"> &ensp; &ensp; &ensp; Data Company</a></li>
-                                            <li class="nav-item"> <a class="nav-link" href="/"> &ensp; &ensp; &ensp; Data PIC</a></li>
-                                        </ul>
-                                    </div> --}}
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="/">&ensp; GPS</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="/">&ensp; Sensor</a></li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="collapse" href="#GSM">
-                                        <span class="menu-title">&ensp;     GSM</span>
-                                    </a>
-                                    <div class="collapse" id="GSM">
-                                        <ul class="nav flex-column sub-menu">
-                                            <li class="nav-item"> <a class="nav-link" href="/"> &ensp; &ensp; &ensp; Data Company</a></li>
-                                            <li class="nav-item"> <a class="nav-link" href="/"> &ensp; &ensp; &ensp; Data PIC</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+            </li>
+            <li class="nav-item">
+                <a class="" data-toggle="collapse" href="#request&complain" aria-expanded="true">
+                    <i class="fas fa-comments"></i>
+                    <p>Request & Complain</p>
+                    <span class="caret"></span>
+                </a>
+                <div class="collapse in" id="request&complain" aria-expanded="true" style="">
+                    <ul class="nav">
+                        <li>
+                            <a href="#profile">
+                                <span class="link-collapse">Data Request Complain</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#edit">
+                                <span class="link-collapse">Dashboard </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="" data-toggle="collapse" href="#visit" aria-expanded="true">
+                    <i class="fas fa-user-cog"></i>
+                    <p>Visit Assignment</p>
+                    <span class="caret"></span>
+                </a>
+                <div class="collapse in" id="visit" aria-expanded="true" style="">
+                    <ul class="nav">
+                        <li>
+                            <a href="#profile">
+                                <span class="link-collapse">Pemasangan dan Mutasi GPS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#edit">
+                                <span class="link-collapse">Maintenance GPS </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#edit">
+                                <span class="link-collapse">Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
-        <div class="main-panel">
-            <div class="content">
-                <div class="container-fluid">
+            <li class="nav-item">
+
+                <a href="livetable">Example Crud</a>
+            </li>
+
+
+        </ul>
+    </div>
+</div>
