@@ -53,13 +53,18 @@
 
     });
 
-
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').DataTable().draw();
+        // $("#item_data").html(data);
+        // $('#table_id').DataTable().destroy();
+        // $('#table_id').dataTable( {
+        //     "dom": '<"top"if>rt<"bottom"lp><"clear">'
+        //     } );
+        // $('#table_id').DataTable().draw();
       });
     }
 
@@ -363,9 +368,6 @@
             read();
 
             }
-
-
-
 
   </script>
 

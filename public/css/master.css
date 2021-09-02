@@ -57,4 +57,32 @@
 
 .data{
     text-align: center;
+
 }
+
+.detailcustomer thead tr th {
+    font-size: 12px;
+    text-align: center;
+}
+
+/* .dataTables_filter, .dataTables_info {
+    position: relative;
+    right: 200px;
+} */
+
+/* .delete_all {
+position: relative;
+top: 55px;
+right: 5px;
+}
+
+.edit_all {
+position: relative;
+top: 55px;
+}
+
+.add-button {
+position: relative;
+left : 50px;
+top: 55px;
+} */

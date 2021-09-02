@@ -2,11 +2,10 @@
 @section('title','Tes')
 
 @section('content')
-
 <div align="right">
     <a class="btn btn-secondary  mr-2" href="{{ route('export') }}"><i class="fas fa-file-excel mr-2"></i>Export</a>
 </div>
-
+<br>
 <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -18,7 +17,7 @@
             </div>
             <br>
 
-          <table class="table table-hover data" class="table_id" id="table_id" >
+          <table class="table table-hover detailcustomer" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th width="10px">
@@ -29,7 +28,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" width="80px">Action</th>
+                <th scope="col" width="80px" >Action</th>
                 <th scope="col">Company</th>
                 <th scope="col">License Plate</th>
                 <th scope="col">Vehicle Type</th>
@@ -46,9 +45,9 @@
                 <th scope="col">Merk Sensor</th>
                 <th scope="col">Pool Name</th>
                 <th scope="col">Pool Location</th>
-                {{-- <th scope="col">Status Layanan</th>
+                <th scope="col">Status Layanan</th>
                 <th scope="col">Tanggal Pasang</th>
-                <th scope="col">Tanggal Non Active</th> --}}
+                <th scope="col">Tanggal Non Active</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -59,6 +58,9 @@
       </div>
     </div>
   </div>
+</div>
+<script>
 
+</script>
 
 @endsection
