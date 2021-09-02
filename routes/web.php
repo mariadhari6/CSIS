@@ -72,6 +72,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update/{id}', [UsernameController::class, 'update']);
     Route::get('/selected', [UsernameController::class, 'selected']);
     Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
+    Route::get('export', [UsernameController::class, 'export'])->name('export');
 
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');

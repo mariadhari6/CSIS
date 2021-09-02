@@ -218,13 +218,11 @@ class UsernameController extends Controller
     public function updateSelected(Request $request)
     {
         Username::where('item_type_id', '=', 1)
-                ->update(['colour' => 'black']);
+            ->update(['colour' => 'black']);
     }
 
     public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
-
-
 }

@@ -87,7 +87,7 @@
                 title: 'Data Saved',
                 showConfirmButton: false,
                 timer: 1500
-            })
+            }).catch(function(timeout) { });
               read();
 
             }
@@ -118,7 +118,7 @@
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
-                        })
+                        }).catch(function(timeout) { });
                         read();
                     }
                 });
@@ -157,8 +157,8 @@
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
-                })
-                read()
+                }).catch(function(timeout) { });
+                read();
 
                 }
             });
@@ -206,7 +206,7 @@
                                     title: 'The selected data has been deleted',
                                     showConfirmButton: false,
                                     timer: 1500
-                                })
+                                }).catch(function(timeout) { });
                                 $("#master").prop('checked', false);
                                 read();
 
@@ -256,7 +256,6 @@
 
         // --- Proses Update Multiple ---
         function updateSelected() {
-
             var allVals = [];
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
@@ -289,14 +288,13 @@
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
                                     timer: 1500
-                                })
-                                $(".save").hide("fast");
-                                $(".cancel").hide("fast");
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                read();
-
+                                }).catch(function(timeout) { });
+                                    $('.save').hide("fast");
+                                    $('.cancel').hide("fast");
+                                    $(".add").show("fast");
+                                    $(".edit_all").show("fast");
+                                    $(".delete_all").show("fast");
+                                    read();
                             }
                     });
                 });
@@ -313,7 +311,6 @@
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-
             }
 
 
