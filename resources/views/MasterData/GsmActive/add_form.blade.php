@@ -1,15 +1,16 @@
 <tr id="add_form">
     <td></td>
     <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
-    <td><select class="form-control" id="gsm_pre_active_id" name="gsm_pre_active_id">
+
+    {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}
+    <td> <div class="input-div"><input type="date" class="input" id="request_date" placeholder="Request Date" rows=""></i></td>
+    <td> <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active_date"></i></td>
+     <td><select class="form-control" id="gsm_pre_active_id" name="gsm_pre_active_id">
        @foreach ($GsmPreActive as $GsmPreActives)
         <option value="{{ $GsmPreActives->id }}" {{ old('gsm_pre_active_id') == $GsmPreActives->id ? 'selected':'' }}>{{ $GsmPreActives->gsm_number }}</option>
 
        @endforeach
     </select></i></td>
-    {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}
-    <td> <div class="input-div"><input type="date" class="input" id="request_date" placeholder="Request Date" rows=""></i></td>
-    <td> <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active_date"></i></td>
     <td><select class="form-control" id="status_active" id="status_active" aria-label=".form-select-lg example">
     <option selected>Pilih status</option>
     <option value="Active">Active</option>

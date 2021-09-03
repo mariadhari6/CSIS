@@ -20,15 +20,16 @@
         <td id="item-pic_name-{{ $pics->id}}">
             {{ $pics->pic_name }}
         </td>
+         <td id="item-phone-{{ $pics->id }}">
+            {{ $pics->phone }}
+        </td>
           <td id="item-email-{{ $pics->id }}">
             {{ $pics->email }}
         </td>
           <td id="item-position-{{ $pics->id }}">
             {{ $pics->position }}
         </td>
-          <td id="item-phone-{{ $pics->id }}">
-            {{ $pics->phone }}
-        </td>
+
         <td id="item-date_of_birth-{{ $pics->id }}">
             {{ $pics->date_of_birth }}
         </td>

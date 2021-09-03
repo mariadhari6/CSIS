@@ -14,16 +14,16 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
-                <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
+               <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <br>
-
+        <div class="table-responsive">
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th>
+                <th width="10px">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -31,20 +31,22 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col">Action</th>
+                <th scope="col" width="80px">Action</th>
                 <th scope="col">Merk</th>
                 <th scope="col">Type</th>
                 <th scope="col">IMEI</th>
                 <th scope="col">Waranty</th>
                 <th scope="col">Po Date</th>
                 <th scope="col">Status</th>
+                <th scope="col">Status Ownership</th>
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -59,8 +61,9 @@
     function read(){
 
       $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
-        $("#item_data").html(data);
-        $('#table_id').DataTable();
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').DataTable().draw();
       });
     }
     // ---- Tombol Cancel -----
@@ -69,7 +72,7 @@
     }
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form_gps') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -82,6 +85,7 @@
         var waranty = $("#waranty").val();
         var po_date = $("#po_date").val();
         var status = $("#status").val();
+        var status_ownership = $("#status_ownership").val();
         $.ajax({
             type: "get",
             url: "{{ url('store_gps') }}",
@@ -91,10 +95,18 @@
               imei: imei,
               waranty: waranty,
               po_date: po_date,
-              status:status
+              status:status,
+              status_ownership:status_ownership
             },
             success: function(data) {
+              swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
               read();
+
             }
         })
     }
@@ -117,7 +129,12 @@
                     url: "{{ url('destroy_gps') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
-                        swal("Done!","It was succesfully deleted!","success");
+                        swal({
+                            type: 'success',
+                            title: 'Data Deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).catch(function(timeout) { });
                         read();
                     }
                 });
@@ -138,6 +155,7 @@
         $("#item-waranty-"+id).hide("fast");
         $("#item-po_date-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
+        $("#item-status_ownership-"+id).hide("fast");
         $.get("{{ url('show_gps') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -150,6 +168,7 @@
             var waranty = $("#waranty").val();
             var po_date = $("#po_date").val();
             var status = $("#status").val();
+            var status_ownership = $("#status_ownership").val();
             var id = id;
             $.ajax({
                 type: "get",
@@ -160,10 +179,18 @@
                 imei: imei,
                 waranty: waranty,
                 po_date: po_date,
-                status:status
+                status:status,
+                status_ownership:status_ownership
                 },
                 success: function(data) {
-                read()
+                swal({
+                    type: 'success',
+                    title: ' Data Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                read();
+
                 }
             });
         }
@@ -204,9 +231,15 @@
                                 _token: _token
                             },
                             success: function(data) {
-                                swal("Done!","It was succesfully deleted!","success");
+                               swal({
+                                    type: 'success',
+                                    title: 'The selected data has been deleted',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).catch(function(timeout) { });
+                                $("#master").prop('checked', false);
                                 read();
-                                }
+                            }
                             });
                     });
                     },
@@ -242,9 +275,12 @@
                     $("#item-waranty-"+value).hide("fast");
                     $("#item-po_date-"+value).hide("fast");
                     $("#item-status-"+value).hide("fast");
+                    $("#item-status_ownership-"+value).hide("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_gps') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
+                        $("#master").prop('checked', false);
+
                     });
                 });
             }else{
@@ -259,7 +295,16 @@
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
-
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to do an update?",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: '#00FF00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Update',
+                showLoaderOnConfirm: true,
+            }).then((willDelete) => {
                 $.each(allVals, function(index, value){
                     var merk = $(".merk-"+value).val();
                     var type = $(".type-"+value).val();
@@ -267,6 +312,7 @@
                     var waranty = $(".waranty-"+value).val();
                     var po_date = $(".po_date-"+value).val();
                     var status = $(".status-"+value).val();
+                    var status_ownership = $(".status_ownership-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_gps') }}/"+value,
@@ -276,19 +322,40 @@
                     imei: imei,
                     waranty: waranty,
                     po_date: po_date,
-                    status:status
+                    status:status,
+                    status_ownership:status_ownership
                     },
                     success: function(data) {
-                    read()
-                    }
+                            swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+
+                                // $(".save").hide();
+                                });
+                                read();
+
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
+
+
+                            }
+                         });
+                    });
                 });
-            });
-
-
         }
 
         //--------Proses Batal--------
-        function cancel(){
+        function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
             read();
         }
 

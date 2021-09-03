@@ -12,7 +12,7 @@ class GsmActive extends Model
     protected $table = 'gsm_actives';
 
     protected $fillable = [
-        'gsm_pre_active_id', 'request_date', 'active_date', 'status_active', 'company_id', 'note'
+        'request_date', 'active_date', 'gsm_pre_active_id', 'status_active', 'company_id', 'note'
     ];
 
     public function gsmPreActive()

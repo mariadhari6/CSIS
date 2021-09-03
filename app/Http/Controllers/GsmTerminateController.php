@@ -16,7 +16,7 @@ class GsmTerminateController extends Controller
 
     public function index()
     {
-        return view('GsmTerminate.index');
+        return view('MasterData.GsmTerminate.index');
     }
 
     public function add_form()
@@ -27,7 +27,7 @@ class GsmTerminateController extends Controller
         $GsmTerminate = GsmTerminate::with('gsmActive')->get();
 
 
-        return view('GsmTerminate.add_form')->with([
+        return view('MasterData.GsmTerminate.add_form')->with([
             'company' => $company,
             'GsmActive' => $GsmActive,
             'GsmPreActive' => $GsmPreActive,
@@ -39,7 +39,7 @@ class GsmTerminateController extends Controller
     public function item_data()
     {
         $GsmTerminate = GsmTerminate::orderBy('id', 'DESC')->get();
-        return view('GsmTerminate.item_data')->with([
+        return view('MasterData.GsmTerminate.item_data')->with([
             'GsmTerminate' => $GsmTerminate
         ]);
     }
@@ -47,9 +47,9 @@ class GsmTerminateController extends Controller
     public function store(Request $request)
     {
         $data = array(
-            'gsm_active_id' => $request->gsm_active_id,
             'request_date'   => $request->request_date,
             'active_date'      => $request->active_date,
+            'gsm_active_id' => $request->gsm_active_id,
             'status_active'   => $request->status_active,
             'company_id'      => $request->company_id,
             'note' => $request->note,
@@ -63,7 +63,7 @@ class GsmTerminateController extends Controller
         $company = Company::orderBy('company_name', 'DESC')->get();
         $GsmActive = GsmActive::orderBy('gsm_pre_active_id', 'DESC')->get();
         $GsmTerminate = GsmTerminate::findOrfail($id);
-        return view('GsmTerminate.edit_form')->with([
+        return view('MasterData.GsmTerminate.edit_form')->with([
             'company' => $company,
             'GsmActive' => $GsmActive,
             'GsmTerminate' => $GsmTerminate
@@ -74,9 +74,9 @@ class GsmTerminateController extends Controller
     public function update(Request $request, $id)
     {
         $data = GsmTerminate::findOrfail($id);
-        $data->gsm_active_id = $request->gsm_active_id;
         $data->request_date = $request->request_date;
         $data->active_date = $request->active_date;
+        $data->gsm_active_id = $request->gsm_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;
         $data->note = $request->note;
@@ -86,7 +86,7 @@ class GsmTerminateController extends Controller
     public function selected()
     {
         $GsmTerminate = GsmTerminate::all();
-        return view('GsmTerminate.selected')->with([
+        return view('MasterData.GsmTerminate.selected')->with([
             'GsmTerminate' => $GsmTerminate
         ]);
     }
@@ -95,9 +95,9 @@ class GsmTerminateController extends Controller
     {
 
         $data = GsmTerminate::findOrfail($id);
-        $data->gsm_active_id = $request->gsm_active_id;
         $data->request_date = $request->request_date;
         $data->active_date = $request->active_date;
+        $data->gsm_active_id = $request->gsm_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;
         $data->note = $request->note;

@@ -21,9 +21,17 @@
     {{-- <td>
         <div class="input-div"><input type="text" class="input status-{{$seller->id}}" id="status" placeholder="Status" value="{{ $seller_status}}"></i></div>
     </td> --}}
-<td><select class="form-select status-{{$gps->id}}" id="status" aria-label=".form-select-lg example">
+<td><select class="form-control status-{{$gps->id}}" id="status" aria-label=".form-select-lg example">
   <option selected>{{$gps->status}}</option>
   <option value="Active">Active</option>
   <option value="In Active">In Active</option>
 </select></i></td>
+
+<td><select class="form-control" id="status_ownership" aria-label=".form-select-lg example">
+    <option selected>{{$gps->status_ownership}}</option>
+    <option value="Sewa">Sewa</option>
+    <option value="Sewa Beli">Sewa Beli</option>
+    <option value="Trial">Trial</option>
+    <option value="Beli">Beli</option>
+    </select></i></td>
 

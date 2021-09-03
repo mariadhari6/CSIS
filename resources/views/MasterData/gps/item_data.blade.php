@@ -35,6 +35,9 @@
           <td id="item-status-{{ $gpses->id }}">
             {{ $gpses->status }}
           </td>
+          <td id="item-status_ownership-{{ $gpses->id }}">
+            {{ $gpses->status_ownership }}
+          </td>
     </tr>
 @endforeach
 

@@ -11,7 +11,7 @@ class GsmTerminate extends Model
     protected $table = 'gsm_terminates';
 
     protected $fillable = [
-        'gsm_active_id', 'request_date', 'active_date', 'status_active', 'company_id', 'note'
+        'request_date', 'active_date', 'gsm_active_id',  'status_active', 'company_id', 'note'
     ];
 
     public function gsmActive()

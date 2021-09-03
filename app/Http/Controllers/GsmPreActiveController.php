@@ -11,18 +11,18 @@ class GsmPreActiveController extends Controller
 {
     public function index()
     {
-        return view('GsmPreActive.index');
+        return view('MasterData.GsmPreActive.index');
     }
     public function add_form()
     {
         // $gsm_pre_active = GsmPreActive::orderBy('gsm_number', 'DESC')->get();
-        return view('GsmPreActive.add_form');
+        return view('MasterData.GsmPreActive.add_form');
     }
 
     public function item_data()
     {
         $GsmPreActive = GsmPreActive::orderBy('id', 'DESC')->get();
-        return view('GsmPreActive.item_data')->with([
+        return view('MasterData.GsmPreActive.item_data')->with([
             'GsmPreActive' => $GsmPreActive
         ]);
     }
@@ -45,7 +45,7 @@ class GsmPreActiveController extends Controller
     {
 
         $GsmPreActive = GsmPreActive::findOrfail($id);
-        return view('GsmPreActive.edit_form')->with([
+        return view('MasterData.GsmPreActive.edit_form')->with([
             'GsmPreActive' => $GsmPreActive,
 
         ]);
@@ -73,7 +73,7 @@ class GsmPreActiveController extends Controller
     public function selected()
     {
         $GsmPreActive = GsmPreActive::all();
-        return view('GsmPreActive.selected')->with([
+        return view('MasterData.GsmPreActive.selected')->with([
             'GsmPreActive' => $GsmPreActive
         ]);
     }

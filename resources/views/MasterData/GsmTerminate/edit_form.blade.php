@@ -17,8 +17,8 @@
     </td>
    <td><select class="form-select status_active-{{$GsmTerminate->id}}" id="status_active" aria-label=".form-select-lg example">
     <option selected>{{$GsmTerminate->status_active}}</option>
-    <option value="Active">Active</option>
-    <option value="In Active">In Active</option>
+    <option value="Active">Sukses</option>
+    <option value="In Active">Tidak Sukses</option>
     </select></i></td>
     <td><select class="form-control company_id-{{$GsmTerminate->id}}" id="company_id" name="company_id">
        @foreach ($company as $companys)

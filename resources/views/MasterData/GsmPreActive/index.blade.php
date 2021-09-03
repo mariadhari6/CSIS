@@ -14,16 +14,16 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
-                <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <br>
-
+        <div class="table-responsive">
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th>
+                <th width="10px">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -45,7 +45,8 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -60,8 +61,9 @@
     function read(){
 
       $.get("{{ url('item_data_GsmPreActive') }}", {}, function(data, status) {
-        $("#item_data").html(data);
-        $('#table_id').DataTable();
+         $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').DataTable().draw();
       });
     }
     // ---- Tombol Cancel -----
@@ -70,7 +72,7 @@
     }
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form_GsmPreActive') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -97,6 +99,12 @@
               note:note
             },
             success: function(data) {
+             swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
               read();
             }
         })
@@ -120,7 +128,12 @@
                     url: "{{ url('destroy_GsmPreActive') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
-                        swal("Done!","It was succesfully deleted!","success");
+                        swal({
+                            type: 'success',
+                            title: 'Data Deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).catch(function(timeout) { });
                         read();
                     }
                 });
@@ -169,7 +182,13 @@
                 note:note
                 },
                 success: function(data) {
-                read()
+                swal({
+                    type: 'success',
+                    title: ' Data Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                read();
                 }
             });
         }
@@ -210,8 +229,15 @@
                                 _token: _token
                             },
                             success: function(data) {
-                                swal("Done!","It was succesfully deleted!","success");
+                                swal({
+                                    type: 'success',
+                                    title: 'The selected data has been deleted',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).catch(function(timeout) { });
+                                $("#master").prop('checked', false);
                                 read();
+
                                 }
                             });
                     });
@@ -252,6 +278,8 @@
                     $(".add").hide("fast");
                     $.get("{{ url('show_GsmPreActive') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
+                        $("#master").prop('checked', false);
+
                     });
                 });
             }else{
@@ -266,7 +294,16 @@
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
-
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to do an update?",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: '#00FF00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Update',
+                showLoaderOnConfirm: true,
+            }).then((willDelete) => {
                 $.each(allVals, function(index, value){
                     var gsm_number = $(".gsm_number-"+value).val();
                     var serial_number = $(".serial_number-"+value).val();
@@ -288,18 +325,38 @@
                     note:note
                     },
                     success: function(data) {
-                    read()
+                     swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+
+                                // $(".save").hide();
+                                });
+                                read();
+
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
                     }
                 });
             });
+        });
 
 
         }
 
         //--------Proses Batal--------
-        function cancel(){
+         function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
             read();
-        }
+            }
 
 
 

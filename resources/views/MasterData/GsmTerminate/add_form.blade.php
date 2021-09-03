@@ -18,12 +18,14 @@
     <td> <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active_date"></i></td>
     <td><select class="form-control" id="status_active" id="status_active" aria-label=".form-select-lg example">
     {{-- <option selected>Pilih status</option> --}}
-    <option value="Active">Active</option>
-    <option value="In Active">In Active</option>
+    <option value="Active">Sukses</option>
+    <option value="In Active">Tidak Sukses</option>
     </select></i></td>
 
     <td><select class="form-control" id="company_id" name="company_id">
+
        @foreach ($GsmActive as $GsmActives)
+
         <option value="{{ $GsmActives->id }}" {{ old('company_id') == $GsmActives->id  ? 'selected':'' }}>
         {{-- @foreach ($GsmTerminate as $GsmTerminates)
         {{ $GsmTerminates->company->company_id}}

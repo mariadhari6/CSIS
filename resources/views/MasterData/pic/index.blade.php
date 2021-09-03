@@ -1,5 +1,5 @@
 @extends('layouts.v_main')
-@section('title','Gsm Active')
+@section('title','PIC Company')
 
 @section('content')
 
@@ -13,12 +13,12 @@
       <div class="card">
         <div class="card-body">
              <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
-                <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
+                 <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <br>
-
+        <div class="table-responsive">
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -31,18 +31,19 @@
                     </div>
                 </th>
                 <th scope="col">Action</th>
-                <th scope="col">Gsm Pre Active</th></th>
-                <th scope="col">Request Date</th>
-                <th scope="col">Active Date</th>
-                <th scope="col">Status Active</th>
                 <th scope="col">Company</th>
-                <th scope="col">Note</th>
+                <th scope="col">Pic Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Position</th>
+                <th scope="col">Date of birth</th>
               </tr>
             </thead>
             <tbody  id="item_data">
-              {{ csrf_field() }}
+              {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+        </div>
         </div>
       </div>
     </div>
@@ -58,9 +59,10 @@
 
     // ------ Tampil Data ------
     function read(){
-      $.get("{{ url('item_data_GsmActive') }}", {}, function(data, status) {
-        $("#item_data").html(data);
-        $('#table_id').DataTable();
+      $.get("{{ url('item_data_pic') }}", {}, function(data, status) {
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').DataTable().draw();
 
       });
 
@@ -72,33 +74,40 @@
     }
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
-        $.get("{{ url('add_form_GsmActive') }}", {}, function(data, status) {
+     $('.add').click(function() {
+        $.get("{{ url('add_form_pic') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
       });
 
     // ----- Proses Tambah data ------
     function store() {
-        var gsm_pre_active_id = $("#gsm_pre_active_id").val();
-        var request_date = $("#request_date").val();
-        var active_date = $("#active_date").val();
-        var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
-        var note = $("#note").val();
+        var pic_name = $("#pic_name").val();
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        var position = $("#position").val();
+        var date_of_birth = $("#date_of_birth").val();
         $.ajax({
             type: "get",
-            url: "{{ url('store_GsmActive') }}",
+            url: "{{ url('store_pic') }}",
             data: {
-              gsm_pre_active_id: gsm_pre_active_id,
-              request_date: request_date,
-              active_date: active_date,
-              status_active: status_active,
               company_id: company_id,
-              note:note
+              pic_name: pic_name,
+              phone: phone,
+              email: email,
+              position: position,
+              date_of_birth:date_of_birth
             },
             success: function(data) {
-              read()
+             swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
+              read();
+
             }
         })
     }
@@ -121,10 +130,15 @@
               return new Promise(function(resolve) {
                 $.ajax({
                     type: "get",
-                    url: "{{ url('destroy_GsmActive') }}/" + id,
+                    url: "{{ url('destroy_pic') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
-                        swal("Done!","It was succesfully deleted!","success");
+                        swal({
+                            type: 'success',
+                            title: 'Data Deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).catch(function(timeout) { });
                         read();
                     }
                 });
@@ -140,42 +154,48 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
-        $("#item-gsm_pre_active_id-"+id).slideUp("fast");
-        $("#item-request_date-"+id).slideUp("fast");
-        $("#item-active_date-"+id).slideUp("fast");
-        $("#item-status_active-"+id).slideUp("fast");
         $("#item-company_id-"+id).slideUp("fast");
-        $("#item-note-"+id).slideUp("fast");
-        $.get("{{ url('show_GsmActive') }}/" + id, {}, function(data, status) {
+        $("#item-pic_name-"+id).slideUp("fast");
+        $("#item-phone-"+id).slideUp("fast");
+        $("#item-email-"+id).slideUp("fast");
+        $("#item-position-"+id).slideUp("fast");
+        $("#item-date_of_birth-"+id).slideUp("fast");
+        $.get("{{ url('show_pic') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
 
     // ------ Proses Update Data ------
     function update(id) {
-        var gsm_pre_active_id = $("#gsm_pre_active_id").val();
-        var request_date = $("#request_date").val();
-        var active_date = $("#active_date").val();
-        var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
-        var note = $("#note").val();
+        var pic_name = $("#pic_name").val();
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        var position = $("#position").val();
+        var date_of_birth = $("#date_of_birth").val();
         var id = id;
         // console.log('test');
         $.ajax({
             type: "get",
-            url: "{{ url('update_GsmActive') }}/"+id,
+            url: "{{ url('update_pic') }}/"+id,
             data: {
-               gsm_pre_active_id: gsm_pre_active_id,
-              request_date: request_date,
-              active_date: active_date,
-              status_active: status_active,
-              company_id: company_id,
-              note:note
+             company_id: company_id,
+              pic_name: pic_name,
+              phone: phone,
+              email: email,
+              position: position,
+             date_of_birth:date_of_birth
             },
             success: function(data) {
-              read()
-            // console.log('test');
-            }
+               swal({
+                    type: 'success',
+                    title: ' Data Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                read();
+
+                }
         })
     }
 
@@ -208,15 +228,22 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ url('/selectedDelete_GsmActive') }}",
+                            url: "{{ url('/selectedDelete_pic') }}",
                             method: "get",
                             data: {
                                 id: allVals,
                                 _token: _token
                             },
                             success: function(data) {
-                                swal("Done!","It was succesfully deleted!","success");
+                                swal({
+                                    type: 'success',
+                                    title: 'The selected data has been deleted',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).catch(function(timeout) { });
+                                $("#master").prop('checked', false);
                                 read();
+
                                 }
                             });
                     });
@@ -246,15 +273,17 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-gsm_pre_active_id-"+value).slideUp("fast");
-                    $("#item-request_date-"+value).slideUp("fast");
-                    $("#item-active_date-"+value).slideUp("fast");
-                    $("#item-status_active-"+value).slideUp("fast");
                     $("#item-company_id-"+value).slideUp("fast");
-                    $("#item-note-"+value).slideUp("fast");
+                    $("#item-pic_name-"+value).slideUp("fast");
+                    $("#item-phone-"+value).slideUp("fast");
+                    $("#item-email-"+value).slideUp("fast");
+                    $("#item-position-"+value).slideUp("fast");
+                    $("#item-date_of_birth-"+value).slideUp("fast");
                     $(".add").hide("fast");
-                    $.get("{{ url('show_GsmActive') }}/" + value, {}, function(data, status) {
+                    $.get("{{ url('show_pic') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
+                        $("#master").prop('checked', false);
+
                     });
                 });
             }else{
@@ -268,34 +297,67 @@
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
-
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to do an update?",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: '#00FF00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Update',
+                showLoaderOnConfirm: true,
+            }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-                    var gsm_pre_active_id = $(".gsm_pre_active_id-"+value).val();
-                    var request_date = $(".request_date-"+value).val();
-                    var active_date = $(".active_date-"+value).val();
-                    var status_active = $(".status_active-"+value).val();
-                    var company_id = $(".company-"+value).val();
-                    var note = $(".note-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
+                    var pic_name = $(".pic_name-"+value).val();
+                    var phone = $(".phone-"+value).val();
+                    var email = $(".email-"+value).val();
+                    var position = $(".position-"+value).val();
+                    var date_of_birth = $(".date_of_birth-"+value).val();
                     $.ajax({
                     type: "get",
-                    url: "{{ url('update_GsmActive') }}/"+value,
+                    url: "{{ url('update_pic') }}/"+value,
                     data: {
-                        gsm_pre_active_id: gsm_pre_active_id,
-                        request_date: request_date,
-                        active_date: active_date,
-                        status_active: status_active,
-                        company: company,
-                        note:note
+                        company_id: company_id,
+                        pic_name: pic_name,
+                        phone: phone,
+                        email: email,
+                        position: position,
+                        date_of_birth:date_of_birth
                     },
                     success: function(data) {
-                    read()
+                    swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+
+                                // $(".save").hide();
+                                });
+                                read();
+
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
                     }
                 });
             });
 
+        });
+
 
         }
-
+//--------Proses Batal--------
+        function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
+            }
 
 
   </script>

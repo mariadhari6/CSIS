@@ -9,9 +9,9 @@
     </select></i></td>
     {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}
     <td> <div class="input-div"><input type="text" class="input" id="pic_name" placeholder="Pic Name"></i></td>
+    <td> <div class="input-div"><input type="text" class="input" id="phone" placeholder="Phone"></i></td>
     <td> <div class="input-div"><input type="text" class="input" id="email" placeholder="Email"></i></td>
     <td> <div class="input-div"><input type="text" class="input" id="position" placeholder="Position"></i></td>
-    <td> <div class="input-div"><input type="text" class="input" id="phone" placeholder="Phone"></i></td>
     <td> <div class="input-div"><input type="date" class="input" id="date_of_birth" placeholder="Date of birth"></i></td>
 </tr>
 

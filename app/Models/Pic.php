@@ -12,7 +12,7 @@ class Pic extends Model
     protected $table = 'pics';
 
     protected $fillable = [
-        'company_id', 'pic_name', 'email', 'position', 'phone', 'date_of_birth'
+        'company_id', 'pic_name', 'phone', 'email', 'position', 'date_of_birth'
     ];
 
 

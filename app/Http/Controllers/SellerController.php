@@ -12,19 +12,19 @@ class SellerController extends Controller
 {
     public function index()
     {
-        return view('seller.index');
+        return view('MasterData.seller.index');
     }
 
     public function add_form()
     {
 
-        return view('seller.add_form');
+        return view('MasterData.seller.add_form');
     }
 
     public function item_data()
     {
         $seller = Seller::orderBy('id', 'DESC')->get();
-        return view('seller.item_data')->with([
+        return view('MasterData.seller.item_data')->with([
             'seller' => $seller
         ]);
     }
@@ -44,7 +44,7 @@ class SellerController extends Controller
     public function edit_form($id)
     {
         $seller    = Seller::findOrfail($id);
-        return view('seller.edit_form')->with([
+        return view('MasterData.seller.edit_form')->with([
             'seller' => $seller,
 
         ]);
@@ -69,7 +69,7 @@ class SellerController extends Controller
     public function selected()
     {
         $seller = Seller::all();
-        return view('seller.selected')->with([
+        return view('MasterData.seller.selected')->with([
             'seller' => $seller
         ]);
     }

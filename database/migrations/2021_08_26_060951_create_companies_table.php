@@ -15,12 +15,13 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('seller_id')->constrained('sellers')->onDelete('cascade')->onUpdate('cascade');
             $table->string('company_name');
-            $table->string('status');
+            $table->foreignId('seller_id')->constrained('sellers')->onDelete('cascade')->onUpdate('cascade');
             $table->string('customer_code');
             $table->string('no_po');
             $table->date('po_date');
+            $table->foreignId('no_agreement_letter_id')->constrained('sellers')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('status');
             $table->timestamps();
         });
     }

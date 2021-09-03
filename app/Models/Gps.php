@@ -11,6 +11,6 @@ class Gps extends Model
     protected $table = 'gps';
 
     protected $fillable = [
-        'merk', 'type', 'imei', 'waranty', 'po_date', 'status'
+        'merk', 'type', 'imei', 'waranty', 'po_date', 'status', 'status_ownership'
     ];
 }

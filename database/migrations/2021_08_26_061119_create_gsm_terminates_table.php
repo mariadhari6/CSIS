@@ -15,11 +15,11 @@ class CreateGsmTerminatesTable extends Migration
     {
         Schema::create('gsm_terminates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gsm_active_id')->constrained('gsm_actives')->onDelete('cascade')->onUpdate('cascade');
             $table->date('request_date');
             $table->date('active_date');
+            $table->foreignId('gsm_active_id')->constrained('gsm_pre_actives')->onDelete('cascade')->onUpdate('cascade');
             $table->string('status_active');
-            $table->foreignId('company_id')->constrained('gsm_actives')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('note');
             $table->timestamps();
         });

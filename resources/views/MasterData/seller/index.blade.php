@@ -1,6 +1,5 @@
 @extends('layouts.v_main')
-@section('title','Sensor')
-
+@section('title','Seller')
 
 @section('content')
 
@@ -14,12 +13,12 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
-                <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <br>
-
+          <div class="table-responsive">
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -32,11 +31,9 @@
                     </div>
                 </th>
                 <th scope="col">Action</th>
-                <th scope="col">Sensor Name</th>
-                <th scope="col">Merk Sensor</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">Rab Number</th>
-                <th scope="col">Waranty</th>
+                <th scope="col">Seller Name</th>
+                <th scope="col">Seller Code</th>
+                <th scope="col">No Agreement Latter</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -44,7 +41,8 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -58,9 +56,10 @@
     // ------ Tampil Data ------
     function read(){
 
-      $.get("{{ url('item_data_sensor') }}", {}, function(data, status) {
-        $("#item_data").html(data);
-        $('#table_id').DataTable();
+      $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').DataTable().draw();
       });
     }
     // ---- Tombol Cancel -----
@@ -70,31 +69,34 @@
 
      // ------ Tambah Form Input ------
      $('#add').click(function() {
-        $.get("{{ url('add_form_sensor') }}", {}, function(data, status) {
+        $.get("{{ url('add_form_seller') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
       });
     // ----- Proses Tambah data ------
     function store() {
-        var sensor_name = $("#sensor_name").val();
-        var merk_sensor = $("#merk_sensor").val();
-        var serial_number = $("#serial_number").val();
-        var rab_number = $("#rab_number").val();
-        var waranty = $("#waranty").val();
+        var seller_name = $("#seller_name").val();
+        var seller_code = $("#seller_code").val();
+        var no_agreement_letter = $("#no_agreement_letter").val();
         var status = $("#status").val();
         $.ajax({
             type: "get",
-            url: "{{ url('store_sensor') }}",
+            url: "{{ url('store_seller') }}",
             data: {
-              sensor_name: sensor_name,
-              merk_sensor:merk_sensor,
-              serial_number: serial_number,
-              rab_number: rab_number,
-              waranty: waranty,
+              seller_name: seller_name,
+              seller_code: seller_code,
+              no_agreement_letter: no_agreement_letter,
               status:status
             },
             success: function(data) {
+              swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
               read();
+
             }
         })
     }
@@ -114,10 +116,15 @@
               return new Promise(function(resolve) {
                 $.ajax({
                     type: "get",
-                    url: "{{ url('destroy_sensor') }}/" + id,
+                    url: "{{ url('destroy_seller') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
-                        swal("Done!","It was succesfully deleted!","success");
+                        swal({
+                            type: 'success',
+                            title: 'Data Deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).catch(function(timeout) { });
                         read();
                     }
                 });
@@ -132,38 +139,39 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
-        $("#item-sensor_name-"+id).hide("fast");
-        $("#item-merk_sensor-"+id).hide("fast");
-        $("#item-serial_number-"+id).hide("fast");
-        $("#item-rab_number-"+id).hide("fast");
-        $("#item-waranty-"+id).hide("fast");
+        $("#item-seller_name-"+id).hide("fast");
+        $("#item-seller_code-"+id).hide("fast");
+        $("#item-no_agreement_latter-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
-        $.get("{{ url('show_sensor') }}/" + id, {}, function(data, status) {
+        $.get("{{ url('show_seller') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
     // ------ Proses Update Data ------
         function update(id) {
-            var sensor_name = $("#sensor_name").val();
-            var merk_sensor = $("#merk_sensor").val();
-            var serial_number = $("#serial_number").val();
-            var rab_number = $("#rab_number").val();
-            var waranty = $("#waranty").val();
+            var seller_name = $("#seller_name").val();
+            var seller_code = $("#seller_code").val();
+            var no_agreement_letter = $("#no_agreement_letter").val();
             var status = $("#status").val();
             var id = id;
             $.ajax({
                 type: "get",
-                url: "{{ url('update_sensor') }}/"+id,
+                url: "{{ url('update_seller') }}/"+id,
                 data: {
-                sensor_name: sensor_name,
-                merk_sensor:merk_sensor,
-                serial_number: serial_number,
-                rab_number: rab_number,
-                waranty: waranty,
+                seller_name: seller_name,
+                seller_code: seller_code,
+                no_agreement_letter: no_agreement_letter,
                 status:status
                 },
                 success: function(data) {
-                read()
+                  swal({
+                    type: 'success',
+                    title: ' Data Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                read();
+
                 }
             });
         }
@@ -197,15 +205,22 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ url('/selectedDelete_sensor') }}",
+                            url: "{{ url('/selectedDelete_seller') }}",
                             method: "get",
                             data: {
                                 id: allVals,
                                 _token: _token
                             },
                             success: function(data) {
-                                swal("Done!","It was succesfully deleted!","success");
+                                 swal({
+                                    type: 'success',
+                                    title: 'The selected data has been deleted',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).catch(function(timeout) { });
+                                $("#master").prop('checked', false);
                                 read();
+
                                 }
                             });
                     });
@@ -236,15 +251,15 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-sensor_name-"+value).hide("fast");
-                    $("#item-merk_sensor-"+value).hide("fast");
-                    $("#item-serial_number-"+value).hide("fast");
-                    $("#item-rab_number-"+value).hide("fast");
-                    $("#item-waranty-"+value).hide("fast");
+                    $("#item-seller_name-"+value).hide("fast");
+                    $("#item-seller_code-"+value).hide("fast");
+                    $("#item-no_agreement_letter-"+value).hide("fast");
                     $("#item-status-"+value).hide("fast");
                     $(".add").hide("fast");
-                    $.get("{{ url('show_sensor') }}/" + value, {}, function(data, status) {
+                    $.get("{{ url('show_seller') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
+                        $("#master").prop('checked', false);
+
                     });
                 });
             }else{
@@ -259,42 +274,65 @@
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
-
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to do an update?",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: '#00FF00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Update',
+                showLoaderOnConfirm: true,
+            }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-                    var sensor_name = $(".sensor_name-"+value).val();
-                    var merk_sensor = $(".merk_sensor-"+value).val();
-                    var serial_number = $(".serial_number-"+value).val();
-                    var rab_number = $(".rab_number-"+value).val();
-                    var waranty = $(".waranty-"+value).val();
+                    var seller_name = $(".seller_name-"+value).val();
+                    var seller_code = $(".seller_code-"+value).val();
+                    var no_agreement_letter = $(".no_agreement_letter-"+value).val();
                     var status = $(".status-"+value).val();
                     $.ajax({
                     type: "get",
-                    url: "{{ url('update_sensor') }}/"+value,
+                    url: "{{ url('update_seller') }}/"+value,
                     data: {
-                    sensor_name: sensor_name,
-                    merk_sensor:merk_sensor,
-                    serial_number: serial_number,
-                    rab_number: rab_number,
-                    waranty: waranty,
-                    status:status
+                    seller_name: seller_name,
+                    seller_code: seller_code,
+                    no_agreement_letter: no_agreement_letter,
+                    status:status,
                     },
                     success: function(data) {
-                    read()
+                   swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+
+                                // $(".save").hide();
+                                });
+                                read();
+
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
                     }
                 });
             });
+        });
 
 
         }
 
         //--------Proses Batal--------
-        function cancel(){
+        function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
             read();
-        }
-
+            }
 
 
 
   </script>
    @endsection
-
