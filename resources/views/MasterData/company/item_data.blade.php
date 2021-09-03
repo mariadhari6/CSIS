@@ -34,7 +34,16 @@
                 {{ $companys->seller->no_agreement_letter}}
         </td>
         <td id="item-status-{{ $companys->id }}">
-            {{ $companys->status }}
+
+            @if ($companys->status == 'Contract')
+                <span class="badge badge-info">{{ $companys->status }}</span>
+            @elseif ($companys->status == 'Terminate')
+                <span class="badge badge-danger">{{ $companys->status }}</span>
+            @elseif($companys->status == 'Trial')
+                <span class="badge badge-primary">{{ $companys->status }}</span>
+            @elseif($companys->status == 'Register')
+                <span class="badge badge-success">{{ $companys->status }}</span>
+            @endif
         </td>
     </tr>
 @endforeach
