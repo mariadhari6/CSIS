@@ -55,37 +55,6 @@
     color: white;
 }
 
-.data{
-    text-align: center;
-
-}
-
-.detailcustomer thead tr th {
-    font-size: 10px;
-    text-align: center;
-}
-
-/* .dataTables_filter, .dataTables_info {
-    position: relative;
-    right: 200px;
-} */
-/* detailcustomer */
-/* .delete_all {
-position: relative;
-top: 55px;
-right: 5px;
-}
-
-.edit_all {
-position: relative;
-top: 55px;
-}
-
-.add-button {
-position: relative;
-left : 50px;
-top: 55px;
-} */
 
 /* Datatable */
 .dataTables_length {
@@ -99,7 +68,27 @@ top: 55px;
     bottom: 35px;
 }
 
+/* tabel livetable */
+
 #table_id {
     position: relative;
-    bottom: 23px;
+    bottom: 0px;
+    text-align: center;
+}
+
+/* tabel detailcustomer */
+
+#detailcustomer {
+
+    position: relative;
+    bottom: 0px;
+}
+
+#detailcustomer thead tr th {
+    font-size: 10px;
+    text-align: center;
+}
+
+#item_data {
+    font-size: 10px;
 }

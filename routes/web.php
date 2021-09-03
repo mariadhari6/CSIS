@@ -72,7 +72,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('export', [UsernameController::class, 'export'])->name('export');
 
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
-    Route::get('/item_detail', [DetailCustomerController::class, 'itemDetail']);
+    Route::get('/item_detail', [DetailCustomerController::class, 'itemDetail'])->name('item_detail');
 });
 
 

@@ -16,7 +16,7 @@
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
 
-          <table class="table table-hover detailcustomer" class="table_id" id="table_id" >
+          <table class="table table-hover" class="detailcustomer" id="detailcustomer">
             <thead>
               <tr>
                 <th width="10px">
@@ -44,6 +44,7 @@
                 <th scope="col">Merk Sensor</th>
                 <th scope="col">Pool Name</th>
                 <th scope="col">Pool Location</th>
+                <th scope="col">Waranty</th>
                 <th scope="col">Status Layanan</th>
                 <th scope="col">Tanggal Pasang</th>
                 <th scope="col">Tanggal Non Active</th>
@@ -54,6 +55,7 @@
             </tbody>
           </table>
 
+
       </div>
     </div>
   </div>
@@ -62,23 +64,22 @@
 <script>
 
     $(document).ready(function() {
+
         read();
-        // $('#table_id').dataTable();
+        // $('#detailcustomer').dataTable();
+
     });
 
     function read(){
-      $.get("{{ url('item_detail') }}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
+
+      $.get("{{ route('item_detail')}}", {}, function(data, status) {
+        $('#detailcustomer').DataTable().destroy();
+        $('#detailcustomer').find("#item_data").html(data);
+        $('#detailcustomer').dataTable( {
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             } );
-        $('#table_id').DataTable().draw();
+        $('#detailcustomer').DataTable().draw();
       });
-    }
-
-    function cancel() {
-      read()
     }
 
 
