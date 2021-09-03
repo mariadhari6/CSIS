@@ -14,11 +14,11 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-            <br>
+
 
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
@@ -48,7 +48,7 @@
   <script>
     $(document).ready(function() {
 
-      read();
+    //   read();
 
 
     });
@@ -58,15 +58,25 @@
       $.get("{{ url('item_data') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            } );
         $('#table_id').DataTable().draw();
-        // $("#item_data").html(data);
-        // $('#table_id').DataTable().destroy();
-        // $('#table_id').dataTable( {
-        //     "dom": '<"top"if>rt<"bottom"lp><"clear">'
-        //     } );
-        // $('#table_id').DataTable().draw();
       });
     }
+    // function read(){
+    //   $.get("{{ url('item_data') }}", {}, function(data, status) {
+    //     $('#table_id').DataTable().destroy();
+    //     $('#table_id').find("#item_data").html(data);
+    //     $('#table_id').DataTable().draw();
+    //     // $("#item_data").html(data);
+    //     // $('#table_id').DataTable().destroy();
+    //     // $('#table_id').dataTable( {
+    //     //     "dom": '<"top"if>rt<"bottom"lp><"clear">'
+    //     //     } );
+    //     // $('#table_id').DataTable().draw();
+    //   });
+    // }
 
     // ---- Tombol Cancel -----
     function cancel() {

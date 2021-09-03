@@ -61,7 +61,7 @@
 }
 
 .detailcustomer thead tr th {
-    font-size: 12px;
+    font-size: 10px;
     text-align: center;
 }
 
@@ -69,7 +69,7 @@
     position: relative;
     right: 200px;
 } */
-
+/* detailcustomer */
 /* .delete_all {
 position: relative;
 top: 55px;
@@ -86,3 +86,20 @@ position: relative;
 left : 50px;
 top: 55px;
 } */
+
+/* Datatable */
+.dataTables_length {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.dataTables_filter {
+    position: relative;
+    right: 150px;
+    bottom: 35px;
+}
+
+#table_id {
+    position: relative;
+    bottom: 23px;
+}
