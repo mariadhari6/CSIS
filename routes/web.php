@@ -4,7 +4,7 @@
 use App\Http\Controllers\UsernameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\GpsController;
@@ -14,12 +14,10 @@ use App\Http\Controllers\GsmTerminateController;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
-=======
 use App\Http\Controllers\GpsController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\GsmPreActiveController;
 use App\Http\Controllers\CustomerServiceController;
->>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
 use Illuminate\Support\Facades\Auth;
 
 
@@ -43,7 +41,7 @@ use Illuminate\Support\Facades\Auth;
 //     return view('tes');
 // });
 
-<<<<<<< HEAD
+
 // Route::get('/login', function () {
 //     return view('partials.v_landingpage');
 // });
@@ -175,7 +173,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_GsmPreActive', [GsmPreActiveController::class, 'deleteAll']);
     Route::get('/selected', [GsmPreActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
-=======
+
 Route::get('/login', function () {
     return view('partials.v_landingpage');
 });
@@ -189,7 +187,6 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin', 'auth'], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.homepage');
->>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
 });
 
 Route::group(['middleware' => 'isCs', 'auth'], function () {
@@ -209,11 +206,11 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update/{id}', [UsernameController::class, 'update']);
     
 
-<<<<<<< HEAD
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-=======
+
  // Gps
  Route::get('/Gps', [GpsController::class, 'index']);
  Route::get('/item_data_gps', [GpsController::class, 'item_data']);
@@ -242,4 +239,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
  Route::get('/update_gsm_pre_active/{id}', [GsmPreActiveController::class, 'update']);
 
 });
->>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
