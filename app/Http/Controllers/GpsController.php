@@ -4,15 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Gps;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
-=======
-use DB;
-use Yajra\DataTables\Contracts\DataTable;
-use Yajra\DataTables\DataTables;
-
->>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
 
 class GpsController extends Controller
 {
@@ -50,7 +43,6 @@ class GpsController extends Controller
         GPS::insert($data);
     }
 
-<<<<<<< HEAD
     public function edit_form($id)
     {
 
@@ -58,15 +50,6 @@ class GpsController extends Controller
         return view('gps.edit_form')->with([
             'gps' => $gps,
 
-=======
-    public function show($id)
-    {
-        
-        $gps =Gps ::findOrfail($id);
-        return view('gps.edit_form')->with([
-            'gps' => $gps,
-            
->>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
         ]);
     }
 
@@ -87,7 +70,6 @@ class GpsController extends Controller
         $data->status = $request->status;
         $data->save();
     }
-<<<<<<< HEAD
 
     public function selected()
     {
@@ -130,6 +112,4 @@ class GpsController extends Controller
         Gps::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
     }
-=======
->>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
 }

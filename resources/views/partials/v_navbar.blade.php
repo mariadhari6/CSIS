@@ -5,20 +5,12 @@
                 <img src="{{ asset('images/logo_db.png') }}" width="150px" height="30px" >
             </a>
             <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-<<<<<<< HEAD
             <span class="navbar-toggler-icon"></span>
-=======
-                <span class="navbar-toggler-icon"></span>
->>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
             </button>
             <button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
         </div>
         <nav class="navbar navbar-header navbar-expand-lg">
             <div class="container-fluid">
-<<<<<<< HEAD
-=======
-
->>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 
                     <li class="nav-item dropdown">

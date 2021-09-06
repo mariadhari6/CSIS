@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 @foreach ($gps as $gpses)
     <tr id="edit-form-{{ $gpses->id }}">
          <td id="td-checkbox-{{ $gpses->id }}">
@@ -39,7 +39,7 @@
     </tr>
 @endforeach
 
-=======
+
 @foreach ($gps as $gps)
     <tr id="edit-form-{{ $gps->id }}">
         <td id="td-button-{{ $gps->id }}">
@@ -68,4 +68,4 @@
         </td>
     </tr>
 @endforeach
->>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
+
