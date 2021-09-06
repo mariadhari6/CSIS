@@ -60,13 +60,15 @@ class GsmTerminateController extends Controller
 
     public function edit_form($id)
     {
+        $GsmPreActive = GsmPreActive::orderBy('gsm_number', 'DESC')->get();
         $company = Company::orderBy('company_name', 'DESC')->get();
         $GsmActive = GsmActive::orderBy('gsm_pre_active_id', 'DESC')->get();
         $GsmTerminate = GsmTerminate::findOrfail($id);
         return view('MasterData.GsmTerminate.edit_form')->with([
             'company' => $company,
             'GsmActive' => $GsmActive,
-            'GsmTerminate' => $GsmTerminate
+            'GsmTerminate' => $GsmTerminate,
+            'GsmPreActive' => $GsmPreActive
 
         ]);
     }
@@ -124,5 +126,22 @@ class GsmTerminateController extends Controller
     {
         GsmActive::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
+    }
+
+    public function dependentTerminate($id)
+    {
+        $data = DB::table("gsm_actives")
+            ->where("gsm_pre_active_id", $id)
+            ->pluck('company_id', 'id');
+        return json_encode($data);
+    }
+
+
+    public function showCompany($id)
+    {
+        $data = DB::table("companies")
+            ->where("id", $id)
+            ->pluck('company_name', 'id');
+        return json_encode($data);
     }
 }

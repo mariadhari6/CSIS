@@ -23,7 +23,7 @@
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th width="10px">
+                <th>
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">

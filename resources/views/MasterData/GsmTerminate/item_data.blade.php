@@ -14,14 +14,15 @@
                 <i class="fas fa-trash delete" onclick="destroy({{ $GsmTerminates->id }})"></i>
             </div>
         </td>
-        <td id="item-gsm_active_id-{{ $GsmTerminates->id}}">
-                {{ $GsmTerminates->gsmActive->gsmPreActive->gsm_number}}
-        </td>
+
         <td id="item-request_date-{{ $GsmTerminates->id}}">
             {{ $GsmTerminates->request_date }}
         </td>
           <td id="item-active_date-{{ $GsmTerminates->id }}">
             {{ $GsmTerminates->active_date }}
+        </td>
+         <td id="item-gsm_active_id-{{ $GsmTerminates->id}}">
+                {{ $GsmTerminates->gsmActive->gsmPreActive->gsm_number}}
         </td>
           <td id="item-status_active-{{ $GsmTerminates->id }}">
             {{ $GsmTerminates->status_active }}

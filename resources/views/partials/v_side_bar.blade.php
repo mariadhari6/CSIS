@@ -16,7 +16,7 @@
         </div>
         <ul class="nav">
             <li class="nav-item active">
-                <a href="/">
+                <a href="{{url('/customer_service')}}">
                     <i class="fas fa-home"></i>
                     <p>Home</p>
 

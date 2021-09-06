@@ -31,9 +31,9 @@
                     </div>
                 </th>
                 <th scope="col">Action</th>
-                <th scope="col">Gsm Number</th></th>
                 <th scope="col">Request Date</th>
-                <th scope="col">Active Date</th>
+                <th scope="col">Terminate Date</th>
+                <th scope="col">Gsm Number</th></th>
                 <th scope="col">Status Active</th>
                 <th scope="col">Company</th>
                 <th scope="col">Note</th>
@@ -337,6 +337,7 @@
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
                     }
+
                 });
             });
             });

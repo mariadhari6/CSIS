@@ -28,9 +28,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('livetable.home');
-// });
+Route::get('/', function () {
+    return view('auth.login');
+});
 
 // Route::get('/tes', function () {
 //     return view('tes');
@@ -131,6 +131,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_GsmTerminate', [GsmTerminateController::class, 'deleteAll']);
     Route::get('/selected', [GsmTerminateController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmTerminateController::class, 'updateall']);
+    Route::get('/dependent_terminate/{id}', [GsmTerminateController::class, 'dependentTerminate']);
+    Route::get('/show_company/{id}', [GsmTerminateController::class, 'showCompany']);
 
     //sensor
     Route::get('/sensor', [SensorController::class, 'index'])->name('sensor');
