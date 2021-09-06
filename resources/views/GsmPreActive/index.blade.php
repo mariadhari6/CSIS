@@ -1,11 +1,11 @@
 @extends('layouts.v_main')
-@section('title','Tes')
+@section('title','Gsm Pre Active')
+
 
 @section('content')
 
 <div align="right">
-    <a class="btn btn-secondary  mr-2" href="{{ route('export') }}"><i class="fas fa-file-excel mr-2"></i>Export</a>
-</div>
+  </div>
   <br>
   <div id="message"></div>
 
@@ -14,16 +14,16 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-primary btn-round mr-2 add"><i class="fas fa-plus" id="add"></i></button>
+                <button class="btn btn-success btn-round mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger btn-round delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <br>
 
           <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th width="10px">
+                <th>
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -31,9 +31,14 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" width="80px">Action</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
+                <th scope="col">Action</th>
+                <th scope="col">Gsm Number</th>
+                <th scope="col">Serial Number</th>
+                <th scope="col">ICC ID</th>
+                <th scope="col">IMSI</th>
+                <th scope="col">Res ID</th>
+                <th scope="col">Expired Date</th>
+                <th scope="col">Note</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -45,17 +50,18 @@
     </div>
   </div>
 
+
+
   <script>
     $(document).ready(function() {
       read()
     });
     // ------ Tampil Data ------
     function read(){
-      $.get("{{ url('item_data') }}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-        $('#table_id').DataTable().draw();
 
+      $.get("{{ url('item_data_GsmPreActive') }}", {}, function(data, status) {
+        $("#item_data").html(data);
+        $('#table_id').DataTable();
       });
     }
     // ---- Tombol Cancel -----
@@ -64,32 +70,34 @@
     }
 
      // ------ Tambah Form Input ------
-     $('.add').click(function() {
-        $.get("{{ url('add_form') }}", {}, function(data, status) {
+     $('#add').click(function() {
+        $.get("{{ url('add_form_GsmPreActive') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
-
         });
       });
     // ----- Proses Tambah data ------
     function store() {
-        var FirstName = $("#FirstName").val();
-        var LastName = $("#LastName").val();
+        var gsm_number = $("#gsm_number").val();
+        var serial_number = $("#serial_number").val();
+        var icc_id = $("#icc_id").val();
+        var imsi = $("#imsi").val();
+        var res_id = $("#res_id").val();
+        var expired_date = $("#expired_date").val();
+        var note = $("#note").val();
         $.ajax({
             type: "get",
-            url: "{{ url('store') }}",
+            url: "{{ url('store_GsmPreActive') }}",
             data: {
-              FirstName: FirstName,
-              LastName: LastName
+              gsm_number: gsm_number,
+              serial_number:serial_number,
+              icc_id: icc_id,
+              imsi: imsi,
+              res_id: res_id,
+              expired_date:expired_date,
+              note:note
             },
             success: function(data) {
-            swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            })
               read();
-
             }
         })
     }
@@ -109,16 +117,10 @@
               return new Promise(function(resolve) {
                 $.ajax({
                     type: "get",
-                    url: "{{ url('destroy') }}/" + id,
+                    url: "{{ url('destroy_GsmPreActive') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
-                        // swal("Done!","It was succesfully deleted!","success");
-                        swal({
-                            type: 'success',
-                            title: 'Data Deleted',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+                        swal("Done!","It was succesfully deleted!","success");
                         read();
                     }
                 });
@@ -133,40 +135,48 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
-        $("#item-FirstName-"+id).hide("fast");
-        $("#item-LastName-"+id).hide("fast");
-        $.get("{{ url('show') }}/" + id, {}, function(data, status) {
+        $("#item-gsm_number-"+id).hide("fast");
+        $("#item-serial_number-"+id).hide("fast");
+        $("#item-icc_id-"+id).hide("fast");
+        $("#item-imsi-"+id).hide("fast");
+        $("#item-res_id-"+id).hide("fast");
+        $("#item-expired_date-"+id).hide("fast");
+        $("#item-note-"+id).hide("fast");
+        $.get("{{ url('show_GsmPreActive') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
     // ------ Proses Update Data ------
         function update(id) {
-            var FirstName = $("#FirstName").val();
-            var LastName = $("#LastName").val();
+            var gsm_number = $("#gsm_number").val();
+            var serial_number = $("#serial_number").val();
+            var icc_id = $("#icc_id").val();
+            var imsi = $("#imsi").val();
+            var res_id = $("#res_id").val();
+            var expired_date = $("#expired_date").val();
+            var note = $("#note").val();
             var id = id;
             $.ajax({
                 type: "get",
-                url: "{{ url('update') }}/"+id,
+                url: "{{ url('update_GsmPreActive') }}/"+id,
                 data: {
-                FirstName: FirstName,
-                LastName: LastName
+                 gsm_number: gsm_number,
+                serial_number:serial_number,
+                icc_id: icc_id,
+                imsi: imsi,
+                res_id: res_id,
+                expired_date:expired_date,
+                note:note
                 },
                 success: function(data) {
-                swal({
-                    type: 'success',
-                    title: ' Data Updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
                 read()
-
                 }
             });
         }
         // checkbox all
         $('#master').on('click', function(e) {
-          if($(this).is(':checked',true) ){
-                $(".task-select").prop('checked', true)
+          if($(this).is(':checked',true)){
+              $(".task-select").prop('checked', true);
           } else {
               $(".task-select").prop('checked',false);
           }
@@ -193,23 +203,15 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ route('livetable.delete_all') }}",
+                            url: "{{ url('/selectedDelete_GsmPreActive') }}",
                             method: "get",
                             data: {
                                 id: allVals,
                                 _token: _token
                             },
                             success: function(data) {
-                                // swal("Done!","It was succesfully deleted!","success");
-                                swal({
-                                    type: 'success',
-                                    title: 'The selected data has been deleted',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                                $("#master").prop('checked', false);
+                                swal("Done!","It was succesfully deleted!","success");
                                 read();
-
                                 }
                             });
                     });
@@ -240,12 +242,16 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-FirstName-"+value).hide("fast");
-                    $("#item-LastName-"+value).hide("fast");
+                    $("#item-gsm_number-"+value).hide("fast");
+                    $("#item-serial_number-"+value).hide("fast");
+                    $("#item-icc_id-"+value).hide("fast");
+                    $("#item-imsi-"+value).hide("fast");
+                    $("#item-res_id-"+value).hide("fast");
+                    $("#item-expired_date-"+value).hide("fast");
+                    $("#item-note-"+value).hide("fast");
                     $(".add").hide("fast");
-                    $.get("{{ url('show') }}/" + value, {}, function(data, status) {
+                    $.get("{{ url('show_GsmPreActive') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
-                        $("#master").prop('checked', false);
                     });
                 });
             }else{
@@ -253,73 +259,51 @@
             }
         });
 
-
-        // --- Proses Update Multiple ---
+        // ------ Proses Update Data ------
         function updateSelected() {
-
             var allVals = [];
+
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
 
-            swal({
-                title: "Are you sure?",
-                text: "Do you want to do an update?",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonColor: '#00FF00',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes Update',
-                showLoaderOnConfirm: true,
-            }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-                    var FirstName = $(".FirstName-"+value).val();
-                    var LastName = $(".LastName-"+value).val();
+                    var gsm_number = $(".gsm_number-"+value).val();
+                    var serial_number = $(".serial_number-"+value).val();
+                    var icc_id = $(".icc_id-"+value).val();
+                    var imsi = $(".imsi-"+value).val();
+                    var res_id = $(".res_id-"+value).val();
+                    var expired_date = $(".expired_date-"+value).val();
+                    var note = $(".note-"+value).val();
                     $.ajax({
-                        type: "get",
-                        url: "{{ url('update') }}/"+value,
-                        data: {
-                        FirstName: FirstName,
-                        LastName: LastName
-                        },
-                        success: function(data) {
-                                // swal("Done!","It was succesfully Update","success");
-                                swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                                $(".save").hide("fast");
-                                $(".cancel").hide("fast");
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                read();
-
-                            }
-                    });
+                    type: "get",
+                    url: "{{ url('update_GsmPreActive') }}/"+value,
+                    data: {
+                     gsm_number: gsm_number,
+                    serial_number:serial_number,
+                    icc_id: icc_id,
+                    imsi: imsi,
+                    res_id: res_id,
+                    expired_date:expired_date,
+                    note:note
+                    },
+                    success: function(data) {
+                    read()
+                    }
                 });
-
             });
+
 
         }
 
-            //--------Proses Batal--------
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
-            $(".add").show("fast");
-            $(".edit_all").show("fast");
-            $(".delete_all").show("fast");
+        //--------Proses Batal--------
+        function cancel(){
             read();
-
-            }
-
+        }
 
 
 
 
   </script>
+   @endsection
 
-  @endsection
