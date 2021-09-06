@@ -7,7 +7,11 @@
             <div class="info">
                 <a class="">
                     <span>
+<<<<<<< HEAD
                         {{Auth::user()->name}}
+=======
+                        Ambar Nur
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
                         <span class="user-level">Customer Service</span>
                     </span>
                 </a>
@@ -32,6 +36,7 @@
                 <div class="collapse in" id="masterData" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
+<<<<<<< HEAD
                             <a href="{{url('/seller')}}">
                                 <span class="link-collapse">Seller</span>
                             </a>
@@ -67,16 +72,50 @@
                                 <ul class="nav">
                                     <li>
                                         <a href="{{url('/GsmPreActive')}}">
+=======
+                            <a href="#">
+                                <span class="link-collapse">Company</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/Gps')}}">
+                                <span class="link-collapse">GPS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/Sensor')}}">
+                                <span class="link-collapse">Sensor</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class ="" data-toggle="collapse" href="#gsm" aria-expanded="true">
+                                <span class="link-collapse">GSM</span>
+                                <span class="caret"></span>
+                            </a>
+
+                            <div class="collapse in" id="gsm" aria-expanded="true" style="">
+                                <ul class="nav">
+                                    <li>
+                                        <a href="{{url('/gsm_pre_active')}}">
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
                                             <span class="link-collapse">Pre Active</span>
                                         </a>
                                     </li>
                                     <li>
+<<<<<<< HEAD
                                         <a href="{{url('/GsmActive') }}">
+=======
+                                        <a href="#edit">
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
                                             <span class="link-collapse">Active</span>
                                         </a>
                                     </li>
                                     <li>
+<<<<<<< HEAD
                                         <a href="{{url('/GsmTerminate') }}">
+=======
+                                        <a href="#settings">
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
                                             <span class="link-collapse">Terminated</span>
                                         </a>
                                     </li>
@@ -159,10 +198,18 @@
 
             <li class="nav-item">
 
+<<<<<<< HEAD
                 <a href="{{ url('/livetable') }}">Example Crud</a>
+=======
+                <a href="livetable">Example Crud</a>
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
             </li>
 
 
         </ul>
     </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24

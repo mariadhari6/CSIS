@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Sensor;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\Facades\DataTables;
+=======
+use DB;
+use Yajra\DataTables\Contracts\DataTable;
+use Yajra\DataTables\DataTables;
+
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
 
 class SensorController extends Controller
 {
@@ -44,6 +51,7 @@ class SensorController extends Controller
         Sensor::insert($data);
     }
 
+<<<<<<< HEAD
     public function edit_form($id)
     {
 
@@ -51,6 +59,15 @@ class SensorController extends Controller
         return view('sensor.edit_form')->with([
             'sensor' => $sensor,
 
+=======
+    public function show($id)
+    {
+        
+        $sensor =Sensor ::findOrfail($id);
+        return view('sensor.edit_form')->with([
+            'sensor' => $sensor,
+            
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
         ]);
     }
 
@@ -71,6 +88,7 @@ class SensorController extends Controller
         $data->status = $request->status;
         $data->save();
     }
+<<<<<<< HEAD
 
     public function selected()
     {
@@ -113,3 +131,6 @@ class SensorController extends Controller
             ->update(['colour' => 'black']);
     }
 }
+=======
+}
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24

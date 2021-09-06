@@ -23,7 +23,10 @@
                     <form>
                         <div class="form-row">
                             <div class="col-lg-7">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 37e80c2851d05eaa6dfe9459719015d8eae19c24
                                 <input type="email" placeholder="Email Address" class="form-control my-3 p-4" >
                             </div>
                         </div>
