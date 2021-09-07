@@ -40,7 +40,7 @@
               </tr>
             </thead>
             <tbody  id="item_data">
-              {{ csrf_field() }}
+              {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
         </div>
@@ -80,9 +80,9 @@
 
     // ----- Proses Tambah data ------
     function store() {
-        var gsm_active_id = $("#gsm_active_id").val();
         var request_date = $("#request_date").val();
         var active_date = $("#active_date").val();
+        var gsm_active_id = $("#gsm_active_id").val();
         var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
         var note = $("#note").val();
@@ -151,9 +151,9 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
-        $("#item-gsm_active_id-"+id).slideUp("fast");
         $("#item-request_date-"+id).slideUp("fast");
         $("#item-active_date-"+id).slideUp("fast");
+        $("#item-gsm_active_id-"+id).slideUp("fast");
         $("#item-status_active-"+id).slideUp("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-note-"+id).slideUp("fast");
@@ -164,9 +164,9 @@
 
     // ------ Proses Update Data ------
     function update(id) {
-        var gsm_active_id = $("#gsm_active_id").val();
         var request_date = $("#request_date").val();
         var active_date = $("#active_date").val();
+        var gsm_active_id = $("#gsm_active_id").val();
         var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
         var note = $("#note").val();
@@ -176,9 +176,9 @@
             type: "get",
             url: "{{ url('update_GsmTerminate') }}/"+id,
             data: {
-               gsm_active_id: gsm_active_id,
               request_date: request_date,
               active_date: active_date,
+               gsm_active_id: gsm_active_id,
               status_active: status_active,
               company_id: company_id,
               note:note
@@ -268,14 +268,14 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-gsm_active_id-"+value).slideUp("fast");
                     $("#item-request_date-"+value).slideUp("fast");
                     $("#item-active_date-"+value).slideUp("fast");
+                    $("#item-gsm_active_id-"+value).slideUp("fast");
                     $("#item-status_active-"+value).slideUp("fast");
                     $("#item-company_id-"+value).slideUp("fast");
                     $("#item-note-"+value).slideUp("fast");
                     $(".add").hide("fast");
-                    $.get("{{ url('show_GsmActive') }}/" + value, {}, function(data, status) {
+                    $.get("{{ url('show_GsmTerminate') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
 
@@ -303,9 +303,9 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-                    var gsm_active_id = $(".gsm_active_id-"+value).val();
                     var request_date = $(".request_date-"+value).val();
                     var active_date = $(".active_date-"+value).val();
+                    var gsm_active_id = $(".gsm_active_id-"+value).val();
                     var status_active = $(".status_active-"+value).val();
                     var company_id = $(".company_id-"+value).val();
                     var note = $(".note-"+value).val();
@@ -313,9 +313,9 @@
                     type: "get",
                     url: "{{ url('update_GsmTerminate') }}/"+value,
                     data: {
-                        gsm_active_id: gsm_active_id,
                         request_date: request_date,
                         active_date: active_date,
+                        gsm_active_id: gsm_active_id,
                         status_active: status_active,
                         company_id: company_id,
                         note:note

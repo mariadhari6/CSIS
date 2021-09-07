@@ -34,7 +34,7 @@
     </select></i></td>
 
       <td><textarea class="form-control" id="note" name="note" rows="3"></textarea></i></td>
-    <script type="text/javascript">
+  <script type="text/javascript">
    $(document).ready(function() {
        $('select[name="gsm_active_id"]').on('change', function() {
            var stateID = $(this).val();
