@@ -203,6 +203,7 @@
           }
     });
 
+    // Delete All
       $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
@@ -250,6 +251,7 @@
             }
         });
 
+        // Form Edit All
         $('.edit_all').on('click', function(e){
 
             var allVals = [];
@@ -277,15 +279,48 @@
                     $(".add").hide("fast");
                     $.get("{{ url('show_GsmTerminate') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
+                          // dependentTerminate
+                          $('select[name="gsm_active_id-1"]').on('change', function() {
+                            var stateID = $(this).val();
+                            if(stateID) {
+                                $.ajax({
+                                    url: '/dependent_terminate/'+stateID,
+                                    type: "GET",
+                                    dataType: "json",
+                                    success:function(data) {
+                                        $('select[name="company_id-1"]').empty();
+                                        $.each(data, function(key, value) {
+                                          var compID = value;
+                                            $.ajax({
+                                                url: '/show_company/'+compID,
+                                                type: "GET",
+                                                dataType: "json",
+                                                success:function(data) {
+                                                  $('select[name="company_id-1"]').empty();
+                                                  $.each(data, function(key, value) {
+                                                  $('select[name="company_id-1"]').append('<option value="'+ key +'">'+ value +'</option>');
+                                                  });
+                                                }
+                                            });
+                                        });
+                                    }
+                                });
+                            }else{
+                                $('select[name="company_id-1"]').empty();
+                            }
+                        });
+
                         $("#master").prop('checked', false);
 
                     });
+
+
                 });
             }else{
                 alert('Select the row you want to edit')
             }
         });
-
+        // Proses Edit Selected
             function updateSelected() {
             var allVals = [];
 
@@ -341,8 +376,6 @@
                 });
             });
             });
-
-
         }
 
         function batal(){
