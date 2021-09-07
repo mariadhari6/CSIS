@@ -34,50 +34,52 @@
     </select></i></td>
 
       <td><textarea class="form-control" id="note" name="note" rows="3"></textarea></i></td>
-    <script type="text/javascript">
-   $(document).ready(function() {
-       $('select[name="gsm_active_id"]').on('change', function() {
-           var stateID = $(this).val();
-           if(stateID) {
-               $.ajax({
-                   url: '/dependent_terminate/'+stateID,
-                   type: "GET",
-                   dataType: "json",
-                   success:function(data) {
-                       $('select[name="company_id"]').empty();
-                       $.each(data, function(key, value) {
-
-                           //------///
-                         var compID = value;
-                           $.ajax({
-                              url: '/show_company/'+compID,
-                              type: "GET",
-                              dataType: "json",
-                              success:function(data) {
-                                 $('select[name="company_id"]').empty();
-                                 $.each(data, function(key, value) {
-
-                                       //------///
-
-
-
-
-                                       //---///
-                                 $('select[name="company_id"]').append('<option value="'+ key +'">'+ value +'</option>');
-                                 });
-                              }
-                           });
-
-
-                           //---///
-                       });
-                   }
-               });
-           }else{
-               $('select[name="company_id"]').empty();
-           }
-       });
-   });
-</script>
+      <script type="text/javascript">
+        $(document).ready(function() {
+            $('select[name="gsm_active_id"]').on('change', function() {
+                var stateID = $(this).val();
+                if(stateID) {
+                    $.ajax({
+                        url: '/dependent_terminate/'+stateID,
+                        type: "GET",
+                        dataType: "json",
+                        success:function(data) {
+                            $('select[name="company_id"]').empty();
+                            $.each(data, function(key, value) {
+     
+                                //------///
+                              var compID = value;
+                                $.ajax({
+                                   url: '/show_company/'+compID,
+                                   type: "GET",
+                                   dataType: "json",
+                                   success:function(data) {
+                                      $('select[name="company_id"]').empty();
+                                      $.each(data, function(key, value) {
+     
+                                            //------///
+     
+     
+     
+     
+                                            //---///
+                                      $('select[name="company_id"]').append('<option value="'+ key +'">'+ value +'</option>');
+                                      });
+                                   }
+                                });
+     
+     
+                                //---///
+                            });
+                        }
+                    });
+                }else{
+                    $('select[name="company_id"]').empty();
+                }
+            });
+        });
+     </script>
+     
+     
 </tr>
 
