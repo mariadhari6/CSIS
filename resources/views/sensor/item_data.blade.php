@@ -1,28 +1,39 @@
-@foreach ($sensor as $sensor)
-    <tr id="edit-form-{{ $sensor->id }}">
-        <td id="td-button-{{ $sensor->id }}">
-            <div id="button-{{ $sensor->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $sensor->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $sensor->id }})"></i>
+@foreach ($sensor as $sensors)
+    <tr id="edit-form-{{ $sensors->id }}">
+         <td id="td-checkbox-{{ $sensors->id }}">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input task-select" type="checkbox" id="{{$sensors->id}}">
+                    <span class="form-check-sign"></span>
+                </label>
             </div>
         </td>
-        <td id="item-sensor_name-{{ $sensor->id}}">
-                {{ $sensor->sensor_name}}
+        <td id="td-button-{{ $sensors->id }}">
+            <div id="button-{{ $sensors->id }}">
+                <i class="fas fa-pen edit" onclick="edit({{ $sensors->id }})"></i>
+                <i class="fas fa-trash delete" onclick="destroy({{ $sensors->id }})"></i>
+            </div>
         </td>
-        <td id="item-merk_sensor-{{ $sensor->id}}">
-            {{ $sensor->merk_sensor }}
+        {{-- <td id="item-company_id-{{ $sellers->id}}">
+                {{ $sellers->company->company_name}}
+        </td> --}}
+        <td id="item-sensor_name-{{ $sensors->id}}">
+            {{ $sensors->sensor_name }}
         </td>
-          <td id="item-serial_number-{{ $sensor->id }}">
-            {{ $sensor->serial_number }}
+          <td id="item-merk_sensor-{{ $sensors->id }}">
+            {{ $sensors->merk_sensor }}
         </td>
-          <td id="item-rab_number-{{ $sensor->id }}">
-            {{ $sensor->rab_number }}
+          <td id="item-serial_number-{{ $sensors->id }}">
+            {{ $sensors->serial_number }}
         </td>
-          <td id="item-waranty-{{ $sensor->id }}">
-            {{ $sensor->waranty }}
+        <td id="item-rab_number-{{ $sensors->id }}">
+            {{ $sensors->rab_number }}
         </td>
-        <td id="item-status-{{ $sensor->id }}">
-            {{ $sensor->status }}
+        <td id="item-waranty-{{ $sensors->id }}">
+            {{ $sensors->waranty }}
         </td>
+          <td id="item-status-{{ $sensors->id }}">
+            {{ $sensors->status }}
+          </td>
     </tr>
 @endforeach

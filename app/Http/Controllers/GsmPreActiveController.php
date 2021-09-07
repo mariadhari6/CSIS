@@ -6,9 +6,9 @@ use App\Models\GsmPreActive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
-use DB;
 use Yajra\DataTables\Contracts\DataTable;
-use Yajra\DataTables\DataTables;
+
+
 
 
 
@@ -17,14 +17,14 @@ class GsmPreActiveController extends Controller
     public function index()
     {
         return view('GsmPreActive.index');
-        return view('gsm_pre_active.index');
+       
     }
     public function add_form()
     {
         // $gsm_pre_active = GsmPreActive::orderBy('gsm_number', 'DESC')->get();
 
         return view('GsmPreActive.add_form');
-        return view('gsm_pre_active.add_form');
+        
 
     }
 
@@ -58,14 +58,15 @@ class GsmPreActiveController extends Controller
         return view('GsmPreActive.edit_form')->with([
             'GsmPreActive' => $GsmPreActive,
         ]);
+    }
 
 
     public function show($id)
     {
         
         $gsm_pre_active =GsmPreActive ::findOrfail($id);
-        return view('gsm_pre_active.edit_form')->with([
-            'gsm_pre_active' => $gsm_pre_active,
+        return view('GsmPreActive.edit_form')->with([
+            'GsmPreActive' => $gsm_pre_active,
         ]);
     }
 
@@ -114,7 +115,7 @@ class GsmPreActiveController extends Controller
     {
         if ($request->ajax()) {
             $ids = $request->input('id');
-            DB::table('gsm_pre_actives')->whereIn('id', $ids)->delete();
+            DB::table('GsmPreActives')->whereIn('id', $ids)->delete();
         }
     }
 
