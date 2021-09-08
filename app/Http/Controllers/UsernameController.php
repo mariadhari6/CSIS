@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Username;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -61,7 +62,42 @@ class UsernameController extends Controller
         $data->LastName = $request->LastName;
         $data->save();
     }
+    public function selected()
+    {
+        $usernames = Username::all();
+        return view('livetable.selected')->with([
+            'usernames' => $usernames
+        ]);
+    }
 
+    public function updateall(Request $request, $id)
+    {
+        $data = Username::findOrfail($id);
+        $data->FirstName = $request->FirstName;
+        $data->LastName = $request->LastName;
+
+        echo $id;
+    }
+    public function deleteAll(Request $request)
+    {
+        if ($request->ajax()) {
+            $ids = $request->input('id');
+            DB::table('usernames')->whereIn('id', $ids)->delete();
+        }
+
+        // $ids = $request->ids;
+        // DB::table('usernames')
+        //         ->whereIn('id',explode(",",$ids))
+        //         ->delete();
+        //
+    }
+    public function datatable(Request $request)
+    {
+        if ($request->ajax()) {
+
+            return DataTables::of(Username::all())->make(true);
+        }
+    }
 
     // public function index()
     // {
@@ -178,57 +214,15 @@ class UsernameController extends Controller
     //         echo '<div class="alert alert-success">Data Updated</div>';
     //     }
     // }
-    public function deleteAll(Request $request)
-    {
-        if ($request->ajax()) {
-            $ids = $request->input('id');
-            DB::table('usernames')->whereIn('id', $ids)->delete();
-
-        }
-
-        // $ids = $request->ids;
-        // DB::table('usernames')
-        //         ->whereIn('id',explode(",",$ids))
-        //         ->delete();
-        //
-    }
-
-
-    public function datatable(Request $request)
-    {
-        if ($request->ajax()) {
-
-            return DataTables::of(Username::all())->make(true);
-        }
-    }
-
-    public function selected()
-    {
-        $usernames = Username::all();
-        return view('livetable.selected')->with([
-            'usernames' => $usernames
-        ]);
-    }
-
-    public function updateall(Request $request, $id)
-    {
-        $data = Username::findOrfail($id);
-        $data->FirstName = $request->FirstName;
-        $data->LastName = $request->LastName;
-
-        echo $id;
-    }
 
     public function updateSelected(Request $request)
     {
         Username::where('item_type_id', '=', 1)
-                ->update(['colour' => 'black']);
+            ->update(['colour' => 'black']);
     }
 
     public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
-
-
 }

@@ -7,7 +7,7 @@
             <div class="info">
                 <a class="">
                     <span>
-                        Ambar Nur
+                        {{Auth::user()->name}}
                         <span class="user-level">Customer Service</span>
                     </span>
                 </a>
@@ -16,7 +16,7 @@
         </div>
         <ul class="nav">
             <li class="nav-item active">
-                <a href="/">
+                <a href="{{url('/customer_service')}}">
                     <i class="fas fa-home"></i>
                     <p>Home</p>
 
@@ -32,17 +32,28 @@
                 <div class="collapse in" id="masterData" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#">
+                            <a href="{{url('/seller')}}">
+                                <span class="link-collapse">Seller</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/Company') }}">
                                 <span class="link-collapse">Company</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#edit">
+                            <a href="{{url('/pic') }}">
+                                <span class="link-collapse">PIC</span></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{url('/gps')}}">
                                 <span class="link-collapse">GPS</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#settings">
+                            <a href="{{url('/sensor')}}">
                                 <span class="link-collapse">Sensor</span>
                             </a>
                         </li>
@@ -55,17 +66,17 @@
                             <div class="collapse in" id="gsm" aria-expanded="true" style="">
                                 <ul class="nav">
                                     <li>
-                                        <a href="#profile">
+                                        <a href="{{url('/GsmPreActive')}}">
                                             <span class="link-collapse">Pre Active</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#edit">
+                                        <a href="{{url('/GsmActive') }}">
                                             <span class="link-collapse">Active</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#settings">
+                                        <a href="{{url('/GsmTerminate') }}">
                                             <span class="link-collapse">Terminated</span>
                                         </a>
                                     </li>
@@ -148,7 +159,7 @@
 
             <li class="nav-item">
 
-                <a href="livetable">Example Crud</a>
+                <a href="{{ url('/livetable') }}">Example Crud</a>
             </li>
 
 
