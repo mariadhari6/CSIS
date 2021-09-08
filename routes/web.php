@@ -6,6 +6,7 @@ use App\Http\Controllers\DetailCustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerServiceController;
+use App\Models\DetailCustomer;
 use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,7 +73,16 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('export', [UsernameController::class, 'export'])->name('export');
 
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
-    Route::get('/item_detail', [DetailCustomerController::class, 'itemDetail'])->name('item_detail');
+    Route::get('/item_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
+    Route::get('/add_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
+    Route::get('/store_detail', [DetailCustomerController::class, 'store'])->name('save_detail');
+    Route::get('/delete_detail/{id}', [DetailCustomerController::class, 'destroy']);
+    Route::get('/show_detail/{id}', [DetailCustomerController::class, 'show']);
+    Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
+    Route::get('/delete_all', [DetailCustomerController::class, 'deleteAll'])->name('deleteAll_detail');
+    Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
+
+
 });
 
 

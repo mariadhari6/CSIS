@@ -1,6 +1,6 @@
    @foreach ($details as $detail )
     <tr id="edit-form-{{ $detail->id }}">
-        <td id="td-checkbox-{{ $detail->id }}">
+        <td id="td-checkbox-{{ $detail->id }}" width="100px">
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$detail->id}}">
@@ -60,7 +60,7 @@
         <td id="item-PoolName-{{ $detail->id }}">
             {{ $detail-> pool_name }}
         </td>
-        <td id="item-PollLocation-{{ $detail->id }}">
+        <td id="item-PoolLocation-{{ $detail->id }}">
             {{ $detail-> pool_location }}
         </td>
         <td id="item-Waranty-{{ $detail->id }}">
@@ -69,7 +69,7 @@
         <td id="item-StatusLayanan-{{ $detail->id }}">
             {{ $detail-> status_layanan }}
         </td>
-        <td id="item-TanggaPasang-{{ $detail->id }}">
+        <td id="item-TanggalPasang-{{ $detail->id }}">
             {{ $detail-> tanggal_pasang }}
         </td>
         <td id="item-TanggalNonAktif-{{ $detail->id }}">

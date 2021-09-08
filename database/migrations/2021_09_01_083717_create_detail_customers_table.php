@@ -19,7 +19,7 @@ class CreateDetailCustomersTable extends Migration
             $table->string('licence_plate');
             $table->string('vihecle_type');
             $table->string('po_number');
-            $table->date('po_date');
+            $table->string('po_date');
             $table->string('status_po');
             $table->string('imei');
             $table->string('merk');
