@@ -36,7 +36,9 @@
     border-bottom: 2px solid #946868;
 }
 
-.input {
+
+
+.input{
     position: absolute;
     left: 0;
     top: 0;
@@ -51,11 +53,49 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.select {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 0px;
+    padding: 13px;
+    border: none;
+    border-bottom: 2px solid #946868;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 30%;
+    outline: none;
+    background: none;
+    padding: 0.3rem 0.7rem;
+    font-size: 1rem;
+    color: #555;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
 #user {
     color: white;
 }
 
-.data{
+
+/* Datatable */
+.dataTables_length {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.dataTables_filter {
+    position: relative;
+    right: 150px;
+    bottom: 35px;
+}
+
+/* tabel livetable */
+
+#table_id {
+    position: relative;
+    bottom: 0px;
     text-align: center;
 }
 
@@ -151,6 +191,18 @@
     padding-left: 0px;
     padding-right: 0px;
     opacity: 0;
+}
+
+
+#detailcustomer tbody tr td {
+    text-align: center;
+
+}
+
+.list{
+    min-width: 250px;
+    font-size: 15px;
+    text-align: center;
 }
 .main-header .logo-header .navbar-toggler .navbar-toggler-icon {
     background: url(../img/menu2.png);

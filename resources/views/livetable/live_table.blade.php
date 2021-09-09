@@ -4,7 +4,7 @@
 @section('content')
 
 <div align="right">
-    <a class="btn btn-secondary  mr-2" href="{{ route('export') }}"><i class="fas fa-file-excel mr-2"></i>Export</a>
+    <a class="btn btn-secondary  mr-2" href="{{ route('export') }}" title="Export"><i class="fas fa-file-excel mr-2"></i>Export</a>
 </div>
   <br>
   <div id="message"></div>
@@ -15,12 +15,14 @@
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+
+                <button class="btn btn-success  mr-2 edit_all" title="Edit Selected"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"  title="Deleted Selected"><i class="fas fa-trash"></i></button>
             </div>
 
 
-          <table class="table table-hover data" class="table_id" id="table_id" >
+
+          <table class="table table-hover" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th width="10px">
@@ -101,6 +103,7 @@
 
             }
         })
+
     }
     // -----Proses Delete Data ------
     function destroy(id) {
@@ -298,10 +301,10 @@
                                     showConfirmButton: false,
                                     timer: 1500
 
+
                                 // $(".save").hide();
                                 });
                                 read();
-
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
@@ -310,7 +313,7 @@
 
 
                             }
-
+                    });
 
                     });
                 });

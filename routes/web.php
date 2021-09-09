@@ -2,10 +2,10 @@
 
 
 use App\Http\Controllers\UsernameController;
+use App\Http\Controllers\DetailCustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\GpsController;
 use App\Http\Controllers\GsmActiveController;
 use App\Http\Controllers\GsmPreActiveController;
@@ -13,6 +13,10 @@ use App\Http\Controllers\GsmTerminateController;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
+
+use App\Models\DetailCustomer;
+use App\Models\Username;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -32,9 +36,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Route::get('/tes', function () {
-//     return view('tes');
-// });
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+Route::get('/register', function () {
+    return view('auth.register');
+});
 
 // Route::get('/login', function () {
 //     return view('partials.v_landingpage');
@@ -73,6 +81,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected', [UsernameController::class, 'selected']);
     Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
     Route::get('export', [UsernameController::class, 'export'])->name('export');
+
 
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
