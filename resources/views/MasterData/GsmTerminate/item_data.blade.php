@@ -22,17 +22,16 @@
             {{ $GsmTerminates->active_date }}
         </td>
          <td id="item-gsm_active_id-{{ $GsmTerminates->id}}">
-                {{ $GsmTerminates->gsmActive->gsmPreActive->gsm_number}}
+                {{ $GsmTerminates->gsm_active_id}}
         </td>
           <td id="item-status_active-{{ $GsmTerminates->id }}">
             {{ $GsmTerminates->status_active }}
         </td>
           <td id="item-company_id-{{ $GsmTerminates->id }}">
-            {{ $GsmTerminates->gsmActive->company->company_name}}
+            {{ $GsmTerminates->company_id}}
         </td>
         <td id="item-note-{{ $GsmTerminates->id }}">
             {{ $GsmTerminates->note }}
         </td>
     </tr>
 @endforeach
-

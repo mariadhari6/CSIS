@@ -19,10 +19,12 @@ class GsmActiveController extends Controller
     public function add_form()
     {
         $company = Company::orderBy('company_name', 'DESC')->get();
+        $GsmActive = GsmActive::orderBy('id', 'DESC')->get();
         $GsmPreActive = GsmPreActive::orderBy('gsm_number', 'DESC')->get();
         return view('MasterData.GsmActive.add_form')->with([
             'company' => $company,
-            'GsmPreActive' => $GsmPreActive
+            'GsmPreActive' => $GsmPreActive,
+            'GsmActive' => $GsmActive
 
         ]);
     }
@@ -72,6 +74,11 @@ class GsmActiveController extends Controller
         $data->company_id = $request->company_id;
         $data->note = $request->note;
         $data->save();
+    }
+    public function destroy($id)
+    {
+        $data = GsmActive::findOrfail($id);
+        $data->delete();
     }
 
     public function selected()

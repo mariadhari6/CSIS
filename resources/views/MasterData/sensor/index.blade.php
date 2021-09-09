@@ -14,13 +14,13 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-            <br>
-         <div class="table-responsive">
-          <table class="table table-hover data" class="table_id" id="table_id" >
+
+
+          <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>
@@ -31,20 +31,20 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col">Action</th>
-                <th scope="col">Sensor Name</th>
-                <th scope="col">Merk Sensor</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">Rab Number</th>
-                <th scope="col">Waranty</th>
-                <th scope="col">Status</th>
+                <th scope="col" class="action">Action</th>
+                <th scope="col" class="list">Sensor Name</th>
+                <th scope="col" class="list">Merk Sensor</th>
+                <th scope="col" class="list">Serial Number</th>
+                <th scope="col" class="list">Rab Number</th>
+                <th scope="col" class="list">Waranty</th>
+                <th scope="col" class="list">Status</th>
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-        </div>
+
         </div>
       </div>
     </div>
@@ -62,6 +62,11 @@
       $.get("{{ url('item_data_sensor') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
+
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+
+            });
         $('#table_id').DataTable().draw();
       });
     }

@@ -13,13 +13,13 @@
       <div class="card">
         <div class="card-body">
              <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-            <br>
 
-          <table class="table table-hover data" class="table_id" id="table_id" >
+
+          <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th width="10px">
@@ -30,17 +30,17 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col">Action</th>
-                <th scope="col">Request Date</th>
-                <th scope="col">Terminate Date</th>
-                <th scope="col">Gsm Number</th></th>
-                <th scope="col">Status Active</th>
-                <th scope="col">Company</th>
-                <th scope="col">Note</th>
+                <th scope="col" class="action">Action</th>
+                <th scope="col" class="list">Request Date</th>
+                <th scope="col" class="list">Terminate Date</th>
+                <th scope="col" class="list">Gsm Number</th></th>
+                <th scope="col" class="list">Status Active</th>
+                <th scope="col" class="list">Company</th>
+                <th scope="col" class="list">Note</th>
               </tr>
             </thead>
             <tbody  id="item_data">
-              {{-- {{ csrf_field() }} --}}
+              {{ csrf_field() }}
             </tbody>
           </table>
         </div>
@@ -51,7 +51,7 @@
   <script>
     $(document).ready(function() {
 
-      read()
+      read();
 
     });
 
@@ -61,6 +61,11 @@
       $.get("{{ url('item_data_GsmTerminate') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
+
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            // "dom": '<lf<t>ip>'
+            });
         $('#table_id').DataTable().draw();
       });
 
@@ -71,18 +76,18 @@
       read()
     }
 
+
      // ------ Tambah Form Input ------
      $('.add').click(function() {
         $.get("{{ url('add_form_GsmTerminate') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
       });
-
     // ----- Proses Tambah data ------
     function store() {
+        var gsm_active_id = $("#gsm_active_id").val();
         var request_date = $("#request_date").val();
         var active_date = $("#active_date").val();
-        var gsm_active_id = $("#gsm_active_id").val();
         var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
         var note = $("#note").val();
@@ -108,9 +113,6 @@
             }
         })
     }
-
-
-
     // -----Proses Delete Data ------
    function destroy(id) {
         var id = id;
@@ -139,21 +141,19 @@
                         read();
                     }
                 });
-
               });
             },
             allowOutsideClick: false
       });
     }
-
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
+        $("#item-gsm_active_id-"+id).slideUp("fast");
         $("#item-request_date-"+id).slideUp("fast");
         $("#item-active_date-"+id).slideUp("fast");
-        $("#item-gsm_active_id-"+id).slideUp("fast");
         $("#item-status_active-"+id).slideUp("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-note-"+id).slideUp("fast");
@@ -161,12 +161,11 @@
             $("#edit-form-"+id).prepend(data)
         });
     }
-
     // ------ Proses Update Data ------
     function update(id) {
+        var gsm_active_id = $("#gsm_active_id").val();
         var request_date = $("#request_date").val();
         var active_date = $("#active_date").val();
-        var gsm_active_id = $("#gsm_active_id").val();
         var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
         var note = $("#note").val();
@@ -176,9 +175,9 @@
             type: "get",
             url: "{{ url('update_GsmTerminate') }}/"+id,
             data: {
+               gsm_active_id: gsm_active_id,
               request_date: request_date,
               active_date: active_date,
-               gsm_active_id: gsm_active_id,
               status_active: status_active,
               company_id: company_id,
               note:note
@@ -194,7 +193,6 @@
             }
         })
     }
-
      $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
               $(".task-select").prop('checked', true);
@@ -202,8 +200,6 @@
               $(".task-select").prop('checked',false);
           }
     });
-
-    // Delete All
       $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
@@ -250,13 +246,9 @@
                 alert('Select the row you want to delete')
             }
         });
-
-        // Form Edit All
         $('.edit_all').on('click', function(e){
-
             var allVals = [];
             var _token = $('input[name="_token"]').val();
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -270,60 +262,24 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-gsm_active_id-"+value).slideUp("fast");
                     $("#item-request_date-"+value).slideUp("fast");
                     $("#item-active_date-"+value).slideUp("fast");
-                    $("#item-gsm_active_id-"+value).slideUp("fast");
                     $("#item-status_active-"+value).slideUp("fast");
                     $("#item-company_id-"+value).slideUp("fast");
                     $("#item-note-"+value).slideUp("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_GsmTerminate') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
-                          // dependentTerminate
-                          $('select[name="gsm_active_id-1"]').on('change', function() {
-                            var stateID = $(this).val();
-                            if(stateID) {
-                                $.ajax({
-                                    url: '/dependent_terminate/'+stateID,
-                                    type: "GET",
-                                    dataType: "json",
-                                    success:function(data) {
-                                        $('select[name="company_id-1"]').empty();
-                                        $.each(data, function(key, value) {
-                                          var compID = value;
-                                            $.ajax({
-                                                url: '/show_company/'+compID,
-                                                type: "GET",
-                                                dataType: "json",
-                                                success:function(data) {
-                                                  $('select[name="company_id-1"]').empty();
-                                                  $.each(data, function(key, value) {
-                                                  $('select[name="company_id-1"]').append('<option value="'+ key +'">'+ value +'</option>');
-                                                  });
-                                                }
-                                            });
-                                        });
-                                    }
-                                });
-                            }else{
-                                $('select[name="company_id-1"]').empty();
-                            }
-                        });
-
                         $("#master").prop('checked', false);
-
                     });
-
-
                 });
             }else{
                 alert('Select the row you want to edit')
             }
         });
-        // Proses Edit Selected
             function updateSelected() {
             var allVals = [];
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -338,9 +294,9 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
+                    var gsm_active_id = $(".gsm_active_id-"+value).val();
                     var request_date = $(".request_date-"+value).val();
                     var active_date = $(".active_date-"+value).val();
-                    var gsm_active_id = $(".gsm_active_id-"+value).val();
                     var status_active = $(".status_active-"+value).val();
                     var company_id = $(".company_id-"+value).val();
                     var note = $(".note-"+value).val();
@@ -348,9 +304,9 @@
                     type: "get",
                     url: "{{ url('update_GsmTerminate') }}/"+value,
                     data: {
+                        gsm_active_id: gsm_active_id,
                         request_date: request_date,
                         active_date: active_date,
-                        gsm_active_id: gsm_active_id,
                         status_active: status_active,
                         company_id: company_id,
                         note:note
@@ -361,23 +317,19 @@
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
                                     timer: 1500
-
                                 // $(".save").hide();
                                 });
                                 read();
-
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
                     }
-
                 });
             });
             });
         }
-
         function batal(){
             $(".save").hide("fast");
             $(".cancel").hide("fast");
@@ -386,9 +338,6 @@
             $(".delete_all").show("fast");
             read();
         }
-
-
-
   </script>
 
    @endsection

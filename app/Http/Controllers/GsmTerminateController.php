@@ -14,6 +14,8 @@ class GsmTerminateController extends Controller
 {
     //
 
+    //
+
     public function index()
     {
         return view('MasterData.GsmTerminate.index');
@@ -95,7 +97,6 @@ class GsmTerminateController extends Controller
 
     public function updateall(Request $request, $id)
     {
-
         $data = GsmTerminate::findOrfail($id);
         $data->request_date = $request->request_date;
         $data->active_date = $request->active_date;

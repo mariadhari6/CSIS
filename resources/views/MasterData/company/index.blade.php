@@ -13,13 +13,13 @@
       <div class="card">
         <div class="card-body">
              <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-            <br>
-        <div class="table-responsive">
-          <table class="table table-hover data" class="table_id" id="table_id" >
+
+
+          <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
                   <th width="10px">
@@ -30,14 +30,14 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" width="80px">Action</th>
-                <th scope="col" width="50px">Company Name</th>
-                <th scope="col">Seller</th>
-                <th scope="col"width="30px">Customer Code</th>
-                <th scope="col">No PO</th>
-                <th scope="col">Po Date</th>
-                <th scope="col">No Agreement Letter</th>
-                <th scope="col">Status</th>
+                <th scope="col" class="action">Action</th>
+                <th scope="col" class="list">Company Name</th>
+                <th scope="col" class="list">Seller</th>
+                <th scope="col" class="list">Customer Code</th>
+                <th scope="col" class="list">No PO</th>
+                <th scope="col" class="list">Po Date</th>
+                <th scope="col" class="list">No Agreement Letter</th>
+                <th scope="col" class="list">Status</th>
 
               </tr>
             </thead>
@@ -45,7 +45,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-          </div>
+
         </div>
       </div>
     </div>
@@ -54,7 +54,9 @@
   <script>
     $(document).ready(function() {
 
-      read()
+      read();
+
+    //   $('#company').dataTable();
 
     });
 
@@ -62,8 +64,13 @@
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data_company') }}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
+         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+         $('#table_id').dataTable( {
+
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            // "dom": '<lf<t>ip>'
+            });
         $('#table_id').DataTable().draw();
       });
 

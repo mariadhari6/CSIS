@@ -18,4 +18,9 @@ class GsmPreActive extends Model
     {
         return $this->hasOne(GsmActive::class);
     }
+
+    public function gsmTerminate()
+    {
+        return $this->hasOne(GsmTerminate::class);
+    }
 }

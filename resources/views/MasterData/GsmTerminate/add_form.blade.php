@@ -46,7 +46,6 @@
                    success:function(data) {
                        $('select[name="company_id"]').empty();
                        $.each(data, function(key, value) {
-
                            //------///
                          var compID = value;
                            $.ajax({
@@ -56,19 +55,12 @@
                               success:function(data) {
                                  $('select[name="company_id"]').empty();
                                  $.each(data, function(key, value) {
-
                                        //------///
-
-
-
-
                                        //---///
                                  $('select[name="company_id"]').append('<option value="'+ key +'">'+ value +'</option>');
                                  });
                               }
                            });
-
-
                            //---///
                        });
                    }
