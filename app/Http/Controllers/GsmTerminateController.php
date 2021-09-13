@@ -50,7 +50,7 @@ class GsmTerminateController extends Controller
     {
         $data = array(
             'request_date'   => $request->request_date,
-            'active_date'      => $request->active_date,
+            'terminate_date'      => $request->terminate_date,
             'gsm_active_id' => $request->gsm_active_id,
             'status_active'   => $request->status_active,
             'company_id'      => $request->company_id,
@@ -79,7 +79,7 @@ class GsmTerminateController extends Controller
     {
         $data = GsmTerminate::findOrfail($id);
         $data->request_date = $request->request_date;
-        $data->active_date = $request->active_date;
+        $data->terminate_date = $request->terminate_date;
         $data->gsm_active_id = $request->gsm_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;
@@ -99,7 +99,7 @@ class GsmTerminateController extends Controller
     {
         $data = GsmTerminate::findOrfail($id);
         $data->request_date = $request->request_date;
-        $data->active_date = $request->active_date;
+        $data->terminate_date = $request->terminate_date;
         $data->gsm_active_id = $request->gsm_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;

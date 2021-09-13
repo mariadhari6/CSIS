@@ -23,7 +23,8 @@
     </td> --}}
 <td><select class="form-select status-{{$sensor->id}}" id="status" aria-label=".form-select-lg example">
   <option selected>{{$sensor->status}}</option>
-  <option value="Active">Active</option>
-  <option value="In Active">In Active</option>
+   <option value="Ready">Ready</option>
+    <option value="Used">Used</option>
+    <option value="Error">Error</option>
 </select></i></td>
 

@@ -20,4 +20,9 @@ class Pic extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaintCustomer::class);
+    }
 }

@@ -12,8 +12,9 @@
     {{-- <td> <div class="input-div"><input type="text" class="input" id="status" placeholder="Status"></i></td> --}}
     <td><select class="form-select" id="status" aria-label=".form-select-lg example">
     <option selected>Pilih status</option>
-    <option value="Active">Active</option>
-    <option value="In Active">In Active</option>
+     <option value="Ready">Ready</option>
+    <option value="Used">Used</option>
+    <option value="Error">Error</option>
     </select></i></td>
 </tr>
 

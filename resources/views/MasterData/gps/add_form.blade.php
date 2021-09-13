@@ -10,8 +10,9 @@
     <td> <div class="input-div"><input type="date" class="input" id="po_date" placeholder="Po Date"></i></td>
     <td><select class="form-control" id="status" aria-label=".form-select-lg example">
     <option selected>Pilih status</option>
-    <option value="Active">Active</option>
-    <option value="In Active">In Active</option>
+    <option value="Ready">Ready</option>
+    <option value="Used">Used</option>
+    <option value="Error">Error</option>
     </select></i></td>
     <td><select class="form-control" id="status_ownership" aria-label=".form-select-lg example">
     <option selected>Pilih Status</option>

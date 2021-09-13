@@ -13,7 +13,7 @@
       <div class="card">
         <div class="card-body">
              <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
@@ -40,7 +40,7 @@
               </tr>
             </thead>
             <tbody  id="item_data">
-              {{ csrf_field() }}
+              {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
         </div>
@@ -87,7 +87,7 @@
     function store() {
         var gsm_active_id = $("#gsm_active_id").val();
         var request_date = $("#request_date").val();
-        var active_date = $("#active_date").val();
+        var terminate_date = $("#terminate_date").val();
         var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
         var note = $("#note").val();
@@ -97,7 +97,7 @@
             data: {
               gsm_active_id: gsm_active_id,
               request_date: request_date,
-              active_date: active_date,
+              terminate_date: terminate_date,
               status_active: status_active,
               company_id: company_id,
               note:note
@@ -153,7 +153,7 @@
         $("#td-checkbox-"+id).hide("fast");
         $("#item-gsm_active_id-"+id).slideUp("fast");
         $("#item-request_date-"+id).slideUp("fast");
-        $("#item-active_date-"+id).slideUp("fast");
+        $("#item-terminate_date-"+id).slideUp("fast");
         $("#item-status_active-"+id).slideUp("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-note-"+id).slideUp("fast");
@@ -165,7 +165,7 @@
     function update(id) {
         var gsm_active_id = $("#gsm_active_id").val();
         var request_date = $("#request_date").val();
-        var active_date = $("#active_date").val();
+        var terminate_date = $("#terminate_date").val();
         var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
         var note = $("#note").val();
@@ -177,7 +177,7 @@
             data: {
                gsm_active_id: gsm_active_id,
               request_date: request_date,
-              active_date: active_date,
+              terminate_date: terminate_date,
               status_active: status_active,
               company_id: company_id,
               note:note
@@ -264,7 +264,7 @@
                     $("#td-button-"+value).hide("fast");
                     $("#item-gsm_active_id-"+value).slideUp("fast");
                     $("#item-request_date-"+value).slideUp("fast");
-                    $("#item-active_date-"+value).slideUp("fast");
+                    $("#item-terminate_date-"+value).slideUp("fast");
                     $("#item-status_active-"+value).slideUp("fast");
                     $("#item-company_id-"+value).slideUp("fast");
                     $("#item-note-"+value).slideUp("fast");
@@ -296,7 +296,7 @@
                 $.each(allVals, function(index, value){
                     var gsm_active_id = $(".gsm_active_id-"+value).val();
                     var request_date = $(".request_date-"+value).val();
-                    var active_date = $(".active_date-"+value).val();
+                    var terminate_date = $(".terminate_date-"+value).val();
                     var status_active = $(".status_active-"+value).val();
                     var company_id = $(".company_id-"+value).val();
                     var note = $(".note-"+value).val();
@@ -306,7 +306,7 @@
                     data: {
                         gsm_active_id: gsm_active_id,
                         request_date: request_date,
-                        active_date: active_date,
+                        terminate_date: terminate_date,
                         status_active: status_active,
                         company_id: company_id,
                         note:note

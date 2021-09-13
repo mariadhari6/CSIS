@@ -2,7 +2,7 @@
     <td></td>
     <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
      <td> <div class="input-div"><input type="date" class="input" id="request_date" placeholder="Request Date" ></i></td>
-    <td> <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active_date"></i></td>
+    <td> <div class="input-div"><input type="date" class="input" id="terminate_date" placeholder="Terminate_date"></i></td>
     <td><select class="form-control" id="gsm_active_id" name="gsm_active_id">
        @foreach ($GsmActive as $GsmActives)
         <option value="{{ $GsmActives->id }}" {{ old('gsm_active_id') == $GsmActives->id  ? 'selected':'' }}>

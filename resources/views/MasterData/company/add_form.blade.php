@@ -16,6 +16,7 @@
     <td> <div class="input-div"><input type="text" class="input" id="no_po" placeholder="No Po" required></i></td>
     <td> <div class="input-div"><input type="date" class="input" id="po_date" placeholder="po date" required></i></td>
         <td><select class="form-control" id="no_agreement_letter_id" name="no_agreement_letter_id">
+    <option value="">----Pilih No Agreement----</option>
        @foreach ($seller as $sellers)
         <option value="{{ $sellers->id }}" {{ old('no_agreement_letter_id') == $sellers->id ? 'selected':'' }}>{{ $sellers->no_agreement_letter }}</option>
 

@@ -18,17 +18,17 @@
         <td id="item-request_date-{{ $GsmTerminates->id}}">
             {{ $GsmTerminates->request_date }}
         </td>
-          <td id="item-active_date-{{ $GsmTerminates->id }}">
-            {{ $GsmTerminates->active_date }}
+          <td id="item-terminate_date-{{ $GsmTerminates->id }}">
+            {{ $GsmTerminates->terminate_date }}
         </td>
          <td id="item-gsm_active_id-{{ $GsmTerminates->id}}">
-                {{ $GsmTerminates->gsm_active_id}}
+                {{-- {{ $GsmTerminates->gsmActive->gsmPreActive->gsm_number}} --}}
         </td>
           <td id="item-status_active-{{ $GsmTerminates->id }}">
             {{ $GsmTerminates->status_active }}
         </td>
           <td id="item-company_id-{{ $GsmTerminates->id }}">
-            {{ $GsmTerminates->company_id}}
+            {{-- {{ $GsmTerminates->gsmActive->company->company_name}} --}}
         </td>
         <td id="item-note-{{ $GsmTerminates->id }}">
             {{ $GsmTerminates->note }}

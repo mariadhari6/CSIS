@@ -31,4 +31,8 @@ class Company extends Model
     {
         return $this->hasMany(GsmTerminate::class);
     }
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaintCustomer::class);
+    }
 }

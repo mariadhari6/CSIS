@@ -23,8 +23,9 @@
     </td> --}}
 <td><select class="form-control status-{{$gps->id}}" id="status" aria-label=".form-select-lg example">
   <option selected>{{$gps->status}}</option>
-  <option value="Active">Active</option>
-  <option value="In Active">In Active</option>
+    <option value="Ready">Ready</option>
+    <option value="Used">Used</option>
+    <option value="Error">Error</option>
 </select></i></td>
 
 <td><select class="form-control" id="status_ownership" aria-label=".form-select-lg example">
