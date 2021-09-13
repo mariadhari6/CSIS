@@ -16,4 +16,9 @@ class CustomerServiceController extends Controller
         return view('tes', compact('username'));
 
     }
+    public function utama()
+    {
+        return view('partials.v_login');
+
+    }
 }

@@ -1,10 +1,7 @@
 <?php
-
-
 use App\Http\Controllers\UsernameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\GpsController;
@@ -14,6 +11,10 @@ use App\Http\Controllers\GsmTerminateController;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
+use App\Http\Controllers\DetailCustomerController;
+
+use App\Models\DetailCustomer;
+use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -28,34 +29,25 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('livetable.home');
-// });
+Route::get('/', function () {
+    return view('auth.login');
+});
 
 // Route::get('/tes', function () {
 //     return view('tes');
 // });
-
-
 // Route::get('/login', function () {
 //     return view('partials.v_landingpage');
 // });
-
-
 // Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
-
 // Route::post('/selected-username', [UsernameController::class, 'deleteall'])->name('livetable.delete_all');
 // Route::get('/selectedDelete', 'UsernameController@deleteAll')->name('livetable.delete_all');
-
 Auth::routes();
-
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin', 'auth'], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.homepage');
 });
-
 Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/customer_service', [CustomerServiceController::class, 'index'])->name('cs.homepage');
     Route::get('/livetable', [UsernameController::class, 'index']);
@@ -74,7 +66,19 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update/{id}', [UsernameController::class, 'update']);
     Route::get('/selected', [UsernameController::class, 'selected']);
     Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
+    Route::get('export', [UsernameController::class, 'export'])->name('export');
 
+    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
+    Route::get('/item_detail', [DetailCustomerController::class, 'itemDetail'])->name('item_detail');
+    Route::get('/item_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
+    Route::get('/add_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
+    Route::get('/store_detail', [DetailCustomerController::class, 'store'])->name('save_detail');
+    Route::get('/delete_detail/{id}', [DetailCustomerController::class, 'destroy']);
+    Route::get('/show_detail/{id}', [DetailCustomerController::class, 'show']);
+    Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
+    Route::get('/delete_all', [DetailCustomerController::class, 'deleteAll'])->name('deleteAll_detail');
+    Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
+    
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
     Route::get('/item_data_company', [CompanyController::class, 'item_data']);
@@ -86,8 +90,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_company', [CompanyController::class, 'deleteAll']);
     Route::get('/selected', [CompanyController::class, 'selected']);
     Route::get('/update_all/{id}', [CompanyController::class, 'updateall']);
-
-
     // pic
     Route::get('/pic', [PicController::class, 'index'])->name('pic');
     Route::get('/item_data_pic', [PicController::class, 'item_data']);
@@ -110,7 +112,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_seller', [SellerController::class, 'deleteAll']);
     Route::get('/selected', [SellerController::class, 'selected']);
     Route::get('/update_all/{id}', [SellerController::class, 'updateall']);
-
     Route::get('/GsmActive', [GsmActiveController::class, 'index'])->name('GsmActive');
     Route::get('/item_data_GsmActive', [GsmActiveController::class, 'item_data']);
     Route::get('/add_form_GsmActive', [GsmActiveController::class, 'add_form']);
@@ -132,6 +133,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_GsmTerminate', [GsmTerminateController::class, 'deleteAll']);
     Route::get('/selected', [GsmTerminateController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmTerminateController::class, 'updateall']);
+    Route::get('/dependent_terminate/{id}', [GsmTerminateController::class, 'dependentTerminate']);
+    Route::get('/show_company/{id}', [GsmTerminateController::class, 'showCompany']);
 
     //sensor
     Route::get('/sensor', [SensorController::class, 'index'])->name('sensor');
@@ -144,7 +147,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_sensor', [SensorController::class, 'deleteAll']);
     Route::get('/selected', [SensorController::class, 'selected']);
     Route::get('/update_all/{id}', [SensorController::class, 'updateall']);
-
     //Gps
     Route::get('/gps', [GpsController::class, 'index'])->name('gps');
     Route::get('/item_data_gps', [GpsController::class, 'item_data']);
@@ -156,9 +158,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_gps', [GpsController::class, 'deleteAll']);
     Route::get('/selected', [GpsController::class, 'selected']);
     Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
-
     //gsm pre active
-
     Route::get('/GsmPreActive', [GsmPreActiveController::class, 'index'])->name('GsmPreActive');
     Route::get('/item_data_GsmPreActive', [GsmPreActiveController::class, 'item_data']);
     Route::get('/add_form_GsmPreActive', [GsmPreActiveController::class, 'add_form']);
@@ -170,7 +170,5 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected', [GsmPreActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
 });
-
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

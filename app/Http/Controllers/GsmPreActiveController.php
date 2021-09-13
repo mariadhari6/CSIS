@@ -6,26 +6,17 @@ use App\Models\GsmPreActive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
-use Yajra\DataTables\Contracts\DataTable;
-
-
-
-
 
 class GsmPreActiveController extends Controller
 {
     public function index()
     {
-        return view('GsmPreActive.index');
-       
+        return view('MasterData.GsmPreActive.index');
     }
     public function add_form()
     {
         // $gsm_pre_active = GsmPreActive::orderBy('gsm_number', 'DESC')->get();
-
-        return view('GsmPreActive.add_form');
-        
-
+        return view('MasterData.GsmPreActive.add_form');
     }
 
     public function item_data()
@@ -33,7 +24,6 @@ class GsmPreActiveController extends Controller
         $GsmPreActive = GsmPreActive::orderBy('id', 'DESC')->get();
         return view('GsmPreActive.item_data')->with([
             'GsmPreActive' => $GsmPreActive
-
         ]);
     }
 
@@ -55,18 +45,9 @@ class GsmPreActiveController extends Controller
     {
 
         $GsmPreActive = GsmPreActive::findOrfail($id);
-        return view('GsmPreActive.edit_form')->with([
+        return view('MasterData.GsmPreActive.edit_form')->with([
             'GsmPreActive' => $GsmPreActive,
-        ]);
-    }
 
-
-    public function show($id)
-    {
-        
-        $gsm_pre_active =GsmPreActive ::findOrfail($id);
-        return view('GsmPreActive.edit_form')->with([
-            'GsmPreActive' => $gsm_pre_active,
         ]);
     }
 
@@ -89,11 +70,10 @@ class GsmPreActiveController extends Controller
         $data->save();
     }
 
-
     public function selected()
     {
         $GsmPreActive = GsmPreActive::all();
-        return view('GsmPreActive.selected')->with([
+        return view('MasterData.GsmPreActive.selected')->with([
             'GsmPreActive' => $GsmPreActive
         ]);
     }
@@ -115,7 +95,7 @@ class GsmPreActiveController extends Controller
     {
         if ($request->ajax()) {
             $ids = $request->input('id');
-            DB::table('GsmPreActives')->whereIn('id', $ids)->delete();
+            DB::table('gsm_pre_actives')->whereIn('id', $ids)->delete();
         }
     }
 

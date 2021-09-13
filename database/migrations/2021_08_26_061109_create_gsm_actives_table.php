@@ -15,9 +15,9 @@ class CreateGsmActivesTable extends Migration
     {
         Schema::create('gsm_actives', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gsm_pre_active_id')->constrained('gsm_pre_actives')->onDelete('cascade')->onUpdate('cascade');
             $table->date('request_date');
             $table->date('active_date');
+            $table->foreignId('gsm_pre_active_id')->constrained('gsm_pre_actives')->onDelete('cascade')->onUpdate('cascade');
             $table->string('status_active');
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('note');

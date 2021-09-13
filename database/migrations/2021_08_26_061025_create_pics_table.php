@@ -17,9 +17,9 @@ class CreatePicsTable extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade')->onUpdate('cascade');
             $table->string('pic_name');
+            $table->string('phone');
             $table->string('email');
             $table->string('position');
-            $table->string('phone');
             $table->date('date_of_birth');
             $table->timestamps();
         });

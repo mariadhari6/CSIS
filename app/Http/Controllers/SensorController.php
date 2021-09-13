@@ -13,12 +13,12 @@ class SensorController extends Controller
 {
     public function index()
     {
-        return view('sensor.index');
+        return view('MasterData.sensor.index');
     }
     public function add_form()
     {
         $sensor = Sensor::orderBy('sensor_name', 'DESC')->get();
-        return view('sensor.add_form')->with([
+        return view('MasterData.sensor.add_form')->with([
 
             'sensor' => $sensor,
         ]);
@@ -27,7 +27,7 @@ class SensorController extends Controller
     public function item_data()
     {
         $sensor = Sensor::orderBy('id', 'DESC')->get();
-        return view('sensor.item_data')->with([
+        return view('MasterData.sensor.item_data')->with([
             'sensor' => $sensor
         ]);
     }
@@ -49,7 +49,7 @@ class SensorController extends Controller
     {
 
         $sensor = Sensor::findOrfail($id);
-        return view('sensor.edit_form')->with([
+        return view('MasterData.sensor.edit_form')->with([
             'sensor' => $sensor,
 
         ]);
@@ -76,7 +76,7 @@ class SensorController extends Controller
     public function selected()
     {
         $sensor = Sensor::all();
-        return view('sensor.selected')->with([
+        return view('MasterData.sensor.selected')->with([
             'sensor' => $sensor
         ]);
     }

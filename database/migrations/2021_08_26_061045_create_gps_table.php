@@ -21,6 +21,7 @@ class CreateGpsTable extends Migration
             $table->date('waranty');
             $table->date('po_date');
             $table->string('status');
+            $table->string('status_ownership');
             $table->timestamps();
         });
     }

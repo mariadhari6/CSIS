@@ -11,12 +11,12 @@ class GpsController extends Controller
 {
     public function index()
     {
-        return view('Gps.index');
+        return view('MasterData.gps.index');
     }
     public function add_form()
     {
         $gps = Gps::orderBy('merk', 'DESC')->get();
-        return view('gps.add_form')->with([
+        return view('MasterData.gps.add_form')->with([
 
             'gps' => $gps,
         ]);
@@ -25,7 +25,7 @@ class GpsController extends Controller
     public function item_data()
     {
         $gps = Gps::orderBy('id', 'DESC')->get();
-        return view('gps.item_data')->with([
+        return view('MasterData.gps.item_data')->with([
             'gps' => $gps
         ]);
     }
@@ -39,6 +39,7 @@ class GpsController extends Controller
             'waranty'     =>  $request->waranty,
             'po_date'     =>  $request->po_date,
             'status'     =>  $request->status,
+            'status_ownership' => $request->status_ownership
         );
         GPS::insert($data);
     }
@@ -47,7 +48,7 @@ class GpsController extends Controller
     {
 
         $gps = Gps::findOrfail($id);
-        return view('gps.edit_form')->with([
+        return view('MasterData.gps.edit_form')->with([
             'gps' => $gps,
 
         ]);
@@ -74,7 +75,7 @@ class GpsController extends Controller
     public function selected()
     {
         $gps = Gps::all();
-        return view('gps.selected')->with([
+        return view('MasterData.gps.selected')->with([
             'gps' => $gps
         ]);
     }
@@ -88,6 +89,7 @@ class GpsController extends Controller
         $data->waranty = $request->waranty;
         $data->po_date = $request->po_date;
         $data->status = $request->status;
+        $data->status_ownership = $request->status_ownership;
         echo $id;
     }
 

@@ -12,12 +12,12 @@ class PicController extends Controller
 {
     public function index()
     {
-        return view('pic.index');
+        return view('MasterData.pic.index');
     }
     public function add_form()
     {
         $company = Company::orderBy('company_name', 'DESC')->get();
-        return view('pic.add_form')->with([
+        return view('MasterData.pic.add_form')->with([
             'company' => $company
         ]);
     }
@@ -25,7 +25,7 @@ class PicController extends Controller
     public function item_data()
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
-        return view('pic.item_data')->with([
+        return view('MasterData.pic.item_data')->with([
             'pic' => $pic
         ]);
     }
@@ -35,9 +35,9 @@ class PicController extends Controller
         $data = array(
             'company_id' => $request->company_id,
             'pic_name'   => $request->pic_name,
+            'phone'      => $request->phone,
             'email'      => $request->email,
             'position'   => $request->position,
-            'phone'      => $request->phone,
             'date_of_birth' => $request->date_of_birth
 
         );
@@ -48,7 +48,7 @@ class PicController extends Controller
     {
         $company = Company::orderBy('company_name', 'DESC')->get();
         $pic     = Pic::findOrfail($id);
-        return view('pic.edit_form')->with([
+        return view('MasterData.pic.edit_form')->with([
             'company' => $company,
             'pic'     => $pic
         ]);
@@ -65,9 +65,9 @@ class PicController extends Controller
         $data = Pic::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->pic_name = $request->pic_name;
+        $data->phone = $request->phone;
         $data->email = $request->email;
         $data->position = $request->position;
-        $data->phone = $request->phone;
         $data->date_of_birth = $request->date_of_birth;
         $data->save();
     }
@@ -75,7 +75,7 @@ class PicController extends Controller
     public function selected()
     {
         $pic = Pic::all();
-        return view('pic.selected')->with([
+        return view('MasterData.pic.selected')->with([
             'pic' => $pic
         ]);
     }
@@ -85,9 +85,9 @@ class PicController extends Controller
         $data = Pic::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->pic_name = $request->pic_name;
+        $data->phone = $request->phone;
         $data->email = $request->email;
         $data->position = $request->position;
-        $data->phone = $request->phone;
         $data->date_of_birth = $request->date_of_birth;
         echo $id;
     }

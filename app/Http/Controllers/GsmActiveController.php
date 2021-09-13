@@ -14,13 +14,13 @@ class GsmActiveController extends Controller
     //
     public function index()
     {
-        return view('GsmActive.index');
+        return view('MasterData.GsmActive.index');
     }
     public function add_form()
     {
         $company = Company::orderBy('company_name', 'DESC')->get();
         $GsmPreActive = GsmPreActive::orderBy('gsm_number', 'DESC')->get();
-        return view('GsmActive.add_form')->with([
+        return view('MasterData.GsmActive.add_form')->with([
             'company' => $company,
             'GsmPreActive' => $GsmPreActive
 
@@ -30,7 +30,7 @@ class GsmActiveController extends Controller
     public function item_data()
     {
         $GsmActive = GsmActive::orderBy('id', 'DESC')->get();
-        return view('GsmActive.item_data')->with([
+        return view('MasterData.GsmActive.item_data')->with([
             'GsmActive' => $GsmActive
         ]);
     }
@@ -38,9 +38,9 @@ class GsmActiveController extends Controller
     public function store(Request $request)
     {
         $data = array(
-            'gsm_pre_active_id' => $request->gsm_pre_active_id,
             'request_date'   => $request->request_date,
             'active_date'      => $request->active_date,
+            'gsm_pre_active_id' => $request->gsm_pre_active_id,
             'status_active'   => $request->status_active,
             'company_id'      => $request->company_id,
             'note' => $request->note
@@ -54,7 +54,7 @@ class GsmActiveController extends Controller
         $company = Company::orderBy('company_name', 'DESC')->get();
         $GsmPreActive = GsmPreActive::orderBy('gsm_number', 'DESC')->get();
         $GsmActive     = GsmActive::findOrfail($id);
-        return view('GsmActive.edit_form')->with([
+        return view('MasterData.GsmActive.edit_form')->with([
             'company' => $company,
             'GsmActive' => $GsmActive,
             'GsmPreActive' => $GsmPreActive
@@ -65,9 +65,9 @@ class GsmActiveController extends Controller
     public function update(Request $request, $id)
     {
         $data = GsmActive::findOrfail($id);
-        $data->gsm_pre_active_id = $request->gsm_pre_active_id;
         $data->request_date = $request->request_date;
         $data->active_date = $request->active_date;
+        $data->gsm_pre_active_id = $request->gsm_pre_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;
         $data->note = $request->note;
@@ -77,7 +77,7 @@ class GsmActiveController extends Controller
     public function selected()
     {
         $GsmActive = GsmActive::all();
-        return view('GsmActive.selected')->with([
+        return view('MasterData.GsmActive.selected')->with([
             'GsmActive' => $GsmActive
         ]);
     }
@@ -85,9 +85,9 @@ class GsmActiveController extends Controller
     public function updateall(Request $request, $id)
     {
         $data = GsmActive::findOrfail($id);
-        $data->gsm_pre_active_id = $request->gsm_pre_active_id;
         $data->request_date = $request->request_date;
         $data->active_date = $request->active_date;
+        $data->gsm_pre_active_id = $request->gsm_pre_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;
         $data->note = $request->note;
