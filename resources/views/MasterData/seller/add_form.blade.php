@@ -1,19 +1,26 @@
 <tr id="add_form">
     <td></td>
     <td>
-        <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
+        <i class="fas fa-check add" id="add" onclick="store()"></i>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
     <td> 
-        <div class="input-div"><input type="text" class="input" id="seller_name" placeholder="Seller name">
-        </td>
-    <td> 
-        <div class="input-div"><input type="text" class="input" id="seller_code" placeholder="Seller code">
+        <div class="input-div">
+            <input type="text" class="input" id="seller_name" placeholder="Seller name">
+        </div>
     </td>
     <td> 
-        <div class="input-div"><input type="text" class="input" id="no_agreement_letter" placeholder="No_agreement_later">
+        <div class="input-div">
+            <input type="text" class="input" id="seller_code" placeholder="Seller code">
+        </div>
+    </td>
+    <td> 
+        <div class="input-div">
+            <input type="text" class="input" id="no_agreement_letter" placeholder="No_agreement_later">
+        </div>
     </td>
     <td>
-        <select class="form-select" id="status" aria-label=".form-select-lg example">
+        <select class="form-control" id="status" aria-label=".form-select-lg example">
             <option selected>Pilih status</option>
             <option value="Active">Active</option>
             <option value="In Active">In Active</option>

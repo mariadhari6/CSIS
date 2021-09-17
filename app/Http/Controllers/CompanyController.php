@@ -14,11 +14,11 @@ class CompanyController extends Controller
     {
         return view('MasterData.company.index');
     }
+
     public function add_form()
     {
         $seller = Seller::orderBy('seller_name', 'DESC')->get();
         return view('MasterData.company.add_form')->with([
-
             'seller' => $seller,
         ]);
     }
@@ -54,7 +54,7 @@ class CompanyController extends Controller
         Company::insert($data);
     }
 
-    public function show($id)
+    public function edit_form($id)
     {
         $seller = Seller::orderBy('seller_name', 'DESC')->get();
         $company = Company::findOrfail($id);
@@ -126,17 +126,16 @@ class CompanyController extends Controller
     public function updateSelected(Request $request)
     {
         Company::where('item_type_id', '=', 1)
-            ->update(['colour' => 'black']);
+                ->update(['colour' => 'black']);
     }
 
-    // public function dependentCompany($id)
-    // {
-    //     $data = DB::table("sellers")
-    //         ->join('companies', 'sellers.id', '=', 'companies.seller_id')
-    //         ->where("id", $id)
-    //         ->pluck('seler ', 'id');
-    //     return json_encode($data);
-    // }
+    public function dependentCompany($id)
+    {
+        $data = DB::table("sellers")
+                    ->where("id", $id)
+                    ->pluck('no_agreement_letter', 'id');
+        return json_encode($data);
+    }
 
 
     // public function showAgreement($id)

@@ -1,8 +1,8 @@
 @extends('layouts.v_main')
-@section('title','Seller')
+@section('title','CSIS | Seller')
 
 @section('content')
-
+<h4 class="page-title">Seller</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -251,7 +251,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_seller') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -325,15 +325,8 @@
           });
         }
 
-        //--------Proses Batal--------
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
-            $(".add").show("fast");
-            $(".edit_all").show("fast");
-            $(".delete_all").show("fast");
-            read();
-        }
+
+       
   </script>
 
 

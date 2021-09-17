@@ -15,7 +15,7 @@
             </div>
         </div>
         <ul class="nav">
-            <li class="nav-item active">
+            <li class="nav-item {{ request()->is('customer_service') ? ' active' : ''}}">
                 <a href="{{url('/customer_service')}}">
                     <i class="fas fa-home"></i>
                     <p>Home</p>
@@ -23,7 +23,10 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item 
+                {{ request()->is('seller') ? ' active' : ''}}
+                {{ request()->is('Company') ? ' active' : ''}}
+            ">
                 <a class="" data-toggle="collapse" href="#masterData" aria-expanded="true">
                     <i class="fas fa-table"></i>
                     <p>Master Data</p>

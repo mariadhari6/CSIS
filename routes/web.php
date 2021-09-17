@@ -80,27 +80,20 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
     Route::get('export', [UsernameController::class, 'export'])->name('export');
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7cd2d07c2ab3cbf0c5f32627c5faf59078754169
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
     Route::get('/item_data_company', [CompanyController::class, 'item_data']);
     Route::get('/add_form_company', [CompanyController::class, 'add_form']);
     Route::get('/store_company', [CompanyController::class, 'store']);
     Route::get('/destroy_company/{id}', [CompanyController::class, 'destroy']);
-    Route::get('/show_company/{id}', [CompanyController::class, 'show']);
+    Route::get('/edit_form_company/{id}', [CompanyController::class, 'edit_form']);
     Route::get('/update_company/{id}', [CompanyController::class, 'update']);
     Route::get('/selectedDelete_company', [CompanyController::class, 'deleteAll']);
-    Route::get('/selected', [CompanyController::class, 'selected']);
+    Route::get('/selected_company', [CompanyController::class, 'selected']);
     Route::get('/update_all/{id}', [CompanyController::class, 'updateall']);
-<<<<<<< HEAD
-
-=======
+    //
     Route::get('/dependent_company/{id}', [CompanyController::class, 'dependentCompany']);
     Route::get('/show_no_agreement/{id}', [CompanyController::class, 'showAgreement']);
->>>>>>> 7cd2d07c2ab3cbf0c5f32627c5faf59078754169
 
     // pic
     Route::get('/pic', [PicController::class, 'index'])->name('pic');
@@ -123,7 +116,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_seller/{id}', [SellerController::class, 'edit_form']);
     Route::get('/update_seller/{id}', [SellerController::class, 'update']);
     Route::get('/selectedDelete_seller', [SellerController::class, 'deleteAll']);
-    Route::get('/selected', [SellerController::class, 'selected']);
+    Route::get('/selected_seller', [SellerController::class, 'selected']);
     Route::get('/update_all/{id}', [SellerController::class, 'updateall']);
 
     Route::get('/GsmActive', [GsmActiveController::class, 'index'])->name('GsmActive');
@@ -175,10 +168,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
 
     //gsm pre active
-<<<<<<< HEAD
-=======
-
->>>>>>> 7cd2d07c2ab3cbf0c5f32627c5faf59078754169
     Route::get('/GsmPreActive', [GsmPreActiveController::class, 'index'])->name('GsmPreActive');
     Route::get('/item_data_GsmPreActive', [GsmPreActiveController::class, 'item_data']);
     Route::get('/add_form_GsmPreActive', [GsmPreActiveController::class, 'add_form']);
@@ -190,12 +179,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected', [GsmPreActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
 
-<<<<<<< HEAD
     //Request and Complent Customer
     Route::get('/request_complent_customer', [RequestComplentCustomerController::class, 'index'])->name('request_complent_customer');
     Route::get('/item_data_reqcomp_cust', [RequestComplentCustomerController::class, 'item_data'])->name('item_data_reqcomp_cust');
 
-=======
     //detail customer
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('Detail customer');
     Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data']);
@@ -219,7 +206,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
     Route::get('/selected', [PemasanganMutasiGpsController::class, 'selected']);
     Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
->>>>>>> 7cd2d07c2ab3cbf0c5f32627c5faf59078754169
 });
 
 
