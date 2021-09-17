@@ -25,4 +25,9 @@ class Pic extends Model
     {
         return $this->hasMany(RequestComplaintCustomer::class);
     }
+
+    public function pemasanganMutasiGps()
+    {
+        return $this->hasMany(PemasanganMutasiGps::class);
+    }
 }

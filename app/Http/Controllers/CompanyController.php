@@ -128,4 +128,23 @@ class CompanyController extends Controller
         Company::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
     }
+
+    // public function dependentCompany($id)
+    // {
+    //     $data = DB::table("sellers")
+    //         ->join('companies', 'sellers.id', '=', 'companies.seller_id')
+    //         ->where("id", $id)
+    //         ->pluck('seler ', 'id');
+    //     return json_encode($data);
+    // }
+
+
+    // public function showAgreement($id)
+    // {
+    //     $data = DB::table("sellers")
+    //         ->join('companies', 'sellers.no_agreement_letter', '=', 'companies.no_agreement_letter_id')
+    //         // ->where("id", $id)
+    //         ->pluck('no_agreement_letter', 'id');
+    //     return json_encode($data);
+    // }
 }

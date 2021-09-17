@@ -10,9 +10,11 @@ use App\Http\Controllers\GpsController;
 use App\Http\Controllers\GsmActiveController;
 use App\Http\Controllers\GsmPreActiveController;
 use App\Http\Controllers\GsmTerminateController;
+use App\Http\Controllers\PemasanganMutasiGpsController;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
+use App\Http\Controllers\CustomerServiceController;
 
 use App\Models\DetailCustomer;
 use App\Models\Username;
@@ -94,7 +96,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_company', [CompanyController::class, 'deleteAll']);
     Route::get('/selected', [CompanyController::class, 'selected']);
     Route::get('/update_all/{id}', [CompanyController::class, 'updateall']);
-
+    Route::get('/dependent_company/{id}', [CompanyController::class, 'dependentCompany']);
+    Route::get('/show_no_agreement/{id}', [CompanyController::class, 'showAgreement']);
 
     // pic
     Route::get('/pic', [PicController::class, 'index'])->name('pic');
@@ -179,6 +182,30 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_GsmPreActive', [GsmPreActiveController::class, 'deleteAll']);
     Route::get('/selected', [GsmPreActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
+
+    //detail customer
+    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('Detail customer');
+    Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data']);
+    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form']);
+    Route::get('/store_detail', [DetailCustomerController::class, 'store']);
+    Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
+    Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
+    Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
+    Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
+    Route::get('/selected', [DetailCustomerController::class, 'selected']);
+    Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
+    // Pemasangan Mutasi GPS
+
+    Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
+    Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
+    Route::get('/add_form_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'add_form']);
+    Route::get('/store_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'store']);
+    Route::get('/destroy_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'destroy']);
+    Route::get('/show_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'edit_form']);
+    Route::get('/update_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'update']);
+    Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
+    Route::get('/selected', [PemasanganMutasiGpsController::class, 'selected']);
+    Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
 });
 
 

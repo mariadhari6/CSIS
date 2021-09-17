@@ -9,7 +9,7 @@ class RequestComplaintCustomer extends Model
 {
     use HasFactory;
 
-    protected $table = 'companies';
+    protected $table = 'request_complaint_customers';
 
     protected $fillable = [
         'company', 'internal_external', 'pic', 'vehicle', 'waktu_info', 'task', 'platform',
@@ -23,5 +23,9 @@ class RequestComplaintCustomer extends Model
     public function picRequest()
     {
         return $this->belongsTo(Pic::class);
+    }
+    public function pemasanganMutasiGps()
+    {
+        return $this->hasOne(PemasanganMutasiGps::class);
     }
 }

@@ -15,7 +15,7 @@ class CreatePemasanganMutasiGpsTable extends Migration
     {
         Schema::create('pemasangan_mutasi_gps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('company_id')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('tanggal')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('kendaraan_awal')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('imei')->constrained('detail_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
@@ -24,7 +24,7 @@ class CreatePemasanganMutasiGpsTable extends Migration
             $table->foreignId('jenis_pekerjaan')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('equipment_terpakai_gps')->constrained('gps')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('equipment_terpakai_sensor')->constrained('sensors')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('teknisi')->constrained('pics')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->string('teknisi');
             $table->string('uang_transportasi');
             $table->string('type_visit');
             $table->string('note');

@@ -14,4 +14,8 @@ class Sensor extends Model
     protected $fillable = [
         'sensor_name', 'merk_sensor', 'serial_number', 'rab_number', 'waranty', 'status'
     ];
+    public function pemasanganMutasiGps()
+    {
+        return $this->hasOne(PemasanganMutasiGps::class);
+    }
 }

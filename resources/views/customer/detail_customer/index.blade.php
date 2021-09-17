@@ -16,8 +16,8 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-          <table class="table table-responsive" class="detailcustomer" id="detailcustomer">
-              <div class="table-responsive">
+          <table class="table table-responsive" class="table_id" id="table_id">
+
             <thead>
               <tr>
                 <th width="10px">
@@ -54,7 +54,7 @@
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
-            </div>
+
           </table>
       </div>
     </div>
@@ -72,19 +72,19 @@
 
     function read(){
 
-      $.get("{{ route('item_detail')}}", {}, function(data, status) {
-        $('#detailcustomer').DataTable().destroy();
-        $('#detailcustomer').find("#item_data").html(data);
-        $('#detailcustomer').dataTable( {
+      $.get("{{ url('item_data_detail')}}", {}, function(data, status) {
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             } );
-        $('#detailcustomer').DataTable().draw();
+        $('#table_id').DataTable().draw();
       });
     }
 
     $('.add').click(function() {
-        $.get("{{ route('add_detail')}}", {}, function(data, status) {
-          $('#detailcustomer tbody').prepend(data);
+        $.get("{{ url('add_form_detail')}}", {}, function(data, status) {
+          $('#table_id tbody').prepend(data);
 
         });
       });
@@ -117,11 +117,11 @@
 
         $.ajax({
             type: "get",
-            url: "{{ route('save_detail')}}",
+            url: "{{ url('store_detail')}}",
             data: {
                 CompanyId           : CompanyId,
                 LicencePlate        : LicencePlate,
-                VihecleType         : VihecleType,
+                VihecleType        : VihecleType,
                 PoNumber            : PoNumber,
                 PoDate              : PoDate,
                 StatusPo            : StatusPo,
@@ -171,7 +171,7 @@
               return new Promise(function(resolve) {
                 $.ajax({
                     type: "get",
-                    url: "{{ url('delete_detail') }}/" + id,
+                    url: "{{ url('destroy_detail') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
                         // swal("Done!","It was succesfully deleted!","success");
@@ -224,77 +224,51 @@
 
      function update(id) {
 
-            var FirstName = $("#FirstName").val();
-            var LastName = $("#LastName").val();
-            var id = id;
-            $.ajax({
-                type: "get",
-                url: "{{ url('update') }}/"+id,
-                data: {
-                FirstName: FirstName,
-                LastName: LastName
-                },
-                success: function(data) {
-                swal({
-                    type: 'success',
-                    title: ' Data Updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).catch(function(timeout) { })
-                read()
-
-                }
-
-
-            });
-        }
-
-        function update(id) {
-            var CompanyId           = $("#CompanyId").val();
-            var LicencePlate        = $("#LicencePlate").val();
-            var VihecleType         = $("#VihecleType").val();
-            var PoNumber            = $("#PoNumber").val();
-            var PoDate              = $("#PoDate").val();
-            var StatusPo            = $("#StatusPo").val();
-            var Imei                = $("#Imei").val();
-            var Merk                = $("#Merk").val();
-            var Type                = $("#Type").val();
-            var GSM                 = $("#GSM").val();
-            var Provider            = $("#Provider").val();
-            var SerialNumberSensor  = $("#SerialNumberSensor").val();
-            var NameSensor          = $("#NameSensor").val();
-            var MerkSensor          = $("#MerkSensor").val();
-            var PoolName            = $("#PoolName").val();
-            var PoolLocation        = $("#PoolLocation").val();
-            var Waranty             = $("#Waranty").val();
-            var StatusLayanan       = $("#StatusLayanan").val();
-            var TanggalPasang       = $("#TanggalPasang").val();
-            var TanggalNonAktif     = $("#TanggalNonAktif").val();
+              var CompanyId           = $("#CompanyId").val();
+        var LicencePlate        = $("#LicencePlate").val();
+        var VihecleType         = $("#VihecleType").val();
+        var PoNumber            = $("#PoNumber").val();
+        var PoDate              = $("#PoDate").val();
+        var StatusPo            = $("#StatusPo").val();
+        var Imei                = $("#Imei").val();
+        var Merk                = $("#Merk").val();
+        var Type                = $("#Type").val();
+        var GSM                 = $("#GSM").val();
+        var Provider            = $("#Provider").val();
+        var SerialNumberSensor  = $("#SerialNumberSensor").val();
+        var NameSensor          = $("#NameSensor").val();
+        var MerkSensor          = $("#MerkSensor").val();
+        var PoolName            = $("#PoolName").val();
+        var PoolLocation        = $("#PoolLocation").val();
+        var Waranty             = $("#Waranty").val();
+        var StatusLayanan       = $("#StatusLayanan").val();
+        var TanggalPasang       = $("#TanggalPasang").val();
+        var TanggalNonAktif     = $("#TanggalNonAktif").val();
             var id = id;
             $.ajax({
                 type: "get",
                 url: "{{ url('update_detail') }}/"+id,
                 data: {
-                    CompanyId           : CompanyId,
-                    LicencePlate        : LicencePlate,
-                    VihecleType         : VihecleType,
-                    PoNumber            : PoNumber,
-                    PoDate              : PoDate,
-                    StatusPo            : StatusPo,
-                    Imei                : Imei,
-                    Merk                : Merk,
-                    Type                : Type,
-                    GSM                 : GSM,
-                    Provider            : Provider,
-                    SerialNumberSensor  : SerialNumberSensor,
-                    NameSensor          : NameSensor,
-                    MerkSensor          : MerkSensor,
-                    PoolName            : PoolName,
-                    PoolLocation        : PoolLocation,
-                    Waranty             : Waranty,
-                    StatusLayanan       : StatusLayanan,
-                    TanggalPasang       : TanggalPasang,
-                    TanggalNonAktif     : TanggalNonAktif
+                CompanyId           : CompanyId,
+                LicencePlate        : LicencePlate,
+                VihecleType         : VihecleType,
+                PoNumber            : PoNumber,
+                PoDate              : PoDate,
+                StatusPo            : StatusPo,
+                Imei                : Imei,
+                Merk                : Merk,
+                Type                : Type,
+                GSM                 : GSM,
+                Provider            : Provider,
+                SerialNumberSensor  : SerialNumberSensor,
+                NameSensor          : NameSensor,
+                MerkSensor          : MerkSensor,
+                PoolName            : PoolName,
+                PoolLocation        : PoolLocation,
+                Waranty             : Waranty,
+                StatusLayanan       : StatusLayanan,
+                TanggalPasang       : TanggalPasang,
+                TanggalNonAktif     : TanggalNonAktif
                 },
                 success: function(data) {
                 swal({
@@ -310,6 +284,8 @@
 
             });
         }
+
+
 
         $('#master').on('click', function(e) {
           if($(this).is(':checked',true) ){
@@ -348,7 +324,7 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ route('deleteAll_detail') }}",
+                            url: "{{ url('selectedDelete_detail') }}",
                             method: "GET",
                             data: {
                                 id: allVals,
@@ -438,91 +414,102 @@
         });
 
 
-        // function updateSelected() {
+        function updateSelected() {
 
-        //     var allVals = [];
-        //     $(".task-select:checked").each(function() {
-        //         allVals.push($(this).attr("id"));
-        //     });
+            var allVals = [];
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+            });
 
-        //     swal({
-        //         title: "Are you sure?",
-        //         text: "Do you want to do an update?",
-        //         type: "info",
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#00FF00',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes Update',
-        //         showLoaderOnConfirm: true,
-        //     }).then((willDelete) => {
-        //         $.each(allVals, function(index, value){
-        //             var CompanyId           = $(".CompanyId-"+ value).val();
-        //             var LicencePlate        = $(".LicencePlate-"+ value).val();
-        //             var VihecleType         = $(".VihecleType-"+ value).val();
-        //             var PoNumber            = $(".PoNumber-"+ value).val();
-        //             var PoDate              = $(".PoDate-"+ value).val();
-        //             var StatusPo            = $(".StatusPo-"+ value).val();
-        //             var Imei                = $(".Imei-"+ value).val();
-        //             var Merk                = $(".Merk-"+ value).val();
-        //             var Type                = $(".Type-"+ value).val();
-        //             var GSM                 = $(".GSM-"+ value).val();
-        //             var Provider            = $(".Provider-"+ value).val();
-        //             var SerialNumberSensor  = $(".SerialNumberSensor-"+ value).val();
-        //             var NameSensor          = $(".NameSensor-"+ value).val();
-        //             var MerkSensor          = $(".MerkSensor-"+ value).val();
-        //             var PoolName            = $(".PoolName-"+ value).val();
-        //             var PoolLocation        = $(".PoolLocation-"+ value).val();
-        //             var Waranty             = $(".Waranty-"+ value).val();
-        //             var StatusLayanan       = $(".StatusLayanan-"+ value).val();
-        //             var TanggalPasang       = $(".TanggalPasang-"+ value).val();
-        //             var TanggalNonAktif     = $(".TanggalNonAktif-"+ value).val();
-        //             $.ajax({
-        //                 type: "get",
-        //                 url: "{{ url('update_detail') }}/"+value,
-        //                 data: {
-        //                     CompanyId           : CompanyId,
-        //                     LicencePlate        : LicencePlate,
-        //                     VihecleType         : VihecleType,
-        //                     PoNumber            : PoNumber,
-        //                     PoDate              : PoDate,
-        //                     StatusPo            : StatusPo,
-        //                     Imei                : Imei,
-        //                     Merk                : Merk,
-        //                     Type                : Type,
-        //                     GSM                 : GSM,
-        //                     Provider            : Provider,
-        //                     SerialNumberSensor  : SerialNumberSensor,
-        //                     NameSensor          : NameSensor,
-        //                     MerkSensor          : MerkSensor,
-        //                     PoolName            : PoolName,
-        //                     PoolLocation        : PoolLocation,
-        //                     Waranty             : Waranty,
-        //                     StatusLayanan       : StatusLayanan,
-        //                     TanggalPasang       : TanggalPasang,
-        //                     TanggalNonAktif     : TanggalNonAktif
-        //                 },
-        //                 success: function(data) {
-        //                         // swal("Done!","It was succesfully Update","success");
-        //                         swal({
-        //                             type: 'success',
-        //                             title: 'The selected data has been updated',
-        //                             showConfirmButton: false,
-        //                             timer: 1500
-        //                         }).catch(function(timeout) { })
-        //                         $(".save").hide("fast");
-        //                         $(".cancel").hide("fast");
-        //                         $(".add").show("fast");
-        //                         $(".edit_all").show("fast");
-        //                         $(".delete_all").show("fast");
-        //                         read();
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to do an update?",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: '#00FF00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Update',
+                showLoaderOnConfirm: true,
+            }).then((willDelete) => {
+                $.each(allVals, function(index, value){
+                    var CompanyId           = $(".CompanyId-"+ value).val();
+                    var LicencePlate        = $(".LicencePlate-"+ value).val();
+                    var VihecleType         = $(".VihecleType-"+ value).val();
+                    var PoNumber            = $(".PoNumber-"+ value).val();
+                    var PoDate              = $(".PoDate-"+ value).val();
+                    var StatusPo            = $(".StatusPo-"+ value).val();
+                    var Imei                = $(".Imei-"+ value).val();
+                    var Merk                = $(".Merk-"+ value).val();
+                    var Type                = $(".Type-"+ value).val();
+                    var GSM                 = $(".GSM-"+ value).val();
+                    var Provider            = $(".Provider-"+ value).val();
+                    var SerialNumberSensor  = $(".SerialNumberSensor-"+ value).val();
+                    var NameSensor          = $(".NameSensor-"+ value).val();
+                    var MerkSensor          = $(".MerkSensor-"+ value).val();
+                    var PoolName            = $(".PoolName-"+ value).val();
+                    var PoolLocation        = $(".PoolLocation-"+ value).val();
+                    var Waranty             = $(".Waranty-"+ value).val();
+                    var StatusLayanan       = $(".StatusLayanan-"+ value).val();
+                    var TanggalPasang       = $(".TanggalPasang-"+ value).val();
+                    var TanggalNonAktif     = $(".TanggalNonAktif-"+ value).val();
+                    $.ajax({
+                        type: "get",
+                        url: "{{ url('update_detail') }}/"+value,
+                        data: {
+                            CompanyId           : CompanyId,
+                            LicencePlate        : LicencePlate,
+                            VihecleType         : VihecleType,
+                            PoNumber            : PoNumber,
+                            PoDate              : PoDate,
+                            StatusPo            : StatusPo,
+                            Imei                : Imei,
+                            Merk                : Merk,
+                            Type                : Type,
+                            GSM                 : GSM,
+                            Provider            : Provider,
+                            SerialNumberSensor  : SerialNumberSensor,
+                            NameSensor          : NameSensor,
+                            MerkSensor          : MerkSensor,
+                            PoolName            : PoolName,
+                            PoolLocation        : PoolLocation,
+                            Waranty             : Waranty,
+                            StatusLayanan       : StatusLayanan,
+                            TanggalPasang       : TanggalPasang,
+                            TanggalNonAktif     : TanggalNonAktif
+                        },
+                        success: function(data) {
+                                // swal("Done!","It was succesfully Update","success");
+                                swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).catch(function(timeout) { })
+                                $(".save").hide("fast");
+                                $(".cancel").hide("fast");
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                read();
 
-        //                     }
-        //             });
-        //         });
+                            }
+                    });
+                });
 
-        //     });
+            });
 
-        // }
+        }
+
+        //--------Proses Batal--------
+         function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
+            }
+
 
 
 

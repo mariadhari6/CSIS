@@ -32,4 +32,24 @@ class DetailCustomer extends Model
         'tanggal_pasang',
         'tanggal_non_aktif'
     ];
+    public function pemasanganMutasiGps()
+    {
+        return $this->hasOne(PemasanganMutasiGps::class);
+    }
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+    public function gps()
+    {
+        return $this->belongsTo(Gps::class);
+    }
+    public function sensor()
+    {
+        return $this->belongsTo(Sensor::class);
+    }
+    public function gsmActive()
+    {
+        return $this->belongsTo(GsmActive::class);
+    }
 }

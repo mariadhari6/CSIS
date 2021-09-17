@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\DetailCustomer;
 
 use Illuminate\Http\Request;
@@ -21,8 +22,8 @@ class DetailCustomerController extends Controller
 
     public function add_form()
     {
-
-        return view('customer.detail_customer.add_form');
+        $company = Company::orderBy('id', 'DESC')->get();
+        return view('customer.detail_customer.add_form', compact('company'));
     }
 
     public function store(Request $request)
@@ -58,7 +59,7 @@ class DetailCustomerController extends Controller
         $data->delete();
     }
 
-    public function show($id)
+    public function edit_form($id)
     {
         $details = DetailCustomer::findOrfail($id);
         return view('customer.detail_customer.edit_form', compact('details'));

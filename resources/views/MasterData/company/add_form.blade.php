@@ -5,6 +5,7 @@
     <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
     <td> <div class="input-div"><input type="text" class="input" id="company_name" placeholder="Company Name" required></i></td>
     <td><select class="form-control" id="seller_id" name="seller_id">
+    <option value="">----Pilih ----</option>
        @foreach ($seller as $sellers)
         <option value="{{ $sellers->id }}" {{ old('seller_id') == $sellers->id ? 'selected':'' }}>{{ $sellers->seller_name }}</option>
 
@@ -20,7 +21,7 @@
        @foreach ($seller as $sellers)
         <option value="{{ $sellers->id }}" {{ old('no_agreement_letter_id') == $sellers->id ? 'selected':'' }}>{{ $sellers->no_agreement_letter }}</option>
 
-          {{-- <option value="{{ $sellers->id }}">{{ $sellers->seller_name}}</option> --}}
+
        @endforeach
     </select></i></td>
    <td><select class="form-control" id="status" name="status">
@@ -30,6 +31,44 @@
     <option value="Trial">Trial</option>
     <option value="Register">Register</option>
     </select></i></td>
+
+      {{-- <script type="text/javascript">
+   $(document).ready(function() {
+       $('select[name="seller_id"]').on('change', function() {
+           var stateID = $(this).val();
+           if(stateID) {
+               $.ajax({
+                   url: '/dependent_company/'+stateID,
+                   method: "GET",
+                   dataType: "json",
+                   success:function(data) {
+                       $('select[name="no_agreement_letter_id"]').empty();
+                       $.each(data, function(key, value) {
+                           //------///
+                         var compID = value;
+                           $.ajax({
+                              url: '/show_no_agreement/'+compID,
+                              method: "GET",
+                              dataType: "json",
+                              success:function(data) {
+                                 $('select[name="no_agreement_letter_id"]').empty();
+                                 $.each(data, function(key, value) {
+                                       //------///
+                                       //---///
+                                 $('select[name="no_agreement_letter_id"]').append('<option value="'+ key +'">'+ value +'</option>');
+                                 });
+                              }
+                           });
+                           //---///
+                       });
+                   }
+               });
+           }else{
+               $('select[name="no_agreement_letter_id"]').empty();
+           }
+       });
+   });
+</script> --}}
 
 </tr>
 

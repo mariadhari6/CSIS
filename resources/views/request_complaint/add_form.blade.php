@@ -14,15 +14,20 @@
     <option value="Eksternal Request">Eksternal Request</option>
     <option value="Eksternal Complain">Eksternal Complain</option>
     </select></i></td>
-    {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}
-    <td> <div class="input-div"><input type="date" class="input" id="request_date" placeholder="Request Date" rows=""></i></td>
-    <td> <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active_date"></i></td>
-     <td><select class="form-control" id="gsm_pre_active_id" name="gsm_pre_active_id">
+    <td><select class="form-control" id="gsm_pre_active_id" name="gsm_pre_active_id">
        @foreach ($GsmPreActive as $GsmPreActives)
         <option value="{{ $GsmPreActives->id }}" {{ old('gsm_pre_active_id') == $GsmPreActives->id ? 'selected':'' }}>{{ $GsmPreActives->gsm_number }}</option>
 
        @endforeach
+    </select></i></td>
+    <td> <div class="input-div"><input type="date" class="input" id="request_date" placeholder="Request Date" rows=""></i></td>
+    <td> <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active_date"></i></td>
 
+    <td><select class="form-control" id="status_active" id="status_active" aria-label=".form-select-lg example">
+    <option selected>Pilih status</option>
+    <option value="Active">Active</option>
+    <option value="In Active">In Active</option>
+    </select></i></td>
 
     <td><select class="form-control" id="company_id" name="company_id">
        @foreach ($company as $companys)

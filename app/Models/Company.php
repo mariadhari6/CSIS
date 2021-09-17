@@ -35,4 +35,12 @@ class Company extends Model
     {
         return $this->hasMany(RequestComplaintCustomer::class);
     }
+    public function details()
+    {
+        return $this->hasMany(DetailCustomer::class);
+    }
+    public function pemasanganMutasiGps()
+    {
+        return $this->hasMany(PemasanganMutasiGps::class);
+    }
 }

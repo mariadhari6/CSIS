@@ -29,4 +29,9 @@ class GsmActive extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function detailCustomer()
+    {
+        return $this->hasMany(DetailCustomer::class);
+    }
 }

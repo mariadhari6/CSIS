@@ -13,4 +13,13 @@ class Gps extends Model
     protected $fillable = [
         'merk', 'type', 'imei', 'waranty', 'po_date', 'status', 'status_ownership'
     ];
+
+    public function pemasanganMutasiGps()
+    {
+        return $this->hasOne(PemasanganMutasiGps::class);
+    }
+    public function detailCustomer()
+    {
+        return $this->hasMany(DetailCustomer::class);
+    }
 }

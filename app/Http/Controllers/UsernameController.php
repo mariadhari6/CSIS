@@ -98,7 +98,6 @@ class UsernameController extends Controller
         }
     }
 
-<<<<<<< HEAD
     // public function index()
     // {
 
@@ -214,41 +213,6 @@ class UsernameController extends Controller
     //         echo '<div class="alert alert-success">Data Updated</div>';
     //     }
     // }
-=======
-
-    public function deleteAll(Request $request)
-    {
-            $ids = $request->input('id');
-            $data = Username::WhereIn('id', $ids);
-            $data->delete();
-    }
-
-
-    public function datatable(Request $request)
-    {
-        if ($request->ajax()) {
-
-            return DataTables::of(Username::all())->make(true);
-        }
-    }
-
-    public function selected()
-    {
-        $usernames = Username::all();
-        return view('livetable.selected')->with([
-            'usernames' => $usernames
-        ]);
-    }
-
-    public function updateall(Request $request, $id)
-    {
-        $data = Username::findOrfail($id);
-        $data->FirstName = $request->FirstName;
-        $data->LastName = $request->LastName;
-
-        echo $id;
-    }
->>>>>>> 784b498cf83f37e97e5281cab8281f088ca92032
 
     public function updateSelected(Request $request)
     {
