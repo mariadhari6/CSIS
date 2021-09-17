@@ -152,7 +152,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_sensor/{id}', [SensorController::class, 'edit_form']);
     Route::get('/update_sensor/{id}', [SensorController::class, 'update']);
     Route::get('/selectedDelete_sensor', [SensorController::class, 'deleteAll']);
-    Route::get('/selected', [SensorController::class, 'selected']);
+    Route::get('/selected_sensor', [SensorController::class, 'selected']);
     Route::get('/update_all/{id}', [SensorController::class, 'updateall']);
 
     //Gps

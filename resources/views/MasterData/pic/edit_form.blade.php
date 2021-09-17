@@ -5,9 +5,12 @@
     </td>
     <td>
         <select class="form-control company_id-{{$pic->id}}" id="company_id" name="company_id">
-        @foreach ($company as $companys)
-            <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
+        <option value="{{ $pic->company->id }}">{{ $pic->company->company_name }}</option>
+
+        @foreach ($company as $item)
+        <option value="{{ $item->id }}">{{ $item->company_name }}</option>
         @endforeach
+
         </select></i>
     </td>
     <td>
