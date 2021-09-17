@@ -3,8 +3,8 @@
     <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
 </td>
 <td>
-    <select class="select" id="CompanyId" class="input CompanyId-{{ $details->id }}">
-        <option  value="{{ $details->company_id }}">{{ $details->company_id }}</option>
+    <select class="select CompanyId-{{ $details->id }}" id="CompanyId">
+        <option value="{{ $details->company_id }}" class="input CompanyId-{{ $details->id }}">{{ $details->company_id }}</option>
         <option value='Islam'>Islam</option>
         <option value='Kristen'>Kristen</option>
         <option value='Katholik'>Katholik</option>
@@ -13,8 +13,8 @@
     </select>
 </td>
 <td>
-    <select class="select" id="LicencePlate" class="input LicencePlate-{{ $details->id }}">
-        <option  value="{{ $details->licence_plate }}">{{ $details->licence_plate }}</option>
+    <select class="select LicencePlate-{{ $details->id }}" id="LicencePlate">
+        <option  value="{{ $details->licence_plate }}" class="input LicencePlate-{{ $details->id }}">{{ $details->licence_plate }}</option>
         <option value='Kristen' >Kristen</option>
         <option value='katholik'>Katholik</option>
         <option value='Hindu'>Hindu</option>

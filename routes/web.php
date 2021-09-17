@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\UsernameController;
 use App\Http\Controllers\DetailCustomerController;
+use App\Http\Controllers\SummaryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerServiceController;
@@ -81,6 +82,11 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
     Route::get('/delete_all', [DetailCustomerController::class, 'deleteAll'])->name('deleteAll_detail');
     Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
+
+
+    Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
+    Route::get('/item_summary', [SummaryController::class, 'item_data'])->name('item_summary');
+    Route::get('/add_summary', [DetailCustomerController::class, 'add_form'])->name('add_summary');
 
 
 });

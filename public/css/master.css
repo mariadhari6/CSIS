@@ -113,6 +113,22 @@
 
 }
 
+/* tabel summary */
+
+
+#summary {
+
+    position: relative;
+    bottom: 0px;
+}
+
+
+#summary tbody tr td {
+    text-align: center;
+
+}
+
+
 .list{
     min-width: 250px;
     font-size: 15px;
