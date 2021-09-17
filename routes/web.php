@@ -176,7 +176,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_GsmPreActive/{id}', [GsmPreActiveController::class, 'edit_form']);
     Route::get('/update_GsmPreActive/{id}', [GsmPreActiveController::class, 'update']);
     Route::get('/selectedDelete_GsmPreActive', [GsmPreActiveController::class, 'deleteAll']);
-    Route::get('/selected', [GsmPreActiveController::class, 'selected']);
+    Route::get('/selected_gsmpreaktiv', [GsmPreActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
 
     //Request and Complent Customer
