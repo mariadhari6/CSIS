@@ -128,6 +128,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_GsmActive', [GsmActiveController::class, 'deleteAll']);
     Route::get('/selected', [GsmActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmActiveController::class, 'updateall']);
+
     //Gsm Terminate
     Route::get('/GsmTerminate', [GsmTerminateController::class, 'index'])->name('GsmTerminate');
     Route::get('/item_data_GsmTerminate', [GsmTerminateController::class, 'item_data']);
@@ -163,7 +164,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_gps/{id}', [GpsController::class, 'edit_form']);
     Route::get('/update_gps/{id}', [GpsController::class, 'update']);
     Route::get('/selectedDelete_gps', [GpsController::class, 'deleteAll']);
-    Route::get('/selected', [GpsController::class, 'selected']);
+    Route::get('/selected_gps', [GpsController::class, 'selected']);
     Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
 
     //gsm pre active
