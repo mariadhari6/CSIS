@@ -273,7 +273,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_pic') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -333,20 +333,20 @@
                     },
                     success: function(data) {
                     swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
+                          type: 'success',
+                          title: 'The selected data has been updated',
+                          showConfirmButton: false,
+                          timer: 1500
 
-                                // $(".save").hide();
-                                });
-                                read();
+                      // $(".save").hide();
+                      });
+                      read();
 
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
+                      $(".add").show("fast");
+                      $(".edit_all").show("fast");
+                      $(".delete_all").show("fast");
+                      $(".btn-round").hide("fast");
+                      $(".btn-round").hide("fast");
                     }
                 });
             });
@@ -355,15 +355,16 @@
 
 
         }
-//--------Proses Batal--------
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
-            $(".add").show("fast");
-            $(".edit_all").show("fast");
-            $(".delete_all").show("fast");
-            read();
-            }
+
+      //--------Proses Batal--------
+      function cancelUpdateSelected(){
+          $("#save-selected").hide("fast");
+          $("#cancel-selected").hide("fast");
+          $(".add").show("fast");
+          $(".edit_all").show("fast");
+          $(".delete_all").show("fast");
+          read();
+      }
 
 
   </script>

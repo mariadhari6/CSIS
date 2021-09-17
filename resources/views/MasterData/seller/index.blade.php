@@ -8,7 +8,7 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2" id="add">
+                <button type="button" class="btn btn-primary float-left mr-2 add" id="add">
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" ></i>
                 </button>
@@ -323,6 +323,16 @@
                 });
             });
           });
+        }
+
+         //--------Proses Batal--------
+         function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
         }
 
 

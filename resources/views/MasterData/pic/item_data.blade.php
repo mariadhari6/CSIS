@@ -15,7 +15,7 @@
             </div>
         </td>
         <td id="item-company_id-{{ $pics->id}}">
-                {{ $pics->company->company_name}}
+            {{ $pics->company->company_name}}
         </td>
         <td id="item-pic_name-{{ $pics->id}}">
             {{ $pics->pic_name }}
@@ -29,7 +29,6 @@
           <td id="item-position-{{ $pics->id }}">
             {{ $pics->position }}
         </td>
-
         <td id="item-date_of_birth-{{ $pics->id }}">
             {{ $pics->date_of_birth }}
         </td>

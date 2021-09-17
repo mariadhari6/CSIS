@@ -91,7 +91,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_company', [CompanyController::class, 'deleteAll']);
     Route::get('/selected_company', [CompanyController::class, 'selected']);
     Route::get('/update_all/{id}', [CompanyController::class, 'updateall']);
-    //
     Route::get('/dependent_company/{id}', [CompanyController::class, 'dependentCompany']);
     Route::get('/show_no_agreement/{id}', [CompanyController::class, 'showAgreement']);
 
@@ -104,7 +103,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_pic/{id}', [PicController::class, 'edit_form']);
     Route::get('/update_pic/{id}', [PicController::class, 'update']);
     Route::get('/selectedDelete_pic', [PicController::class, 'deleteAll']);
-    Route::get('/selected', [PicController::class, 'selected']);
+    Route::get('/selected_pic', [PicController::class, 'selected']);
     Route::get('/update_all/{id}', [PicController::class, 'updateall']);
     
     // seller

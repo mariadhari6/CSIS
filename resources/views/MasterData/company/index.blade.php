@@ -360,16 +360,16 @@
 
                 });
             });
-
-
         }
-        function batal(){
-              $(".save").hide("fast");
-              $(".cancel").hide("fast");
-              $(".add").show("fast");
-              $(".edit_all").show("fast");
-              $(".delete_all").show("fast");
-              read();
+        
+         //--------Proses Batal--------
+        function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
         }
 
         
