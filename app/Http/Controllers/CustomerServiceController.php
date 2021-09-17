@@ -14,4 +14,8 @@ class CustomerServiceController extends Controller
         $username = Username::where('id', 3)->count();
         return view('tes', compact('username'));
     }
+    public function utama()
+    {
+        return view('partials.v_login');
+    }
 }

@@ -4,7 +4,7 @@
 @section('content')
 
 <div align="right">
-    <a class="btn btn-secondary  mr-2" href="{{ route('export') }}"><i class="fas fa-file-excel mr-2"></i>Export</a>
+    <a class="btn btn-secondary  mr-2" href="{{ route('export') }}" title="Export"><i class="fas fa-file-excel mr-2"></i>Export</a>
 </div>
   <br>
   <div id="message"></div>
@@ -15,10 +15,21 @@
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+<<<<<<< HEAD
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
           <table class="table table-hover data" class="table_id" id="table_id" >
+=======
+
+                <button class="btn btn-success  mr-2 edit_all" title="Edit Selected"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"  title="Deleted Selected"><i class="fas fa-trash"></i></button>
+            </div>
+
+
+
+          <table class="table table-hover" class="table_id" id="table_id" >
+>>>>>>> 7cd2d07c2ab3cbf0c5f32627c5faf59078754169
             <thead>
               <tr>
                 <th width="10px">
@@ -45,36 +56,35 @@
 
   <script>
     $(document).ready(function() {
-
       read();
 
 
+
     });
-
-
     // ------ Tampil Data ------
     function read(){
+
       $.get("{{ url('item_data') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
+<<<<<<< HEAD
             "dom": '<"top"f>rt<"bottom"lp><"clear">'   
             } );
+=======
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            });
+>>>>>>> 7cd2d07c2ab3cbf0c5f32627c5faf59078754169
         $('#table_id').DataTable().draw();
+
+
+
       });
     }
-
     // ---- Tombol Cancel -----
     function cancel() {
       read()
     }
-
-
-    // ---- Tombol Cancel -----
-    function cancel() {
-      read()
-    }
-
 
      // ------ Tambah Form Input ------
      $('.add').click(function() {
@@ -83,7 +93,6 @@
 
         });
       });
-
     // ----- Proses Tambah data ------
     function store() {
         var FirstName = $("#FirstName").val();
@@ -101,19 +110,16 @@
                 title: 'Data Saved',
                 showConfirmButton: false,
                 timer: 1500
-            })
+            }).catch(function(timeout) { });
               read();
 
             }
         })
+
     }
-
-
-
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
-
         swal({
             title: 'Are you sure?',
             text: "You want delete to this data!",
@@ -136,7 +142,7 @@
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
-                        })
+                        }).catch(function(timeout) { });
                         read();
                     }
                 });
@@ -145,9 +151,7 @@
             },
             allowOutsideClick: false
       });
-
     }
-
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
@@ -158,10 +162,8 @@
             $("#edit-form-"+id).prepend(data)
         });
     }
-
     // ------ Proses Update Data ------
         function update(id) {
-
             var FirstName = $("#FirstName").val();
             var LastName = $("#LastName").val();
             var id = id;
@@ -178,16 +180,12 @@
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
-                })
-                read()
+                }).catch(function(timeout) { });
+                read();
 
                 }
-
-
             });
         }
-
-
         // checkbox all
         $('#master').on('click', function(e) {
           if($(this).is(':checked',true) ){
@@ -195,29 +193,17 @@
           } else {
               $(".task-select").prop('checked',false);
           }
-
         });
-
-
-
-
          // Delete All
         $('.delete_all').on('click', function(){
-        //   event.preventDefault();
-
+          event.preventDefault();
             var allVals = [];
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
-
             });
-
                 if (allVals.length > 0) {
-
                     var _token = $('input[name="_token"]').val();
-
                     // alert(allVals);
-
                     swal({
                     title: 'Are you sure?',
                     text: "You want delete Selected data !",
@@ -231,7 +217,7 @@
                     return new Promise(function(resolve) {
                         $.ajax({
                             url: "{{ route('livetable.delete_all') }}",
-                            method: "GET",
+                            method: "get",
                             data: {
                                 id: allVals,
                                 _token: _token
@@ -243,7 +229,7 @@
                                     title: 'The selected data has been deleted',
                                     showConfirmButton: false,
                                     timer: 1500
-                                })
+                                }).catch(function(timeout) { });
                                 $("#master").prop('checked', false);
                                 read();
 
@@ -253,11 +239,9 @@
                     },
                     allowOutsideClick: false
                 });
-
             }else{
                 alert('Select the row you want to delete')
             }
-
         });
 
         // Form Edit All
@@ -266,24 +250,17 @@
             var allVals = [];
             var _token = $('input[name="_token"]').val();
 
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
-
             });
-
             if (allVals.length > 0){
-
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
                 $.get("{{ url('selected') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
-
                 });
-
                 $.each(allVals, function(index, value){
-
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
                     $("#item-FirstName-"+value).hide("fast");
@@ -294,8 +271,6 @@
                         $("#master").prop('checked', false);
                     });
                 });
-
-
             }else{
                 alert('Select the row you want to edit')
             }
@@ -304,7 +279,6 @@
 
         // --- Proses Update Multiple ---
         function updateSelected() {
-
             var allVals = [];
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
@@ -337,19 +311,25 @@
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
                                     timer: 1500
-                                })
-                                $(".save").hide("fast");
-                                $(".cancel").hide("fast");
+
+
+                                // $(".save").hide();
+                                });
+                                read();
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
-                                read();
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
+
 
                             }
                     });
+
+                    });
                 });
 
-            });
+
 
         }
 
@@ -361,8 +341,10 @@
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-
             }
+
+
+
 
 
 
