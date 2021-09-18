@@ -118,6 +118,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected_seller', [SellerController::class, 'selected']);
     Route::get('/update_all/{id}', [SellerController::class, 'updateall']);
 
+    // GSM Aktiv
     Route::get('/GsmActive', [GsmActiveController::class, 'index'])->name('GsmActive');
     Route::get('/item_data_GsmActive', [GsmActiveController::class, 'item_data']);
     Route::get('/add_form_GsmActive', [GsmActiveController::class, 'add_form']);
