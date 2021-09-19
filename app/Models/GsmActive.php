@@ -22,7 +22,7 @@ class GsmActive extends Model
 
     public function gsmTerminate()
     {
-        return $this->hasOne(GsmTerminate::class);
+        return $this->belongsTo(GsmTerminate::class);
     }
 
     public function company()

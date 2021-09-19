@@ -127,7 +127,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_GsmActive/{id}', [GsmActiveController::class, 'edit_form']);
     Route::get('/update_GsmActive/{id}', [GsmActiveController::class, 'update']);
     Route::get('/selectedDelete_GsmActive', [GsmActiveController::class, 'deleteAll']);
-    Route::get('/selected', [GsmActiveController::class, 'selected']);
+    Route::get('/selected_GsmActive', [GsmActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmActiveController::class, 'updateall']);
 
     //Gsm Terminate
@@ -139,7 +139,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_GsmTerminate/{id}', [GsmTerminateController::class, 'edit_form']);
     Route::get('/update_GsmTerminate/{id}', [GsmTerminateController::class, 'update']);
     Route::get('/selectedDelete_GsmTerminate', [GsmTerminateController::class, 'deleteAll']);
-    Route::get('/selected', [GsmTerminateController::class, 'selected']);
+    Route::get('/selected_GsmTerminate', [GsmTerminateController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmTerminateController::class, 'updateall']);
     Route::get('/dependent_terminate/{id}', [GsmTerminateController::class, 'dependentTerminate']);
     Route::get('/show_company/{id}', [GsmTerminateController::class, 'showCompany']);

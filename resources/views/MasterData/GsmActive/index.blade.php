@@ -204,7 +204,7 @@
             }
         });
     }
-
+    // Check All
      $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
               $(".task-select").prop('checked', true);
@@ -212,7 +212,7 @@
               $(".task-select").prop('checked',false);
           }
     });
-
+    // Delete All
       $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
@@ -259,7 +259,7 @@
                 alert('Select the row you want to delete')
             }
         });
-
+        // Edit All
         $('.edit_all').on('click', function(e){
 
             var allVals = [];
@@ -272,7 +272,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_GsmActive') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -295,7 +295,7 @@
                 alert('Select the row you want to edit')
             }
         });
-
+        // Proses Update all
             function updateSelected() {
             var allVals = [];
 
@@ -356,6 +356,8 @@
 
 
     }
+
+    //--------Proses Batal--------
     function cancelUpdateSelected(){
       $("#save-selected").hide("fast");
       $("#cancel-selected").hide("fast");

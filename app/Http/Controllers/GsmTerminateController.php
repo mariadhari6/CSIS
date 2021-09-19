@@ -75,6 +75,13 @@ class GsmTerminateController extends Controller
         ]);
     }
 
+    
+    public function destroy($id)
+    {
+        $data = GsmTerminate::findOrfail($id);
+        $data->delete();
+    }
+
     public function update(Request $request, $id)
     {
         $data = GsmTerminate::findOrfail($id);

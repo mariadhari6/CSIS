@@ -22,7 +22,7 @@
             {{ $item->active_date }}
         </td>
         <td id="item-gsm_pre_active_id-{{ $item->id}}">
-                {{ $item->gsmPreActive->gsm_number}}
+            {{ $item->gsmPreActive->gsm_number}}
         </td>
           <td id="item-status_active-{{ $item->id }}">
             {{ $item->status_active }}

@@ -17,7 +17,7 @@ class GsmTerminate extends Model
     public function gsmActive()
     {
 
-        return $this->belongsTo(GsmActive::class, 'gsm_pre_active_id');
+        return $this->hasOne(GsmActive::class, 'gsm_pre_active_id');
     }
 
     public function company()

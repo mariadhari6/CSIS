@@ -27,8 +27,8 @@
    </td>
    <td>
       <select class="form-control" id="company_id" name="company_id">
-         @foreach ($company as $companys)
-         <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
+         @foreach ($company as $item)
+         <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
          @endforeach
       </select></i>
    </td>
