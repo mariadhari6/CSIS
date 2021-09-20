@@ -95,6 +95,11 @@
                                 <span class="link-collapse">Summary</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('dashboard_customer')}}">
+                                <span class="link-collapse">Dashboard Customer</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

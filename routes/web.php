@@ -4,6 +4,7 @@
 use App\Http\Controllers\UsernameController;
 use App\Http\Controllers\DetailCustomerController;
 use App\Http\Controllers\SummaryController;
+use App\Http\Controllers\DashboardCustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerServiceController;
@@ -87,6 +88,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
     Route::get('/item_summary', [SummaryController::class, 'item_data'])->name('item_summary');
     Route::get('/add_summary', [DetailCustomerController::class, 'add_form'])->name('add_summary');
+
+    Route::get('/apioslog', [UsernameController::class, 'getApi']);
+
+    Route::get('/dashboard_customer', [DashboardCustomerController::class, 'index'])->name('dashboard_customer');
 
 
 });

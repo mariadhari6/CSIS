@@ -17,7 +17,6 @@
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
           <table class="table table-responsive" class="detailcustomer" id="detailcustomer">
-              <div class="table-responsive">
             <thead>
               <tr>
                 <th width="10px">
@@ -54,7 +53,7 @@
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
-            </div>
+
           </table>
       </div>
     </div>

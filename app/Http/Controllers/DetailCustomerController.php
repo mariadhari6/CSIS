@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\DetailCustomer;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 class DetailCustomerController extends Controller
@@ -20,12 +20,42 @@ class DetailCustomerController extends Controller
 
     public function add_form(){
 
-        return view('customer.detail_customer.add_form');
+        $response = Http::post('https://oslog.id/apiv5/gps/search?apiKey=8725f9e6-7713-4c99-8fd8-20ae0a523709', [
+            'start' => '0',
+            'lenght'=> '25',
+            'name' => 'license_plate',
+            'logic_operator' => 'like',
+            'value' => '',
+            'operator' => 'AND',
+            'table_name' => 'm_vehicle',
+            'name' => 'company',
+            'column_result' => 'name',
+            'name' => 'vehicle',
+            'column_result' => ['licence_plate','name'],
+            'name' => 'vehicle_type',
+            'column_result' => 'name',
+            'name' => 'pool',
+            'column_result' => 'name',
+            // 'columns' => 'id',
+            // 'ascending' => false
+        ]);
+
+        $data = $response->json();
+        $items = $data['data'];
+
+        return view('customer.detail_customer.add_form' , compact('items'));
     }
 
     public function store(Request $request)
     {
-        $data = array(
+
+        // cek data company
+        // jika kosong
+        // insert data company
+        // jika ada
+        // insert table detail customer
+
+            $data = array(
             "company_id"            => $request->CompanyId,
             "licence_plate"         => $request->LicencePlate,
             "vihecle_type"          => $request-> VihecleType,

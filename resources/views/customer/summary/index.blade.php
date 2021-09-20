@@ -5,7 +5,6 @@
 
 <div class="title">
     <strong>Summary Customer</strong>
-
 </div>
 <br>
 
@@ -26,15 +25,14 @@
                             <option>5</option>
                             </select>
                         </div>
-                        <label for="alamat" class="col-sm-1 col-form-label">Input Bulan</label>
+                        <label for="Bulan" class="col-sm-1 col-form-label">Input Bulan</label>
                         <label class="col-form-label">:</label>
                         <div class="col-sm-3">
-                            <input type="month" class="form-control" placeholder="Bulan">
+                            <input type="smonth" class="form-control" placeholder="Bulan">
                         </div>
                     </div>
                 </div>
                 <table class="table table-responsive" class="summary" id="summary">
-                    <div class="table-responsive">
                   <thead>
                     <tr>
                       <th scope="col" class="list">Company</th>
@@ -51,7 +49,7 @@
                   <tbody  id="item_data">
                     {{-- {{ csrf_field() }} --}}
                   </tbody>
-                  </div>
+
                 </table>
             </div>
         </div>

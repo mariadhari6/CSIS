@@ -2,22 +2,19 @@
     <td width="80px"></td>
     <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
     <td >
-        <select class="select" id="CompanyId">
-            <option value="" disabled selected>Company</option>
-            <option value='islam'>Islam</option>
-            <option value='kristen'>Kristen</option>
-            <option value='katholik'>Katholik</option>
-            <option value='hindu'>Hindu</option>
-            <option value='kristen'>Budha</option>
-        </select>
+            <select class="select" id="CompanyId">
+                <option value="" disabled selected>Company</option>
+                @foreach ( $items as $item)
+                <option value='{{ $item['data_company']['name'] }}'>{{ $item['data_company']['name'] }}</option>
+                @endforeach
+            </select>
     </td>
     <td >
         <select class="select" id="LicencePlate">
             <option value="" disabled selected>Licence Plate</option>
-            <option value='kristen' >Kristen</option>
-            <option value='katholik'>Katholik</option>
-            <option value='hindu'>Hindu</option>
-            <option value='kristen'>Budha</option>
+            @foreach ( $items as $item)
+            <option value='{{ $item['data_vehicle']['license_plate'] }}' >{{ $item['data_vehicle']['license_plate'] }}</option>
+            @endforeach
         </select>
     </td>
     <td><div class="input-div" ><input type="text" class="input" id="VihecleType" placeholder="Vihecle Type"></div></td>
