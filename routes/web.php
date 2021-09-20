@@ -38,10 +38,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
 Route::get('/register', function () {
     return view('auth.register');
 });
@@ -84,17 +80,16 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
     Route::get('export', [UsernameController::class, 'export'])->name('export');
 
-
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
     Route::get('/item_data_company', [CompanyController::class, 'item_data']);
     Route::get('/add_form_company', [CompanyController::class, 'add_form']);
     Route::get('/store_company', [CompanyController::class, 'store']);
     Route::get('/destroy_company/{id}', [CompanyController::class, 'destroy']);
-    Route::get('/show_company/{id}', [CompanyController::class, 'show']);
+    Route::get('/edit_form_company/{id}', [CompanyController::class, 'edit_form']);
     Route::get('/update_company/{id}', [CompanyController::class, 'update']);
     Route::get('/selectedDelete_company', [CompanyController::class, 'deleteAll']);
-    Route::get('/selected', [CompanyController::class, 'selected']);
+    Route::get('/selected_company', [CompanyController::class, 'selected']);
     Route::get('/update_all/{id}', [CompanyController::class, 'updateall']);
     Route::get('/dependent_company/{id}', [CompanyController::class, 'dependentCompany']);
     Route::get('/show_no_agreement/{id}', [CompanyController::class, 'showAgreement']);
@@ -108,8 +103,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_pic/{id}', [PicController::class, 'edit_form']);
     Route::get('/update_pic/{id}', [PicController::class, 'update']);
     Route::get('/selectedDelete_pic', [PicController::class, 'deleteAll']);
-    Route::get('/selected', [PicController::class, 'selected']);
+    Route::get('/selected_pic', [PicController::class, 'selected']);
     Route::get('/update_all/{id}', [PicController::class, 'updateall']);
+
     // seller
     Route::get('/seller', [SellerController::class, 'index'])->name('seller');
     Route::get('/item_data_seller', [SellerController::class, 'item_data']);
@@ -119,9 +115,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_seller/{id}', [SellerController::class, 'edit_form']);
     Route::get('/update_seller/{id}', [SellerController::class, 'update']);
     Route::get('/selectedDelete_seller', [SellerController::class, 'deleteAll']);
-    Route::get('/selected', [SellerController::class, 'selected']);
+    Route::get('/selected_seller', [SellerController::class, 'selected']);
     Route::get('/update_all/{id}', [SellerController::class, 'updateall']);
 
+    // GSM Aktiv
     Route::get('/GsmActive', [GsmActiveController::class, 'index'])->name('GsmActive');
     Route::get('/item_data_GsmActive', [GsmActiveController::class, 'item_data']);
     Route::get('/add_form_GsmActive', [GsmActiveController::class, 'add_form']);
@@ -130,8 +127,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_GsmActive/{id}', [GsmActiveController::class, 'edit_form']);
     Route::get('/update_GsmActive/{id}', [GsmActiveController::class, 'update']);
     Route::get('/selectedDelete_GsmActive', [GsmActiveController::class, 'deleteAll']);
-    Route::get('/selected', [GsmActiveController::class, 'selected']);
+    Route::get('/selected_GsmActive', [GsmActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmActiveController::class, 'updateall']);
+
     //Gsm Terminate
     Route::get('/GsmTerminate', [GsmTerminateController::class, 'index'])->name('GsmTerminate');
     Route::get('/item_data_GsmTerminate', [GsmTerminateController::class, 'item_data']);
@@ -141,7 +139,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_GsmTerminate/{id}', [GsmTerminateController::class, 'edit_form']);
     Route::get('/update_GsmTerminate/{id}', [GsmTerminateController::class, 'update']);
     Route::get('/selectedDelete_GsmTerminate', [GsmTerminateController::class, 'deleteAll']);
-    Route::get('/selected', [GsmTerminateController::class, 'selected']);
+    Route::get('/selected_GsmTerminate', [GsmTerminateController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmTerminateController::class, 'updateall']);
     Route::get('/dependent_terminate/{id}', [GsmTerminateController::class, 'dependentTerminate']);
     Route::get('/show_company/{id}', [GsmTerminateController::class, 'showCompany']);
@@ -155,7 +153,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_sensor/{id}', [SensorController::class, 'edit_form']);
     Route::get('/update_sensor/{id}', [SensorController::class, 'update']);
     Route::get('/selectedDelete_sensor', [SensorController::class, 'deleteAll']);
-    Route::get('/selected', [SensorController::class, 'selected']);
+    Route::get('/selected_sensor', [SensorController::class, 'selected']);
     Route::get('/update_all/{id}', [SensorController::class, 'updateall']);
 
     //Gps
@@ -167,11 +165,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_gps/{id}', [GpsController::class, 'edit_form']);
     Route::get('/update_gps/{id}', [GpsController::class, 'update']);
     Route::get('/selectedDelete_gps', [GpsController::class, 'deleteAll']);
-    Route::get('/selected', [GpsController::class, 'selected']);
+    Route::get('/selected_gps', [GpsController::class, 'selected']);
     Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
 
     //gsm pre active
-
     Route::get('/GsmPreActive', [GsmPreActiveController::class, 'index'])->name('GsmPreActive');
     Route::get('/item_data_GsmPreActive', [GsmPreActiveController::class, 'item_data']);
     Route::get('/add_form_GsmPreActive', [GsmPreActiveController::class, 'add_form']);
@@ -180,8 +177,12 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_GsmPreActive/{id}', [GsmPreActiveController::class, 'edit_form']);
     Route::get('/update_GsmPreActive/{id}', [GsmPreActiveController::class, 'update']);
     Route::get('/selectedDelete_GsmPreActive', [GsmPreActiveController::class, 'deleteAll']);
-    Route::get('/selected', [GsmPreActiveController::class, 'selected']);
+    Route::get('/selected_gsmpreaktiv', [GsmPreActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
+
+    // //Request and Complent Customer
+    // Route::get('/request_complent_customer', [RequestComplentCustomerController::class, 'index'])->name('request_complent_customer');
+    // Route::get('/item_data_reqcomp_cust', [RequestComplentCustomerController::class, 'item_data'])->name('item_data_reqcomp_cust');
 
     //detail customer
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('Detail customer');
@@ -194,8 +195,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
     Route::get('/selected', [DetailCustomerController::class, 'selected']);
     Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
-    // Pemasangan Mutasi GPS
 
+    // Pemasangan Mutasi GPS
     Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
     Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
     Route::get('/add_form_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'add_form']);
@@ -204,7 +205,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'edit_form']);
     Route::get('/update_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'update']);
     Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
-    Route::get('/selected', [PemasanganMutasiGpsController::class, 'selected']);
+    Route::get('/selected_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'selected']);
     Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
 
     // Request Complain

@@ -1,24 +1,24 @@
 @extends('layouts.v_main')
-@section('title','Seller')
+@section('title','CSIS | Seller')
 
 @section('content')
-
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
+<h4 class="page-title">Seller</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add" id="add">
+                  <b>Add</b>
+                  <i class="fas fa-plus ml-2" ></i>
+                </button>
+                <button class="btn btn-success  mr-2 edit_all"> 
+                  <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn btn-danger  delete_all">
+                  <i class="fas fa-trash"></i>
+                </button>
             </div>
-
-
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -33,7 +33,7 @@
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list-seller">Seller Name</th>
                 <th scope="col" class="list-seller">Seller Code</th>
-                <th scope="col" class="list-seller">No Agreement Latter</th>
+                <th scope="col" class="list-seller">No Agreement Letter</th>
                 <th scope="col" class="list-seller">Status</th>
               </tr>
             </thead>
@@ -41,32 +41,29 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-
         </div>
       </div>
     </div>
   </div>
 
-
-
   <script>
+
     $(document).ready(function() {
       read()
     });
+
     // ------ Tampil Data ------
     function read(){
-
       $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
-
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
-
-            });
+        });
         $('#table_id').DataTable().draw();
       });
     }
+
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -99,12 +96,12 @@
                 title: 'Data Saved',
                 showConfirmButton: false,
                 timer: 1500
-            }).catch(function(timeout) { });
+              }).catch(function(timeout) { });
               read();
-
             }
         })
     }
+
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -133,7 +130,6 @@
                         read();
                     }
                 });
-
               });
             },
             allowOutsideClick: false
@@ -146,7 +142,7 @@
         $("#td-button-"+id).hide("fast");
         $("#item-seller_name-"+id).hide("fast");
         $("#item-seller_code-"+id).hide("fast");
-        $("#item-no_agreement_latter-"+id).hide("fast");
+        $("#item-no_agreement_letter-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
         $.get("{{ url('show_seller') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
@@ -250,7 +246,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_seller') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -275,7 +271,6 @@
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -305,39 +300,39 @@
                     },
                     success: function(data) {
                    swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
+                        type: 'success',
+                        title: 'The selected data has been updated',
+                        showConfirmButton: false,
+                        timer: 1500
 
-                                // $(".save").hide();
-                                });
-                                read();
+                    // $(".save").hide();
+                    });
+                    read();
 
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
+                    $(".add").show("fast");
+                    $(".edit_all").show("fast");
+                    $(".delete_all").show("fast");
+                    $(".btn-round").hide("fast");
+                    $(".btn-round").hide("fast");
                     }
                 });
             });
-        });
-
-
+          });
         }
 
-        //--------Proses Batal--------
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+         //--------Proses Batal--------
+         function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-            }
+        }
 
 
-
+       
   </script>
-   @endsection
+
+
+@endsection

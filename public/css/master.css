@@ -36,9 +36,7 @@
     border-bottom: 2px solid #946868;
 }
 
-
-
-.input{
+.input {
     position: absolute;
     left: 0;
     top: 0;
@@ -49,6 +47,7 @@
     background: none;
     padding: 1rem 0.7rem;
     font-size: 0.8rem;
+<<<<<<< HEAD
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -69,16 +68,17 @@
     background: none;
     padding: 0.3rem 0.7rem;
     font-size: 1rem;
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
-
 }
 
 #user {
     color: white;
 }
 
-
+<<<<<<< HEAD
 /* Datatable */
 .dataTables_length {
     margin-top: 5px;
@@ -99,24 +99,22 @@
     text-align: center;
 }
 
-
 /* Datatable */
 .dataTables_length {
     margin-top: 5px;
     margin-left: 20px;
-
 }
 
-.action{
+.action {
     min-width: 80px;
     text-align: center;
 }
-.list{
+.list {
     min-width: 140px;
     font-size: 15px;
     text-align: center;
 }
-.list-seller{
+.list-seller {
     min-width: 180px;
     font-size: 15px;
     text-align: center;
@@ -140,9 +138,7 @@
     border-bottom: 2px solid #946868;
 }
 
-
-
-.input{
+.input {
     position: absolute;
     left: 0;
     top: 0;
@@ -175,13 +171,15 @@
     font-size: 1rem;
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
-
 }
 /* tabel livetable */
 
 #table_id {
     position: relative;
     bottom: 0px;
+=======
+.data{
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     text-align: center;
 }
 
@@ -212,6 +210,7 @@
     opacity: 0.8;
 } */
 
+<<<<<<< HEAD
 /* .delete_all{
     display: none;
 }
@@ -222,3 +221,5 @@
 .add {
     display: none;
 } */
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131

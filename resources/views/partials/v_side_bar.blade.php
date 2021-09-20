@@ -15,7 +15,7 @@
             </div>
         </div>
         <ul class="nav">
-            <li class="nav-item active">
+            <li class="nav-item {{ request()->is('customer_service') ? ' active' : ''}}">
                 <a href="{{url('/customer_service')}}">
                     <i class="fas fa-home"></i>
                     <p>Home</p>
@@ -23,7 +23,10 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item
+                {{ request()->is('seller') ? ' active' : ''}}
+                {{ request()->is('Company') ? ' active' : ''}}
+            ">
                 <a class="" data-toggle="collapse" href="#masterData" aria-expanded="true">
                     <i class="fas fa-table"></i>
                     <p>Master Data</p>
@@ -97,7 +100,7 @@
                 <div class="collapse in" id="customer" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#">
+                            <a href="{{url('/detail_customer')}}">
                                 <span class="link-collapse">Detail Customer</span>
                             </a>
                         </li>
@@ -144,12 +147,12 @@
                 <div class="collapse in" id="visit" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#profile">
+                            <a href="{{url('/PemasanganMutasi')}}">
                                 <span class="link-collapse">Pemasangan dan Mutasi GPS</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#edit">
+                            <a href="/MaintenanceGps">
                                 <span class="link-collapse">Maintenance GPS </span>
                             </a>
                         </li>

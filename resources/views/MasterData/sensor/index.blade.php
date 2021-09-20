@@ -1,25 +1,26 @@
 @extends('layouts.v_main')
-@section('title','Sensor')
+@section('title','CSIS | Sensor')
 
 
 @section('content')
 
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
+<h4 class="page-title">Sensor</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-
-
+          <div class="text-right mt-3" id="selected">
+              <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
+                <b>Add</b>
+                <i class="fas fa-plus ml-2" id="add"></i>
+              </button>
+              <button class="btn btn-success  mr-2 edit_all"> 
+                <i class="fas fa-pen"></i>
+              </button>
+              <button class="btn btn-danger  delete_all">
+                <i class="fas fa-trash"></i>
+              </button>
+          </div>
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -44,7 +45,6 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
     }
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form_sensor') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -263,7 +263,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_sensor') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -348,16 +348,15 @@
 
         }
 
-        //--------Proses Batal--------
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+         //--------Proses Batal--------
+         function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-            }
-
+        }
 
 
 

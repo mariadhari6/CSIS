@@ -21,6 +21,7 @@
     <td>
         <div class="input-div"><input type="date" class="input expired_date-{{$GsmPreActive->id}}" id="expired_date" placeholder="Expired Date" value="{{ $GsmPreActive->expired_date}}"></i></div>
     </td>
-      <td><textarea class="form-control note-{{$GsmPreActive->id}}" id="note" name="note" >{{$GsmPreActive->note}}</textarea></i></td>
+      <td><textarea class="form-control note-{{$GsmPreActive->id}}" id="note" name="note" >{{$GsmPreActive->note}}</textarea></i>
+    </td>
 
 

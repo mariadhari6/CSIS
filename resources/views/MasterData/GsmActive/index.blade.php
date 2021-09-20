@@ -1,23 +1,24 @@
 @extends('layouts.v_main')
-@section('title','Gsm Active')
+@section('title','CSIS | Gsm Active')
 
 @section('content')
-
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
+<h4 class="page-title">GSM Active</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
              <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button">
+                  <b>Add</b>
+                  <i class="fas fa-plus ml-2" id="add"></i>
+                </button>
+                <button class="btn btn-success  mr-2 edit_all"> 
+                  <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn btn-danger  delete_all">
+                  <i class="fas fa-trash"></i>
+                </button>
             </div>
-
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -203,7 +204,7 @@
             }
         });
     }
-
+    // Check All
      $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
               $(".task-select").prop('checked', true);
@@ -211,7 +212,7 @@
               $(".task-select").prop('checked',false);
           }
     });
-
+    // Delete All
       $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
@@ -258,7 +259,7 @@
                 alert('Select the row you want to delete')
             }
         });
-
+        // Edit All
         $('.edit_all').on('click', function(e){
 
             var allVals = [];
@@ -271,7 +272,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_GsmActive') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -294,7 +295,7 @@
                 alert('Select the row you want to edit')
             }
         });
-
+        // Proses Update all
             function updateSelected() {
             var allVals = [];
 
@@ -355,15 +356,16 @@
 
 
     }
-    function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
-            $(".add").show("fast");
-            $(".edit_all").show("fast");
-            $(".delete_all").show("fast");
-            read();
-            }
 
+    //--------Proses Batal--------
+    function cancelUpdateSelected(){
+      $("#save-selected").hide("fast");
+      $("#cancel-selected").hide("fast");
+      $(".add").show("fast");
+      $(".edit_all").show("fast");
+      $(".delete_all").show("fast");
+      read();
+    }
 
 
 

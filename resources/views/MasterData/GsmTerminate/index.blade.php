@@ -1,24 +1,24 @@
 @extends('layouts.v_main')
-@section('title','Gsm Terminate')
+@section('title','CSIS | Gsm Terminate')
 
 @section('content')
-
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
+<h4 class="page-title">GSM Terminate</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-
-
+          <div class="text-right mt-3" id="selected">
+            <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
+              <b>Add</b>
+              <i class="fas fa-plus ml-2" ></i>
+            </button>
+            <button class="btn btn-success  mr-2 edit_all"> 
+              <i class="fas fa-pen"></i>
+            </button>
+            <button class="btn btn-danger  delete_all">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -78,7 +78,7 @@
 
 
      // ------ Tambah Form Input ------
-     $('.add').click(function() {
+     $('#add').click(function() {
         $.get("{{ url('add_form_GsmTerminate') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -91,6 +91,7 @@
         var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
         var note = $("#note").val();
+        // alert(request_date)
         $.ajax({
             type: "get",
             url: "{{ url('store_GsmTerminate') }}",
@@ -161,16 +162,17 @@
             $("#edit-form-"+id).prepend(data)
         });
     }
+
     // ------ Proses Update Data ------
     function update(id) {
-        var gsm_active_id = $("#gsm_active_id").val();
+        var gsm_active_id =$('select[name="gsm_active_id"]').val();
         var request_date = $("#request_date").val();
         var terminate_date = $("#terminate_date").val();
         var status_active = $("#status_active").val();
         var company_id = $("#company_id").val();
         var note = $("#note").val();
         var id = id;
-        // console.log('test');
+        // alert(company_id);
         $.ajax({
             type: "get",
             url: "{{ url('update_GsmTerminate') }}/"+id,
@@ -193,6 +195,8 @@
             }
         })
     }
+
+    // Check all
      $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
               $(".task-select").prop('checked', true);
@@ -200,6 +204,8 @@
               $(".task-select").prop('checked',false);
           }
     });
+
+    // Delete All
       $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
@@ -246,6 +252,8 @@
                 alert('Select the row you want to delete')
             }
         });
+
+        // Edit All
         $('.edit_all').on('click', function(e){
             var allVals = [];
             var _token = $('input[name="_token"]').val();
@@ -256,7 +264,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_GsmTerminate') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -278,6 +286,8 @@
                 alert('Select the row you want to edit')
             }
         });
+
+        // Proses Edit All
             function updateSelected() {
             var allVals = [];
             $(".task-select:checked").each(function() {
@@ -313,31 +323,33 @@
                     },
                     success: function(data) {
                     swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                // $(".save").hide();
-                                });
-                                read();
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
+                          type: 'success',
+                          title: 'The selected data has been updated',
+                          showConfirmButton: false,
+                          timer: 1500
+                      // $(".save").hide();
+                      });
+                      read();
+                      $(".add").show("fast");
+                      $(".edit_all").show("fast");
+                      $(".delete_all").show("fast");
+                      $(".btn-round").hide("fast");
+                      $(".btn-round").hide("fast");
                     }
                 });
             });
             });
         }
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+          //--------Proses Batal--------
+          function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
         }
+
   </script>
 
    @endsection

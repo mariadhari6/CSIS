@@ -1,29 +1,32 @@
 @extends('layouts.v_main')
-@section('title','Pemasangan dan Mutasi GPS')
+@section('title','CSIS | Pemasangan dan Mutasi GPS')
 
 
 @section('content')
+<h4 class="page-title">Pemasangan dan Mutasi GPS</h4>
 
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
 
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button">
+                    <b>Add</b>
+                    <i class="fas fa-plus ml-2" id="add"></i>
+                </button>
+                <button class="btn btn-success  mr-2 edit_all">
+                    <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn btn-danger  delete_all">
+                    <i class="fas fa-trash"></i>
+                </button>
             </div>
-
 
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th>
+                <th width="10px">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -302,7 +305,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('/selected_PemasanganMutasi') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -408,14 +411,14 @@
         }
 
         //--------Proses Batal--------
-         function batal(){
-            $(".btn-round").hide("fast");
-            $(".btn-round").hide("fast");
+         function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-            }
+        }
 
 
 
