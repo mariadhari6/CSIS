@@ -18,6 +18,7 @@
     <td>
         <div class="input-div"><input type="date" class="input po_date-{{$gps->id}}" id="po_date" placeholder="Po Date" value="{{ $gps->po_date}}"></i></div>
     </td>
+<<<<<<< HEAD
     <td>
         <select class="form-control status-{{$gps->id}}" id="status" aria-label=".form-select-lg example">
             <option selected>{{$gps->status}}</option>
@@ -35,4 +36,22 @@
             <option value="Beli">Beli</option>
         </select></i>
     </td>
+=======
+    {{-- <td>
+        <div class="input-div"><input type="text" class="input status-{{$seller->id}}" id="status" placeholder="Status" value="{{ $seller_status}}"></i></div>
+    </td> --}}
+<td><select class="form-control status-{{$gps->id}}" id="status" aria-label=".form-select-lg example">
+  <option selected>{{$gps->status}}</option>
+  <option value="Active">Active</option>
+  <option value="In Active">In Active</option>
+</select></i></td>
+
+<td><select class="form-control" id="status_ownership" aria-label=".form-select-lg example">
+    <option selected>{{$gps->status_ownership}}</option>
+    <option value="Sewa">Sewa</option>
+    <option value="Sewa Beli">Sewa Beli</option>
+    <option value="Trial">Trial</option>
+    <option value="Beli">Beli</option>
+    </select></i></td>
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 

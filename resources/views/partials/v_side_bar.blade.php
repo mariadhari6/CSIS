@@ -15,7 +15,11 @@
             </div>
         </div>
         <ul class="nav">
+<<<<<<< HEAD
             <li class="nav-item {{ request()->is('customer_service') ? ' active' : ''}}">
+=======
+            <li class="nav-item active">
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                 <a href="{{url('/customer_service')}}">
                     <i class="fas fa-home"></i>
                     <p>Home</p>

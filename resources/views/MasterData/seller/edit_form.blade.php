@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <td></td>
 <td>
     <i class="fas fa-check add" id="edit" onclick="update({{ $seller->id}})"></i>
@@ -28,4 +29,28 @@
         </option>
     </select>
 </td>
+=======
+    <td></td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $seller->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
+    </td>
+
+    <td>
+        <div class="input-div"><input type="text" class="input seller_name-{{$seller->id}}" id="seller_name" placeholder="Seller Name" value="{{ $seller->seller_name}}"></i></div>
+    </td>
+    <td>
+        <div class="input-div"><input type="text" class="input seller_code-{{$seller->id}}" id="seller_code" placeholder="Seller Code" value="{{ $seller->seller_code}}"></i></div>
+    </td>
+    <td>
+        <div class="input-div"><input type="text" class="input no_agreement_letter-{{$seller->id}}" id="no_agreement_letter" placeholder="No Agreement Latter" value="{{ $seller->no_agreement_letter}}"></i></div>
+    </td>
+    {{-- <td>
+        <div class="input-div"><input type="text" class="input status-{{$seller->id}}" id="status" placeholder="Status" value="{{ $seller_status}}"></i></div>
+    </td> --}}
+<td><select class="form-select status-{{$seller->id}}" id="status" aria-label=".form-select-lg example">
+  <option selected>{{$seller->status}}</option>
+  <option value="Active">Active</option>
+  <option value="In Active">In Active</option>
+</select></i></td>
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 

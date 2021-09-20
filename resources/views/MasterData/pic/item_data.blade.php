@@ -1,13 +1,23 @@
+<<<<<<< HEAD
 @foreach ($pic as $item)
     <tr id="edit-form-{{ $item->id }}">
          <td id="td-checkbox-{{ $item->id }}">
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
+=======
+@foreach ($pic as $pics)
+    <tr id="edit-form-{{ $pics->id }}">
+         <td id="td-checkbox-{{ $pics->id }}">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input task-select" type="checkbox" id="{{$pics->id}}">
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                     <span class="form-check-sign"></span>
                 </label>
             </div>
         </td>
+<<<<<<< HEAD
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
@@ -31,6 +41,32 @@
         </td>
         <td id="item-date_of_birth-{{ $item->id }}">
             {{ $item->date_of_birth }}
+=======
+        <td id="td-button-{{ $pics->id }}">
+            <div id="button-{{ $pics->id }}">
+                <i class="fas fa-pen edit" onclick="edit({{ $pics->id }})"></i>
+                <i class="fas fa-trash delete" onclick="destroy({{ $pics->id }})"></i>
+            </div>
+        </td>
+        <td id="item-company_id-{{ $pics->id}}">
+                {{ $pics->company->company_name}}
+        </td>
+        <td id="item-pic_name-{{ $pics->id}}">
+            {{ $pics->pic_name }}
+        </td>
+         <td id="item-phone-{{ $pics->id }}">
+            {{ $pics->phone }}
+        </td>
+          <td id="item-email-{{ $pics->id }}">
+            {{ $pics->email }}
+        </td>
+          <td id="item-position-{{ $pics->id }}">
+            {{ $pics->position }}
+        </td>
+
+        <td id="item-date_of_birth-{{ $pics->id }}">
+            {{ $pics->date_of_birth }}
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         </td>
     </tr>
 @endforeach

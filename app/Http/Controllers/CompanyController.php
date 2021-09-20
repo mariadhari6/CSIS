@@ -14,11 +14,18 @@ class CompanyController extends Controller
     {
         return view('MasterData.company.index');
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     public function add_form()
     {
         $seller = Seller::orderBy('seller_name', 'DESC')->get();
         return view('MasterData.company.add_form')->with([
+<<<<<<< HEAD
+=======
+
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             'seller' => $seller,
         ]);
     }
@@ -54,7 +61,11 @@ class CompanyController extends Controller
         Company::insert($data);
     }
 
+<<<<<<< HEAD
     public function edit_form($id)
+=======
+    public function show($id)
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     {
         $seller = Seller::orderBy('seller_name', 'DESC')->get();
         $company = Company::findOrfail($id);
@@ -126,6 +137,7 @@ class CompanyController extends Controller
     public function updateSelected(Request $request)
     {
         Company::where('item_type_id', '=', 1)
+<<<<<<< HEAD
                 ->update(['colour' => 'black']);
     }
 
@@ -146,4 +158,8 @@ class CompanyController extends Controller
     //         ->pluck('no_agreement_letter', 'id');
     //     return json_encode($data);
     // }
+=======
+            ->update(['colour' => 'black']);
+    }
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 }

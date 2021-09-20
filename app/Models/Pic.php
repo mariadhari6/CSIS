@@ -20,6 +20,7 @@ class Pic extends Model
     {
         return $this->belongsTo(Company::class);
     }
+<<<<<<< HEAD
 
     public function requestComplaint()
     {
@@ -30,4 +31,6 @@ class Pic extends Model
     {
         return $this->hasMany(PemasanganMutasiGps::class);
     }
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 }

@@ -14,11 +14,17 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
+<<<<<<< HEAD
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
 <<<<<<< HEAD
+=======
+                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
+            <br>
+
           <table class="table table-hover data" class="table_id" id="table_id" >
 =======
 
@@ -67,6 +73,7 @@
       $.get("{{ url('item_data') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+<<<<<<< HEAD
         $('#table_id').dataTable( {
 <<<<<<< HEAD
             "dom": '<"top"f>rt<"bottom"lp><"clear">'   
@@ -77,6 +84,9 @@
 >>>>>>> 7cd2d07c2ab3cbf0c5f32627c5faf59078754169
         $('#table_id').DataTable().draw();
 
+=======
+        $('#table_id').DataTable().draw();
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 
 
       });
@@ -115,7 +125,10 @@
 
             }
         })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     }
     // -----Proses Delete Data ------
     function destroy(id) {
@@ -155,6 +168,7 @@
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
+        $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
         $("#item-FirstName-"+id).hide("fast");
         $("#item-LastName-"+id).hide("fast");
@@ -312,10 +326,17 @@
                                     showConfirmButton: false,
                                     timer: 1500
 
+<<<<<<< HEAD
 
                                 // $(".save").hide();
                                 });
                                 read();
+=======
+                                // $(".save").hide();
+                                });
+                                read();
+
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
@@ -324,6 +345,8 @@
 
 
                             }
+
+
                     });
 
                     });

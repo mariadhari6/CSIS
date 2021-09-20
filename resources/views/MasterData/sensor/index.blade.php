@@ -4,11 +4,20 @@
 
 @section('content')
 
+<<<<<<< HEAD
 <h4 class="page-title">Sensor</h4>
+=======
+<div align="right">
+  </div>
+  <br>
+  <div id="message"></div>
+
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
+<<<<<<< HEAD
           <div class="text-right mt-3" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
                 <b>Add</b>
@@ -22,6 +31,16 @@
               </button>
           </div>
           <table class="table table-responsive data" class="table_id" id="table_id" >
+=======
+            <div class="text-right mt-3" id="selected">
+                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+            </div>
+            <br>
+         <div class="table-responsive">
+          <table class="table table-hover data" class="table_id" id="table_id" >
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             <thead>
               <tr>
                 <th>
@@ -32,6 +51,7 @@
                         </label>
                     </div>
                 </th>
+<<<<<<< HEAD
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list">Sensor Name</th>
                 <th scope="col" class="list">Merk Sensor</th>
@@ -39,13 +59,26 @@
                 <th scope="col" class="list">Rab Number</th>
                 <th scope="col" class="list">Waranty</th>
                 <th scope="col" class="list">Status</th>
+=======
+                <th scope="col">Action</th>
+                <th scope="col">Sensor Name</th>
+                <th scope="col">Merk Sensor</th>
+                <th scope="col">Serial Number</th>
+                <th scope="col">Rab Number</th>
+                <th scope="col">Waranty</th>
+                <th scope="col">Status</th>
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+<<<<<<< HEAD
 
+=======
+        </div>
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         </div>
       </div>
     </div>
@@ -63,11 +96,14 @@
       $.get("{{ url('item_data_sensor') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+<<<<<<< HEAD
         $('#table_id').dataTable( {
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
 
             });
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         $('#table_id').DataTable().draw();
       });
     }
@@ -77,12 +113,19 @@
     }
 
      // ------ Tambah Form Input ------
+<<<<<<< HEAD
      $('.add').click(function() {
+=======
+     $('#add').click(function() {
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         $.get("{{ url('add_form_sensor') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
       });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     // ----- Proses Tambah data ------
     function store() {
         var sensor_name = $("#sensor_name").val();
@@ -265,7 +308,11 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
+<<<<<<< HEAD
                 $.get("{{ url('selected_sensor') }}", {}, function(data, status) {
+=======
+                $.get("{{ url('selected') }}", {}, function(data, status) {
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -350,15 +397,27 @@
 
         }
 
+<<<<<<< HEAD
          //--------Proses Batal--------
          function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
             $("#cancel-selected").hide("fast");
+=======
+        //--------Proses Batal--------
+        function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
+<<<<<<< HEAD
         }
+=======
+            }
+
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 
 
 

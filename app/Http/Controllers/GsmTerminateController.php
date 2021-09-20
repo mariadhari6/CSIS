@@ -14,8 +14,11 @@ class GsmTerminateController extends Controller
 {
     //
 
+<<<<<<< HEAD
     //
 
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     public function index()
     {
         return view('MasterData.GsmTerminate.index');
@@ -50,7 +53,11 @@ class GsmTerminateController extends Controller
     {
         $data = array(
             'request_date'   => $request->request_date,
+<<<<<<< HEAD
             'terminate_date'      => $request->terminate_date,
+=======
+            'active_date'      => $request->active_date,
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             'gsm_active_id' => $request->gsm_active_id,
             'status_active'   => $request->status_active,
             'company_id'      => $request->company_id,
@@ -75,6 +82,7 @@ class GsmTerminateController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     
     public function destroy($id)
     {
@@ -82,11 +90,17 @@ class GsmTerminateController extends Controller
         $data->delete();
     }
 
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     public function update(Request $request, $id)
     {
         $data = GsmTerminate::findOrfail($id);
         $data->request_date = $request->request_date;
+<<<<<<< HEAD
         $data->terminate_date = $request->terminate_date;
+=======
+        $data->active_date = $request->active_date;
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         $data->gsm_active_id = $request->gsm_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;
@@ -106,7 +120,11 @@ class GsmTerminateController extends Controller
     {
         $data = GsmTerminate::findOrfail($id);
         $data->request_date = $request->request_date;
+<<<<<<< HEAD
         $data->terminate_date = $request->terminate_date;
+=======
+        $data->active_date = $request->active_date;
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         $data->gsm_active_id = $request->gsm_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;

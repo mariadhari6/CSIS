@@ -3,11 +3,20 @@
 
 @section('content')
 
+<<<<<<< HEAD
 <h4 class="page-title">PIC</h4>
+=======
+<div align="right">
+  </div>
+  <br>
+  <div id="message"></div>
+
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
+<<<<<<< HEAD
           <div class="text-right mt-3" id="selected">
             <button type="button" class="btn btn-primary float-left mr-2 add add-button">
               <b>Add</b>
@@ -24,6 +33,19 @@
             <thead>
               <tr>
                 <th>
+=======
+             <div class="text-right mt-3" id="selected">
+                 <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+            </div>
+            <br>
+        <div class="table-responsive">
+          <table class="table table-hover data" class="table_id" id="table_id" >
+            <thead>
+              <tr>
+                  <th>
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -31,6 +53,7 @@
                         </label>
                     </div>
                 </th>
+<<<<<<< HEAD
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Pic Name</th>
@@ -38,6 +61,15 @@
                 <th scope="col" class="list">Email</th>
                 <th scope="col" class="list">Position</th>
                 <th scope="col" class="list">Date of birth</th>
+=======
+                <th scope="col">Action</th>
+                <th scope="col">Company</th>
+                <th scope="col">Pic Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Position</th>
+                <th scope="col">Date of birth</th>
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -48,7 +80,11 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
 
+=======
+  </div>
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 
   <script>
     $(document).ready(function() {
@@ -63,11 +99,14 @@
       $.get("{{ url('item_data_pic') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+<<<<<<< HEAD
         $('#table_id').dataTable( {
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
 
             });
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         $('#table_id').DataTable().draw();
 
       });
@@ -273,7 +312,11 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
+<<<<<<< HEAD
                 $.get("{{ url('selected_pic') }}", {}, function(data, status) {
+=======
+                $.get("{{ url('selected') }}", {}, function(data, status) {
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -333,6 +376,7 @@
                     },
                     success: function(data) {
                     swal({
+<<<<<<< HEAD
                           type: 'success',
                           title: 'The selected data has been updated',
                           showConfirmButton: false,
@@ -347,6 +391,22 @@
                       $(".delete_all").show("fast");
                       $(".btn-round").hide("fast");
                       $(".btn-round").hide("fast");
+=======
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+
+                                // $(".save").hide();
+                                });
+                                read();
+
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                     }
                 });
             });
@@ -355,6 +415,7 @@
 
 
         }
+<<<<<<< HEAD
 
       //--------Proses Batal--------
       function cancelUpdateSelected(){
@@ -365,6 +426,17 @@
           $(".delete_all").show("fast");
           read();
       }
+=======
+//--------Proses Batal--------
+        function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
+            }
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 
 
   </script>
