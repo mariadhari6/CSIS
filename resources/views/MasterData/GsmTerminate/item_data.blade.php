@@ -28,7 +28,7 @@
             {{ $GsmTerminates->status_active }}
         </td>
           <td id="item-company_id-{{ $GsmTerminates->id }}">
-            {{-- {{ $GsmTerminates->gsmActive->company->company_name}} --}}
+            {{ $GsmTerminates->company_name}}
         </td>
         <td id="item-note-{{ $GsmTerminates->id }}">
             {{ $GsmTerminates->note }}

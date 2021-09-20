@@ -36,10 +36,10 @@
        @endforeach
     </select></i></td>
 
-    <td><select class="form-control" id="gsm" name="gsm">
+    <td><select class="form-control" id="gsm_pemasangan" name="gsm_pemasangan">
        @foreach ($details as $detail)
-        <option value="{{ $detail->id }}" {{ old('gsm') == $detail->id  ? 'selected':'' }}>
-        {{$detail->gsmActive->gsmPreActive->gsm_number}}
+        <option value="{{ $detail->id }}" {{ old('gsm_pemasangan') == $detail->id  ? 'selected':'' }}>
+        {{$detail->gsm}}
         </option>
 
        @endforeach

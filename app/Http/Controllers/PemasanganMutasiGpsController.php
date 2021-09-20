@@ -59,7 +59,7 @@ class PemasanganMutasiGpsController extends Controller
             "tanggal"               => $request->tanggal,
             "kendaraan_awal"        => $request->kendaraan_awal,
             "imei"                  => $request->imei,
-            "gsm"                   => $request->gsm,
+            "gsm_pemasangan"                   => $request->gsm_pemasangan,
             "kendaraan_pasang"      => $request->kendaraan_pasang,
             "jenis_pekerjaan"       => $request->jenis_pekerjaan,
             "equipment_terpakai_gps" => $request->equipment_terpakai_gps,
@@ -93,11 +93,11 @@ class PemasanganMutasiGpsController extends Controller
     public function update(Request $request, $id)
     {
         $data = PemasanganMutasiGps::findOrfail($id);
-        $data->company = $request->company;
+        $data->company_id = $request->company_id;
         $data->tanggal = $request->tanggal;
         $data->kendaraan_awal = $request->kendaraan_awal;
         $data->imei = $request->imei;
-        $data->gsm = $request->gsm;
+        $data->gsm_pemasangan = $request->gsm_pemasangan;
         $data->kendaraan_pasang = $request->kendaraan_pasang;
         $data->jenis_pekerjaan = $request->jenis_pekerjaan;
         $data->equipment_terpakai_gps = $request->equipment_terpakai_gps;
@@ -121,11 +121,11 @@ class PemasanganMutasiGpsController extends Controller
     public function updateall(Request $request, $id)
     {
         $data = PemasanganMutasiGps::findOrfail($id);
-        $data->company = $request->company;
+        $data->company_id = $request->company_id;
         $data->tanggal = $request->tanggal;
         $data->kendaraan_awal = $request->kendaraan_awal;
         $data->imei = $request->imei;
-        $data->gsm = $request->gsm;
+        $data->gsm_pemasangan = $request->gsm_pemasangan;
         $data->kendaraan_pasang = $request->kendaraan_pasang;
         $data->jenis_pekerjaan = $request->jenis_pekerjaan;
         $data->equipment_terpakai_gps = $request->equipment_terpakai_gps;

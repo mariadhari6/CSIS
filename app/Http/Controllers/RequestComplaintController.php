@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Pic;
 use App\Models\RequestComplaintCustomer;
 use Illuminate\Http\Request;
@@ -17,11 +18,13 @@ class RequestComplaintController extends Controller
     public function add_form()
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
         return view('request_complaint.add_form')->with([
 
             'request_complain' => $request_complain,
-            'pic'              => $pic
+            'pic'              => $pic,
+            'company'              => $company,
         ]);
     }
 

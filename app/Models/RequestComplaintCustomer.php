@@ -18,14 +18,14 @@ class RequestComplaintCustomer extends Model
 
     public function companyRequest()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'id');
     }
     public function picRequest()
     {
-        return $this->belongsTo(Pic::class);
+        return $this->belongsTo(Pic::class, 'id');
     }
     public function pemasanganMutasiGps()
     {
-        return $this->hasOne(PemasanganMutasiGps::class);
+        return $this->hasMany(PemasanganMutasiGps::class);
     }
 }

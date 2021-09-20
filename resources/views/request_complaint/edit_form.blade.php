@@ -18,7 +18,7 @@
     <option value="Eksternal Complain">Eksternal Complain</option>
     </select></i></td>
 
-    <td><select class="form-control" id="pic" name="pic">
+    <td><select class="form-control pic-{{$request_complain->id}}" id="pic" name="pic">
        @foreach ($pic as $pics)
         <option value="{{ $pic->id }}" {{ old('pic') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
 
@@ -54,8 +54,12 @@
         <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$request_complain->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ $request_complain->waktu_kesepakatan}}"></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input expired_date-{{$request_complain->id}}" id="expired_date" placeholder="Expired Date" value="{{ $request_complain->expired_date}}"></i></div>
+        <div class="input-div"><input type="datetime-local" class="input waktu_solve-{{$request_complain->id}}" id="waktu_solve" placeholder="waktu Solve" value="{{ $request_complain->waktu_solve}}"></i></div>
     </td>
-      <td><textarea class="form-control note-{{$request_complain->id}}" id="note" name="note" >{{$request_complain->note}}</textarea></i></td>
-
+    <td>
+        <div class="input-div"><input type="text" class="input status-{{$request_complain->id}}" id="status" placeholder="status" value="{{ $request_complain->status}}"></i></div>
+    </td>
+    <td>
+        <div class="input-div"><input type="text" class="input status_akhir-{{$request_complain->id}}" id="status_akhir" placeholder="status akhir" value="{{ $request_complain->status_akhir}}"></i></div>
+    </td>
 

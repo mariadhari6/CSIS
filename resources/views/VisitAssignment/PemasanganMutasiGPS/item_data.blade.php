@@ -25,10 +25,10 @@
                 {{ $pemasangan_mutasi_GPSes->requestComplain->vehicle}}
         </td>
           <td id="item-imei-{{ $pemasangan_mutasi_GPSes->id }}">
-            {{ $pemasangan_mutasi_GPSes->detailCustomer->gps->imei }}
+            {{ $pemasangan_mutasi_GPSes->detailCustomer->imei}}
         </td>
-          <td id="item-gsm-{{ $pemasangan_mutasi_GPSes->id }}">
-            {{ $pemasangan_mutasi_GPSes->detailCustomer->gsmActive->gsmPreActive->gsm_number}}
+          <td id="item-gsm_pemasangan-{{ $pemasangan_mutasi_GPSes->id }}">
+            {{ $pemasangan_mutasi_GPSes->detailCustomer->gsm}}
         </td>
 
         <td id="item-kendaraan_pasang-{{ $pemasangan_mutasi_GPSes->id }}">
@@ -39,11 +39,11 @@
         </td>
 
         <td id="item-equipment_terpakai_gps-{{ $pemasangan_mutasi_GPSes->id }}">
-            {{ $pemasangan_mutasi_GPSes->gpsPemasangan->type}}
+            {{$pemasangan_mutasi_GPSes->gps->type}}
         </td>
 
         <td id="item-equipment_terpakai_sensor-{{ $pemasangan_mutasi_GPSes->id }}">
-            {{ $pemasangan_mutasi_GPSes->sensorPemasangan->sensor_name}}
+            {{$pemasangan_mutasi_GPSes->sensor->sensor_name}}
         </td>
 
         <td id="item-teknisi-{{ $pemasangan_mutasi_GPSes->id }}">

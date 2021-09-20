@@ -308,8 +308,8 @@
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
+                                $(".cancel").hide("fast");
+                                $(".save").hide("fast");
 
 
                             }

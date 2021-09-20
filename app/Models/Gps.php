@@ -16,7 +16,7 @@ class Gps extends Model
 
     public function pemasanganMutasiGps()
     {
-        return $this->hasOne(PemasanganMutasiGps::class);
+        return $this->hasMany(PemasanganMutasiGps::class);
     }
     public function detailCustomer()
     {

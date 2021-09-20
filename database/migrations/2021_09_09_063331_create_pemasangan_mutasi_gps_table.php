@@ -19,7 +19,7 @@ class CreatePemasanganMutasiGpsTable extends Migration
             $table->foreignId('tanggal')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('kendaraan_awal')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('imei')->constrained('detail_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('gsm')->constrained('detail_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('gsm_pemasangan')->constrained('detail_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('kendaraan_pasang')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('jenis_pekerjaan')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('equipment_terpakai_gps')->constrained('gps')->onDelete('cascade')->onUpdate('cascade')->nullable();

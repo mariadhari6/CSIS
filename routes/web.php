@@ -15,7 +15,7 @@ use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\CustomerServiceController;
-
+use App\Http\Controllers\RequestComplaintController;
 use App\Models\DetailCustomer;
 use App\Models\Username;
 
@@ -206,6 +206,18 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
     Route::get('/selected', [PemasanganMutasiGpsController::class, 'selected']);
     Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
+
+    // Request Complain
+    Route::get('/RequestComplain', [RequestComplaintController::class, 'index'])->name('request.complain');
+    Route::get('/item_data_RequestComplain', [RequestComplaintController::class, 'item_data']);
+    Route::get('/add_form_RequestComplain', [RequestComplaintController::class, 'add_form']);
+    Route::get('/store_RequestComplain', [RequestComplaintController::class, 'store']);
+    Route::get('/destroy_RequestComplain/{id}', [RequestComplaintController::class, 'destroy']);
+    Route::get('/show_RequestComplain/{id}', [RequestComplaintController::class, 'edit_form']);
+    Route::get('/update_RequestComplain/{id}', [RequestComplaintController::class, 'update']);
+    Route::get('/selectedDelete_RequestComplain', [RequestComplaintController::class, 'deleteAll']);
+    Route::get('/selected', [RequestComplaintController::class, 'selected']);
+    Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
 });
 
 
