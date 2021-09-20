@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class RequestComplaintCustomer extends Model
 {
     use HasFactory;
-
     protected $table = 'request_complaint_customers';
 
     protected $fillable = [
@@ -16,14 +15,16 @@ class RequestComplaintCustomer extends Model
         'detail_task', 'divisi', 'respond', 'waktu_kesepakatan', 'waktu_solve', 'status', 'status_akhir',
     ];
 
-    public function companyRequest()
+    public function company()
     {
         return $this->belongsTo(Company::class);
     }
+
     public function picRequest()
     {
         return $this->belongsTo(Pic::class);
     }
+    
     public function pemasanganMutasiGps()
     {
         return $this->hasOne(PemasanganMutasiGps::class);

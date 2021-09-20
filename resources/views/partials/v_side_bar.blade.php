@@ -152,7 +152,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#edit">
+                            <a href="/MaintenanceGps">
                                 <span class="link-collapse">Maintenance GPS </span>
                             </a>
                         </li>

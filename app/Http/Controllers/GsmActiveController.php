@@ -16,6 +16,7 @@ class GsmActiveController extends Controller
     {
         return view('MasterData.GsmActive.index');
     }
+    
     public function add_form()
     {
         $company = Company::orderBy('company_name', 'DESC')->get();
