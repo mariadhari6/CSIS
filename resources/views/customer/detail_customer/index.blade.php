@@ -16,7 +16,12 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
+<<<<<<< HEAD
           <table class="table table-responsive" class="detailcustomer" id="detailcustomer">
+=======
+          <table class="table table-responsive" class="table_id" id="table_id">
+
+>>>>>>> da4365d189c93cf5ff829b11638c78875478ec72
             <thead>
               <tr>
                 <th width="10px">
@@ -71,19 +76,19 @@
 
     function read(){
 
-      $.get("{{ route('item_detail')}}", {}, function(data, status) {
-        $('#detailcustomer').DataTable().destroy();
-        $('#detailcustomer').find("#item_data").html(data);
-        $('#detailcustomer').dataTable( {
+      $.get("{{ url('item_data_detail')}}", {}, function(data, status) {
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             } );
-        $('#detailcustomer').DataTable().draw();
+        $('#table_id').DataTable().draw();
       });
     }
 
     $('.add').click(function() {
-        $.get("{{ route('add_detail')}}", {}, function(data, status) {
-          $('#detailcustomer tbody').prepend(data);
+        $.get("{{ url('add_form_detail')}}", {}, function(data, status) {
+          $('#table_id tbody').prepend(data);
 
         });
     });
@@ -116,11 +121,11 @@
 
         $.ajax({
             type: "get",
-            url: "{{ route('save_detail')}}",
+            url: "{{ url('store_detail')}}",
             data: {
                 CompanyId           : CompanyId,
                 LicencePlate        : LicencePlate,
-                VihecleType         : VihecleType,
+                VihecleType        : VihecleType,
                 PoNumber            : PoNumber,
                 PoDate              : PoDate,
                 StatusPo            : StatusPo,
@@ -170,7 +175,7 @@
               return new Promise(function(resolve) {
                 $.ajax({
                     type: "get",
-                    url: "{{ url('delete_detail') }}/" + id,
+                    url: "{{ url('destroy_detail') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
                         // swal("Done!","It was succesfully deleted!","success");
@@ -223,77 +228,51 @@
 
      function update(id) {
 
-            var FirstName = $("#FirstName").val();
-            var LastName = $("#LastName").val();
-            var id = id;
-            $.ajax({
-                type: "get",
-                url: "{{ url('update') }}/"+id,
-                data: {
-                FirstName: FirstName,
-                LastName: LastName
-                },
-                success: function(data) {
-                swal({
-                    type: 'success',
-                    title: ' Data Updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).catch(function(timeout) { })
-                read()
-
-                }
-
-
-            });
-        }
-
-        function update(id) {
-            var CompanyId           = $("#CompanyId").val();
-            var LicencePlate        = $("#LicencePlate").val();
-            var VihecleType         = $("#VihecleType").val();
-            var PoNumber            = $("#PoNumber").val();
-            var PoDate              = $("#PoDate").val();
-            var StatusPo            = $("#StatusPo").val();
-            var Imei                = $("#Imei").val();
-            var Merk                = $("#Merk").val();
-            var Type                = $("#Type").val();
-            var GSM                 = $("#GSM").val();
-            var Provider            = $("#Provider").val();
-            var SerialNumberSensor  = $("#SerialNumberSensor").val();
-            var NameSensor          = $("#NameSensor").val();
-            var MerkSensor          = $("#MerkSensor").val();
-            var PoolName            = $("#PoolName").val();
-            var PoolLocation        = $("#PoolLocation").val();
-            var Waranty             = $("#Waranty").val();
-            var StatusLayanan       = $("#StatusLayanan").val();
-            var TanggalPasang       = $("#TanggalPasang").val();
-            var TanggalNonAktif     = $("#TanggalNonAktif").val();
+              var CompanyId           = $("#CompanyId").val();
+        var LicencePlate        = $("#LicencePlate").val();
+        var VihecleType         = $("#VihecleType").val();
+        var PoNumber            = $("#PoNumber").val();
+        var PoDate              = $("#PoDate").val();
+        var StatusPo            = $("#StatusPo").val();
+        var Imei                = $("#Imei").val();
+        var Merk                = $("#Merk").val();
+        var Type                = $("#Type").val();
+        var GSM                 = $("#GSM").val();
+        var Provider            = $("#Provider").val();
+        var SerialNumberSensor  = $("#SerialNumberSensor").val();
+        var NameSensor          = $("#NameSensor").val();
+        var MerkSensor          = $("#MerkSensor").val();
+        var PoolName            = $("#PoolName").val();
+        var PoolLocation        = $("#PoolLocation").val();
+        var Waranty             = $("#Waranty").val();
+        var StatusLayanan       = $("#StatusLayanan").val();
+        var TanggalPasang       = $("#TanggalPasang").val();
+        var TanggalNonAktif     = $("#TanggalNonAktif").val();
             var id = id;
             $.ajax({
                 type: "get",
                 url: "{{ url('update_detail') }}/"+id,
                 data: {
-                    CompanyId           : CompanyId,
-                    LicencePlate        : LicencePlate,
-                    VihecleType         : VihecleType,
-                    PoNumber            : PoNumber,
-                    PoDate              : PoDate,
-                    StatusPo            : StatusPo,
-                    Imei                : Imei,
-                    Merk                : Merk,
-                    Type                : Type,
-                    GSM                 : GSM,
-                    Provider            : Provider,
-                    SerialNumberSensor  : SerialNumberSensor,
-                    NameSensor          : NameSensor,
-                    MerkSensor          : MerkSensor,
-                    PoolName            : PoolName,
-                    PoolLocation        : PoolLocation,
-                    Waranty             : Waranty,
-                    StatusLayanan       : StatusLayanan,
-                    TanggalPasang       : TanggalPasang,
-                    TanggalNonAktif     : TanggalNonAktif
+                CompanyId           : CompanyId,
+                LicencePlate        : LicencePlate,
+                VihecleType         : VihecleType,
+                PoNumber            : PoNumber,
+                PoDate              : PoDate,
+                StatusPo            : StatusPo,
+                Imei                : Imei,
+                Merk                : Merk,
+                Type                : Type,
+                GSM                 : GSM,
+                Provider            : Provider,
+                SerialNumberSensor  : SerialNumberSensor,
+                NameSensor          : NameSensor,
+                MerkSensor          : MerkSensor,
+                PoolName            : PoolName,
+                PoolLocation        : PoolLocation,
+                Waranty             : Waranty,
+                StatusLayanan       : StatusLayanan,
+                TanggalPasang       : TanggalPasang,
+                TanggalNonAktif     : TanggalNonAktif
                 },
                 success: function(data) {
                 swal({
@@ -309,6 +288,8 @@
 
             });
         }
+
+
 
         $('#master').on('click', function(e) {
           if($(this).is(':checked',true) ){
@@ -347,7 +328,7 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ route('deleteAll_detail') }}",
+                            url: "{{ url('selectedDelete_detail') }}",
                             method: "GET",
                             data: {
                                 id: allVals,
@@ -457,7 +438,11 @@
                 $.each(allVals, function(index, value){
                     var CompanyId           = $(".CompanyId-"+ value).val();
                     var LicencePlate        = $(".LicencePlate-"+ value).val();
+<<<<<<< HEAD
                     var VihecleType         = $(".VehicleType-"+ value).val();
+=======
+                    var VihecleType         = $(".VihecleType-"+ value).val();
+>>>>>>> da4365d189c93cf5ff829b11638c78875478ec72
                     var PoNumber            = $(".PoNumber-"+ value).val();
                     var PoDate              = $(".PoDate-"+ value).val();
                     var StatusPo            = $(".StatusPo-"+ value).val();
@@ -522,6 +507,20 @@
             });
 
         }
+<<<<<<< HEAD
+=======
+
+        //--------Proses Batal--------
+         function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
+            }
+
+>>>>>>> da4365d189c93cf5ff829b11638c78875478ec72
 
 
 

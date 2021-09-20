@@ -48,7 +48,7 @@
     outline: none;
     background: none;
     padding: 1rem 0.7rem;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -99,19 +99,19 @@
     text-align: center;
 }
 
-/* tabel detailcustomer */
 
-#detailcustomer {
+/* Datatable */
+.dataTables_length {
+    margin-top: 5px;
+    margin-left: 20px;
 
-    position: relative;
-    bottom: 0px;
 }
 
-
-#detailcustomer tbody tr td {
+.action{
+    min-width: 80px;
     text-align: center;
-
 }
+<<<<<<< HEAD
 
 /* tabel summary */
 
@@ -145,98 +145,116 @@
 }
 
 
+=======
+>>>>>>> da4365d189c93cf5ff829b11638c78875478ec72
+.list{
+    min-width: 140px;
+    font-size: 15px;
+    text-align: center;
+}
+.list-seller{
+    min-width: 180px;
+    font-size: 15px;
+    text-align: center;
+}
+.dataTables_filter {
+    position: relative;
+    right: 150px;
+    bottom: 35px;
+}
+
+.fa-times {
+    color: red;
+}
+
+.input-div {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 0px;
+    padding: 13px;
+    border-bottom: 2px solid #946868;
+}
+
+
+
+.input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 1rem 0.7rem;
+    font-size: 0.8rem;
+    color: #555;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.select {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 0px;
+    padding: 13px;
+    border: none;
+    border-bottom: 2px solid #946868;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 30%;
+    outline: none;
+    background: none;
+    padding: 0.3rem 0.7rem;
+    font-size: 1rem;
+    color: #555;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+/* tabel livetable */
+
+#table_id {
+    position: relative;
+    bottom: 0px;
+    text-align: center;
+}
+
+/*  */
+
+/* .main-header .logo-header .navbar-toggler {
+    padding-left: 0px;
+    padding-right: 0px;
+    opacity: 0;
+}
+
+
+#detailcustomer tbody tr td {
+    text-align: center;
+
+}
+
 .list{
     min-width: 250px;
     font-size: 15px;
     text-align: center;
 }
+.main-header .logo-header .navbar-toggler .navbar-toggler-icon {
+    background: url(../img/menu2.png);
+    background-size: cover;
+    height: 1em;
+    width: 1em;
+    opacity: 0.8;
+} */
 
-.action{
-    min-width: 80px;
-    text-align: center;
+/* .delete_all{
+    display: none;
+}
+.edit_all{
+    display: none;
 }
 
-#item_data {
-    font-size: 10px;
-}
-
-.title{
-    font-size: 25px;
-
-}
-
-
-/*******************************
-* MODAL AS LEFT/RIGHT SIDEBAR
-* Add "left" or "right" in modal parent div, after class="modal".
-* Get free snippets on bootpen.com
-*******************************/
-
-.modal.right .modal-dialog {
-    position: fixed;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    -webkit-transform: translate3d(0%, 0, 0);
-        -ms-transform: translate3d(0%, 0, 0);
-         -o-transform: translate3d(0%, 0, 0);
-            transform: translate3d(0%, 0, 0);
-}
-
-
-.modal.right .modal-content {
-    height: 100%;
-    overflow-y: auto;
-}
-
-
-.modal.right .modal-body {
-    padding: 15px 15px 80px;
-}
-
-
-
-/*Right*/
-.modal.right.fade .modal-dialog {
-    right: -5px;
-    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-       -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-         -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-            transition: opacity 0.3s linear, right 0.3s ease-out;
-}
-
-.modal.right.fade.in .modal-dialog {
-    right: 0;
-}
-
-/* ----- MODAL STYLE ----- */
- .modal-content {
-    border-radius: 0;
-    border: none;
-}
-
-.modal-header {
-    border-bottom-color: #EEEEEE;
-    background-color: #FAFAFA;
-
-}
-
-
-.demo {
-padding-top: 60px;
-padding-bottom: 110px;
-}
-
-.btn-demo {
-margin: 15px;
-padding: 10px 15px;
-border-radius: 0;
-font-size: 16px;
-background-color: #FFFFFF;
-}
-
-.btn-demo:focus {
-	outline: 0;
-}
-
-
+.add {
+    display: none;
+} */

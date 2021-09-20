@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SummaryCustomer extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
     protected $table = 'summary_customers';
 
     protected $fillable = [
@@ -22,4 +23,6 @@ class SummaryCustomer extends Model
         'jumlah'
 
     ];
+=======
+>>>>>>> da4365d189c93cf5ff829b11638c78875478ec72
 }

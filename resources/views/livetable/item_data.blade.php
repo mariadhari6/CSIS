@@ -22,5 +22,3 @@
         </td>
     </tr>
 @endforeach
-
-

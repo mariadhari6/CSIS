@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaniesTable extends Migration
+class CreateGpsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('gps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('seller_id')->constrained('sellers')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('company_name');
-            $table->string('status');
-            $table->string('customer_code');
-            $table->string('no_po');
+            $table->string('merk');
+            $table->string('type');
+            $table->bigInteger('imei');
+            $table->date('waranty');
             $table->date('po_date');
+            $table->string('status');
+            $table->string('status_ownership');
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('gps');
     }
 }
