@@ -1,24 +1,15 @@
 @extends('layouts.v_main')
-@section('title','Gsm Pre Active')
+@section('title','CSIS | Gsm Pre Active')
 
 
 @section('content')
 
-<<<<<<< HEAD
 <h4 class="page-title">GSM Pre Active</h4>
-=======
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-<<<<<<< HEAD
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button">
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" id="add"></i>
@@ -31,15 +22,6 @@
                 </button>
             </div>
           <table class="table table-responsive data" class="table_id" id="table_id" >
-=======
-                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-            <br>
-        <div class="table-responsive">
-          <table class="table table-hover data" class="table_id" id="table_id" >
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             <thead>
               <tr>
                 <th>
@@ -50,7 +32,6 @@
                         </label>
                     </div>
                 </th>
-<<<<<<< HEAD
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list">Gsm Number</th>
                 <th scope="col" class="list">Serial Number</th>
@@ -59,16 +40,6 @@
                 <th scope="col" class="list">Res ID</th>
                 <th scope="col" class="list">Expired Date</th>
                 <th scope="col" class="list">Note</th>
-=======
-                <th scope="col">Action</th>
-                <th scope="col">Gsm Number</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">ICC ID</th>
-                <th scope="col">IMSI</th>
-                <th scope="col">Res ID</th>
-                <th scope="col">Expired Date</th>
-                <th scope="col">Note</th>
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -76,10 +47,6 @@
             </tbody>
           </table>
         </div>
-<<<<<<< HEAD
-=======
-        </div>
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
       </div>
     </div>
   </div>
@@ -96,14 +63,11 @@
       $.get("{{ url('item_data_GsmPreActive') }}", {}, function(data, status) {
          $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
-<<<<<<< HEAD
          $('#table_id').dataTable( {
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
-=======
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         $('#table_id').DataTable().draw();
       });
     }
@@ -303,11 +267,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-<<<<<<< HEAD
                 $.get("{{ url('selected_gsmpreaktiv') }}", {}, function(data, status) {
-=======
-                $.get("{{ url('selected') }}", {}, function(data, status) {
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -394,25 +354,14 @@
         }
 
         //--------Proses Batal--------
-<<<<<<< HEAD
         function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
             $("#cancel-selected").hide("fast");
-=======
-         function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-<<<<<<< HEAD
         }
-=======
-            }
-
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 
 
 

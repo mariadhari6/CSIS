@@ -7,12 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-<<<<<<< HEAD
-=======
     use HasFactory;
     protected $table = 'companies';
 
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     protected $fillable = [
         'company_name', 'seller_id', 'customer_code', 'no_po', 'po_date', 'no_agreement_letter_id', 'status',
     ];
@@ -34,7 +31,7 @@ class Company extends Model
     {
         return $this->hasMany(GsmTerminate::class);
     }
-<<<<<<< HEAD
+    //---------------------//
     public function requestComplaint()
     {
         return $this->hasMany(RequestComplaintCustomer::class);
@@ -47,6 +44,4 @@ class Company extends Model
     {
         return $this->hasMany(PemasanganMutasiGps::class);
     }
-=======
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 }

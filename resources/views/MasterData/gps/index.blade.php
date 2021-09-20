@@ -1,39 +1,20 @@
 @extends('layouts.v_main')
-@section('title','Gps')
+@section('title','CSIS | Gps')
 
 
 @section('content')
 
-<<<<<<< HEAD
 <h4 class="page-title">GPS</h4>
-=======
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-<<<<<<< HEAD
           <div class="text-right mt-3" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
               <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
           <table class="table table-responsive data" class="table_id" id="table_id" >
-=======
-            <div class="text-right mt-3" id="selected">
-               <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-            <br>
-        <div class="table-responsive">
-          <table class="table table-hover data" class="table_id" id="table_id" >
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             <thead>
               <tr>
                 <th width="10px">
@@ -44,7 +25,6 @@
                         </label>
                     </div>
                 </th>
-<<<<<<< HEAD
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list" >Merk</th>
                 <th scope="col" class="list" >Type</th>
@@ -53,27 +33,13 @@
                 <th scope="col" class="list" >Po Date</th>
                 <th scope="col" class="list" >Status</th>
                 <th scope="col" class="list" >Status Ownership</th>
-=======
-                <th scope="col" width="80px">Action</th>
-                <th scope="col">Merk</th>
-                <th scope="col">Type</th>
-                <th scope="col">IMEI</th>
-                <th scope="col">Waranty</th>
-                <th scope="col">Po Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Status Ownership</th>
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-<<<<<<< HEAD
         {{-- </div> --}}
-=======
-        </div>
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         </div>
       </div>
     </div>
@@ -91,14 +57,11 @@
       $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
-<<<<<<< HEAD
         $('#table_id').dataTable( {
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
-=======
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         $('#table_id').DataTable().draw();
       });
     }
@@ -127,21 +90,12 @@
             url: "{{ url('store_gps') }}",
             data: {
               merk: merk,
-<<<<<<< HEAD
               type: type,
               imei: imei,
               waranty: waranty,
               po_date: po_date,
               status: status,
               status_ownership: status_ownership
-=======
-              type:type,
-              imei: imei,
-              waranty: waranty,
-              po_date: po_date,
-              status:status,
-              status_ownership:status_ownership
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             },
             success: function(data) {
               swal({
@@ -308,11 +262,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-<<<<<<< HEAD
                 $.get("{{ url('selected_gps') }}", {}, function(data, status) {
-=======
-                $.get("{{ url('selected') }}", {}, function(data, status) {
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -398,17 +348,10 @@
                 });
         }
 
-<<<<<<< HEAD
          //--------Proses Batal--------
          function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
             $("#cancel-selected").hide("fast");
-=======
-        //--------Proses Batal--------
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");

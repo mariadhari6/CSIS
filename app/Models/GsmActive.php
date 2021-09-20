@@ -22,23 +22,16 @@ class GsmActive extends Model
 
     public function gsmTerminate()
     {
-<<<<<<< HEAD
-        return $this->belongsTo(GsmTerminate::class);
-=======
         return $this->hasMany(GsmTerminate::class);
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     }
 
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
-<<<<<<< HEAD
 
     public function detailCustomer()
     {
         return $this->hasMany(DetailCustomer::class);
     }
-=======
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
 }

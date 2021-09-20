@@ -1,26 +1,13 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
 @section('title','CSIS | Seller')
 
 @section('content')
 <h4 class="page-title">Seller</h4>
-=======
-@section('title','Seller')
-
-@section('content')
-
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-<<<<<<< HEAD
                 <button type="button" class="btn btn-primary float-left mr-2 add" id="add">
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" ></i>
@@ -33,15 +20,6 @@
                 </button>
             </div>
           <table class="table table-responsive data" class="table_id" id="table_id" >
-=======
-                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-            <br>
-          <div class="table-responsive">
-          <table class="table table-hover data" class="table_id" id="table_id" >
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             <thead>
               <tr>
                 <th>
@@ -52,19 +30,11 @@
                         </label>
                     </div>
                 </th>
-<<<<<<< HEAD
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list-seller">Seller Name</th>
                 <th scope="col" class="list-seller">Seller Code</th>
-                <th scope="col" class="list-seller">No Agreement Latter</th>
+                <th scope="col" class="list-seller">No Agreement Letter</th>
                 <th scope="col" class="list-seller">Status</th>
-=======
-                <th scope="col">Action</th>
-                <th scope="col">Seller Name</th>
-                <th scope="col">Seller Code</th>
-                <th scope="col">No Agreement Latter</th>
-                <th scope="col">Status</th>
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -72,15 +42,10 @@
             </tbody>
           </table>
         </div>
-<<<<<<< HEAD
-=======
-        </div>
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
       </div>
     </div>
   </div>
 
-<<<<<<< HEAD
   <script>
 
     $(document).ready(function() {
@@ -99,23 +64,6 @@
       });
     }
 
-=======
-
-
-  <script>
-    $(document).ready(function() {
-      read()
-    });
-    // ------ Tampil Data ------
-    function read(){
-
-      $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-        $('#table_id').DataTable().draw();
-      });
-    }
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -127,10 +75,6 @@
           $('#table_id tbody').prepend(data);
         });
       });
-<<<<<<< HEAD
-
-=======
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     // ----- Proses Tambah data ------
     function store() {
         var seller_name = $("#seller_name").val();
@@ -152,21 +96,12 @@
                 title: 'Data Saved',
                 showConfirmButton: false,
                 timer: 1500
-<<<<<<< HEAD
               }).catch(function(timeout) { });
               read();
             }
         })
     }
 
-=======
-            }).catch(function(timeout) { });
-              read();
-
-            }
-        })
-    }
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -195,19 +130,11 @@
                         read();
                     }
                 });
-<<<<<<< HEAD
-=======
-
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
               });
             },
             allowOutsideClick: false
       });
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
@@ -215,20 +142,12 @@
         $("#td-button-"+id).hide("fast");
         $("#item-seller_name-"+id).hide("fast");
         $("#item-seller_code-"+id).hide("fast");
-<<<<<<< HEAD
         $("#item-no_agreement_letter-"+id).hide("fast");
-=======
-        $("#item-no_agreement_latter-"+id).hide("fast");
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         $("#item-status-"+id).hide("fast");
         $.get("{{ url('show_seller') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
     // ------ Proses Update Data ------
         function update(id) {
             var seller_name = $("#seller_name").val();
@@ -257,10 +176,6 @@
                 }
             });
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
         // checkbox all
         $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
@@ -269,10 +184,6 @@
               $(".task-select").prop('checked',false);
           }
         });
-<<<<<<< HEAD
-
-=======
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
          // Delete All
         $('.delete_all').on('click', function(){
           event.preventDefault();
@@ -335,11 +246,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-<<<<<<< HEAD
                 $.get("{{ url('selected_seller') }}", {}, function(data, status) {
-=======
-                $.get("{{ url('selected') }}", {}, function(data, status) {
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -364,10 +271,6 @@
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
-<<<<<<< HEAD
-=======
-
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -397,7 +300,6 @@
                     },
                     success: function(data) {
                    swal({
-<<<<<<< HEAD
                         type: 'success',
                         title: 'The selected data has been updated',
                         showConfirmButton: false,
@@ -422,39 +324,10 @@
          function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
             $("#cancel-selected").hide("fast");
-=======
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-
-                                // $(".save").hide();
-                                });
-                                read();
-
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
-                    }
-                });
-            });
-        });
-
-
-        }
-
-        //--------Proses Batal--------
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-<<<<<<< HEAD
         }
 
 
@@ -463,11 +336,3 @@
 
 
 @endsection
-=======
-            }
-
-
-
-  </script>
-   @endsection
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
