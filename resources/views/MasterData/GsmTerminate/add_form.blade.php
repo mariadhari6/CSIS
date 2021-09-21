@@ -3,17 +3,17 @@
     <td>
         <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()">
     </td>
-    <td> 
+    <td>
         <div class="input-div">
             <input type="date" class="input" id="request_date" placeholder="Request Date" >
         </div>
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="date" class="input" id="terminate_date" placeholder="Terminate_date">
         </div>
     </td>
     <td>
-        <select class="form-control" id="gsm_active_id" name="gsm_active_id">
+        <select class="select" id="gsm_active_id" name="gsm_active_id">
         @foreach ($GsmActive as $item)
         <option value="{{ $item->gsmPreActive->id }}">
             {{$item->gsmPreActive->gsm_number}}
@@ -22,12 +22,12 @@
         </select>
     </td>
     <td>
-        <select class="form-control" id="status_active" id="status_active" aria-label=".form-select-lg example">
+        <select class="select" id="status_active" id="status_active" aria-label=".form-select-lg example">
         <option value="Sukses">Sukses</option>
         <option value="Tidak Sukses">Tidak Sukses</option>
         </select></i></td>
     <td>
-        <select class="form-control" id="company_id" name="company_id">
+        <select class="select" id="company_id" name="company_id">
             @foreach ($GsmActive as $item)
             <option value="{{ $item->company_id }}">
             {{$item->company->company_name}}

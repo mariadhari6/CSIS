@@ -50,7 +50,8 @@
             {{ $pemasangan_mutasi_GPSes->teknisi}}
         </td>
          <td id="item-uang_transportasi-{{ $pemasangan_mutasi_GPSes->id }}">
-            {{ $pemasangan_mutasi_GPSes->uang_transportasi}}
+        <span>Rp. </span>{{ number_format( $pemasangan_mutasi_GPSes->uang_transportasi)}}
+
         </td>
          <td id="item-type_visit-{{ $pemasangan_mutasi_GPSes->id }}">
             {{ $pemasangan_mutasi_GPSes->type_visit}}

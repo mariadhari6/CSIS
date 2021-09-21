@@ -11,7 +11,7 @@
         </div>
     </td>
     <td>
-        <select class="form-control gsm_active_id-{{$GsmTerminate->id}}" id="{{$GsmTerminate->id}}" name="gsm_active_id">
+        <select class="select gsm_active_id-{{$GsmTerminate->id}}" id="{{$GsmTerminate->id}}" name="gsm_active_id">
             <option value="{{ $GsmTerminate->gsmActive->gsmPreActive->id }}">
                 {{ $GsmTerminate->gsmActive->gsmPreActive->gsm_number}}
             </option>
@@ -35,14 +35,14 @@
 
 
     <td>
-        <select class="form-control status_active-{{$GsmTerminate->id}}" id="status_active" aria-label=".form-select-lg example">
+        <select class="select status_active-{{$GsmTerminate->id}}" id="status_active" aria-label=".form-select-lg example">
         <option selected>{{$GsmTerminate->status_active}}</option>
         <option value="Sukses">Sukses</option>
         <option value="Tidak Sukses">Tidak Sukses</option>
         </select></i>
     </td>
     <td>
-        <select class="form-control company_id-{{$GsmTerminate->id}}" id="company_id" name="company_id-{{$GsmTerminate->id}}">
+        <select class="select company_id-{{$GsmTerminate->id}}" id="company_id" name="company_id-{{$GsmTerminate->id}}">
             <option value="{{ $GsmTerminate->company->id}}">
                 {{ $GsmTerminate->gsmActive->company->company_name}}
             </option>

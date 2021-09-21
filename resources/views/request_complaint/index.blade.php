@@ -308,7 +308,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('/selected') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){

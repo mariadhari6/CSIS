@@ -1,12 +1,10 @@
 @extends('layouts.v_main')
-@section('title','Tes')
+@section('title','CSIC | Detail Customer')
 
 @section('content')
 
-<div class="title">
-    <strong>Detail Customer</strong>
-</div>
-<br>
+<h4 class="page-title">Detail Customer</h4>
+
 <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -16,7 +14,7 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-          <table class="table table-responsive" class="table_id" id="table_id">
+          <table class="table table-responsive data" class="table_id" id="table_id">
 
             <thead>
               <tr>
@@ -82,6 +80,9 @@
       });
     }
 
+     function cancel() {
+      read()
+    }
     $('.add').click(function() {
         $.get("{{ url('add_form_detail')}}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
@@ -89,9 +90,7 @@
         });
       });
 
-      function cancel() {
-      read()
-    }
+
 
     function store() {
         var CompanyId           = $("#CompanyId").val();
@@ -224,7 +223,7 @@
 
      function update(id) {
 
-              var CompanyId           = $("#CompanyId").val();
+        var CompanyId           = $("#CompanyId").val();
         var LicencePlate        = $("#LicencePlate").val();
         var VihecleType         = $("#VihecleType").val();
         var PoNumber            = $("#PoNumber").val();
@@ -371,7 +370,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected_detail') }}", {}, function(data, status) {
+                $.get("{{ url('/selected_detail') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
 
                 });
@@ -485,12 +484,14 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 }).catch(function(timeout) { })
-                                $(".save").hide("fast");
-                                $(".cancel").hide("fast");
+                                read();
+
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
-                                read();
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
+
 
                             }
                     });
@@ -501,19 +502,14 @@
         }
 
         //--------Proses Batal--------
-         function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+        function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-            }
-
-
-
-
-
+        }
 
 
 </script>

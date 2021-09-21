@@ -15,6 +15,7 @@ use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\CustomerServiceController;
+use App\Http\Controllers\DashboardVisitAssignmentController;
 use App\Http\Controllers\RequestComplaintController;
 use App\Models\DetailCustomer;
 use App\Models\Username;
@@ -193,7 +194,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
     Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
     Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
-    Route::get('/selected', [DetailCustomerController::class, 'selected']);
+    Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
     Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
 
     // Pemasangan Mutasi GPS
@@ -217,8 +218,11 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_RequestComplain/{id}', [RequestComplaintController::class, 'edit_form']);
     Route::get('/update_RequestComplain/{id}', [RequestComplaintController::class, 'update']);
     Route::get('/selectedDelete_RequestComplain', [RequestComplaintController::class, 'deleteAll']);
-    Route::get('/selected', [RequestComplaintController::class, 'selected']);
+    Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
+
+    //Dashboar Visit Assignment
+    Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
 });
 
 
