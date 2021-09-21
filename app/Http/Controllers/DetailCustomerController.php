@@ -20,7 +20,7 @@ class DetailCustomerController extends Controller
         return view('customer.detail_customer.item_data', compact('details'));
     }
 
-<<<<<<< HEAD
+
     public function add_form(){
 
         $response = Http::post('https://oslog.id/apiv5/gps/search?apiKey=8725f9e6-7713-4c99-8fd8-20ae0a523709', [
@@ -47,12 +47,6 @@ class DetailCustomerController extends Controller
         $items = $data['data'];
 
         return view('customer.detail_customer.add_form' , compact('items'));
-=======
-    public function add_form()
-    {
-        $company = Company::orderBy('id', 'DESC')->get();
-        return view('customer.detail_customer.add_form', compact('company'));
->>>>>>> da4365d189c93cf5ff829b11638c78875478ec72
     }
 
     public function store(Request $request)

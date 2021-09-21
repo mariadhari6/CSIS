@@ -87,7 +87,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('export', [UsernameController::class, 'export'])->name('export');
 
 
-<<<<<<< HEAD
     Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
     Route::get('/item_summary', [SummaryController::class, 'item_data'])->name('item_summary');
     Route::get('/add_summary', [DetailCustomerController::class, 'add_form'])->name('add_summary');
@@ -97,7 +96,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/dashboard_customer', [DashboardCustomerController::class, 'index'])->name('dashboard_customer');
 
 
-=======
+
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
     Route::get('/item_data_company', [CompanyController::class, 'item_data']);
@@ -123,6 +122,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_pic', [PicController::class, 'deleteAll']);
     Route::get('/selected', [PicController::class, 'selected']);
     Route::get('/update_all/{id}', [PicController::class, 'updateall']);
+
     // seller
     Route::get('/seller', [SellerController::class, 'index'])->name('seller');
     Route::get('/item_data_seller', [SellerController::class, 'item_data']);
@@ -196,9 +196,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected', [GsmPreActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
 
-    //detail customer
-    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('Detail customer');
-    Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data']);
+    // detail customer
+    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
+    Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
     Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form']);
     Route::get('/store_detail', [DetailCustomerController::class, 'store']);
     Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
@@ -207,7 +207,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
     Route::get('/selected', [DetailCustomerController::class, 'selected']);
     Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
-    // Pemasangan Mutasi GPS
+
 
     Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
     Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
@@ -231,7 +231,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_RequestComplain', [RequestComplaintController::class, 'deleteAll']);
     Route::get('/selected', [RequestComplaintController::class, 'selected']);
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
->>>>>>> da4365d189c93cf5ff829b11638c78875478ec72
+
 });
 
 

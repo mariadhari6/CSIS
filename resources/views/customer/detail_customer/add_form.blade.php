@@ -1,7 +1,7 @@
 <tr id="add_form">
     <td width="80px"></td>
     <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
-<<<<<<< HEAD
+
     <td >
             <select class="select" id="CompanyId">
                 <option value="" disabled selected>Company</option>
@@ -16,31 +16,6 @@
             @foreach ( $items as $item)
             <option value='{{ $item['data_vehicle']['license_plate'] }}' >{{ $item['data_vehicle']['license_plate'] }}</option>
             @endforeach
-=======
-    <td><select class="select" id="CompanyId" name="company_id">
-       @foreach ($company as $companys)
-        <option value="{{ $companys->id }}" {{ old('CompanyId') == $companys->id  ? 'selected':'' }}>
-        {{$companys->company_name}}
-        </option>
-
-       @endforeach
-    </select></i></td>
-    <td >
-        <select class="select" id="LicencePlate">
-            <option value="" disabled selected>Licence Plate</option>
-            <option value="B-64728-YZ" >B-64728-YZ</option>
-            <option value="B-62737-XS">B-62737-XS</option>
-            <option value="B-73627-WS">B-73627-WS</option>
-            {{-- <option value=""></option> --}}
-        </select>
-    </td>
-     <td >
-        <select class="select" id="VihecleType">
-            <option value="" disabled selected>Vehicle Type</option>
-            <option value="Box" >Box</option>
-            <option value="WingsBox">WingsBox</option>
-
->>>>>>> da4365d189c93cf5ff829b11638c78875478ec72
         </select>
     </td>
 

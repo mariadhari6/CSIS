@@ -75,7 +75,7 @@
                                             <span class="link-collapse">Active</span>
                                         </a>
                                     </li>
-                                    <li>
+                                    class="list"         <li>
                                         <a href="{{url('/GsmTerminate') }}">
                                             <span class="link-collapse">Terminated</span>
                                         </a>
@@ -97,7 +97,7 @@
                 <div class="collapse in" id="customer" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#">
+                            <a href="{{ route('detail_customer')}}">
                                 <span class="link-collapse">Detail Customer</span>
                             </a>
                         </li>
@@ -107,11 +107,7 @@
                             </a>
                         </li>
                         <li>
-<<<<<<< HEAD
                             <a href="{{ route('dashboard_customer')}}">
-=======
-                            <a href="#edit">
->>>>>>> da4365d189c93cf5ff829b11638c78875478ec72
                                 <span class="link-collapse">Dashboard Customer</span>
                             </a>
                         </li>

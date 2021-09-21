@@ -3,11 +3,10 @@
 
 @section('content')
 
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
+<div class="title">
+    <strong>Seller</strong>
+</div>
+<br>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -17,12 +16,10 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-
-
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+          <table class="table" class="seller" id="seller" >
             <thead>
               <tr>
-                <th>
+                <th width="10px">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -31,10 +28,10 @@
                     </div>
                 </th>
                 <th scope="col" class="action">Action</th>
-                <th scope="col" class="list-seller">Seller Name</th>
-                <th scope="col" class="list-seller">Seller Code</th>
-                <th scope="col" class="list-seller">No Agreement Latter</th>
-                <th scope="col" class="list-seller">Status</th>
+                <th scope="col" class="list">Seller Name</th>
+                <th scope="col" class="list">Seller Code</th>
+                <th scope="col" class="list">No Agreement Latter</th>
+                <th scope="col" class="list">Status</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -57,14 +54,14 @@
     function read(){
 
       $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
+        $('#seller').DataTable().destroy();
+        $('#seller').find("#item_data").html(data);
+        $('#seller').dataTable( {
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
 
             });
-        $('#table_id').DataTable().draw();
+        $('#seller').DataTable().draw();
       });
     }
     // ---- Tombol Cancel -----
