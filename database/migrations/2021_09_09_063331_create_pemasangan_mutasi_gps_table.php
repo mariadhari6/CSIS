@@ -15,15 +15,15 @@ class CreatePemasanganMutasiGpsTable extends Migration
     {
         Schema::create('pemasangan_mutasi_gps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('tanggal')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('kendaraan_awal')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('imei')->constrained('detail_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('gsm_pemasangan')->constrained('detail_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('kendaraan_pasang')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('jenis_pekerjaan')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('equipment_terpakai_gps')->constrained('gps')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('equipment_terpakai_sensor')->constrained('sensors')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('company_id')->nullable();
+            $table->foreignId('tanggal')->nullable();
+            $table->foreignId('kendaraan_awal')->nullable();
+            $table->foreignId('imei')->nullable();
+            $table->foreignId('gsm_pemasangan')->nullable();
+            $table->foreignId('kendaraan_pasang')->nullable();
+            $table->foreignId('jenis_pekerjaan')->nullable();
+            $table->foreignId('equipment_terpakai_gps')->nullable();
+            $table->foreignId('equipment_terpakai_sensor')->nullable();
             $table->string('teknisi');
             $table->string('uang_transportasi');
             $table->string('type_visit');

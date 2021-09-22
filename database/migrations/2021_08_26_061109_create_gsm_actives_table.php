@@ -17,9 +17,9 @@ class CreateGsmActivesTable extends Migration
             $table->id();
             $table->date('request_date');
             $table->date('active_date');
-            $table->foreignId('gsm_pre_active_id')->constrained('gsm_pre_actives')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('gsm_pre_active_id');
             $table->string('status_active');
-            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('company_id')->nullable();
             $table->string('note');
             $table->timestamps();
         });

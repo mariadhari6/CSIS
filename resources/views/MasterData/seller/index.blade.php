@@ -16,7 +16,7 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-          <table class="table" class="seller" id="seller" >
+          <table class="table" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th width="10px">
@@ -54,14 +54,14 @@
     function read(){
 
       $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
-        $('#seller').DataTable().destroy();
-        $('#seller').find("#item_data").html(data);
-        $('#seller').dataTable( {
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
 
             });
-        $('#seller').DataTable().draw();
+        $('#table_id').DataTable().draw();
       });
     }
     // ---- Tombol Cancel -----
@@ -70,7 +70,7 @@
     }
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form_seller') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });

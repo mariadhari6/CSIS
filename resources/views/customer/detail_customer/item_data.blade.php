@@ -16,7 +16,7 @@
         </td>
 
         <td id="item-CompanyId-{{ $detail->id }}">
-            {{ $detail->company->company_name}}
+            {{ $detail->company_id}}
         </td>
         <td id="item-LicencePlate-{{ $detail->id }}">
             {{ $detail->licence_plate }}
@@ -28,7 +28,7 @@
             {{ $detail->po_number }}
         </td>
         <td id="item-PoDate-{{ $detail->id }}">
-            {{ $detail->company->po_date}}
+            {{ $detail->po_date}}
         </td>
         <td id="item-StatusPo-{{ $detail->id }}">
             {{ $detail->status_po }}

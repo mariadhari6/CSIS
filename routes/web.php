@@ -20,7 +20,7 @@ use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\RequestComplaintController;
 use App\Models\DetailCustomer;
 use App\Models\Username;
-
+use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -48,19 +48,7 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
-// Route::get('/login', function () {
-//     return view('partials.v_landingpage');
-// });
-
-
-// Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
-
-// Route::post('/selected-username', [UsernameController::class, 'deleteall'])->name('livetable.delete_all');
-// Route::get('/selectedDelete', 'UsernameController@deleteAll')->name('livetable.delete_all');
-
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin', 'auth'], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.homepage');
@@ -199,13 +187,13 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // detail customer
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
     Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
-    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form']);
+    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
     Route::get('/store_detail', [DetailCustomerController::class, 'store']);
     Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
     Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
     Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
     Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
-    Route::get('/selected', [DetailCustomerController::class, 'selected']);
+    Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
     Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
 
 

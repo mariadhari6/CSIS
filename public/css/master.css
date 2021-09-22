@@ -94,50 +94,8 @@
     text-align: center;
 }
 
-/* tabel detailcustomer */
-
-#detailcustomer {
-
-    position: relative;
-    bottom: 0px;
-}
-
-#detailcustomer tbody tr td {
-    text-align: center;
-}
-
-/* tabel summary */
-
-#summary {
-
-    position: relative;
-    bottom: 0px;
-}
-
-#summary tbody tr td {
-    text-align: center;
-}
-
-/* dashboardCustomer */
-
-#dashboardCustomer {
-    position: relative;
-    bottom: 0px;
-}
-
-#dashboardCustomer tbody tr td {
-    text-align: center;
-}
-
-/* table seller */
-#seller {
-
-    position: relative;
-    bottom: 0px;
-}
-
 .list{
-    min-width: 140px;
+    min-width: 290px;
     font-size: 15px;
     text-align: center;
 }
@@ -149,6 +107,11 @@
     bottom: 0px;
     text-align: center;
 }
+
+#table tbody tr td {
+    text-align: center;
+}
+
 
 .title{
     font-size: 25px;

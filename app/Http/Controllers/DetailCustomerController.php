@@ -20,67 +20,36 @@ class DetailCustomerController extends Controller
         return view('customer.detail_customer.item_data', compact('details'));
     }
 
-
     public function add_form(){
-
-        $response = Http::post('https://oslog.id/apiv5/gps/search?apiKey=8725f9e6-7713-4c99-8fd8-20ae0a523709', [
-            'start' => '0',
-            'lenght'=> '25',
-            'name' => 'license_plate',
-            'logic_operator' => 'like',
-            'value' => '',
-            'operator' => 'AND',
-            'table_name' => 'm_vehicle',
-            'name' => 'company',
-            'column_result' => 'name',
-            'name' => 'vehicle',
-            'column_result' => ['licence_plate','name'],
-            'name' => 'vehicle_type',
-            'column_result' => 'name',
-            'name' => 'pool',
-            'column_result' => 'name',
-            // 'columns' => 'id',
-            // 'ascending' => false
-        ]);
-
-        $data = $response->json();
-        $items = $data['data'];
-
-        return view('customer.detail_customer.add_form' , compact('items'));
+        $company = DetailCustomer::with('company')->get();
+        return view('customer.detail_customer.add_form', compact('company'));
     }
 
     public function store(Request $request)
     {
-
-        // cek data company
-        // jika kosong
-        // insert data company
-        // jika ada
-        // insert table detail customer
-
             $data = array(
-            "company_id"            => $request->CompanyId,
-            "licence_plate"         => $request->LicencePlate,
-            "vihecle_type"          => $request->VihecleType,
-            "po_number"             => $request->PoNumber,
-            "po_date"               => $request->PoDate,
-            "status_po"             => $request->StatusPo,
-            "imei"                  => $request->Imei,
-            "merk"                  => $request->Merk,
-            "type"                  => $request->Type,
-            "GSM"                   => $request->GSM,
-            "provider"              => $request->Provider,
-            "serial_number_sensor"  => $request->SerialNumberSensor,
-            "name_sensor"           => $request->NameSensor,
-            "merk_sensor"           => $request->MerkSensor,
-            "pool_name"             => $request->PoolName,
-            "pool_location"         => $request->PoolLocation,
-            "waranty"               => $request->Waranty,
-            "status_layanan"        => $request->StatusLayanan,
-            "tanggal_pasang"        => $request->TanggalPasang,
-            "tanggal_non_aktif"     => $request->TanggalNonAktif
-        );
-        DetailCustomer::insert($data);
+                "company_id"            => $request->CompanyId,
+                "licence_plate"         => $request->LicencePlate,
+                "vihecle_type"          => $request->VihecleType,
+                "po_number"             => $request->PoNumber,
+                "po_date"               => $request->PoDate,
+                "status_po"             => $request->StatusPo,
+                "imei"                  => $request->Imei,
+                "merk"                  => $request->Merk,
+                "type"                  => $request->Type,
+                "GSM"                   => $request->GSM,
+                "provider"              => $request->Provider,
+                "serial_number_sensor"  => $request->SerialNumberSensor,
+                "name_sensor"           => $request->NameSensor,
+                "merk_sensor"           => $request->MerkSensor,
+                "pool_name"             => $request->PoolName,
+                "pool_location"         => $request->PoolLocation,
+                "waranty"               => $request->Waranty,
+                "status_layanan"        => $request->StatusLayanan,
+                "tanggal_pasang"        => $request->TanggalPasang,
+                "tanggal_non_aktif"     => $request->TanggalNonAktif
+            );
+            DetailCustomer::insert($data);
     }
 
     public function destroy($id)

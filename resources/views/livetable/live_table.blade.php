@@ -50,9 +50,6 @@
   <script>
     $(document).ready(function() {
       read();
-
-
-
     });
     // ------ Tampil Data ------
     function read(){
