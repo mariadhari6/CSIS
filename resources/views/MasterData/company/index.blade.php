@@ -117,8 +117,6 @@
         })
     }
 
-
-
     // -----Proses Delete Data ------
      function destroy(id) {
         var id = id;
@@ -205,6 +203,8 @@
             }
         });
     }
+
+
    // checkbox all
 
   $('#master').on('click', function(e) {
@@ -264,102 +264,101 @@
    });
 
     // form edit all
+    $('.edit_all').on('click', function(e){
 
-        $('.edit_all').on('click', function(e){
+    var allVals = [];
+    var _token = $('input[name="_token"]').val();
 
+    $(".task-select:checked").each(function() {
+        allVals.push($(this).attr("id"));
+    });
+    if (allVals.length > 0){
+        $(".edit_all").hide("fast");
+        $(".delete_all").hide("fast");
+        $.get("{{ url('selected_company') }}", {}, function(data, status) {
+            $("#selected").prepend(data)
+        });
+        $.each(allVals, function(index, value){
+            $("#td-checkbox-"+value).hide("fast");
+            $("#td-button-"+value).hide("fast");
+            $("#item-company_name-"+value).slideUp("fast");
+            $("#item-seller_id-"+value).slideUp("fast");
+            $("#item-customer_code-"+value).slideUp("fast");
+            $("#item-no_po-"+value).slideUp("fast");
+            $("#item-po_date-"+value).slideUp("fast");
+            $("#item-no_agreement_letter_id-"+value).slideUp("fast");
+            $("#item-status-"+value).slideUp("fast");
+
+            $(".add").hide("fast");
+            $.get("{{ url('edit_form_company') }}/" + value, {}, function(data, status) {
+                $("#edit-form-"+value).prepend(data)
+                $("#master").prop('checked', false);
+            });
+        });
+    }else{
+        alert('Select the row you want to edit')
+    }
+    });
+
+      // ------ Proses Update Data ------
+    function updateSelected() {
         var allVals = [];
-        var _token = $('input[name="_token"]').val();
 
         $(".task-select:checked").each(function() {
             allVals.push($(this).attr("id"));
         });
-        if (allVals.length > 0){
-            $(".edit_all").hide("fast");
-            $(".delete_all").hide("fast");
-            $.get("{{ url('selected_company') }}", {}, function(data, status) {
-                $("#selected").prepend(data)
-            });
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to do an update?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: '#00FF00',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes Update',
+            showLoaderOnConfirm: true,
+        }).then((willDelete) => {
             $.each(allVals, function(index, value){
-                $("#td-checkbox-"+value).hide("fast");
-                $("#td-button-"+value).hide("fast");
-                $("#item-company_name-"+value).slideUp("fast");
-                $("#item-seller_id-"+value).slideUp("fast");
-                $("#item-customer_code-"+value).slideUp("fast");
-                $("#item-no_po-"+value).slideUp("fast");
-                $("#item-po_date-"+value).slideUp("fast");
-                $("#item-no_agreement_letter_id-"+value).slideUp("fast");
-                $("#item-status-"+value).slideUp("fast");
+                var company_name = $(".company_name-"+value).val();
+                var seller_id = $(".seller_id-"+value).val();
+                var customer_code = $(".customer_code-"+value).val();
+                var no_po = $(".no_po-"+value).val();
+                var po_date = $(".po_date-"+value).val();
+                var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
+                var status = $(".status-"+value).val();
 
-                $(".add").hide("fast");
-                $.get("{{ url('edit_form_company') }}/" + value, {}, function(data, status) {
-                    $("#edit-form-"+value).prepend(data)
-                    $("#master").prop('checked', false);
-                });
+                $.ajax({
+                type: "get",
+                url: "{{ url('update_company') }}/"+value,
+                data: {
+                    company_name: company_name,
+                    seller_id: seller_id,
+                    customer_code: customer_code,
+                    no_po: no_po,
+                    po_date: po_date,
+                    no_agreement_letter_id:no_agreement_letter_id,
+                    status: status
+                },
+                success: function(data) {
+                swal({
+                      type: 'success',
+                      title: 'The selected data has been updated',
+                      showConfirmButton: false,
+                      timer: 1500
+
+                  // $(".save").hide();
+                  });
+                  read();
+
+                  $(".add").show("fast");
+                  $(".edit_all").show("fast");
+                  $(".delete_all").show("fast");
+                  $(".btn-round").hide("fast");
+                  $(".btn-round").hide("fast");
+                }
             });
-        }else{
-            alert('Select the row you want to edit')
-        }
-    });
 
-          // ------ Proses Update Data ------
-        function updateSelected() {
-            var allVals = [];
-
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
             });
-            swal({
-                title: "Are you sure?",
-                text: "Do you want to do an update?",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonColor: '#00FF00',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes Update',
-                showLoaderOnConfirm: true,
-            }).then((willDelete) => {
-                $.each(allVals, function(index, value){
-                    var company_name = $(".company_name-"+value).val();
-                    var seller_id = $(".seller_id-"+value).val();
-                    var customer_code = $(".customer_code-"+value).val();
-                    var no_po = $(".no_po-"+value).val();
-                    var po_date = $(".po_date-"+value).val();
-                    var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
-                    var status = $(".status-"+value).val();
-
-                    $.ajax({
-                    type: "get",
-                    url: "{{ url('update_company') }}/"+value,
-                    data: {
-                        company_name: company_name,
-                        seller_id: seller_id,
-                        customer_code: customer_code,
-                        no_po: no_po,
-                        po_date: po_date,
-                        no_agreement_letter_id:no_agreement_letter_id,
-                        status: status
-                    },
-                    success: function(data) {
-                    swal({
-                          type: 'success',
-                          title: 'The selected data has been updated',
-                          showConfirmButton: false,
-                          timer: 1500
-
-                      // $(".save").hide();
-                      });
-                      read();
-
-                      $(".add").show("fast");
-                      $(".edit_all").show("fast");
-                      $(".delete_all").show("fast");
-                      $(".btn-round").hide("fast");
-                      $(".btn-round").hide("fast");
-                    }
-                });
-
-                });
-            });
+        });
         }
         
          //--------Proses Batal--------

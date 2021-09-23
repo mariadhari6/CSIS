@@ -3,37 +3,55 @@
     <td></td>
     <td>
         <i class="fas fa-check add" id="add" onclick="store()"></i>
+        {{-- <button onclick="store()">save</button> --}}
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
     <td> 
-        <select class="form-control" id="seller_id" name="seller_id">
-            <option value="">Pilih Company</option>
+        <select class="form-control" id="company" name="company">
+            @foreach ($requestComplaint as $item)
+            <option value="{{ $item->id }}">{{ $item->company->company_name }}</option>
+            @endforeach
 
-            {{-- @foreach ($requestComplaint as $item)
-            <option value="{{ $item->company }}">{{ $item->companyRequest->id }}</option>
-            @endforeach --}}
+        </select>
+    </td>
+    <td> 
+        <select class="form-control" id="vehicle" name="vehicle">
+            @foreach ($requestComplaint as $item)
+                <option value="{{ $item->id }}">{{ $item->vehicle }}</option>
+            @endforeach
 
         </select>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input" id="tanggal" placeholder="tanggal" required>
+        <select class="form-control" id="tanggal" name="tanggal">
+            @foreach ($requestComplaint as $item)
+                <option value="{{ $item->id }}">{{ $item->waktu_kesepakatan }}</option>
+            @endforeach
+
+        </select>
     </td>
     <td>
         <select class="form-control" id="type_gps" name="type_gps">
             <option value="">Type Gps</option>
-            <option></option>
+            @foreach ($gps as $item)
+                <option value="{{ $item->id }}">{{ $item->type }}</option>
+            @endforeach
         </select>
     </td>
     <td>
         <select class="form-control" id="equipment_gps" name="equipment_gps">
             <option value="">equipment_gps</option>
-            <option></option>
+            @foreach ($gps as $item)
+                <option value="{{ $item->id }}">{{ $item->type }}</option>
+            @endforeach
         </select>
     </td>
     <td>
         <select class="form-control" id="equipment_sensor" name="equipment_sensor">
             <option value="">equipment_sensor</option>
-            <option></option>
+                @foreach ($sensor as $item)
+                <option value="{{ $item->id }}">{{ $item->sensor_name }}</option>
+                @endforeach
         </select>
     </td>
     <td> 
@@ -44,7 +62,9 @@
     <td>
         <select class="form-control" id="permasalahan" name="permasalahan">
             <option value="">permasalahan</option>
-            <option></option>
+            @foreach ($requestComplaint as $item)
+                <option value="{{ $item->id }}">{{ $item->detail_task }}</option>
+            @endforeach
         </select>
     </td>
     <td>
@@ -66,14 +86,16 @@
     </td>
     <td>
         <select class="form-control" id="teknisi" name="teknisi">
-            <option value="">teknisi</option>
-            <option></option>
+            @foreach ($pic as $item)
+            <option value="{{ $item->id }}">{{ $item->pic_name }}</option>
+            @endforeach
+
         </select>
     </td>
     <td>
         <select class="form-control" id="req_by" name="req_by">
             <option value="Customer">Customer</option>
-            <option value="req_by">req_by</option>
+            <option value="CS">CS</option>
         </select>
     </td>
     <td>
@@ -81,29 +103,76 @@
     </td>
     
 
-{{-- <script type="text/javascript">
-    $(document).ready(function() {
-        $('select[name="seller_id"]').on('change', function() {
-            var itemID = $(this).val();
-            if(itemID) {
-                $.ajax({
-                    url: '/dependent_company/'+itemID,
-                    method: "GET",
-                    dataType: "json",
-                    success:function(data) {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // depend vehicle
+            $('select[name="company"]').on('change', function() {
+                var id = $(this).attr("id");
+                var itemID = $(this).val();
+                if(itemID) {
+                    $.ajax({
+                        url: '/dependentMaintenanceGpsCompany/'+itemID,
+                        method: "GET",
+                        dataType: "json",
+                        success:function(data) {
+    
+                            $('select[name="vehicle"]').empty();
+                                $.each(data, function(key, value) {
+                                    $('select[name="vehicle"]').append('<option value="'+ key +'">'+ value +'</option>');
+                                });
+                        }
+                    });
+                }else{
+                    $('select[name="vehicle"]').empty();
+                }
+            });
 
-                        $('select[name="no_agreement_letter_id').empty();
-                            $.each(data, function(key, value) {
-                                $('select[name="no_agreement_letter_id').append('<option value="'+ key +'">'+ value +'</option>');
-                            });
-                    }
-                });
-            }else{
-                $('select[name="no_agreement_letter_id"]').empty();
-            }
+            // depend tanggal
+            $('select[name="company"]').on('change', function() {
+                var id = $(this).attr("id");
+                var itemID = $(this).val();
+                if(itemID) {
+                    $.ajax({
+                        url: '/dependentMaintenanceGpsTanggal/'+itemID,
+                        method: "GET",
+                        dataType: "json",
+                        success:function(data) {
+    
+                            $('select[name="tanggal"]').empty();
+                                $.each(data, function(key, value) {
+                                    $('select[name="tanggal"]').append('<option value="'+ key +'">'+ value +'</option>');
+                                });
+                        }
+                    });
+                }else{
+                    $('select[name="tanggal"]').empty();
+                }
+            });
+
+            // depend permasalahan
+            $('select[name="company"]').on('change', function() {
+                var id = $(this).attr("id");
+                var itemID = $(this).val();
+                if(itemID) {
+                    $.ajax({
+                        url: '/dependentMaintenanceGpsPermasalahan/'+itemID,
+                        method: "GET",
+                        dataType: "json",
+                        success:function(data) {
+    
+                            $('select[name="permasalahan"]').empty();
+                                $.each(data, function(key, value) {
+                                    $('select[name="permasalahan"]').append('<option value="'+ key +'">'+ value +'</option>');
+                                });
+                        }
+                    });
+                }else{
+                    $('select[name="permasalahan"]').empty();
+                }
+            });
+
         });
-    });
-</script>    --}}
+    </script>   
 
 </tr>
 
