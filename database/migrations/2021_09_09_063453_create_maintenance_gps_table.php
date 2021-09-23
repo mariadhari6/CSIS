@@ -15,19 +15,19 @@ class CreateMaintenanceGpsTable extends Migration
     {
         Schema::create('maintenance_gps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('vehicle')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('tanggal')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('type_gps')->constrained('gps')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('equipment_gps')->constrained('gps')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('equipment_sensor')->constrained('sensors')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('equipment_gsm')->constrained('gsm_actives')->onDelete('cascade')->onUpdate('cascade')->nullable();
-            $table->foreignId('permasalahan')->constrained('request_complaint_customers')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('company');
+            $table->foreignId('vehicle');
+            $table->foreignId('tanggal');
+            $table->foreignId('type_gps');
+            $table->foreignId('equipment_gps');
+            $table->foreignId('equipment_sensor');
+            $table->foreignId('equipment_gsm');
+            $table->foreignId('permasalahan');
             $table->string('ketersediaan_kendaraan');
             $table->string('keterangan');
             $table->string('hasil');
             $table->string('biaya_transportasi');
-            $table->foreignId('teknisi')->constrained('pics')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('teknisi');
             $table->string('req_by');
             $table->longText('note');
             $table->timestamps();

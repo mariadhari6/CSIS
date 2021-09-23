@@ -15,11 +15,11 @@
             </div>
         </td>
 
-        <td id="item-company-{{ $request_complains->id}}">
+        <td id="item-company_id-{{ $request_complains->id}}">
             {{ $request_complains->companyRequest->company_name}}
         </td>
-          <td id="item-internal_external-{{ $request_complains->id }}">
-            {{ $request_complains->internal_external }}
+          <td id="item-internal_eksternal-{{ $request_complains->id }}">
+            {{ $request_complains->internal_eksternal }}
         </td>
         <td id="item-pic-{{ $request_complains->id}}">
                 {{ $request_complains->picRequest->pic_name}}
@@ -29,6 +29,9 @@
         </td>
           <td id="item-waktu_info-{{ $request_complains->id }}">
             {{ $request_complains->waktu_info}}
+        </td>
+         <td id="item-waktu_respond-{{ $request_complains->id }}">
+            {{ $request_complains->waktu_respond}}
         </td>
 
         <td id="item-task-{{ $request_complains->id }}">

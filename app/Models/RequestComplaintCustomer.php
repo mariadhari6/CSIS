@@ -11,7 +11,7 @@ class RequestComplaintCustomer extends Model
     protected $table = 'request_complaint_customers';
 
     protected $fillable = [
-        'company', 'internal_external', 'pic', 'vehicle', 'waktu_info', 'task', 'platform',
+        'company_id', 'internal_external', 'pic', 'vehicle', 'waktu_info', 'waktu_respond', 'task', 'platform',
         'detail_task', 'divisi', 'respond', 'waktu_kesepakatan', 'waktu_solve', 'status', 'status_akhir',
     ];
 

@@ -112,7 +112,7 @@
 
         <div class="col-md-6">
             <div class="card">
-                <div id="barchart_values" style="width: 900px; height: 300px;">
+                <div id="chart-div" style="width: 900px; height: 300px;">
                 </div>
             </div>
         </div>
@@ -121,36 +121,36 @@
 </div>
 
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        // ["Element", "Density", { role: "style" } ],
-        ["company_id","uang_transportasi","id"]
-      ]);
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+</script>
+    <script type="text/javascript">
+                google.load("visualization", "1", {packages:["corechart"]});
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
-
-      var options = {
-        title: "Density of Precious Metals, in g/cm^3",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-      chart.draw(view, options);
-  }
-  </script>
-
-
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Week Ending');
+            data.addColumn('number', 'Total');
+            data.addColumn('number', 'Passed');
+            data.addColumn('number', 'Failed');
+            data.addColumn('number', 'Incomplete');
+        var options = {
+            series: {
+            0: { color: '#253646' },
+            1: { color: '#009bde' },
+            2: { color: '#8dc8ea' },
+            3: { color: '#a7bbc4' }
+            },
+            vAxis: { viewWindow: {max: 100,min:0 }, gridlines: { color: '#f3f3f3', count: 7}},
+            chartArea: {left:"5%", width:"90%"},
+            vAxis :{ textStyle: {fontName: 'Aileron-Light',fontSize: 12 }},
+            hAxis :{ textStyle: {fontName: 'Aileron-Light',fontSize: 12 }},
+            tooltip: {textStyle:  {fontName: 'Aileron-Light',fontSize: 12}},
+            legend: {textStyle:  {fontName: 'Aileron-Light',fontSize: 12,bold: false}, position: 'top', alignment: 'end' },
+            pointSize: 5,
+            is3D:true
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart-div'));
+        chart.draw(data, options);
+    </script>
 
 @endsection
+

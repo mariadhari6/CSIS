@@ -24,27 +24,27 @@ class RequestComplaintController extends Controller
 
             'request_complain' => $request_complain,
             'pic'              => $pic,
-            'company'              => $company,
+            'company'              => $company
         ]);
     }
 
     public function item_data()
     {
         $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
-        return view('request_complaint.item_data')->with([
-            'request_complain' => $request_complain
-        ]);
+        return view('request_complaint.item_data', compact('request_complain'));
+        // dd($request_complain);
     }
 
     public function store(Request $request)
     {
 
         $data = array(
-            'company'     =>  $request->company,
+            'company_id'     =>  $request->company_id,
             'internal_eksternal'    =>  $request->internal_eksternal,
             'pic'     =>  $request->pic,
             'vehicle'     =>  $request->vehicle,
             'waktu_info'     =>  $request->waktu_info,
+            'waktu_respond'     =>  $request->waktu_respond,
             'task' => $request->task,
             'platform'     =>  $request->platform,
             'detail_task'     =>  $request->detail_task,
@@ -60,10 +60,13 @@ class RequestComplaintController extends Controller
 
     public function edit_form($id)
     {
-
+        $pic = Pic::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaintCustomer::findOrfail($id);
         return view('request_complaint.edit_form')->with([
             'request_complain' => $request_complain,
+            'pic'              => $pic,
+            'company'              => $company
 
         ]);
     }
@@ -77,13 +80,14 @@ class RequestComplaintController extends Controller
     public function update(Request $request, $id)
     {
         $data = RequestComplaintCustomer::findOrfail($id);
-        $data->company = $request->company;
-        $data->internal_external = $request->internal_external;
+        $data->company_id = $request->company_id;
+        $data->internal_eksternal = $request->internal_eksternal;
         $data->pic = $request->pic;
         $data->vehicle = $request->vehicle;
         $data->waktu_info = $request->waktu_info;
+        $data->waktu_respond = $request->waktu_respond;
         $data->task = $request->task;
-        $data->platfom = $request->platfom;
+        $data->platform = $request->platform;
         $data->detail_task = $request->detail_task;
         $data->divisi = $request->divisi;
         $data->respond = $request->respond;
@@ -106,13 +110,14 @@ class RequestComplaintController extends Controller
     public function updateall(Request $request, $id)
     {
         $data = RequestComplaintCustomer::findOrfail($id);
-        $data->company = $request->company;
-        $data->internal_external = $request->internal_external;
+        $data->company_id = $request->company_id;
+        $data->internal_eksternal = $request->internal_eksternal;
         $data->pic = $request->pic;
         $data->vehicle = $request->vehicle;
         $data->waktu_info = $request->waktu_info;
+        $data->waktu_respond = $request->waktu_respond;
         $data->task = $request->task;
-        $data->platfom = $request->platfom;
+        $data->platform = $request->platform;
         $data->detail_task = $request->detail_task;
         $data->divisi = $request->divisi;
         $data->respond = $request->respond;

@@ -37,6 +37,7 @@
                 <th scope="col" class="list">PIC</th>
                 <th scope="col" class="list">Vehicle</th>
                 <th scope="col" class="list">Waktu Info</th>
+                <th scope="col" class="list">Waktu Respond</th>
                 <th scope="col" class="list">Task</th>
                 <th scope="col" class="list">Platform</th>
                 <th scope="col" class="list">Detail Taks</th>
@@ -90,11 +91,12 @@
       });
     // ----- Proses Tambah data ------
     function store() {
-        var company = $("#company").val();
-        var internal_external = $("#internal_external").val();
+        var company_id = $("#company_id").val();
+        var internal_eksternal = $("#internal_eksternal").val();
         var pic = $("#pic").val();
         var vehicle = $("#vehicle").val();
         var waktu_info = $("#waktu_info").val();
+        var waktu_respond = $("#waktu_respond").val();
         var task = $("#task").val();
         var platform = $("#platform").val();
         var detail_task = $("#detail_task").val();
@@ -108,11 +110,12 @@
             type: "get",
             url: "{{ url('store_RequestComplain') }}",
             data: {
-              company: company,
-              internal_external:internal_external,
+              company_id: company_id,
+              internal_eksternal:internal_eksternal,
               pic: pic,
               vehicle: vehicle,
               waktu_info: waktu_info,
+             waktu_respond:waktu_respond,
               task:task,
               platform:platform,
               detail_task:detail_task,
@@ -173,18 +176,19 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
-        $("#item-company-"+id).hide("fast");
-        $("#item-internal_external-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
+        $("#item-internal_eksternal-"+id).hide("fast");
         $("#item-pic-"+id).hide("fast");
         $("#item-vehicle-"+id).hide("fast");
         $("#item-waktu_info-"+id).hide("fast");
+        $("#item-waktu_respond-"+id).hide("fast");
         $("#item-taks-"+id).hide("fast");
         $("#item-platform-"+id).hide("fast");
         $("#item-detail_task-"+id).hide("fast");
         $("#item-divisi-"+id).hide("fast");
         $("#item-respond-"+id).hide("fast");
         $("#item-waktu_kesepakatan-"+id).hide("fast");
-        $("#item-waktu_solved-"+id).hide("fast");
+        $("#item-waktu_solve-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
         $("#item-status_akhir-"+id).hide("fast");
         $.get("{{ url('show_RequestComplain') }}/" + id, {}, function(data, status) {
@@ -193,11 +197,12 @@
     }
     // ------ Proses Update Data ------
         function update(id) {
-            var company = $("#company").val();
+            var company_id = $("#company_id").val();
             var internal_eksternal = $("#internal_eksternal").val();
             var pic = $("#pic").val();
             var vehicle = $("#vehicle").val();
             var waktu_info = $("#waktu_info").val();
+            var waktu_respond = $("#waktu_respond").val();
             var task = $("#task").val();
             var platform = $("#platform").val();
             var detail_task = $("#detail_task").val();
@@ -212,11 +217,12 @@
                 type: "get",
                 url: "{{ url('update_RequestComplain') }}/"+id,
                 data: {
-                company: company,
-                internal_external:internal_external,
+                company_id: company_id,
+                internal_eksternal:internal_eksternal,
                 pic: pic,
                 vehicle: vehicle,
                 waktu_info: waktu_info,
+                waktu_respond: waktu_respond,
                 task:task,
                 platform:platform,
                 detail_task:detail_task,
@@ -314,11 +320,12 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-company-"+value).hide("fast");
-                    $("#item-internal_external-"+value).hide("fast");
+                    $("#item-company_id-"+value).hide("fast");
+                    $("#item-internal_eksternal-"+value).hide("fast");
                     $("#item-pic-"+value).hide("fast");
                     $("#item-vehicle-"+value).hide("fast");
                     $("#item-waktu_info-"+value).hide("fast");
+                    $("#item-waktu_respond-"+value).hide("fast");
                     $("#item-task-"+value).hide("fast");
                     $("#item-platform-"+value).hide("fast");
                     $("#item-detail_task-"+value).hide("fast");
@@ -359,11 +366,12 @@
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
 
-                    var company = $(".company-"+value).val();
-                    var internal_external = $(".internal_external-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
+                    var internal_eksternal = $(".internal_eksternal-"+value).val();
                     var pic = $(".pic-"+value).val();
                     var vehicle = $(".vehicle-"+value).val();
                     var waktu_info = $(".waktu_info-"+value).val();
+                    var waktu_respond = $(".waktu_respond-"+value).val();
                     var task = $(".task-"+value).val();
                     var platform = $(".platform-"+value).val();
                     var detail_task = $(".detail_task-"+value).val();
@@ -377,11 +385,12 @@
                     type: "get",
                     url: "{{ url('update_RequestComplain') }}/"+value,
                     data: {
-                       company: company,
-                        internal_external:internal_external,
+                       company_id: company_id,
+                        internal_eksternal:internal_eksternal,
                         pic: pic,
                         vehicle: vehicle,
                         waktu_info: waktu_info,
+                        waktu_respond:waktu_respond,
                         task:task,
                         platform:platform,
                         detail_task:detail_task,

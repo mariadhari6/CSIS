@@ -9,8 +9,8 @@ class DashboardVisitAssignmentController extends Controller
 {
     public function dashboard()
     {
-        $pemasangan_mutasi_GPS = PemasanganMutasiGps::all();
+        // $pemasangan_mutasi_GPS = PemasanganMutasiGps::all();
 
-        return view('VisitAssignment.Dashboard.dashboard_visitAssignment', ['pemasangan_mutasi_GPS' => $pemasangan_mutasi_GPS]);
+        return view('VisitAssignment.Dashboard.dashboard_visitAssignment');
     }
 }
