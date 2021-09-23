@@ -20,7 +20,7 @@
         <td id="item-internal_eksternal-{{ $request_complaints->id}}">
                 {{ $request_complaints->internal_eksternal}}
         </td>
-        <td id="item-pic-{{ $request_complaints->id }}">
+        <td id="item-pic_id-{{ $request_complaints->id }}">
                 {{ $request_complaints->pic->pic_name }}
         </td>
         <td id="item-vehicle-{{ $request_complaints->id }}">

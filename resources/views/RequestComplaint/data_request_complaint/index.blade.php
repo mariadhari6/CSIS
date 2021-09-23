@@ -64,7 +64,7 @@
   <script>
     $(document).ready(function() {
 
-      read()
+      read();
 
       //   $('#requestcomplaint').dataTable();
 
@@ -100,41 +100,41 @@
 
     // ----- Proses Tambah data ------
     function store() {
-        var company_id = $("#company_id").val();
-        var internal_eksternal = $("#internal_eksternal").val();
-        var pic_id = $("#pic_id").val();
-        var vehicle = $("#vehicle").val();
-        var waktu_info = $("#waktu_info").val();
-        var task = $("#task").val();
-        var platform = $("#platform").val();
-        var detail_task = $("#detail_task").val();
-        var divisi = $("#divisi").val();
-        var waktu_respond = $("#waktu_respond").val();
-        var respond = $("#respond").val();
-        var waktu_kesepakatan = $("#waktu_kesepakatan").val();
-        var waktu_solve = $("#waktu_solve").val();
-        var status = $("#status").val();
-        var status_akhir = $("#status_akhir").val();
+        var company_id          = $("#company_id").val();
+        var internal_eksternal  = $("#internal_eksternal").val();
+        var pic_id              = $("#pic_id").val();
+        var vehicle             = $("#vehicle").val();
+        var waktu_info          = $("#waktu_info").val();
+        var task                = $("#task").val();
+        var platform            = $("#platform").val();
+        var detail_task         = $("#detail_task").val();
+        var divisi              = $("#divisi").val();
+        var waktu_respond       = $("#waktu_respond").val();
+        var respond             = $("#respond").val();
+        var waktu_kesepakatan   = $("#waktu_kesepakatan").val();
+        var waktu_solve         = $("#waktu_solve").val();
+        var status              = $("#status").val();
+        var status_akhir        = $("#status_akhir").val();
 
         $.ajax({
             type: "get",
             url: "{{ url('store_requestcomplaint') }}",
             data: {
-                company_id: company_id,
-                internal_eksternal: internal_eksternal,
-                pic_id: pic_id,
-                vehicle: vehicle,
-                waktu_info: waktu_info,
-                task: task,
-                platform: platform,
-                detail_task: detail_task,
-                divisi: divisi,
-                waktu_respond: waktu_respond,
-                respond: respond,
-                waktu_kesepakatan: waktu_kesepakatan,
-                waktu_solve: waktu_solve,
-                status: status,
-                status_akhir: status_akhir
+                company_id            : company_id,
+                internal_eksternal    : internal_eksternal,
+                pic_id                : pic_id,
+                vehicle               : vehicle,
+                waktu_info            : waktu_info,
+                task                  : task,
+                platform              : platform,
+                detail_task           : detail_task,
+                divisi                : divisi,
+                waktu_respond         : waktu_respond,
+                respond               : respond,
+                waktu_kesepakatan     : waktu_kesepakatan,
+                waktu_solve           : waktu_solve,
+                status                : status,
+                status_akhir          : status_akhir
 
             },
             success: function(data) {
@@ -207,6 +207,7 @@
         $("#item-waktu_solve-"+id).slideUp("fast");
         $("#item-status-"+id).slideUp("fast");
         $("#item-status_akhir-"+id).slideUp("fast");
+
         $.get("{{ url('show_requestcomplaint') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -214,42 +215,42 @@
 
     // ------ Proses Update Data ------
     function update(id) {
-        var company_id = $("#company_id").val();
-        var internal_eksternal = $("#internal_eksternal").val();
-        var pic_id = $("#pic_id").val();
-        var vehicle = $("#vehicle-").val();
-        var waktu_info = $("#waktu_info").val();
-        var task = $("#task").val();
-        var platform = $("#platform").val();
-        var detail_task = $("#detail_task").val();
-        var divisi = $("#divisi").val();
-        var waktu_respond = $("#waktu_respond").val();
-        var respond = $("#respond").val();
-        var waktu_kesepakatan = $("#waktu_kesepakatan").val();
-        var waktu_solve = $("#waktu_solve").val();
-        var status = $("#status").val();
-        var status_akhir = $("#status_akhir").val();
+        var company_id                = $("#company_id").val();
+        var internal_eksternal        = $("#internal_eksternal").val();
+        var pic_id                    = $("#pic_id").val();
+        var vehicle                   = $("#vehicle-").val();
+        var waktu_info                = $("#waktu_info").val();
+        var task                      = $("#task").val();
+        var platform                  = $("#platform").val();
+        var detail_task               = $("#detail_task").val();
+        var divisi                    = $("#divisi").val();
+        var waktu_respond             = $("#waktu_respond").val();
+        var respond                   = $("#respond").val();
+        var waktu_kesepakatan         = $("#waktu_kesepakatan").val();
+        var waktu_solve               = $("#waktu_solve").val();
+        var status                    = $("#status").val();
+        var status_akhir              = $("#status_akhir").val();
 
         var id = id;
         $.ajax({
             type: "get",
             url: "{{ url('update_requestcomplaint') }}/"+id,
             data: {
-                company_id: company_id,
-                internal_eksternal: internal_eksternal,
-                pic_id: pic_id,
-                vehicle: vehicle,
-                waktu_info: waktu_info,
-                task: task,
-                platform: platform,
-                detail_task: detail_task,
-                divisi: divisi,
-                waktu_respond: waktu_respond,
-                respond: respond,
-                waktu_kesepakatan: waktu_kesepakatan,
-                waktu_solve: waktu_solve,
-                status: status,
-                status_akhir: status_akhir
+                company_id            : company_id,
+                internal_eksternal    : internal_eksternal,
+                pic_id                : pic_id,
+                vehicle               : vehicle,
+                waktu_info            : waktu_info,
+                task                  : task,
+                platform              : platform,
+                detail_task           : detail_task,
+                divisi                : divisi,
+                waktu_respond         : waktu_respond,
+                respond               : respond,
+                waktu_kesepakatan     : waktu_kesepakatan,
+                waktu_solve           : waktu_solve,
+                status                : status,
+                status_akhir          : status_akhir
             },
             success: function(data) {
               swal({
@@ -257,8 +258,8 @@
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
-                }).catch(function(timeout) { });
-                read();
+                }).catch(function(timeout) { })
+                read()
               }
             
         });
@@ -267,7 +268,7 @@
 
   $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
-              $(".task-select").prop('checked', true);
+              $(".task-select").prop('checked', true)
           } else {
               $(".task-select").prop('checked',false);
           }

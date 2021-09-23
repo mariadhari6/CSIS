@@ -15,16 +15,16 @@ class CreateRequestComplaintCustomersTable extends Migration
     {
         Schema::create('request_complaint_customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id');
+            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('internal_eksternal');
-            $table->foreignId('pic_id');
+            $table->foreignId('pic_id')->constrained('pics')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('vehicle');
             $table->dateTime('waktu_info');
             $table->longText('task');
             $table->string('platform');
             $table->longText('detail_task');
             $table->string('divisi');
-            $table->datetime('waktu_respond');
+            $table->string('waktu_respond');
             $table->string('respond');
             $table->dateTime('waktu_kesepakatan');
             $table->dateTime('waktu_solve');
