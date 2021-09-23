@@ -80,21 +80,21 @@ class RequestComplaintCustomerController extends Controller
     public function update(Request $request, $id)
     {
         $data = RequestComplaintCustomer::findOrfail($id);
-        $data->company_id = $request->company_id;
-        $data->internal_eksternal = $request->internal_eksternal;
-        $data->pic_id = $request->pic_id;
-        $data->vehicle = $request->vehicle;
-        $data->waktu_info = $request->waktu_info;
-        $data->task = $request->task;
-        $data->platform = $request->platform;
-        $data->detail_task = $request->detail_task;
-        $data->divisi = $request->divisi;
-        $data->waktu_respond = $request->waktu_respond;
-        $data->respond = $request->respond;
-        $data->waktu_kesepakatan = $request->waktu_kesepakatan;
-        $data->waktu_solve = $request->waktu_solve;
-        $data->status = $request->status;
-        $data->status_akhir = $request->status_akhir;
+        $data->company_id               = $request->company_id;
+        $data->internal_eksternal       = $request->internal_eksternal;
+        $data->pic_id                   = $request->pic_id;
+        $data->vehicle                  = $request->vehicle;
+        $data->waktu_info               = $request->waktu_info;
+        $data->task                     = $request->task;
+        $data->platform                 = $request->platform;
+        $data->detail_task              = $request->detail_task;
+        $data->divisi                   = $request->divisi;
+        $data->waktu_respond            = $request->waktu_respond;
+        $data->respond                  = $request->respond;
+        $data->waktu_kesepakatan        = $request->waktu_kesepakatan;
+        $data->waktu_solve              = $request->waktu_solve;
+        $data->status                   = $request->status;
+        $data->status_akhir             = $request->status_akhir;
 
         $data->save();
     }
@@ -111,13 +111,13 @@ class RequestComplaintCustomerController extends Controller
     public function updateall(Request $request, $id)
     {
         $data = RequestComplaintCustomer::findOrfail($id);
-        $data->company_id              = $request->company_id;
-        $data->internal_eksternal    = $request->internal_eksternal;
-        $data->pic_id                  = $request->pic_id;
+        $data->company_id           = $request->company_id;
+        $data->internal_eksternal   = $request->internal_eksternal;
+        $data->pic_id               = $request->pic_id;
         $data->vehicle              = $request->vehicle;
         $data->waktu_info           = $request->waktu_info;
         $data->task                 = $request->task;
-        $data->platform              = $request->platform;
+        $data->platform             = $request->platform;
         $data->detail_task          = $request->detail_task;
         $data->divisi               = $request->divisi;
         $data->waktu_respond        = $request->waktu_respond;

@@ -390,41 +390,41 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
               $.each(allVals, function(index, value){
-                    var company_id = $(".company_id-"+value).val();
-                    var internal_eksternal = $(".internal_eksternal-"+value).val();
-                    var pic_id = $(".pic_id-"+value).val();
-                    var vehicle = $(".vehicle-"+value).val();
-                    var waktu_info = $(".waktu_info-"+value).val();
-                    var task = $(".task-"+value).val();
-                    var platform = $(".platform-"+value).val();
-                    var detail_task = $(".detail_task-"+value).val();
-                    var divisi = $(".divisi-"+value).val();
-                    var waktu_respond = $(".waktu_respond-"+value).val();
-                    var respond = $(".respond-"+value).val();
-                    var waktu_kesepakatan = $(".waktu_kesepakatan-"+value).val();
-                    var waktu_solve = $(".waktu_solve-"+value).val();
-                    var status = $(".status-"+value).val();
-                    var status_akhir = $(".status_akhir-"+value).val();
+                    var company_id                = $(".company_id-"+value).val();
+                    var internal_eksternal        = $(".internal_eksternal-"+value).val();
+                    var pic_id                    = $(".pic_id-"+value).val();
+                    var vehicle                   = $(".vehicle-"+value).val();
+                    var waktu_info                = $(".waktu_info-"+value).val();
+                    var task                      = $(".task-"+value).val();
+                    var platform                  = $(".platform-"+value).val();
+                    var detail_task               = $(".detail_task-"+value).val();
+                    var divisi                    = $(".divisi-"+value).val();
+                    var waktu_respond             = $(".waktu_respond-"+value).val();
+                    var respond                   = $(".respond-"+value).val();
+                    var waktu_kesepakatan         = $(".waktu_kesepakatan-"+value).val();
+                    var waktu_solve               = $(".waktu_solve-"+value).val();
+                    var status                    = $(".status-"+value).val();
+                    var status_akhir              = $(".status_akhir-"+value).val();
 
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_requestcomplaint') }}/"+value,
                     data: {
-                        company_id: company_id,
-                        internal_eksternal: internal_eksternal,
-                        pic_id: pic_id,
-                        vehicle: vehicle,
-                        waktu_info: waktu_info,
-                        task: task,
-                        platform: platform,
-                        detail_task: detail_task,
-                        divisi: divisi,
-                        waktu_respond: waktu_respond,
-                        respond: respond,
-                        waktu_kesepakatan: waktu_kesepakatan,
-                        waktu_solve: waktu_solve,
-                        status: status,
-                        status_akhir: status_akhir
+                        company_id                : company_id,
+                        internal_eksternal        : internal_eksternal,
+                        pic_id                    : pic_id,
+                        vehicle                   : vehicle,
+                        waktu_info                : waktu_info,
+                        task                      : task,
+                        platform                  : platform,
+                        detail_task               : detail_task,
+                        divisi                    : divisi,
+                        waktu_respond             : waktu_respond,
+                        respond                   : respond,
+                        waktu_kesepakatan         : waktu_kesepakatan,
+                        waktu_solve               : waktu_solve,
+                        status                    : status,
+                        status_akhir              : status_akhir
                     },
                     success: function(data) {
                     swal({
@@ -433,8 +433,9 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 // $(".save").hide();
-                                });
+                                })
                                 read();
+
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
@@ -447,13 +448,17 @@
 
 
         }
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+        function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
+
+
+
+            
             }
 
   </script>
