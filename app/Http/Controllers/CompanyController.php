@@ -125,14 +125,14 @@ class CompanyController extends Controller
     public function updateSelected(Request $request)
     {
         Company::where('item_type_id', '=', 1)
-                ->update(['colour' => 'black']);
+            ->update(['colour' => 'black']);
     }
 
     public function dependentCompany($id)
     {
         $data = DB::table("sellers")
-                    ->where("id", $id)
-                    ->pluck('no_agreement_letter', 'id');
+            ->where("id", $id)
+            ->pluck('no_agreement_letter', 'id');
         return json_encode($data);
     }
 

@@ -34,7 +34,7 @@
         </div>
     </td>
     <td>
-        <select class="form-control no_agreement_letter_id-{{$company->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id-{{$company->id}}">
+        <select class="select no_agreement_letter_id-{{$company->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id-{{$company->id}}">
 
         @foreach ($seller as $item)
         <option value="{{ $item->id }}" {{ old('no_agreement_letter_id') == $item->id ? 'selected':'' }}>
@@ -45,7 +45,7 @@
         </select>
     </td>
     <td>
-        <select class="form-control status-{{$company->id}}" id="status" name="status">
+        <select class="select status-{{$company->id}}" id="status" name="status">
             <option selected value="{{$company->status}}">{{$company->status}}</option>
             <option value="Contract">Contract</option>
             <option value="Terminate">Terminate</option>

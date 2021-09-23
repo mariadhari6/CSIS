@@ -22,17 +22,9 @@ class PemasanganMutasiGpsController extends Controller
 
     public function item_data()
     {
-        // $details = DetailCustomer::orderBy('id', 'DESC')->get();
-        // $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
-        // $pic = Pic::orderBy('id', 'DESC')->get();
-        // $sensor = Sensor::orderBy('id', 'DESC')->get();
-        // $gps = Gps::orderBy('id', 'DESC')->get();
-
-        // $pemasangan_mutasi_GPS = PemasanganMutasiGps::with('requestComplain', 'detailCustomer', 'sensorPemasangan', 'gpsPemasangan')->get();
-        // $pemasangan_mutasi_GPS = PemasanganMutasiGps::with('companyRequest');
 
 
-        $pemasangan_mutasi_GPS = PemasanganMutasiGps::orderBy('id', 'DESC')->get();
+        $pemasangan_mutasi_GPS = PemasanganMutasiGps::all();
 
         return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
         // dd($pemasangan_mutasi_GPS);
@@ -159,4 +151,26 @@ class PemasanganMutasiGpsController extends Controller
         PemasanganMutasiGps::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
     }
+
+    public function dependentPemasangan($id)
+    {
+        $data = DB::table("request_complaint_customers")
+            ->where("id", $id)
+            ->pluck('waktu_kesepakatan', 'id');
+        return json_encode($data);
+    }
+    public function dependentJenisPekerjaan($id)
+    {
+        $data = DB::table("request_complaint_customers")
+            ->where("id", $id)
+            ->pluck('task', 'id');
+        return json_encode($data);
+    }
+    // public function dependentKendaraanPasang($id)
+    // {
+    //     $data = DB::table("request_complaint_customers")
+    //         ->where("id", $id)
+    //         ->pluck('vehicle', 'id');
+    //     return json_encode($data);
+    // }
 }

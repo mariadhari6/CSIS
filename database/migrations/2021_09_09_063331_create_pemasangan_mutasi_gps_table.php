@@ -25,7 +25,7 @@ class CreatePemasanganMutasiGpsTable extends Migration
             $table->foreignId('equipment_terpakai_gps')->constrained('gps')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('equipment_terpakai_sensor')->constrained('sensors')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('teknisi');
-            $table->string('uang_transportasi');
+            $table->integer('uang_transportasi');
             $table->string('type_visit');
             $table->string('note');
             $table->timestamps();

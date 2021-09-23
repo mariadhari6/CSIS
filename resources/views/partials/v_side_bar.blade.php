@@ -126,15 +126,15 @@
                 <div class="collapse in" id="request&complain" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#profile">
+                            <a href="{{url('/RequestComplain')}}">
                                 <span class="link-collapse">Data Request Complain</span>
                             </a>
                         </li>
-                        {{-- <li>
+                        <li>
                             <a href="#edit">
-                                <span class="link-collapse">Dashboard </span>
+                                <span class="link-collapse">Summary </span>
                             </a>
-                        </li> --}}
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -157,7 +157,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#edit">
+                            <a href="{{url('/Dashboard_Visit_Assignment')}}">
                                 <span class="link-collapse">Dashboard</span>
                             </a>
                         </li>

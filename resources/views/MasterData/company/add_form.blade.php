@@ -28,7 +28,7 @@
         <div class="input-div"><input type="date" class="input" id="po_date" placeholder="po date" required>
     </td>
     <td>
-        <select class="form-control" id="no_agreement_letter_id" name="no_agreement_letter_id">
+        <select class="select" id="no_agreement_letter_id" name="no_agreement_letter_id">
             <option value="">Pilih No Agreement</option>
 
             @foreach ($seller as $item)
@@ -38,7 +38,7 @@
         </select>
     </td>
     <td>
-        <select class="form-control" id="status" name="status">
+        <select class="select" id="status" name="status">
             <option selected>Pilih status</option>
             <option value="Contract">Contract</option>
             <option value="Terminate">Terminate</option>

@@ -18,6 +18,7 @@ use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\DashboardVisitAssignmentController;
 use App\Http\Controllers\RequestComplaintController;
 use App\Models\DetailCustomer;
+use App\Models\PemasanganMutasiGps;
 use App\Models\Username;
 
 use Illuminate\Support\Facades\Auth;
@@ -208,7 +209,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
     Route::get('/selected_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'selected']);
     Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
-
+    Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
+    Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
+    // Route::get('/dependent_KendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'dependentKendaraanPasang']);
     // Request Complain
     Route::get('/RequestComplain', [RequestComplaintController::class, 'index'])->name('request.complain');
     Route::get('/item_data_RequestComplain', [RequestComplaintController::class, 'item_data']);
