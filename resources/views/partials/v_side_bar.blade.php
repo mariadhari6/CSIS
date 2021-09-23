@@ -118,7 +118,7 @@
                 <div class="collapse in" id="request&complain" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#profile">
+                            <a href="{{url('/requestcomplaint') }}">
                                 <span class="link-collapse">Data Request Complain</span>
                             </a>
                         </li>

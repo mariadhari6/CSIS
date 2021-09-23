@@ -15,7 +15,7 @@ class CreatePicsTable extends Migration
     {
         Schema::create('pics', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('company_id');
             $table->string('pic_name');
             $table->string('phone');
             $table->string('email');

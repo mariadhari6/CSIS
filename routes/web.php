@@ -12,7 +12,9 @@ use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\DetailCustomerController;
+use App\Http\Controllers\RequestComplaintCustomerController;
 
+use App\Models\RequestComplaintCustomer;
 use App\Models\DetailCustomer;
 use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
@@ -169,6 +171,18 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_GsmPreActive', [GsmPreActiveController::class, 'deleteAll']);
     Route::get('/selected', [GsmPreActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
+
+    // requestcomplaint
+    Route::get('/requestcomplaint', [RequestComplaintCustomerController::class, 'index'])->name('RequestComplaintCustomer');
+    Route::get('/item_data_requestcomplaint', [RequestComplaintCustomerController::class, 'item_data']);
+    Route::get('/add_form_requestcomplaint', [RequestComplaintCustomerController::class, 'add_form']);
+    Route::get('/store_requestcomplaint', [RequestComplaintCustomerController::class, 'store']);
+    Route::get('/destroy_requestcomplaint/{id}', [RequestComplaintCustomerController::class, 'destroy']);
+    Route::get('/show_requestcomplaint/{id}', [RequestComplaintCustomerController::class, 'edit_form']);
+    Route::get('/update_requestcomplaint/{id}', [RequestComplaintCustomerController::class, 'update']);
+    Route::get('/selectedDelete_requestcomplaint', [RequestComplaintCustomerController::class, 'deleteAll']);
+    Route::get('/selected', [RequestComplaintCustomerController::class, 'selected']);
+    Route::get('/update_all/{id}', [RequestComplaintCustomerController::class, 'updateall']);
 });
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

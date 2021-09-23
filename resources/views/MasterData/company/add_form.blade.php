@@ -7,7 +7,7 @@
     <td><select class="form-control" id="seller_id" name="seller_id">
        @foreach ($seller as $sellers)
         <option value="{{ $sellers->id }}" {{ old('seller_id') == $sellers->id ? 'selected':'' }}>{{ $sellers->seller_name }}</option>
-          {{-- <option value="{{ $sellers->id }}">{{ $sellers->seller_name}}</option> --}}
+           <option value="{{ $sellers->id }}">{{ $sellers->seller_name}}</option>
        @endforeach
     </select></i></td>
     {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}
