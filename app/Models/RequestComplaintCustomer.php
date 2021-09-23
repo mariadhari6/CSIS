@@ -23,7 +23,7 @@ class RequestComplaintCustomer extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function picRequest()
+    public function pic()
     {
         return $this->belongsTo(Pic::class);
     }
