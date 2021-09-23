@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\DetailCustomer;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 class DetailCustomerController extends Controller
@@ -20,9 +20,8 @@ class DetailCustomerController extends Controller
         return view('customer.detail_customer.item_data', compact('details'));
     }
 
-    public function add_form()
-    {
-        $company = Company::orderBy('id', 'DESC')->get();
+    public function add_form(){
+        $company = DetailCustomer::with('company')->get();
         return view('customer.detail_customer.add_form', compact('company'));
     }
 

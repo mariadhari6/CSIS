@@ -17,7 +17,6 @@
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
           <table class="table table-responsive" class="table_id" id="table_id">
-
             <thead>
               <tr>
                 <th width="10px">
@@ -52,9 +51,8 @@
               </tr>
             </thead>
             <tbody  id="item_data">
-              {{-- {{ csrf_field() }} --}}
+                   {{-- {{ csrf_field() }} --}}
             </tbody>
-
           </table>
       </div>
     </div>
@@ -62,17 +60,11 @@
 </div>
 
 <script>
-
     $(document).ready(function() {
-
         read();
-        // $('#detailcustomer').dataTable();
-
     });
-
     function read(){
-
-      $.get("{{ url('item_data_detail')}}", {}, function(data, status) {
+      $.get("{{ route('item_detail')}}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
@@ -81,18 +73,14 @@
         $('#table_id').DataTable().draw();
       });
     }
-
-    $('.add').click(function() {
-        $.get("{{ url('add_form_detail')}}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
-
-        });
-      });
-
-      function cancel() {
+    function cancel() {
       read()
     }
-
+    $('.add').click(function() {
+        $.get("{{ route('add_detail')}}", {}, function(data, status) {
+          $('#table_id tbody').prepend(data);
+        });
+    });
     function store() {
         var CompanyId           = $("#CompanyId").val();
         var LicencePlate        = $("#LicencePlate").val();
@@ -114,14 +102,13 @@
         var StatusLayanan       = $("#StatusLayanan").val();
         var TanggalPasang       = $("#TanggalPasang").val();
         var TanggalNonAktif     = $("#TanggalNonAktif").val();
-
         $.ajax({
             type: "get",
             url: "{{ url('store_detail')}}",
             data: {
                 CompanyId           : CompanyId,
                 LicencePlate        : LicencePlate,
-                VihecleType        : VihecleType,
+                VihecleType         : VihecleType,
                 PoNumber            : PoNumber,
                 PoDate              : PoDate,
                 StatusPo            : StatusPo,
@@ -148,16 +135,12 @@
                 timer: 1500
             }).catch(function(timeout) { })
               read();
-
             }
         })
     }
-
-
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
-
         swal({
             title: 'Are you sure?',
             text: "You want delete to this data!",
@@ -184,14 +167,11 @@
                         read();
                     }
                 });
-
               });
             },
             allowOutsideClick: false
       });
-
     }
-
     function edit(id){
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
@@ -216,15 +196,12 @@
         $("#item-StatusLayanan-"+id).hide("fast");
         $("#item-TanggalPasang-"+id).hide("fast");
         $("#item-TanggalNonAktif-"+id).hide("fast");
-
         $.get("{{ url('show_detail') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
-
      function update(id) {
-
-              var CompanyId           = $("#CompanyId").val();
+        var CompanyId           = $("#CompanyId").val();
         var LicencePlate        = $("#LicencePlate").val();
         var VihecleType         = $("#VihecleType").val();
         var PoNumber            = $("#PoNumber").val();
@@ -278,40 +255,25 @@
                     timer: 1500
                 }).catch(function(timeout) { })
                 read()
-
                 }
-
-
             });
         }
-
-
-
         $('#master').on('click', function(e) {
           if($(this).is(':checked',true) ){
                 $(".task-select").prop('checked', true)
           } else {
               $(".task-select").prop('checked',false);
           }
-
         });
-
         $('.delete_all').on('click', function(){
         //   event.preventDefault();
-
             var allVals = [];
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
-
             });
-
                 if (allVals.length > 0) {
-
                     var _token = $('input[name="_token"]').val();
-
                     // alert(allVals);
-
                     swal({
                     title: 'Are you sure?',
                     text: "You want delete Selected data !",
@@ -340,44 +302,30 @@
                                 }).catch(function(timeout) { })
                                 $("#master").prop('checked', false);
                                 read();
-
                                 }
                             });
                     });
                     },
                     allowOutsideClick: false
                 });
-
             }else{
                 alert('Select the row you want to delete')
             }
-
         });
-
-
         $('.edit_all').on('click', function(e){
-
             var allVals = [];
             var _token = $('input[name="_token"]').val();
-
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
-
             });
-
             if (allVals.length > 0){
-
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
                 $.get("{{ url('selected_detail') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
-
                 });
-
                 $.each(allVals, function(index, value){
-
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
                     $("#item-CompanyId-"+value).hide("fast");
@@ -406,21 +354,15 @@
                         $("#master").prop('checked', false);
                     });
                 });
-
-
             }else{
                 alert('Select the row you want to edit')
             }
         });
-
-
         function updateSelected() {
-
             var allVals = [];
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
-
             swal({
                 title: "Are you sure?",
                 text: "Do you want to do an update?",
@@ -434,7 +376,7 @@
                 $.each(allVals, function(index, value){
                     var CompanyId           = $(".CompanyId-"+ value).val();
                     var LicencePlate        = $(".LicencePlate-"+ value).val();
-                    var VihecleType         = $(".VihecleType-"+ value).val();
+                    var VihecleType         = $(".VehicleType-"+ value).val();
                     var PoNumber            = $(".PoNumber-"+ value).val();
                     var PoDate              = $(".PoDate-"+ value).val();
                     var StatusPo            = $(".StatusPo-"+ value).val();
@@ -491,15 +433,11 @@
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
                                 read();
-
                             }
                     });
                 });
-
             });
-
         }
-
         //--------Proses Batal--------
          function batal(){
             $(".save").hide("fast");
@@ -509,13 +447,6 @@
             $(".delete_all").show("fast");
             read();
             }
-
-
-
-
-
-
-
 </script>
 
 @endsection

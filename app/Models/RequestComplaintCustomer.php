@@ -28,8 +28,8 @@ class RequestComplaintCustomer extends Model
         return $this->belongsTo(Pic::class);
     }
     
-    public function pemasanganMutasiGps()
-    {
-        return $this->hasOne(PemasanganMutasiGps::class);
-    }
+    // public function pemasanganMutasiGps()
+    // {
+    //     return $this->hasOne(PemasanganMutasiGps::class);
+    // }
 }

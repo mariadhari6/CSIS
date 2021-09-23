@@ -122,16 +122,11 @@
     </td>
     <td>
         <select class="form-control teknisi-{{$maintenanceGps->id}}" id="teknisi" name="teknisi-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->pic->id}}">
-                {{ $maintenanceGps->pic->pic_name }}
-            </option>
-    
-            @foreach ($pic as $item)
-            <option value="{{ $item->id }}">
-                {{ $item->pic_name }}
-            </option>
-            @endforeach
-            
+            <option value="" disabled selected>Teknisi</option>
+            <option value="Khatam">Khatam</option>
+            <option value="Rifai">Rifai</option>
+            <option value="Arief">Arief</option>
+            <option value="Mukhti">Mukhti</option>
         </select>
     </td>
     <td>

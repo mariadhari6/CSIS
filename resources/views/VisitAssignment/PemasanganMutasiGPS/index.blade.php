@@ -1,29 +1,32 @@
 @extends('layouts.v_main')
-@section('title','Pemasangan dan Mutasi GPS')
+@section('title','CSIS | Pemasangan dan Mutasi GPS')
 
 
 @section('content')
+<h4 class="page-title">Pemasangan dan Mutasi GPS</h4>
 
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
 
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button">
+                    <b>Add</b>
+                    <i class="fas fa-plus ml-2" id="add"></i>
+                </button>
+                <button class="btn btn-success  mr-2 edit_all">
+                    <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn btn-danger  delete_all">
+                    <i class="fas fa-trash"></i>
+                </button>
             </div>
-
 
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th>
+                <th width="10px">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -64,12 +67,10 @@
     });
     // ------ Tampil Data ------
     function read(){
-
       $.get("{{ url('item_data_PemasanganMutasi') }}", {}, function(data, status) {
          $('#table_id').DataTable().destroy();
          $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
-
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
@@ -80,7 +81,6 @@
     function cancel() {
       read()
     }
-
      // ------ Tambah Form Input ------
      $('.add').click(function() {
         $.get("{{ url('add_form_PemasanganMutasi') }}", {}, function(data, status) {
@@ -93,7 +93,7 @@
         var tanggal = $("#tanggal").val();
         var kendaraan_awal = $("#kendaraan_awal").val();
         var imei = $("#imei").val();
-        var gsm = $("#gsm").val();
+        var gsm_pemasangan = $("#gsm_pemasangan").val();
         var kendaraan_pasang = $("#kendaraan_pasang").val();
         var jenis_pekerjaan = $("#jenis_pekerjaan").val();
         var equipment_terpakai_gps = $("#equipment_terpakai_gps").val();
@@ -110,7 +110,7 @@
               tanggal:tanggal,
               kendaraan_awal: kendaraan_awal,
               imei: imei,
-              gsm: gsm,
+              gsm_pemasangan: gsm_pemasangan,
               kendaraan_pasang:kendaraan_pasang,
               jenis_pekerjaan:jenis_pekerjaan,
               equipment_terpakai_gps:equipment_terpakai_gps,
@@ -159,7 +159,6 @@
                         read();
                     }
                 });
-
               });
             },
             allowOutsideClick: false
@@ -174,7 +173,7 @@
         $("#item-tanggal-"+id).hide("fast");
         $("#item-kendaraan_awal-"+id).hide("fast");
         $("#item-imei-"+id).hide("fast");
-        $("#item-gsm-"+id).hide("fast");
+        $("#item-gsm_pemasangan-"+id).hide("fast");
         $("#item-kendaraan_pasang-"+id).hide("fast");
         $("#item-jenis_pekerjaan-"+id).hide("fast");
         $("#item-equipment_terpakai_gps-"+id).hide("fast");
@@ -193,7 +192,7 @@
             var tanggal = $("#tanggal").val();
             var kendaraan_awal = $("#kendaraan_awal").val();
             var imei = $("#imei").val();
-            var gsm = $("#gsm").val();
+            var gsm_pemasangan = $("#gsm_pemasangan").val();
             var kendaraan_pasang = $("#kendaraan_pasang").val();
             var jenis_pekerjaan = $("#jenis_pekerjaan").val();
             var equipment_terpakai_gps = $("#equipment_terpakai_gps").val();
@@ -207,19 +206,19 @@
                 type: "get",
                 url: "{{ url('update_PemasanganMutasi') }}/"+id,
                 data: {
-                 company_id: company_id,
-              tanggal:tanggal,
-              kendaraan_awal: kendaraan_awal,
-              imei: imei,
-              gsm: gsm,
-              kendaraan_pasang:kendaraan_pasang,
-              jenis_pekerjaan:jenis_pekerjaan,
-              equipment_terpakai_gps:equipment_terpakai_gps,
-              equipment_terpakai_sensor:equipment_terpakai_sensor,
-              teknisi:teknisi,
-              uang_transportasi:uang_transportasi,
-              type_visit:type_visit,
-              note:note
+                company_id: company_id,
+                tanggal:tanggal,
+                kendaraan_awal: kendaraan_awal,
+                imei: imei,
+                gsm_pemasangan: gsm_pemasangan,
+                kendaraan_pasang:kendaraan_pasang,
+                jenis_pekerjaan:jenis_pekerjaan,
+                equipment_terpakai_gps:equipment_terpakai_gps,
+                equipment_terpakai_sensor:equipment_terpakai_sensor,
+                teknisi:teknisi,
+                uang_transportasi:uang_transportasi,
+                type_visit:type_visit,
+                note:note
                 },
                 success: function(data) {
                 swal({
@@ -277,7 +276,6 @@
                                 }).catch(function(timeout) { });
                                 $("#master").prop('checked', false);
                                 read();
-
                                 }
                             });
                     });
@@ -288,13 +286,10 @@
                 alert('Select the row you want to delete')
             }
         });
-
         // Form Edit All
         $('.edit_all').on('click', function(e){
-
             var allVals = [];
             var _token = $('input[name="_token"]').val();
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -302,7 +297,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('/selected_PemasanganMutasi') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -312,7 +307,7 @@
                     $("#item-tanggal-"+value).hide("fast");
                     $("#item-kendaraan_awal-"+value).hide("fast");
                     $("#item-imei-"+value).hide("fast");
-                    $("#item-gsm-"+value).hide("fast");
+                    $("#item-gsm_pemasangan-"+value).hide("fast");
                     $("#item-kendaraan_pasang-"+value).hide("fast");
                     $("#item-jenis_pekerjaan-"+value).hide("fast");
                     $("#item-equipment_terpakai_gps-"+value).hide("fast");
@@ -325,18 +320,15 @@
                     $.get("{{ url('show_PemasanganMutasi') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
-
                     });
                 });
             }else{
                 alert('Select the row you want to edit')
             }
         });
-
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -351,12 +343,11 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-
                     var company_id = $(".company_id-"+value).val();
                     var tanggal = $(".tanggal-"+value).val();
                     var kendaraan_awal = $(".kendaraan_awal-"+value).val();
                     var imei = $(".imei-"+value).val();
-                    var gsm = $(".gsm-"+value).val();
+                    var gsm_pemasangan = $(".gsm_pemasangan-"+value).val();
                     var kendaraan_pasang = $(".kendaraan_pasang-"+value).val();
                     var jenis_pekerjaan = $(".jenis_pekerjaan-"+value).val();
                     var equipment_terpakai_gps = $(".equipment_terpakai_gps-"+value).val();
@@ -373,7 +364,7 @@
                         tanggal:tanggal,
                         kendaraan_awal: kendaraan_awal,
                         imei: imei,
-                        gsm: gsm,
+                        gsm_pemasangan: gsm_pemasangan,
                         kendaraan_pasang:kendaraan_pasang,
                         jenis_pekerjaan:jenis_pekerjaan,
                         equipment_terpakai_gps:equipment_terpakai_gps,
@@ -389,11 +380,9 @@
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
                                     timer: 1500
-
                                 // $(".save").hide();
                                 });
                                 read();
-
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
@@ -403,23 +392,15 @@
                 });
             });
         });
-
-
         }
-
         //--------Proses Batal--------
-         function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+         function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-            }
-
-
-
-
+        }
   </script>
    @endsection
-

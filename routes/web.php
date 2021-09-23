@@ -185,15 +185,15 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_data_reqcomp_cust', [RequestComplentCustomerController::class, 'item_data'])->name('item_data_reqcomp_cust');
 
     //detail customer
-    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('Detail customer');
-    Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data']);
-    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form']);
+    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
+    Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
+    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
     Route::get('/store_detail', [DetailCustomerController::class, 'store']);
     Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
     Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
     Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
     Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
-    Route::get('/selected', [DetailCustomerController::class, 'selected']);
+    Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
     Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
     
     // Pemasangan Mutasi GPS
@@ -205,8 +205,11 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'edit_form']);
     Route::get('/update_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'update']);
     Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
-    Route::get('/selected', [PemasanganMutasiGpsController::class, 'selected']);
+    Route::get('/selected_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'selected']);
     Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
+    Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
+    Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
+    // Route::get('/dependent_KendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'dependentKendaraanPasang']);
 
     // Maintenance GPS
     Route::get('/MaintenanceGps', [MaintenanceGpsController::class, 'index']);

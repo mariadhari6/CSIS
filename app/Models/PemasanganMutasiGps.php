@@ -11,12 +11,12 @@ class PemasanganMutasiGps extends Model
     protected $table = 'pemasangan_mutasi_gps';
 
     protected $fillable = [
-        'company_id', 'tanggal', 'kendaraan_awal', 'imei', 'gsm', 'kendaraan_pasang', 'jenis_pekerjaan', 'equipment_terpakai_gps', 'equipment_terpasang_sensor', 'teknisi',
+        'company_id', 'tanggal', 'kendaraan_awal', 'imei', 'gsm_pemasangan', 'kendaraan_pasang', 'jenis_pekerjaan', 'equipment_terpakai_gps', 'equipment_terpasang_sensor', 'teknisi',
         'uang_transportasi', 'type_visit', 'note'
     ];
     public function requestComplain()
     {
-        return $this->belongsTo(RequestComplaintCustomer::class, 'company', 'tanggal', 'waktu_kesepakatan');
+        return $this->belongsTo(RequestComplaintCustomer::class, 'company_id');
     }
     // public function companyRequest()
     // {
@@ -24,15 +24,15 @@ class PemasanganMutasiGps extends Model
     // }
     public function detailCustomer()
     {
-        return $this->belongsTo(DetailCustomer::class);
+        return $this->belongsTo(DetailCustomer::class, 'imei');
     }
-    public function gpsPemasangan()
+    public function gps()
     {
-        return $this->belongsTo(Gps::class);
+        return $this->belongsTo(Gps::class, 'id');
     }
 
-    public function sensorPemasangan()
+    public function sensor()
     {
-        return $this->belongsTo(Sensor::class);
+        return $this->belongsTo(Sensor::class, 'id');
     }
 }
