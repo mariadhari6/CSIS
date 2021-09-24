@@ -14,6 +14,11 @@ class GsmTerminateController extends Controller
 {
     //
 
+<<<<<<< HEAD
+=======
+    //
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     public function index()
     {
         return view('MasterData.GsmTerminate.index');
@@ -48,7 +53,11 @@ class GsmTerminateController extends Controller
     {
         $data = array(
             'request_date'   => $request->request_date,
+<<<<<<< HEAD
             'active_date'      => $request->active_date,
+=======
+            'terminate_date'      => $request->terminate_date,
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             'gsm_active_id' => $request->gsm_active_id,
             'status_active'   => $request->status_active,
             'company_id'      => $request->company_id,
@@ -73,11 +82,25 @@ class GsmTerminateController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
+=======
+    
+    public function destroy($id)
+    {
+        $data = GsmTerminate::findOrfail($id);
+        $data->delete();
+    }
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     public function update(Request $request, $id)
     {
         $data = GsmTerminate::findOrfail($id);
         $data->request_date = $request->request_date;
+<<<<<<< HEAD
         $data->active_date = $request->active_date;
+=======
+        $data->terminate_date = $request->terminate_date;
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         $data->gsm_active_id = $request->gsm_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;
@@ -95,10 +118,16 @@ class GsmTerminateController extends Controller
 
     public function updateall(Request $request, $id)
     {
+<<<<<<< HEAD
 
         $data = GsmTerminate::findOrfail($id);
         $data->request_date = $request->request_date;
         $data->active_date = $request->active_date;
+=======
+        $data = GsmTerminate::findOrfail($id);
+        $data->request_date = $request->request_date;
+        $data->terminate_date = $request->terminate_date;
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         $data->gsm_active_id = $request->gsm_active_id;
         $data->status_active = $request->status_active;
         $data->company_id = $request->company_id;
@@ -144,5 +173,9 @@ class GsmTerminateController extends Controller
             ->pluck('company_name', 'id');
         return json_encode($data);
     }
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

@@ -32,11 +32,18 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         $data = array(
+<<<<<<< HEAD
             'seller_name' => $request->seller_name,
             'seller_code'   => $request->seller_code,
             'no_agreement_letter'      => $request->no_agreement_letter,
             'status'   => $request->status
 
+=======
+            'seller_name'           => $request->seller_name,
+            'seller_code'           => $request->seller_code,
+            'no_agreement_letter'   => $request->no_agreement_letter,
+            'status'                => $request->status
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         );
         Seller::insert($data);
     }
@@ -46,7 +53,10 @@ class SellerController extends Controller
         $seller    = Seller::findOrfail($id);
         return view('MasterData.seller.edit_form')->with([
             'seller' => $seller,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         ]);
     }
 

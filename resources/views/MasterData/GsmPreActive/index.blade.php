@@ -1,19 +1,28 @@
 @extends('layouts.v_main')
+<<<<<<< HEAD
 @section('title','Gsm Pre Active')
+=======
+@section('title','CSIS | Gsm Pre Active')
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
 
 @section('content')
 
+<<<<<<< HEAD
 <div align="right">
   </div>
   <br>
   <div id="message"></div>
 
+=======
+<h4 class="page-title">GSM Pre Active</h4>
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
+<<<<<<< HEAD
             <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
             <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
             <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
@@ -21,6 +30,20 @@
             <br>
 <div class=" table-responsive">
           <table class="table table-hover data" class="table_id" id="table_id" >
+=======
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button">
+                  <b>Add</b>
+                  <i class="fas fa-plus ml-2" id="add"></i>
+                </button>
+                <button class="btn btn-success  mr-2 edit_all"> 
+                  <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn btn-danger  delete_all">
+                  <i class="fas fa-trash"></i>
+                </button>
+            </div>
+          <table class="table table-responsive data" class="table_id" id="table_id" >
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             <thead>
               <tr>
                 <th>
@@ -31,6 +54,7 @@
                         </label>
                     </div>
                 </th>
+<<<<<<< HEAD
                 <th scope="col">Action</th>
                 <th scope="col">Gsm Number</th>
                 <th scope="col">Serial Number</th>
@@ -39,14 +63,27 @@
                 <th scope="col">Res ID</th>
                 <th scope="col">Expired Date</th>
                 <th scope="col">Note</th>
+=======
+                <th scope="col" class="action">Action</th>
+                <th scope="col" class="list">Gsm Number</th>
+                <th scope="col" class="list">Serial Number</th>
+                <th scope="col" class="list">ICC ID</th>
+                <th scope="col" class="list">IMSI</th>
+                <th scope="col" class="list">Res ID</th>
+                <th scope="col" class="list">Expired Date</th>
+                <th scope="col" class="list">Note</th>
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+<<<<<<< HEAD
 
           </div>
+=======
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         </div>
       </div>
     </div>
@@ -60,9 +97,21 @@
     });
     // ------ Tampil Data ------
     function read(){
+<<<<<<< HEAD
       $.get("{{ url('item_data_GsmPreActive') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+=======
+
+      $.get("{{ url('item_data_GsmPreActive') }}", {}, function(data, status) {
+         $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+         $('#table_id').dataTable( {
+
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            // "dom": '<lf<t>ip>'
+            });
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         $('#table_id').DataTable().draw();
       });
     }
@@ -70,6 +119,10 @@
     function cancel() {
       read()
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
      // ------ Tambah Form Input ------
      $('.add').click(function() {
         $.get("{{ url('add_form_GsmPreActive') }}", {}, function(data, status) {
@@ -98,7 +151,11 @@
               note:note
             },
             success: function(data) {
+<<<<<<< HEAD
               swal({
+=======
+             swal({
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                 type: 'success',
                 title: 'Data Saved',
                 showConfirmButton: false,
@@ -128,7 +185,11 @@
                     data: "id=" + id,
                     success: function(data) {
                         swal({
+<<<<<<< HEAD
                           type: 'success',
+=======
+                            type: 'success',
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
@@ -136,6 +197,10 @@
                         read();
                     }
                 });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
               });
             },
             allowOutsideClick: false
@@ -181,14 +246,21 @@
                 },
                 success: function(data) {
                 swal({
+<<<<<<< HEAD
                   type: 'success',
+=======
+                    type: 'success',
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
                 }).catch(function(timeout) { });
                 read();
                 }
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             });
         }
         // checkbox all
@@ -229,7 +301,11 @@
                             },
                             success: function(data) {
                                 swal({
+<<<<<<< HEAD
                                   type: 'success',
+=======
+                                    type: 'success',
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                     title: 'The selected data has been deleted',
                                     showConfirmButton: false,
                                     timer: 1500
@@ -247,10 +323,20 @@
                 alert('Select the row you want to delete')
             }
         });
+<<<<<<< HEAD
         // Form Edit All
         $('.edit_all').on('click', function(e){
             var allVals = [];
             var _token = $('input[name="_token"]').val();
+=======
+
+        // Form Edit All
+        $('.edit_all').on('click', function(e){
+
+            var allVals = [];
+            var _token = $('input[name="_token"]').val();
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -258,7 +344,11 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
+<<<<<<< HEAD
                 $.get("{{ url('selected') }}", {}, function(data, status) {
+=======
+                $.get("{{ url('selected_gsmpreaktiv') }}", {}, function(data, status) {
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -275,12 +365,17 @@
                     $.get("{{ url('show_GsmPreActive') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     });
                 });
             }else{
                 alert('Select the row you want to edit')
             }
         });
+<<<<<<< HEAD
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
@@ -288,6 +383,16 @@
                 allVals.push($(this).attr("id"));
             });
 
+=======
+
+        // ------ Proses Update Data ------
+        function updateSelected() {
+            var allVals = [];
+
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+            });
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             swal({
                 title: "Are you sure?",
                 text: "Do you want to do an update?",
@@ -319,6 +424,7 @@
                     note:note
                     },
                     success: function(data) {
+<<<<<<< HEAD
                     swal({
                       type: 'success',
                                     title: 'The selected data has been updated',
@@ -327,12 +433,25 @@
                                 // $(".save").hide();
                                 });
                                 read();
+=======
+                     swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+
+                                // $(".save").hide();
+                                });
+                                read();
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
                     }
+<<<<<<< HEAD
                     });
                 });
             });
@@ -344,11 +463,33 @@
         function batal(){
             $(".save").hide("fast");
             $(".cancel").hide("fast");
+=======
+                });
+            });
+        });
+
+
+        }
+
+        //--------Proses Batal--------
+        function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
         }
+<<<<<<< HEAD
         
   </script>
    @endsection
+=======
+
+
+
+  </script>
+   @endsection
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

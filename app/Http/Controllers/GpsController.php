@@ -69,6 +69,10 @@ class GpsController extends Controller
         $data->waranty = $request->waranty;
         $data->po_date = $request->po_date;
         $data->status = $request->status;
+<<<<<<< HEAD
+=======
+        $data->status_ownership = $request->status_ownership;
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         $data->save();
     }
 
@@ -114,4 +118,8 @@ class GpsController extends Controller
         Gps::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

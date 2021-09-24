@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @foreach ($details as $detail )
+=======
+   @foreach ($details as $detail )
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     <tr id="edit-form-{{ $detail->id }}">
         <td id="td-checkbox-{{ $detail->id }}" width="100px">
             <div class="form-check">
@@ -16,7 +20,11 @@
         </td>
 
         <td id="item-CompanyId-{{ $detail->id }}">
+<<<<<<< HEAD
             {{ $detail->company_id}}
+=======
+            {{ $detail->company->company_name}}
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         </td>
         <td id="item-LicencePlate-{{ $detail->id }}">
             {{ $detail->licence_plate }}
@@ -28,6 +36,7 @@
             {{ $detail->po_number }}
         </td>
         <td id="item-PoDate-{{ $detail->id }}">
+<<<<<<< HEAD
             {{ $detail-> po_date }}
         </td>
         <td id="item-StatusPo-{{ $detail->id }}">
@@ -78,3 +87,55 @@
     </tr>
 
    @endforeach
+=======
+            {{ $detail->company->po_date}}
+        </td>
+        <td id="item-StatusPo-{{ $detail->id }}">
+            {{ $detail->status_po }}
+        </td>
+        <td id="item-Imei-{{ $detail->id }}">
+            {{ $detail->imei }}
+        </td>
+        <td id="item-Merk-{{ $detail->id }}">
+            {{ $detail->merk }}
+        </td>
+        <td id="item-Type-{{ $detail->id }}">
+            {{ $detail->type }}
+        </td>
+        <td id="item-GSM-{{ $detail->id }}">
+            {{ $detail->gsm }}
+        </td>
+        <td id="item-Provider-{{ $detail->id }}">
+            {{ $detail->provider }}
+        </td>
+        <td id="item-SerialNumberSensor-{{ $detail->id }}">
+            {{ $detail->serial_number_sensor }}
+        </td>
+        <td id="item-NameSensor-{{ $detail->id }}">
+            {{ $detail->name_sensor }}
+        </td>
+        <td id="item-MerkSensor-{{ $detail->id }}">
+            {{ $detail->merk_sensor }}
+        </td>
+        <td id="item-PoolName-{{ $detail->id }}">
+            {{ $detail->pool_name }}
+        </td>
+        <td id="item-PoolLocation-{{ $detail->id }}">
+            {{ $detail->pool_location }}
+        </td>
+        <td id="item-Waranty-{{ $detail->id }}">
+            {{ $detail->waranty }}
+        </td>
+        <td id="item-StatusLayanan-{{ $detail->id }}">
+            {{ $detail->status_layanan }}
+        </td>
+        <td id="item-TanggalPasang-{{ $detail->id }}">
+            {{ $detail->tanggal_pasang }}
+        </td>
+        <td id="item-TanggalNonAktif-{{ $detail->id }}">
+            {{ $detail->tanggal_non_aktif }}
+        </td>
+    </tr>
+
+   @endforeach
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

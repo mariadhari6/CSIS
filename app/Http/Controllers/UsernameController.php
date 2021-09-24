@@ -13,12 +13,25 @@ class UsernameController extends Controller
 {
     public function index()
     {
+<<<<<<< HEAD
         return view('livetable.live_table');
     }
     public function add_form()
     {
         return view('livetable.add_form');
     }
+=======
+
+        return view('livetable.live_table');
+    }
+
+    public function add_form()
+    {
+
+        return view('livetable.add_form');
+    }
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     public function item_data()
     {
         $usernames = Username::orderBy('id', 'DESC')->get();
@@ -32,6 +45,7 @@ class UsernameController extends Controller
             'LastName'     =>  $request->LastName
         );
         Username::insert($data);
+<<<<<<< HEAD
     }
     public function show($id)
     {
@@ -52,6 +66,31 @@ class UsernameController extends Controller
         $data->LastName = $request->LastName;
         $data->save();
     }
+=======
+    }
+
+    public function show($id)
+    {
+        $usernames = Username::findOrfail($id);
+        return view('livetable.edit_form')->with([
+            'usernames' => $usernames
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $data = Username::findOrfail($id);
+        $data->delete();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = Username::findOrfail($id);
+        $data->FirstName = $request->FirstName;
+        $data->LastName = $request->LastName;
+        $data->save();
+    }
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     public function selected()
     {
         $usernames = Username::all();
@@ -59,11 +98,19 @@ class UsernameController extends Controller
             'usernames' => $usernames
         ]);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     public function updateall(Request $request, $id)
     {
         $data = Username::findOrfail($id);
         $data->FirstName = $request->FirstName;
         $data->LastName = $request->LastName;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         echo $id;
     }
     public function deleteAll(Request $request)
@@ -72,6 +119,10 @@ class UsernameController extends Controller
             $ids = $request->input('id');
             DB::table('usernames')->whereIn('id', $ids)->delete();
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         // $ids = $request->ids;
         // DB::table('usernames')
         //         ->whereIn('id',explode(",",$ids))
@@ -81,6 +132,10 @@ class UsernameController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             return DataTables::of(Username::all())->make(true);
         }
     }
@@ -148,7 +203,15 @@ class UsernameController extends Controller
     //     }
     // }
 
-    // public function datatable(Request $request)
+    // public function index()
+    // {
+
+    //     $Username = Username::all();
+    //     return view('livetable.live_table', compact('Username'));
+    //     // dd($Username);
+    // }
+
+    // function add_data(Request $request)
     // {
     //     if ($request->ajax()) {
     //         $data = array(
@@ -169,6 +232,7 @@ class UsernameController extends Controller
     //         echo json_encode($Username);
     //     }
     // }
+
     // function detail_data(Request $request)
     // {
     //     if ($request->ajax()) {
@@ -177,8 +241,6 @@ class UsernameController extends Controller
     //     }
     // }
 
-
-    =======
     // function delete_data(Request $request)
     // {
     //     if ($request->ajax()) {
@@ -203,6 +265,76 @@ class UsernameController extends Controller
     //     }
     // }
 
+    // public function datatable(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = array(
+    //             'FirstName'    =>  $request->FirstName,
+    //             'LastName'     =>  $request->LastName
+    //         );
+    //         $id = DB::table('usernames')->insert($data);
+    //         if ($id > 0) {
+    //             echo '<div class="alert alert-success">Data Inserted</div>';
+    //         }
+    //     }
+    // }
+
+    // function fetch_data(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $Username = Username::orderBy('id', 'desc')->get();
+    //         echo json_encode($Username);
+<<<<<<< HEAD
+    //     }
+    // }
+    // function detail_data(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = DB::table('usernames')->where('id', $request->id)->first();
+    //         echo json_encode($data);
+    //     }
+    // }
+
+
+    =======
+=======
+    //     }
+    // }
+
+    // function detail_data(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = DB::table('usernames')->where('id', $request->id)->first();
+    //         echo json_encode($data);
+    //     }
+    // }
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+    // function delete_data(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         DB::table('usernames')
+    //             ->where('id', $request->id)
+    //             ->delete();
+    //         echo '<div class="alert alert-success">Data Deleted</div>';
+    //     }
+    // }
+
+    // function update_data(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = array(
+    //             'FirstName'    =>  $request->FirstName,
+    //             'LastName'     =>  $request->LastName
+    //         );
+    //         DB::table('usernames')
+    //             ->where('id', $request->id)
+    //             ->update($data);
+    //         echo '<div class="alert alert-success">Data Updated</div>';
+    //     }
+    // }
+
+<<<<<<< HEAD
     =======
     public function deleteAll(Request $request)
     {
@@ -246,5 +378,17 @@ class UsernameController extends Controller
 public function export()
 {
     return Excel::download(new UsersExport, 'users.xlsx');
+=======
+    public function updateSelected(Request $request)
+    {
+        Username::where('item_type_id', '=', 1)
+            ->update(['colour' => 'black']);
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 }
 }

@@ -325,4 +325,8 @@ return [
         */
         'force_resync_remote' => null,
     ],
+<<<<<<< HEAD
 ];
+=======
+];
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

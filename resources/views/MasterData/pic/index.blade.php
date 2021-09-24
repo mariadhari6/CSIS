@@ -1,4 +1,5 @@
 @extends('layouts.v_main')
+<<<<<<< HEAD
 @section('title','PIC Company')
 
 @section('content')
@@ -8,10 +9,18 @@
   <br>
   <div id="message"></div>
 
+=======
+@section('title','CSIS | PIC Company')
+
+@section('content')
+
+<h4 class="page-title">PIC</h4>
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
+<<<<<<< HEAD
              <div class="text-right mt-3" id="selected">
              <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
@@ -24,6 +33,24 @@
             <thead>
               <tr>
                   <th>
+=======
+          <div class="text-right mt-3" id="selected">
+            <button type="button" class="btn btn-primary float-left mr-2 add add-button">
+              <b>Add</b>
+              <i class="fas fa-plus ml-2" id="add"></i>
+            </button>
+            <button class="btn btn-success  mr-2 edit_all"> 
+              <i class="fas fa-pen"></i>
+            </button>
+            <button class="btn btn-danger  delete_all">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+          <table class="table table-responsive data" class="table_id" id="table_id" >
+            <thead>
+              <tr>
+                <th>
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -31,6 +58,7 @@
                         </label>
                     </div>
                 </th>
+<<<<<<< HEAD
                 <th scope="col">Action</th>
                 <th scope="col">Company</th>
                 <th scope="col">Pic Name</th>
@@ -38,6 +66,15 @@
                 <th scope="col">Email</th>
                 <th scope="col">Position</th>
                 <th scope="col">Date of birth</th>
+=======
+                <th scope="col" class="action">Action</th>
+                <th scope="col" class="list">Company</th>
+                <th scope="col" class="list">Pic Name</th>
+                <th scope="col" class="list">Phone</th>
+                <th scope="col" class="list">Email</th>
+                <th scope="col" class="list">Position</th>
+                <th scope="col" class="list">Date of birth</th>
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -48,7 +85,10 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   </div>
+=======
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
   <script>
     $(document).ready(function() {
@@ -63,6 +103,14 @@
       $.get("{{ url('item_data_pic') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+<<<<<<< HEAD
+=======
+        $('#table_id').dataTable( {
+
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+
+            });
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         $('#table_id').DataTable().draw();
 
       });
@@ -101,7 +149,11 @@
               date_of_birth:date_of_birth
             },
             success: function(data) {
+<<<<<<< HEAD
               swal({
+=======
+             swal({
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                 type: 'success',
                 title: 'Data Saved',
                 showConfirmButton: false,
@@ -109,10 +161,16 @@
             }).catch(function(timeout) { });
               read();
 
+<<<<<<< HEAD
               }
             })
         }
     
+=======
+            }
+        })
+    }
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
 
 
@@ -136,7 +194,11 @@
                     data: "id=" + id,
                     success: function(data) {
                         swal({
+<<<<<<< HEAD
                           type: 'success',
+=======
+                            type: 'success',
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
@@ -189,14 +251,24 @@
              date_of_birth:date_of_birth
             },
             success: function(data) {
+<<<<<<< HEAD
              swal({
               type: 'success',
+=======
+               swal({
+                    type: 'success',
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
                 }).catch(function(timeout) { });
                 read();
+<<<<<<< HEAD
              }
+=======
+
+                }
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         })
     }
 
@@ -237,13 +309,21 @@
                             },
                             success: function(data) {
                                 swal({
+<<<<<<< HEAD
                                   type: 'success',
+=======
+                                    type: 'success',
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                     title: 'The selected data has been deleted',
                                     showConfirmButton: false,
                                     timer: 1500
                                 }).catch(function(timeout) { });
                                 $("#master").prop('checked', false);
                                 read();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                 }
                             });
                     });
@@ -267,7 +347,11 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
+<<<<<<< HEAD
                 $.get("{{ url('selected') }}", {}, function(data, status) {
+=======
+                $.get("{{ url('selected_pic') }}", {}, function(data, status) {
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -283,6 +367,10 @@
                     $.get("{{ url('show_pic') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     });
                 });
             }else{
@@ -306,7 +394,10 @@
                 confirmButtonText: 'Yes Update',
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                 $.each(allVals, function(index, value){
                     var company_id = $(".company_id-"+value).val();
                     var pic_name = $(".pic_name-"+value).val();
@@ -327,6 +418,7 @@
                     },
                     success: function(data) {
                     swal({
+<<<<<<< HEAD
                       type: 'success',
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
@@ -356,6 +448,40 @@
             read();
             }
 
+=======
+                          type: 'success',
+                          title: 'The selected data has been updated',
+                          showConfirmButton: false,
+                          timer: 1500
+
+                      // $(".save").hide();
+                      });
+                      read();
+
+                      $(".add").show("fast");
+                      $(".edit_all").show("fast");
+                      $(".delete_all").show("fast");
+                      $(".btn-round").hide("fast");
+                      $(".btn-round").hide("fast");
+                    }
+                });
+            });
+
+        });
+
+
+        }
+
+      //--------Proses Batal--------
+      function cancelUpdateSelected(){
+          $("#save-selected").hide("fast");
+          $("#cancel-selected").hide("fast");
+          $(".add").show("fast");
+          $(".edit_all").show("fast");
+          $(".delete_all").show("fast");
+          read();
+      }
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
 
   </script>

@@ -4,7 +4,11 @@
 @section('content')
 
 <div align="right">
+<<<<<<< HEAD
 <a class="btn btn-secondary  mr-2" href="{{ route('export') }}" title="Export"><i class="fas fa-file-excel mr-2"></i>Export</a>
+=======
+    <a class="btn btn-secondary  mr-2" href="{{ route('export') }}" title="Export"><i class="fas fa-file-excel mr-2"></i>Export</a>
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 </div>
   <br>
   <div id="message"></div>
@@ -14,13 +18,38 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
+<<<<<<< HEAD
                 <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all" title="Edit Selected"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"  title="Deleted Selected"><i class="fas fa-trash"></i></button>
+=======
+<<<<<<< HEAD
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+<<<<<<< HEAD
+=======
+                <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             </div>
             
 
+<<<<<<< HEAD
             <table class="table table-hover" class="table_id" id="table_id" >
+=======
+          <table class="table table-hover data" class="table_id" id="table_id" >
+=======
+
+                <button class="btn btn-success  mr-2 edit_all" title="Edit Selected"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"  title="Deleted Selected"><i class="fas fa-trash"></i></button>
+            </div>
+
+
+
+          <table class="table table-hover" class="table_id" id="table_id" >
+>>>>>>> 7cd2d07c2ab3cbf0c5f32627c5faf59078754169
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             <thead>
               <tr>
                 <th width="10px">
@@ -47,10 +76,16 @@
 
   <script>
     $(document).ready(function() {
+<<<<<<< HEAD
+=======
+      read();
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
       read();
 
     });
+<<<<<<< HEAD
 
     // ------ Tampil Data ------
     function read(){
@@ -58,6 +93,29 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').DataTable().draw();
+=======
+    // ------ Tampil Data ------
+    function read(){
+
+      $.get("{{ url('item_data') }}", {}, function(data, status) {
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+<<<<<<< HEAD
+        $('#table_id').dataTable( {
+<<<<<<< HEAD
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'   
+            } );
+=======
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            });
+>>>>>>> 7cd2d07c2ab3cbf0c5f32627c5faf59078754169
+        $('#table_id').DataTable().draw();
+
+=======
+        $('#table_id').DataTable().draw();
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
       });
     }
@@ -95,10 +153,18 @@
 
             }
         })
+<<<<<<< HEAD
 
     }
 
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
+    }
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -124,7 +190,11 @@
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
+<<<<<<< HEAD
                         }).catch(function(timeout){ });
+=======
+                        }).catch(function(timeout) { });
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                         read();
                     }
                 });
@@ -134,7 +204,10 @@
             allowOutsideClick: false
       });
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
@@ -165,12 +238,19 @@
                     showConfirmButton: false,
                     timer: 1500
                 }).catch(function(timeout) { });
+<<<<<<< HEAD
                 read()
+=======
+                read();
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
                 }
             });
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         // checkbox all
         $('#master').on('click', function(e) {
           if($(this).is(':checked',true) ){
@@ -260,6 +340,7 @@
                 alert('Select the row you want to edit')
             }
         });
+<<<<<<< HEAD
 
 
         // --- Proses Update Multiple ---
@@ -314,19 +395,96 @@
                 });
 
             });
+=======
+
+
+        // --- Proses Update Multiple ---
+        function updateSelected() {
+            var allVals = [];
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+            });
+
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to do an update?",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: '#00FF00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Update',
+                showLoaderOnConfirm: true,
+            }).then((willDelete) => {
+                $.each(allVals, function(index, value){
+                    var FirstName = $(".FirstName-"+value).val();
+                    var LastName = $(".LastName-"+value).val();
+                    $.ajax({
+                        type: "get",
+                        url: "{{ url('update') }}/"+value,
+                        data: {
+                        FirstName: FirstName,
+                        LastName: LastName
+                        },
+                        success: function(data) {
+                                // swal("Done!","It was succesfully Update","success");
+                                swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+
+<<<<<<< HEAD
+
+                                // $(".save").hide();
+                                });
+                                read();
+=======
+                                // $(".save").hide();
+                                });
+                                read();
+
+>>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
+
+
+                            }
+
+
+                    });
+
+                    });
+                });
+
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
         }
 
             //--------Proses Batal--------
         function batal(){
+<<<<<<< HEAD
             $(".save").hide("fast");
             $(".cancel").hide("fast");
+=======
+            $(".btn-round").hide("fast");
+            $(".btn-round").hide("fast");
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
+<<<<<<< HEAD
 
             }
+=======
+            }
+
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
 
 

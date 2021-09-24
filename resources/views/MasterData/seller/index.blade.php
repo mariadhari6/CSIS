@@ -1,4 +1,5 @@
 @extends('layouts.v_main')
+<<<<<<< HEAD
 @section('title','Seller')
 
 @section('content')
@@ -8,17 +9,38 @@
   <br>
   <div id="message"></div>
 
+=======
+@section('title','CSIS | Seller')
+
+@section('content')
+<h4 class="page-title">Seller</h4>
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
+<<<<<<< HEAD
             <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
             
             <table class="table table-responsive data" class="table_id" id="table_id" >
+=======
+                <button type="button" class="btn btn-primary float-left mr-2 add" id="add">
+                  <b>Add</b>
+                  <i class="fas fa-plus ml-2" ></i>
+                </button>
+                <button class="btn btn-success  mr-2 edit_all"> 
+                  <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn btn-danger  delete_all">
+                  <i class="fas fa-trash"></i>
+                </button>
+            </div>
+          <table class="table table-responsive data" class="table_id" id="table_id" >
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             <thead>
               <tr>
                 <th>
@@ -32,7 +54,11 @@
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list-seller">Seller Name</th>
                 <th scope="col" class="list-seller">Seller Code</th>
+<<<<<<< HEAD
                 <th scope="col" class="list-seller">No Agreement Latter</th>
+=======
+                <th scope="col" class="list-seller">No Agreement Letter</th>
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                 <th scope="col" class="list-seller">Status</th>
               </tr>
             </thead>
@@ -40,6 +66,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+<<<<<<< HEAD
         
         </div>
         </div>
@@ -62,6 +89,31 @@
         $('#table_id').DataTable().draw();
       });
     }
+=======
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    $(document).ready(function() {
+      read()
+    });
+
+    // ------ Tampil Data ------
+    function read(){
+      $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
+        $('#table_id').DataTable().destroy();
+        $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+        });
+        $('#table_id').DataTable().draw();
+      });
+    }
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -94,11 +146,19 @@
                 title: 'Data Saved',
                 showConfirmButton: false,
                 timer: 1500
+<<<<<<< HEAD
             }).catch(function(timeout) { });
+=======
+              }).catch(function(timeout) { });
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
               read();
             }
         })
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -119,7 +179,11 @@
                     data: "id=" + id,
                     success: function(data) {
                         swal({
+<<<<<<< HEAD
                           type: 'success',
+=======
+                            type: 'success',
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
@@ -127,7 +191,10 @@
                         read();
                     }
                 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
               });
             },
             allowOutsideClick: false
@@ -140,7 +207,11 @@
         $("#td-button-"+id).hide("fast");
         $("#item-seller_name-"+id).hide("fast");
         $("#item-seller_code-"+id).hide("fast");
+<<<<<<< HEAD
         $("#item-no_agreement_latter-"+id).hide("fast");
+=======
+        $("#item-no_agreement_letter-"+id).hide("fast");
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         $("#item-status-"+id).hide("fast");
         $.get("{{ url('show_seller') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
@@ -211,8 +282,13 @@
                                 _token: _token
                             },
                             success: function(data) {
+<<<<<<< HEAD
                                 swal({
                                   type: 'success',
+=======
+                                 swal({
+                                    type: 'success',
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                     title: 'The selected data has been deleted',
                                     showConfirmButton: false,
                                     timer: 1500
@@ -244,7 +320,11 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
+<<<<<<< HEAD
                 $.get("{{ url('selected') }}", {}, function(data, status) {
+=======
+                $.get("{{ url('selected_seller') }}", {}, function(data, status) {
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -269,11 +349,17 @@
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
+<<<<<<< HEAD
 
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
 
+=======
+            $(".task-select:checked").each(function() {
+                allVals.push($(this).attr("id"));
+            });
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             swal({
                 title: "Are you sure?",
                 text: "Do you want to do an update?",
@@ -284,7 +370,10 @@
                 confirmButtonText: 'Yes Update',
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                 $.each(allVals, function(index, value){
                     var seller_name = $(".seller_name-"+value).val();
                     var seller_code = $(".seller_code-"+value).val();
@@ -300,6 +389,7 @@
                     status:status,
                     },
                     success: function(data) {
+<<<<<<< HEAD
                       swal({
                                     type: 'success',
                                     title: 'The selected data has been updated',
@@ -313,10 +403,28 @@
                                 $(".delete_all").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
+=======
+                   swal({
+                        type: 'success',
+                        title: 'The selected data has been updated',
+                        showConfirmButton: false,
+                        timer: 1500
+
+                    // $(".save").hide();
+                    });
+                    read();
+
+                    $(".add").show("fast");
+                    $(".edit_all").show("fast");
+                    $(".delete_all").show("fast");
+                    $(".btn-round").hide("fast");
+                    $(".btn-round").hide("fast");
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     }
                 });
             });
           });
+<<<<<<< HEAD
 
 
         }
@@ -325,6 +433,14 @@
         function batal(){
             $(".save").hide("fast");
             $(".cancel").hide("fast");
+=======
+        }
+
+         //--------Proses Batal--------
+         function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
@@ -332,7 +448,15 @@
         }
 
 
+<<<<<<< HEAD
 
 
   </script>
    @endsection
+=======
+       
+  </script>
+
+
+@endsection
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

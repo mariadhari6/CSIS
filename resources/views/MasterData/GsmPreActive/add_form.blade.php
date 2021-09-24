@@ -1,5 +1,6 @@
 <tr id="add_form">
     <td></td>
+<<<<<<< HEAD
     <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
 
     {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}
@@ -13,3 +14,31 @@
 
 
 </tr>
+=======
+    <td>
+        <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
+    </td>
+    <td> 
+        <div class="input-div"><input type="text" class="input" id="gsm_number" placeholder="Gsm Number">
+    </td>
+    <td> 
+        <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number">
+    </td>
+    <td> 
+        <div class="input-div"><input type="text" class="input" id="icc_id" placeholder="ICC ID">
+    </td>
+    <td> 
+        <div class="input-div"><input type="text" class="input" id="imsi" placeholder="IMSI">
+    </td>
+    <td> 
+        <div class="input-div"><input type="text" class="input" id="res_id" placeholder="Res ID">
+    </td>
+    <td> 
+        <div class="input-div"><input type="date" class="input" id="expired_date" placeholder="Expired Date">
+    </td>
+    <td>
+        <textarea class="form-control" id="note" name="note" ></textarea>
+    </td>
+</tr>
+
+>>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
