@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 @foreach ($details as $detail )
-=======
+
    @foreach ($details as $detail )
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
     <tr id="edit-form-{{ $detail->id }}">
         <td id="td-checkbox-{{ $detail->id }}" width="100px">
             <div class="form-check">
@@ -20,11 +20,11 @@
         </td>
 
         <td id="item-CompanyId-{{ $detail->id }}">
-<<<<<<< HEAD
+
             {{ $detail->company_id}}
-=======
+
             {{ $detail->company->company_name}}
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
         </td>
         <td id="item-LicencePlate-{{ $detail->id }}">
             {{ $detail->licence_plate }}
@@ -36,7 +36,7 @@
             {{ $detail->po_number }}
         </td>
         <td id="item-PoDate-{{ $detail->id }}">
-<<<<<<< HEAD
+
             {{ $detail-> po_date }}
         </td>
         <td id="item-StatusPo-{{ $detail->id }}">
@@ -87,7 +87,7 @@
     </tr>
 
    @endforeach
-=======
+
             {{ $detail->company->po_date}}
         </td>
         <td id="item-StatusPo-{{ $detail->id }}">
@@ -138,4 +138,3 @@
     </tr>
 
    @endforeach
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

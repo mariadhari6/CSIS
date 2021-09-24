@@ -3,27 +3,30 @@
 <tr id="add_form">
    <td></td>
    <td>
-      <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
+      <i class="fas fa-check add" id="add" onclick="store()"></i>
+      <i class="fas fa-times cancel" onclick="cancel()"></i>
    </td>
    <td>
       <select class="select" id="company_id" name="company_id">
-       @foreach ($company as $item)
-        <option value="{{ $item->id }}" >{{ $item['company_name'] }}</option>
+       @foreach ($company as $companys)
+        <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
            
        @endforeach
       </select>
    </td>
    <td>
-      <select class="select" id="internal_eksternal">
+      <select class="select" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example">
          <option value="" disable selected>Internal_Eksternal</option>
-         <option value="Internal">Internal</option>
-         <option value="Eksternal">Eksternal</option>
+         <option value="Internal Request">Internal Request</option>
+         <option value="Internal Complain">Internal Complain</option>
+         <option value="Eksternal Request">Eksternal Request</option>
+         <option value="Eksternal Complain">Eksternal Complain</option>
       </select>
    </td>
    <td>
-      <select class="select" id="pic_id" name="pic_id">
-       @foreach ($pic as $item)
-        <option value="{{ $item->id }}" >{{ $item['pic_name'] }}</option>
+      <select class="select" id="pic" name="pic">
+       @foreach ($pic as $pics)
+       <option value="{{ $pics->id }}" {{ old('pic') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
            
        @endforeach
       </select>

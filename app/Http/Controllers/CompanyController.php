@@ -18,10 +18,6 @@ class CompanyController extends Controller
     {
         $seller = Seller::orderBy('seller_name', 'DESC')->get();
         return view('MasterData.company.add_form')->with([
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             'seller' => $seller,
         ]);
     }
@@ -37,38 +33,29 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
-            'company_name' => 'required',
-            'seller_id' => 'required',
-            'customer_code' => 'required',
-            'no_po' => 'required',
-            'po_date' => 'required',
-            'no_agreement_letter_id' => 'required',
-            'status' => 'required',
+            'company_name'            => 'required',
+            'seller_id'               => 'required',
+            'customer_code'           => 'required',
+            'no_po'                   => 'required',
+            'po_date'                 => 'required',
+            'no_agreement_letter_id'  => 'required',
+            'status'                  => 'required',
         ]);
         $data = array(
-            'company_name'     =>  $request->company_name,
-            'seller_id'    =>  $request->seller_id,
-            'customer_code'     =>  $request->customer_code,
-            'no_po'     =>  $request->no_po,
-            'po_date'     =>  $request->po_date,
-            'no_agreement_letter_id' => $request->no_agreement_letter_id,
-            'status'     =>  $request->status,
+            'company_name'            =>  $request->company_name,
+            'seller_id'               =>  $request->seller_id,
+            'customer_code'           =>  $request->customer_code,
+            'no_po'                   =>  $request->no_po,
+            'po_date'                 =>  $request->po_date,
+            'no_agreement_letter_id'  => $request->no_agreement_letter_id,
+            'status'                  =>  $request->status,
         );
         Company::insert($data);
     }
-
-<<<<<<< HEAD
     public function show($id)
-=======
-    public function edit_form($id)
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     {
-        $seller = Seller::orderBy('seller_name', 'DESC')->get();
-        $company = Company::findOrfail($id);
+        $seller                       = Seller::orderBy('seller_name', 'DESC')->get();
+        $company                      = Company::findOrfail($id);
         return view('MasterData.company.edit_form')->with([
             'company' => $company,
             'seller' => $seller,
@@ -83,14 +70,14 @@ class CompanyController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = Company::findOrfail($id);
-        $data->company_name = $request->company_name;
-        $data->seller_id = $request->seller_id;
-        $data->customer_code = $request->customer_code;
-        $data->no_po = $request->no_po;
-        $data->po_date = $request->po_date;
+        $data                         = Company::findOrfail($id);
+        $data->company_name           = $request->company_name;
+        $data->seller_id              = $request->seller_id;
+        $data->customer_code          = $request->customer_code;
+        $data->no_po                  = $request->no_po;
+        $data->po_date                = $request->po_date;
         $data->no_agreement_letter_id = $request->no_agreement_letter_id;
-        $data->status = $request->status;
+        $data->status                 = $request->status;
 
         $data->save();
     }
@@ -114,10 +101,6 @@ class CompanyController extends Controller
         $data->no_agreement_letter_id = $request->no_agreement_letter_id;
         $data->status = $request->status;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         echo $id;
     }
 
@@ -142,8 +125,6 @@ class CompanyController extends Controller
         Company::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
     }
-<<<<<<< HEAD
-=======
 
     public function dependentCompany($id)
     {
@@ -154,13 +135,4 @@ class CompanyController extends Controller
     }
 
 
-    // public function showAgreement($id)
-    // {
-    //     $data = DB::table("sellers")
-    //         ->join('companies', 'sellers.no_agreement_letter', '=', 'companies.no_agreement_letter_id')
-    //         // ->where("id", $id)
-    //         ->pluck('no_agreement_letter', 'id');
-    //     return json_encode($data);
-    // }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 }

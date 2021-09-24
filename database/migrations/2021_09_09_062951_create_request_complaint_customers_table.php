@@ -20,18 +20,11 @@ class CreateRequestComplaintCustomersTable extends Migration
             $table->foreignId('pic');
             $table->string('vehicle');
             $table->dateTime('waktu_info');
-<<<<<<< HEAD
-=======
             $table->dateTime('waktu_respond');
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             $table->longText('task');
             $table->string('platform');
             $table->longText('detail_task');
             $table->string('divisi');
-<<<<<<< HEAD
-            $table->string('waktu_respond');
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             $table->string('respond');
             $table->dateTime('waktu_kesepakatan');
             $table->dateTime('waktu_solve');
@@ -50,8 +43,4 @@ class CreateRequestComplaintCustomersTable extends Migration
     {
         Schema::dropIfExists('request_complaint_customers');
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

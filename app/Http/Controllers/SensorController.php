@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\Facades\DataTables;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 class SensorController extends Controller
 {
     public function index()

@@ -19,8 +19,9 @@ class RequestComplaintCustomerController extends Controller
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
-        return view('RequestComplaint.data_request_complaint.add_form')
+        return view('RequestComplaint.add_form')
                 ->with([
+                    'request_complain' => $request_complain,
                     'company'   => $company,
                     'pic'       => $pic
                 ]);
@@ -29,8 +30,8 @@ class RequestComplaintCustomerController extends Controller
     }
     public function item_data()
     {
-        $request_complaint = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
-        return view('RequestComplaint.data_request_complaint.item_data',compact('request_complaint'));
+        $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
+        return view('RequestComplaint.item_data', compact('request_complaint'));
         // echo $request_complaint->companyRequest['id'];
     }
 

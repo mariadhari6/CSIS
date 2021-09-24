@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-use App\Models\DetailCustomer;
-
-use Illuminate\Http\Request;
-=======
 use App\Models\Company;
 use App\Models\DetailCustomer;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
 class DetailCustomerController extends Controller
 {
@@ -30,13 +24,8 @@ class DetailCustomerController extends Controller
 
     public function add_form()
     {
-<<<<<<< HEAD
-
-        return view('customer.detail_customer.add_form');
-=======
         $company = Company::orderBy('id', 'DESC')->get();
         return view('customer.detail_customer.add_form', compact('company'));
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     }
 
     public function store(Request $request)
@@ -72,18 +61,11 @@ class DetailCustomerController extends Controller
         $data->delete();
     }
 
-<<<<<<< HEAD
-    public function show($id)
-    {
-        $details = DetailCustomer::findOrfail($id);
-        return view('customer.detail_customer.edit_form', compact('details'));
-=======
     public function edit_form($id)
     {
         $company = Company::orderBy('id', 'DESC')->get();
         $details = DetailCustomer::findOrfail($id);
         return view('customer.detail_customer.edit_form', compact('details', 'company'));
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     }
 
     public function update(Request $request, $id)
@@ -112,30 +94,18 @@ class DetailCustomerController extends Controller
         $data->save();
     }
 
-<<<<<<< HEAD
-    public function deleteAll(Request $request)
-    {
-        $ids = $request->input('id');
-        $data = DetailCustomer::WhereIn('id', $ids);
-        $data->delete();
-    }
-=======
     // public function deleteAll(Request $request)
     // {
     //     $ids = $request->input('id');
     //     $data = DetailCustomer::WhereIn('id', $ids);
     //     $data->delete();
     // }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
     public function selected()
     {
         $details = DetailCustomer::all();
         return view('customer.detail_customer.selected', compact('details'));
     }
-<<<<<<< HEAD
-}
-=======
 
     public function updateall(Request $request, $id)
     {
@@ -186,4 +156,3 @@ class DetailCustomerController extends Controller
             ->update(['colour' => 'black']);
     }
 }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

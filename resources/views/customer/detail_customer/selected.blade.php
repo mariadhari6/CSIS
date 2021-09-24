@@ -1,7 +1,7 @@
-<<<<<<< HEAD
+
 <button class="btn btn-primary btn-round save" onclick="updateSelected()" ><i class="fas fa-"></i>Kirim</button>
 <button class="btn btn-danger btn-round cancel" onclick="batal()">Cancel</button>
-=======
+
 <button class="btn btn-primary btn-round" id="save-selected" onclick="updateSelected()" >
     <i class="fas fa-"></i>
     Save
@@ -9,4 +9,4 @@
 <button class="btn btn-danger btn-round " id="cancel-selected" onclick="cancelUpdateSelected()">
     Cancel
 </button>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+

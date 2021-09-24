@@ -1,19 +1,19 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
+
 @section('title','Tes')
 @section('content')
 <div align="right">
     <a class="btn btn-secondary  mr-2" href="{{ route('export') }}"><i class="fas fa-file-excel mr-2"></i>Export</a>
 </div>
 <br>
-=======
+
 @section('title','CSIC | Detail Customer')
 
 @section('content')
 
 <h4 class="page-title">Detail Customer</h4>
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
 <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -23,12 +23,11 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-<<<<<<< HEAD
+
             <table class="table table-hover" class="detailcustomer" id="detailcustomer">
-=======
+
           <table class="table table-responsive data" class="table_id" id="table_id">
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             <thead>
               <tr>
                 <th width="10px">
@@ -39,7 +38,7 @@
                         </label>
                     </div>
                 </th>
-<<<<<<< HEAD
+
                 <th scope="col" width="80px" >Action</th>
                 <th scope="col">Company</th>
                 <th scope="col">License Plate</th>
@@ -61,7 +60,7 @@
                 <th scope="col">Status Layanan</th>
                 <th scope="col">Tanggal Pasang</th>
                 <th scope="col">Tanggal Non Active</th>
-=======
+
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">License Plate</th>
@@ -83,25 +82,23 @@
                 <th scope="col" class="list">Status Layanan</th>
                 <th scope="col" class="list">Tanggal Pasang</th>
                 <th scope="col" class="list">Tanggal Non Active</th>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
-<<<<<<< HEAD
-          </table>
-
-
-=======
 
           </table>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
+
+          </table>
+
       </div>
     </div>
   </div>
 </div>
-<<<<<<< HEAD
+
 <script>
     $(document).ready(function() {
         read();
@@ -120,7 +117,7 @@
 
 
     </script>
-=======
+
 
 <script>
 
@@ -578,4 +575,4 @@
 </script>
 
 @endsection
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+

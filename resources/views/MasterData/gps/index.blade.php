@@ -1,44 +1,20 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
-@section('title','Gps')
-=======
 @section('title','CSIS | Gps')
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
 
 @section('content')
 
-<<<<<<< HEAD
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
-=======
 <h4 class="page-title">GPS</h4>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-<<<<<<< HEAD
-            <div class="text-right mt-3" id="selected">
-            <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button> 
-            </div>
-            <br>
-
-            <div class="table-responsive">
-            <table class="table table-hover data" class="table_id" id="table_id" >
-=======
           <div class="text-right mt-3" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
               <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
           <table class="table table-responsive data" class="table_id" id="table_id" >
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             <thead>
               <tr>
                 <th width="10px">
@@ -49,16 +25,6 @@
                         </label>
                     </div>
                 </th>
-<<<<<<< HEAD
-                <th scope="col" width="80px">Action</th>
-                <th scope="col">Merk</th>
-                <th scope="col">Type</th>
-                <th scope="col">IMEI</th>
-                <th scope="col">Waranty</th>
-                <th scope="col">Po Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Status Ownership</th>
-=======
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list" >Merk</th>
                 <th scope="col" class="list" >Type</th>
@@ -67,19 +33,13 @@
                 <th scope="col" class="list" >Po Date</th>
                 <th scope="col" class="list" >Status</th>
                 <th scope="col" class="list" >Status Ownership</th>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-<<<<<<< HEAD
-
-          </div>
-=======
         {{-- </div> --}}
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         </div>
       </div>
     </div>
@@ -93,12 +53,6 @@
     });
     // ------ Tampil Data ------
     function read(){
-<<<<<<< HEAD
-      $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-        $('#table_id').DataTable().draw(); 
-=======
 
       $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
@@ -109,17 +63,12 @@
             // "dom": '<lf<t>ip>'
             });
         $('#table_id').DataTable().draw();
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
       });
     }
     // ---- Tombol Cancel -----
     function cancel() {
       read()
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
      // ------ Tambah Form Input ------
      $('.add').click(function() {
         $.get("{{ url('add_form_gps') }}", {}, function(data, status) {
@@ -140,21 +89,12 @@
             url: "{{ url('store_gps') }}",
             data: {
               merk: merk,
-<<<<<<< HEAD
-              type:type,
-              imei: imei,
-              waranty: waranty,
-              po_date: po_date,
-              status:status,
-              status_ownership:status_ownership
-=======
               type: type,
               imei: imei,
               waranty: waranty,
               po_date: po_date,
               status: status,
               status_ownership: status_ownership
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             },
             success: function(data) {
               swal({
@@ -163,15 +103,9 @@
                 showConfirmButton: false,
                 timer: 1500
             }).catch(function(timeout) { });
-<<<<<<< HEAD
-            read();
-
-              }
-=======
               read();
 
             }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         })
     }
     // -----Proses Delete Data ------
@@ -194,16 +128,6 @@
                     data: "id=" + id,
                     success: function(data) {
                         swal({
-<<<<<<< HEAD
-                          type: 'success',
-                            title: 'Data Deleted',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).catch(function(timeout) { })
-                        read();
-                    }
-                });
-=======
                             type: 'success',
                             title: 'Data Deleted',
                             showConfirmButton: false,
@@ -213,7 +137,6 @@
                     }
                 });
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
               });
             },
             allowOutsideClick: false
@@ -258,14 +181,8 @@
                 status_ownership:status_ownership
                 },
                 success: function(data) {
-<<<<<<< HEAD
-                read()
-                swal({
-                  type: 'success',
-=======
                 swal({
                     type: 'success',
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
@@ -273,13 +190,8 @@
                 read();
 
                 }
-<<<<<<< HEAD
-                });
-                }
-=======
             });
         }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         // checkbox all
         $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
@@ -317,24 +229,15 @@
                                 _token: _token
                             },
                             success: function(data) {
-<<<<<<< HEAD
-                                swal({
-                                  type: 'success',
-=======
                                swal({
                                     type: 'success',
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                     title: 'The selected data has been deleted',
                                     showConfirmButton: false,
                                     timer: 1500
                                 }).catch(function(timeout) { });
                                 $("#master").prop('checked', false);
                                 read();
-<<<<<<< HEAD
-                                }
-=======
                             }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                             });
                     });
                     },
@@ -344,12 +247,6 @@
                 alert('Select the row you want to delete')
             }
         });
-<<<<<<< HEAD
-        // Form Edit All
-        $('.edit_all').on('click', function(e){
-            var allVals = [];
-            var _token = $('input[name="_token"]').val();
-=======
 
         // Form Edit All
         $('.edit_all').on('click', function(e){
@@ -357,7 +254,6 @@
             var allVals = [];
             var _token = $('input[name="_token"]').val();
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -365,11 +261,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-<<<<<<< HEAD
-                $.get("{{ url('selected') }}", {}, function(data, status) {
-=======
                 $.get("{{ url('selected_gps') }}", {}, function(data, status) {
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -393,17 +285,11 @@
                 alert('Select the row you want to edit')
             }
         });
-<<<<<<< HEAD
-        // ------ Proses Update Data ------
-        function updateSelected() {
-            var allVals = [];
-=======
 
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -438,20 +324,11 @@
                     status_ownership:status_ownership
                     },
                     success: function(data) {
-<<<<<<< HEAD
-                   
-                      swal({
-=======
                             swal({
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                     type: 'success',
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
                                     timer: 1500
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                 // $(".save").hide();
                                 });
                                 read();
@@ -462,28 +339,17 @@
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
 
-<<<<<<< HEAD
-                              }
-=======
 
                             }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                          });
                     });
                 });
         }
-<<<<<<< HEAD
-        //--------Proses Batal--------
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
-=======
 
          //--------Proses Batal--------
          function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
             $("#cancel-selected").hide("fast");
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
@@ -491,14 +357,8 @@
         }
 
 
-<<<<<<< HEAD
-        
-  </script>
-   @endsection
-=======
 
 
   </script>
    @endsection
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

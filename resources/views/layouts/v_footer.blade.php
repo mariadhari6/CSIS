@@ -45,15 +45,15 @@
 
     {{-- Datatable --}}
     <script src="//cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
-<<<<<<< HEAD
+
     <!-- {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script> --}} -->
-=======
+
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script> --}}
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
 
 
 </html>

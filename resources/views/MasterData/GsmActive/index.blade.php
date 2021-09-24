@@ -1,35 +1,13 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
-@section('title','Gsm Active')
-
-@section('content')
-
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
-=======
 @section('title','CSIS | Gsm Active')
 
 @section('content')
 <h4 class="page-title">GSM Active</h4>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
              <div class="text-right mt-3" id="selected">
-<<<<<<< HEAD
-             <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>   
-            <br>
-            
-            <div class="table-responsive">
-            <table class="table table-hover data" class="table_id" id="table_id" >
-=======
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button">
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" id="add"></i>
@@ -42,7 +20,6 @@
                 </button>
             </div>
           <table class="table table-responsive data" class="table_id" id="table_id" >
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             <thead>
               <tr>
                   <th width="10px">
@@ -53,21 +30,6 @@
                         </label>
                     </div>
                 </th>
-<<<<<<< HEAD
-                <th scope="col" width="80px">Action</th>
-                <th scope="col">Request Date</th>
-                <th scope="col">Active Date</th>
-                <th scope="col">Gsm Number</th></th>
-                <th scope="col">Status Active</th>
-                <th scope="col">Company</th>
-                <th scope="col">Note</th>
-              </tr>
-            </thead>
-            <tbody  id="item_data">
-              {{ csrf_field() }}
-            </tbody>
-          </table>
-=======
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list">Request Date</th>
                 <th scope="col" class="list">Active Date</th>
@@ -82,7 +44,6 @@
             </tbody>
           </table>
          {{-- </div> --}}
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         </div>
       </div>
     </div>
@@ -101,10 +62,6 @@
       $.get("{{ url('item_data_GsmActive') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
-<<<<<<< HEAD
-        $('#table_id').DataTable().draw();
-
-=======
         $('#table_id').dataTable( {
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
@@ -114,7 +71,6 @@
 
 
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
       });
 
     }
@@ -156,14 +112,9 @@
                 title: 'Data Saved',
                 showConfirmButton: false,
                 timer: 1500
-<<<<<<< HEAD
-              }).catch(function(timeout) { });
-              read();
-=======
             }).catch(function(timeout) { });
               read();
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             }
         })
     }
@@ -190,11 +141,7 @@
                     data: "id=" + id,
                     success: function(data) {
                         swal({
-<<<<<<< HEAD
-                          type: 'success',
-=======
                             type: 'success',
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
@@ -241,11 +188,7 @@
             data: {
               request_date: request_date,
               active_date: active_date,
-<<<<<<< HEAD
-              gsm_pre_active_id: gsm_pre_active_id,
-=======
                gsm_pre_active_id: gsm_pre_active_id,
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
               status_active: status_active,
               company_id: company_id,
               note:note
@@ -261,11 +204,7 @@
             }
         });
     }
-<<<<<<< HEAD
-
-=======
     // Check All
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
      $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
               $(".task-select").prop('checked', true);
@@ -273,11 +212,7 @@
               $(".task-select").prop('checked',false);
           }
     });
-<<<<<<< HEAD
-
-=======
     // Delete All
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
       $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
@@ -307,11 +242,7 @@
                             },
                             success: function(data) {
                                 swal({
-<<<<<<< HEAD
-                                  type: 'success',
-=======
                                     type: 'success',
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                     title: 'The selected data has been deleted',
                                     showConfirmButton: false,
                                     timer: 1500
@@ -328,11 +259,7 @@
                 alert('Select the row you want to delete')
             }
         });
-<<<<<<< HEAD
-
-=======
         // Edit All
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         $('.edit_all').on('click', function(e){
 
             var allVals = [];
@@ -345,11 +272,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-<<<<<<< HEAD
-                $.get("{{ url('selected') }}", {}, function(data, status) {
-=======
                 $.get("{{ url('selected_GsmActive') }}", {}, function(data, status) {
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -365,33 +288,20 @@
                     $.get("{{ url('show_GsmActive') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     });
                 });
             }else{
                 alert('Select the row you want to edit')
             }
         });
-<<<<<<< HEAD
-
-=======
         // Proses Update all
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             function updateSelected() {
             var allVals = [];
 
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
-<<<<<<< HEAD
-
-            swal({
-=======
              swal({
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                 title: "Are you sure?",
                 text: "Do you want to do an update?",
                 type: "info",
@@ -401,10 +311,6 @@
                 confirmButtonText: 'Yes Update',
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                 $.each(allVals, function(index, value){
                     var request_date = $(".request_date-"+value).val();
                     var active_date = $(".active_date-"+value).val();
@@ -425,15 +331,6 @@
                     },
                     success: function(data) {
                     swal({
-<<<<<<< HEAD
-                      type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                // $(".save").hide();
-                                });
-                                read();
-=======
                                     type: 'success',
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
@@ -443,30 +340,12 @@
                                 });
                                 read();
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
 
-<<<<<<< HEAD
-                    }
-                    });
-                });
-            });
-
-
-        }
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
-            $(".add").show("fast");
-            $(".edit_all").show("fast");
-            $(".delete_all").show("fast");
-            read();
-            }
-=======
 
                     }
                 });
@@ -487,7 +366,6 @@
       read();
     }
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
 
   </script>

@@ -32,8 +32,6 @@ class DetailCustomer extends Model
         'tanggal_pasang',
         'tanggal_non_aktif'
     ];
-<<<<<<< HEAD
-=======
     public function pemasanganMutasiGps()
     {
         return $this->hasMany(PemasanganMutasiGps::class);
@@ -54,5 +52,4 @@ class DetailCustomer extends Model
     {
         return $this->belongsTo(GsmActive::class, 'gsm_pre_active_id');
     }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 }

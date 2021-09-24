@@ -15,11 +15,10 @@
             </div>
         </div>
         <ul class="nav">
-<<<<<<< HEAD
+
             <li class="nav-item active">
-=======
             <li class="nav-item {{ request()->is('customer_service') ? ' active' : ''}}">
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
                 <a href="{{url('/customer_service')}}">
                     <i class="fas fa-home"></i>
                     <p>Home</p>
@@ -27,14 +26,12 @@
                 </a>
             </li>
 
-<<<<<<< HEAD
             <li class="nav-item">
-=======
+
             <li class="nav-item
                 {{ request()->is('seller') ? ' active' : ''}}
                 {{ request()->is('Company') ? ' active' : ''}}
             ">
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                 <a class="" data-toggle="collapse" href="#masterData" aria-expanded="true">
                     <i class="fas fa-table"></i>
                     <p>Master Data</p>
@@ -108,11 +105,8 @@
                 <div class="collapse in" id="customer" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-<<<<<<< HEAD
-                            <a href="{{ route('detail_customer')}}">
-=======
                             <a href="{{url('/detail_customer')}}">
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
                                 <span class="link-collapse">Detail Customer</span>
                             </a>
                         </li>
@@ -121,14 +115,11 @@
                                 <span class="link-collapse">Summary</span>
                             </a>
                         </li>
-<<<<<<< HEAD
-=======
                         <li>
                             <a href="#edit">
                                 <span class="link-collapse">Dashboard Customer</span>
                             </a>
                         </li>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                     </ul>
                 </div>
             </li>
@@ -141,21 +132,8 @@
                 <div class="collapse in" id="request&complain" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-<<<<<<< HEAD
-                            <a href="{{url('/requestcomplaint') }}">
-=======
                             <a href="{{url('/RequestComplain')}}">
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                 <span class="link-collapse">Data Request Complain</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#edit">
-<<<<<<< HEAD
-                                <span class="link-collapse">Dashboard </span>
-=======
-                                <span class="link-collapse">Summary </span>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                             </a>
                         </li>
                     </ul>
@@ -170,29 +148,21 @@
                 <div class="collapse in" id="visit" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-<<<<<<< HEAD
                             <a href="#profile">
-=======
                             <a href="{{url('/PemasanganMutasi')}}">
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
                                 <span class="link-collapse">Pemasangan dan Mutasi GPS</span>
                             </a>
                         </li>
                         <li>
-<<<<<<< HEAD
                             <a href="#edit">
-=======
                             <a href="/MaintenanceGps">
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                 <span class="link-collapse">Maintenance GPS </span>
                             </a>
                         </li>
                         <li>
-<<<<<<< HEAD
                             <a href="#edit">
-=======
                             <a href="{{url('/Dashboard_Visit_Assignment')}}">
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                                 <span class="link-collapse">Dashboard</span>
                             </a>
                         </li>

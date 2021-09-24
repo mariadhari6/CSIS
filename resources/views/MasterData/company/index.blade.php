@@ -1,5 +1,5 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
+
 @section('title','Company')
 
 @section('content')
@@ -9,34 +9,16 @@
   <br>
   <div id="message"></div>
 
-=======
+
 @section('title',' CSIS | Company ')
 
 @section('content')
 <h4 class="page-title">Company</h4>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-<<<<<<< HEAD
-             <div class="text-right mt-3" id="selected">
-             <button type="button" class="btn btn-primary float-left mr-2 add add-button"></b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>  
-            
-            <table class="table table-responsive data" class="table_id" id="table_id" >
-            <thead>
-              <tr>
-                  <th width="10px">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-=======
             <div class="text-right mt-3" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
                 <b>Add</b>
@@ -59,7 +41,7 @@
                           <span class="form-check-sign"></span>
                       </label>
                   </div>
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
                 </th>
                 <th scope="col" class="action">Action</th>
                 <th scope="col" class="list">Company Name</th>
@@ -69,21 +51,14 @@
                 <th scope="col" class="list">Po Date</th>
                 <th scope="col" class="list">No Agreement Letter</th>
                 <th scope="col" class="list">Status</th>
-<<<<<<< HEAD
 
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-<<<<<<< HEAD
 
-         
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         </div>
       </div>
     </div>
@@ -94,11 +69,9 @@
 
       read();
 
-<<<<<<< HEAD
+
       //   $('#company').dataTable();
 
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     });
 
 
@@ -109,18 +82,12 @@
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
-<<<<<<< HEAD
+
             // "dom": '<lf<t>ip>'
             });
         $('#table_id').DataTable().draw();
 
       });
-
-=======
-            });
-        $('#table_id').DataTable().draw();
-      });
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     }
 
     // ---- Tombol Cancel -----
@@ -131,13 +98,10 @@
      // ------ Tambah Form Input ------
      $('.add').click(function() {
         $.get("{{ url('add_form_company') }}", {}, function(data, status) {
-<<<<<<< HEAD
-          $('#table_id tbody').prepend(data);
-=======
+
           $('#table_id tbody').prepend(data); 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
         });
-      });
 
     // ----- Proses Tambah data ------
     function store() {
@@ -158,21 +122,12 @@
               customer_code: customer_code,
               no_po: no_po,
               po_date: po_date,
-<<<<<<< HEAD
               no_agreement_letter_id:no_agreement_letter_id,
-              status: status
-
-            },
-            success: function(data) {
-              swal({
-=======
-              no_agreement_letter_id: no_agreement_letter_id,
               status: status
 
             },
              success: function(data) {
             swal({
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
                 type: 'success',
                 title: 'Data Saved',
                 showConfirmButton: false,
@@ -180,17 +135,9 @@
             }).catch(function(timeout) { });
               read();
 
-<<<<<<< HEAD
               }
             })
         }
-=======
-            }
-        })
-    }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
-
-
 
     // -----Proses Delete Data ------
      function destroy(id) {
@@ -212,11 +159,11 @@
                     data: "id=" + id,
                     success: function(data) {
                         swal({
-<<<<<<< HEAD
+
                           type: 'success',
-=======
+
                             type: 'success',
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
@@ -243,11 +190,11 @@
         $("#item-po_date-"+id).slideUp("fast");
         $("#item-no_agreement_letter_id-"+id).slideUp("fast");
         $("#item-status-"+id).slideUp("fast");
-<<<<<<< HEAD
+
         $.get("{{ url('show_company') }}/" + id, {}, function(data, status) {
-=======
+
         $.get("{{ url('edit_form_company') }}/" + id, {}, function(data, status) {
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
             $("#edit-form-"+id).prepend(data)
         });
     }
@@ -255,11 +202,11 @@
     // ------ Proses Update Data ------
     function update(id) {
         var company_name = $("#company_name").val();
-<<<<<<< HEAD
+
         var seller_id = $("#seller_id").val();
-=======
+
         var seller_id = $('select[name="seller_id"]').val();
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
         var customer_code = $("#customer_code").val();
         var no_po = $("#no_po").val();
         var po_date = $("#po_date").val();
@@ -281,22 +228,21 @@
             },
             success: function(data) {
               swal({
-<<<<<<< HEAD
+
                 type: 'success',
-=======
+
                     type: 'success',
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
                 }).catch(function(timeout) { });
                 read();
-<<<<<<< HEAD
+
               }
             
-=======
+
             }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
         });
     }
    // checkbox all
@@ -310,7 +256,7 @@
     });
 
     // delete all
-<<<<<<< HEAD
+
         $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
@@ -397,7 +343,7 @@
                 alert('Select the row you want to edit')
             }
         });
-=======
+
     $('.delete_all').on('click', function(){
       event.preventDefault();
       var allVals = [];
@@ -445,156 +391,7 @@
       }
    });
 
-    // form edit all
-
-        $('.edit_all').on('click', function(e){
-
-        var allVals = [];
-        var _token = $('input[name="_token"]').val();
-
-        $(".task-select:checked").each(function() {
-            allVals.push($(this).attr("id"));
-        });
-        if (allVals.length > 0){
-            $(".edit_all").hide("fast");
-            $(".delete_all").hide("fast");
-            $.get("{{ url('selected_company') }}", {}, function(data, status) {
-                $("#selected").prepend(data)
-            });
-            $.each(allVals, function(index, value){
-                $("#td-checkbox-"+value).hide("fast");
-                $("#td-button-"+value).hide("fast");
-                $("#item-company_name-"+value).slideUp("fast");
-                $("#item-seller_id-"+value).slideUp("fast");
-                $("#item-customer_code-"+value).slideUp("fast");
-                $("#item-no_po-"+value).slideUp("fast");
-                $("#item-po_date-"+value).slideUp("fast");
-                $("#item-no_agreement_letter_id-"+value).slideUp("fast");
-                $("#item-status-"+value).slideUp("fast");
-
-                $(".add").hide("fast");
-                $.get("{{ url('edit_form_company') }}/" + value, {}, function(data, status) {
-                    $("#edit-form-"+value).prepend(data)
-                    $("#master").prop('checked', false);
-                });
-            });
-        }else{
-            alert('Select the row you want to edit')
-        }
-    });
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
-
-          // ------ Proses Update Data ------
-        function updateSelected() {
-            var allVals = [];
-
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
-            swal({
-                title: "Are you sure?",
-                text: "Do you want to do an update?",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonColor: '#00FF00',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes Update',
-                showLoaderOnConfirm: true,
-            }).then((willDelete) => {
-<<<<<<< HEAD
-              $.each(allVals, function(index, value){
-                    var seller_id = $(".seller_id-"+value).val();
-=======
-                $.each(allVals, function(index, value){
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
-                    var company_name = $(".company_name-"+value).val();
-                    var seller_id = $(".seller_id-"+value).val();
-                    var customer_code = $(".customer_code-"+value).val();
-                    var no_po = $(".no_po-"+value).val();
-                    var po_date = $(".po_date-"+value).val();
-                    var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
-                    var status = $(".status-"+value).val();
-
-                    $.ajax({
-                    type: "get",
-                    url: "{{ url('update_company') }}/"+value,
-                    data: {
-                        company_name: company_name,
-                        seller_id: seller_id,
-                        customer_code: customer_code,
-                        no_po: no_po,
-                        po_date: po_date,
-                        no_agreement_letter_id:no_agreement_letter_id,
-                        status: status
-                    },
-                    success: function(data) {
-                    swal({
-<<<<<<< HEAD
-                      type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                // $(".save").hide();
-                                });
-                                read();
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
-                    }
-                    });
-                    });
-                });
-
-
-        }
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
-=======
-                          type: 'success',
-                          title: 'The selected data has been updated',
-                          showConfirmButton: false,
-                          timer: 1500
-
-                      // $(".save").hide();
-                      });
-                      read();
-
-                      $(".add").show("fast");
-                      $(".edit_all").show("fast");
-                      $(".delete_all").show("fast");
-                      $(".btn-round").hide("fast");
-                      $(".btn-round").hide("fast");
-                    }
-                });
-
-                });
-            });
-        }
-        
-         //--------Proses Batal--------
-        function cancelUpdateSelected(){
-            $("#save-selected").hide("fast");
-            $("#cancel-selected").hide("fast");
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
-            $(".add").show("fast");
-            $(".edit_all").show("fast");
-            $(".delete_all").show("fast");
-            read();
-<<<<<<< HEAD
-            }
-=======
-        }
-
-        
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
-
+    
   </script>
 
    @endsection

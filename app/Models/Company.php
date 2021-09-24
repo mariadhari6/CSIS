@@ -31,16 +31,10 @@ class Company extends Model
     {
         return $this->hasMany(GsmTerminate::class);
     }
-<<<<<<< HEAD
-=======
-    //---------------------//
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     public function requestComplaint()
     {
         return $this->hasMany(RequestComplaintCustomer::class);
     }
-<<<<<<< HEAD
-=======
     public function details()
     {
         return $this->hasMany(DetailCustomer::class);
@@ -49,5 +43,4 @@ class Company extends Model
     {
         return $this->hasMany(PemasanganMutasiGps::class);
     }
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 }

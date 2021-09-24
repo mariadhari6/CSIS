@@ -22,11 +22,7 @@ class GsmPreActiveController extends Controller
     public function item_data()
     {
         $GsmPreActive = GsmPreActive::orderBy('id', 'DESC')->get();
-<<<<<<< HEAD
-        return view('GsmPreActive.item_data')->with([
-=======
         return view('MasterData.GsmPreActive.item_data')->with([
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
             'GsmPreActive' => $GsmPreActive
         ]);
     }
@@ -115,8 +111,4 @@ class GsmPreActiveController extends Controller
         GsmPreActive::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

@@ -25,15 +25,9 @@
 
         {{-- Datatable --}}
         <link rel="stylesheet" href="//cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
-<<<<<<< HEAD
-        <!-- {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script> --}} -->
-=======
         {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
         <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script> --}}
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 
         {{-- Ajax --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
