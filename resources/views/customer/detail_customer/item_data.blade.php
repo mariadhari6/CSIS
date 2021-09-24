@@ -9,7 +9,7 @@
                 </label>
             </div>
         </td>
-         <td id="item-no-{{ $sensors->id}}">
+         <td id="item-no-{{$detail->id}}">
             {{ $no++ }}
         </td>
 
