@@ -25,7 +25,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list" >Merk</th>
                 <th scope="col" class="list" >Type</th>
                 <th scope="col" class="list" >IMEI</th>
@@ -33,6 +33,8 @@
                 <th scope="col" class="list" >Po Date</th>
                 <th scope="col" class="list" >Status</th>
                 <th scope="col" class="list" >Status Ownership</th>
+                <th scope="col" class="action">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -148,6 +150,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).slideUp("fast");
         $("#item-merk-"+id).hide("fast");
         $("#item-type-"+id).hide("fast");
         $("#item-imei-"+id).hide("fast");
@@ -268,6 +271,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).slideUp("fast");
                     $("#item-merk-"+value).hide("fast");
                     $("#item-type-"+value).hide("fast");
                     $("#item-imei-"+value).hide("fast");

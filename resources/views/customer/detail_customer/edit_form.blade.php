@@ -1,7 +1,6 @@
 <td></td>
-<td>
-    <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
-</td>
+<td></td>
+
 
     <td><select class="select CompanyId-{{$details->id}}" id="CompanyId" name="company_id">
         <option  value="{{ $details->company_id}}">{{ $details->company->company_name}}</option>
@@ -67,4 +66,6 @@
     <td><div class="input-div"><input type="text" class="input StatusLayanan-{{$details->id}}" id="StatusLayanan" placeholder="Status Layanan" value="{{$details->status_layanan}}"></div></td>
     <td><div class="input-div"><input type="date" class="input TanggalPasang-{{$details->id}}" id="TanggalPasang" placeholder="Tanggal Pasang" value="{{$details->tanggal_pasang}}"></div></td>
     <td><div class="input-div"><input type="date" class="input TanggalNonAktif-{{$details->id}}" id="TanggalNonAktif" placeholder="TanggalNonAktif" value="{{$details->tanggal_non_aktif}}"></div></td>
-
+<td>
+    <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
+</td>

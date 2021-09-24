@@ -1,8 +1,7 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $company->id}})"></i>
-        <i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+    <td></td>
+
+
     <td>
         <div class="input-div"><input type="text" class="input company_name-{{$company->id}}" id="company_name" placeholder="Company Name" value="{{ $company->company_name}}"></i>
         </div>
@@ -35,7 +34,6 @@
     </td>
     <td>
         <select class="select no_agreement_letter_id-{{$company->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id-{{$company->id}}">
-
         @foreach ($seller as $item)
         <option value="{{ $item->id }}" {{ old('no_agreement_letter_id') == $item->id ? 'selected':'' }}>
             {{ $item->no_agreement_letter }}
@@ -52,6 +50,10 @@
             <option value="Trial">Trial</option>
             <option value="Register">Register</option>
         </select>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $company->id}})"></i>
+        <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
 
     <script type="text/javascript">

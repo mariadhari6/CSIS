@@ -18,6 +18,7 @@ class Company extends Model
     {
         return $this->belongsTo(Seller::class);
     }
+
     public function pic()
     {
         return $this->hasMany(Pic::class);
@@ -31,17 +32,14 @@ class Company extends Model
     {
         return $this->hasMany(GsmTerminate::class);
     }
+    public function maintenanceGps()
+    {
+        return $this->hasMany(MaintenanceGps::class);
+    }
     //---------------------//
-    public function requestComplaint()
-    {
-        return $this->hasMany(RequestComplaintCustomer::class);
-    }
-    public function details()
-    {
-        return $this->hasMany(DetailCustomer::class);
-    }
-    public function pemasanganMutasiGps()
-    {
-        return $this->hasMany(PemasanganMutasiGps::class);
-    }
+    // public function requestComplaint()
+    // {
+    //     return $this->hasMany(RequestComplaintCustomer::class);
+    // }
+
 }

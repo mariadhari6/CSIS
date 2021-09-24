@@ -1,3 +1,4 @@
+<?php $no=1; ?>
 @foreach ($pemasangan_mutasi_GPS as $pemasangan_mutasi_GPSes)
     <tr id="edit-form-{{ $pemasangan_mutasi_GPSes->id }}">
          <td id="td-checkbox-{{ $pemasangan_mutasi_GPSes->id }}">
@@ -8,12 +9,10 @@
                 </label>
             </div>
         </td>
-        <td id="td-button-{{ $pemasangan_mutasi_GPSes->id }}">
-            <div id="button-{{ $pemasangan_mutasi_GPSes->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $pemasangan_mutasi_GPSes->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $pemasangan_mutasi_GPSes->id }})"></i>
-            </div>
+        <td id="item-no-{{ $pemasangan_mutasi_GPSess->id}}">
+            {{ $no++ }}
         </td>
+
 
         <td id="item-company_id-{{ $pemasangan_mutasi_GPSes->id}}">
             {{ $pemasangan_mutasi_GPSes->requestComplain->companyRequest->company_name}}
@@ -58,6 +57,12 @@
         </td>
         <td id="item-note-{{ $pemasangan_mutasi_GPSes->id }}">
             {{ $pemasangan_mutasi_GPSes->note }}
+        </td>
+        <td id="td-button-{{ $pemasangan_mutasi_GPSes->id }}">
+            <div id="button-{{ $pemasangan_mutasi_GPSes->id }}">
+                <i class="fas fa-pen edit" onclick="edit({{ $pemasangan_mutasi_GPSes->id }})"></i>
+                <i class="fas fa-trash delete" onclick="destroy({{ $pemasangan_mutasi_GPSes->id }})"></i>
+            </div>
         </td>
     </tr>
 @endforeach

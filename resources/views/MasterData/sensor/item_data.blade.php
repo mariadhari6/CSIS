@@ -1,3 +1,4 @@
+<?php $no=1; ?>
 @foreach ($sensor as $sensors)
     <tr id="edit-form-{{ $sensors->id }}">
          <td id="td-checkbox-{{ $sensors->id }}">
@@ -8,12 +9,10 @@
                 </label>
             </div>
         </td>
-        <td id="td-button-{{ $sensors->id }}">
-            <div id="button-{{ $sensors->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $sensors->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $sensors->id }})"></i>
-            </div>
+        <td id="item-no-{{ $sensors->id}}">
+            {{ $no++ }}
         </td>
+
         {{-- <td id="item-company_id-{{ $sellers->id}}">
                 {{ $sellers->company->company_name}}
         </td> --}}
@@ -35,6 +34,12 @@
           <td id="item-status-{{ $sensors->id }}">
             {{ $sensors->status }}
           </td>
+          <td id="td-button-{{ $sensors->id }}">
+            <div id="button-{{ $sensors->id }}">
+                <i class="fas fa-pen edit" onclick="edit({{ $sensors->id }})"></i>
+                <i class="fas fa-trash delete" onclick="destroy({{ $sensors->id }})"></i>
+            </div>
+        </td>
     </tr>
 @endforeach
 

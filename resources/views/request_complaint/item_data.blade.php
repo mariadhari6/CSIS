@@ -1,3 +1,4 @@
+<?php $no=1; ?>
 @foreach ($request_complain as $request_complains)
     <tr id="edit-form-{{ $request_complains->id }}">
          <td id="td-checkbox-{{ $request_complains->id }}">
@@ -8,12 +9,10 @@
                 </label>
             </div>
         </td>
-        <td id="td-button-{{ $request_complains->id }}">
-            <div id="button-{{ $request_complains->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $request_complains->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $request_complains->id }})"></i>
-            </div>
+        <td id="item-no-{{ $request_complains->id}}">
+            {{ $no++ }}
         </td>
+
 
         <td id="item-company_id-{{ $request_complains->id}}">
             {{ $request_complains->companyRequest->company_name}}
@@ -63,6 +62,12 @@
         </td>
         <td id="item-status_akhir-{{ $request_complains->id }}">
             {{ $request_complains->status_akhir }}
+        </td>
+        <td id="td-button-{{ $request_complains->id }}">
+            <div id="button-{{ $request_complains->id }}">
+                <i class="fas fa-pen edit" onclick="edit({{ $request_complains->id }})"></i>
+                <i class="fas fa-trash delete" onclick="destroy({{ $request_complains->id }})"></i>
+            </div>
         </td>
     </tr>
 @endforeach

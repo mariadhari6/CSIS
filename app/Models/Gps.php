@@ -22,4 +22,8 @@ class Gps extends Model
     {
         return $this->hasMany(DetailCustomer::class);
     }
+    public function maintenanceGps()
+    {
+        return $this->hasMany(MaintenanceGps::class);
+    }
 }

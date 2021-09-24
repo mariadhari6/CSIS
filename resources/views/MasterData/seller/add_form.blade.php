@@ -1,9 +1,7 @@
 <tr id="add_form">
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="add" onclick="store()"></i>
-        <i class="fas fa-times cancel" onclick="cancel()"></i>
-    </td>
+    <td></td>
+
     <td>
         <div class="input-div">
             <input type="text" class="input" id="seller_name" placeholder="Seller name">
@@ -25,6 +23,10 @@
             <option value="Active">Active</option>
             <option value="In Active">In Active</option>
         </select>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="add" onclick="store()"></i>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 </tr>
 

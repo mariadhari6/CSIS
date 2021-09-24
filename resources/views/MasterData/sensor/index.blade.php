@@ -14,7 +14,7 @@
                 <b>Add</b>
                 <i class="fas fa-plus ml-2" id="add"></i>
               </button>
-              <button class="btn btn-success  mr-2 edit_all"> 
+              <button class="btn btn-success  mr-2 edit_all">
                 <i class="fas fa-pen"></i>
               </button>
               <button class="btn btn-danger  delete_all">
@@ -32,13 +32,15 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Sensor Name</th>
                 <th scope="col" class="list">Merk Sensor</th>
                 <th scope="col" class="list">Serial Number</th>
                 <th scope="col" class="list">Rab Number</th>
                 <th scope="col" class="list">Waranty</th>
                 <th scope="col" class="list">Status</th>
+                <th scope="col" class="action">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -151,6 +153,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-sensor_name-"+id).hide("fast");
         $("#item-merk_sensor-"+id).hide("fast");
         $("#item-serial_number-"+id).hide("fast");
@@ -269,6 +272,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-sensor_name-"+value).hide("fast");
                     $("#item-merk_sensor-"+value).hide("fast");
                     $("#item-serial_number-"+value).hide("fast");

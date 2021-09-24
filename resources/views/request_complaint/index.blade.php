@@ -1,13 +1,10 @@
 @extends('layouts.v_main')
-@section('title','Request and Complain')
+@section('title','CSIS | Request and Complain')
 
 
 @section('content')
 
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
+<h4 class="page-title">Request and Complain</h4>
 
   <div class="row">
     <div class="col-md-12">
@@ -31,7 +28,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Internal/External Request & Complain</th>
                 <th scope="col" class="list">PIC</th>
@@ -47,6 +44,8 @@
                 <th scope="col" class="list">waktu Solve</th>
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="list">Status Akhir</th>
+                <th scope="col" class="action">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -176,6 +175,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).hide("fast");
         $("#item-internal_eksternal-"+id).hide("fast");
         $("#item-pic-"+id).hide("fast");
@@ -320,6 +320,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-company_id-"+value).hide("fast");
                     $("#item-internal_eksternal-"+value).hide("fast");
                     $("#item-pic-"+value).hide("fast");

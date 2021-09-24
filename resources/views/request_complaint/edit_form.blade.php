@@ -1,7 +1,7 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $request_complain->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+    <td></td>
+
+
 
     <td><select class="select company_id-{{$request_complain->id}}" id="company_id" name="company_id">
         <option value="{{$request_complain->company}}"> {{$request_complain->companyRequest->company_name}} </option>
@@ -72,5 +72,8 @@
     </td>
     <td>
         <div class="input-div"><input type="text" class="input status_akhir-{{$request_complain->id}}" id="status_akhir" placeholder="status akhir" value="{{ $request_complain->status_akhir}}"></i></div>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $request_complain->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
 

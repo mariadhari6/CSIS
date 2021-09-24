@@ -1,7 +1,5 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $GsmPreActive->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+    <td></td>
 
     <td>
         <div class="input-div"><input type="text" class="input gsm_number-{{$GsmPreActive->id}}" id="gsm_number" placeholder="Gsm Number" value="{{ $GsmPreActive->gsm_number}}"></i></div>
@@ -21,7 +19,11 @@
     <td>
         <div class="input-div"><input type="date" class="input expired_date-{{$GsmPreActive->id}}" id="expired_date" placeholder="Expired Date" value="{{ $GsmPreActive->expired_date}}"></i></div>
     </td>
-      <td><textarea class="form-control note-{{$GsmPreActive->id}}" id="note" name="note" >{{$GsmPreActive->note}}</textarea></i>
+    <td>
+          <textarea class="form-control note-{{$GsmPreActive->id}}" id="note" name="note" >{{$GsmPreActive->note}}</textarea></i>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $GsmPreActive->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
 
 

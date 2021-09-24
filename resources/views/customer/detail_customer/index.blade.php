@@ -26,7 +26,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">License Plate</th>
                 <th scope="col" class="list">Vehicle Type</th>
@@ -47,6 +47,8 @@
                 <th scope="col" class="list">Status Layanan</th>
                 <th scope="col" class="list">Tanggal Pasang</th>
                 <th scope="col" class="list">Tanggal Non Active</th>
+                <th scope="col" class="action">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -195,6 +197,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-CompanyId-"+id).hide("fast");
         $("#item-LicencePlate-"+id).hide("fast");
         $("#item-VihecleType-"+id).hide("fast");
@@ -379,6 +382,7 @@
 
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-CompanyId-"+value).hide("fast");
                     $("#item-LicencePlate-"+value).hide("fast");
                     $("#item-VihecleType-"+value).hide("fast");

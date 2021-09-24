@@ -8,12 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class MaintenanceGps extends Model
 {
     use HasFactory;
-    protected $table = 'maintenance_gps';
 
-    protected $fillable = [
-        'company', 'vehicle', 'tanggal', 'type_gps', 'equipment_gps', 'equipment_sensor',
-        'equipment_gsm', 'permasalahan', 'ketersediaan_kendaraan', 'keterangan', 'hasil',
-        'biaya_transportasi', 'teknisi', 'req_by', 'note'
-    ];
+    protected $guard = ['id'];
 
+    public function requestComplain()
+    {
+        return $this->belongsTo(RequestComplaintCustomer::class, 'company_id');
+    }
+
+    public function gps()
+    {
+        return $this->belongsTo(Gps::class, 'type_gps_id');
+    }
+
+    public function sensor()
+    {
+        return $this->belongsTo(Sensor::class, 'equipment_sensor_id');
+    }
+
+    public function pic()
+    {
+        return $this->belongsTo(Pic::class, 'teknisi_id');
+    }
 }

@@ -17,6 +17,7 @@ use App\Http\Controllers\SensorController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\DashboardVisitAssignmentController;
 use App\Http\Controllers\RequestComplaintController;
+use App\Http\Controllers\MaintenanceGpsController;
 use App\Models\DetailCustomer;
 use App\Models\PemasanganMutasiGps;
 use App\Models\Username;
@@ -209,6 +210,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
     Route::get('/selected_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'selected']);
     Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
+
     Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
     Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
     // Route::get('/dependent_KendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'dependentKendaraanPasang']);
@@ -226,6 +228,22 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
 
     //Dashboar Visit Assignment
     Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
+
+
+    // Maintenance GPS
+    Route::get('/MaintenanceGps', [MaintenanceGpsController::class, 'index']);
+    Route::get('/item_data_maintenanace_gps', [MaintenanceGpsController::class, 'item_data']);
+    Route::get('/add_form_maintenanace_gps', [MaintenanceGpsController::class, 'add_form']);
+    Route::get('/store_maintenanceGps', [MaintenanceGpsController::class, 'store']);
+    Route::get('/destroy_maintenanceGps/{id}', [MaintenanceGpsController::class, 'destroy']);
+    Route::get('/edit_form_maintenanceGps/{id}', [MaintenanceGpsController::class, 'edit_form']);
+    Route::get('/dependentMaintenanceGpsCompany/{id}', [MaintenanceGpsController::class, 'dependentCompany']);
+    Route::get('/dependentMaintenanceGpsTanggal/{id}', [MaintenanceGpsController::class, 'dependentTanggal']);
+    Route::get('/dependentMaintenanceGpsPermasalahan/{id}', [MaintenanceGpsController::class, 'dependentPermasalahan']);
+    Route::get('/dependentMaintenanceGpsEquipmentGps/{id}', [MaintenanceGpsController::class, 'dependentEquipmentGps']);
+    Route::get('/update_maintenanceGps/{id}', [MaintenanceGpsController::class, 'update']);
+    Route::get('/selectedDelete_maintenanceGps', [MaintenanceGpsController::class, 'deleteAll']);
+    Route::get('/selected_maintenanceGps', [MaintenanceGpsController::class, 'selected']);
 });
 
 

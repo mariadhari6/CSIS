@@ -13,7 +13,7 @@
               <b>Add</b>
               <i class="fas fa-plus ml-2" id="add"></i>
             </button>
-            <button class="btn btn-success  mr-2 edit_all"> 
+            <button class="btn btn-success  mr-2 edit_all">
               <i class="fas fa-pen"></i>
             </button>
             <button class="btn btn-danger  delete_all">
@@ -31,13 +31,15 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Pic Name</th>
                 <th scope="col" class="list">Phone</th>
                 <th scope="col" class="list">Email</th>
                 <th scope="col" class="list">Position</th>
                 <th scope="col" class="list">Date of birth</th>
+                <th scope="col" class="action">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -159,6 +161,7 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
+        $("#item-no-"+id).slideUp("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-pic_name-"+id).slideUp("fast");
         $("#item-phone-"+id).slideUp("fast");
@@ -278,6 +281,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).slideUp("fast");
                     $("#item-company_id-"+value).slideUp("fast");
                     $("#item-pic_name-"+value).slideUp("fast");
                     $("#item-phone-"+value).slideUp("fast");

@@ -1,7 +1,6 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $sensor->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+    <td></td>
+
     <td>
         <div class="input-div"><input type="text" class="input sensor_name-{{$sensor->id}}" id="sensor_name" placeholder="Sensor Name" value="{{ $sensor->sensor_name}}"></div>
     </td>
@@ -24,5 +23,8 @@
             <option value="Used">Used</option>
             <option value="Error">Error</option>
         </select>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $sensor->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
 

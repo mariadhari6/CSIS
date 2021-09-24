@@ -15,19 +15,19 @@ class CreateMaintenanceGpsTable extends Migration
     {
         Schema::create('maintenance_gps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company');
-            $table->foreignId('vehicle');
-            $table->foreignId('tanggal');
-            $table->foreignId('type_gps');
-            $table->foreignId('equipment_gps');
-            $table->foreignId('equipment_sensor');
-            $table->foreignId('equipment_gsm');
-            $table->foreignId('permasalahan');
+            $table->foreignId('company_id');
+            $table->foreignId('vehicle_id');
+            $table->foreignId('tanggal_id');
+            $table->foreignId('type_gps_id');
+            $table->foreignId('equipment_gps_id');
+            $table->foreignId('equipment_sensor_id');
+            $table->integer('equipment_gsm');
+            $table->foreignId('permasalahan_id');
             $table->string('ketersediaan_kendaraan');
             $table->string('keterangan');
             $table->string('hasil');
             $table->string('biaya_transportasi');
-            $table->foreignId('teknisi');
+            $table->foreignId('teknisi_id');
             $table->string('req_by');
             $table->longText('note');
             $table->timestamps();

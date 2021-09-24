@@ -1,8 +1,7 @@
 <tr id="add_form">
-    <td></td>
-    <td>
-        <i class="fas fa-check add" id="add" onclick="store()"></i>
-        <i class="fas fa-times cancel" onclick="cancel()"></i></td>
+
+<td></td>
+<td></td>
     <td>
         <div class="input-div"><input type="text" class="input" id="merk" placeholder="Merk"></i>
     </td>
@@ -35,5 +34,12 @@
             <option value="Beli">Beli</option>
         </select></i>
     </td>
+
+
+    <td>
+        <i class="fas fa-check add" id="add" onclick="store()"></i>
+        <i class="fas fa-times cancel" onclick="cancel()"></i></td>
+    <td>
+
 </tr>
 

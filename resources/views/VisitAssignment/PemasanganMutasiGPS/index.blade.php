@@ -34,7 +34,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Tanggal</th>
                 <th scope="col" class="list">Kendaraan Awal</th>
@@ -48,6 +48,8 @@
                 <th scope="col" class="list">Uang Transportasi</th>
                 <th scope="col" class="list">Type Visit</th>
                 <th scope="col" class="list">Note</th>
+                <th scope="col" class="action">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -173,6 +175,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).hide("fast");
         $("#item-tanggal-"+id).hide("fast");
         $("#item-kendaraan_awal-"+id).hide("fast");
@@ -311,6 +314,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-company_id-"+value).hide("fast");
                     $("#item-tanggal-"+value).hide("fast");
                     $("#item-kendaraan_awal-"+value).hide("fast");

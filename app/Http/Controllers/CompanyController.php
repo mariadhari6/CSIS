@@ -102,7 +102,6 @@ class CompanyController extends Controller
         $data->no_agreement_letter_id = $request->no_agreement_letter_id;
         $data->status = $request->status;
 
-
         echo $id;
     }
 

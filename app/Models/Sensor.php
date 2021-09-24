@@ -18,4 +18,8 @@ class Sensor extends Model
     {
         return $this->hasOne(PemasanganMutasiGps::class);
     }
+    public function maintenanceGps()
+    {
+        return $this->hasMany(MaintenanceGps::class);
+    }
 }

@@ -1,8 +1,5 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $gps->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
-
+    <td></td>
     <td>
         <div class="input-div"><input type="text" class="input merk-{{$gps->id}}" id="merk" placeholder="Merk" value="{{ $gps->merk}}"></i></div>
     </td>
@@ -35,4 +32,8 @@
             <option value="Beli">Beli</option>
         </select></i>
     </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $gps->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
+    </td>
+
 

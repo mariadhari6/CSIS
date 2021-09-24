@@ -1,3 +1,4 @@
+<?php $no=1; ?>
 @foreach ($company as $item)
     <tr id="edit-form-{{ $item->id }}">
         <td id="td-checkbox-{{ $item->id }}">
@@ -8,12 +9,10 @@
                 </label>
             </div>
         </td>
-        <td id="td-button-{{ $item->id }}">
-            <div id="button-{{ $item->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
-            </div>
+         <td id="item-no-{{ $item->id}}">
+            {{ $no++ }}
         </td>
+
         <td id="item-company_name-{{ $item->id}}">
             {{ $item->company_name }}
         </td>
@@ -44,6 +43,12 @@
             @elseif($item->status == 'Register')
                 <span class="badge badge-success">{{ $item->status }}</span>
             @endif
+        </td>
+         <td id="td-button-{{ $item->id }}">
+            <div id="button-{{ $item->id }}">
+                <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
+                <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
+            </div>
         </td>
     </tr>
 @endforeach
