@@ -1,8 +1,5 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $company->id}})"></i>
-        <i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+    <td></td>
     <td>
         <div class="input-div"><input type="text" class="input company_name-{{$company->id}}" id="company_name" placeholder="Company Name" value="{{ $company->company_name}}"></i>
         </div>
@@ -56,6 +53,10 @@
             <option value="Trial">Trial</option>
             <option value="Register">Register</option>
         </select>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $company->id}})"></i>
+        <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
     
     <script type="text/javascript">

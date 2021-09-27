@@ -32,7 +32,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Gsm Number</th>
                 <th scope="col" class="list">Serial Number</th>
                 <th scope="col" class="list">ICC ID</th>
@@ -40,6 +40,7 @@
                 <th scope="col" class="list">Res ID</th>
                 <th scope="col" class="list">Expired Date</th>
                 <th scope="col" class="list">Note</th>
+                <th scope="col" class="action">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -153,6 +154,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-gsm_number-"+id).hide("fast");
         $("#item-serial_number-"+id).hide("fast");
         $("#item-icc_id-"+id).hide("fast");
@@ -273,6 +275,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-gsm_number-"+value).hide("fast");
                     $("#item-serial_number-"+value).hide("fast");
                     $("#item-icc_id-"+value).hide("fast");

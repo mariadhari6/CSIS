@@ -1,7 +1,5 @@
 <td></td>
-<td>
-    <i class="fas fa-check add" id="edit" onclick="update({{ $request_complaint->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
-</td>
+<td></td>
 <td>
 <select class="select company_id-{{ $request_complaint->id }}" id="company_id" name="company_id">
     @foreach ($company as $item)
@@ -82,4 +80,7 @@
     </td>
 <td>
     <div class="input-div"><input type="text" class="input status_akhir-{{$request_complaint->id}}" id="status_akhir" placeholder="status_akhir" value="{{ $request_complaint->status_akhir}}"></i></div>
+</td>
+<td>
+    <i class="fas fa-check add" id="edit" onclick="update({{ $request_complaint->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
 </td>

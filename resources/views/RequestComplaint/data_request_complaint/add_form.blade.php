@@ -1,9 +1,7 @@
 
 <tr id="add_form">
    <td></td>
-   <td>
-      <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
-   </td>
+   <td></td>
    <td>
       <select class="select" id="company_id" name="company_id">
          @foreach ($company as $item)
@@ -79,6 +77,9 @@
    </td>
    <td> 
       <div class="input-div"><input type="text" class="input" id="status_akhir" placeholder="" required>
+   </td>
+   <td>
+      <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
    </td>
 
 

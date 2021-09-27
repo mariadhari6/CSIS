@@ -1,10 +1,6 @@
     <td></td>
     <td></td>
     <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $maintenanceGps->id }})"></i>
-        <i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
-    <td>
         <select class="form-control company-{{$maintenanceGps->id}}"  id="{{$maintenanceGps->id}}" name="company">
             <option selected value="{{ $maintenanceGps->requestComplaint->id}}">
                 {{ $maintenanceGps->requestComplaint->company->company_name }}
@@ -122,7 +118,7 @@
     </td>
     <td>
         <select class="form-control teknisi-{{$maintenanceGps->id}}" id="teknisi" name="teknisi-{{$maintenanceGps->id}}">
-            <option value="" disabled selected>Teknisi</option>
+            <option value="{{  $maintenanceGps->teknisi }}" selected>{{  $maintenanceGps->teknisi }}</option>
             <option value="Khatam">Khatam</option>
             <option value="Rifai">Rifai</option>
             <option value="Arief">Arief</option>
@@ -142,6 +138,10 @@
     <td>
         <div class="input-div"><input type="text" class="input note-{{$maintenanceGps->id}}" id="note" value="{{$maintenanceGps->note}}"></i>
         </div>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $maintenanceGps->id }})"></i>
+        <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
 
 

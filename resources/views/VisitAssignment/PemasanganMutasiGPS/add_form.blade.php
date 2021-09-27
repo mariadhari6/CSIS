@@ -1,9 +1,6 @@
 <tr id="add_form">
    <td></td>
-   <td>
-       <i class="fas fa-check add" id="add" onclick="store()"></i>
-       <i class="fas fa-times cancel" onclick="cancel()"></i>
-   </td>
+   <td></td>
    <td>
        <select class="select" id="company_id" name="company_id">
            <option value="" disabled selected>Company</option>
@@ -109,7 +106,7 @@
          {{$item->sensor_name}}
          </option>
          @endforeach
-         
+
       </select>
    </td>
    <td>
@@ -133,6 +130,10 @@
    <td>
       <textarea class="form-control" id="note" name="note" rows="3"></textarea>  
    </td>
+   <td>
+      <i class="fas fa-check add" id="add" onclick="store()"></i>
+      <i class="fas fa-times cancel" onclick="cancel()"></i>
+  </td>
 
 <script type="text/javascript">
    $(document).ready(function() {

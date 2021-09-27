@@ -12,14 +12,6 @@
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
-        <td id="td-button-{{ $item->id }}">
-            <div id="button-{{ $item->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
-                {{-- <button onclick="edit({{ $item->id }})">edit</button> --}}
-                <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
-                {{-- <button onclick="destroy({{ $item->id }})">hapus</button> --}}
-            </div>
-        </td>
         <td id="item-company-{{ $item->id}}">
             {{ $item->requestComplaint->company->company_name }}
         </td>
@@ -57,13 +49,21 @@
             {{ $item->biaya_transportasi }}
         </td>
         <td id="item-teknisi-{{ $item->id}}">
-            {{ $item->pic->pic_name }}
+            {{ $item->teknisi }}
         </td>
         <td id="item-req_by-{{ $item->id}}">
             {{ $item->req_by }}
         </td>
         <td id="item-note-{{ $item->id}}">
             {{ $item->note }}
+        </td>
+        <td id="td-button-{{ $item->id }}">
+            <div id="button-{{ $item->id }}">
+                <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
+                {{-- <button onclick="edit({{ $item->id }})">edit</button> --}}
+                <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
+                {{-- <button onclick="destroy({{ $item->id }})">hapus</button> --}}
+            </div>
         </td>
     </tr>
 @endforeach

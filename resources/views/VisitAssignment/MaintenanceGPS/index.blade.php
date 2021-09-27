@@ -31,7 +31,6 @@
                   </div>
                 </th>
                 <th rowspan="2" scope="col" class="action">No.</th>
-                <th rowspan="2" scope="col" class="action">Action</th>
                 <th rowspan="2" scope="col" class="list">Company</th>
                 <th rowspan="2" scope="col" class="list">Vehicle</th>
                 <th rowspan="2" scope="col" class="list">Tanggal</th>
@@ -45,6 +44,7 @@
                 <th rowspan="2" scope="col" class="list">Teknisi</th>
                 <th rowspan="2" scope="col" class="list">Req By</th>
                 <th rowspan="2" scope="col" class="list">Note</th>
+                <th rowspan="2" scope="col" class="action">Action</th>
               </tr>
               <tr>
                 <th scope="col" class="list">GPS</th>

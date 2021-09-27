@@ -1,8 +1,5 @@
 <td></td>
-<td>
-    <i class="fas fa-check add" id="edit" onclick="update({{ $seller->id}})"></i>
-    <i class="fas fa-times cancel" onclick="cancel()" ></i>
-</td>
+<td></td>
 <td>
     <div class="input-div">
         <input type="text" class="input seller_name-{{$seller->id}}" id="seller_name" placeholder="Seller Name" value="{{ $seller->seller_name}}">
@@ -27,5 +24,9 @@
             {{  $seller->status == 'Active' ? 'In Active' : 'Active'}}
         </option>
     </select>
+</td>
+<td>
+    <i class="fas fa-check add" id="edit" onclick="update({{ $seller->id}})"></i>
+    <i class="fas fa-times cancel" onclick="cancel()" ></i>
 </td>
 

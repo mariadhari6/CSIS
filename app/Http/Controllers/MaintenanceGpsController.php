@@ -74,7 +74,7 @@ class MaintenanceGpsController extends Controller
             'keterangan'     =>  $request->keterangan,
             'hasil'     =>  $request->hasil,
             'biaya_transportasi'     =>  $request->biaya_transportasi,
-            'teknisi_id'     =>  $request->teknisi,
+            'teknisi'     =>  $request->teknisi,
             'req_by'     =>  $request->req_by,
             'note'     =>  $request->note,
         );
@@ -119,7 +119,7 @@ class MaintenanceGpsController extends Controller
         $data->keterangan = $request->keterangan;
         $data->hasil = $request->hasil;
         $data->biaya_transportasi = $request->biaya_transportasi;
-        $data->teknisi_id = $request->teknisi;
+        $data->teknisi = $request->teknisi;
         $data->req_by = $request->req_by;
         $data->note = $request->note;
 

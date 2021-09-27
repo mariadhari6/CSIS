@@ -1,64 +1,67 @@
-@foreach ($request_complaint as $request_complaints)
-    <tr id="edit-form-{{ $request_complaints->id }}">
-        <td id="td-checkbox-{{ $request_complaints->id }}">
+<?php $no=1; ?>
+@foreach ($request_complaint as $item)
+    <tr id="edit-form-{{ $item->id }}">
+        <td id="td-checkbox-{{ $item->id }}">
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input task-select" type="checkbox" id="{{$request_complaints->id}}">
+                    <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
                     <span class="form-check-sign"></span>
                 </label>
             </div>
         </td>
-        <td id="td-button-{{ $request_complaints->id }}">
-            <div id="button-{{ $request_complaints->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $request_complaints->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $request_complaints->id }})"></i>
-            </div>
+        <td id="item-no-{{ $item->id}}">
+                {{ $no++ }}
         </td>
-        <td id="item-company_id-{{ $request_complaints->id}}">
-                {{ $request_complaints->company->company_name }}
+        <td id="item-company_id-{{ $item->id}}">
+                {{ $item->company->company_name }}
         </td>
-        <td id="item-internal_eksternal-{{ $request_complaints->id}}">
-                {{ $request_complaints->internal_eksternal}}
+        <td id="item-internal_eksternal-{{ $item->id}}">
+                {{ $item->internal_eksternal}}
         </td>
-        <td id="item-pic_id-{{ $request_complaints->id }}">
-                {{ $request_complaints->pic->pic_name }}
+        <td id="item-pic_id-{{ $item->id }}">
+                {{ $item->pic->pic_name }}
         </td>
-        <td id="item-vehicle-{{ $request_complaints->id }}">
-                {{ $request_complaints->vehicle }}
+        <td id="item-vehicle-{{ $item->id }}">
+                {{ $item->vehicle }}
         </td>
-        <td id="item-waktu_info-{{ $request_complaints->id }}">
-                {{ $request_complaints->waktu_info }}
+        <td id="item-waktu_info-{{ $item->id }}">
+                {{ $item->waktu_info }}
         </td>
-        <td id="item-task-{{ $request_complaints->id}}">
-                {{ $request_complaints->task}}
+        <td id="item-task-{{ $item->id}}">
+                {{ $item->task}}
         </td>
-        <td id="item-platform-{{ $request_complaints->id}}">
-                {{ $request_complaints->platform}}       
+        <td id="item-platform-{{ $item->id}}">
+                {{ $item->platform}}       
         </td>
-        <td id="item-detail_task-{{ $request_complaints->id}}">
-                {{ $request_complaints->detail_task}}       
+        <td id="item-detail_task-{{ $item->id}}">
+                {{ $item->detail_task}}       
         </td>
-        <td id="item-divisi-{{ $request_complaints->id}}">
-                {{ $request_complaints->divisi}}
+        <td id="item-divisi-{{ $item->id}}">
+                {{ $item->divisi}}
         </td>
-        <td id="item-waktu_respond-{{ $request_complaints->id}}">
-                {{ $request_complaints->waktu_respond}}       
+        <td id="item-waktu_respond-{{ $item->id}}">
+                {{ $item->waktu_respond}}       
         </td>
-        <td id="item-respond-{{ $request_complaints->id}}">
-                {{ $request_complaints->respond}}
+        <td id="item-respond-{{ $item->id}}">
+                {{ $item->respond}}
         </td>
-        <td id="item-waktu_kesepakatan-{{ $request_complaints->id}}">
-                {{ $request_complaints->waktu_kesepakatan}}
+        <td id="item-waktu_kesepakatan-{{ $item->id}}">
+                {{ $item->waktu_kesepakatan}}
         </td>
-        <td id="item-waktu_solve-{{ $request_complaints->id}}">
-                {{ $request_complaints->waktu_solve}}
+        <td id="item-waktu_solve-{{ $item->id}}">
+                {{ $item->waktu_solve}}
         </td>
-        <td id="item-status-{{ $request_complaints->id}}">
-                {{ $request_complaints->status}}
+        <td id="item-status-{{ $item->id}}">
+                {{ $item->status}}
         </td>
-        <td id="item-status_akhir-{{ $request_complaints->id}}">
-                {{ $request_complaints->status_akhir}}
+        <td id="item-status_akhir-{{ $item->id}}">
+                {{ $item->status_akhir}}
         </td>
-        
+        <td id="td-button-{{ $item->id }}">
+                <div id="button-{{ $item->id }}">
+                        <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
+                        <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
+                </div>
+        </td>
     </tr>
 @endforeach

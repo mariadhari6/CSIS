@@ -30,7 +30,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Internal/Eksternal</th>
                 <th scope="col" class="list">PIC</th>
@@ -46,7 +46,7 @@
                 <th scope="col" class="list">Waktu Solve</th>
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="list">Status Akhir</th>
-
+                <th scope="col" class="action">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -174,6 +174,7 @@
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
         $("#item-company_id-"+id).slideUp("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-internal_eksternal-"+id).slideUp("fast");
         $("#item-pic_id-"+id).slideUp("fast");
         $("#item-vehicle-"+id).slideUp("fast");
@@ -314,6 +315,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-company_id-"+value).slideUp("fast");
                     $("#item-internal_eksternal-"+value).slideUp("fast");
                     $("#item-pic_id-"+value).slideUp("fast");

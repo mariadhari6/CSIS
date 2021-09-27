@@ -1,15 +1,10 @@
 <tr id="add_form">
     <td></td>
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="add" onclick="store()"></i>
-        {{-- <button onclick="store()">save</button> --}}
-        <i class="fas fa-times cancel" onclick="cancel()"></i>
-    </td>
     <td> 
         <select class="form-control" id="company" name="company">
             @foreach ($requestComplaint as $item)
-            <option value="{{ $item->id }}">{{ $item->company->company_name }}</option>
+            <option value="{{ $item->company->id }}">{{ $item->company->company_name }}</option>
             @endforeach
 
         </select>
@@ -32,7 +27,7 @@
     </td>
     <td>
         <select class="form-control" id="type_gps" name="type_gps">
-            <option value="">Type Gps</option>
+            <option value="none">-- Select --</option>
             @foreach ($gps as $item)
                 <option value="{{ $item->id }}">{{ $item->type }}</option>
             @endforeach
@@ -40,7 +35,7 @@
     </td>
     <td>
         <select class="form-control" id="equipment_gps" name="equipment_gps">
-            <option value="">equipment_gps</option>
+            <option value="">-- Select --</option>
             @foreach ($gps as $item)
                 <option value="{{ $item->id }}">{{ $item->type }}</option>
             @endforeach
@@ -48,7 +43,7 @@
     </td>
     <td>
         <select class="form-control" id="equipment_sensor" name="equipment_sensor">
-            <option value="">equipment_sensor</option>
+            <option value=""-->Select --</option>
                 @foreach ($sensor as $item)
                 <option value="{{ $item->id }}">{{ $item->sensor_name }}</option>
                 @endforeach
@@ -86,7 +81,7 @@
     </td>
     <td>
         <select class="form-control" id="teknisi" name="teknisi">
-            <option value="" disabled selected>Teknisi</option>
+            <option value="belum dipilih" disabled selected>Teknisi</option>
             <option value="Khatam">Khatam</option>
             <option value="Rifai">Rifai</option>
             <option value="Arief">Arief</option>
@@ -101,6 +96,11 @@
     </td>
     <td>
         <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="add" onclick="store()"></i>
+        {{-- <button onclick="store()">save</button> --}}
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
     
 

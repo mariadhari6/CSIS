@@ -1,8 +1,6 @@
 <tr id="add_form">
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
-    </td>
+    <td></td>
     <td> 
         <div class="input-div"><input type="text" class="input" id="gsm_number" placeholder="Gsm Number">
     </td>
@@ -23,6 +21,9 @@
     </td>
     <td>
         <textarea class="form-control" id="note" name="note" ></textarea>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 </tr>
 

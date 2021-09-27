@@ -1,7 +1,5 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $GsmTerminate->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+    <td></td>
     <td>
         <div class="input-div"><input type="date" class="input request_date-{{$GsmTerminate->id}}" id="request_date" placeholder="Request Date" value="{{ $GsmTerminate->request_date}}">
         </div>
@@ -22,6 +20,7 @@
             @endforeach
         </select></i>
     </td>
+    
 
     {{-- <td>
         <select class="form-control gsm_pre_active_id-{{$GsmActive->id}}" id="{{$GsmTerminate->id}}" name="gsm_pre_active_id">
@@ -50,6 +49,9 @@
     </td>
     <td>
         <textarea class="form-control note-{{$GsmTerminate->id}}" id="note" name="note" rows="3">{{$GsmTerminate->note}}</textarea></i>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $GsmTerminate->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
 
 

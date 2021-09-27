@@ -30,7 +30,7 @@
                       </label>
                   </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company Name</th>
                 <th scope="col" class="list">Seller</th>
                 <th scope="col" class="list">Customer Code</th>
@@ -38,6 +38,7 @@
                 <th scope="col" class="list">Po Date</th>
                 <th scope="col" class="list">No Agreement Letter</th>
                 <th scope="col" class="list">Status</th>
+                <th scope="col" class="action">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -156,6 +157,7 @@
     function edit(id){
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#td-button-"+id).slideUp("fast");
         $("#item-company_name-"+id).slideUp("fast");
         $("#item-seller_id-"+id).slideUp("fast");
@@ -281,6 +283,7 @@
         $.each(allVals, function(index, value){
             $("#td-checkbox-"+value).hide("fast");
             $("#td-button-"+value).hide("fast");
+            $("#item-no-"+value).hide("fast");
             $("#item-company_name-"+value).slideUp("fast");
             $("#item-seller_id-"+value).slideUp("fast");
             $("#item-customer_code-"+value).slideUp("fast");

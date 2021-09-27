@@ -1,8 +1,5 @@
 <td></td>
-<td>
-    <i class="fas fa-check add" id="edit" onclick="update({{ $pemasangan_mutasi_GPS->id}})"></i>
-    <i class="fas fa-times cancel" onclick="cancel()" ></i>
-</td>
+<td></td>
 <td>
     <select class="select company_id-{{$pemasangan_mutasi_GPS->id}}" id="company_id" name="company_id">
       <option value="{{$pemasangan_mutasi_GPS->company_id}}"> {{$pemasangan_mutasi_GPS->requestComplain->company->company_name}} </option>
@@ -112,7 +109,13 @@
       <option value="Visit Berbayar">Visit Berbayar</option>
    </select>   
 </td>
-<td><textarea class="form-control note-{{$pemasangan_mutasi_GPS->id}}" id="note" name="note" rows="3">{{$pemasangan_mutasi_GPS->note}}</textarea></i></td>
+<td>
+   <textarea class="form-control note-{{$pemasangan_mutasi_GPS->id}}" id="note" name="note" rows="3">{{$pemasangan_mutasi_GPS->note}}</textarea></i>
+</td>
+<td>
+   <i class="fas fa-check add" id="edit" onclick="update({{ $pemasangan_mutasi_GPS->id}})"></i>
+   <i class="fas fa-times cancel" onclick="cancel()" ></i>
+</td>
 
 <script type="text/javascript">
 $(document).ready(function() {
