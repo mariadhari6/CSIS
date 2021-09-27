@@ -1,5 +1,3 @@
-
-
 <tr id="add_form">
    <td></td>
    <td>
@@ -53,11 +51,14 @@
       <select class="select" id="platform" name="platform">
          <option value="" disable selected>Platform</option>
          <option value="Wa">Wa</option>
+         <option value="SMS">SMS</option>
+         <option value="E-mail">E-mail</option>
+         <option value="Telepon">Telepon</option>
     </select>
    </td>
 
     <td> 
-       <div class="input-div"><input type="text" class="input" id="detail_task" placeholder="detail_task" required>
+       <textarea class="form-control" id="detail_task" name="detail_task" ></textarea></i>
    </td>
 
     <td>

@@ -4,6 +4,7 @@
 </td>
 <td>
 <select class="select company_id-{{ $request_complaint->id }}" id="company_id" name="company_id">
+<option value="{{$request_complain->company}}"> {{$request_complain->companyRequest->company_name}} </option>
     @foreach ($company as $item)
     <option value="{{ $item->id }}" {{ old('company') == $item->id ? 'selected':'' }}>
         {{ $item->company_name }}
