@@ -14,10 +14,10 @@ class CreateSummaryCustomersTable extends Migration
     public function up()
     {
         Schema::create('summary_customers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignId('company');
-            $table->foreignId('po_number');
-            $table->foreignId('jumlah_unit_di_po');
+            $table->id();
+            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('po_number_id')->constrained('detail_customers');
+            $table->foreignId('jumlah_unit_di_po_id');
             $table->integer('harga_layanan');
             $table->decimal('revenue');
             $table->string('status_po');

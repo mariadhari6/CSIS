@@ -4,7 +4,9 @@
     <td>
         <select class="select" id="CompanyId">
             <option value="" disabled selected>Company</option>
-            <option value="1">1</option>
+            @foreach ($company as $item)
+                <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{         $item->company_name }}</option>
+                @endforeach
         </select>
     </td>
     <td>
@@ -18,14 +20,15 @@
      <td >
         <select class="select" id="PoNumber">
             <option value="" disabled selected>Po Number</option>
-            <option value="001/DPT/VIII/2016" >001/DPT/VIII/2016</option>
-            <option value="002/DPT/VIII/2019">002/DPT/VIII/2019</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
         </select>
     </td>
      <td>
         <select class="select" id="PoDate">
-        <option value="1">1</option>
-        <option value="2">2</option>
+            <option value="" disabled selected>Po Date</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
      </select>
 
     <td>

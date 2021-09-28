@@ -14,27 +14,28 @@ class CreateDashboardCustomersTable extends Migration
     public function up()
     {
         Schema::create('dashboard_customers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('company_name');
-            $table->string('pic_name');
-            $table->string('email');
-            $table->string('position');
-            $table->string('date_birth');
-            $table->integer('total_gps_installed');
-            $table->integer('total_sensor_installed');
-            $table->string('name_sensor');
-            $table->integer('jumlah_sensor');
-            $table->string('vehicle_type');
-            $table->integer('jumlah_vehicle_type');
+            $table->id();
+            $table->foreignId('company_name');
+            $table->foreignId('pic_name');
+            $table->foreignId('email');
+            $table->foreignId('phone');
+            $table->foreignId('position');;
+            $table->foreignId('date_of_birth');
+            $table->foreignId('total_gps_installed');
+            $table->foreignId('total_sensor_installed');
+            $table->foreignId('nama_sensor');
+            $table->foreignId('jumlah_sensor');
+            $table->foreignId('vehicle_type');
+            $table->foreignId('jumlah_vehicle');
             $table->string('pool_name');
             $table->string('pool_location');
             $table->string('coordinate');
             $table->integer('jumlah_unit_per_pool');
-            $table->string('fitur_digunakan');
+            $table->string('fitur_yang_digunakan');
             $table->string('business_type');
-            $table->string('description_businnes_type');
-            $table->string('address');
-            $table->string('coordinate_address');
+            $table->string('description_business_type');
+            $table->string('adress');
+            $table->string('coordinate_adress');
             $table->string('customer');
             $table->timestamps();
         });

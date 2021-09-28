@@ -4,11 +4,9 @@
     <td >
         <select class="select" id="CompanyId">
             <option value="" disabled selected>Company</option>
-            <option value='islam'>Islam</option>
-            <option value='kristen'>Kristen</option>
-            <option value='katholik'>Katholik</option>
-            <option value='hindu'>Hindu</option>
-            <option value='kristen'>Budha</option>
+            @foreach ($summary as $item )
+                <option value='{{ $item->company->company_name}}'> {{ $item->company->company_name}}</option>
+            @endforeach
         </select>
     </td>
     <td><div class="input-div" ><input type="text" class="input" id="PoNumber" placeholder=""></div></td>

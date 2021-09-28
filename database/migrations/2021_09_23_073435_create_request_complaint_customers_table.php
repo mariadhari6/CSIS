@@ -15,9 +15,9 @@ class CreateRequestComplaintCustomersTable extends Migration
     {
         Schema::create('request_complaint_customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company')->nullable();;
+            $table->foreignId('company_id');
             $table->string('internal_eksternal');
-            $table->foreignId('pic')->nullable();
+            $table->foreignId('pic_id');
             $table->string('vehicle');
             $table->dateTime('waktu_info');
             $table->longText('task');

@@ -1,17 +1,9 @@
-@foreach ($summary as $data)
+@foreach ($company as $data)
 <tr id="edit-form-{{ $data->id }}">
-    <td id="item-CompanyId-{{ $data->company }}">
-        {{ $data->company }}
+    <td id="item-CompanyId-{{ $data->company}}"{{ old('company_id') == $data->id ? 'selected':'' }}>
+        {{ $data->company_name }}
     </td>
-    <td id="item-PoNumber-{{ $data->po_number}}">
-        {{ $data->po_number}}
-    </td>
-    <td id="item-JumlahUnit-{{ $data->jumlah_unit_di_po}}">
-        {{ $data->jumlah_unit_di_po }}
-    </td>
-    <td id="item-HargaLayanan-{{ $data->harga_layanan}}">
-        {{ $data->harga_layanan}}
-    </td>
+
     <td id="item-Revenue-{{ $data->revenue}}">
         {{ $data->revenue }}
     </td>

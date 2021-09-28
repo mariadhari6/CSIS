@@ -3,11 +3,10 @@
 
 @section('content')
 
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
+<div class="title">
+    <strong>PIC Company</strong>
+</div>
+<br>
   <div class="row">
     <div class="col-md-12">
       <div class="card">

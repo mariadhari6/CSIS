@@ -10,7 +10,7 @@
     <td> <div class="input-div"><input type="date" class="input" id="waranty" placeholder="Waranty"></i></td>
     {{-- <td> <div class="input-div"><input type="text" class="input" id="status" placeholder="Status"></i></td> --}}
     {{-- <td> <div class="input-div"><input type="text" class="input" id="status" placeholder="Status"></i></td> --}}
-    <td><select class="form-select" id="status" aria-label=".form-select-lg example">
+    <td><select class="select" id="status" aria-label=".form-select-lg example">
     <option selected>Pilih status</option>
      <option value="Ready">Ready</option>
     <option value="Used">Used</option>

@@ -1,7 +1,8 @@
 <tr id="add_form">
     <td></td>
     <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
-    <td><select class="form-control" id="company_id" name="company_id">
+    <td><select class="select" id="company_id" name="company_id">
+        <option value="" selected disabled>Pilih Company</option>
        @foreach ($company as $companys)
         <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
 
@@ -14,4 +15,3 @@
     <td> <div class="input-div"><input type="text" class="input" id="position" placeholder="Position"></i></td>
     <td> <div class="input-div"><input type="date" class="input" id="date_of_birth" placeholder="Date of birth"></i></td>
 </tr>
-

@@ -42,16 +42,14 @@ class DetailCustomer extends Model
     {
         return $this->belongsTo(Company::class);
     }
-    // public function gps()
-    // {
-    //     return $this->belongsTo(Gps::class, 'id');
-    // }
-    // public function sensor()
-    // {
-    //     return $this->belongsTo(Sensor::class, 'id');
-    // }
+
     public function gsmActive()
     {
         return $this->belongsTo(GsmActive::class, 'gsm_pre_active_id');
+    }
+
+    public function summary(){
+
+        return $this->hasMany(SummaryCustomer::class);
     }
 }

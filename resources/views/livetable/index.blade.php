@@ -7,10 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    @foreach ( $data as $item)
-        {{ $item['data']['naata']['name']me']}}
-
-    @endforeach
+  {{ $data }}
 
 </body>
 </html>

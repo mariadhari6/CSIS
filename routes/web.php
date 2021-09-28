@@ -220,6 +220,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected', [RequestComplaintController::class, 'selected']);
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
 
+    Route::get('/count', [SummaryController::class, 'countPo']);
 });
 
 

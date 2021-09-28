@@ -4,11 +4,10 @@
 
 @section('content')
 
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
+<div class="title">
+    <strong>Sensor</strong>
+</div>
+<br>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -76,7 +75,7 @@
     }
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form_sensor') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });

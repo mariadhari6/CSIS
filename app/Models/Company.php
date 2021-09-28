@@ -43,4 +43,9 @@ class Company extends Model
     {
         return $this->hasMany(PemasanganMutasiGps::class);
     }
+
+    public function summary()
+    {
+        return $this->hasMany(SummaryCustomer::class);
+    }
 }

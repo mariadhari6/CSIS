@@ -48,7 +48,10 @@
 
   <script>
     $(document).ready(function() {
-      read()
+
+      read();
+
+
     });
     // ------ Tampil Data ------
     function read(){
@@ -100,6 +103,7 @@
               read();
 
             }
+
         })
     }
     // -----Proses Delete Data ------

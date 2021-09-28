@@ -19,7 +19,7 @@ class CreateGsmTerminatesTable extends Migration
             $table->date('terminate_date');
             $table->foreignId('gsm_active_id');
             $table->string('status_active');
-            $table->foreignId('company_id')->nullable();
+            $table->foreignId('company_id');
             $table->string('note');
             $table->timestamps();
         });

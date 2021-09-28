@@ -19,9 +19,9 @@
         <td><select class="select" id="no_agreement_letter_id" name="no_agreement_letter_id">
     <option value="">----Pilih No Agreement----</option>
        @foreach ($seller as $sellers)
-        <option value="{{ $sellers->id }}" {{ old('no_agreement_letter_id') == $sellers->id ? 'selected':'' }}>{{ $sellers->no_agreement_letter }}</option>
-
-
+        <option value="{{ $sellers->id }}" {{ old('no_agreement_letter_id') == $sellers->id ? 'selected':'' }}>
+            {{  $sellers->no_agreement_letter }}
+        </option>
        @endforeach
     </select></i></td>
    <td><select class="select" id="status" name="status">

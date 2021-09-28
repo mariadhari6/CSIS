@@ -33,12 +33,13 @@ class SellerController extends Controller
     {
         $data = array(
             'seller_name' => $request->seller_name,
-            'seller_code'   => $request->seller_code,
-            'no_agreement_letter'      => $request->no_agreement_letter,
-            'status'   => $request->status
-
+            'seller_code' => $request->seller_code,
+            'no_agreement_letter' => $request->no_agreement_letter,
+            'status' => $request->status
         );
+
         Seller::insert($data);
+
     }
 
     public function edit_form($id)

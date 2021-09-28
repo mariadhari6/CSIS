@@ -15,11 +15,11 @@ class CreateDetailCustomersTable extends Migration
     {
         Schema::create('detail_customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('company_id')->nullable();
+            $table->foreignId('company_id');
             $table->string('licence_plate');
             $table->string('vihecle_type');
             $table->string('po_number');
-            $table->foreignId('po_date')->nullable();
+            $table->foreignId('po_date');
             $table->string('status_po');
             $table->string('imei');
             $table->string('merk');
