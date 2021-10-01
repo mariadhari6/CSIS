@@ -22,6 +22,8 @@ class CreateGsmPreActivesTable extends Migration
             $table->string('res_id');
             $table->date('expired_date');
             $table->string('note');
+            $table->string('status_gsm');
+
             $table->timestamps();
         });
     }

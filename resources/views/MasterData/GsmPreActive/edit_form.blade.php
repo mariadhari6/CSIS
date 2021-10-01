@@ -23,6 +23,14 @@
           <textarea class="form-control note-{{$GsmPreActive->id}}" id="note" name="note" >{{$GsmPreActive->note}}</textarea></i>
     </td>
     <td>
+        <select class="select status_gsm-{{$GsmPreActive->id}}" id="status_gsm" aria-label=".form-select-lg example">
+            <option value="{{$GsmPreActive->status_gsm}}">{{$GsmPreActive->status_gsm}}</option>
+            <option value="Ready">Ready</option>
+            <option value="Active">Active</option>
+            <option value="Terminate">Terminate</option>
+        </select></i>
+    </td>
+    <td>
         <i class="fas fa-check add" id="edit" onclick="update({{ $GsmPreActive->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
 

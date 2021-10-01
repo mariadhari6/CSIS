@@ -37,6 +37,7 @@ class GsmPreActiveController extends Controller
             'res_id'     =>  $request->res_id,
             'expired_date'     =>  $request->expired_date,
             'note'     =>  $request->note,
+            'status_gsm'     =>  $request->status_gsm,
         );
         GsmPreActive::insert($data);
     }
@@ -67,6 +68,7 @@ class GsmPreActiveController extends Controller
         $data->res_id = $request->res_id;
         $data->expired_date = $request->expired_date;
         $data->note = $request->note;
+        $data->status_gsm = $request->status_gsm;
         $data->save();
     }
 
@@ -88,6 +90,7 @@ class GsmPreActiveController extends Controller
         $data->res_id = $request->res_id;
         $data->expired_date = $request->expired_date;
         $data->note = $request->note;
+        $data->status_gsm = $request->status_gsm;
         echo $id;
     }
 

@@ -9,7 +9,7 @@
                 </label>
             </div>
         </td>
-        <td id="item-no-{{ $pemasangan_mutasi_GPSess->id}}">
+        <td id="item-no-{{ $pemasangan_mutasi_GPSes->id}}">
             {{ $no++ }}
         </td>
 

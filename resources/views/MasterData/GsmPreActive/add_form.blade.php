@@ -22,6 +22,14 @@
     <td>
         <textarea class="form-control" id="note" name="note" ></textarea>
     </td>
+    <td>
+        <select class="select" id="status_gsm" aria-label=".form-select-lg example">
+            <option selected disabled>Status Gsm</option>
+            <option value="Ready">Ready</option>
+            <option value="Active">Active</option>
+            <option value="Terminate">Terminate</option>
+        </select></i>
+    </td>
      <td>
         <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>

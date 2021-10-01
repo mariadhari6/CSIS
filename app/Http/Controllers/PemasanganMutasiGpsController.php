@@ -51,7 +51,7 @@ class PemasanganMutasiGpsController extends Controller
             "tanggal"               => $request->tanggal,
             "kendaraan_awal"        => $request->kendaraan_awal,
             "imei"                  => $request->imei,
-            "gsm_pemasangan"                   => $request->gsm_pemasangan,
+            "gsm_pemasangan"        => $request->gsm_pemasangan,
             "kendaraan_pasang"      => $request->kendaraan_pasang,
             "jenis_pekerjaan"       => $request->jenis_pekerjaan,
             "equipment_terpakai_gps" => $request->equipment_terpakai_gps,

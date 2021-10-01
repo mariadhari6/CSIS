@@ -33,7 +33,6 @@
                     </div>
                 </th>
                 <th scope="col" class="action">No.</th>
-                <th scope="col" class="action">Action</th>
                 <th scope="col" class="list">Gsm Number</th>
                 <th scope="col" class="list">Serial Number</th>
                 <th scope="col" class="list">ICC ID</th>
@@ -41,6 +40,9 @@
                 <th scope="col" class="list">Res ID</th>
                 <th scope="col" class="list">Expired Date</th>
                 <th scope="col" class="list">Note</th>
+                <th scope="col" class="list">Status GSM</th>
+                <th scope="col" class="action">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -92,6 +94,7 @@
         var res_id = $("#res_id").val();
         var expired_date = $("#expired_date").val();
         var note = $("#note").val();
+        var status_gsm = $("#status_gsm").val();
         $.ajax({
             type: "get",
             url: "{{ url('store_GsmPreActive') }}",
@@ -102,7 +105,8 @@
               imsi: imsi,
               res_id: res_id,
               expired_date:expired_date,
-              note:note
+              note:note,
+              status_gsm:status_gsm
             },
             success: function(data) {
              swal({
@@ -162,6 +166,7 @@
         $("#item-res_id-"+id).hide("fast");
         $("#item-expired_date-"+id).hide("fast");
         $("#item-note-"+id).hide("fast");
+        $("#item-status_gsm-"+id).hide("fast");
         $.get("{{ url('show_GsmPreActive') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -175,18 +180,20 @@
             var res_id = $("#res_id").val();
             var expired_date = $("#expired_date").val();
             var note = $("#note").val();
+            var status_gsm = $("#status_gsm").val();
             var id = id;
             $.ajax({
                 type: "get",
                 url: "{{ url('update_GsmPreActive') }}/"+id,
                 data: {
-                 gsm_number: gsm_number,
+                  gsm_number: gsm_number,
                 serial_number:serial_number,
                 icc_id: icc_id,
                 imsi: imsi,
                 res_id: res_id,
                 expired_date:expired_date,
-                note:note
+                note:note,
+                status_gsm:status_gsm
                 },
                 success: function(data) {
                 swal({
@@ -283,6 +290,7 @@
                     $("#item-res_id-"+value).hide("fast");
                     $("#item-expired_date-"+value).hide("fast");
                     $("#item-note-"+value).hide("fast");
+                    $("#item-status_gsm-"+value).hide("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_GsmPreActive') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
@@ -320,17 +328,19 @@
                     var res_id = $(".res_id-"+value).val();
                     var expired_date = $(".expired_date-"+value).val();
                     var note = $(".note-"+value).val();
+                    var status_gsm = $(".status_gsm-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_GsmPreActive') }}/"+value,
                     data: {
-                     gsm_number: gsm_number,
+                      gsm_number: gsm_number,
                     serial_number:serial_number,
                     icc_id: icc_id,
                     imsi: imsi,
                     res_id: res_id,
                     expired_date:expired_date,
-                    note:note
+                    note:note,
+                    status_gsm:status_gsm
                     },
                     success: function(data) {
                      swal({

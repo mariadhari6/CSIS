@@ -6,14 +6,14 @@
 <div class="container-fluid">
     <h4 class="page-title">Dashboard Visit Assignment</h4>
     <div class="row">
-        <div class="col-md-3">
-            <div class="card card-stats card-grey">
+        <div class="col-md-3 ">
+            <div class="card card-stats card-grey cost">
                 <div class="card-body ">
                     <div class="row">
 
                         <div class="col-12 d-flex align-items-left">
                             <div class="numbers">
-                                <p class="card-category">Cost per Company</p>
+                                <p class="card-category" >Cost per Company</p>
                             </div>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card card-stats card-primary-soft">
+            <div class="card card-stats card-primary-soft detail">
                 <div class="card-body ">
                     <div class="row">
 
@@ -120,37 +120,27 @@
     </div>
 </div>
 
+<div class="table_id">
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+</div>
+
+
+<script>
+    $('.cost').click(function() {
+        $.get("{{ url('item_data_DashboardVisitAssignment') }}", {}, function(data, status) {
+            $('.table_id').html(data)
+
+        });
+    });
+
+    $('.detail').click(function() {
+        $.get("{{ url('item_data_DetailCostPercompany') }}", {}, function(data, status) {
+            $('.table_id').html(data)
+
+        });
+    });
 </script>
-    <script type="text/javascript">
-                google.load("visualization", "1", {packages:["corechart"]});
 
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Week Ending');
-            data.addColumn('number', 'Total');
-            data.addColumn('number', 'Passed');
-            data.addColumn('number', 'Failed');
-            data.addColumn('number', 'Incomplete');
-        var options = {
-            series: {
-            0: { color: '#253646' },
-            1: { color: '#009bde' },
-            2: { color: '#8dc8ea' },
-            3: { color: '#a7bbc4' }
-            },
-            vAxis: { viewWindow: {max: 100,min:0 }, gridlines: { color: '#f3f3f3', count: 7}},
-            chartArea: {left:"5%", width:"90%"},
-            vAxis :{ textStyle: {fontName: 'Aileron-Light',fontSize: 12 }},
-            hAxis :{ textStyle: {fontName: 'Aileron-Light',fontSize: 12 }},
-            tooltip: {textStyle:  {fontName: 'Aileron-Light',fontSize: 12}},
-            legend: {textStyle:  {fontName: 'Aileron-Light',fontSize: 12,bold: false}, position: 'top', alignment: 'end' },
-            pointSize: 5,
-            is3D:true
-        };
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart-div'));
-        chart.draw(data, options);
-    </script>
 
 @endsection
 

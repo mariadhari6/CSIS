@@ -332,7 +332,7 @@
                     $("#item-detail_task-"+value).hide("fast");
                     $("#item-divisi-"+value).hide("fast");
                     $("#item-respond-"+value).hide("fast");
-                    $("#item-waktu_kesepakatan"+value).hide("fast");
+                    $("#item-waktu_kesepakatan-"+value).hide("fast");
                     $("#item-waktu_solve-"+value).hide("fast");
                     $("#item-status-"+value).hide("fast");
                     $("#item-status_akhir-"+value).hide("fast");

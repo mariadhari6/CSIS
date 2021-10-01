@@ -26,7 +26,7 @@
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th width="10px">
+                <th rowspan="2" width="10px" >
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -34,22 +34,25 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Tanggal</th>
-                <th scope="col" class="list">Kendaraan Awal</th>
-                <th scope="col" class="list">IMEI</th>
-                <th scope="col" class="list">GSM</th>
-                <th scope="col" class="list">Kendaraan Pasang</th>
-                <th scope="col" class="list">Jenis Pekerjaan</th>
-                <th scope="col" class="list">Equipment Terpakai GPS</th>
-                <th scope="col" class="list">Equipment Terpasang Sensor</th>
-                <th scope="col" class="list">Teknisi</th>
-                <th scope="col" class="list">Uang Transportasi</th>
-                <th scope="col" class="list">Type Visit</th>
-                <th scope="col" class="list">Note</th>
-                <th scope="col" class="action">Action</th>
+                <th rowspan="2" scope="col" class="action">No.</th>
+                <th rowspan="2" scope="col" class="list">Company</th>
+                <th rowspan="2" scope="col" class="list">Tanggal</th>
+                <th rowspan="2" scope="col" class="list">Kendaraan Awal</th>
+                <th rowspan="2" scope="col" class="list">IMEI</th>
+                <th rowspan="2" scope="col" class="list">GSM</th>
+                <th rowspan="2" scope="col" class="list">Kendaraan Pasang</th>
+                <th rowspan="2" scope="col" class="list">Jenis Pekerjaan</th>
+                <th colspan="2" scope="col" class="list">Equipment</th>
+                <th rowspan="2" scope="col" class="list">Teknisi</th>
+                <th rowspan="2" scope="col" class="list">Uang Transportasi</th>
+                <th rowspan="2" scope="col" class="list">Type Visit</th>
+                <th rowspan="2" scope="col" class="list">Note</th>
+                <th rowspan="2" scope="col" class="action">Action</th>
 
+              </tr>
+              <tr>
+                <th scope="col" class="list">Terpasang Sensor </th>
+                <th scope="col" class="list">Terpasang GPS</th>
               </tr>
             </thead>
             <tbody  id="item_data">

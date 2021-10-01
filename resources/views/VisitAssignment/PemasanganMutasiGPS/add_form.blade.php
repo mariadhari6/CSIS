@@ -63,6 +63,7 @@
 
      <td><select class="select" id="jenis_pekerjaan" name="jenis_pekerjaan">
         <option value="" disabled selected>Jenis Pekerjaan</option>
+
        @foreach ($request_complain as $request_complains)
         <option value="{{ $request_complains->id }}" {{ old('jenis_pekerjaan') == $request_complains->id  ? 'selected':'' }}>
         {{$request_complains->task}}

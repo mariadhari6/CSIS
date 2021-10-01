@@ -4,7 +4,7 @@
 
 
     <td><select class="select company_id-{{$request_complain->id}}" id="company_id" name="company_id">
-        <option value="{{$request_complain->company}}"> {{$request_complain->companyRequest->company_name}} </option>
+        <option value="{{$request_complain->company_id}}"> {{$request_complain->companyRequest->company_name}} </option>
        @foreach ($company as $companys)
         <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
 
@@ -34,12 +34,28 @@
     <option value="B-76267-TWS">B-76267-TWS</option>
     </select></i></td>
     <td>
-        <div class="input-div"><input type="datetime-local" class="input waktu_info-{{$request_complain->id}}" id="waktu_info" placeholder="Waktu Info" value="{{ $request_complain->waktu_info}}"></i></div>
+        <div class="input-div"><input type="datetime-local" class="input waktu_info-{{$request_complain->id}}" id="waktu_info" placeholder="Waktu Info" value="{{ str_replace(" ", "T", $request_complain->waktu_info) }}"></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="datetime-local" class="input waktu_respond-{{$request_complain->id}}" id="waktu_respond" placeholder="Waktu Respond" value="{{ $request_complain->waktu_respond}}"></i></div>
+        <div class="input-div"><input type="datetime-local" class="input waktu_respond-{{$request_complain->id}}" id="waktu_respond" placeholder="Waktu Respond" value="{{ str_replace(" ", "T", $request_complain->waktu_respond) }}"></i></div>
     </td>
-    <td><textarea class="form-control task-{{$request_complain->id}}" id="task" name="task" >{{$request_complain->task}}</textarea></i></td>
+       <td>
+        <select class="select task-{{$request_complain->id}}" id="task" id="task" aria-label=".form-select-lg example">
+            <option value="{{$request_complain->task}}"> {{$request_complain->task}} </option>
+            <option value="Pemasangan/Mutasi/Pelepasan GPS">Pemasangan/Mutasi/Pelepasan GPS</option>
+            <option value="Tampilan OSLOG">Tampilan OSLOG</option>
+            <option value="Permasalahan GPS">Permasalahan GPS</option>
+            <option value="Edit/Add/Delete Master Data">Edit/Add/Delete Master Data</option>
+            <option value="Request Kartu GSM">Request Kartu GSM</option>
+            <option value="Integrasi TMS">Integrasi TMS</option>
+            <option value="Permasalahan GPS">Permasalahan GPS</option>
+            <option value="Request Kartu GSM">Request Kartu GSM</option>
+            <option value="Request Data Firmware dan Configurator">Request Data Firmware dan Configurator</option>
+            <option value="Training OSLOG Lite">Training OSLOG Lite</option>
+            <option value="OSLOG Adoption">OSLOG Adoption</option>
+            <option value="Reporting">Reporting</option>
+        </select></i>
+    </td>
 
 
      <td><select class="select platform-{{$request_complain->id}}" id="platform" id="platform" aria-label=".form-select-lg example">
@@ -58,10 +74,10 @@
         <div class="input-div"><input type="text" class="input respond-{{$request_complain->id}}" id="respond" placeholder="Respond" value="{{ $request_complain->respond}}"></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$request_complain->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ $request_complain->waktu_kesepakatan}}"></i></div>
+        <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$request_complain->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ str_replace(" ", "T", $request_complain->waktu_kesepakatan) }}"></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="datetime-local" class="input waktu_solve-{{$request_complain->id}}" id="waktu_solve" placeholder="waktu Solve" value="{{ $request_complain->waktu_solve}}"></i></div>
+        <div class="input-div"><input type="datetime-local" class="input waktu_solve-{{$request_complain->id}}" id="waktu_solve" placeholder="waktu Solve" value="{{ str_replace(" ", "T", $request_complain->waktu_solve) }}"></i></div>
     </td>
    <td>
         <select class="select status-{{$request_complain->id}}"  id="status" aria-label=".form-select-lg example">
