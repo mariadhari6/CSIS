@@ -12,9 +12,9 @@ use App\Http\Controllers\GsmTerminateController;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
-use App\Http\Controllers\RequestComplaintCustomerController;
-
-use App\Models\RequestComplaintCustomer;
+use App\Http\Controllers\MaintenanceGpsController;
+use App\Http\Controllers\RequestComplaintController;
+use App\Http\Controllers\PemasanganMutasiGpsController;
 use App\Models\DetailCustomer;
 use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
@@ -172,17 +172,62 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected', [GsmPreActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
 
-    // requestcomplaint
-    Route::get('/requestcomplaint', [RequestComplaintCustomerController::class, 'index'])->name('RequestComplaintCustomer');
-    Route::get('/item_data_requestcomplaint', [RequestComplaintCustomerController::class, 'item_data']);
-    Route::get('/add_form_requestcomplaint', [RequestComplaintCustomerController::class, 'add_form']);
-    Route::get('/store_requestcomplaint', [RequestComplaintCustomerController::class, 'store']);
-    Route::get('/destroy_requestcomplaint/{id}', [RequestComplaintCustomerController::class, 'destroy']);
-    Route::get('/show_requestcomplaint/{id}', [RequestComplaintCustomerController::class, 'edit_form']);
-    Route::get('/update_requestcomplaint/{id}', [RequestComplaintCustomerController::class, 'update']);
-    Route::get('/selectedDelete_requestcomplaint', [RequestComplaintCustomerController::class, 'deleteAll']);
-    Route::get('/selected', [RequestComplaintCustomerController::class, 'selected']);
-    Route::get('/update_all/{id}', [RequestComplaintCustomerController::class, 'updateall']);
+    // Request Complain
+    Route::get('/RequestComplain', [RequestComplaintController::class, 'index'])->name('request.complain');
+    Route::get('/item_data_RequestComplain', [RequestComplaintController::class, 'item_data']);
+    Route::get('/add_form_RequestComplain', [RequestComplaintController::class, 'add_form']);
+    Route::get('/store_RequestComplain', [RequestComplaintController::class, 'store']);
+    Route::get('/destroy_RequestComplain/{id}', [RequestComplaintController::class, 'destroy']);
+    Route::get('/show_RequestComplain/{id}', [RequestComplaintController::class, 'edit_form']);
+    Route::get('/update_RequestComplain/{id}', [RequestComplaintController::class, 'update']);
+    Route::get('/selectedDelete_RequestComplain', [RequestComplaintController::class, 'deleteAll']);
+    Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
+    Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
+
+    //detail customer
+    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
+    Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
+    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
+    Route::get('/store_detail', [DetailCustomerController::class, 'store']);
+    Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
+    Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
+    Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
+    Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
+    Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
+    Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
+    
+    // Pemasangan Mutasi GPS
+    Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
+    Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
+    Route::get('/add_form_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'add_form']);
+    Route::get('/store_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'store']);
+    Route::get('/destroy_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'destroy']);
+    Route::get('/show_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'edit_form']);
+    Route::get('/update_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'update']);
+    Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
+    Route::get('/selected_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'selected']);
+    Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
+    Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
+    Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
+    // Route::get('/dependent_KendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'dependentKendaraanPasang']);
+
+    // Maintenance GPS
+    Route::get('/MaintenanceGps', [MaintenanceGpsController::class, 'index']);
+    Route::get('/item_data_maintenanace_gps', [MaintenanceGpsController::class, 'item_data']);
+    Route::get('/add_form_maintenanace_gps', [MaintenanceGpsController::class, 'add_form']);
+    Route::get('/store_maintenanceGps', [MaintenanceGpsController::class, 'store']);
+    Route::get('/destroy_maintenanceGps/{id}', [MaintenanceGpsController::class, 'destroy']);
+    Route::get('/edit_form_maintenanceGps/{id}', [MaintenanceGpsController::class, 'edit_form']);
+    Route::get('/dependentMaintenanceGpsCompany/{id}', [MaintenanceGpsController::class, 'dependentCompany']);
+    Route::get('/dependentMaintenanceGpsTanggal/{id}', [MaintenanceGpsController::class, 'dependentTanggal']);
+    Route::get('/dependentMaintenanceGpsPermasalahan/{id}', [MaintenanceGpsController::class, 'dependentPermasalahan']);
+    Route::get('/dependentMaintenanceGpsEquipmentGps/{id}', [MaintenanceGpsController::class, 'dependentEquipmentGps']);
+    Route::get('/update_maintenanceGps/{id}', [MaintenanceGpsController::class, 'update']);
+    Route::get('/selectedDelete_maintenanceGps', [MaintenanceGpsController::class, 'deleteAll']);
+    Route::get('/selected_maintenanceGps', [MaintenanceGpsController::class, 'selected']);
+
+
 });
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

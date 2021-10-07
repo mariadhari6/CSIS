@@ -1,3 +1,4 @@
+<?php $no=1; ?>
 @foreach ($GsmActive as $item)
     <tr id="edit-form-{{ $item->id }}">
          <td id="td-checkbox-{{ $item->id }}">
@@ -8,13 +9,9 @@
                 </label>
             </div>
         </td>
-        <td id="td-button-{{ $item->id }}">
-            <div id="button-{{ $item->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
-            </div>
+        <td id="item-no-{{ $item->id}}">
+            {{ $no++ }}
         </td>
-
         <td id="item-request_date-{{ $item->id}}">
             {{ $item->request_date }}
         </td>
@@ -32,6 +29,12 @@
         </td>
         <td id="item-note-{{ $item->id }}">
             {{ $item->note }}
+        </td>
+        <td id="td-button-{{ $item->id }}">
+            <div id="button-{{ $item->id }}">
+                <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
+                <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
+            </div>
         </td>
     </tr>
 @endforeach

@@ -1,10 +1,7 @@
 <tr id="add_form">
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="add" onclick="store()"></i>
-        <i class="fas fa-times cancel" onclick="cancel()"></i>
-    </td>
-    <td>
+    <td></td>
+    <td> 
         <div class="input-div">
             <input type="text" class="input" id="company_name" placeholder="Company Name" required>
         </td>
@@ -38,13 +35,17 @@
         </select>
     </td>
     <td>
-        <select class="select" id="status" name="status">
+        <select class="form-control" id="status" name="status">
             <option selected>Pilih status</option>
             <option value="Contract">Contract</option>
             <option value="Terminate">Terminate</option>
             <option value="Trial">Trial</option>
             <option value="Register">Register</option>
         </select>
+    </td>   
+    <td>
+        <i class="fas fa-check add" id="add" onclick="store()"></i>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 
 <script type="text/javascript">

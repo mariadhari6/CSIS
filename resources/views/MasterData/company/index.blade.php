@@ -1,16 +1,6 @@
 @extends('layouts.v_main')
 
-@section('title','Company')
-
-@section('content')
-
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
-
-@section('title',' CSIS | Company ')
+@section('title','CSIS | Company')
 
 @section('content')
 <h4 class="page-title">Company</h4>
@@ -43,7 +33,7 @@
                   </div>
 
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company Name</th>
                 <th scope="col" class="list">Seller</th>
                 <th scope="col" class="list">Customer Code</th>
@@ -51,7 +41,7 @@
                 <th scope="col" class="list">Po Date</th>
                 <th scope="col" class="list">No Agreement Letter</th>
                 <th scope="col" class="list">Status</th>
-
+                <th scope="col" class="action">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -99,9 +89,9 @@
      $('.add').click(function() {
         $.get("{{ url('add_form_company') }}", {}, function(data, status) {
 
-          $('#table_id tbody').prepend(data); 
-
+          $('#table_id tbody').prepend(data);
         });
+      });
 
     // ----- Proses Tambah data ------
     function store() {
@@ -135,9 +125,9 @@
             }).catch(function(timeout) { });
               read();
 
-              }
-            })
-        }
+            }
+        })
+    }
 
     // -----Proses Delete Data ------
      function destroy(id) {
@@ -159,11 +149,7 @@
                     data: "id=" + id,
                     success: function(data) {
                         swal({
-
-                          type: 'success',
-
                             type: 'success',
-
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
@@ -182,6 +168,7 @@
     function edit(id){
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#td-button-"+id).slideUp("fast");
         $("#item-company_name-"+id).slideUp("fast");
         $("#item-seller_id-"+id).slideUp("fast");
@@ -190,23 +177,15 @@
         $("#item-po_date-"+id).slideUp("fast");
         $("#item-no_agreement_letter_id-"+id).slideUp("fast");
         $("#item-status-"+id).slideUp("fast");
-
-        $.get("{{ url('show_company') }}/" + id, {}, function(data, status) {
-
         $.get("{{ url('edit_form_company') }}/" + id, {}, function(data, status) {
-
-            $("#edit-form-"+id).prepend(data)
+          $("#edit-form-"+id).prepend(data)
         });
     }
 
     // ------ Proses Update Data ------
     function update(id) {
         var company_name = $("#company_name").val();
-
-        var seller_id = $("#seller_id").val();
-
         var seller_id = $('select[name="seller_id"]').val();
-
         var customer_code = $("#customer_code").val();
         var no_po = $("#no_po").val();
         var po_date = $("#po_date").val();
@@ -228,11 +207,7 @@
             },
             success: function(data) {
               swal({
-
-                type: 'success',
-
                     type: 'success',
-
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
@@ -240,11 +215,10 @@
                 read();
 
               }
-            
-
-            }
-        });
+        })
     }
+
+
    // checkbox all
 
   $('#master').on('click', function(e) {
@@ -324,6 +298,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-company_name-"+value).slideUp("fast");
                     $("#item-seller_id-"+value).slideUp("fast");
                     $("#item-customer_code-"+value).slideUp("fast");
@@ -344,54 +319,78 @@
             }
         });
 
-    $('.delete_all').on('click', function(){
-      event.preventDefault();
-      var allVals = [];
-      $(".task-select:checked").each(function() {
-          allVals.push($(this).attr("id"));
-      });
-          if (allVals.length > 0) {
-              var _token = $('input[name="_token"]').val();
-              // alert(allVals);
-              swal({
-              title: 'Are you sure?',
-              text: "You want delete Selected data !",
-              type: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes Delete',
-              showLoaderOnConfirm: true,
-              preConfirm: function() {
-              return new Promise(function(resolve) {
-                  $.ajax({
-                      url: "{{ url('/selectedDelete_company') }}",
-                      method: "get",
-                      data: {
-                          id: allVals,
-                          _token: _token
-                      },
-                      success: function(data) {
-                          swal({
-                              type: 'success',
-                              title: 'The selected data has been deleted',
-                              showConfirmButton: false,
-                              timer: 1500
-                          }).catch(function(timeout) { });
-                          $("#master").prop('checked', false);
-                          read();
-                          }
-                      });
-              });
-              },
-              allowOutsideClick: false
-          });
-      }else{
-          alert('Select the row you want to delete')
-      }
-   });
+    // ------ Proses Update Data ------
+    function updateSelected() {
+        var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
+        });
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to do an update?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: '#00FF00',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes Update',
+            showLoaderOnConfirm: true,
+        }).then((willDelete) => {
+            $.each(allVals, function(index, value){
+                var company_name = $(".company_name-"+value).val();
+                var seller_id = $(".seller_id-"+value).val();
+                var customer_code = $(".customer_code-"+value).val();
+                var no_po = $(".no_po-"+value).val();
+                var po_date = $(".po_date-"+value).val();
+                var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
+                var status = $(".status-"+value).val();
 
-    
-  </script>
+                $.ajax({
+                type: "get",
+                url: "{{ url('update_company') }}/"+value,
+                data: {
+                    company_name: company_name,
+                    seller_id: seller_id,
+                    customer_code: customer_code,
+                    no_po: no_po,
+                    po_date: po_date,
+                    no_agreement_letter_id:no_agreement_letter_id,
+                    status: status
+                },
+                success: function(data) {
+                swal({
+                      type: 'success',
+                      title: 'The selected data has been updated',
+                      showConfirmButton: false,
+                      timer: 1500
 
-   @endsection
+                      // $(".save").hide();
+                  });
+                  read();
+
+                  $(".add").show("fast");
+                  $(".edit_all").show("fast");
+                  $(".delete_all").show("fast");
+                  $(".btn-round").hide("fast");
+                  $(".btn-round").hide("fast");
+                }
+            });
+            });
+        });
+        }
+        
+         //--------Proses Batal--------
+        function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
+        }
+
+
+
+        
+    </script>
+   
+   @endsection     

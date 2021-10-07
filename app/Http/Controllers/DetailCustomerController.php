@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\DetailCustomer;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -22,9 +22,8 @@ class DetailCustomerController extends Controller
         return view('customer.detail_customer.item_data', compact('details'));
     }
 
-    public function add_form()
-    {
-        $company = Company::orderBy('id', 'DESC')->get();
+    public function add_form(){
+        $company = DetailCustomer::with('company')->get();
         return view('customer.detail_customer.add_form', compact('company'));
     }
 
@@ -105,54 +104,5 @@ class DetailCustomerController extends Controller
     {
         $details = DetailCustomer::all();
         return view('customer.detail_customer.selected', compact('details'));
-    }
-
-    public function updateall(Request $request, $id)
-    {
-        $data = DetailCustomer::findOrfail($id);
-        $data->company_id            = $request->CompanyId;
-        $data->licence_plate         = $request->LicencePlate;
-        $data->vihecle_type          = $request->VihecleType;
-        $data->po_number             = $request->PoNumber;
-        $data->po_date               = $request->PoDate;
-        $data->status_po             = $request->StatusPo;
-        $data->imei                  = $request->Imei;
-        $data->merk                  = $request->Merk;
-        $data->type                  = $request->Type;
-        $data->GSM                   = $request->GSM;
-        $data->provider              = $request->Provider;
-        $data->serial_number_sensor  = $request->SerialNumberSensor;
-        $data->name_sensor           = $request->NameSensor;
-        $data->merk_sensor           = $request->MerkSensor;
-        $data->pool_name             = $request->PoolName;
-        $data->pool_location         = $request->PoolLocation;
-        $data->waranty               = $request->Waranty;
-        $data->status_layanan        = $request->StatusLayanan;
-        $data->tanggal_pasang        = $request->TanggalPasang;
-        $data->tanggal_non_aktif     = $request->TanggalNonAktif;
-
-        echo $id;
-    }
-
-    public function deleteAll(Request $request)
-    {
-        if ($request->ajax()) {
-            $ids = $request->input('id');
-            DB::table('detail_customers')->whereIn('id', $ids)->delete();
-        }
-    }
-
-    public function datatable(Request $request)
-    {
-        if ($request->ajax()) {
-
-            return DataTables::of(DetailCustomer::all())->make(true);
-        }
-    }
-
-    public function updateSelected(Request $request)
-    {
-        DetailCustomer::where('item_type_id', '=', 1)
-            ->update(['colour' => 'black']);
     }
 }

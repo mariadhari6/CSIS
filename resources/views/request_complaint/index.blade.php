@@ -1,15 +1,11 @@
 @extends('layouts.v_main')
-@section('title','Request and Complain')
-
+@section('title','CSIS | Request and Complain')
 
 @section('content')
 
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
+<h4 class="page-title">Request and Complain</h4>
 
-  <div class="row">
+<div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
@@ -19,8 +15,7 @@
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
 
-
-          <table class="table table-responsive data " class="table_id" id="table_id" >
+            <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>
@@ -31,7 +26,7 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Internal/External Request & Complain</th>
                 <th scope="col" class="list">PIC</th>
@@ -44,10 +39,12 @@
                 <th scope="col" class="list">Divisi</th>
                 <th scope="col" class="list">Respond</th>
                 <th scope="col" class="list">Waktu Kesepakatan</th>
-                <th scope="col" class="list">waktu Solve</th>
+                <th scope="col" class="list">Waktu Solve</th>
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="list">Status Akhir</th>
-              </tr>
+                <th scope="col" class="action">Action</th>
+
+                </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
@@ -56,22 +53,18 @@
         </div>
       </div>
     </div>
-  </div>
 
-
-
+    </div>
   <script>
     $(document).ready(function() {
       read()
     });
     // ------ Tampil Data ------
     function read(){
-
       $.get("{{ url('item_data_RequestComplain') }}", {}, function(data, status) {
          $('#table_id').DataTable().destroy();
          $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
-
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
@@ -82,7 +75,6 @@
     function cancel() {
       read()
     }
-
      // ------ Tambah Form Input ------
      $('.add').click(function() {
         $.get("{{ url('add_form_RequestComplain') }}", {}, function(data, status) {
@@ -165,7 +157,6 @@
                         read();
                     }
                 });
-
               });
             },
             allowOutsideClick: false
@@ -176,6 +167,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).hide("fast");
         $("#item-internal_eksternal-"+id).hide("fast");
         $("#item-pic-"+id).hide("fast");
@@ -289,7 +281,6 @@
                                 }).catch(function(timeout) { });
                                 $("#master").prop('checked', false);
                                 read();
-
                                 }
                             });
                     });
@@ -300,13 +291,10 @@
                 alert('Select the row you want to delete')
             }
         });
-
         // Form Edit All
         $('.edit_all').on('click', function(e){
-
             var allVals = [];
             var _token = $('input[name="_token"]').val();
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -320,6 +308,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-company_id-"+value).hide("fast");
                     $("#item-internal_eksternal-"+value).hide("fast");
                     $("#item-pic-"+value).hide("fast");
@@ -339,18 +328,15 @@
                     $.get("{{ url('show_RequestComplain') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
-
                     });
                 });
             }else{
-                alert('Select the row you want to edit')
+              alert('Select the row you want to edit')
             }
         });
-
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -363,9 +349,8 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes Update',
                 showLoaderOnConfirm: true,
-            }).then((willDelete) => {
+              }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-
                     var company_id = $(".company_id-"+value).val();
                     var internal_eksternal = $(".internal_eksternal-"+value).val();
                     var pic = $(".pic-"+value).val();
@@ -403,15 +388,13 @@
                     },
                     success: function(data) {
                      swal({
-                                    type: 'success',
+                      type: 'success',
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
                                     timer: 1500
-
                                 // $(".save").hide();
                                 });
                                 read();
-
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
@@ -422,9 +405,7 @@
             });
         });
 
-
-        }
-
+      }
         //--------Proses Batal--------
          function batal(){
             $(".save").hide("fast");
@@ -434,10 +415,5 @@
             $(".delete_all").show("fast");
             read();
             }
-
-
-
-
   </script>
    @endsection
-

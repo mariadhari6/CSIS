@@ -18,6 +18,7 @@ class Company extends Model
     {
         return $this->belongsTo(Seller::class);
     }
+    
     public function pic()
     {
         return $this->hasMany(Pic::class);
@@ -33,14 +34,7 @@ class Company extends Model
     }
     public function requestComplaint()
     {
-        return $this->hasMany(RequestComplaintCustomer::class);
+         return $this->hasMany(RequestComplaintCustomer::class);
     }
-    public function details()
-    {
-        return $this->hasMany(DetailCustomer::class);
-    }
-    public function pemasanganMutasiGps()
-    {
-        return $this->hasMany(PemasanganMutasiGps::class);
-    }
+
 }

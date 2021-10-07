@@ -16,11 +16,11 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('company_name');
-            $table->foreignId('seller_id')->constrained('sellers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('seller_id');
             $table->string('customer_code');
             $table->string('no_po');
             $table->date('po_date');
-            $table->foreignId('no_agreement_letter_id')->constrained('sellers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('no_agreement_letter_id');
             $table->string('status');
             $table->timestamps();
         });

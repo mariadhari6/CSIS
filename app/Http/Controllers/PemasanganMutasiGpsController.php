@@ -23,24 +23,25 @@ class PemasanganMutasiGpsController extends Controller
     public function item_data()
     {
 
-
-        $pemasangan_mutasi_GPS = PemasanganMutasiGps::all();
+        $pemasangan_mutasi_GPS = PemasanganMutasiGps::orderBy('id', 'DESC')->get();
 
         return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
-        // dd($pemasangan_mutasi_GPS);
     }
 
     public function add_form()
     {
         $details = DetailCustomer::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
-        $pic = Pic::orderBy('id', 'DESC')->get();
         $sensor = Sensor::orderBy('id', 'DESC')->get();
         $gps = Gps::orderBy('id', 'DESC')->get();
-        $pemasangan_mutasi_GPS = PemasanganMutasiGps::orderBy('id', 'DESC')->get();
         return view(
             'VisitAssignment.PemasanganMutasiGPS.add_form',
-            compact('pemasangan_mutasi_GPS', 'details', 'request_complain', 'pic', 'sensor', 'gps')
+                compact(
+                    'details', 
+                    'request_complain', 
+                    'sensor', 
+                    'gps'
+                    )
         );
     }
 

@@ -4,6 +4,7 @@
 @section('content')
 
 <h4 class="page-title">PIC</h4>
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -23,7 +24,7 @@
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th>
+                <th width="10px">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -31,13 +32,14 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Pic Name</th>
                 <th scope="col" class="list">Phone</th>
                 <th scope="col" class="list">Email</th>
                 <th scope="col" class="list">Position</th>
                 <th scope="col" class="list">Date of birth</th>
+                <th scope="col" class="action">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -159,6 +161,7 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-pic_name-"+id).slideUp("fast");
         $("#item-phone-"+id).slideUp("fast");
@@ -277,6 +280,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-company_id-"+value).slideUp("fast");
                     $("#item-pic_name-"+value).slideUp("fast");
                     $("#item-phone-"+value).slideUp("fast");

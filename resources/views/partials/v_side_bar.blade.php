@@ -31,6 +31,12 @@
             <li class="nav-item
                 {{ request()->is('seller') ? ' active' : ''}}
                 {{ request()->is('Company') ? ' active' : ''}}
+                {{ request()->is('pic') ? ' active' : ''}}
+                {{ request()->is('gps') ? ' active' : ''}}
+                {{ request()->is('sensor') ? ' active' : ''}}
+                {{ request()->is('GsmPreActive') ? ' active' : ''}}
+                {{ request()->is('GsmActive') ? ' active' : ''}}
+                {{ request()->is('GsmTerminate') ? ' active' : ''}}
             ">
                 <a class="" data-toggle="collapse" href="#masterData" aria-expanded="true">
                     <i class="fas fa-table"></i>
@@ -96,7 +102,9 @@
                 </div>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item
+                {{ request()->is('detail_customer') ? ' active' : ''}}
+            ">
                 <a class="" data-toggle="collapse" href="#customer" aria-expanded="true">
                     <i class="fas fa-user-friends"></i>
                     <p>Customer</p>
@@ -105,8 +113,7 @@
                 <div class="collapse in" id="customer" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="{{url('/detail_customer')}}">
-
+                            <a href="{{url('/detail_customer') }}">
                                 <span class="link-collapse">Detail Customer</span>
                             </a>
                         </li>
@@ -139,7 +146,10 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item
+                {{ request()->is('MaintenanceGps') ? ' active' : ''}}
+                {{ request()->is('PemasanganMutasi') ? ' active' : ''}}
+            ">
                 <a class="" data-toggle="collapse" href="#visit" aria-expanded="true">
                     <i class="fas fa-user-cog"></i>
                     <p>Visit Assignment</p>
@@ -148,9 +158,7 @@
                 <div class="collapse in" id="visit" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#profile">
-                            <a href="{{url('/PemasanganMutasi')}}">
-
+                            <a href="/PemasanganMutasi">
                                 <span class="link-collapse">Pemasangan dan Mutasi GPS</span>
                             </a>
                         </li>

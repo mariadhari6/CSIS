@@ -30,13 +30,14 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Request Date</th>
                 <th scope="col" class="list">Active Date</th>
                 <th scope="col" class="list">Gsm Number</th></th>
                 <th scope="col" class="list">Status Active</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Note</th>
+                <th scope="col" class="action">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -162,6 +163,7 @@
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
         $("#item-request_date-"+id).slideUp("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-active_date-"+id).slideUp("fast");
         $("#item-gsm_pre_active_id-"+id).slideUp("fast");
         $("#item-status_active-"+id).slideUp("fast");
@@ -278,6 +280,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-request_date-"+value).slideUp("fast");
                     $("#item-active_date-"+value).slideUp("fast");
                     $("#item-gsm_pre_active_id-"+value).slideUp("fast");

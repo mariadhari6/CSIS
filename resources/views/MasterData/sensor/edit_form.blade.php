@@ -1,8 +1,5 @@
-<td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $sensor->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
-
+    <td></td>
+    <td></td>
     <td>
         <div class="input-div"><input type="text" class="input sensor_name-{{$sensor->id}}" id="sensor_name" placeholder="Sensor Name" value="{{ $sensor->sensor_name}}"></i></div>
     </td>
@@ -18,11 +15,14 @@
     <td>
         <div class="input-div"><input type="date" class="input waranty-{{$sensor->id}}" id="waranty" placeholder="Waranty" value="{{ $sensor->waranty}}"></i></div>
     </td>
-    {{-- <td>
-        <div class="input-div"><input type="text" class="input status-{{$seller->id}}" id="status" placeholder="Status" value="{{ $seller_status}}"></i></div>
-    </td> --}}
-<td><select class="form-select status-{{$sensor->id}}" id="status" aria-label=".form-select-lg example">
-  <option selected>{{$sensor->status}}</option>
-  <option value="Active">Active</option>
-  <option value="In Active">In Active</option>
-</select></i></td>
+    <td>
+        <select class="form-control" id="status" aria-label=".form-select-lg example">
+            <option selected>Pilih status</option>
+            <option value="Ready">Ready</option>
+            <option value="Used">Used</option>
+            <option value="Error">Error</option>
+        </select>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $sensor->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
+    </td>
+

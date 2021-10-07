@@ -4,19 +4,19 @@
 </td>
 
 <td>
-    <select class="select" id="CompanyId" class="input CompanyId-{{ $details->id }}">
-        <option  value="{{ $details->company_id }}">{{ $details->company_id }}</option>
-        <option value='Islam'>Islam</option>
-        <option value='Kristen'>Kristen</option>
+    <select class="select CompanyId-{{ $details->id }}" id="CompanyId">
+        <option value="{{ $details->company_id }}" class="input CompanyId-{{ $details->id }}">{{ $details->company_id }}</option>
+        <option value='1'>1</option>
+        <option value='2'>2</option>
         <option value='Katholik'>Katholik</option>
         <option value='Hindu'>Hindu</option>
         <option value='Budha'>Budha</option>
     </select>
 </td>
 <td>
-    <select class="select" id="LicencePlate" class="input LicencePlate-{{ $details->id }}">
-        <option  value="{{ $details->licence_plate }}">{{ $details->licence_plate }}</option>
-        <option value='Kristen' >Kristen</option>
+    <select class="select LicencePlate-{{ $details->id }}" id="LicencePlate">
+        <option  value="{{ $details->licence_plate }}" class="input LicencePlate-{{ $details->id }}">{{ $details->licence_plate }}</option>
+        <option value='2' >Kristen</option>
         <option value='katholik'>Katholik</option>
         <option value='Hindu'>Hindu</option>
         <option value='Budha'>Budha</option>

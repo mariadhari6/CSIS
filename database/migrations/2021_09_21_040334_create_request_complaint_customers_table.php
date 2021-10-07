@@ -20,11 +20,11 @@ class CreateRequestComplaintCustomersTable extends Migration
             $table->foreignId('pic');
             $table->string('vehicle');
             $table->dateTime('waktu_info');
-            $table->dateTime('waktu_respond');
             $table->longText('task');
             $table->string('platform');
             $table->longText('detail_task');
             $table->string('divisi');
+            $table->string('waktu_respond');
             $table->string('respond');
             $table->dateTime('waktu_kesepakatan');
             $table->dateTime('waktu_solve');

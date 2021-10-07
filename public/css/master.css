@@ -36,11 +36,7 @@
     border-bottom: 2px solid #946868;
 }
 
-<<<<<<< HEAD
-.input{
-=======
 .input {
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     position: absolute;
     left: 0;
     top: 0;
@@ -73,19 +69,11 @@
     font-size: 1rem;
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 }
 
 #user {
     color: white;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 /* Datatable */
 .dataTables_length {
     margin-top: 5px;
@@ -111,29 +99,17 @@
     margin-top: 5px;
     margin-left: 20px;
 }
-<<<<<<< HEAD
-.action{
-    min-width: 80px;
-    text-align: center;
-}
-.list{
-=======
 
 .action {
     min-width: 80px;
     text-align: center;
 }
 .list {
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     min-width: 140px;
     font-size: 15px;
     text-align: center;
 }
-<<<<<<< HEAD
-.list-seller{
-=======
 .list-seller {
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     min-width: 180px;
     font-size: 15px;
     text-align: center;
@@ -143,17 +119,11 @@
     right: 150px;
     bottom: 35px;
 }
-<<<<<<< HEAD
-.fa-times {
-    color: red;
-}
-=======
 
 .fa-times {
     color: red;
 }
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 .input-div {
     position: relative;
     display: grid;
@@ -162,12 +132,8 @@
     padding: 13px;
     border-bottom: 2px solid #946868;
 }
-<<<<<<< HEAD
-.input{
-=======
 
 .input {
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     position: absolute;
     left: 0;
     top: 0;
@@ -181,10 +147,6 @@
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 .select {
     position: relative;
     display: grid;
@@ -205,32 +167,19 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 /* tabel livetable */
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 #table_id {
     position: relative;
     bottom: 0px;
     text-align: center;
 }
-<<<<<<< HEAD
-/*  */
-=======
 
 /*  */
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 /* .main-header .logo-header .navbar-toggler {
     padding-left: 0px;
     padding-right: 0px;
     opacity: 0;
 }
-<<<<<<< HEAD
-#detailcustomer tbody tr td {
-    text-align: center;
-}
-=======
 
 
 #detailcustomer tbody tr td {
@@ -238,7 +187,6 @@
 
 }
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 .list{
     min-width: 250px;
     font-size: 15px;
@@ -251,20 +199,12 @@
     width: 1em;
     opacity: 0.8;
 } */
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 /* .delete_all{
     display: none;
 }
 .edit_all{
     display: none;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
 .add {
     display: none;
 } */

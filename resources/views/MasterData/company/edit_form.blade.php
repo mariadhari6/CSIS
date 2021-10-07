@@ -1,16 +1,13 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $company->id}})"></i>
-        <i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+    <td></td>
     <td>
         <div class="input-div"><input type="text" class="input company_name-{{$company->id}}" id="company_name" placeholder="Company Name" value="{{ $company->company_name}}"></i>
         </div>
     </td>
     <td>
-       <select class="select seller_id-{{$company->id}}"  id="{{$company->id}}" name="seller_id">
-        <option selected value="{{ $company->seller->id}}">
-            {{ $company->seller->seller_name }}
+       <select class="select seller_id-{{$item->id}}"  id="{{$item->id}}" name="seller_id">
+        <option selected value="{{ $item->seller->id}}">
+            {{ $item->seller->seller_name }}
         </option>
 
        @foreach ($seller as $item)
@@ -34,7 +31,11 @@
         </div>
     </td>
     <td>
-        <select class="select no_agreement_letter_id-{{$company->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id-{{$company->id}}">
+        <select class="form-control no_agreement_letter_id-{{$item->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id-{{$item->id}}">
+        
+        <option selected value="{{ $item->seller->id}}">
+            {{ $item->seller->no_agreement_letter }}
+        </option>
 
         @foreach ($seller as $item)
         <option value="{{ $item->id }}" {{ old('no_agreement_letter_id') == $item->id ? 'selected':'' }}>
@@ -45,36 +46,15 @@
         </select>
     </td>
     <td>
-        <select class="select status-{{$company->id}}" id="status" name="status">
-            <option selected value="{{$company->status}}">{{$company->status}}</option>
+        <select class="form-control status-{{$item->id}}" id="status" name="status">
+            <option selected value="{{$item->status}}">{{$item->status}}</option>
             <option value="Contract">Contract</option>
             <option value="Terminate">Terminate</option>
             <option value="Trial">Trial</option>
             <option value="Register">Register</option>
         </select>
     </td>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('select[name="seller_id"]').on('change', function() {
-                var id = $(this).attr("id");
-                var itemID = $(this).val();
-                if(itemID) {
-                    $.ajax({
-                        url: '/dependent_company/'+itemID,
-                        method: "GET",
-                        dataType: "json",
-                        success:function(data) {
-
-                            $('select[name="no_agreement_letter_id-'+ id +'"]').empty();
-                                $.each(data, function(key, value) {
-                                    $('select[name="no_agreement_letter_id-'+ id +'"]').append('<option value="'+ key +'">'+ value +'</option>');
-                                });
-                        }
-                    });
-                }else{
-                    $('select[name="no_agreement_letter_id-'+ id +'"]').empty();
-                }
-            });
-        });
-    </script>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $item->id}})"></i>
+        <i class="fas fa-times cancel" onclick="cancel()" ></i>
+    </td>

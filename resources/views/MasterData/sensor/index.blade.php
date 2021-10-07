@@ -1,14 +1,10 @@
 @extends('layouts.v_main')
-@section('title','Sensor')
+@section('title','CSIS | Sensor')
 
 
 @section('content')
 
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
-
+<h4 class="page-title">SENSOR</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -18,13 +14,10 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>  
             </div>
-            <br>
-            
-            <div class="table-responsive">
-            <table class="table table-hover data" class="table_id" id="table_id" >
+            <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th>
+                <th width="10px">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -32,13 +25,14 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col">Action</th>
-                <th scope="col">Sensor Name</th>
-                <th scope="col">Merk Sensor</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">Rab Number</th>
-                <th scope="col">Waranty</th>
-                <th scope="col">Status</th>
+                <th scope="col" class="action">No.</th>
+                <th scope="col" class="list">Sensor Name</th>
+                <th scope="col" class="list">Merk Sensor</th>
+                <th scope="col" class="list">Serial Number</th>
+                <th scope="col" class="list">Rab Number</th>
+                <th scope="col" class="list">Waranty</th>
+                <th scope="col" class="list">Status</th>
+                <th scope="col" class="action">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -145,6 +139,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-sensor_name-"+id).hide("fast");
         $("#item-merk_sensor-"+id).hide("fast");
         $("#item-serial_number-"+id).hide("fast");
@@ -258,6 +253,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-sensor_name-"+value).hide("fast");
                     $("#item-merk_sensor-"+value).hide("fast");
                     $("#item-serial_number-"+value).hide("fast");

@@ -15,19 +15,11 @@ class CreateDetailCustomersTable extends Migration
     {
         Schema::create('detail_customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-<<<<<<< HEAD
-            $table->string('company_id');
+            $table->foreignId('company_id')->nullable();
             $table->string('licence_plate');
             $table->string('vihecle_type');
             $table->string('po_number');
-            $table->string('po_date');
-=======
-            $table->foreignId('company_id');
-            $table->string('licence_plate');
-            $table->string('vihecle_type');
-            $table->string('po_number');
-            $table->foreignId('po_date');
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
+            $table->foreignId('po_date')->nullable();
             $table->string('status_po');
             $table->string('imei');
             $table->string('merk');
@@ -56,8 +48,4 @@ class CreateDetailCustomersTable extends Migration
     {
         Schema::dropIfExists('detail_customers');
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e

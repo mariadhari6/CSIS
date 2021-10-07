@@ -1,8 +1,5 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $pic->id}})"></i>
-        <i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+    <td></td>
     <td>
         <select class="select company_id-{{$pic->id}}" id="company_id" name="company_id">
         <option value="{{ $pic->company->id }}">{{ $pic->company->company_name }}</option>
@@ -32,4 +29,8 @@
      <td>
         <div class="input-div"><input type="date" class="input date_of_birth-{{$pic->id}}" id="date_of_birth" placeholder="date_of_birth" value="{{ $pic->date_of_birth}}"></i>
         </div>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $pic->id}})"></i>
+        <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>

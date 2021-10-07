@@ -30,13 +30,14 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Request Date</th>
                 <th scope="col" class="list">Terminate Date</th>
                 <th scope="col" class="list">Gsm Number</th></th>
                 <th scope="col" class="list">Status Active</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Note</th>
+                <th scope="col" class="action">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">

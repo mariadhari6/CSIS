@@ -231,11 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 7f487e11d887604e31cbc913b8ce5c4f7bb1646e
     ],
 
 ];
