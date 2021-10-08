@@ -149,6 +149,7 @@
             <li class="nav-item
                 {{ request()->is('MaintenanceGps') ? ' active' : ''}}
                 {{ request()->is('PemasanganMutasi') ? ' active' : ''}}
+                {{ request()->is('dashboard_visit_assignment') ? ' active' : ''}}
             ">
                 <a class="" data-toggle="collapse" href="#visit" aria-expanded="true">
                     <i class="fas fa-user-cog"></i>
@@ -168,7 +169,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#edit">
+                            <a href="/dashboard_visit_assignment">
                                 <span class="link-collapse">Dashboard</span>
                             </a>
                         </li>

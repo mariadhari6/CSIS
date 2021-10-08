@@ -15,6 +15,7 @@ use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\CustomerServiceController;
+use App\Http\Controllers\DashboardVisitAssignmentController;
 use App\Http\Controllers\MaintenanceGpsController;
 use App\Http\Controllers\RequestComplaintCustomerController;
 use App\Models\DetailCustomer;
@@ -234,6 +235,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_maintenanceGps/{id}', [MaintenanceGpsController::class, 'update']);
     Route::get('/selectedDelete_maintenanceGps', [MaintenanceGpsController::class, 'deleteAll']);
     Route::get('/selected_maintenanceGps', [MaintenanceGpsController::class, 'selected']);
+
+     //Dashboar Visit Assignment
+     Route::get('/dashboard_visit_assignment', [DashboardVisitAssignmentController::class, 'index']);
 
 
 });

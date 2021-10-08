@@ -2261,7 +2261,7 @@ body {
 .main-header {
     min-height: 55px;
     width: 100%;
-    background: #5AA8D3;
+    background: #5aa8d3;
     position: fixed;
     z-index: 1001;
     border-bottom: 1px solid #eee;
@@ -2469,7 +2469,7 @@ body {
     width: calc(100% - 260px);
     min-height: 100%;
     float: right;
-    background: #F2F8F9;
+    background: #f2f8f9;
 }
 .main-panel .content {
     padding: 30px 15px;
@@ -5357,9 +5357,9 @@ body {
 }
 .card .card-category {
     margin-top: 5px;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 400;
-    color: #9a9a9a;
+    color: #ffffff;
     margin-bottom: 0px;
 }
 .card label {
@@ -5396,6 +5396,10 @@ body {
     margin-top: 0px;
 }
 .card-stats .icon-big {
+    font-size: 3em;
+    min-height: 64px;
+}
+.numbers {
     font-size: 3em;
     min-height: 64px;
 }
@@ -5460,8 +5464,7 @@ body {
 .card-default .card-title,
 .card-primary .card-title,
 .card-info .card-title,
-.card-success .card-title,
-.card-warning .card-title,
+.card-success .card-title .card-warning .card-title,
 .card-danger .card-title,
 .card-default label,
 .card-primary label,
@@ -5494,12 +5497,18 @@ body {
     background: #607d8b;
 }
 
-.card-primary {
-    background: #1d62f0;
+.card-primary-tua {
+    background: #5aa8d3;
+}
+.card-primary-soft {
+    background: #7ea3d9;
 }
 
 .card-info {
     background: #23ccef;
+}
+.card-pink {
+    background: #ff6565;
 }
 
 .card-success {
@@ -5512,6 +5521,12 @@ body {
 
 .card-danger {
     background: #ff646d;
+}
+.card-grey {
+    background: #aca9a9;
+}
+.card-grey-soft {
+    background: #d6d5d5;
 }
 
 /*     Progress Card    */
