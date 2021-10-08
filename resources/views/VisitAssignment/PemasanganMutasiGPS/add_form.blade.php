@@ -65,22 +65,20 @@
         <option value="" disabled selected>Jenis Pekerjaan</option>
 
        @foreach ($request_complain as $request_complains)
-        <option value="{{ $request_complains->id }}" {{ old('jenis_pekerjaan') == $request_complains->id  ? 'selected':'' }}>
-        {{$request_complains->task}}
+
+            <option value="{{ $request_complains->id }}" {{ old('jenis_pekerjaan') == $request_complains->id  ? 'selected':'' }}>
+
+
+                    {{$request_complains->taskRequest->task}}
+
         </option>
+
+
 
        @endforeach
     </select></i></td>
 
-     <td><select class="select" id="equipment_terpakai_gps" name="equipment_terpakai_gps">
-        <option value="" disabled selected>equipment GPS</option>
-       @foreach ($gps as $gpses)
-        <option value="{{ $gpses->id }}" {{ old('equipment_terpakai_gps') == $gpses->id  ? 'selected':'' }}>
-        {{$gpses->type}}
-        </option>
 
-       @endforeach
-    </select></i></td>
 
     <td><select class="select" id="equipment_terpakai_sensor" name="equipment_terpakai_sensor">
         <option value="" disabled selected>equipment Sensor </option>
@@ -91,15 +89,24 @@
 
        @endforeach
     </select></i></td>
+     <td><select class="select" id="equipment_terpakai_gps" name="equipment_terpakai_gps">
+        <option value="" disabled selected>equipment GPS</option>
+       @foreach ($gps as $gpses)
+        <option value="{{ $gpses->id }}" {{ old('equipment_terpakai_gps') == $gpses->id  ? 'selected':'' }}>
+        {{$gpses->typeGps->type}}
+        </option>
 
-    <td><select class="select" id="teknisi" name="teknisi" aria-label=".form-select-lg example">
-    <option value="" disabled selected>Teknisi</option>
-
-    <option value="Khatam">Khatam</option>
-    <option value="Rifai">Rifai</option>
-    <option value="Arief">Arief</option>
-    <option value="Mukhti">Mukhti</option>
+       @endforeach
     </select></i></td>
+
+    <td>
+        <select class="select" id="teknisi" name="teknisi">
+            <option selected disabled>Teknisi</option>
+            @foreach ($teknisi_pemasangan_mutasi as $item)
+                <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
+            @endforeach
+        </select>
+    </td>
 
     <td> <div class="input-div"><input type="number" class="input" id="uang_transportasi" placeholder="Uang Transpotasi" ></i></td>
      <td><select class="select" id="type_visit" name="type_visit" aria-label=".form-select-lg example">

@@ -39,10 +39,22 @@
     <td>
         <div class="input-div"><input type="datetime-local" class="input waktu_respond-{{$request_complain->id}}" id="waktu_respond" placeholder="Waktu Respond" value="{{ str_replace(" ", "T", $request_complain->waktu_respond) }}"></i></div>
     </td>
-       <td>
+
+    <td>
+        <select class="select task-{{$request_complain->id}}" id="task" name="task">
+        <option value="{{$request_complain->task}}"> {{$request_complain->taskRequest->task}} </option>
+       @foreach ($task_request as $item)
+        <option value="{{ $item->id }}" {{ old('task') == $item->id ? 'selected':'' }}>{{ $item->task }}</option>
+
+       @endforeach
+    </select></i>
+    </td>
+       {{-- <td>
         <select class="select task-{{$request_complain->id}}" id="task" id="task" aria-label=".form-select-lg example">
             <option value="{{$request_complain->task}}"> {{$request_complain->task}} </option>
-            <option value="Pemasangan/Mutasi/Pelepasan GPS">Pemasangan/Mutasi/Pelepasan GPS</option>
+            <option value="Pemasangan">Pemasangan</option>
+            <option value="Mutasi">Mutasi</option>
+            <option value="Pelepasan GPS">Pelepasan GPS</option>
             <option value="Tampilan OSLOG">Tampilan OSLOG</option>
             <option value="Permasalahan GPS">Permasalahan GPS</option>
             <option value="Edit/Add/Delete Master Data">Edit/Add/Delete Master Data</option>
@@ -55,7 +67,7 @@
             <option value="OSLOG Adoption">OSLOG Adoption</option>
             <option value="Reporting">Reporting</option>
         </select></i>
-    </td>
+    </td> --}}
 
 
      <td><select class="select platform-{{$request_complain->id}}" id="platform" id="platform" aria-label=".form-select-lg example">

@@ -3,7 +3,8 @@
     <td></td>
 
     <td>
-        <select class="form-control" id="company" name="company">
+        <select class="select" id="company" name="company">
+            <option selected disabled>Company</option>
             @foreach ($requestComplaint as $item)
             <option value="{{ $item->id }}">{{ $item->companyRequest->company_name }}</option>
             @endforeach
@@ -11,7 +12,8 @@
         </select>
     </td>
     <td>
-        <select class="form-control" id="vehicle" name="vehicle">
+        <select class="select" id="vehicle" name="vehicle">
+            <option selected disabled>Vehicle</option>
             @foreach ($requestComplaint as $item)
                 <option value="{{ $item->id }}">{{ $item->vehicle }}</option>
             @endforeach
@@ -19,7 +21,8 @@
         </select>
     </td>
     <td>
-        <select class="form-control" id="tanggal" name="tanggal">
+        <select class="select" id="tanggal" name="tanggal">
+            <option selected disabled>Tanggal</option>
             @foreach ($requestComplaint as $item)
                 <option value="{{ $item->id }}">{{ $item->waktu_kesepakatan }}</option>
             @endforeach
@@ -27,23 +30,24 @@
         </select>
     </td>
     <td>
-        <select class="form-control" id="type_gps" name="type_gps">
-            <option value="">Type Gps</option>
+        <select class="select" id="type_gps" name="type_gps">
+            <option selected disabled>Type Gps</option>
+
             @foreach ($gps as $item)
-                <option value="{{ $item->id }}">{{ $item->type }}</option>
+                <option value="{{ $item->id }}">{{ $item->typeGps->type }}</option>
             @endforeach
         </select>
     </td>
     <td>
-        <select class="form-control" id="equipment_gps" name="equipment_gps">
+        <select class="select" id="equipment_gps" name="equipment_gps">
             <option value="">equipment_gps</option>
             @foreach ($gps as $item)
-                <option value="{{ $item->id }}">{{ $item->type }}</option>
+                <option value="{{ $item->id }}">{{ $item->typeGps->type }}</option>
             @endforeach
         </select>
     </td>
     <td>
-        <select class="form-control" id="equipment_sensor" name="equipment_sensor">
+        <select class="select" id="equipment_sensor" name="equipment_sensor">
             <option value="">equipment_sensor</option>
                 @foreach ($sensor as $item)
                 <option value="{{ $item->id }}">{{ $item->sensor_name }}</option>
@@ -56,7 +60,7 @@
         </div>
     </td>
     <td>
-        <select class="form-control" id="permasalahan" name="permasalahan">
+        <select class="select" id="permasalahan" name="permasalahan">
             <option value="">permasalahan</option>
             @foreach ($requestComplaint as $item)
                 <option value="{{ $item->id }}">{{ $item->detail_task }}</option>
@@ -64,7 +68,7 @@
         </select>
     </td>
     <td>
-        <select class="form-control" id="ketersediaan_kendaraan" name="ketersediaan_kendaraan">
+        <select class="select" id="ketersediaan_kendaraan" name="ketersediaan_kendaraan">
             <option value="Tidak Tersedia">Tidak Tersedia</option>
             <option value="Tersedia">Tersedia</option>
         </select>
@@ -81,15 +85,15 @@
         </div>
     </td>
     <td>
-        <select class="form-control" id="teknisi" name="teknisi">
-            @foreach ($pic as $item)
-            <option value="{{ $item->id }}">{{ $item->pic_name }}</option>
+        <select class="select" id="teknisi" name="teknisi">
+            <option selected disabled>Teknisi</option>
+            @foreach ($teknisi_maintenance as $item)
+                <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
             @endforeach
-
         </select>
     </td>
     <td>
-        <select class="form-control" id="req_by" name="req_by">
+        <select class="select" id="req_by" name="req_by">
             <option value="Customer">Customer</option>
             <option value="CS">CS</option>
         </select>

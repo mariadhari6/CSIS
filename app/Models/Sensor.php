@@ -22,4 +22,8 @@ class Sensor extends Model
     {
         return $this->hasMany(MaintenanceGps::class);
     }
+    public function merkSensor()
+    {
+        return $this->belongsTo(MerkSensor::class, 'merk_sensor');
+    }
 }

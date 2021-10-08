@@ -8,6 +8,7 @@ use App\Models\PemasanganMutasiGps;
 use App\Models\Pic;
 use App\Models\RequestComplaintCustomer;
 use App\Models\Sensor;
+use App\Models\Teknisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -33,6 +34,7 @@ class PemasanganMutasiGpsController extends Controller
     public function add_form()
     {
         $details = DetailCustomer::orderBy('id', 'DESC')->get();
+        $teknisi_pemasangan_mutasi = Teknisi::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
         $pic = Pic::orderBy('id', 'DESC')->get();
         $sensor = Sensor::orderBy('id', 'DESC')->get();
@@ -40,7 +42,7 @@ class PemasanganMutasiGpsController extends Controller
         $pemasangan_mutasi_GPS = PemasanganMutasiGps::orderBy('id', 'DESC')->get();
         return view(
             'VisitAssignment.PemasanganMutasiGPS.add_form',
-            compact('pemasangan_mutasi_GPS', 'details', 'request_complain', 'pic', 'sensor', 'gps')
+            compact('pemasangan_mutasi_GPS', 'details', 'request_complain', 'pic', 'sensor', 'gps', 'teknisi_pemasangan_mutasi')
         );
     }
 
@@ -79,7 +81,9 @@ class PemasanganMutasiGpsController extends Controller
         $pic = Pic::orderBy('id', 'DESC')->get();
         $sensor = Sensor::orderBy('id', 'DESC')->get();
         $gps = Gps::orderBy('id', 'DESC')->get();
-        return view('VisitAssignment.PemasanganMutasiGPS.edit_form', compact('pemasangan_mutasi_GPS', 'details', 'request_complain', 'pic', 'sensor', 'gps'));
+        $teknisi_pemasangan_mutasi = Teknisi::orderBy('id', 'DESC')->get();
+
+        return view('VisitAssignment.PemasanganMutasiGPS.edit_form', compact('pemasangan_mutasi_GPS', 'details', 'request_complain', 'pic', 'sensor', 'gps', 'teknisi_pemasangan_mutasi'));
     }
 
     public function update(Request $request, $id)

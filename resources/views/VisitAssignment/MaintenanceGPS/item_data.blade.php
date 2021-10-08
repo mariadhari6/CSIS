@@ -23,10 +23,10 @@
             {{ $item->requestComplain->waktu_kesepakatan }}
         </td>
         <td id="item-type_gps-{{ $item->id }}">
-            {{ $item->gps->type }}
+            {{ $item->gps->typeGps->type }}
         </td>
         <td id="item-equipment_gps-{{ $item->id }}">
-            {{ $item->gps->type }}
+            {{ $item->gps->typeGps->type }}
         </td>
         <td id="item-equipment_sensor-{{ $item->id}}">
             {{ $item->sensor->sensor_name }}
@@ -50,7 +50,7 @@
             {{ $item->biaya_transportasi }}
         </td>
         <td id="item-teknisi-{{ $item->id}}">
-            {{ $item->pic->pic_name }}
+            {{ $item->teknisiMaintenance->teknisi_name }}
         </td>
         <td id="item-req_by-{{ $item->id}}">
             {{ $item->req_by }}

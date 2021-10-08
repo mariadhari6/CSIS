@@ -34,7 +34,7 @@
         </td>
 
         <td id="item-task-{{ $request_complains->id }}">
-            {{ $request_complains->task}}
+            {{ $request_complains->taskRequest->task}}
         </td>
         <td id="item-platform-{{ $request_complains->id }}">
             {{ $request_complains->platform}}

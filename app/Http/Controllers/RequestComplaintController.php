@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Pic;
 use App\Models\RequestComplaintCustomer;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -19,12 +20,14 @@ class RequestComplaintController extends Controller
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
+        $task_request = Task::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
         return view('request_complaint.add_form')->with([
 
             'request_complain' => $request_complain,
             'pic'              => $pic,
-            'company'              => $company
+            'company'              => $company,
+            'task_request'              => $task_request
         ]);
     }
 
@@ -63,10 +66,13 @@ class RequestComplaintController extends Controller
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaintCustomer::findOrfail($id);
+        $task_request = Task::orderBy('id', 'DESC')->get();
+
         return view('request_complaint.edit_form')->with([
             'request_complain' => $request_complain,
             'pic'              => $pic,
-            'company'              => $company
+            'company'              => $company,
+            'task_request'   => $task_request
 
         ]);
     }

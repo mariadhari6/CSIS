@@ -36,10 +36,13 @@ class Company extends Model
     {
         return $this->hasMany(MaintenanceGps::class);
     }
+    public function pemasanganMutasiGps()
+    {
+        return $this->hasMany(PemasanganMutasiGps::class);
+    }
     //---------------------//
-    // public function requestComplaint()
-    // {
-    //     return $this->hasMany(RequestComplaintCustomer::class);
-    // }
-
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaintCustomer::class);
+    }
 }

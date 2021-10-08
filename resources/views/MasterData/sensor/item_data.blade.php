@@ -20,7 +20,7 @@
             {{ $sensors->sensor_name }}
         </td>
           <td id="item-merk_sensor-{{ $sensors->id }}">
-            {{ $sensors->merk_sensor }}
+            {{ $sensors->merkSensor->merk}}
         </td>
           <td id="item-serial_number-{{ $sensors->id }}">
             {{ $sensors->serial_number }}

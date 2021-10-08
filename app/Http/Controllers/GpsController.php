@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gps;
+use App\Models\MerkGps;
+use App\Models\TypeGps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -15,10 +17,15 @@ class GpsController extends Controller
     }
     public function add_form()
     {
-        $gps = Gps::orderBy('merk', 'DESC')->get();
+        $gps = Gps::orderBy('id', 'DESC')->get();
+        $merk = MerkGps::orderBy('id', 'DESC')->get();
+        $type = TypeGps::orderBy('id', 'DESC')->get();
         return view('MasterData.gps.add_form')->with([
 
             'gps' => $gps,
+            'merk' => $merk,
+            'type' => $type
+
         ]);
     }
 
@@ -26,12 +33,22 @@ class GpsController extends Controller
     {
         $gps = Gps::orderBy('id', 'DESC')->get();
         return view('MasterData.gps.item_data')->with([
-            'gps' => $gps
+            'gps' => $gps,
+
         ]);
     }
 
     public function store(Request $request)
     {
+        $request->validate([
+            'merk' => 'required',
+            'type' => 'required',
+            'imei' => 'required',
+            'waranty' => 'required',
+            'po_date' => 'required',
+            'status' => 'required'
+
+        ]);
         $data = array(
             'merk'    =>  $request->merk,
             'type'     =>  $request->type,
@@ -46,10 +63,13 @@ class GpsController extends Controller
 
     public function edit_form($id)
     {
-
+        $merk_gps = MerkGps::orderBy('id', 'DESC')->get();
+        $type_gps = TypeGps::orderBy('id', 'DESC')->get();
         $gps = Gps::findOrfail($id);
         return view('MasterData.gps.edit_form')->with([
             'gps' => $gps,
+            'merk_gps' => $merk_gps,
+            'type_gps' => $type_gps
 
         ]);
     }
@@ -76,8 +96,13 @@ class GpsController extends Controller
     public function selected()
     {
         $gps = Gps::all();
+        $merk_gps = MerkGps::all();
+        $type_gps = TypeGps::all();
+
         return view('MasterData.gps.selected')->with([
-            'gps' => $gps
+            'gps' => $gps,
+            'merk_gps' => $merk_gps,
+            'type_gps' => $type_gps
         ]);
     }
 

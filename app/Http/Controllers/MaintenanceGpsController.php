@@ -8,6 +8,7 @@ use App\Models\Pic;
 use App\Models\RequestComplaintCustomer;
 use Illuminate\Support\Facades\DB;
 use App\Models\Sensor;
+use App\Models\Teknisi;
 use Illuminate\Http\Request;
 
 class MaintenanceGpsController extends Controller
@@ -23,11 +24,13 @@ class MaintenanceGpsController extends Controller
         $gps = Gps::orderBy('id', 'DESC')->get();
         $pic = Pic::orderBy('id', 'DESC')->get();
         $sensor = Sensor::orderBy('id', 'DESC')->get();
+        $teknisi_maintenance = Teknisi::orderBy('id', 'DESC')->get();
         return view('VisitAssignment.MaintenanceGPS.add_form')->with([
             'requestComplaint' => $requestComplaint,
             'pic' => $pic,
             'gps' => $gps,
             'sensor' => $sensor,
+            'teknisi_maintenance' => $teknisi_maintenance
         ]);
         // echo $requestComplaint->company;
     }
@@ -89,12 +92,16 @@ class MaintenanceGpsController extends Controller
         $gps = Gps::orderBy('id', 'DESC')->get();
         $pic = Pic::orderBy('id', 'DESC')->get();
         $sensor = Sensor::orderBy('id', 'DESC')->get();
+        $teknisi_maintenance = Teknisi::orderBy('id', 'DESC')->get();
+
         return view('VisitAssignment.MaintenanceGPS.edit_form')->with([
             'maintenanceGps' => $maintenanceGps,
             'requestComplaint' => $requestComplaint,
             'gps' => $gps,
             'pic' => $pic,
             'sensor' => $sensor,
+            'teknisi_maintenance' => $teknisi_maintenance
+
         ]);
     }
 

@@ -6,7 +6,14 @@
         <div class="input-div"><input type="text" class="input" id="sensor_name" placeholder="Sensor Name">
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="merk_sensor" placeholder="Merk Sensor">
+        <select class="select" id="merk_sensor" name="merk_sensor">
+            <option selected disabled>Merk Sensor</option>
+
+            @foreach ($merk_sensor as $item)
+            <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':'' }}>{{ $item->merk}}</option>
+            @endforeach
+
+        </select>
     </td>
     <td>
         <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number">

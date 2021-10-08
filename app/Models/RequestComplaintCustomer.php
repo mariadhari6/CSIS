@@ -18,15 +18,18 @@ class RequestComplaintCustomer extends Model
 
 
 
-
+    public function companyR()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
     public function companyRequest()
     {
-        return $this->belongsTo(Company::class, 'id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function picRequest()
     {
-        return $this->belongsTo(Pic::class, 'id');
+        return $this->belongsTo(Pic::class, 'pic');
     }
 
     public function pemasanganMutasiGps()
@@ -37,5 +40,10 @@ class RequestComplaintCustomer extends Model
     public function maintenanceGps()
     {
         return $this->hasMany(MaintenanceGps::class);
+    }
+
+    public function taskRequest()
+    {
+        return $this->belongsTo(Task::class, 'task');
     }
 }

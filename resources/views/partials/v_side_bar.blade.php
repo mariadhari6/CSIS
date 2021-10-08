@@ -70,7 +70,7 @@
                                 <ul class="nav">
                                     <li>
                                         <a href="{{url('/GsmPreActive')}}">
-                                            <span class="link-collapse">Pre Active</span>
+                                            <span class="link-collapse">Master GSM</span>
                                         </a>
                                     </li>
                                     <li>

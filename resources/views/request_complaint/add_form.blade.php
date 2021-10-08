@@ -4,6 +4,8 @@
 
     <td>
         <select class="select" id="company_id" name="company_id">
+            <option selected disabled>Company</option>
+
        @foreach ($company as $companys)
         <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
 
@@ -21,6 +23,7 @@
     </td>
       <td>
           <select class="select" id="pic" name="pic">
+            <option selected disabled>PIC</option>
             @foreach ($pic as $pics)
                 <option value="{{ $pics->id }}" {{ old('pic') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
 
@@ -43,22 +46,14 @@
     </td>
 
     <td>
-        <select class="select" id="task" name="task" aria-label=".form-select-lg example">
-            <option selected disabled>Task</option>
-            <option value="Pemasangan/Mutasi/Pelepasan GPS">Pemasangan/Mutasi/Pelepasan GPS</option>
-            <option value="Tampilan OSLOG">Tampilan OSLOG</option>
-            <option value="Permasalahan GPS">Permasalahan GPS</option>
-            <option value="Edit/Add/Delete Master Data">Edit/Add/Delete Master Data</option>
-            <option value="Request Kartu GSM">Request Kartu GSM</option>
-            <option value="Integrasi TMS">Integrasi TMS</option>
-            <option value="Permasalahan GPS">Permasalahan GPS</option>
-            <option value="Request Kartu GSM">Request Kartu GSM</option>
-            <option value="Request Data Firmware dan Configurator">Request Data Firmware dan Configurator</option>
-            <option value="Training OSLOG Lite">Training OSLOG Lite</option>
-            <option value="OSLOG Adoption">OSLOG Adoption</option>
-            <option value="Reporting">Reporting</option>
-        </select></i>
+        <select class="select" id="task" name="task">
+       @foreach ($task_request as $item)
+        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->task }}</option>
+
+       @endforeach
+    </select></i>
     </td>
+
       <td>
         <select class="select" id="platform" id="platform" aria-label=".form-select-lg example">
             <option selected disabled>Platform</option>

@@ -229,6 +229,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     //Dashboar Visit Assignment
     Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
     Route::get('/item_data_DashboardVisitAssignment', [DashboardVisitAssignmentController::class, 'item_data']);
+    Route::get('/item_data_DetailCostPercompany', [DashboardVisitAssignmentController::class, 'detailPercompany']);
+    Route::get('/item_data_TypeGps', [DashboardVisitAssignmentController::class, 'perTypeGps']);
+    Route::get('/item_data_teknisi', [DashboardVisitAssignmentController::class, 'tugasPerTeknisi']);
 
 
     // Maintenance GPS

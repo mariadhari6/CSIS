@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h4 class="page-title">GSM Pre Active</h4>
+<h4 class="page-title">Master GSM</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
