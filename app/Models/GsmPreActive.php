@@ -14,6 +14,7 @@ class GsmPreActive extends Model
     protected $fillable = [
         'gsm_number', 'serial_number', 'icc_id', 'imsi', 'res_id', 'expired_date', 'note'
     ];
+    
     public function gsmActive()
     {
         return $this->hasOne(GsmActive::class);

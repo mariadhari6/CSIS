@@ -8,10 +8,6 @@
       <div class="card">
         <div class="card-body">
           <div class="text-right mt-3" id="selected">
-            <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
-              <b>Add</b>
-              <i class="fas fa-plus ml-2" ></i>
-            </button>
             <button class="btn btn-success  mr-2 edit_all"> 
               <i class="fas fa-pen"></i>
             </button>
@@ -31,11 +27,11 @@
                     </div>
                 </th>
                 <th scope="col" class="action">No.</th>
+                <th scope="col" class="list">Status GSM</th>
+                <th scope="col" class="list">GSM Number</th>
+                <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Request Date</th>
                 <th scope="col" class="list">Terminate Date</th>
-                <th scope="col" class="list">Gsm Number</th></th>
-                <th scope="col" class="list">Status Active</th>
-                <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="action">Action</th>
               </tr>
@@ -76,45 +72,7 @@
     function cancel() {
       read()
     }
-
-
-     // ------ Tambah Form Input ------
-     $('#add').click(function() {
-        $.get("{{ url('add_form_GsmTerminate') }}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
-        });
-      });
-    // ----- Proses Tambah data ------
-    function store() {
-        var gsm_active_id = $("#gsm_active_id").val();
-        var request_date = $("#request_date").val();
-        var terminate_date = $("#terminate_date").val();
-        var status_active = $("#status_active").val();
-        var company_id = $("#company_id").val();
-        var note = $("#note").val();
-        // alert(request_date)
-        $.ajax({
-            type: "get",
-            url: "{{ url('store_GsmTerminate') }}",
-            data: {
-              gsm_active_id: gsm_active_id,
-              request_date: request_date,
-              terminate_date: terminate_date,
-              status_active: status_active,
-              company_id: company_id,
-              note:note
-            },
-            success: function(data) {
-             swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-              read();
-            }
-        })
-    }
+     
     // -----Proses Delete Data ------
    function destroy(id) {
         var id = id;
@@ -148,16 +106,18 @@
             allowOutsideClick: false
       });
     }
+
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
-        $("#item-gsm_active_id-"+id).slideUp("fast");
+        $("#item-no-"+id).hide("fast");
+        $("#item-status_gsm-"+id).hide("fast");
+        $("#item-gsm_number-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
         $("#item-request_date-"+id).slideUp("fast");
         $("#item-terminate_date-"+id).slideUp("fast");
-        $("#item-status_active-"+id).slideUp("fast");
-        $("#item-company_id-"+id).slideUp("fast");
         $("#item-note-"+id).slideUp("fast");
         $.get("{{ url('show_GsmTerminate') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
@@ -166,23 +126,22 @@
 
     // ------ Proses Update Data ------
     function update(id) {
-        var gsm_active_id =$('select[name="gsm_active_id"]').val();
+        var status_gsm = $("#status_gsm").val();
+        var gsm_number = $("#gsm_number").val();
+        var company_id = $("#company_id").val();
         var request_date = $("#request_date").val();
         var terminate_date = $("#terminate_date").val();
-        var status_active = $("#status_active").val();
-        var company_id = $("#company_id").val();
         var note = $("#note").val();
         var id = id;
-        // alert(company_id);
         $.ajax({
             type: "get",
             url: "{{ url('update_GsmTerminate') }}/"+id,
             data: {
-               gsm_active_id: gsm_active_id,
+              status_gsm: status_gsm,
+              gsm_number: gsm_number,
+              company_id: company_id,
               request_date: request_date,
               terminate_date: terminate_date,
-              status_active: status_active,
-              company_id: company_id,
               note:note
             },
             success: function(data) {
@@ -271,11 +230,12 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-gsm_active_id-"+value).slideUp("fast");
+                    $("#item-no-"+value).hide("fast");
+                    $("#item-status_gsm-"+value).hide("fast");
+                    $("#item-gsm_number-"+value).hide("fast");
+                    $("#item-company_id-"+value).hide("fast");
                     $("#item-request_date-"+value).slideUp("fast");
                     $("#item-terminate_date-"+value).slideUp("fast");
-                    $("#item-status_active-"+value).slideUp("fast");
-                    $("#item-company_id-"+value).slideUp("fast");
                     $("#item-note-"+value).slideUp("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_GsmTerminate') }}/" + value, {}, function(data, status) {
@@ -305,21 +265,21 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-                    var gsm_active_id = $(".gsm_active_id-"+value).val();
+                    var status_gsm = $(".status_gsm-"+value).val();
+                    var gsm_number = $(".gsm_number-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
                     var request_date = $(".request_date-"+value).val();
                     var terminate_date = $(".terminate_date-"+value).val();
-                    var status_active = $(".status_active-"+value).val();
-                    var company_id = $(".company_id-"+value).val();
                     var note = $(".note-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_GsmTerminate') }}/"+value,
                     data: {
-                        gsm_active_id: gsm_active_id,
+                        status_gsm: status_gsm,
+                        gsm_number: gsm_number,
+                        company_id: company_id,
                         request_date: request_date,
                         terminate_date: terminate_date,
-                        status_active: status_active,
-                        company_id: company_id,
                         note:note
                     },
                     success: function(data) {

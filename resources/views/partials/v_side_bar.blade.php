@@ -75,8 +75,8 @@
                             <div class="collapse in" id="gsm" aria-expanded="true" style="">
                                 <ul class="nav">
                                     <li>
-                                        <a href="{{url('/GsmPreActive')}}">
-                                            <span class="link-collapse">Pre Active</span>
+                                        <a href="{{url('/GsmMaster')}}">
+                                            <span class="link-collapse">Master</span>
                                         </a>
                                     </li>
                                     <li>

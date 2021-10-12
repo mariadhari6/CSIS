@@ -68,7 +68,6 @@ class UsernameController extends Controller
             'usernames' => $usernames
         ]);
     }
-<<<<<<< HEAD
 
     public function updateall(Request $request, $id)
     {
@@ -95,34 +94,6 @@ class UsernameController extends Controller
     {
         if ($request->ajax()) {
 
-=======
-
-    public function updateall(Request $request, $id)
-    {
-        $data = Username::findOrfail($id);
-        $data->FirstName = $request->FirstName;
-        $data->LastName = $request->LastName;
-
-        echo $id;
-    }
-    public function deleteAll(Request $request)
-    {
-        if ($request->ajax()) {
-            $ids = $request->input('id');
-            DB::table('usernames')->whereIn('id', $ids)->delete();
-        }
-
-        // $ids = $request->ids;
-        // DB::table('usernames')
-        //         ->whereIn('id',explode(",",$ids))
-        //         ->delete();
-        //
-    }
-    public function datatable(Request $request)
-    {
-        if ($request->ajax()) {
-
->>>>>>> 16a71c4f897e3f5521f93dffe30c0dfcfddb2131
             return DataTables::of(Username::all())->make(true);
         }
     }

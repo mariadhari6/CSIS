@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gsm;
 use App\Models\GsmPreActive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,9 +14,9 @@ class GsmPreActiveController extends Controller
     {
         return view('MasterData.GsmPreActive.index');
     }
+    
     public function add_form()
     {
-        // $gsm_pre_active = GsmPreActive::orderBy('gsm_number', 'DESC')->get();
         return view('MasterData.GsmPreActive.add_form');
     }
 
@@ -27,19 +28,6 @@ class GsmPreActiveController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
-        $data = array(
-            'gsm_number'    =>  $request->gsm_number,
-            'serial_number'     =>  $request->serial_number,
-            'icc_id'     =>  $request->icc_id,
-            'imsi'     =>  $request->imsi,
-            'res_id'     =>  $request->res_id,
-            'expired_date'     =>  $request->expired_date,
-            'note'     =>  $request->note,
-        );
-        GsmPreActive::insert($data);
-    }
 
     public function edit_form($id)
     {

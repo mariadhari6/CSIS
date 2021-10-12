@@ -14,6 +14,7 @@ class PemasanganMutasiGps extends Model
         'company_id', 'tanggal', 'kendaraan_awal', 'imei', 'gsm_pemasangan', 'kendaraan_pasang', 'jenis_pekerjaan', 'equipment_terpakai_gps', 'equipment_terpasang_sensor', 'teknisi',
         'uang_transportasi', 'type_visit', 'note'
     ];
+    
     public function requestComplain()
     {
         return $this->belongsTo(RequestComplaintCustomer::class, 'company_id');

@@ -8,7 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GpsController;
 use App\Http\Controllers\GsmActiveController;
-use App\Http\Controllers\GsmPreActiveController;
+use App\Http\Controllers\GsmMasterController;
 use App\Http\Controllers\GsmTerminateController;
 use App\Http\Controllers\PemasanganMutasiGpsController;
 use App\Http\Controllers\PicController;
@@ -170,17 +170,24 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected_gps', [GpsController::class, 'selected']);
     Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
 
-    //gsm pre active
-    Route::get('/GsmPreActive', [GsmPreActiveController::class, 'index'])->name('GsmPreActive');
-    Route::get('/item_data_GsmPreActive', [GsmPreActiveController::class, 'item_data']);
-    Route::get('/add_form_GsmPreActive', [GsmPreActiveController::class, 'add_form']);
-    Route::get('/store_GsmPreActive', [GsmPreActiveController::class, 'store']);
-    Route::get('/destroy_GsmPreActive/{id}', [GsmPreActiveController::class, 'destroy']);
-    Route::get('/show_GsmPreActive/{id}', [GsmPreActiveController::class, 'edit_form']);
-    Route::get('/update_GsmPreActive/{id}', [GsmPreActiveController::class, 'update']);
-    Route::get('/selectedDelete_GsmPreActive', [GsmPreActiveController::class, 'deleteAll']);
-    Route::get('/selected_gsmpreaktiv', [GsmPreActiveController::class, 'selected']);
-    Route::get('/update_all/{id}', [GsmPreActiveController::class, 'updateall']);
+    //gsm Master
+    Route::get('/GsmMaster', [GsmMasterController::class, 'index'])->name('GsmMaster');
+    Route::get('/item_data_GsmMaster', [GsmMasterController::class, 'item_data']);
+    Route::get('/item_data_temporary_GsmMaster', [GsmMasterController::class, 'item_data_temporary']);
+    Route::get('/item_data_all_GsmMaster', [GsmMasterController::class, 'item_data']);
+    Route::get('/item_data_ready_GsmMaster', [GsmMasterController::class, 'item_data_ready']);
+    Route::get('/item_data_active_GsmMaster', [GsmMasterController::class, 'item_data_active']);
+    Route::get('/item_data_terminate_GsmMaster', [GsmMasterController::class, 'item_data_terminate']);
+    Route::get('/add_form_GsmMaster', [GsmMasterController::class, 'add_form']);
+    Route::get('/store_GsmMaster', [GsmMasterController::class, 'store']);
+    Route::get('/destroy_GsmMaster/{id}', [GsmMasterController::class, 'destroy']);
+    Route::get('/show_GsmMaster/{id}', [GsmMasterController::class, 'edit_form']);
+    Route::get('/update_GsmMaster/{id}', [GsmMasterController::class, 'update']);
+    Route::get('/selectedDelete_GsmMaster', [GsmMasterController::class, 'deleteAll']);
+    Route::get('/selected_GsmMaster', [GsmMasterController::class, 'selected']);
+    Route::get('/update_all/{id}', [GsmMasterController::class, 'updateall']);
+    Route::post('/importExcel_GsmMaster', [GsmMasterController::class, 'importExcel'])->name('importExcel_GsmMaster');
+    Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
 
     //Request and Complent Customer
     Route::get('/requestcomplaint', [RequestComplaintCustomerController::class, 'index']);

@@ -8,10 +8,6 @@
       <div class="card">
         <div class="card-body">
              <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button">
-                  <b>Add</b>
-                  <i class="fas fa-plus ml-2" id="add"></i>
-                </button>
                 <button class="btn btn-success  mr-2 edit_all"> 
                   <i class="fas fa-pen"></i>
                 </button>
@@ -31,11 +27,11 @@
                     </div>
                 </th>
                 <th scope="col" class="action">No.</th>
+                <th scope="col" class="list">Status GSM</th>
+                <th scope="col" class="list">GSM Number</th>
+                <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Request Date</th>
                 <th scope="col" class="list">Active Date</th>
-                <th scope="col" class="list">Gsm Number</th></th>
-                <th scope="col" class="list">Status Active</th>
-                <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="action">Action</th>
               </tr>
@@ -69,58 +65,13 @@
             // "dom": '<lf<t>ip>'
             });
         $('#table_id').DataTable().draw();
-
-
-
       });
-
     }
 
     // ---- Tombol Cancel -----
     function cancel() {
       read()
     }
-
-     // ------ Tambah Form Input ------
-     $('.add').click(function() {
-        $.get("{{ url('add_form_GsmActive') }}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
-        });
-      });
-
-    // ----- Proses Tambah data ------
-    function store() {
-        var request_date = $("#request_date").val();
-        var active_date = $("#active_date").val();
-        var gsm_pre_active_id = $("#gsm_pre_active_id").val();
-        var status_active = $("#status_active").val();
-        var company_id = $("#company_id").val();
-        var note = $("#note").val();
-        $.ajax({
-            type: "get",
-            url: "{{ url('store_GsmActive') }}",
-            data: {
-              request_date: request_date,
-              active_date: active_date,
-              gsm_pre_active_id: gsm_pre_active_id,
-              status_active: status_active,
-              company_id: company_id,
-              note:note
-            },
-            success: function(data) {
-              swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-              read();
-
-            }
-        })
-    }
-
-
 
     // -----Proses Delete Data ------
    function destroy(id) {
@@ -164,10 +115,11 @@
         $("#td-checkbox-"+id).hide("fast");
         $("#item-request_date-"+id).slideUp("fast");
         $("#item-no-"+id).hide("fast");
-        $("#item-active_date-"+id).slideUp("fast");
-        $("#item-gsm_pre_active_id-"+id).slideUp("fast");
-        $("#item-status_active-"+id).slideUp("fast");
-        $("#item-company_id-"+id).slideUp("fast");
+        $("#item-status_gsm-"+id).hide("fast");
+        $("#item-gsm_number-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
+        $("#item-request_date-"+id).hide("fast");
+        $("#item-active_date-"+id).hide("fast");
         $("#item-note-"+id).slideUp("fast");
         $.get("{{ url('show_GsmActive') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
@@ -176,23 +128,22 @@
 
     // ------ Proses Update Data ------
     function update(id) {
+        var status_gsm = $("#status_gsm").val();
+        var gsm_number = $("#gsm_number").val();
+        var company_id = $("#company_id").val();
         var request_date = $("#request_date").val();
         var active_date = $("#active_date").val();
-        var gsm_pre_active_id = $("#gsm_pre_active_id").val();
-        var status_active = $("#status_active").val();
-        var company_id = $("#company_id").val();
         var note = $("#note").val();
         var id = id;
-        // console.log('test');
         $.ajax({
             type: "get",
             url: "{{ url('update_GsmActive') }}/"+id,
             data: {
+              status_gsm: status_gsm,
+              gsm_number: gsm_number,
+              company_id: company_id,
               request_date: request_date,
               active_date: active_date,
-               gsm_pre_active_id: gsm_pre_active_id,
-              status_active: status_active,
-              company_id: company_id,
               note:note
             },
             success: function(data) {
@@ -271,7 +222,6 @@
                 allVals.push($(this).attr("id"));
             });
             if (allVals.length > 0){
-                // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
                 $.get("{{ url('selected_GsmActive') }}", {}, function(data, status) {
@@ -281,11 +231,11 @@
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
                     $("#item-no-"+value).hide("fast");
+                    $("#item-status_gsm-"+value).hide("fast");
+                    $("#item-gsm_number-"+value).hide("fast");
+                    $("#item-company_id-"+value).hide("fast");
                     $("#item-request_date-"+value).slideUp("fast");
                     $("#item-active_date-"+value).slideUp("fast");
-                    $("#item-gsm_pre_active_id-"+value).slideUp("fast");
-                    $("#item-status_active-"+value).slideUp("fast");
-                    $("#item-company_id-"+value).slideUp("fast");
                     $("#item-note-"+value).slideUp("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_GsmActive') }}/" + value, {}, function(data, status) {
@@ -316,39 +266,39 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
+                    var status_gsm = $(".status_gsm-"+value).val();
+                    var gsm_number = $(".gsm_number-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
                     var request_date = $(".request_date-"+value).val();
                     var active_date = $(".active_date-"+value).val();
-                    var gsm_pre_active_id = $(".gsm_pre_active_id-"+value).val();
-                    var status_active = $(".status_active-"+value).val();
-                    var company_id = $(".company_id-"+value).val();
                     var note = $(".note-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_GsmActive') }}/"+value,
                     data: {
+                        status_gsm: status_gsm,
+                        gsm_number: gsm_number,
+                        company_id: company_id,
                         request_date: request_date,
                         active_date: active_date,
-                        gsm_pre_active_id: gsm_pre_active_id,
-                        status_active: status_active,
-                        company_id: company_id,
                         note:note
                     },
                     success: function(data) {
                     swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
+                          type: 'success',
+                          title: 'The selected data has been updated',
+                          showConfirmButton: false,
+                          timer: 1500
 
-                                // $(".save").hide();
-                                });
-                                read();
+                      // $(".save").hide();
+                      });
+                      read();
 
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
+                      $(".add").show("fast");
+                      $(".edit_all").show("fast");
+                      $(".delete_all").show("fast");
+                      $(".btn-round").hide("fast");
+                      $(".btn-round").hide("fast");
 
 
                     }
