@@ -35,7 +35,7 @@
     </select></i>
 </td>
 <td>
-    <div class="input-div"><input type="datetime-local" class="input waktu_info-{{$request_complain->id}}" id="waktu_info" placeholder="Waktu Info" value="{{ $request_complain->waktu_info}}"></i></div>
+    <div class="input-div"><input type="datetime-local" class="input waktu_info-{{$request_complain->id}}" id="waktu_info" placeholder="Waktu Info" value="{{ str_replace(" ", "T", $request_complain->waktu_info) }}"></i></div>
 </td>
 <td>
     <textarea class="form-control task-{{$request_complain->id}}" id="task" name="task" >{{$request_complain->task}}</textarea></i></td>
@@ -59,16 +59,16 @@
     </select></i>
 </td>
 <td>
-    <div class="input-div"><input type="datetime-local" class="input waktu_respond-{{$request_complain->id}}" id="waktu_respond" placeholder="Waktu Respond" value="{{ $request_complain->waktu_respond}}"></i></div>
+    <div class="input-div"><input type="datetime-local" class="input waktu_respond-{{$request_complain->id}}" id="waktu_respond" placeholder="Waktu Respond" value="{{ str_replace(" ", "T", $request_complain->waktu_respond) }}"></i></div>
 </td>
 <td>
     <div class="input-div"><input type="text" class="input respond-{{$request_complain->id}}" id="respond" placeholder="Respond" value="{{ $request_complain->respond}}"></i></div>
 </td>
 <td>
-    <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$request_complain->id}}" id="waktu_kesepakatan" placeholder="Waktu Kesepakatan" value="{{ $request_complain->waktu_kesepakatan}}"></i></div>
+    <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$request_complain->id}}" id="waktu_kesepakatan" placeholder="Waktu Kesepakatan" value="{{ str_replace(" ", "T", $request_complain->waktu_kesepakatan) }}"></i></div>
 </td>
 <td>
-    <div class="input-div"><input type="datetime-local" class="input waktu_solve-{{$request_complain->id}}" id="waktu_solve" placeholder="Waktu Solve" value="{{ $request_complain->waktu_solve}}"></i></div>
+    <div class="input-div"><input type="datetime-local" class="input waktu_solve-{{$request_complain->id}}" id="waktu_solve" placeholder="Waktu Solve" value="{{ str_replace(" ", "T", $request_complain->waktu_solve) }}"></i></div>
 </td>
 <td>
     <select class="select status-{{$request_complain->id}}"  id="status" aria-label=".form-select-lg example">
