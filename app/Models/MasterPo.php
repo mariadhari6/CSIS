@@ -12,6 +12,6 @@ class MasterPo extends Model
     protected $table = 'master_pos';
 
     protected $fillable = [
-        'po_number', 'po_date', 'jumlah_unit_po', 'selles'
+        'company_id', 'po_number', 'po_date', 'harga_layanan', 'jumlah_unit_po', 'status_po', 'selles'
     ];
 }

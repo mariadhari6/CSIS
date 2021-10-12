@@ -12,14 +12,23 @@
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
+        <td id="item-company_id-{{ $item->id}}">
+            {{ $item->company_id }}
+        </td>
         <td id="item-po_number-{{ $item->id}}">
             {{ $item->po_number }}
         </td>
           <td id="item-po_date-{{ $item->id }}">
             {{ $item->po_date }}
         </td>
+        <td id="item-harga_layanan-{{ $item->id}}">
+            {{ $item->harga_layanan }}
+        </td>
           <td id="item-jumlah_unit_po-{{ $item->id }}">
             {{ $item->jumlah_unit_po }}
+        </td>
+        <td id="item-status_po-{{ $item->id}}">
+            {{ $item->status_po }}
         </td>
         <td id="item-selles-{{ $item->id }}">
             {{ $item->selles }}

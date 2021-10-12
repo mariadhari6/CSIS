@@ -26,9 +26,12 @@
                     </div>
                 </th>
                 <th scope="col" class="action">No.</th>
+                <th scope="col" class="list">Company Id</th>
                 <th scope="col" class="list">Po Number</th>
                 <th scope="col" class="list">Po Date</th>
+                <th scope="col" class="list">Harga Layanan</th>
                 <th scope="col" class="list">Jumlah Unit Po</th>
+                <th scope="col" class="list">Status Po</th>
                 <th scope="col" class="list">Selles</th>
                 <th scope="col" class="action">Action</th>
               </tr>
@@ -71,18 +74,24 @@
       });
     // ----- Proses Tambah data ------
     function store() {
+        var company_id = $("#company_id").val();
         var po_number = $("#po_number").val();
         var po_date = $("#po_date").val();
+        var harga_layanan = $("#harga_layanan").val();
         var jumlah_unit_po = $("#jumlah_unit_po").val();
+        var status_po = $("#status_po").val();
         var selles = $("#selles").val();
     
         $.ajax({
             type: "get",
             url: "{{ url('store_master_po') }}",
             data: {
+              company_id: company_id,
               po_number: po_number,
               po_date: po_date,
+              harga_layanan: harga_layanan,
               jumlah_unit_po: jumlah_unit_po,
+              status_po: status_po,
               selles: selles
             },
             success: function(data) {
@@ -135,9 +144,12 @@
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
         $("#item-po_number-"+id).hide("fast");
         $("#item-po_date-"+id).hide("fast");
+        $("#item-harga_layanan-"+id).hide("fast");
         $("#item-jumlah_unit_po-"+id).hide("fast");
+        $("#item-status_po-"+id).hide("fast");
         $("#item-selles-"+id).hide("fast");
         $.get("{{ url('show_master_po') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
@@ -145,18 +157,25 @@
     }
     // ------ Proses Update Data ------
         function update(id) {
+            var company_id = $("#company_id").val();
             var po_number = $("#po_number").val();
             var po_date = $("#po_date").val();
+            var harga_layanan = $("#harga_layanan").val();
             var jumlah_unit_po = $("#jumlah_unit_po").val();
+            var status_po = $("#status_po").val();
             var selles = $("#selles").val();
             var id = id;
             $.ajax({
                 type: "get",
                 url: "{{ url('update_master_po') }}/"+id,
                 data: {
+
+                company_id: company_id,
                 po_number: po_number,
                 po_date:po_date,
+                harga_layanan: harga_layanan,
                 jumlah_unit_po: jumlah_unit_po,
+                status_po: status_po,
                 selles: selles
                 },
                 success: function(data) {
@@ -243,9 +262,12 @@
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
                     $("#item-no-"+value).hide("fast");
+                    $("#item-company_id-"+value).hide("fast");
                     $("#item-po_number-"+value).hide("fast");
                     $("#item-po_date-"+value).hide("fast");
+                    $("#item-harga_layanan-"+value).hide("fast");
                     $("#item-jumlah_unit_po-"+value).hide("fast");
+                    $("#item-status_po-"+value).hide("fast");
                     $("#item-selles-"+value).hide("fast");
                    
                     $(".add").hide("fast");
@@ -277,18 +299,24 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
+                    var company_id = $(".company_id-"+value).val();
                     var po_number = $(".po_number-"+value).val();
                     var po_date = $(".po_date-"+value).val();
+                    var harga_layanan = $(".harga_layanan-"+value).val();
                     var jumlah_unit_po = $(".jumlah_unit_po-"+value).val();
+                    var status_po = $(".status_po-"+value).val();
                     var selles = $(".selles-"+value).val();
                     
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_master_po') }}/"+value,
                     data: {
+                    company_id: company_id,
                     po_number: po_number,
                     po_date:po_date,
+                    harga_layanan: harga_layanan,
                     jumlah_unit_po: jumlah_unit_po,
+                    status_po: status_po,
                     selles: selles
                     
                     },

@@ -30,9 +30,12 @@ class MasterPoController extends Controller
     public function store(Request $request)
     {
         $data = array(
+            'company_id' => $request->company_id,
             'po_number' => $request->po_number,
             'po_date' => $request->po_date,
+            'harga_layanan' => $request->harga_layanan,
             'jumlah_unit_po' => $request->jumlah_unit_po,
+            'status_po' => $request->status_po,
             'selles' => $request->selles
         );
         MasterPo::insert($data);
@@ -56,9 +59,12 @@ class MasterPoController extends Controller
     public function update(Request $request, $id)
     {
         $data = MasterPo::findOrfail($id);
+        $data->company_id = $request->company_id;
         $data->po_number = $request->po_number;
         $data->po_date = $request->po_date;
+        $data->harga_layanan = $request->harga_layanan;
         $data->jumlah_unit_po = $request->jumlah_unit_po;
+        $data->status_po = $request->status_po;
         $data->selles = $request->selles;
         
         $data->save();
@@ -75,9 +81,12 @@ class MasterPoController extends Controller
     public function updateall(Request $request, $id)
     {
         $data = Gps::findOrfail($id);
+        $data->company_id = $request->company_id;
         $data->po_number = $request->po_number;
         $data->po_date = $request->po_date;
+        $data->harga_layanan = $request->harga_layanan;
         $data->jumlah_unit_po = $request->jumlah_unit_po;
+        $data->status_po = $request->status_po;
         $data->selles = $request->selles;
         echo $id;
     }

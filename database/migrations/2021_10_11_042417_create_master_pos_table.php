@@ -15,9 +15,12 @@ class CreateMasterPosTable extends Migration
     {
         Schema::create('master_pos', function (Blueprint $table) {
             $table->id();
+            $table->string('company_id');
             $table->string('po_number');
             $table->string('po_date');
+            $table->string('harga_layanan');
             $table->string('jumlah_unit_po');
+            $table->string('status_po');
             $table->string('selles');
             $table->timestamps();
         });
