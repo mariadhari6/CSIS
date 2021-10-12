@@ -3,7 +3,6 @@
 
 
 @section('content')
-
 <h4 class="page-title">GPS</h4>
   <div class="row">
     <div class="col-md-12">
@@ -11,6 +10,8 @@
         <div class="card-body">
           <div class="text-right mt-3" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+              <button type="button" class="btn btn-success float-left mr-2 " data-toggle="modal" data-target="#modal-import"><b>Import Excel</b><i class="fas fa-file-excel ml-2"></i></button>
+
               <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
@@ -366,5 +367,65 @@
 
 
   </script>
+  {{-- <div class="modal-fade" id="modal-import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+
+         <form action="{{url('/gps')}}" method="POST" id="form-import" enctype="multipart/form-data" class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Import Data GPS</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span arial-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            {{method_field('PUT')}}
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="">File Excel GPS</label>
+                    <input type="file" name="excel-gps" required>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" >Save</button>
+        </div>
+        </form>
+     </div>
+ </div> --}}
+ <div class="modal fade" id="modal-import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+         <form action="{{url('/import_gps')}}" method="POST" id="form-import" enctype="multipart/form-data" class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Import Excel GPS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{method_field('PUT')}}
+        @csrf
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Import data GPS sesuai format berikut. <br><a href="{{url('')}}/excel-gps.xlsx"><i class="fa fa-download"></i> File contoh excel GPS</a></p>
+
+                </div>
+                <div class="col-md-12">
+                    <label for="">File Excel GPS</label>
+                    <input type="file" name="excel-gps" required>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
    @endsection
+
 

@@ -170,6 +170,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_gps', [GpsController::class, 'deleteAll']);
     Route::get('/selected_gps', [GpsController::class, 'selected']);
     Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
+    Route::put('/import_gps', [GpsController::class, 'ImportGps']);
+
 
     //gsm pre active
     Route::get('/GsmPreActive', [GsmPreActiveController::class, 'index'])->name('GsmPreActive');
@@ -229,6 +231,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     //Dashboar Visit Assignment
     Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
     Route::get('/item_data_DashboardVisitAssignment', [DashboardVisitAssignmentController::class, 'item_data']);
+    Route::get('/item_data_DetailCostPercompany', [DashboardVisitAssignmentController::class, 'detailPercompany']);
+    Route::get('/item_data_TypeGps', [DashboardVisitAssignmentController::class, 'perTypeGps']);
+    Route::get('/item_data_teknisi', [DashboardVisitAssignmentController::class, 'tugasPerTeknisi']);
 
 
     // Maintenance GPS

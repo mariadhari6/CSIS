@@ -17,10 +17,10 @@
                 {{ $sellers->company->company_name}}
         </td> --}}
         <td id="item-merk-{{ $item->id}}">
-            {{ $item->merk }}
+            {{ $item->merkGps->merk }}
         </td>
           <td id="item-type-{{ $item->id }}">
-            {{ $item->type }}
+            {{ $item->typeGps->type }}
         </td>
           <td id="item-imei-{{ $item->id }}">
             {{ $item->imei }}

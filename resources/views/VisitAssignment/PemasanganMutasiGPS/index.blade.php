@@ -36,12 +36,12 @@
                 </th>
                 <th rowspan="2" scope="col" class="action">No.</th>
                 <th rowspan="2" scope="col" class="list">Company</th>
+                <th rowspan="2" scope="col" class="list">Jenis Pekerjaan</th>
                 <th rowspan="2" scope="col" class="list">Tanggal</th>
                 <th rowspan="2" scope="col" class="list">Kendaraan Awal</th>
                 <th rowspan="2" scope="col" class="list">IMEI</th>
                 <th rowspan="2" scope="col" class="list">GSM</th>
                 <th rowspan="2" scope="col" class="list">Kendaraan Pasang</th>
-                <th rowspan="2" scope="col" class="list">Jenis Pekerjaan</th>
                 <th colspan="2" scope="col" class="list">Equipment</th>
                 <th rowspan="2" scope="col" class="list">Teknisi</th>
                 <th rowspan="2" scope="col" class="list">Uang Transportasi</th>

@@ -175,6 +175,10 @@
     bottom: 0px;
     text-align: center;
 }
+#btn-primary-outline {
+  background-color: transparent;
+  border-color: transparent;
+}
 
 /*  */
 

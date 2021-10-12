@@ -26,4 +26,12 @@ class Gps extends Model
     {
         return $this->hasMany(MaintenanceGps::class);
     }
+    public function merkGps()
+    {
+        return $this->belongsTo(MerkGps::class, 'merk');
+    }
+    public function typeGps()
+    {
+        return $this->belongsTo(TypeGps::class, 'type');
+    }
 }

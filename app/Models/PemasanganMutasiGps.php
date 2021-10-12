@@ -28,11 +28,16 @@ class PemasanganMutasiGps extends Model
     }
     public function gps()
     {
-        return $this->belongsTo(Gps::class, 'id');
+        return $this->belongsTo(Gps::class, 'equipment_terpakai_gps');
     }
 
     public function sensor()
     {
-        return $this->belongsTo(Sensor::class, 'id');
+        return $this->belongsTo(Sensor::class, 'equipment_terpakai_sensor');
+    }
+
+    public function teknisiPemasangan()
+    {
+        return $this->belongsTo(Teknisi::class, 'teknisi');
     }
 }

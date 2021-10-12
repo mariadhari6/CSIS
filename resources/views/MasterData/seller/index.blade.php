@@ -1,5 +1,7 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Seller')
+@section('master','show')
+@section('seller','active')
 
 @section('content')
 <h4 class="page-title">Seller</h4>

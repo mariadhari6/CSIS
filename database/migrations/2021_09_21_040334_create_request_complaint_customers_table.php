@@ -21,7 +21,7 @@ class CreateRequestComplaintCustomersTable extends Migration
             $table->string('vehicle');
             $table->dateTime('waktu_info');
             $table->dateTime('waktu_respond');
-            $table->longText('task');
+            $table->foreignId('task');
             $table->string('platform');
             $table->longText('detail_task');
             $table->string('divisi');

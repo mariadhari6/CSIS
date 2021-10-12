@@ -1,15 +1,17 @@
-<div class="row">
-    <div class="col-md-7">
+<div class="row" id="table-detail">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <h6>Cost Per Company</h6>
+                <h6>Detail Per Company</h6>
                 <table class="table table-responsive data " class="table_id" id="table_id" >
 
                 <tr>
-                    <th scope="col" class="list">Per Company</th>
-                    <th scope="col" class="list">Vehicle</th>
-                    <th scope="col" class="list">Times</th>
-                    <th scope="col" class="list">Cost</th>
+                    <th scope="col" class="list">Company</th>
+                    <th scope="col" class="list">Pemasangan</th>
+                    <th scope="col" class="list">Maintenance GPS</th>
+                    <th scope="col" class="list">Maintenance Sensor</th>
+                    <th scope="col" class="list">Mutasi Pemasangan GPS</th>
+                    <th scope="col" class="list">Pelepasan</th>
                 </tr>
 
 
@@ -20,13 +22,13 @@
 
                     </td>
                     <td>
-                        {{ $item->vehicle}}
+                        {{ $item->jenis_pekerjaan}}
                     </td>
                     <td>
-                        {{ $item->time}}
+                        {{ $item->task}}
                     </td>
                     <td>
-                        {{ $item->cost}}
+                        {{-- {{ $item->cost}} --}}
                     </td>
                     </tr>
                     @endforeach

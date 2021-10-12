@@ -24,7 +24,7 @@ class CreatePemasanganMutasiGpsTable extends Migration
             $table->foreignId('jenis_pekerjaan');
             $table->foreignId('equipment_terpakai_gps');
             $table->foreignId('equipment_terpakai_sensor');
-            $table->string('teknisi');
+            $table->foreignId('teknisi');
             $table->integer('uang_transportasi');
             $table->string('type_visit');
             $table->string('note');

@@ -2,21 +2,21 @@
     <td></td>
 
     <td>
-        <select class="form-control company-{{$maintenanceGps->id}}"  id="{{$maintenanceGps->id}}" name="company">
-            <option selected value="{{ $maintenanceGps->requestComplaint->id}}">
-                {{ $maintenanceGps->requestComplaint->company->company_name }}
+        <select class="select company-{{$maintenanceGps->id}}"  id="{{$maintenanceGps->id}}" name="company">
+            <option selected value="{{ $maintenanceGps->company_id}}">
+                {{ $maintenanceGps->requestComplain->companyRequest->company_name}}
             </option>
 
             @foreach ($requestComplaint as $item)
-            <option value="{{ $item->id }}">{{ $item->company->company_name }}</option>
+            <option value="{{ $item->id }}">{{ $item->companyRequest->company_name }}</option>
             @endforeach
 
         </select>
     </td>
     <td>
-        <select class="form-control vehicle-{{$maintenanceGps->id}}" id="vehicle" name="vehicle-{{$maintenanceGps->id}}">
-        <option selected value="{{ $maintenanceGps->requestComplaint->id}}">
-            {{ $maintenanceGps->requestComplaint->vehicle }}
+        <select class="select vehicle-{{$maintenanceGps->id}}" id="vehicle" name="vehicle-{{$maintenanceGps->id}}">
+        <option selected value="{{ $maintenanceGps->vehicle_id}}">
+            {{ $maintenanceGps->requestComplain->vehicle }}
         </option>
 
         @foreach ($requestComplaint as $item)
@@ -28,9 +28,9 @@
         </select>
     </td>
     <td>
-        <select class="form-control tanggal-{{$maintenanceGps->id}}" id="tanggal" name="tanggal-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->requestComplaint->id }}">
-                {{ $maintenanceGps->requestComplaint->waktu_kesepakatan }}
+        <select class="select tanggal-{{$maintenanceGps->id}}" id="tanggal" name="tanggal-{{$maintenanceGps->id}}">
+            <option selected value="{{ $maintenanceGps->tanggal_id }}">
+                {{ $maintenanceGps->requestComplain->waktu_kesepakatan }}
             </option>
 
             @foreach ($requestComplaint as $item)
@@ -42,8 +42,8 @@
         </select>
     </td>
     <td>
-        <select class="form-control type_gps-{{$maintenanceGps->id}}" id="type_gps" name="type_gps-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->gps->id }}">
+        <select class="select type_gps-{{$maintenanceGps->id}}" id="type_gps" name="type_gps-{{$maintenanceGps->id}}">
+            <option selected value="{{ $maintenanceGps->type_gps_id }}">
                 {{ $maintenanceGps->gps->type }}
             </option>
 
@@ -56,8 +56,8 @@
         </select>
     </td>
     <td>
-        <select class="form-control equipment_gps-{{$maintenanceGps->id}}" id="equipment_gps" name="equipment_gps-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->gps->id }}">
+        <select class="select equipment_gps-{{$maintenanceGps->id}}" id="equipment_gps" name="equipment_gps-{{$maintenanceGps->id}}">
+            <option selected value="{{ $maintenanceGps->equipment_gps_id }}">
                 {{ $maintenanceGps->gps->type }}
             </option>
 
@@ -70,8 +70,8 @@
         </select>
     </td>
     <td>
-        <select class="form-control equipment_sensor-{{$maintenanceGps->id}}" id="equipment_sensor" name="equipment_sensor-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->sensor->id}}">
+        <select class="select equipment_sensor-{{$maintenanceGps->id}}" id="equipment_sensor" name="equipment_sensor-{{$maintenanceGps->id}}">
+            <option selected value="{{ $maintenanceGps->equipment_sensor_id}}">
                 {{ $maintenanceGps->sensor->sensor_name }}
             </option>
 
@@ -88,9 +88,9 @@
         </div>
     </td>
     <td>
-        <select class="form-control permasalahan-{{$maintenanceGps->id}}" id="permasalahan" name="permasalahan-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->requestComplaint->id}}">
-                {{ $maintenanceGps->requestComplaint->detail_task }}
+        <select class="select permasalahan-{{$maintenanceGps->id}}" id="permasalahan" name="permasalahan-{{$maintenanceGps->id}}">
+            <option selected value="{{ $maintenanceGps->permasalahan_id}}">
+                {{ $maintenanceGps->requestComplain->detail_task }}
             </option>
 
             @foreach ($requestComplaint as $item)
@@ -117,22 +117,16 @@
         <div class="input-div"><input type="text" class="input biaya_transportasi-{{$maintenanceGps->id}}" id="biaya_transportasi" value="{{$maintenanceGps->biaya_transportasi}}"></i>
         </div>
     </td>
-    <td>
-        <select class="form-control teknisi-{{$maintenanceGps->id}}" id="teknisi" name="teknisi-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->pic->id}}">
-                {{ $maintenanceGps->pic->pic_name }}
-            </option>
-
-            @foreach ($pic as $item)
-            <option value="{{ $item->id }}">
-                {{ $item->pic_name }}
-            </option>
+   <td>
+        <select class="select teknisi-{{$maintenanceGps->id}}" id="teknisi" name="teknisi">
+            <option selected value="{{$maintenanceGps->teknisi_id}}">{{$maintenanceGps->teknisiMaintenance->teknisi_name}}</option>
+            @foreach ($teknisi_maintenance as $item)
+                <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
             @endforeach
-
         </select>
     </td>
     <td>
-        <select class="form-control req_by-{{$maintenanceGps->id}}" id="req_by" aria-label=".form-select-lg example">
+        <select class="select req_by-{{$maintenanceGps->id}}" id="req_by" aria-label=".form-select-lg example">
             <option selected value="{{  $maintenanceGps->req_by == 'Customer' ? 'Customer' : 'CS'}}">
                 {{  $maintenanceGps->req_by == 'Customer' ? 'Customer' : 'CS'}}
             </option>

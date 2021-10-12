@@ -1,11 +1,29 @@
     <td></td>
     <td></td>
     <td>
-        <div class="input-div"><input type="text" class="input merk-{{$gps->id}}" id="merk" placeholder="Merk" value="{{ $gps->merk}}"></i></div>
+        <select class="select merk-{{$gps->id}}" id="merk" name="merk">
+            <option value="{{$gps->merkGps->id}}">{{$gps->merkGps->merk}}</option>
+
+            @foreach ($merk_gps as $item)
+            <option value="{{ $item->id }}" {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk}}</option>
+            @endforeach
+
+        </select>
     </td>
+
     <td>
-        <div class="input-div"><input type="text" class="input type-{{$gps->id}}" id="type" placeholder="Type" value="{{ $gps->type}}"></i></div>
+        <select class="select type-{{$gps->id}}" id="type" name="type">
+            <option value="{{$gps->typeGps->id}}">{{$gps->typeGps->type}}</option>
+
+            @foreach ($type_gps as $item)
+            <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type}}</option>
+            @endforeach
+
+        </select>
     </td>
+    {{-- <td>
+        <div class="input-div"><input type="text" class="input type-{{$gps->id}}" id="type" placeholder="Type" value="{{ $gps->type}}"></i></div>
+    </td> --}}
     <td>
         <div class="input-div"><input type="text" class="input imei-{{$gps->id}}" id="imei" placeholder="IMEI" value="{{ $gps->imei}}"></i></div>
     </td>

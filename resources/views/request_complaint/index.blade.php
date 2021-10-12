@@ -182,7 +182,7 @@
         $("#item-vehicle-"+id).hide("fast");
         $("#item-waktu_info-"+id).hide("fast");
         $("#item-waktu_respond-"+id).hide("fast");
-        $("#item-taks-"+id).hide("fast");
+        $("#item-task-"+id).hide("fast");
         $("#item-platform-"+id).hide("fast");
         $("#item-detail_task-"+id).hide("fast");
         $("#item-divisi-"+id).hide("fast");

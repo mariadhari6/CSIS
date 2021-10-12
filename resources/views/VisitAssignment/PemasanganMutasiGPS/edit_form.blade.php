@@ -12,6 +12,20 @@
 
        @endforeach
     </select></i>
+
+    <td><select class="select jenis_pekerjaan-{{$pemasangan_mutasi_GPS->id}}" id="jenis_pekerjaan" name="jenis_pekerjaan">
+        <option value="{{$pemasangan_mutasi_GPS->jenis_pekerjaan}} "> {{$pemasangan_mutasi_GPS->requestComplain->taskRequest->task}} </option>
+        @foreach ($request_complain as $request_complains)
+        <option value="{{ $request_complains->id }}" {{ old('jenis_pekerjaan') == $request_complains->id  ? 'selected':'' }}>
+         {{-- @if ($request_complains->task =='Pemasangan'||'Mutasi'||'Pelepasan GPS') --}}
+            {{$request_complains->taskRequest->task}}
+
+         {{-- @endif --}}
+            {{-- {{$request_complains->task}} --}}
+        </option>
+
+       @endforeach
+    </select></i></td>
     </td>
 
      <td><select class="select tanggal-{{$pemasangan_mutasi_GPS->id}}" id="tanggal" name="tanggal">
@@ -65,15 +79,6 @@
        @endforeach
     </select></i></td>
 
-    <td><select class="select jenis_pekerjaan-{{$pemasangan_mutasi_GPS->id}}" id="jenis_pekerjaan" name="jenis_pekerjaan">
-        <option value="{{$pemasangan_mutasi_GPS->jenis_pekerjaan}} "> {{$pemasangan_mutasi_GPS->requestComplain->task}} </option>
-        @foreach ($request_complain as $request_complains)
-        <option value="{{ $request_complains->id }}" {{ old('jenis_pekerjaan') == $request_complains->id  ? 'selected':'' }}>
-        {{$request_complains->task}}
-        </option>
-
-       @endforeach
-    </select></i></td>
 
     <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps">
         <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->gps->type}} </option>
@@ -94,13 +99,14 @@
        @endforeach
     </select></i></td>
 
-    <td><select class="select teknisi-{{$pemasangan_mutasi_GPS->id}}" id="teknisi" name="teknisi" aria-label=".form-select-lg example">
-    <option value=" {{$pemasangan_mutasi_GPS->teknisi}}"> {{$pemasangan_mutasi_GPS->teknisi}} </option>
-    <option value="Khatam">Khatam</option>
-    <option value="Rifai">Rifai</option>
-    <option value="Arief">Arief</option>
-    <option value="Mukhti">Mukhti</option>
-    </select></i></td>
+     <td>
+        <select class="select teknisi-{{$pemasangan_mutasi_GPS->id}}" id="teknisi" name="teknisi">
+            <option selected value="{{$pemasangan_mutasi_GPS->teknisi_id}}">{{$pemasangan_mutasi_GPS->teknisiPemasangan->teknisi_name}}</option>
+            @foreach ($teknisi_pemasangan_mutasi as $item)
+                <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
+            @endforeach
+        </select>
+    </td>
 
     <td>
         <div class="input-div"><input type="number" class="input uang_transportasi-{{$pemasangan_mutasi_GPS->id}}" id="uang_transportasi" placeholder="Uang Transportasi" value="{{ $pemasangan_mutasi_GPS->uang_transportasi}}"></i></div>
