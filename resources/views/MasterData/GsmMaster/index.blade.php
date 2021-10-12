@@ -81,7 +81,6 @@
 				</div>
 				<div class="modal-body">
 
-      <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
         <form action="{{ route('importExcel_GsmMaster') }}" method="POST" id="temporary_form" enctype="multipart/form-data" target="dummyframe">
           {{ csrf_field() }}
           <div class="mb-2">
@@ -581,5 +580,8 @@
 
 
   </script>
+  
+  <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
+
    @endsection
 
