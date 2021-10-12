@@ -29,9 +29,6 @@
           <td id="item-waktu_info-{{ $request_complains->id }}">
             {{ $request_complains->waktu_info}}
         </td>
-         <td id="item-waktu_respond-{{ $request_complains->id }}">
-            {{ $request_complains->waktu_respond}}
-        </td>
         <td id="item-task-{{ $request_complains->id }}">
             {{ $request_complains->task}}
         </td>
@@ -43,6 +40,9 @@
         </td>
         <td id="item-divisi-{{ $request_complains->id }}">
             {{ $request_complains->divisi}}
+        </td>
+        <td id="item-waktu_respond-{{ $request_complains->id }}">
+            {{ $request_complains->waktu_respond}}
         </td>
         <td id="item-respond-{{ $request_complains->id }}">
             {{ $request_complains->respond}}

@@ -113,6 +113,11 @@
                 <div class="collapse in" id="customer" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
+                            <a href="{{url('/master_po') }}">
+                                <span class="link-collapse">Master Po</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{url('/detail_customer') }}">
                                 <span class="link-collapse">Detail Customer</span>
                             </a>

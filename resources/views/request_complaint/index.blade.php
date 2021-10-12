@@ -13,6 +13,7 @@
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <button class="btn btn-default filter"><i class="fas fa-filter"></i></button>
             </div>
 
             <table class="table table-responsive data " class="table_id" id="table_id" >
@@ -32,11 +33,11 @@
                 <th scope="col" class="list">PIC</th>
                 <th scope="col" class="list">Vehicle</th>
                 <th scope="col" class="list">Waktu Info</th>
-                <th scope="col" class="list">Waktu Respond</th>
                 <th scope="col" class="list">Task</th>
                 <th scope="col" class="list">Platform</th>
-                <th scope="col" class="list">Detail Taks</th>
+                <th scope="col" class="list">Detail Task</th>
                 <th scope="col" class="list">Divisi</th>
+                <th scope="col" class="list">Waktu Respond</th>
                 <th scope="col" class="list">Respond</th>
                 <th scope="col" class="list">Waktu Kesepakatan</th>
                 <th scope="col" class="list">Waktu Solve</th>
@@ -88,11 +89,11 @@
         var pic = $("#pic").val();
         var vehicle = $("#vehicle").val();
         var waktu_info = $("#waktu_info").val();
-        var waktu_respond = $("#waktu_respond").val();
         var task = $("#task").val();
         var platform = $("#platform").val();
         var detail_task = $("#detail_task").val();
         var divisi = $("#divisi").val();
+        var waktu_respond = $("#waktu_respond").val();
         var respond = $("#respond").val();
         var waktu_kesepakatan = $("#waktu_kesepakatan").val();
         var waktu_solve = $("#waktu_solve").val();
@@ -102,16 +103,16 @@
             type: "get",
             url: "{{ url('store_RequestComplain') }}",
             data: {
-              company_id: company_id,
+              company_id:company_id,
               internal_eksternal:internal_eksternal,
-              pic: pic,
-              vehicle: vehicle,
-              waktu_info: waktu_info,
-             waktu_respond:waktu_respond,
+              pic:pic,
+              vehicle:vehicle,
+              waktu_info:waktu_info,
               task:task,
               platform:platform,
               detail_task:detail_task,
               divisi:divisi,
+              waktu_respond:waktu_respond,
               respond:respond,
               waktu_kesepakatan:waktu_kesepakatan,
               waktu_solve:waktu_solve,
@@ -173,11 +174,11 @@
         $("#item-pic-"+id).hide("fast");
         $("#item-vehicle-"+id).hide("fast");
         $("#item-waktu_info-"+id).hide("fast");
-        $("#item-waktu_respond-"+id).hide("fast");
-        $("#item-taks-"+id).hide("fast");
+        $("#item-task-"+id).hide("fast");
         $("#item-platform-"+id).hide("fast");
         $("#item-detail_task-"+id).hide("fast");
         $("#item-divisi-"+id).hide("fast");
+        $("#item-waktu_respond-"+id).hide("fast");
         $("#item-respond-"+id).hide("fast");
         $("#item-waktu_kesepakatan-"+id).hide("fast");
         $("#item-waktu_solve-"+id).hide("fast");
@@ -194,11 +195,11 @@
             var pic = $("#pic").val();
             var vehicle = $("#vehicle").val();
             var waktu_info = $("#waktu_info").val();
-            var waktu_respond = $("#waktu_respond").val();
             var task = $("#task").val();
             var platform = $("#platform").val();
             var detail_task = $("#detail_task").val();
             var divisi = $("#divisi").val();
+            var waktu_respond = $("#waktu_respond").val();
             var respond = $("#respond").val();
             var waktu_kesepakatan = $("#waktu_kesepakatan").val();
             var waktu_solve = $("#waktu_solve").val();
@@ -214,11 +215,11 @@
                 pic: pic,
                 vehicle: vehicle,
                 waktu_info: waktu_info,
-                waktu_respond: waktu_respond,
                 task:task,
                 platform:platform,
                 detail_task:detail_task,
                 divisi:divisi,
+                waktu_respond: waktu_respond,
                 respond:respond,
                 waktu_kesepakatan:waktu_kesepakatan,
                 waktu_solve:waktu_solve,
@@ -314,11 +315,11 @@
                     $("#item-pic-"+value).hide("fast");
                     $("#item-vehicle-"+value).hide("fast");
                     $("#item-waktu_info-"+value).hide("fast");
-                    $("#item-waktu_respond-"+value).hide("fast");
                     $("#item-task-"+value).hide("fast");
                     $("#item-platform-"+value).hide("fast");
                     $("#item-detail_task-"+value).hide("fast");
                     $("#item-divisi-"+value).hide("fast");
+                    $("#item-waktu_respond-"+value).hide("fast");
                     $("#item-respond-"+value).hide("fast");
                     $("#item-waktu_kesepakatan"+value).hide("fast");
                     $("#item-waktu_solve-"+value).hide("fast");
@@ -356,11 +357,11 @@
                     var pic = $(".pic-"+value).val();
                     var vehicle = $(".vehicle-"+value).val();
                     var waktu_info = $(".waktu_info-"+value).val();
-                    var waktu_respond = $(".waktu_respond-"+value).val();
                     var task = $(".task-"+value).val();
                     var platform = $(".platform-"+value).val();
                     var detail_task = $(".detail_task-"+value).val();
                     var divisi = $(".divisi-"+value).val();
+                    var waktu_respond = $(".waktu_respond-"+value).val();
                     var respond = $(".respond-"+value).val();
                     var waktu_kesepakatan = $(".waktu_kesepakatan-"+value).val();
                     var waktu_solve = $(".waktu_solve-"+value).val();
@@ -375,11 +376,11 @@
                         pic: pic,
                         vehicle: vehicle,
                         waktu_info: waktu_info,
-                        waktu_respond:waktu_respond,
                         task:task,
                         platform:platform,
                         detail_task:detail_task,
                         divisi:divisi,
+                        waktu_respond:waktu_respond,
                         respond:respond,
                         waktu_kesepakatan:waktu_kesepakatan,
                         waktu_solve:waktu_solve,

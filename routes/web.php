@@ -15,6 +15,7 @@ use App\Http\Controllers\SensorController;
 use App\Http\Controllers\MaintenanceGpsController;
 use App\Http\Controllers\RequestComplaintController;
 use App\Http\Controllers\PemasanganMutasiGpsController;
+use App\Http\Controllers\MasterPoController;
 use App\Models\DetailCustomer;
 use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
@@ -226,6 +227,18 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_maintenanceGps', [MaintenanceGpsController::class, 'deleteAll']);
     Route::get('/selected_maintenanceGps', [MaintenanceGpsController::class, 'selected']);
 
+
+    //Master PO
+    Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');
+    Route::get('/item_data_master_po', [MasterPoController::class, 'item_data'])->name('item_master_po');
+    Route::get('/add_form_master_po', [MasterPoController::class, 'add_form'])->name('add_master_po');
+    Route::get('/store_master_po', [MasterPoController::class, 'store']);
+    Route::get('/destroy_master_po/{id}', [MasterPoController::class, 'destroy']);
+    Route::get('/show_master_po/{id}', [MasterPoController::class, 'edit_form']);
+    Route::get('/update_master_po/{id}', [MasterPoController::class, 'update']);
+    Route::get('/selectedDelete_master_po', [MasterPoController::class, 'deleteAll']);
+    Route::get('/selected_master_po', [MasterPoController::class, 'selected']);
+    Route::get('/update_all/{id}', [MasterPoController::class, 'updateall']);
 
 });
 Auth::routes();
