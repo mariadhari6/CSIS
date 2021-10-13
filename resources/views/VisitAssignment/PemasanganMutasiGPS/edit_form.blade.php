@@ -79,6 +79,18 @@
        @endforeach
     </select></i></td>
 
+    <td><select class="select jenis_pekerjaan-{{$pemasangan_mutasi_GPS->id}}" id="jenis_pekerjaan" name="jenis_pekerjaan">
+        <option value="{{$pemasangan_mutasi_GPS->jenis_pekerjaan}} "> {{$pemasangan_mutasi_GPS->requestComplain->task}} </option>
+        @foreach ($request_complain as $request_complains)
+        <option value="{{ $request_complains->id }}" {{ old('jenis_pekerjaan') == $request_complains->id  ? 'selected':'' }}>
+         {{-- @if ($request_complains->task =='Pemasangan'||'Mutasi'||'Pelepasan GPS') --}}
+            {{$request_complains->task}}
+         {{-- @endif --}}
+            {{-- {{$request_complains->task}} --}}
+        </option>
+
+       @endforeach
+    </select></i></td>
 
     <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps">
         <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->gps->type}} </option>

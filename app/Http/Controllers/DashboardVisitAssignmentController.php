@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\MaintenanceGps;
 use App\Models\PemasanganMutasiGps;
 use Illuminate\Http\Request;
@@ -61,9 +60,10 @@ class DashboardVisitAssignmentController extends Controller
             ->selectRaw('type_gps_id, count(type_gps_id) as type_count')->get();
         return view('VisitAssignment.Dashboard.perTypeGps')->with([
             'data' => $data
-
         ]);
     }
+
+
 
     public function tugasPerTeknisi()
     {

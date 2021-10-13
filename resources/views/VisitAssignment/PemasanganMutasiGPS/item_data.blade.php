@@ -17,9 +17,6 @@
         <td id="item-company_id-{{ $item->id}}">
             {{ $item->requestComplain->companyRequest->company_name}}
         </td>
-        <td id="item-jenis_pekerjaan-{{ $item->id }}">
-            {{ $item->requestComplain->taskRequest->task}}
-        </td>
           <td id="item-tanggal-{{ $item->id }}">
             {{ $item->requestComplain->waktu_kesepakatan }}
         </td>
@@ -36,7 +33,9 @@
         <td id="item-kendaraan_pasang-{{ $item->id }}">
             {{ $item->requestComplain->vehicle}}
         </td>
-
+        <td id="item-jenis_pekerjaan-{{ $item->id }}">
+            {{ $item->requestComplain->taskRequest->task}}
+        </td>
 
         <td id="item-equipment_terpakai_gps-{{ $item->id }}">
             {{$item->gps->typeGps->type}}

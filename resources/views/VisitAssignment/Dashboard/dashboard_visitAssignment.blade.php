@@ -118,7 +118,7 @@
                     <canvas id="myChart"></canvas>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <br>
     </div>
 </div>

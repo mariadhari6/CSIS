@@ -72,6 +72,19 @@
     </select></i></td>
 
 
+       @foreach ($request_complain as $request_complains)
+
+            <option value="{{ $request_complains->id }}" {{ old('jenis_pekerjaan') == $request_complains->id  ? 'selected':'' }}>
+
+
+                    {{$request_complains->taskRequest->task}}
+
+        </option>
+
+
+
+       @endforeach
+    </select></i></td>
 
 
 
