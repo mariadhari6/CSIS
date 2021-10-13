@@ -2,12 +2,10 @@
 
 namespace App\Exports;
 
-use App\Models\Username;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use App\Exports\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
-class UsersExport implements FromCollection
+class TemplateGsm implements FromCollection
 {
     public function collection()
     {

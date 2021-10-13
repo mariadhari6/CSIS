@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TemplateGsm;
 use App\Imports\GsmMasterImport;
 use App\Models\Company;
 use App\Models\Gsm;
@@ -35,7 +36,7 @@ class GsmMasterController extends Controller
 
     public function item_data_temporary()
     {
-        $GsmMaster = GsmTemporary::orderBy('id', 'DESC')->get();
+        $GsmMaster = GsmTemporary::orderBy('id', 'ASC')->get();
         return view('MasterData.GsmMaster.item_data_temporary')->with([
             'GsmMaster' => $GsmMaster
         ]);
@@ -150,6 +151,11 @@ class GsmMasterController extends Controller
 
         Excel::import(new GsmMasterImport, public_path('/DataGsmMaster/'.$nameFile));
         // return redirect('/GsmMaster');
+    }
+
+    public function export()
+    {
+        return Excel::download(new TemplateGsm, 'template-gsm.xlsx');
     }
 
 }

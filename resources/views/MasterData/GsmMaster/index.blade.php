@@ -85,9 +85,11 @@
           {{ csrf_field() }}
           <div class="mb-2">
             <input type="file" name="file" id="file_import" required="required">
-            <button type="submit" class="btn btn-primary btn-xs" id="check" >Check</button>
+            <button type="submit" class="btn btn-primary btn-xs" id="check" ></button>
+            <button class="btn btn-primary btn-xs" onclick="submitClick()">Check</button>
         </form>									
             <button type="button" class="btn btn-success btn-xs" id="send" onclick="send_data()" >Send</button>
+            <a  class="btn btn-secondary btn-xs" href="/download_template_gsm" style="color:white">Download Template</a>
           </div>
           <div class="card">
             <div class="card-body">
@@ -95,6 +97,7 @@
                 <table class="table table-bordered" id="table_temporary_id">
                   <thead>
                     <tr>
+                      <th>No.</th>
                       <th>Status GSM</th>
                       <th>GSM Number</th>
                       <th>Company</th>
@@ -129,23 +132,42 @@
     $(document).ready(function() {
       read()
       read_temporary()
+      deleteTemporary();
+      // --- hide submit button ----
+      document.getElementById("check").style.visibility = "hidden";
     });
+
+      // ---- Submit form temporary ----
+    function submitClick() {
+      deleteTemporary();
+      $('#check').click();
+    }
 
     // ------- send import -----
     function send_data() {
-      var status_gsm = $(".temporary-status_gsm").attr("id");
-      var gsm_number = $(".temporary-gsm_number").attr("id");
-      var company_id = $(".temporary-company_id").attr("id");
-      var serial_number = $(".temporary-serial_number").attr("id");
-      var icc_id = $(".temporary-icc_id").attr("id");
-      var imsi = $(".temporary-imsi").attr("id");
-      var res_id = $(".temporary-res_id").attr("id");
-      var request_date = $(".temporary-request_date").attr("id");
-      var expired_date = $(".temporary-expired_date").attr("id");
-      var active_date = $(".temporary-active_date").attr("id");
-      var terminate_date = $(".temporary-terminate_date").attr("id");
-      var note = $(".temporary-note").attr("id");
-      $.ajax({
+      $rowCount = $("#table_temporary_id tr").length;
+      $rowResult = $rowCount - 1;
+      var allVals = [];
+      for($i = 0; $i < $rowResult; $i++)
+          { 
+            var id = $("#table_temporary_id").find("tbody>tr:eq("+ $i +")>td:eq(0)").attr("id");
+            allVals[$i] = id;
+          }
+      
+      $.each(allVals, function(index, value){
+        var status_gsm = $(".temporary-status_gsm-"+value).attr("id");
+        var gsm_number = $(".temporary-gsm_number-"+value).attr("id");
+        var company_id = $(".temporary-company_id-"+value).attr("id");
+        var serial_number = $(".temporary-serial_number-"+value).attr("id");
+        var icc_id = $(".temporary-icc_id-"+value).attr("id");
+        var imsi = $(".temporary-imsi-"+value).attr("id");
+        var res_id = $(".temporary-res_id-"+value).attr("id");
+        var request_date = $(".temporary-request_date-"+value).attr("id");
+        var expired_date = $(".temporary-expired_date-"+value).attr("id");
+        var active_date = $(".temporary-active_date-"+value).attr("id");
+        var terminate_date = $(".temporary-terminate_date-"+value).attr("id");
+        var note = $(".temporary-note-"+value).attr("id");
+          $.ajax({
           type: "get",
           url: "{{ url('store_GsmMaster') }}",
           data: {
@@ -174,7 +196,8 @@
             read_temporary()
             $('#importData').modal('hide');
           }
-      })
+      });
+      });
     }
 
     // ---- Close Modal -------
@@ -499,7 +522,6 @@
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -549,8 +571,6 @@
                           title: 'The selected data has been updated',
                           showConfirmButton: false,
                           timer: 1500
-
-                      // $(".save").hide();
                       });
                       read();
 
@@ -563,10 +583,7 @@
                 });
             });
         });
-
-
         }
-
         //--------Proses Batal--------
         function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
@@ -580,7 +597,7 @@
 
 
   </script>
-  
+
   <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
 
    @endsection

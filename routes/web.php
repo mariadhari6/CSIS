@@ -188,6 +188,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [GsmMasterController::class, 'updateall']);
     Route::post('/importExcel_GsmMaster', [GsmMasterController::class, 'importExcel'])->name('importExcel_GsmMaster');
     Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
+    Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
+
 
     //Request and Complent Customer
     Route::get('/requestcomplaint', [RequestComplaintCustomerController::class, 'index']);
