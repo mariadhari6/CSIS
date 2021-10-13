@@ -25,7 +25,6 @@
         <td id="item-status-{{ $item->id }}">
             {{ $item->status }}
         </td>
-
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>

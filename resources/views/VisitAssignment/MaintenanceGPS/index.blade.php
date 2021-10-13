@@ -45,7 +45,6 @@
                 <th rowspan="2" scope="col" class="list">Req By</th>
                 <th rowspan="2" scope="col" class="list">Note</th>
                 <th rowspan="2" scope="col" class="action">Action</th>
-
               </tr>
               <tr>
                 <th scope="col" class="list">GPS</th>

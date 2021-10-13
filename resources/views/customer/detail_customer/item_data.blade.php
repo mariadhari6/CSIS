@@ -82,4 +82,4 @@
         </td>
     </tr>
 
-   @endforeach
+@endforeach

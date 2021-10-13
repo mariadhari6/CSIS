@@ -110,15 +110,19 @@
             </div>
         </div>
 
-        {{-- <div class="col-md-6">
+         <div class="col-md-6">
             <div class="card">
-                <div id="chart-div" style="width: 900px; height: 300px;">
+                {{-- <div id="columnchart_values" style="width: 900px; height: 300px;">
+                </div> --}}
+                <div>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <br>
     </div>
 </div>
+
 
 <div class="table_id">
 
@@ -168,3 +172,64 @@
 
 @endsection
 
+</div>
+
+<script>
+    // const DATA_COUNT = 7;
+    // const NUMBER_CFG =  {count: DATA_COUNT, min: -100, max: 100};
+
+    var cData = JSON.parse(`<?php echo $chart_company; ?>`);
+    const labels = [...new Set(cData.company)];
+
+    const data = {
+    labels: labels,
+    datasets: [
+        {
+        label: 'Vehicle',
+        data: [1,2],
+        borderColor: '#3366cc',
+        backgroundColor: '#3366cc',
+        },
+
+        {
+        label: 'Times',
+        data: [1,2],
+        borderColor: '#b35900',
+        backgroundColor: '#b35900',
+        },
+
+        {
+        label: 'Cost',
+        data: [1,2],
+        borderColor: '#737373',
+        backgroundColor: '#737373',
+        }
+    ]
+
+    };
+
+    const config = {
+    type: 'bar',
+    data: data,
+    options: {
+        responsive: true,
+        plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Chart.js Bar Chart'
+        }
+        }
+    },
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+</script>
+
+@endsection

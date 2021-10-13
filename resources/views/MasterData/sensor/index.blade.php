@@ -40,7 +40,6 @@
                 <th scope="col" class="list">Waranty</th>
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="action">Action</th>
-
               </tr>
             </thead>
             <tbody  id="item_data">

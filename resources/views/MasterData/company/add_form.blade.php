@@ -48,6 +48,7 @@
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('select[name="seller_id"]').on('change', function() {

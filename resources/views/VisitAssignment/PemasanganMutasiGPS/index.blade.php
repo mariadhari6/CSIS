@@ -72,12 +72,10 @@
     });
     // ------ Tampil Data ------
     function read(){
-
       $.get("{{ url('item_data_PemasanganMutasi') }}", {}, function(data, status) {
          $('#table_id').DataTable().destroy();
          $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
-
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
@@ -88,7 +86,6 @@
     function cancel() {
       read()
     }
-
      // ------ Tambah Form Input ------
      $('.add').click(function() {
         $.get("{{ url('add_form_PemasanganMutasi') }}", {}, function(data, status) {
@@ -167,7 +164,6 @@
                         read();
                     }
                 });
-
               });
             },
             allowOutsideClick: false
@@ -182,6 +178,7 @@
         $("#item-company_id-"+id).hide("fast");
         $("#item-tanggal-"+id).hide("fast");
         $("#item-kendaraan_awal-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-imei-"+id).hide("fast");
         $("#item-gsm_pemasangan-"+id).hide("fast");
         $("#item-kendaraan_pasang-"+id).hide("fast");
@@ -286,7 +283,6 @@
                                 }).catch(function(timeout) { });
                                 $("#master").prop('checked', false);
                                 read();
-
                                 }
                             });
                     });
@@ -297,13 +293,10 @@
                 alert('Select the row you want to delete')
             }
         });
-
         // Form Edit All
         $('.edit_all').on('click', function(e){
-
             var allVals = [];
             var _token = $('input[name="_token"]').val();
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -319,6 +312,7 @@
                     $("#td-button-"+value).hide("fast");
                     $("#item-no-"+value).hide("fast");
                     $("#item-company_id-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-tanggal-"+value).hide("fast");
                     $("#item-kendaraan_awal-"+value).hide("fast");
                     $("#item-imei-"+value).hide("fast");
@@ -335,18 +329,15 @@
                     $.get("{{ url('show_PemasanganMutasi') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
-
                     });
                 });
             }else{
                 alert('Select the row you want to edit')
             }
         });
-
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
@@ -361,7 +352,6 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-
                     var company_id = $(".company_id-"+value).val();
                     var tanggal = $(".tanggal-"+value).val();
                     var kendaraan_awal = $(".kendaraan_awal-"+value).val();
@@ -399,11 +389,9 @@
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
                                     timer: 1500
-
                                 // $(".save").hide();
                                 });
                                 read();
-
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
@@ -413,10 +401,7 @@
                 });
             });
         });
-
-
         }
-
         //--------Proses Batal--------
          function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
@@ -432,4 +417,3 @@
 
   </script>
    @endsection
-

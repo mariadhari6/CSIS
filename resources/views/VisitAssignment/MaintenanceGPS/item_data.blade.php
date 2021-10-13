@@ -12,7 +12,6 @@
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
-
         <td id="item-company-{{ $item->id}}">
             {{ $item->requestComplain->companyRequest->company_name }}
         </td>

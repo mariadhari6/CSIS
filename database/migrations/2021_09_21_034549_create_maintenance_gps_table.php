@@ -27,7 +27,7 @@ class CreateMaintenanceGpsTable extends Migration
             $table->string('keterangan');
             $table->string('hasil');
             $table->string('biaya_transportasi');
-            $table->foreignId('teknisi_id');
+            $table->string('teknisi');
             $table->string('req_by');
             $table->longText('note');
             $table->timestamps();

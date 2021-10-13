@@ -14,6 +14,7 @@ class PemasanganMutasiGps extends Model
         'company_id', 'tanggal', 'kendaraan_awal', 'imei', 'gsm_pemasangan', 'kendaraan_pasang', 'jenis_pekerjaan', 'equipment_terpakai_gps', 'equipment_terpasang_sensor', 'teknisi',
         'uang_transportasi', 'type_visit', 'note'
     ];
+
     public function requestComplain()
     {
         return $this->belongsTo(RequestComplaintCustomer::class, 'company_id');
@@ -28,16 +29,18 @@ class PemasanganMutasiGps extends Model
     }
     public function gps()
     {
-        return $this->belongsTo(Gps::class, 'equipment_terpakai_gps');
+        return $this->belongsTo(Gps::class, 'id');
     }
 
     public function sensor()
     {
+
         return $this->belongsTo(Sensor::class, 'equipment_terpakai_sensor');
     }
 
     public function teknisiPemasangan()
     {
-        return $this->belongsTo(Teknisi::class, 'teknisi');
+
+        return $this->belongsTo(Sensor::class, 'id');
     }
 }

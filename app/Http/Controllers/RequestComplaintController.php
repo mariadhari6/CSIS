@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Pic;
-use App\Models\RequestComplaintCustomer;
+use App\Models\RequestComplaint;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +21,7 @@ class RequestComplaintController extends Controller
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
         $task_request = Task::orderBy('id', 'DESC')->get();
-        $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
+        $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
         return view('request_complaint.add_form')->with([
 
             'request_complain' => $request_complain,
@@ -33,7 +33,7 @@ class RequestComplaintController extends Controller
 
     public function item_data()
     {
-        $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
+        $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
         return view('request_complaint.item_data', compact('request_complain'));
         // dd($request_complain);
     }
@@ -58,14 +58,14 @@ class RequestComplaintController extends Controller
             'status'     =>  $request->status,
             'status_akhir'     =>  $request->status_akhir,
         );
-        RequestComplaintCustomer::insert($data);
+        RequestComplaint::insert($data);
     }
 
     public function edit_form($id)
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
-        $request_complain = RequestComplaintCustomer::findOrfail($id);
+        $request_complain = RequestComplaint::findOrfail($id);
         $task_request = Task::orderBy('id', 'DESC')->get();
 
         return view('request_complaint.edit_form')->with([
@@ -79,13 +79,13 @@ class RequestComplaintController extends Controller
 
     public function destroy($id)
     {
-        $data = RequestComplaintCustomer::findOrfail($id);
+        $data = RequestComplaint::findOrfail($id);
         $data->delete();
     }
 
     public function update(Request $request, $id)
     {
-        $data = RequestComplaintCustomer::findOrfail($id);
+        $data = RequestComplaint::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->internal_eksternal = $request->internal_eksternal;
         $data->pic = $request->pic;
@@ -107,7 +107,7 @@ class RequestComplaintController extends Controller
 
     public function selected()
     {
-        $request_complain = RequestComplaintCustomer::all();
+        $request_complain = RequestComplaint::all();
         return view('request_complaint.selected')->with([
             'request_complain' => $request_complain
         ]);
@@ -115,7 +115,7 @@ class RequestComplaintController extends Controller
 
     public function updateall(Request $request, $id)
     {
-        $data = RequestComplaintCustomer::findOrfail($id);
+        $data = RequestComplaint::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->internal_eksternal = $request->internal_eksternal;
         $data->pic = $request->pic;
@@ -147,13 +147,13 @@ class RequestComplaintController extends Controller
     {
         if ($request->ajax()) {
 
-            return DataTables::of(RequestComplaintCustomer::all())->make(true);
+            return DataTables::of(RequestComplaint::all())->make(true);
         }
     }
 
     public function updateSelected(Request $request)
     {
-        RequestComplaintCustomer::where('item_type_id', '=', 1)
+        RequestComplaint::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
     }
 }

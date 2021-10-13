@@ -23,7 +23,8 @@
                 </a>
             </li>
 
-            <li class="nav-item ">
+
+            <li class="nav-item {{ request()->is('seller') ? ' active' : ''}} ">
                 <a class="" data-toggle="collapse" href="#masterData" aria-expanded="true">
                     <i class="fas fa-table"></i>
                     <p>Master Data</p>
@@ -58,16 +59,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class ="" data-toggle="collapse @yield('gsm')" href="#gsm" aria-expanded="true">
+                            <a class ="" data-toggle="collapse" href="#gsm" aria-expanded="true">
                                 <span class="link-collapse">GSM</span>
                                 <span class="caret"></span>
                             </a>
 
                             <div class="collapse in" id="gsm" aria-expanded="true" style="">
                                 <ul class="nav">
-                                    <li class="nav-item {{ request()->is('GsmPreActive') ? ' active' : ''}}">
-                                        <a class="collapse-item @yield('GsmPreActive')" href="{{url('/GsmPreActive')}}">
-                                            <span class="link-collapse">Master GSM</span>
+
+                                    <li>
+                                        <a href="{{url('/GsmMaster')}}">
+                                            <span class="link-collapse">Master</span>
                                         </a>
                                     </li>
                                     <li class="nav-item {{ request()->is('Active') ? ' active' : ''}}">
@@ -88,7 +90,9 @@
                 </div>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item
+                {{ request()->is('detail_customer') ? ' active' : ''}}
+            ">
                 <a class="" data-toggle="collapse" href="#customer" aria-expanded="true">
                     <i class="fas fa-user-friends"></i>
                     <p>Customer</p>
@@ -135,7 +139,11 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item
+                {{ request()->is('MaintenanceGps') ? ' active' : ''}}
+                {{ request()->is('PemasanganMutasi') ? ' active' : ''}}
+                {{ request()->is('dashboard_visit_assignment') ? ' active' : ''}}
+            ">
                 <a class="" data-toggle="collapse" href="#visit" aria-expanded="true">
                     <i class="fas fa-user-cog"></i>
                     <p>Visit Assignment</p>

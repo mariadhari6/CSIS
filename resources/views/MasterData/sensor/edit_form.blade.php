@@ -1,6 +1,5 @@
     <td></td>
     <td></td>
-
     <td>
         <div class="input-div"><input type="text" class="input sensor_name-{{$sensor->id}}" id="sensor_name" placeholder="Sensor Name" value="{{ $sensor->sensor_name}}"></div>
     </td>

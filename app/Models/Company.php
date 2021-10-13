@@ -43,6 +43,6 @@ class Company extends Model
     //---------------------//
     public function requestComplaint()
     {
-        return $this->hasMany(RequestComplaintCustomer::class);
+        return $this->hasMany(RequestComplaint::class);
     }
 }

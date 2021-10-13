@@ -17,7 +17,7 @@
                 {{ $sellers->company->company_name}}
         </td> --}}
         <td id="item-merk-{{ $item->id}}">
-            {{ $item->merkGps->merk }}
+            {{ $item->merkGps->merk}}
         </td>
           <td id="item-type-{{ $item->id }}">
             {{ $item->typeGps->type }}
@@ -37,7 +37,6 @@
           <td id="item-status_ownership-{{ $item->id }}">
             {{ $item->status_ownership }}
           </td>
-
           <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>

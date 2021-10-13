@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use App\Imports\GpsImport;
+use App\Models\GpsTemporary;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GpsController extends Controller
@@ -39,18 +40,30 @@ class GpsController extends Controller
 
         ]);
     }
+    public function item_data_temporary()
+    {
+        $gps = GpsTemporary::orderBy('id', 'DESC')->get();
+        return view('MasterData.gps.item_data_temporary')->with([
+            'gps' => $gps
+        ]);
+        // dd($gps);
+    }
+    public function deleteTemporary()
+    {
+        GpsTemporary::truncate();
+    }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'merk' => 'required',
-            'type' => 'required',
-            'imei' => 'required',
-            'waranty' => 'required',
-            'po_date' => 'required',
-            'status' => 'required'
+        // $request->validate([
+        //     'merk' => 'required',
+        //     'type' => 'required',
+        //     'imei' => 'required',
+        //     'waranty' => 'required',
+        //     'po_date' => 'required',
+        //     'status' => 'required'
 
-        ]);
+        // ]);
         $data = array(
             'merk'    =>  $request->merk,
             'type'     =>  $request->type,
@@ -143,13 +156,13 @@ class GpsController extends Controller
             ->update(['colour' => 'black']);
     }
 
-    public function ImportGps(Request $request)
+    public function importExcel(Request $request)
     {
-        $file = $request->file('excel-gps');
-        Excel::import(new GpsImport, $file);
-        return redirect()->back()->withStatus('file imported success');
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('MasterGps', $nameFile);
 
-
-        // return redirect('/')->with('success', 'All good!');
+        Excel::import(new GpsImport, public_path('/MasterGps/' . $nameFile));
+        // return redirect('/GsmMaster');
     }
 }

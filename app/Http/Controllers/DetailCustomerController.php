@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\DetailCustomer;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -24,7 +24,7 @@ class DetailCustomerController extends Controller
 
     public function add_form()
     {
-        $company = Company::orderBy('id', 'DESC')->get();
+        $company = DetailCustomer::with('company')->get();
         return view('customer.detail_customer.add_form', compact('company'));
     }
 

@@ -12,22 +12,20 @@
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
-
-
-        <td id="item-request_date-{{ $item->id}}">
+        <td id="item-status_gsm-{{ $item->id}}">
+            {{ $item->status_gsm }}
+        </td>
+        <td id="item-gsm_number-{{ $item->id}}">
+            {{ $item->gsm_number }}
+        </td>
+        <td id="item-company_id-{{ $item->id}}">
+            {{ $item->company->company_name }}
+        </td>
+        <td id="item-request_date-{{ $item->id }}">
             {{ $item->request_date }}
         </td>
-          <td id="item-active_date-{{ $item->id }}">
+        <td id="item-active_date-{{ $item->id }}">
             {{ $item->active_date }}
-        </td>
-        <td id="item-gsm_pre_active_id-{{ $item->id}}">
-            {{ $item->gsmPreActive->gsm_number}}
-        </td>
-          <td id="item-status_active-{{ $item->id }}">
-            {{ $item->status_active }}
-        </td>
-          <td id="item-company_id-{{ $item->id }}">
-            {{ $item->company->company_name}}
         </td>
         <td id="item-note-{{ $item->id }}">
             {{ $item->note }}

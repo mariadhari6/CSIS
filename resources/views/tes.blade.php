@@ -84,7 +84,10 @@
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div id="columnchart_values" style="width: 900px; height: 300px;">
+                {{-- <div id="columnchart_values" style="width: 900px; height: 300px;">
+                </div> --}}
+                <div>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
@@ -126,6 +129,38 @@
     var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
     chart.draw(view, options);
 }
+</script>
+
+<script>
+        
+    const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    ];
+    const data = {
+    labels: labels,
+    datasets: [{
+        label: 'My First dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 5, 2, 20, 30, 45],
+    }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
 </script>
 
 

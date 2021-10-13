@@ -39,7 +39,6 @@
                 <th scope="col" class="list">No Agreement Letter</th>
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="action">Action</th>
-
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -158,6 +157,7 @@
     function edit(id){
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
+        // $("#item-no-"+id).hide("fast");
         $("#td-button-"+id).slideUp("fast");
         $("#item-no-"+value).slideUp("fast");
         $("#item-company_name-"+id).slideUp("fast");

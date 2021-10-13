@@ -10,8 +10,10 @@
         <div class="card-body">
           <div class="text-right mt-3" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-              <button type="button" class="btn btn-success float-left mr-2 " data-toggle="modal" data-target="#modal-import"><b>Import Excel</b><i class="fas fa-file-excel ml-2"></i></button>
-
+                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                  <b> Import</b>
+                  <i class="fas fa-file-excel ml-2"></i>
+                </button>
               <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
@@ -35,7 +37,6 @@
                 <th scope="col" class="list" >Status</th>
                 <th scope="col" class="list" >Status Ownership</th>
                 <th scope="col" class="action">Action</th>
-
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -48,15 +49,121 @@
     </div>
   </div>
 
+ <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
+		<div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role="document">
+			<div class="modal-content-full-width modal-content">
+				<div class="modal-header-full-width modal-header bg-primary">
+					<h6 class="modal-title">Import data</h6>
+                     <button type="button" class="close" id="close-modal" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
 
+      {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
+       <form  method="POST" action="{{ route('importExcel_gps') }}" id="temporary_form" enctype="multipart/form-data" target="dummyframe">
+          {{-- {{method_field('')}} --}}
+            @csrf
+          <div class="mb-2">
+            <input type="file" name="file" id="file_import" required="required">
+            <button type="submit" class="btn btn-primary btn-xs" id="check" >Check</button>
+        </form>
+            <button type="button" class="btn btn-success btn-xs" id="send" onclick="send_data()" >Send</button>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="table_temporary_id">
+                  <thead>
+                    <tr>
+                        <th>Merk</th>
+                        <th>Type</th>
+                        <th>IMEI</th>
+                        <th>Waranty</th>
+                        <th>Po Date</th>
+                        <th>Status</th>
+                        <th>Status Ownership</th>
+
+                    </tr>
+                  </thead>
+                  <tbody id="item_data_temporary">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer-full-width  modal-footer">
+
+        </div>
+        </div>
+			</div>
+		</div>
+	</div>
 
   <script>
     $(document).ready(function() {
       read()
+      read_temporary()
+
     });
+    //------- Send Import ------
+      function send_data() {
+      var merk = $(".temporary-merk").attr("id");
+      var type = $(".temporary-type").attr("id");
+      var imei = $(".temporary-imei").attr("id");
+      var waranty = $(".temporary-waranty").attr("id");
+      var po_date = $(".temporary-po_date").attr("id");
+      var status = $(".temporary-status").attr("id");
+      var status_ownership = $(".temporary-status_ownership").attr("id");
+      $.ajax({
+          type: "get",
+          url: "{{ url('store_gps') }}",
+          data: {
+            merk: merk,
+            type: type,
+            imei: imei,
+            waranty: waranty,
+            po_date: po_date,
+            status: status,
+            status_ownership: status_ownership,
+
+          },
+          success: function(data) {
+            swal({
+              type: 'success',
+              title: 'Data Saved',
+              showConfirmButton: false,
+              timer: 1500
+          }).catch(function(timeout) { });
+            read();
+            deleteTemporary();
+            read_temporary()
+            $('#importData').modal('hide');
+          }
+      })
+    }
+
+     // ---- Close Modal -------
+    $('#close-modal').click(function() {
+        deleteTemporary();
+        read_temporary()
+        $('#importData').modal('hide');
+    });
+
+     // ------- Delete Temporary -----
+    function deleteTemporary() {
+      $.ajax({
+          type: "get",
+          url: "{{ url('delete_temporary_gps') }}",
+          success: function(data) {
+
+          }
+      });
+    }
     // ------ Tampil Data ------
     function read(){
-
       $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -68,6 +175,20 @@
         $('#table_id').DataTable().draw();
       });
     }
+     // ------ Tampil Data Temporary------
+    function read_temporary(){
+      $.get("{{ url('/item_data_temporary_GpsMaster') }}", {}, function(data, status) {
+        $('#table_temporary_id').find("#item_data_temporary").html(data);
+      });
+    }
+    // ------ Tambah Form Input ------
+     $('.check').click(function() {
+        $.get("{{ url('/item_data_temporary_GpsMaster') }}", {}, function(data, status) {
+          $('#table_temporary_id').find("#item_data_temporary").html(data);
+        });
+      });
+
+
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -153,6 +274,7 @@
         $("#td-button-"+id).hide("fast");
         $("#item-no-"+id).slideUp("fast");
         $("#item-merk-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-type-"+id).hide("fast");
         $("#item-imei-"+id).hide("fast");
         $("#item-waranty-"+id).hide("fast");
@@ -274,6 +396,7 @@
                     $("#td-button-"+value).hide("fast");
                     $("#item-no-"+value).slideUp("fast");
                     $("#item-merk-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-type-"+value).hide("fast");
                     $("#item-imei-"+value).hide("fast");
                     $("#item-waranty-"+value).hide("fast");
@@ -367,6 +490,7 @@
 
 
   </script>
+    <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
   {{-- <div class="modal-fade" id="modal-import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
      <div class="modal-dialog">
 
@@ -393,7 +517,7 @@
         </form>
      </div>
  </div> --}}
- <div class="modal fade" id="modal-import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ {{-- <div class="modal fade" id="modal-import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
          <form action="{{url('/import_gps')}}" method="POST" id="form-import" enctype="multipart/form-data" class="modal-content">
@@ -425,7 +549,7 @@
     </form>
     </div>
   </div>
-</div>
+</div> --}}
    @endsection
 
 

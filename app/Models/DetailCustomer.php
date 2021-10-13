@@ -32,6 +32,8 @@ class DetailCustomer extends Model
         'tanggal_pasang',
         'tanggal_non_aktif'
     ];
+
+
     public function pemasanganMutasiGps()
     {
         return $this->hasMany(PemasanganMutasiGps::class);

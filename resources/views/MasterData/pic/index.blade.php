@@ -39,7 +39,6 @@
                 <th scope="col" class="list">Position</th>
                 <th scope="col" class="list">Date of birth</th>
                 <th scope="col" class="action">Action</th>
-
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -161,7 +160,8 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
-        $("#item-no-"+id).slideUp("fast");
+
+        $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-pic_name-"+id).slideUp("fast");
         $("#item-phone-"+id).slideUp("fast");
@@ -281,7 +281,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-no-"+value).slideUp("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-company_id-"+value).slideUp("fast");
                     $("#item-pic_name-"+value).slideUp("fast");
                     $("#item-phone-"+value).slideUp("fast");

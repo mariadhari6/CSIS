@@ -15,16 +15,16 @@ class CreatePemasanganMutasiGpsTable extends Migration
     {
         Schema::create('pemasangan_mutasi_gps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id');
-            $table->foreignId('tanggal');
-            $table->foreignId('kendaraan_awal');
-            $table->foreignId('imei');
-            $table->foreignId('gsm_pemasangan');
-            $table->foreignId('kendaraan_pasang');
-            $table->foreignId('jenis_pekerjaan');
-            $table->foreignId('equipment_terpakai_gps');
-            $table->foreignId('equipment_terpakai_sensor');
-            $table->foreignId('teknisi');
+            $table->foreignId('company_id')->nullable();
+            $table->foreignId('tanggal')->nullable();
+            $table->foreignId('kendaraan_awal')->nullable();
+            $table->foreignId('imei')->nullable();
+            $table->foreignId('gsm_pemasangan')->nullable();
+            $table->foreignId('kendaraan_pasang')->nullable();
+            $table->foreignId('jenis_pekerjaan')->nullable();
+            $table->foreignId('equipment_terpakai_gps')->nullable();
+            $table->foreignId('equipment_terpakai_sensor')->nullable();
+            $table->string('teknisi');
             $table->integer('uang_transportasi');
             $table->string('type_visit');
             $table->string('note');

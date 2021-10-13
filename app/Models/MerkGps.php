@@ -14,4 +14,8 @@ class MerkGps extends Model
     {
         return $this->hasMany(Gps::class);
     }
+    public function GpsTemporary()
+    {
+        return $this->hasMany(GpsTemporary::class);
+    }
 }

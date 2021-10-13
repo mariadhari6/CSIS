@@ -1,6 +1,5 @@
 <td></td>
 <td></td>
-
 <td>
     <div class="input-div">
         <input type="text" class="input seller_name-{{$seller->id}}" id="seller_name" placeholder="Seller Name" value="{{ $seller->seller_name}}">

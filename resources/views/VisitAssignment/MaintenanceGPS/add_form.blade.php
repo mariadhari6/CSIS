@@ -107,7 +107,6 @@
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 
-
     <script type="text/javascript">
         $(document).ready(function() {
             // depend vehicle

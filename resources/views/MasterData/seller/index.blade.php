@@ -10,7 +10,7 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add" id="add">
+                <button type="button" class="btn btn-primary float-left mr-2 add" id="add" >
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" ></i>
                 </button>
@@ -38,7 +38,6 @@
                 <th scope="col" class="list-seller">No Agreement Letter</th>
                 <th scope="col" class="list-seller">Status</th>
                 <th scope="col" class="action">Action</th>
-
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -55,6 +54,10 @@
     $(document).ready(function() {
       read()
     });
+
+    // Swal.mixin({
+    //   toast: true,
+    // }).bindClickHandler('data-swal-toast-template')
 
     // ------ Tampil Data ------
     function read(){
@@ -81,11 +84,29 @@
       });
     // ----- Proses Tambah data ------
     function store() {
+
         var seller_name = $("#seller_name").val();
         var seller_code = $("#seller_code").val();
         var no_agreement_letter = $("#no_agreement_letter").val();
         var status = $("#status").val();
-        $.ajax({
+
+        if(
+            seller_name == '' ||
+            seller_code == '' ||
+            no_agreement_letter == ''
+          ) {
+          swal({
+            type: 'warning',
+            text: 'there is data that has not been filled',
+            showConfirmButton: false,
+            timer: 1500
+          }).catch(function(timeout) { });
+
+          $("#required").text("please fill out this field");
+
+        } else {
+
+           $.ajax({
             type: "get",
             url: "{{ url('store_seller') }}",
             data: {
@@ -104,6 +125,8 @@
               read();
             }
         })
+
+        }
     }
 
     // -----Proses Delete Data ------
@@ -143,6 +166,7 @@
     function edit(id){
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
         $("#item-seller_name-"+id).hide("fast");
@@ -335,6 +359,8 @@
             $(".delete_all").show("fast");
             read();
         }
+
+
 
 
 
