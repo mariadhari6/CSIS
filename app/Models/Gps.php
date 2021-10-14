@@ -34,4 +34,8 @@ class Gps extends Model
     {
         return $this->belongsTo(TypeGps::class, 'type');
     }
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaint::class);
+    }
 }

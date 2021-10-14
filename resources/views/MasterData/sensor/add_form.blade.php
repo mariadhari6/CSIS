@@ -10,7 +10,7 @@
             <option selected disabled>Merk Sensor</option>
 
             @foreach ($merk_sensor as $item)
-            <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':'' }}>{{ $item->merk}}</option>
+            <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':'' }}>{{ $item->merk_sensor}}</option>
             @endforeach
 
         </select>

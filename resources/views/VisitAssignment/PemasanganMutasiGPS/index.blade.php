@@ -11,10 +11,7 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button">
-                    <b>Add</b>
-                    <i class="fas fa-plus ml-2" id="add"></i>
-                </button>
+
                 <button class="btn btn-success  mr-2 edit_all">
                     <i class="fas fa-pen"></i>
                 </button>
@@ -41,12 +38,12 @@
                 <th rowspan="2" scope="col" class="list">Kendaraan Awal</th>
                 <th rowspan="2" scope="col" class="list">IMEI</th>
                 <th rowspan="2" scope="col" class="list">GSM</th>
-                <th rowspan="2" scope="col" class="list">Kendaraan Pasang</th>
                 <th colspan="2" scope="col" class="list">Equipment</th>
                 <th rowspan="2" scope="col" class="list">Teknisi</th>
                 <th rowspan="2" scope="col" class="list">Uang Transportasi</th>
                 <th rowspan="2" scope="col" class="list">Type Visit</th>
                 <th rowspan="2" scope="col" class="list">Note</th>
+                <th rowspan="2" scope="col" class="list">Kendaraan Pasang</th>
                 <th rowspan="2" scope="col" class="action">Action</th>
 
               </tr>
@@ -86,56 +83,56 @@
     function cancel() {
       read()
     }
-     // ------ Tambah Form Input ------
-     $('.add').click(function() {
-        $.get("{{ url('add_form_PemasanganMutasi') }}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
-        });
-      });
+    //  // ------ Tambah Form Input ------
+    //  $('.add').click(function() {
+    //     $.get("{{ url('add_form_PemasanganMutasi') }}", {}, function(data, status) {
+    //       $('#table_id tbody').prepend(data);
+    //     });
+    //   });
     // ----- Proses Tambah data ------
-    function store() {
-        var company_id = $("#company_id").val();
-        var tanggal = $("#tanggal").val();
-        var kendaraan_awal = $("#kendaraan_awal").val();
-        var imei = $("#imei").val();
-        var gsm_pemasangan = $("#gsm_pemasangan").val();
-        var kendaraan_pasang = $("#kendaraan_pasang").val();
-        var jenis_pekerjaan = $("#jenis_pekerjaan").val();
-        var equipment_terpakai_gps = $("#equipment_terpakai_gps").val();
-        var equipment_terpakai_sensor = $("#equipment_terpakai_sensor").val();
-        var teknisi = $("#teknisi").val();
-        var uang_transportasi = $("#uang_transportasi").val();
-        var type_visit = $("#type_visit").val();
-        var note = $("#note").val();
-        $.ajax({
-            type: "get",
-            url: "{{ url('store_PemasanganMutasi') }}",
-            data: {
-              company_id: company_id,
-              tanggal:tanggal,
-              kendaraan_awal: kendaraan_awal,
-              imei: imei,
-              gsm_pemasangan: gsm_pemasangan,
-              kendaraan_pasang:kendaraan_pasang,
-              jenis_pekerjaan:jenis_pekerjaan,
-              equipment_terpakai_gps:equipment_terpakai_gps,
-              equipment_terpakai_sensor:equipment_terpakai_sensor,
-              teknisi:teknisi,
-              uang_transportasi:uang_transportasi,
-              type_visit:type_visit,
-              note:note
-            },
-            success: function(data) {
-             swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-              read();
-            }
-        })
-    }
+    // function store() {
+    //     var company_id = $("#company_id").val();
+    //     var tanggal = $("#tanggal").val();
+    //     var kendaraan_awal = $("#kendaraan_awal").val();
+    //     var imei = $("#imei").val();
+    //     var gsm_pemasangan = $("#gsm_pemasangan").val();
+    //     var kendaraan_pasang = $("#kendaraan_pasang").val();
+    //     var jenis_pekerjaan = $("#jenis_pekerjaan").val();
+    //     var equipment_terpakai_gps = $("#equipment_terpakai_gps").val();
+    //     var equipment_terpakai_sensor = $("#equipment_terpakai_sensor").val();
+    //     var teknisi = $("#teknisi").val();
+    //     var uang_transportasi = $("#uang_transportasi").val();
+    //     var type_visit = $("#type_visit").val();
+    //     var note = $("#note").val();
+    //     $.ajax({
+    //         type: "get",
+    //         url: "{{ url('store_PemasanganMutasi') }}",
+    //         data: {
+    //           company_id: company_id,
+    //           tanggal:tanggal,
+    //           kendaraan_awal: kendaraan_awal,
+    //           imei: imei,
+    //           gsm_pemasangan: gsm_pemasangan,
+    //           kendaraan_pasang:kendaraan_pasang,
+    //           jenis_pekerjaan:jenis_pekerjaan,
+    //           equipment_terpakai_gps:equipment_terpakai_gps,
+    //           equipment_terpakai_sensor:equipment_terpakai_sensor,
+    //           teknisi:teknisi,
+    //           uang_transportasi:uang_transportasi,
+    //           type_visit:type_visit,
+    //           note:note
+    //         },
+    //         success: function(data) {
+    //          swal({
+    //             type: 'success',
+    //             title: 'Data Saved',
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //         }).catch(function(timeout) { });
+    //           read();
+    //         }
+    //     })
+    // }
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -176,19 +173,18 @@
         $("#td-button-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).hide("fast");
-        $("#item-tanggal-"+id).hide("fast");
-        $("#item-kendaraan_awal-"+id).hide("fast");
-        $("#item-no-"+id).hide("fast");
+        $("#item-task-"+id).hide("fast");
+        $("#item-waktu_kesepakatan-"+id).hide("fast");
+        $("#item-vehicle-"+id).hide("fast");
         $("#item-imei-"+id).hide("fast");
         $("#item-gsm_pemasangan-"+id).hide("fast");
-        $("#item-kendaraan_pasang-"+id).hide("fast");
-        $("#item-jenis_pekerjaan-"+id).hide("fast");
         $("#item-equipment_terpakai_gps-"+id).hide("fast");
         $("#item-equipment_terpakai_sensor-"+id).hide("fast");
-        $("#item-teknisi-"+id).hide("fast");
+        $("#item-teknisi_pemasangan-"+id).hide("fast");
         $("#item-uang_transportasi-"+id).hide("fast");
         $("#item-type_visit-"+id).hide("fast");
-        $("#item-note-"+id).hide("fast");
+        $("#item-note_pemasangan-"+id).hide("fast");
+        $("#item-kendaraan_pasang-"+id).hide("fast");
         $.get("{{ url('show_PemasanganMutasi') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -196,36 +192,37 @@
     // ------ Proses Update Data ------
         function update(id) {
             var company_id = $("#company_id").val();
-            var tanggal = $("#tanggal").val();
-            var kendaraan_awal = $("#kendaraan_awal").val();
+            var task = $("#task").val();
+            var waktu_kesepakatan = $("#waktu_kesepakatan").val();
+            var vehicle = $("#vehicle").val();
             var imei = $("#imei").val();
             var gsm_pemasangan = $("#gsm_pemasangan").val();
-            var kendaraan_pasang = $("#kendaraan_pasang").val();
-            var jenis_pekerjaan = $("#jenis_pekerjaan").val();
             var equipment_terpakai_gps = $("#equipment_terpakai_gps").val();
             var equipment_terpakai_sensor = $("#equipment_terpakai_sensor").val();
-            var teknisi = $("#teknisi").val();
+            var teknisi_pemasangan = $("#teknisi_pemasangan").val();
             var uang_transportasi = $("#uang_transportasi").val();
             var type_visit = $("#type_visit").val();
-            var note = $("#note").val();
+            var note_pemasangan = $("#note_pemasangan").val();
+            var kendaraan_pasang = $("#kendaraan_pasang").val();
             var id = id;
             $.ajax({
                 type: "get",
                 url: "{{ url('update_PemasanganMutasi') }}/"+id,
                 data: {
                 company_id: company_id,
-                tanggal:tanggal,
-                kendaraan_awal: kendaraan_awal,
+                task:task,
+                waktu_kesepakatan: waktu_kesepakatan,
+                vehicle: vehicle,
                 imei: imei,
                 gsm_pemasangan: gsm_pemasangan,
-                kendaraan_pasang:kendaraan_pasang,
-                jenis_pekerjaan:jenis_pekerjaan,
                 equipment_terpakai_gps:equipment_terpakai_gps,
                 equipment_terpakai_sensor:equipment_terpakai_sensor,
-                teknisi:teknisi,
+                teknisi_pemasangan:teknisi_pemasangan,
                 uang_transportasi:uang_transportasi,
                 type_visit:type_visit,
-                note:note
+                note_pemasangan:note_pemasangan,
+                kendaraan_pasang:kendaraan_pasang
+
                 },
                 success: function(data) {
                 swal({
@@ -312,19 +309,18 @@
                     $("#td-button-"+value).hide("fast");
                     $("#item-no-"+value).hide("fast");
                     $("#item-company_id-"+value).hide("fast");
-                    $("#item-no-"+value).hide("fast");
-                    $("#item-tanggal-"+value).hide("fast");
-                    $("#item-kendaraan_awal-"+value).hide("fast");
+                    $("#item-task-"+value).hide("fast");
+                    $("#item-waktu_kesepakatan-"+value).hide("fast");
+                    $("#item-vehicle-"+value).hide("fast");
                     $("#item-imei-"+value).hide("fast");
                     $("#item-gsm_pemasangan-"+value).hide("fast");
-                    $("#item-kendaraan_pasang-"+value).hide("fast");
-                    $("#item-jenis_pekerjaan-"+value).hide("fast");
                     $("#item-equipment_terpakai_gps-"+value).hide("fast");
                     $("#item-equipment_terpakai_sensor-"+value).hide("fast");
-                    $("#item-teknisi-"+value).hide("fast");
+                    $("#item-teknisi_pemasangan-"+value).hide("fast");
                     $("#item-uang_transportasi-"+value).hide("fast");
                     $("#item-type_visit-"+value).hide("fast");
-                    $("#item-note-"+value).hide("fast");
+                    $("#item-note_pemasangan-"+value).hide("fast");
+                    $("#item-kendaraan_pasang-"+value).hide("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_PemasanganMutasi') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
@@ -353,35 +349,36 @@
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
                     var company_id = $(".company_id-"+value).val();
-                    var tanggal = $(".tanggal-"+value).val();
-                    var kendaraan_awal = $(".kendaraan_awal-"+value).val();
+                    var task = $(".task-"+value).val();
+                    var waktu_kesepakatan = $(".waktu_kesepakatan-"+value).val();
+                    var vehicle = $(".vehicle-"+value).val();
                     var imei = $(".imei-"+value).val();
                     var gsm_pemasangan = $(".gsm_pemasangan-"+value).val();
-                    var kendaraan_pasang = $(".kendaraan_pasang-"+value).val();
-                    var jenis_pekerjaan = $(".jenis_pekerjaan-"+value).val();
                     var equipment_terpakai_gps = $(".equipment_terpakai_gps-"+value).val();
                     var equipment_terpakai_sensor = $(".equipment_terpakai_sensor-"+value).val();
-                    var teknisi = $(".teknisi-"+value).val();
+                    var teknisi_pemasangan = $(".teknisi_pemasangan-"+value).val();
                     var uang_transportasi = $(".uang_transportasi-"+value).val();
                     var type_visit = $(".type_visit-"+value).val();
-                    var note = $(".note-"+value).val();
+                    var note_pemasangan = $(".note_pemasangan-"+value).val();
+                    var kendaraan_pasang = $(".kendaraan_pasang-"+value).val();
+
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_PemasanganMutasi') }}/"+value,
                     data: {
                         company_id: company_id,
-                        tanggal:tanggal,
-                        kendaraan_awal: kendaraan_awal,
+                        task:task,
+                        waktu_kesepakatan: waktu_kesepakatan,
+                        vehicle: vehicle,
                         imei: imei,
                         gsm_pemasangan: gsm_pemasangan,
-                        kendaraan_pasang:kendaraan_pasang,
-                        jenis_pekerjaan:jenis_pekerjaan,
                         equipment_terpakai_gps:equipment_terpakai_gps,
                         equipment_terpakai_sensor:equipment_terpakai_sensor,
-                        teknisi:teknisi,
+                        teknisi_pemasangan:teknisi_pemasangan,
                         uang_transportasi:uang_transportasi,
                         type_visit:type_visit,
-                        note:note
+                        note_pemasangan:note_pemasangan,
+                        kendaraan_pasang:kendaraan_pasang
                     },
                     success: function(data) {
                      swal({

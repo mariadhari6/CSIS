@@ -1,4 +1,4 @@
-    <td></td>
+ <td></td>
     <td></td>
     <td>
         <select class="form-control status_gsm-{{$GsmMaster->id}}" id="status_gsm" name="status_gsm">

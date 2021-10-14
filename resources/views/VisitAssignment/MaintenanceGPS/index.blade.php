@@ -94,41 +94,41 @@
 
     // ----- Proses Tambah data ------
     function store() {
-        var company = $("#company").val();
+        var company_id = $("#company_id").val();
         var vehicle = $("#vehicle").val();
-        var tanggal = $("#tanggal").val();
-        var type_gps = $("#type_gps").val();
-        var equipment_gps = $("#equipment_gps").val();
-        var equipment_sensor = $("#equipment_sensor").val();
+        var waktu_kesepakatan = $("#waktu_kesepakatan").val();
+        var type_gps_id = $("#type_gps_id").val();
+        var equipment_gps_id = $("#equipment_gps_id").val();
+        var equipment_sensor_id = $("#equipment_sensor_id").val();
         var equipment_gsm = $("#equipment_gsm").val();
-        var permasalahan = $("#permasalahan").val();
+        var task = $("#task").val();
         var ketersediaan_kendaraan = $("#ketersediaan_kendaraan").val();
         var keterangan = $("#keterangan").val();
         var hasil = $("#hasil").val();
         var biaya_transportasi = $("#biaya_transportasi").val();
-        var teknisi = $("#teknisi").val();
+        var teknisi_maintenance = $("#teknisi_maintenance").val();
         var req_by = $("#req_by").val();
-        var note = $("#note").val();
+        var note_maintenance = $("#note_maintenance").val();
 
         $.ajax({
             type: "get",
             url: "{{ url('store_maintenanceGps') }}",
             data: {
-              company: company,
+              company_id: company_id,
               vehicle: vehicle,
-              tanggal: tanggal,
-              type_gps: type_gps,
-              equipment_gps: equipment_gps,
-              equipment_sensor: equipment_sensor,
+              waktu_kesepakatan: waktu_kesepakatan,
+              type_gps_id: type_gps_id,
+              equipment_gps_id: equipment_gps_id,
+              equipment_sensor_id: equipment_sensor_id,
               equipment_gsm: equipment_gsm,
-              permasalahan: permasalahan,
+              task: task,
               ketersediaan_kendaraan: ketersediaan_kendaraan,
               keterangan: keterangan,
               hasil: hasil,
               biaya_transportasi: biaya_transportasi,
-              teknisi: teknisi,
+              teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
-              note: note,
+              note_maintenance: note_maintenance,
 
             },
              success: function(data) {
@@ -184,21 +184,21 @@
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).slideUp("fast");
         $("#item-no-"+id).slideUp("fast");
-        $("#item-company-"+id).slideUp("fast");
+        $("#item-company_id-"+id).slideUp("fast");
         $("#item-vehicle-"+id).slideUp("fast");
-        $("#item-tanggal-"+id).slideUp("fast");
-        $("#item-type_gps-"+id).slideUp("fast");
-        $("#item-equipment_gps-"+id).slideUp("fast");
-        $("#item-equipment_sensor-"+id).slideUp("fast");
+        $("#item-waktu_kesepakatan-"+id).slideUp("fast");
+        $("#item-type_gps_id-"+id).slideUp("fast");
+        $("#item-equipment_gps_id-"+id).slideUp("fast");
+        $("#item-equipment_sensor_id-"+id).slideUp("fast");
         $("#item-equipment_gsm-"+id).slideUp("fast");
-        $("#item-permasalahan-"+id).slideUp("fast");
+        $("#item-task-"+id).slideUp("fast");
         $("#item-ketersediaan_kendaraan-"+id).slideUp("fast");
         $("#item-keterangan-"+id).slideUp("fast");
         $("#item-hasil-"+id).slideUp("fast");
         $("#item-biaya_transportasi-"+id).slideUp("fast");
-        $("#item-teknisi-"+id).slideUp("fast");
+        $("#item-teknisi_maintenance-"+id).slideUp("fast");
         $("#item-req_by-"+id).slideUp("fast");
-        $("#item-note-"+id).slideUp("fast");
+        $("#item-note_maintenance-"+id).slideUp("fast");
         $.get("{{ url('edit_form_maintenanceGps') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -206,42 +206,42 @@
 
     // ------ Proses Update Data ------
     function update(id) {
-        var company = $('select[name="company"]').val();
+        var company_id = $('select[name="company_id"]').val();
         var vehicle = $("#vehicle").val();
-        var tanggal = $("#tanggal").val();
-        var type_gps = $("#type_gps").val();
-        var equipment_gps = $("#equipment_gps").val();
-        var equipment_sensor = $("#equipment_sensor").val();
+        var waktu_kesepakatan = $("#waktu_kesepakatan").val();
+        var type_gps_id = $("#type_gps_id").val();
+        var equipment_gps_id = $("#equipment_gps_id").val();
+        var equipment_sensor_id = $("#equipment_sensor_id").val();
         var equipment_gsm = $("#equipment_gsm").val();
-        var permasalahan = $("#permasalahan").val();
+        var task = $("#task").val();
         var ketersediaan_kendaraan = $("#ketersediaan_kendaraan").val();
         var keterangan = $("#keterangan").val();
         var hasil = $("#hasil").val();
         var biaya_transportasi = $("#biaya_transportasi").val();
-        var teknisi = $("#teknisi").val();
+        var teknisi_maintenance = $("#teknisi_maintenance").val();
         var req_by = $("#req_by").val();
-        var note = $("#note").val();
+        var note_maintenance = $("#note_maintenance").val();
         var id = id;
 
         $.ajax({
             type: "get",
             url: "{{ url('update_maintenanceGps') }}/"+id,
             data: {
-              company: company,
+              company_id: company_id,
               vehicle: vehicle,
-              tanggal: tanggal,
-              type_gps: type_gps,
-              equipment_gps: equipment_gps,
-              equipment_sensor:equipment_sensor,
+              waktu_kesepakatan: waktu_kesepakatan,
+              type_gps_id: type_gps_id,
+              equipment_gps_id: equipment_gps_id,
+              equipment_sensor_id: equipment_sensor_id,
               equipment_gsm: equipment_gsm,
-              permasalahan: permasalahan,
+              task: task,
               ketersediaan_kendaraan: ketersediaan_kendaraan,
               keterangan: keterangan,
               hasil: hasil,
               biaya_transportasi: biaya_transportasi,
-              teknisi: teknisi,
+              teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
-              note: note
+              note_maintenance: note_maintenance
             },
             success: function(data) {
               swal({
@@ -331,21 +331,21 @@
               $("#td-checkbox-"+value).hide("fast");
               $("#item-no-"+value).hide("fast");
               $("#td-button-"+value).hide("fast");
-              $("#item-company-"+value).slideUp("fast");
+              $("#item-company_id-"+value).slideUp("fast");
               $("#item-vehicle-"+value).slideUp("fast");
-              $("#item-tanggal-"+value).slideUp("fast");
-              $("#item-type_gps-"+value).slideUp("fast");
-              $("#item-equipment_gps-"+value).slideUp("fast");
-              $("#item-equipment_sensor-"+value).slideUp("fast");
+              $("#item-waktu_kesepakatan-"+value).slideUp("fast");
+              $("#item-type_gps_id-"+value).slideUp("fast");
+              $("#item-equipment_gps_id-"+value).slideUp("fast");
+              $("#item-equipment_sensor_id-"+value).slideUp("fast");
               $("#item-equipment_gsm-"+value).slideUp("fast");
-              $("#item-permasalahan-"+value).slideUp("fast");
+              $("#item-task-"+value).slideUp("fast");
               $("#item-ketersediaan_kendaraan-"+value).slideUp("fast");
               $("#item-keterangan-"+value).slideUp("fast");
               $("#item-hasil-"+value).slideUp("fast");
               $("#item-biaya_transportasi-"+value).slideUp("fast");
-              $("#item-teknisi-"+value).slideUp("fast");
+              $("#item-teknisi_maintenance-"+value).slideUp("fast");
               $("#item-req_by-"+value).slideUp("fast");
-              $("#item-note-"+value).slideUp("fast");
+              $("#item-note_maintenance-"+value).slideUp("fast");
 
               $(".add").hide("fast");
               $.get("{{ url('edit_form_maintenanceGps') }}/" + value, {}, function(data, status) {
@@ -376,41 +376,41 @@
         showLoaderOnConfirm: true,
     }).then((willDelete) => {
         $.each(allVals, function(index, value){
-            var company = $(".company-"+value).val();
+            var company_id = $(".company_id-"+value).val();
             var vehicle = $(".vehicle-"+value).val();
-            var tanggal = $(".tanggal-"+value).val();
-            var type_gps = $(".type_gps-"+value).val();
-            var equipment_gps = $(".equipment_gps-"+value).val();
-            var equipment_sensor = $(".equipment_sensor-"+value).val();
+            var waktu_kesepakatan = $(".waktu_kesepakatan-"+value).val();
+            var type_gps_id = $(".type_gps_id-"+value).val();
+            var equipment_gps_id = $(".equipment_gps_id-"+value).val();
+            var equipment_sensor_id = $(".equipment_sensor_id-"+value).val();
             var equipment_gsm = $(".equipment_gsm-"+value).val();
-            var permasalahan = $(".permasalahan-"+value).val();
+            var task = $(".task-"+value).val();
             var ketersediaan_kendaraan = $(".ketersediaan_kendaraan-"+value).val();
             var keterangan = $(".keterangan-"+value).val();
             var hasil = $(".hasil-"+value).val();
             var biaya_transportasi = $(".biaya_transportasi-"+value).val();
-            var teknisi = $(".teknisi-"+value).val();
+            var teknisi_maintenance = $(".teknisi_maintenance-"+value).val();
             var req_by = $(".req_by-"+value).val();
-            var note = $(".note-"+value).val();
+            var note_maintenance = $(".note_maintenance-"+value).val();
 
             $.ajax({
             type: "get",
             url: "{{ url('update_maintenanceGps') }}/"+value,
             data: {
-                company: company,
-                vehicle: vehicle,
-                tanggal: tanggal,
-                type_gps: type_gps,
-                equipment_gps: equipment_gps,
-                equipment_sensor:equipment_sensor,
-                equipment_gsm: equipment_gsm,
-                permasalahan: permasalahan,
-                ketersediaan_kendaraan: ketersediaan_kendaraan,
-                keterangan: keterangan,
-                hasil: hasil,
-                biaya_transportasi: biaya_transportasi,
-                teknisi: teknisi,
-                req_by: req_by,
-                note: note
+                company_id: company_id,
+              vehicle: vehicle,
+              waktu_kesepakatan: waktu_kesepakatan,
+              type_gps_id: type_gps_id,
+              equipment_gps_id: equipment_gps_id,
+              equipment_sensor_id: equipment_sensor_id,
+              equipment_gsm: equipment_gsm,
+              task: task,
+              ketersediaan_kendaraan: ketersediaan_kendaraan,
+              keterangan: keterangan,
+              hasil: hasil,
+              biaya_transportasi: biaya_transportasi,
+              teknisi_maintenance: teknisi_maintenance,
+              req_by: req_by,
+              note_maintenance: note_maintenance,
             },
             success: function(data) {
             swal({

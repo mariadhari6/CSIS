@@ -21,7 +21,7 @@
     </select></i></td>
 
     <td><select class="select pic-{{$request_complain->id}}" id="pic" name="pic">
-    <option value="{{$request_complain->pic}}"> {{$request_complain->picRequest->pic_name}} </option>
+    {{-- <option value="{{$request_complain->pic}}"> {{$request_complain->picRequest->pic_name}} </option> --}}
 
        @foreach ($pic as $pics)
         <option value="{{ $pics->id }}" {{ old('pic') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>

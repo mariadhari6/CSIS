@@ -66,6 +66,7 @@
                             });
                     }
                 });
+
             }else{
                 $('select[name="no_agreement_letter_id"]').empty();
             }

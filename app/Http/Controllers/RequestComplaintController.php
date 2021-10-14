@@ -20,7 +20,7 @@ class RequestComplaintController extends Controller
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
-        $task_request = Task::orderBy('id', 'DESC')->get();
+        $task_request = Task::all();
         $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
         return view('request_complaint.add_form')->with([
 
@@ -33,7 +33,7 @@ class RequestComplaintController extends Controller
 
     public function item_data()
     {
-        $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
+        $request_complain = RequestComplaint::all();
         return view('request_complaint.item_data', compact('request_complain'));
         // dd($request_complain);
     }
@@ -44,7 +44,7 @@ class RequestComplaintController extends Controller
         $data = array(
             'company_id'     =>  $request->company_id,
             'internal_eksternal'    =>  $request->internal_eksternal,
-            'pic'     =>  $request->pic,
+            'pic_id'     =>  $request->pic_id,
             'vehicle'     =>  $request->vehicle,
             'waktu_info'     =>  $request->waktu_info,
             'waktu_respond'     =>  $request->waktu_respond,
@@ -66,7 +66,7 @@ class RequestComplaintController extends Controller
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaint::findOrfail($id);
-        $task_request = Task::orderBy('id', 'DESC')->get();
+        $task_request = Task::all();
 
         return view('request_complaint.edit_form')->with([
             'request_complain' => $request_complain,
@@ -88,7 +88,7 @@ class RequestComplaintController extends Controller
         $data = RequestComplaint::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->internal_eksternal = $request->internal_eksternal;
-        $data->pic = $request->pic;
+        $data->pic_id = $request->pic_id;
         $data->vehicle = $request->vehicle;
         $data->waktu_info = $request->waktu_info;
         $data->waktu_respond = $request->waktu_respond;
@@ -118,7 +118,7 @@ class RequestComplaintController extends Controller
         $data = RequestComplaint::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->internal_eksternal = $request->internal_eksternal;
-        $data->pic = $request->pic;
+        $data->pic_id = $request->pic_id;
         $data->vehicle = $request->vehicle;
         $data->waktu_info = $request->waktu_info;
         $data->waktu_respond = $request->waktu_respond;

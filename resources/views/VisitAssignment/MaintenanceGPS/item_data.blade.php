@@ -12,29 +12,29 @@
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
-        <td id="item-company-{{ $item->id}}">
-            {{ $item->requestComplain->companyRequest->company_name }}
+        <td id="item-company_id-{{ $item->id}}">
+            {{ $item->companyRequest->company_name }}
         </td>
         <td id="item-vehicle-{{ $item->id}}">
-            {{ $item->requestComplain->vehicle }}
+            {{ $item->vehicle }}
         </td>
-        <td id="item-tanggal-{{ $item->id }}">
-            {{ $item->requestComplain->waktu_kesepakatan }}
+        <td id="item-waktu_kesepakatan-{{ $item->id }}">
+            {{ $item->waktu_kesepakatan }}
         </td>
-        <td id="item-type_gps-{{ $item->id }}">
-            {{ $item->gps->typeGps->type }}
+        <td id="item-type_gps_id-{{ $item->id }}">
+            {{ $item->gps->typeGps->type_gps }}
         </td>
-        <td id="item-equipment_gps-{{ $item->id }}">
-            {{ $item->gps->typeGps->type }}
+        <td id="item-equipment_gps_id-{{ $item->id }}">
+            {{ $item->gps->typeGps->type_gps }}
         </td>
-        <td id="item-equipment_sensor-{{ $item->id}}">
+        <td id="item-equipment_sensor_id-{{ $item->id}}">
             {{ $item->sensor->sensor_name }}
         </td>
         <td id="item-equipment_gsm-{{ $item->id}}">
-            {{ $item->equipment_gsm }}
+            {{ $item->gsm->gsm_number }}
         </td>
-        <td id="item-permasalahan-{{ $item->id}}">
-            {{ $item->requestComplain->detail_task }}
+        <td id="item-task-{{ $item->id}}">
+            {{ $item->taskRequest->task }}
         </td>
         <td id="item-ketersediaan_kendaraan-{{ $item->id}}">
             {{ $item->ketersediaan_kendaraan }}
@@ -46,16 +46,17 @@
             {{ $item->hasil }}
         </td>
         <td id="item-biaya_transportasi-{{ $item->id}}">
-            {{ $item->biaya_transportasi }}
+        <span>Rp. </span>{{ number_format( $item->biaya_transportasi)}}
+
         </td>
-        <td id="item-teknisi-{{ $item->id}}">
-            {{ $item->teknisiMaintenance->teknisi_name }}
+        <td id="item-teknisi_maintenance-{{ $item->id}}">
+            {{ $item->teknisi->teknisi_name }}
         </td>
         <td id="item-req_by-{{ $item->id}}">
             {{ $item->req_by }}
         </td>
-        <td id="item-note-{{ $item->id}}">
-            {{ $item->note }}
+        <td id="item-note_maintenance-{{ $item->id}}">
+            {{ $item->note_maintenance }}
         </td>
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">

@@ -92,7 +92,7 @@
     function store() {
         var company_id = $("#company_id").val();
         var internal_eksternal = $("#internal_eksternal").val();
-        var pic = $("#pic").val();
+        var pic_id = $("#pic_id").val();
         var vehicle = $("#vehicle").val();
         var waktu_info = $("#waktu_info").val();
         var waktu_respond = $("#waktu_respond").val();
@@ -111,7 +111,7 @@
             data: {
               company_id: company_id,
               internal_eksternal:internal_eksternal,
-              pic: pic,
+              pic_id: pic_id,
               vehicle: vehicle,
               waktu_info: waktu_info,
              waktu_respond:waktu_respond,
@@ -178,7 +178,7 @@
         $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).hide("fast");
         $("#item-internal_eksternal-"+id).hide("fast");
-        $("#item-pic-"+id).hide("fast");
+        $("#item-pic_id-"+id).hide("fast");
         $("#item-vehicle-"+id).hide("fast");
         $("#item-waktu_info-"+id).hide("fast");
         $("#item-waktu_respond-"+id).hide("fast");
@@ -199,7 +199,7 @@
         function update(id) {
             var company_id = $("#company_id").val();
             var internal_eksternal = $("#internal_eksternal").val();
-            var pic = $("#pic").val();
+            var pic_id = $("#pic_id").val();
             var vehicle = $("#vehicle").val();
             var waktu_info = $("#waktu_info").val();
             var waktu_respond = $("#waktu_respond").val();
@@ -219,7 +219,7 @@
                 data: {
                 company_id: company_id,
                 internal_eksternal:internal_eksternal,
-                pic: pic,
+                pic_id: pic_id,
                 vehicle: vehicle,
                 waktu_info: waktu_info,
                 waktu_respond: waktu_respond,
@@ -323,7 +323,7 @@
                     $("#item-no-"+value).hide("fast");
                     $("#item-company_id-"+value).hide("fast");
                     $("#item-internal_eksternal-"+value).hide("fast");
-                    $("#item-pic-"+value).hide("fast");
+                    $("#item-pic_id-"+value).hide("fast");
                     $("#item-vehicle-"+value).hide("fast");
                     $("#item-waktu_info-"+value).hide("fast");
                     $("#item-waktu_respond-"+value).hide("fast");
@@ -369,7 +369,7 @@
 
                     var company_id = $(".company_id-"+value).val();
                     var internal_eksternal = $(".internal_eksternal-"+value).val();
-                    var pic = $(".pic-"+value).val();
+                    var pic_id = $(".pic_id-"+value).val();
                     var vehicle = $(".vehicle-"+value).val();
                     var waktu_info = $(".waktu_info-"+value).val();
                     var waktu_respond = $(".waktu_respond-"+value).val();
@@ -388,7 +388,7 @@
                     data: {
                        company_id: company_id,
                         internal_eksternal:internal_eksternal,
-                        pic: pic,
+                        pic_id: pic_id,
                         vehicle: vehicle,
                         waktu_info: waktu_info,
                         waktu_respond:waktu_respond,

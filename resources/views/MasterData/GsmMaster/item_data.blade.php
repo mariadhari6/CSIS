@@ -39,7 +39,12 @@
         <td id="item-expired_date-{{ $item->id }}">
             {{ $item->expired_date }}
         </td>
-
+        <td id="item-active_date-{{ $item->id }}">
+            {{ $item->active_date }}
+        </td>
+        <td id="item-terminate_date-{{ $item->id }}">
+            {{ $item->terminate_date }}
+        </td>
         <td id="item-note-{{ $item->id }}">
             {{ $item->note }}
         </td>

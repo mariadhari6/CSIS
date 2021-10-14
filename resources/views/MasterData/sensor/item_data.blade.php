@@ -4,7 +4,7 @@
          <td id="td-checkbox-{{ $sensors->id }}">
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
+                    <input class="form-check-input task-select" type="checkbox" id="{{$sensors->id}}">
                     <span class="form-check-sign"></span>
                 </label>
             </div>
@@ -20,35 +20,23 @@
             {{ $sensors->sensor_name }}
         </td>
           <td id="item-merk_sensor-{{ $sensors->id }}">
-            {{ $sensors->merkSensor->merk}}
+            {{ $sensors->sensorMerk->merk_sensor}}
         </td>
-        <td id="item-rab_number-{{ $item->id }}">
-            {{ $item->rab_number }}
+        <td id="item-rab_number-{{ $sensors->id }}">
+            {{ $sensors->rab_number }}
         </td>
-        <td id="item-waranty-{{ $item->id }}">
-            {{ $item->waranty }}
+        <td id="item-waranty-{{ $sensors->id }}">
+            {{ $sensors->waranty }}
         </td>
-        <td id="item-status-{{ $item->id }}">
-            {{ $item->status }}
-        </td>
-        <td id="td-button-{{ $item->id }}">
-            <div id="button-{{ $item->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
-            </div>
-        </td>
-<<<<<<< HEAD
-          <td id="item-status-{{ $sensors->id }}">
+        <td id="item-status-{{ $sensors->id }}">
             {{ $sensors->status }}
-          </td>
+        </td>
           <td id="td-button-{{ $sensors->id }}">
             <div id="button-{{ $sensors->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $sensors->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $sensors->id }})"></i>
             </div>
         </td>
-=======
->>>>>>> 514e22055a05f4fd4ac46b75f91e072eddac6b30
     </tr>
 @endforeach
 

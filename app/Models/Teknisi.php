@@ -11,13 +11,8 @@ class Teknisi extends Model
     protected $table = 'teknisis';
 
 
-    public function pemasanganMutasiGps()
+    public function requestComplaint()
     {
-        return $this->hasMany(PemasanganMutasiGps::class);
-    }
-
-    public function maintenanceGps()
-    {
-        return $this->hasMany(MaintenanceGps::class);
+        return $this->hasMany(RequestComplaint::class);
     }
 }

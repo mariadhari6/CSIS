@@ -54,7 +54,8 @@
                 <th scope="col" class="list">Res ID</th>
                 <th scope="col" class="list">Request Date</th>
                 <th scope="col" class="list">Expired Date</th>
-
+                <th scope="col" class="list">Active Date</th>
+                <th scope="col" class="list">Terminated Date</th>
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="action">Action</th>
               </tr>

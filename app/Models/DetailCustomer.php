@@ -34,24 +34,12 @@ class DetailCustomer extends Model
     ];
 
 
-    public function pemasanganMutasiGps()
+    public function requestComplaint()
     {
-        return $this->hasMany(PemasanganMutasiGps::class);
+        return $this->hasMany(RequestComplaint::class);
     }
     public function company()
     {
         return $this->belongsTo(Company::class);
-    }
-    // public function gps()
-    // {
-    //     return $this->belongsTo(Gps::class, 'id');
-    // }
-    // public function sensor()
-    // {
-    //     return $this->belongsTo(Sensor::class, 'id');
-    // }
-    public function gsmActive()
-    {
-        return $this->belongsTo(GsmActive::class, 'gsm_pre_active_id');
     }
 }

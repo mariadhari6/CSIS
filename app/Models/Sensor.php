@@ -14,16 +14,12 @@ class Sensor extends Model
     protected $fillable = [
         'sensor_name', 'merk_sensor', 'serial_number', 'rab_number', 'waranty', 'status'
     ];
-    public function pemasanganMutasiGps()
+    public function requestComplaint()
     {
-        return $this->hasOne(PemasanganMutasiGps::class);
+        return $this->hasMany(RequestComplaint::class);
     }
-    public function maintenanceGps()
+    public function sensorMerk()
     {
-        return $this->hasMany(MaintenanceGps::class);
-    }
-    public function merkSensor()
-    {
-        return $this->belongsTo(MerkSensor::class, 'merk_sensor');
+        return $this->belongsTo(MerkSensor::class, 'id');
     }
 }

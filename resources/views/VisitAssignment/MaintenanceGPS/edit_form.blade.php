@@ -2,75 +2,55 @@
     <td></td>
 
     <td>
-        <select class="select company-{{$maintenanceGps->id}}"  id="{{$maintenanceGps->id}}" name="company">
+        <select class="select company_id-{{$maintenanceGps->id}}"  id="{{$maintenanceGps->id}}" name="company_id">
             <option selected value="{{ $maintenanceGps->company_id}}">
-                {{ $maintenanceGps->requestComplain->companyRequest->company_name}}
+                {{ $maintenanceGps->companyRequest->company_name}}
             </option>
 
-            @foreach ($requestComplaint as $item)
-            <option value="{{ $item->id }}">{{ $item->companyRequest->company_name }}</option>
+            @foreach ($company as $item)
+            <option value="{{ $item->id }}">{{ $item->company_name }}</option>
             @endforeach
 
         </select>
     </td>
+    <td><select class="select vehicle-{{$maintenanceGps->id}}" id="vehicle" id="vehicle" aria-label=".form-select-lg example">
+    <option value="{{$maintenanceGps->vehicle}}"> {{$maintenanceGps->vehicle}} </option>
+    <option value="B-94828-YTS">B-94828-YTS</option>
+    <option value="B-76267-TWS">B-76267-TWS</option>
+    </select></i></td>
     <td>
-        <select class="select vehicle-{{$maintenanceGps->id}}" id="vehicle" name="vehicle-{{$maintenanceGps->id}}">
-        <option selected value="{{ $maintenanceGps->vehicle_id}}">
-            {{ $maintenanceGps->requestComplain->vehicle }}
-        </option>
-
-        @foreach ($requestComplaint as $item)
-        <option value="{{ $item->id }}">
-            {{ $item->vehicle }}
-        </option>
-        @endforeach
-
-        </select>
+        <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$maintenanceGps->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ str_replace(" ", "T", $maintenanceGps->waktu_kesepakatan) }}"></i></div>
     </td>
     <td>
-        <select class="select tanggal-{{$maintenanceGps->id}}" id="tanggal" name="tanggal-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->tanggal_id }}">
-                {{ $maintenanceGps->requestComplain->waktu_kesepakatan }}
-            </option>
-
-            @foreach ($requestComplaint as $item)
-            <option value="{{ $item->id }}">
-                {{ $item->waktu_kesepakatan }}
-            </option>
-            @endforeach
-
-        </select>
-    </td>
-    <td>
-        <select class="select type_gps-{{$maintenanceGps->id}}" id="type_gps" name="type_gps-{{$maintenanceGps->id}}">
+        <select class="select type_gps_id-{{$maintenanceGps->id}}" id="type_gps_id" name="type_gps_id-{{$maintenanceGps->id}}">
             <option selected value="{{ $maintenanceGps->type_gps_id }}">
-                {{ $maintenanceGps->gps->type }}
+                {{ $maintenanceGps->gps->typeGps->type_gps }}
             </option>
 
             @foreach ($gps as $item)
             <option value="{{ $item->id }}">
-                {{ $item->type }}
+                {{ $item->typeGps->type_gps }}
             </option>
             @endforeach
 
         </select>
     </td>
     <td>
-        <select class="select equipment_gps-{{$maintenanceGps->id}}" id="equipment_gps" name="equipment_gps-{{$maintenanceGps->id}}">
+        <select class="select equipment_gps_id-{{$maintenanceGps->id}}" id="equipment_gps_id" name="equipment_gps_id-{{$maintenanceGps->id}}">
             <option selected value="{{ $maintenanceGps->equipment_gps_id }}">
-                {{ $maintenanceGps->gps->type }}
+                {{ $maintenanceGps->gps->typeGps->type_gps }}
             </option>
 
             @foreach ($gps as $item)
             <option value="{{ $item->id }}">
-                {{ $item->type }}
+                {{ $item->typeGps->type_gps }}
             </option>
             @endforeach
 
         </select>
     </td>
     <td>
-        <select class="select equipment_sensor-{{$maintenanceGps->id}}" id="equipment_sensor" name="equipment_sensor-{{$maintenanceGps->id}}">
+        <select class="select equipment_sensor_id-{{$maintenanceGps->id}}" id="equipment_sensor_id" name="equipment_sensor_id-{{$maintenanceGps->id}}">
             <option selected value="{{ $maintenanceGps->equipment_sensor_id}}">
                 {{ $maintenanceGps->sensor->sensor_name }}
             </option>
@@ -83,19 +63,24 @@
 
         </select>
     </td>
+     <td><select class="select equipment_gsm-{{$pemasangan_mutasi_GPS->id}}" id="equipment_gsm" name="equipment_gsm">
+        <option value="{{$pemasangan_mutasi_GPS->equipment_gsm}}"> {{$pemasangan_mutasi_GPS->gsm->gsm_number}} </option>
+        @foreach ($gsm_master as $gsm_masters)
+        <option value="{{ $gsm_masters->id }}" {{ old('equipment_gsm') == $gsm_masters->id  ? 'selected':'' }}>
+        {{$gsm_masters->gsm_number}}
+        </option>
+
+       @endforeach
+    </select></i></td>
     <td>
-        <div class="input-div"><input type="number" class="input equipment_gsm-{{$maintenanceGps->id}}" id="equipment_gsm" value="{{$maintenanceGps->equipment_gsm}}"></i>
-        </div>
-    </td>
-    <td>
-        <select class="select permasalahan-{{$maintenanceGps->id}}" id="permasalahan" name="permasalahan-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->permasalahan_id}}">
-                {{ $maintenanceGps->requestComplain->detail_task }}
+        <select class="select task-{{$maintenanceGps->id}}" id="task" name="task-{{$maintenanceGps->id}}">
+            <option selected value="{{ $maintenanceGps->task}}">
+                {{ $maintenanceGps->task }}
             </option>
 
-            @foreach ($requestComplaint as $item)
+            @foreach ($task as $item)
             <option value="{{ $item->id }}">
-                {{ $item->detail_task }}
+                {{ $item->task }}
             </option>
             @endforeach
 
@@ -118,8 +103,8 @@
         </div>
     </td>
    <td>
-        <select class="select teknisi-{{$maintenanceGps->id}}" id="teknisi" name="teknisi">
-            <option selected value="{{$maintenanceGps->teknisi_id}}">{{$maintenanceGps->teknisiMaintenance->teknisi_name}}</option>
+        <select class="select teknisi_maintenance-{{$maintenanceGps->id}}" id="teknisi_maintenance" name="teknisi_maintenance">
+            <option selected value="{{$maintenanceGps->teknisi_maintenance}}">{{$maintenanceGps->teknisiMaintenance->teknisi_name}}</option>
             @foreach ($teknisi_maintenance as $item)
                 <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
             @endforeach
@@ -136,7 +121,7 @@
         </select>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input note-{{$maintenanceGps->id}}" id="note" value="{{$maintenanceGps->note}}"></i>
+        <div class="input-div"><input type="text" class="input note_maintenance-{{$maintenanceGps->id}}" id="note_maintenance" value="{{$maintenanceGps->note_maintenance}}"></i>
         </div>
     </td>
     <td>
@@ -145,73 +130,3 @@
     </td>
 
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            // depend vehicle
-            $('select[name="company"]').on('change', function() {
-                var id = $(this).attr("id");
-                var itemID = $(this).val();
-                if(itemID) {
-                    $.ajax({
-                        url: '/dependentMaintenanceGpsCompany/'+itemID,
-                        method: "GET",
-                        dataType: "json",
-                        success:function(data) {
-
-                            $('select[name="vehicle-'+ id +'"]').empty();
-                                $.each(data, function(key, value) {
-                                    $('select[name="vehicle-'+ id +'"]').append('<option value="'+ key +'">'+ value +'</option>');
-                                });
-                        }
-                    });
-                }else{
-                    $('select[name="vehicle-'+ id +'"]').empty();
-                }
-            });
-
-            // depend tanggal
-            $('select[name="company"]').on('change', function() {
-                var id = $(this).attr("id");
-                var itemID = $(this).val();
-                if(itemID) {
-                    $.ajax({
-                        url: '/dependentMaintenanceGpsTanggal/'+itemID,
-                        method: "GET",
-                        dataType: "json",
-                        success:function(data) {
-
-                            $('select[name="tanggal-'+ id +'"]').empty();
-                                $.each(data, function(key, value) {
-                                    $('select[name="tanggal-'+ id +'"]').append('<option value="'+ key +'">'+ value +'</option>');
-                                });
-                        }
-                    });
-                }else{
-                    $('select[name="tanggal-'+ id +'"]').empty();
-                }
-            });
-
-            // depend permasalahan
-            $('select[name="company"]').on('change', function() {
-                var id = $(this).attr("id");
-                var itemID = $(this).val();
-                if(itemID) {
-                    $.ajax({
-                        url: '/dependentMaintenanceGpsPermasalahan/'+itemID,
-                        method: "GET",
-                        dataType: "json",
-                        success:function(data) {
-
-                            $('select[name="permasalahan-'+ id +'"]').empty();
-                                $.each(data, function(key, value) {
-                                    $('select[name="permasalahan-'+ id +'"]').append('<option value="'+ key +'">'+ value +'</option>');
-                                });
-                        }
-                    });
-                }else{
-                    $('select[name="permasalahan-'+ id +'"]').empty();
-                }
-            });
-
-        });
-    </script>

@@ -24,7 +24,7 @@ class DetailCustomerController extends Controller
 
     public function add_form()
     {
-        $company = DetailCustomer::with('company')->get();
+        $company = Company::orderBy('id', 'DESC')->get();
         return view('customer.detail_customer.add_form', compact('company'));
     }
 
