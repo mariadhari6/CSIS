@@ -2,53 +2,48 @@
 @section('title',' CSIS | Company ')
 
 @section('content')
-<h4 class="page-title">Company</h4>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-            <div class="text-right mt-3" id="selected">
-              <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
-                <b>Add</b>
-                <i class="fas fa-plus ml-2" ></i>
-              </button>
-              <button class="btn btn-success  mr-2 edit_all"> 
-                <i class="fas fa-pen"></i>
-              </button>
-              <button class="btn btn-danger delete_all">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          <table class="table table-responsive data" class="table_id" id="table_id" >
-            <thead>
-              <tr>
-                <th width="10px">
-                  <div class="form-check">
-                      <label class="form-check-label">
-                          <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                          <span class="form-check-sign"></span>
-                      </label>
-                  </div>
-                </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Company Name</th>
-                <th scope="col" class="list">Seller</th>
-                <th scope="col" class="list">Customer Code</th>
-                <th scope="col" class="list">No PO</th>
-                <th scope="col" class="list">Po Date</th>
-                <th scope="col" class="list">No Agreement Letter</th>
-                <th scope="col" class="list">Status</th>
-                <th scope="col" class="action">Action</th>
-              </tr>
-            </thead>
-            <tbody  id="item_data">
-              {{-- {{ csrf_field() }} --}}
-            </tbody>
-          </table>
-        </div>
+<div class="card">
+  <div class="card-body">
+      <div class="text-right" id="selected">
+        <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
+          <b>Add</b>
+          <i class="fas fa-plus ml-2" ></i>
+        </button>
+        <button class="btn btn-success  mr-2 edit_all"> 
+          <i class="fas fa-pen"></i>
+        </button>
+        <button class="btn btn-danger delete_all">
+          <i class="fas fa-trash"></i>
+        </button>
       </div>
-    </div>
+    <table class="table table-responsive data" class="table_id" id="table_id" >
+      <thead>
+        <tr>
+          <th>
+            <div>
+                <label class="form-check-label">
+                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                    <span class="form-check-sign"></span>
+                </label>
+            </div>
+          </th>
+          <th scope="col" class="action">No.</th>
+          <th scope="col" class="list">Company Name</th>
+          <th scope="col" class="list">Seller</th>
+          <th scope="col" class="list">Customer Code</th>
+          <th scope="col" class="list">No PO</th>
+          <th scope="col" class="list">Po Date</th>
+          <th scope="col" class="list">No Agreement Letter</th>
+          <th scope="col" class="list">Status</th>
+          <th scope="col" class="action">Action</th>
+        </tr>
+      </thead>
+      <tbody  id="item_data">
+        {{-- {{ csrf_field() }} --}}
+      </tbody>
+    </table>
   </div>
+</div>
 
   <script>
     $(document).ready(function() {

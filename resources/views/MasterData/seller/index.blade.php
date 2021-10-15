@@ -1,14 +1,15 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Seller')
+@section('title-table','Seller')
 
 @section('content')
 <form>
-<h4 class="page-title">Seller</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+          <table class="table table-responsive data" class="table_id" id="table_id" >
+            <div class="text-right" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add" id="add" >
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" ></i>
@@ -20,11 +21,10 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
-          <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>
-                    <div class="form-check">
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
@@ -83,11 +83,43 @@
       });
     // ----- Proses Tambah data ------
     function store() {
-
-        var seller_name = $("#seller_name").val();
+      var seller_name = $("#seller_name").val();
         var seller_code = $("#seller_code").val();
         var no_agreement_letter = $("#no_agreement_letter").val();
         var status = $("#status").val();
+        if(
+            seller_name == '' ||
+            seller_code == '' ||
+            no_agreement_letter == ''
+          ) {
+          swal({
+            type: 'warning',
+            text: 'there is data that has not been filled',
+            showConfirmButton: false,
+            timer: 1500
+          }).catch(function(timeout) { });
+          $("#required").text("please fill out this field");
+        } else {
+           $.ajax({
+            type: "get",
+            url: "{{ url('store_seller') }}",
+            data: {
+              seller_name: seller_name,
+              seller_code: seller_code,
+              no_agreement_letter: no_agreement_letter,
+              status:status
+            },
+            success: function(data) {
+              swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+              }).catch(function(timeout) { });
+              read();
+            }
+        })
+        }
     }
 
     // -----Proses Delete Data ------

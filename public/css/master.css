@@ -80,24 +80,10 @@
     margin-left: 20px;
 }
 
-.dataTables_filter {
-    position: relative;
-    right: 150px;
-    bottom: 35px;
-}
-
-/* tabel livetable */
-
 #table_id {
     position: relative;
     bottom: 0px;
     text-align: center;
-}
-
-/* Datatable */
-.dataTables_length {
-    margin-top: 5px;
-    margin-left: 20px;
 }
 
 .action {
@@ -167,13 +153,6 @@
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
 }
-/* tabel livetable */
-
-#table_id {
-    position: relative;
-    bottom: 0px;
-    text-align: center;
-}
 
 /*  */
 
@@ -242,4 +221,10 @@
     border: none;
     padding: 0;
     background: none;
+}
+
+/* Space among tr */
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
 }

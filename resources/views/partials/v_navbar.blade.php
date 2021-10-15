@@ -11,6 +11,9 @@
         </div>
         <nav class="navbar navbar-header navbar-expand-lg">
             <div class="container-fluid">
+
+                <button class="mt-1 btn btn-light btn-sm" >@yield('title-table')</button>
+
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 
                     <li class="nav-item dropdown">

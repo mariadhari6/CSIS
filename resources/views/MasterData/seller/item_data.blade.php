@@ -1,8 +1,8 @@
 <?php $no=1; ?>
 @foreach ($seller as $item)
-    <tr id="edit-form-{{ $item->id }}">
+    <tr class="mt-20" id="edit-form-{{ $item->id }}">
         <td id="td-checkbox-{{ $item->id }}">
-            <div class="form-check">
+            <div>
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
                     <span class="form-check-sign"></span>
@@ -12,7 +12,8 @@
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
-        <td id="item-seller_name-{{ $item->id}}">
+
+        <td  style="padding: 0" id="item-seller_name-{{ $item->id}}">
             {{ $item->seller_name }}
         </td>
         <td id="item-seller_code-{{ $item->id }}">

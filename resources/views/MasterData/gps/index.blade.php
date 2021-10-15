@@ -17,8 +17,8 @@
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th width="10px">
-                    <div class="form-check">
+                <th>
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
@@ -51,6 +51,20 @@
   <script>
     $(document).ready(function() {
       read()
+
+      $('input[type=text]').bind('change', function () {
+          var arr = []
+          $siblings = $(this).siblings();
+          alert($siblings);
+          // $.each($siblings, function (i, key) {
+          //   arr.push($(key).val()); 
+          // });
+          // if ($.inArray($(this).val(), arr) !== -1)
+          // {
+          //     alert("duplicate has been found");
+          // }
+      });    
+    
     });
     // ------ Tampil Data ------
     function read(){
