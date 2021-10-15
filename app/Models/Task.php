@@ -12,6 +12,6 @@ class Task extends Model
 
     public function requestComplaint()
     {
-        return $this->hasMany(RequestComplaint::class);
+        return $this->hasMany(RequestComplaint::class, 'task', 'id');
     }
 }

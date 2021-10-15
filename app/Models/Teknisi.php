@@ -13,6 +13,10 @@ class Teknisi extends Model
 
     public function requestComplaint()
     {
-        return $this->hasMany(RequestComplaint::class);
+        return $this->hasOne(RequestComplaint::class, 'id', 'teknisi_pemasangan');
+    }
+    public function requestComplaintMaintenance()
+    {
+        return $this->hasMany(RequestComplaint::class, 'id', 'teknisi_maintenance');
     }
 }

@@ -36,7 +36,7 @@ class DetailCustomer extends Model
 
     public function requestComplaint()
     {
-        return $this->hasMany(RequestComplaint::class);
+        return $this->hasMany(RequestComplaint::class, 'imei', 'id');
     }
     public function company()
     {

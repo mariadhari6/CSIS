@@ -35,7 +35,7 @@
     </select></i></td>
 
     <td><select class="select imei-{{$pemasangan_mutasi_GPS->id}}" id="imei" name="imei">
-        <option value="{{$pemasangan_mutasi_GPS->imei}}"> {{$pemasangan_mutasi_GPS->detailCustomer->imei}} </option>
+        <option value="{{$pemasangan_mutasi_GPS->imei}}"> {{$pemasangan_mutasi_GPS->detailCustomer->imei?? ''}} </option>
         @foreach ($details as $detail)
         <option value="{{ $detail->id }}" {{ old('imei') == $detail->id  ? 'selected':'' }}>
         {{$detail->imei}}
@@ -44,7 +44,7 @@
     </select></i></td>
 
      <td><select class="select gsm_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="gsm_pemasangan" name="gsm_pemasangan">
-        <option value="{{$pemasangan_mutasi_GPS->gsm_pemasangan}}"> {{$pemasangan_mutasi_GPS->gsm->gsm_number}} </option>
+        <option value="{{$pemasangan_mutasi_GPS->gsm_pemasangan}}"> {{$pemasangan_mutasi_GPS->gsmMaster->gsm_number?? ''}} </option>
         @foreach ($gsm_master as $gsm_masters)
         <option value="{{ $gsm_masters->id }}" {{ old('gsm_pemasangan') == $gsm_masters->id  ? 'selected':'' }}>
         {{$gsm_masters->gsm_number}}
@@ -53,7 +53,7 @@
        @endforeach
     </select></i></td>
      <td><select class="select equipment_terpakai_sensor-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_sensor" name="equipment_terpakai_sensor">
-        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_sensor}}"> {{$pemasangan_mutasi_GPS->sensor->sensor_name}} </option>
+        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_sensor}}"> {{$pemasangan_mutasi_GPS->sensor->sensor_name?? ''}} </option>
         @foreach ($sensor as $sensors)
         <option value="{{ $sensors->id }}" {{ old('equipment_terpakai_sensor') == $sensors->id  ? 'selected':'' }}>
         {{$sensors->sensor_name}}
@@ -62,7 +62,7 @@
     </select></i></td>
 
     <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps">
-        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->gps->typeGps->type_gps}} </option>
+        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->gpsPemasangan->typeGps->type_gps}} </option>
         @foreach ($gps as $gpses)
         <option value="{{ $gpses->id }}" {{ old('equipment_terpakai_gps') == $gpses->id  ? 'selected':'' }}>
         {{$gpses->typeGps->type_gps}}
@@ -75,7 +75,7 @@
 
      <td>
         <select class="select teknisi_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="teknisi_pemasangan" name="teknisi_pemasangan">
-            <option selected value="{{$pemasangan_mutasi_GPS->teknisi_pemasnagan}}">{{$pemasangan_mutasi_GPS->teknisi->teknisi_name}}</option>
+            <option selected value="{{$pemasangan_mutasi_GPS->teknisi_pemasnagan}}">{{$pemasangan_mutasi_GPS->teknisi->teknisi_name?? ''}}</option>
             @foreach ($teknisi as $item)
                 <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
             @endforeach

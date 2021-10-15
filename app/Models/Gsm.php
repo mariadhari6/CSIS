@@ -23,6 +23,10 @@ class Gsm extends Model
     }
     public function requestComplaint()
     {
-        return $this->hasMany(RequestComplaint::class);
+        return $this->hasMany(RequestComplaint::class, 'gsm_pemasangan', 'id');
+    }
+    public function requestComplaintMaintenance()
+    {
+        return $this->hasMany(RequestComplaint::class, 'equipment_gsm', 'id');
     }
 }

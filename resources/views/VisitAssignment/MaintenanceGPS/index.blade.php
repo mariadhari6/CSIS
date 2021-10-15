@@ -8,10 +8,7 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-              <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
-                <b>Add</b>
-                <i class="fas fa-plus ml-2" ></i>
-              </button>
+
               <button class="btn btn-success  mr-2 edit_all">
                 <i class="fas fa-pen"></i>
               </button>

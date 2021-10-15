@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Sensor extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $table = 'sensors';
 
     protected $fillable = [
@@ -16,10 +15,15 @@ class Sensor extends Model
     ];
     public function requestComplaint()
     {
-        return $this->hasMany(RequestComplaint::class);
+        return $this->hasOne(RequestComplaint::class, 'id', 'equipment_sensor_id');
+    }
+
+    public function requestComplaintPemasangan()
+    {
+        return $this->hasMany(RequestComplaint::class, 'id', 'equipment_terpakai_sensor');
     }
     public function sensorMerk()
     {
-        return $this->belongsTo(MerkSensor::class, 'id');
+        return $this->belongsTo(MerkSensor::class, 'merk_sensor', 'id');
     }
 }

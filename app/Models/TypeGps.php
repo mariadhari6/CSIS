@@ -11,7 +11,7 @@ class TypeGps extends Model
     protected $table = 'type_gps';
     public function Gps()
     {
-        return $this->hasMany(Gps::class);
+        return $this->hasMany(Gps::class, 'type', 'id');
     }
 
     public function GpsTemporary()

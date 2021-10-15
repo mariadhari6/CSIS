@@ -29,9 +29,10 @@ class PemasanganMutasiGpsController extends Controller
     {
 
 
-        $pemasangan_mutasi_GPS = RequestComplaint::where('task', 1)->orWhere('task', 2)->orWhere('task', 3)->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::with(['sensor'])->where('task', 1)->orWhere('task', 2)->orWhere('task', 3)->get();
 
         return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
+        // dd($pemasangan_mutasi_GPS);
     }
 
     public function destroy($id)

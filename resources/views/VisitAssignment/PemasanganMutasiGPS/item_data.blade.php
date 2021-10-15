@@ -30,19 +30,21 @@
             {{ $item->detailCustomer->imei}}
         </td>
           <td id="item-gsm_pemasangan-{{ $item->id }}">
-            {{ $item->gsm->gsm_number}}
+            {{ $item->gsmMaster->gsm_number}}
         </td>
         <td id="item-equipment_terpakai_sensor-{{ $item->id }}">
-            {{$item->sensor->sensor_name}}
+            {{$item->sensor->sensor_name?? ''}}
+            {{-- {{optional($item)->sensor->sensor_name}} --}}
+
         </td>
         <td id="item-equipment_terpakai_gps-{{ $item->id }}">
-            {{$item->gps->typeGps->type_gps}}
+            {{$item->gpsPemasangan->typeGps->type_gps?? ''}}
         </td>
 
 
 
         <td id="item-teknisi_pemasangan-{{ $item->id }}">
-            {{ $item->teknisi->teknisi_name}}
+            {{ $item->teknisi->teknisi_name?? ''}}
         </td>
          <td id="item-uang_transportasi-{{ $item->id }}">
         <span>Rp. </span>{{ number_format( $item->uang_transportasi)}}

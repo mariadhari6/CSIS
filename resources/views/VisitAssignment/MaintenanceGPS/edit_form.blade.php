@@ -24,7 +24,7 @@
     <td>
         <select class="select type_gps_id-{{$maintenanceGps->id}}" id="type_gps_id" name="type_gps_id-{{$maintenanceGps->id}}">
             <option selected value="{{ $maintenanceGps->type_gps_id }}">
-                {{ $maintenanceGps->gps->typeGps->type_gps }}
+                {{ $maintenanceGps->gpsMaintenance->typeGps->type_gps }}
             </option>
 
             @foreach ($gps as $item)
@@ -38,7 +38,7 @@
     <td>
         <select class="select equipment_gps_id-{{$maintenanceGps->id}}" id="equipment_gps_id" name="equipment_gps_id-{{$maintenanceGps->id}}">
             <option selected value="{{ $maintenanceGps->equipment_gps_id }}">
-                {{ $maintenanceGps->gps->typeGps->type_gps }}
+                {{ $maintenanceGps->gpsMaintenance->typeGps->type_gps }}
             </option>
 
             @foreach ($gps as $item)
@@ -52,7 +52,7 @@
     <td>
         <select class="select equipment_sensor_id-{{$maintenanceGps->id}}" id="equipment_sensor_id" name="equipment_sensor_id-{{$maintenanceGps->id}}">
             <option selected value="{{ $maintenanceGps->equipment_sensor_id}}">
-                {{ $maintenanceGps->sensor->sensor_name }}
+                {{ $maintenanceGps->sensorMaintenance->sensor_name }}
             </option>
 
             @foreach ($sensor as $item)

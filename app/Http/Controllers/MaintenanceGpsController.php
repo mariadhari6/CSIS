@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Gps;
 use App\Models\Gsm;
 use App\Models\MaintenanceGps;
@@ -25,10 +26,11 @@ class MaintenanceGpsController extends Controller
 
     public function item_data()
     {
-        $maintenanceGps = RequestComplaint::where('task', 4)->orWhere('task', 5)->get();
+        $maintenanceGps = RequestComplaint::with(['sensor'])->where('task', 4)->orWhere('task', 5)->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
         ]);
+        // dd($maintenanceGps);
         // echo $maintenanceGps->requestComplaint->company->company_name;
     }
 
@@ -36,6 +38,7 @@ class MaintenanceGpsController extends Controller
     {
         $maintenanceGps = RequestComplaint::findOrfail($id);
         $gps = Gps::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('id', 'DESC')->get();
         $pic = Pic::orderBy('id', 'DESC')->get();
         $sensor = Sensor::orderBy('id', 'DESC')->get();
         $teknisi_maintenance = Teknisi::orderBy('id', 'DESC')->get();
@@ -50,7 +53,8 @@ class MaintenanceGpsController extends Controller
             'sensor' => $sensor,
             'teknisi_maintenance' => $teknisi_maintenance,
             'task' => $task,
-            'gsm_master' => $gsm_master
+            'gsm_master' => $gsm_master,
+            'company' => $company
 
         ]);
     }

@@ -165,4 +165,8 @@ class GpsController extends Controller
         Excel::import(new GpsImport, public_path('/MasterGps/' . $nameFile));
         // return redirect('/GsmMaster');
     }
+    public function export()
+    {
+        return Excel::download(new TemplateGsm, 'template-gsm.xlsx');
+    }
 }

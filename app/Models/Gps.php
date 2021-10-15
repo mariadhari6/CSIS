@@ -32,10 +32,14 @@ class Gps extends Model
     }
     public function typeGps()
     {
-        return $this->belongsTo(TypeGps::class, 'type');
+        return $this->belongsTo(TypeGps::class, 'type', 'id');
+    }
+    public function requestComplaintMaintenance()
+    {
+        return $this->hasMany(RequestComplaint::class, 'equipment_gps_id', 'id');
     }
     public function requestComplaint()
     {
-        return $this->hasMany(RequestComplaint::class);
+        return $this->hasMany(RequestComplaint::class, 'equipment_terpakai_gps', 'id');
     }
 }

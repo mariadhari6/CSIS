@@ -22,7 +22,7 @@
         </select></i>
     </td>
       <td>
-          <select class="select" id="pic" name="pic">
+          <select class="select" id="pic_id" name="pic_id">
             <option selected disabled>PIC</option>
             @foreach ($pic as $pics)
                 <option value="{{ $pics->id }}" {{ old('pic') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>

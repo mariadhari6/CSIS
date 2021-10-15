@@ -22,16 +22,16 @@
             {{ $item->waktu_kesepakatan }}
         </td>
         <td id="item-type_gps_id-{{ $item->id }}">
-            {{ $item->gps->typeGps->type_gps }}
+            {{-- {{ $item->gpsMaintenance->typeGps->type_gps}} --}}
         </td>
         <td id="item-equipment_gps_id-{{ $item->id }}">
-            {{ $item->gps->typeGps->type_gps }}
+            {{-- {{ $item->gps->typeGps->type_gps }} --}}
         </td>
         <td id="item-equipment_sensor_id-{{ $item->id}}">
-            {{ $item->sensor->sensor_name }}
+            {{-- {{ $item->sensor->sensor_name }} --}}
         </td>
         <td id="item-equipment_gsm-{{ $item->id}}">
-            {{ $item->gsm->gsm_number }}
+            {{ $item->gsm->gsm_number}}
         </td>
         <td id="item-task-{{ $item->id}}">
             {{ $item->taskRequest->task }}
@@ -50,7 +50,7 @@
 
         </td>
         <td id="item-teknisi_maintenance-{{ $item->id}}">
-            {{ $item->teknisi->teknisi_name }}
+            {{-- {{ $item->teknisi->teknisi_name }} --}}
         </td>
         <td id="item-req_by-{{ $item->id}}">
             {{ $item->req_by }}
