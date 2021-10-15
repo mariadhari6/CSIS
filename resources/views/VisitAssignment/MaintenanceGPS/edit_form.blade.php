@@ -63,8 +63,8 @@
 
         </select>
     </td>
-     <td><select class="select equipment_gsm-{{$pemasangan_mutasi_GPS->id}}" id="equipment_gsm" name="equipment_gsm">
-        <option value="{{$pemasangan_mutasi_GPS->equipment_gsm}}"> {{$pemasangan_mutasi_GPS->gsm->gsm_number}} </option>
+     <td><select class="select equipment_gsm-{{$maintenanceGps->id}}" id="equipment_gsm" name="equipment_gsm">
+        <option value="{{$maintenanceGps->equipment_gsm}}"> {{$maintenanceGps->gsm->gsm_number}} </option>
         @foreach ($gsm_master as $gsm_masters)
         <option value="{{ $gsm_masters->id }}" {{ old('equipment_gsm') == $gsm_masters->id  ? 'selected':'' }}>
         {{$gsm_masters->gsm_number}}
@@ -75,7 +75,7 @@
     <td>
         <select class="select task-{{$maintenanceGps->id}}" id="task" name="task-{{$maintenanceGps->id}}">
             <option selected value="{{ $maintenanceGps->task}}">
-                {{ $maintenanceGps->task }}
+                {{ $maintenanceGps->taskRequest->task }}
             </option>
 
             @foreach ($task as $item)
@@ -104,7 +104,7 @@
     </td>
    <td>
         <select class="select teknisi_maintenance-{{$maintenanceGps->id}}" id="teknisi_maintenance" name="teknisi_maintenance">
-            <option selected value="{{$maintenanceGps->teknisi_maintenance}}">{{$maintenanceGps->teknisiMaintenance->teknisi_name}}</option>
+            <option selected value="{{$maintenanceGps->teknisi_maintenance}}">{{$maintenanceGps->teknisiMaintenance->teknisi_name?? ''}}</option>
             @foreach ($teknisi_maintenance as $item)
                 <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
             @endforeach

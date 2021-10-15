@@ -21,7 +21,7 @@
             <option selected disabled @if (old('type')=='' or old('type')==0) @endif>Type</option>
 
             @foreach ($type as $item)
-            <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type}}</option>
+            <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->typeGps->type_gps}}</option>
             @endforeach
 
         </select>

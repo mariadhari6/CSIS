@@ -37,7 +37,7 @@ class RequestComplaint extends Model
     }
     public function teknisiMaintenance()
     {
-        return $this->belongsTo(Teknisi::class, 'teknisi_maintenace', 'id');
+        return $this->belongsTo(Teknisi::class, 'teknisi_maintenance', 'id');
     }
     public function detailCustomer()
     {
@@ -55,10 +55,10 @@ class RequestComplaint extends Model
     {
         return $this->belongsTo(Sensor::class, 'equipment_terpakai_sensor', 'id');
     }
-    // public function sensorMaintenance()
-    // {
-    //     return $this->belongsTo(Sensor::class, 'equipment_sensor_id', 'id');
-    // }
+    public function sensorMaintenance()
+    {
+        return $this->belongsTo(Sensor::class, 'equipment_sensor_id', 'id');
+    }
     public function gpsPemasangan()
     {
         return $this->belongsTo(Gps::class, 'equipment_terpakai_gps', 'id');

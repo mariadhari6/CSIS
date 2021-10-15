@@ -62,7 +62,7 @@
     </select></i></td>
 
     <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps">
-        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->gpsPemasangan->typeGps->type_gps}} </option>
+        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->gpsPemasangan->typeGps->type_gps??''}} </option>
         @foreach ($gps as $gpses)
         <option value="{{ $gpses->id }}" {{ old('equipment_terpakai_gps') == $gpses->id  ? 'selected':'' }}>
         {{$gpses->typeGps->type_gps}}
@@ -75,7 +75,7 @@
 
      <td>
         <select class="select teknisi_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="teknisi_pemasangan" name="teknisi_pemasangan">
-            <option selected value="{{$pemasangan_mutasi_GPS->teknisi_pemasnagan}}">{{$pemasangan_mutasi_GPS->teknisi->teknisi_name?? ''}}</option>
+            <option selected value="{{$pemasangan_mutasi_GPS->teknisi_pemasangan}}">{{$pemasangan_mutasi_GPS->teknisi->teknisi_name?? ''}}</option>
             @foreach ($teknisi as $item)
                 <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
             @endforeach
@@ -92,7 +92,7 @@
     <option value="Visit Berbayar">Visit Berbayar</option>
     </select></i></td>
 
-    <td><textarea class="form-control note_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="note_pemasangan" name="note_pemasangan" rows="3">{{$pemasangan_mutasi_GPS->note}}</textarea></i></td>
+    <td><textarea class="form-control note_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="note_pemasangan" name="note_pemasangan" rows="3">{{$pemasangan_mutasi_GPS->note_pemasangan}}</textarea></i></td>
     <td><select class="select kendaraan_pasang-{{$pemasangan_mutasi_GPS->id}}" id="kendaraan_pasang" id="kendaraan_pasang" aria-label=".form-select-lg example">
     <option value="{{$pemasangan_mutasi_GPS->kendaraan_pasang}}"> {{$pemasangan_mutasi_GPS->kendaraan_pasang}} </option>
     <option value="B-94828-YTS">B-94828-YTS</option>

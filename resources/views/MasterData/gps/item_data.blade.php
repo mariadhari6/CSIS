@@ -20,7 +20,7 @@
             {{ $item->merkGps->merk}}
         </td>
           <td id="item-type-{{ $item->id }}">
-            {{ $item->typeGps->type }}
+            {{ $item->typeGps->type_gps }}
         </td>
           <td id="item-imei-{{ $item->id }}">
             {{ $item->imei }}
