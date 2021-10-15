@@ -48,7 +48,7 @@ class RequestComplaintController extends Controller
             'vehicle'     =>  $request->vehicle,
             'waktu_info'     =>  $request->waktu_info,
             'waktu_respond'     =>  $request->waktu_respond,
-            'task_id' => $request->task_id,
+            'task' => $request->task,
             'platform'     =>  $request->platform,
             'detail_task'     =>  $request->detail_task,
             'divisi'     =>  $request->divisi,
@@ -92,7 +92,7 @@ class RequestComplaintController extends Controller
         $data->vehicle = $request->vehicle;
         $data->waktu_info = $request->waktu_info;
         $data->waktu_respond = $request->waktu_respond;
-        $data->task_id = $request->task;
+        $data->task = $request->task;
         $data->platform = $request->platform;
         $data->detail_task = $request->detail_task;
         $data->divisi = $request->divisi;
@@ -122,7 +122,7 @@ class RequestComplaintController extends Controller
         $data->vehicle = $request->vehicle;
         $data->waktu_info = $request->waktu_info;
         $data->waktu_respond = $request->waktu_respond;
-        $data->task_id = $request->task;
+        $data->task = $request->task;
         $data->platform = $request->platform;
         $data->detail_task = $request->detail_task;
         $data->divisi = $request->divisi;

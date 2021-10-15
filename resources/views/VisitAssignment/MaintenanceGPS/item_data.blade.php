@@ -31,7 +31,7 @@
             {{ $item->sensorMaintenance->sensor_name?? '' }}
         </td>
         <td id="item-equipment_gsm-{{ $item->id}}">
-            {{ $item->gsm->gsm_number}}
+            {{ $item->gsm->gsm_number?? ''}}
         </td>
         <td id="item-task-{{ $item->id}}">
             {{ $item->taskRequest->task }}
