@@ -236,3 +236,10 @@
 .modal-footer-full-width {
     border-top: 1px solid #9ea2a2 !important;
 }
+
+/* Submit button */
+.unstyled-button {
+    border: none;
+    padding: 0;
+    background: none;
+}

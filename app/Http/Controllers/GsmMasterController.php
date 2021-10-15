@@ -36,10 +36,11 @@ class GsmMasterController extends Controller
 
     public function item_data_temporary()
     {
-        $GsmMaster = GsmTemporary::orderBy('id', 'ASC')->get();
+        $GsmMaster = GsmTemporary::orderBy('id', 'DESC')->get();
         return view('MasterData.GsmMaster.item_data_temporary')->with([
             'GsmMaster' => $GsmMaster
         ]);
+        // echo $GsmMaster;
     }
 
     public function item_data_ready()
@@ -81,7 +82,8 @@ class GsmMasterController extends Controller
             'active_date'       =>  $request->active_date,
             'expired_date'      =>  $request->expired_date,
             'terminate_date'    =>  $request->terminate_date,
-            'note'              =>  $request->note
+            'note'              =>  $request->note,
+            'provider'          =>  $request->provider
         );
         Gsm::insert($data);
     }
@@ -124,6 +126,7 @@ class GsmMasterController extends Controller
         $data->active_date = $request->active_date;
         $data->terminate_date = $request->terminate_date;
         $data->note = $request->note;
+        $data->provider = $request->provider;
         $data->save();
     }
 
@@ -148,7 +151,7 @@ class GsmMasterController extends Controller
         $file = $request->file('file');
         $nameFile = $file->getClientOriginalName();
         $file->move('DataGsmMaster', $nameFile);
-
+        
         Excel::import(new GsmMasterImport, public_path('/DataGsmMaster/'.$nameFile));
         // return redirect('/GsmMaster');
     }

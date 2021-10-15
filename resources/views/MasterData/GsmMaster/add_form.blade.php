@@ -49,6 +49,9 @@
     <td>
         <textarea class="form-control" id="note" name="note" ></textarea>
     </td>
+    <td> 
+        <div class="input-div"><input type="text" class="input" id="provider" placeholder="Provider">
+    </td>
     <td>
         <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>

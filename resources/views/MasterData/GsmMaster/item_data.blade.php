@@ -48,6 +48,9 @@
         <td id="item-note-{{ $item->id }}">
             {{ $item->note }}
         </td>
+        <td id="item-provider-{{ $item->id }}">
+            {{ $item->provider }}
+        </td>
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>

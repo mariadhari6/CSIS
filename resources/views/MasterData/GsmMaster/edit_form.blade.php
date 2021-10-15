@@ -47,5 +47,8 @@
     <td>
         <i class="fas fa-check add" id="edit" onclick="update({{ $GsmMaster->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
+    <td>
+        <div class="input-div"><input type="text" class="input provider-{{$GsmMaster->id}}" id="provider" placeholder="Provider" value="{{ $GsmMaster->provider}}"></div>
+    </td>
 
 

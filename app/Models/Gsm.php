@@ -14,7 +14,7 @@ class Gsm extends Model
     // protected $guard = ['id'];
     protected $fillable = [
         'status_gsm', 'gsm_number', 'company_id', 'serial_number', 'icc_id', 'imsi', 'res_id', 'request_date',
-         'expired_date', 'active_date', 'terminate_date', 'note'
+         'expired_date', 'active_date', 'terminate_date', 'note', 'provider'
     ];
 
     public function company()

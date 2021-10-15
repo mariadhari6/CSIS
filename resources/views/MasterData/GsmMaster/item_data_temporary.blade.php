@@ -9,8 +9,8 @@
         <td class="temporary-gsm_number-{{ $item->id }}" id="{{ $item->gsm_number }}">
             {{ $item->gsm_number }}
         </td>
-        <td class="temporary-company_id-{{ $item->id }}" id="{{ $item->company->id }}">
-            {{ $item->company->company_name }}
+        <td class="temporary-company_id-{{ $item->id }}" id="{{ $item->company_id == 0 ? 0 : $item->company->id }}">
+            {{ $item->company_id == 0 ? 'company is null' : $item->company->company_name }}
         </td>
         <td class="temporary-serial_number-{{ $item->id }}" id="{{ $item->serial_number }}">
             {{ $item->serial_number }}
@@ -24,8 +24,8 @@
         <td class="temporary-res_id-{{ $item->id }}" id="{{ $item->res_id }}">
             {{ $item->res_id }}
         </td>
-        <td class="temporary-request_date-{{ $item->id }}" id="{{ $item->request_date }}">
-            {{ $item->request_date }}
+        <td bgcolor='{{ $item->request_date  == "" ? "ff8080" : "" }}' class="temporary-request_date-{{ $item->id }}" id="{{ $item->request_date }}">
+            {{ $item->request_date  == "" ? "column empty" : $item->request_date }}
         </td>
         <td class="temporary-expired_date-{{ $item->id }}" id="{{ $item->expired_date }}">
             {{ $item->expired_date }}
@@ -38,6 +38,9 @@
         </td>
         <td class="temporary-note-{{ $item->id }}" id="{{ $item->note }}">
             {{ $item->note }}
+        </td>
+        <td class="temporary-provider-{{ $item->id }}" id="{{ $item->provider }}">
+            {{ $item->provider }}
         </td>
     </tr>
 @endforeach

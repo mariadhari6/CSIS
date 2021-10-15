@@ -8,10 +8,6 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-              <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
-                <b>Add</b>
-                <i class="fas fa-plus ml-2" ></i>
-              </button>
               <button class="btn btn-success  mr-2 edit_all"> 
                 <i class="fas fa-pen"></i>
               </button>
@@ -91,57 +87,6 @@
         $('#table_id tbody').prepend(data); 
     });
     });
-
-    // ----- Proses Tambah data ------
-    function store() {
-        var company = $("#company").val();
-        var vehicle = $("#vehicle").val();
-        var tanggal = $("#tanggal").val();
-        var type_gps = $("#type_gps").val();
-        var equipment_gps = $("#equipment_gps").val();
-        var equipment_sensor = $("#equipment_sensor").val();
-        var equipment_gsm = $("#equipment_gsm").val();
-        var permasalahan = $("#permasalahan").val();
-        var ketersediaan_kendaraan = $("#ketersediaan_kendaraan").val();
-        var keterangan = $("#keterangan").val();
-        var hasil = $("#hasil").val();
-        var biaya_transportasi = $("#biaya_transportasi").val();
-        var teknisi = $("#teknisi").val();
-        var req_by = $("#req_by").val();
-        var note = $("#note").val();
-
-        $.ajax({
-            type: "get",
-            url: "{{ url('store_maintenanceGps') }}",
-            data: {
-              company: company,
-              vehicle: vehicle,
-              tanggal: tanggal,
-              type_gps: type_gps,
-              equipment_gps: equipment_gps,
-              equipment_sensor: equipment_sensor,
-              equipment_gsm: equipment_gsm,
-              permasalahan: permasalahan,
-              ketersediaan_kendaraan: ketersediaan_kendaraan,
-              keterangan: keterangan,
-              hasil: hasil,
-              biaya_transportasi: biaya_transportasi,
-              teknisi: teknisi,
-              req_by: req_by,
-              note: note,
-
-            },
-             success: function(data) {
-            swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-              read();
-            }
-        })
-    }
 
     // -----Proses Delete Data ------
     function destroy(id) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gps;
 use App\Models\MaintenanceGps;
 use App\Models\Pic;
+use App\Models\RequestComplaint;
 use App\Models\RequestComplaintCustomer;
 use Illuminate\Support\Facades\DB;
 use App\Models\Sensor;
@@ -17,69 +18,13 @@ class MaintenanceGpsController extends Controller
         return view('VisitAssignment.MaintenanceGPS.index');
     }
 
-    public function add_form()
-    {
-        $requestComplaint = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
-        $gps = Gps::orderBy('id', 'DESC')->get();
-        $pic = Pic::orderBy('id', 'DESC')->get();
-        $sensor = Sensor::orderBy('id', 'DESC')->get();
-        return view('VisitAssignment.MaintenanceGPS.add_form')->with([
-            'requestComplaint' => $requestComplaint,
-            'pic' => $pic,
-            'gps' => $gps,
-            'sensor' => $sensor,
-        ]);
-        // echo $requestComplaint->company;
-    }
-
     public function item_data()
     {
-        $maintenanceGps = MaintenanceGps::orderBy('id', 'DESC')->get();
+        $maintenanceGps = RequestComplaint::where('task', '1')->orWhere('task', '2')->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
         ]);
         // echo $maintenanceGps->requestComplaint->company->company_name;
-    }
-
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'company' => 'required',
-            'vehicle' => 'required',
-            'tanggal' => 'required',
-            'type_gps' => 'required',
-            'equipment_gps' => 'required',
-            'equipment_sensor' => 'required',
-            'equipment_gsm' => 'required',
-            'permasalahan' => 'required',
-            'ketersediaan_kendaraan' => 'required',
-            'keterangan' => 'required',
-            'hasil' => 'required',
-            'biaya_transportasi' => 'required',
-            'teknisi' => 'required',
-            'req_by' => 'required',
-            'note' => 'required',
-        ]);
-
-        $data = array(
-            'company_id'     =>  $request->company,
-            'vehicle_id'    =>  $request->vehicle,
-            'tanggal_id'     =>  $request->tanggal,
-            'type_gps_id'     =>  $request->type_gps,
-            'equipment_gps_id'     =>  $request->equipment_gps,
-            'equipment_sensor_id' => $request->equipment_sensor,
-            'equipment_gsm'     =>  $request->equipment_gsm,
-            'permasalahan_id'     =>  $request->permasalahan,
-            'ketersediaan_kendaraan'     =>  $request->ketersediaan_kendaraan,
-            'keterangan'     =>  $request->keterangan,
-            'hasil'     =>  $request->hasil,
-            'biaya_transportasi'     =>  $request->biaya_transportasi,
-            'teknisi'     =>  $request->teknisi,
-            'req_by'     =>  $request->req_by,
-            'note'     =>  $request->note,
-        );
-
-        MaintenanceGps::insert($data);
     }
 
     public function edit_form($id)

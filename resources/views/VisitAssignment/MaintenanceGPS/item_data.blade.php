@@ -13,28 +13,28 @@
             {{ $no++ }}
         </td>
         <td id="item-company-{{ $item->id}}">
-            {{ $item->requestComplaint->company->company_name }}
+            {{ $item->company_id}}
         </td>
         <td id="item-vehicle-{{ $item->id}}">
-            {{ $item->requestComplaint->vehicle }}
+            {{ $item->vehicle }}
         </td>
         <td id="item-tanggal-{{ $item->id }}">
-            {{ $item->requestComplaint->waktu_kesepakatan }}
+            {{ $item->waktu_kesepakatan }}
         </td>
         <td id="item-type_gps-{{ $item->id }}">
-            {{ $item->gps->type }}
+            {{-- {{ $item->gps->type }} --}}
         </td>
         <td id="item-equipment_gps-{{ $item->id }}">
-            {{ $item->gps->type }}
+            {{-- {{ $item->gps->type }} --}}
         </td>
         <td id="item-equipment_sensor-{{ $item->id}}">
-            {{ $item->sensor->sensor_name }}
+            {{-- {{ $item->sensor->sensor_name }} --}}
         </td>
         <td id="item-equipment_gsm-{{ $item->id}}">
             {{ $item->equipment_gsm }}
         </td>
         <td id="item-permasalahan-{{ $item->id}}">
-            {{ $item->requestComplaint->detail_task }}
+            {{ $item->detail_task }}
         </td>
         <td id="item-ketersediaan_kendaraan-{{ $item->id}}">
             {{ $item->ketersediaan_kendaraan }}

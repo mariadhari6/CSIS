@@ -16,12 +16,12 @@ class CreateRequestComplaintTable extends Migration
         Schema::create('request_complaint', function (Blueprint $table) {
             $table->id();
             // from request and complaint
-            $table->foreignId('company_id')->nullable();
+            $table->foreignId('company_id')->nullable(); // detail customer
             $table->string('internal_eksternal')->nullable();
-            $table->foreignId('pic_id')->nullable();
-            $table->string('vehicle')->nullable();
+            $table->foreignId('pic_id')->nullable(); // Master PIC
+            $table->string('vehicle')->nullable(); // Detail customer
             $table->dateTime('waktu_info')->nullable();
-            $table->longText('task')->nullable();
+            $table->foreignId('task')->nullable(); // master Task
             $table->string('platform')->nullable();
             $table->longText('detail_task')->nullable();
             $table->string('divisi')->nullable();
@@ -32,24 +32,24 @@ class CreateRequestComplaintTable extends Migration
             $table->string('status')->nullable();
             $table->string('status_akhir')->nullable();
             // from pemasangan dan mutasi
-            $table->foreignId('imei')->nullable();
-            $table->foreignId('gsm_pemasangan')->nullable();
-            $table->foreignId('equipment_terpakai_gps')->nullable();
-            $table->foreignId('equipment_terpakai_sensor')->nullable();
-            $table->string('teknisi_pemasangan')->nullable();
+            $table->foreignId('imei')->nullable(); // detail customer
+            $table->foreignId('gsm_pemasangan')->nullable(); //Master GSM yg statusnya ready
+            $table->foreignId('equipment_terpakai_gps')->nullable(); // master GPS
+            $table->foreignId('equipment_terpakai_sensor')->nullable(); // master sensor
+            $table->foreignId('teknisi_pemasangan')->nullable(); // tabel Teknisi
             $table->integer('uang_transportasi')->nullable();
             $table->string('type_visit')->nullable();
             $table->string('note_pemasangan')->nullable();
             // from maintenance
-            $table->foreignId('type_gps_id')->nullable();
-            $table->foreignId('equipment_gps_id')->nullable();
-            $table->foreignId('equipment_sensor_id')->nullable();
-            $table->integer('equipment_gsm')->nullable();
+            $table->foreignId('type_gps_id')->nullable(); // Master GPS
+            $table->foreignId('equipment_gps_id')->nullable(); // Master GPS
+            $table->foreignId('equipment_sensor_id')->nullable(); // Master Sensor
+            $table->integer('equipment_gsm')->nullable(); // Master gsm Ready
             $table->string('ketersediaan_kendaraan')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('hasil')->nullable();
             $table->string('biaya_transportasi')->nullable();
-            $table->string('teknisi_maintenance')->nullable();
+            $table->foreignId('teknisi_maintenance')->nullable(); // tabel teknisi
             $table->string('req_by')->nullable();
             $table->longText('note_maintenance')->nullable();
             $table->timestamps();

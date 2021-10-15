@@ -11,7 +11,7 @@ class TemplateGsm implements FromCollection
     {
         return new EloquentCollection([
             ['Status GSM', 'GSM Number', 'Company', 'Serial Number', 'ICC ID', 'IMSI', 'Res ID',
-            'Request Date', 'Expired Date', 'Active Date', 'Terminated Date', 'Note']
+            'Request Date', 'Expired Date', 'Active Date', 'Terminated Date', 'Note', 'Provider']
         ]);
     }
 }

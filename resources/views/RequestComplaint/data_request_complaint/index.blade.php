@@ -1,28 +1,33 @@
 @extends('layouts.v_main')
-@section('title','requestcomplaint')
+@section('title','CSIS | Request and Complain')
 
 @section('content')
-<h4 class="page-title">Data Request & Complaint</h4>
-  <div class="row">
+
+<h4 class="page-title">Request and Complain</h4>
+
+<div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-             <button type="button" class="btn btn-primary float-left mr-2 add add-button">
-               </b>Add</b>
-               <i class="fas fa-plus ml-2" id="add"></i>
-              </button>
-              <button class="btn btn-success  mr-2 edit_all"> 
-                <i class="fas fa-pen"></i>
-              </button>
-              <button class="btn btn-danger  delete_all">
-                <i class="fas fa-trash"></i>
-              </button>
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                  <div class="form-group">
+                    {{-- <label for="smallSelect">Bulan</label> --}}
+                      <input class="form-control" id="filter-date" type="month">
+                      <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
+                    </select>
+                  </div>
+                </ul>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-            <table class="table table-responsive data" class="table_id" id="table_id" >
+
+            <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
-                  <th width="10px">
+                <th>
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -32,7 +37,7 @@
                 </th>
                 <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Internal/Eksternal</th>
+                <th scope="col" class="list">Internal/External Request & Complain</th>
                 <th scope="col" class="list">PIC</th>
                 <th scope="col" class="list">Vehicle</th>
                 <th scope="col" class="list">Waktu Info</th>
@@ -47,30 +52,61 @@
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="list">Status Akhir</th>
                 <th scope="col" class="action">Action</th>
-              </tr>
+
+                </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-
-         
         </div>
       </div>
     </div>
-  </div>
 
+    </div>
   <script>
     $(document).ready(function() {
-      read();
-      //   $('#requestcomplaint').dataTable();
+      read()
     });
+
+      // filter bulan dan tahun
+    $('#check-btn').click(function() {
+      var date = new Date($('#filter-date').val());
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+        $.ajax({
+            type: "get",
+            url: "{{ url('item_data_MY_RequestComplain') }}",
+            data: {
+              month: month,
+              year: year,
+            },
+            success: function(data) {
+              $('#table_id').DataTable().destroy();
+              $('#table_id').find("#item_data").html(data);
+              $('#table_id').dataTable( {
+
+                  "dom": '<"top"f>rt<"bottom"lp><"clear">'
+                  // "dom": '<lf<t>ip>'
+                  });
+              $('#table_id').DataTable().draw();
+            }
+        })
+    });
+    
+
+    // ---- stop dropdown -----
+    $(document).on('click', '.dropdown-menu', function (e) {
+      e.stopPropagation();
+    });
+
     // ------ Tampil Data ------
     function read(){
-      $.get("{{ url('item_data_requestcomplaint') }}", {}, function(data, status) {
+      $.get("{{ url('item_data_RequestComplain') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
+         $('#table_id').dataTable( {
+
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
@@ -83,60 +119,60 @@
     }
      // ------ Tambah Form Input ------
      $('.add').click(function() {
-        $.get("{{ url('add_form_requestcomplaint') }}", {}, function(data, status) {
+        $.get("{{ url('add_form_RequestComplain') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
       });
     // ----- Proses Tambah data ------
     function store() {
-        var company_id          = $("#company_id").val();
-        var internal_eksternal  = $("#internal_eksternal").val();
-        var pic_id              = $("#pic_id").val();
-        var vehicle             = $("#vehicle").val();
-        var waktu_info          = $("#waktu_info").val();
-        var task                = $("#task").val();
-        var platform            = $("#platform").val();
-        var detail_task         = $("#detail_task").val();
-        var divisi              = $("#divisi").val();
-        var waktu_respond       = $("#waktu_respond").val();
-        var respond             = $("#respond").val();
-        var waktu_kesepakatan   = $("#waktu_kesepakatan").val();
-        var waktu_solve         = $("#waktu_solve").val();
-        var status              = $("#status").val();
-        var status_akhir        = $("#status_akhir").val();
+        var company_id = $("#company_id").val();
+        var internal_eksternal = $("#internal_eksternal").val();
+        var pic = $("#pic").val();
+        var vehicle = $("#vehicle").val();
+        var waktu_info = $("#waktu_info").val();
+        var task = $("#task").val();
+        var platform = $("#platform").val();
+        var detail_task = $("#detail_task").val();
+        var divisi = $("#divisi").val();
+        var waktu_respond = $("#waktu_respond").val();
+        var respond = $("#respond").val();
+        var waktu_kesepakatan = $("#waktu_kesepakatan").val();
+        var waktu_solve = $("#waktu_solve").val();
+        var status = $("#status").val();
+        var status_akhir = $("#status_akhir").val();
         $.ajax({
             type: "get",
-            url: "{{ url('store_requestcomplaint') }}",
+            url: "{{ url('store_RequestComplain') }}",
             data: {
-                company_id            : company_id,
-                internal_eksternal    : internal_eksternal,
-                pic_id                : pic_id,
-                vehicle               : vehicle,
-                waktu_info            : waktu_info,
-                task                  : task,
-                platform              : platform,
-                detail_task           : detail_task,
-                divisi                : divisi,
-                waktu_respond         : waktu_respond,
-                respond               : respond,
-                waktu_kesepakatan     : waktu_kesepakatan,
-                waktu_solve           : waktu_solve,
-                status                : status,
-                status_akhir          : status_akhir
+              company_id:company_id,
+              internal_eksternal:internal_eksternal,
+              pic:pic,
+              vehicle:vehicle,
+              waktu_info:waktu_info,
+              task:task,
+              platform:platform,
+              detail_task:detail_task,
+              divisi:divisi,
+              waktu_respond:waktu_respond,
+              respond:respond,
+              waktu_kesepakatan:waktu_kesepakatan,
+              waktu_solve:waktu_solve,
+              status:status,
+              status_akhir:status_akhir
             },
             success: function(data) {
-              swal({
+             swal({
                 type: 'success',
                 title: 'Data Saved',
                 showConfirmButton: false,
                 timer: 1500
             }).catch(function(timeout) { });
               read();
-              }
-            })
-        }
+            }
+        })
+    }
     // -----Proses Delete Data ------
-     function destroy(id) {
+    function destroy(id) {
         var id = id;
         swal({
             title: 'Are you sure?',
@@ -151,11 +187,11 @@
               return new Promise(function(resolve) {
                 $.ajax({
                     type: "get",
-                    url: "{{ url('destroy_requestcomplaint') }}/" + id,
+                    url: "{{ url('destroy_RequestComplain') }}/" + id,
                     data: "id=" + id,
                     success: function(data) {
                         swal({
-                          type: 'success',
+                            type: 'success',
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
@@ -173,85 +209,84 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
-        $("#item-company_id-"+id).slideUp("fast");
         $("#item-no-"+id).hide("fast");
-        $("#item-internal_eksternal-"+id).slideUp("fast");
-        $("#item-pic_id-"+id).slideUp("fast");
-        $("#item-vehicle-"+id).slideUp("fast");
-        $("#item-waktu_info-"+id).slideUp("fast");
-        $("#item-task-"+id).slideUp("fast");
-        $("#item-platform-"+id).slideUp("fast");
-        $("#item-detail_task-"+id).slideUp("fast");
-        $("#item-divisi-"+id).slideUp("fast");
-        $("#item-waktu_respond-"+id).slideUp("fast");
-        $("#item-respond-"+id).slideUp("fast");
-        $("#item-waktu_kesepakatan-"+id).slideUp("fast");
-        $("#item-waktu_solve-"+id).slideUp("fast");
-        $("#item-status-"+id).slideUp("fast");
-        $("#item-status_akhir-"+id).slideUp("fast");
-        $.get("{{ url('show_requestcomplaint') }}/" + id, {}, function(data, status) {
+        $("#item-company_id-"+id).hide("fast");
+        $("#item-internal_eksternal-"+id).hide("fast");
+        $("#item-pic-"+id).hide("fast");
+        $("#item-vehicle-"+id).hide("fast");
+        $("#item-waktu_info-"+id).hide("fast");
+        $("#item-task-"+id).hide("fast");
+        $("#item-platform-"+id).hide("fast");
+        $("#item-detail_task-"+id).hide("fast");
+        $("#item-divisi-"+id).hide("fast");
+        $("#item-waktu_respond-"+id).hide("fast");
+        $("#item-respond-"+id).hide("fast");
+        $("#item-waktu_kesepakatan-"+id).hide("fast");
+        $("#item-waktu_solve-"+id).hide("fast");
+        $("#item-status-"+id).hide("fast");
+        $("#item-status_akhir-"+id).hide("fast");
+        $.get("{{ url('show_RequestComplain') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
     // ------ Proses Update Data ------
-    function update(id) {
-        var company_id                = $("#company_id").val();
-        var internal_eksternal        = $("#internal_eksternal").val();
-        var pic_id                    = $("#pic_id").val();
-        var vehicle                   = $("#vehicle").val();
-        var waktu_info                = $("#waktu_info").val();
-        var task                      = $("#task").val();
-        var platform                  = $("#platform").val();
-        var detail_task               = $("#detail_task").val();
-        var divisi                    = $("#divisi").val();
-        var waktu_respond             = $("#waktu_respond").val();
-        var respond                   = $("#respond").val();
-        var waktu_kesepakatan         = $("#waktu_kesepakatan").val();
-        var waktu_solve               = $("#waktu_solve").val();
-        var status                    = $("#status").val();
-        var status_akhir              = $("#status_akhir").val();
-        var id = id;
-        $.ajax({
-            type: "get",
-            url: "{{ url('update_requestcomplaint') }}/"+id,
-            data: {
-                company_id            : company_id,
-                internal_eksternal    : internal_eksternal,
-                pic_id                : pic_id,
-                vehicle               : vehicle,
-                waktu_info            : waktu_info,
-                task                  : task,
-                platform              : platform,
-                detail_task           : detail_task,
-                divisi                : divisi,
-                waktu_respond         : waktu_respond,
-                respond               : respond,
-                waktu_kesepakatan     : waktu_kesepakatan,
-                waktu_solve           : waktu_solve,
-                status                : status,
-                status_akhir          : status_akhir
-            },
-            success: function(data) {
-              swal({
-                type: 'success',
+        function update(id) {
+            var company_id = $("#company_id").val();
+            var internal_eksternal = $("#internal_eksternal").val();
+            var pic = $("#pic").val();
+            var vehicle = $("#vehicle").val();
+            var waktu_info = $("#waktu_info").val();
+            var task = $("#task").val();
+            var platform = $("#platform").val();
+            var detail_task = $("#detail_task").val();
+            var divisi = $("#divisi").val();
+            var waktu_respond = $("#waktu_respond").val();
+            var respond = $("#respond").val();
+            var waktu_kesepakatan = $("#waktu_kesepakatan").val();
+            var waktu_solve = $("#waktu_solve").val();
+            var status = $("#status").val();
+            var status_akhir = $("#status_akhir").val();
+            var id = id;
+            $.ajax({
+                type: "get",
+                url: "{{ url('update_RequestComplain') }}/"+id,
+                data: {
+                company_id: company_id,
+                internal_eksternal:internal_eksternal,
+                pic: pic,
+                vehicle: vehicle,
+                waktu_info: waktu_info,
+                task:task,
+                platform:platform,
+                detail_task:detail_task,
+                divisi:divisi,
+                waktu_respond: waktu_respond,
+                respond:respond,
+                waktu_kesepakatan:waktu_kesepakatan,
+                waktu_solve:waktu_solve,
+                status:status,
+                status_akhir:status_akhir
+                },
+                success: function(data) {
+                swal({
+                    type: 'success',
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
-                }).catch(function(timeout) { })
-                read()
-              }
-            
-        });
-    }
-   // checkbox all
-  $('#master').on('click', function(e) {
+                }).catch(function(timeout) { });
+                read();
+                }
+            });
+        }
+        // checkbox all
+        $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
-              $(".task-select").prop('checked', true)
+              $(".task-select").prop('checked', true);
           } else {
               $(".task-select").prop('checked',false);
           }
-    });
-    // delete all
+        });
+         // Delete All
         $('.delete_all').on('click', function(){
           event.preventDefault();
             var allVals = [];
@@ -273,14 +308,14 @@
                     preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            url: "{{ url('/selectedDelete_requestcomplaint') }}",
+                            url: "{{ url('/selectedDelete_RequestComplain') }}",
                             method: "get",
                             data: {
                                 id: allVals,
                                 _token: _token
                             },
                             success: function(data) {
-                                  swal({
+                                swal({
                                     type: 'success',
                                     title: 'The selected data has been deleted',
                                     showConfirmButton: false,
@@ -298,8 +333,8 @@
                 alert('Select the row you want to delete')
             }
         });
-        // form edit all
-            $('.edit_all').on('click', function(e){
+        // Form Edit All
+        $('.edit_all').on('click', function(e){
             var allVals = [];
             var _token = $('input[name="_token"]').val();
             $(".task-select:checked").each(function() {
@@ -309,40 +344,39 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('/selected') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
                     $("#item-no-"+value).hide("fast");
-                    $("#item-company_id-"+value).slideUp("fast");
-                    $("#item-internal_eksternal-"+value).slideUp("fast");
-                    $("#item-pic_id-"+value).slideUp("fast");
-                    $("#item-vehicle-"+value).slideUp("fast");
-                    $("#item-waktu_info-"+value).slideUp("fast");
-                    $("#item-task-"+value).slideUp("fast");
-                    $("#item-platform-"+value).slideUp("fast");
-                    $("#item-detail_task-"+value).slideUp("fast");
-                    $("#item-divisi-"+value).slideUp("fast");
-                    $("#item-waktu_respond-"+value).slideUp("fast");
-                    $("#item-respond-"+value).slideUp("fast");
-                    $("#item-waktu_kesepakatan-"+value).slideUp("fast");
-                    $("#item-waktu_solve-"+value).slideUp("fast");
-                    $("#item-status-"+value).slideUp("fast");
-                    $("#item-status_akhir-"+value).slideUp("fast");
-                    
+                    $("#item-company_id-"+value).hide("fast");
+                    $("#item-internal_eksternal-"+value).hide("fast");
+                    $("#item-pic-"+value).hide("fast");
+                    $("#item-vehicle-"+value).hide("fast");
+                    $("#item-waktu_info-"+value).hide("fast");
+                    $("#item-task-"+value).hide("fast");
+                    $("#item-platform-"+value).hide("fast");
+                    $("#item-detail_task-"+value).hide("fast");
+                    $("#item-divisi-"+value).hide("fast");
+                    $("#item-waktu_respond-"+value).hide("fast");
+                    $("#item-respond-"+value).hide("fast");
+                    $("#item-waktu_kesepakatan"+value).hide("fast");
+                    $("#item-waktu_solve-"+value).hide("fast");
+                    $("#item-status-"+value).hide("fast");
+                    $("#item-status_akhir-"+value).hide("fast");
                     $(".add").hide("fast");
-                    $.get("{{ url('show_requestcomplaint') }}/" + value, {}, function(data, status) {
+                    $.get("{{ url('show_RequestComplain') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
                     });
                 });
             }else{
-                alert('Select the row you want to edit')
+              alert('Select the row you want to edit')
             }
         });
-          // ------ Proses Update Data ------
+        // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
             $(".task-select:checked").each(function() {
@@ -357,11 +391,11 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes Update',
                 showLoaderOnConfirm: true,
-            }).then((willDelete) => {
-              $.each(allVals, function(index, value){
+              }).then((willDelete) => {
+                $.each(allVals, function(index, value){
                     var company_id = $(".company_id-"+value).val();
                     var internal_eksternal = $(".internal_eksternal-"+value).val();
-                    var pic_id = $(".pic_id-"+value).val();
+                    var pic = $(".pic-"+value).val();
                     var vehicle = $(".vehicle-"+value).val();
                     var waktu_info = $(".waktu_info-"+value).val();
                     var task = $(".task-"+value).val();
@@ -376,26 +410,26 @@
                     var status_akhir = $(".status_akhir-"+value).val();
                     $.ajax({
                     type: "get",
-                    url: "{{ url('update_requestcomplaint') }}/"+value,
+                    url: "{{ url('update_RequestComplain') }}/"+value,
                     data: {
-                        company_id: company_id,
-                        internal_eksternal: internal_eksternal,
-                        pic_id: pic_id,
+                       company_id: company_id,
+                        internal_eksternal:internal_eksternal,
+                        pic: pic,
                         vehicle: vehicle,
                         waktu_info: waktu_info,
-                        task: task,
-                        platform: platform,
-                        detail_task: detail_task,
-                        divisi: divisi,
-                        waktu_respond: waktu_respond,
-                        respond: respond,
-                        waktu_kesepakatan: waktu_kesepakatan,
-                        waktu_solve: waktu_solve,
-                        status: status,
-                        status_akhir: status_akhir
+                        task:task,
+                        platform:platform,
+                        detail_task:detail_task,
+                        divisi:divisi,
+                        waktu_respond:waktu_respond,
+                        respond:respond,
+                        waktu_kesepakatan:waktu_kesepakatan,
+                        waktu_solve:waktu_solve,
+                        status:status,
+                        status_akhir:status_akhir
                     },
                     success: function(data) {
-                    swal({
+                     swal({
                       type: 'success',
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
@@ -409,21 +443,18 @@
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
                     }
-                    });
-                    });
                 });
-        }
-      
-        
-        //--------Proses Batal--------
-      function cancelUpdateSelected(){
-          $("#save-selected").hide("fast");
-          $("#cancel-selected").hide("fast");
-          $(".add").show("fast");
-          $(".edit_all").show("fast");
-          $(".delete_all").show("fast");
-          read();
+            });
+        });
       }
+        //--------Proses Batal--------
+         function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
+            }
   </script>
-
    @endsection

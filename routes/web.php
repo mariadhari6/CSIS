@@ -17,6 +17,7 @@ use App\Http\Controllers\SensorController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\DashboardVisitAssignmentController;
 use App\Http\Controllers\MaintenanceGpsController;
+use App\Http\Controllers\RequestComplaintController;
 use App\Http\Controllers\RequestComplaintCustomerController;
 use App\Models\DetailCustomer;
 use App\Models\Username;
@@ -191,17 +192,18 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
 
 
-    //Request and Complent Customer
-    Route::get('/requestcomplaint', [RequestComplaintCustomerController::class, 'index']);
-    Route::get('/item_data_requestcomplaint', [RequestComplaintCustomerController::class, 'item_data']);
-    Route::get('/add_form_requestcomplaint', [RequestComplaintCustomerController::class, 'add_form']);
-    Route::get('/store_requestcomplaint', [RequestComplaintCustomerController::class, 'store']);
-    Route::get('/destroy_requestcomplaint/{id}', [RequestComplaintCustomerController::class, 'destroy']);
-    Route::get('/show_requestcomplaint/{id}', [RequestComplaintCustomerController::class, 'edit_form']);
-    Route::get('/update_requestcomplaint/{id}', [RequestComplaintCustomerController::class, 'update']);
-    Route::get('/selectedDelete_requestcomplaint', [RequestComplaintCustomerController::class, 'deleteAll']);
-    Route::get('/selected', [RequestComplaintCustomerController::class, 'selected']);
-    Route::get('/update_all/{id}', [RequestComplaintCustomerController::class, 'updateall']);
+     // Request Complain
+     Route::get('/requestcomplaint', [RequestComplaintController::class, 'index'])->name('request.complain');
+     Route::get('/item_data_RequestComplain', [RequestComplaintController::class, 'item_data']);
+     Route::get('/item_data_MY_RequestComplain', [RequestComplaintController::class, 'item_data_MY']);
+     Route::get('/add_form_RequestComplain', [RequestComplaintController::class, 'add_form']);
+     Route::get('/store_RequestComplain', [RequestComplaintController::class, 'store']);
+     Route::get('/destroy_RequestComplain/{id}', [RequestComplaintController::class, 'destroy']);
+     Route::get('/show_RequestComplain/{id}', [RequestComplaintController::class, 'edit_form']);
+     Route::get('/update_RequestComplain/{id}', [RequestComplaintController::class, 'update']);
+     Route::get('/selectedDelete_RequestComplain', [RequestComplaintController::class, 'deleteAll']);
+     Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
+     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
 
     //detail customer
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
