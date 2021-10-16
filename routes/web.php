@@ -81,7 +81,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
     Route::get('/delete_all', [DetailCustomerController::class, 'deleteAll'])->name('deleteAll_detail');
     Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
-    
+
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
     Route::get('/item_data_company', [CompanyController::class, 'item_data']);
@@ -185,18 +185,18 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
 
-    //detail customer
-    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
-    Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
-    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
-    Route::get('/store_detail', [DetailCustomerController::class, 'store']);
-    Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
-    Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
-    Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
-    Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
-    Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
-    Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
-    
+    // //detail customer
+    // Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
+    // Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
+    // Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
+    // Route::get('/store_detail', [DetailCustomerController::class, 'store']);
+    // Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
+    // Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
+    // Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
+    // Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
+    // Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
+    // Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
+
     // Pemasangan Mutasi GPS
     Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
     Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
@@ -231,6 +231,14 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     //Master PO
     Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');
     Route::get('/item_data_master_po', [MasterPoController::class, 'item_data'])->name('item_master_po');
+    Route::get('/item_data_status_master_po', [MasterPoController::class, 'item_data_status']);
+    Route::get('/item_data_contract_master_po', [MasterPoController::class, 'item_data_contract']);
+    Route::get('/item_data_terminate_master_po', [MasterPoController::class, 'item_data_terminate']);
+    Route::get('/item_data_trial_master_po', [MasterPoController::class, 'item_data_trial']);
+    Route::get('/item_data_register_master_po', [MasterPoController::class, 'item_data_register']);
+    Route::get('/item_data_company_master_po',[MasterPoController::class, 'item_data_company']);
+    Route::get('/item_data_OSLOG_master_po', [MasterPoController::class, 'item_data_OSLOG']);
+    Route::get('/item_data_Rajawali_master_po', [MasterPoController::class, 'item_data_Rajawali']);
     Route::get('/add_form_master_po', [MasterPoController::class, 'add_form'])->name('add_master_po');
     Route::get('/store_master_po', [MasterPoController::class, 'store']);
     Route::get('/destroy_master_po/{id}', [MasterPoController::class, 'destroy']);

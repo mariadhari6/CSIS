@@ -1,18 +1,37 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Master Po')
 
-
 @section('content')
 
 <h4 class="page-title">Master Po</h4>
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-            <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+            <button type="button" class="btn btn-primary float-left mr-2 add add-button">
+              <b>Add</b>
+              <i class="fas fa-plus ml-2" id="add"></i>
+              </button>
+            <div class="float-left mr-2">
+                  <select class="form-control input-fixed" id="filter">
+                  <option value="{{ url('item_data_company_master_po') }}">Company</option>
+                  <option value="{{ url('item_data_company_master_po') }}">OSLOG</option>
+                  <option value="{{ url('item_data_company_master_po') }}">Rajawali</option>
+                </select>
+            </div>
+            <div class="float-left mr-2">
+                  <select class="form-control input-fixed" id="filter">
+                  <option value="{{ url('item_data_status_master_po') }}">Status</option>
+                  <option value="{{ url('item_data_contract_master_po') }}">Contract</option>
+                  <option value="{{ url('item_data_terminate_master_po') }}">Terminate</option>
+                  <option value="{{ url('item_data_trial_master_po') }}">Trial</option>
+                  <option value="{{ url('item_data_register_master_po') }}">Register</option>
+                </select>
+            </div>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>  
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
@@ -40,8 +59,8 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-        
-        
+
+
           </div>
         </div>
         </div>
@@ -50,15 +69,44 @@
 
 
 
+
   <script>
     $(document).ready(function() {
       read()
+
+
     });
+
+
+      // ------ Filter change ------
+      $("#filter").change(function(){
+            var value = $(this).val();
+            filter(value);
+        });
+
+        // ------ Filter ------
+        function filter(value){
+      var value = value;
+      $.get(value, {}, function(data, status) {
+          $('#table_id').DataTable().destroy();
+          $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable( {
+
+              "dom": '<"top"f>rt<"bottom"lp><"clear">'
+              });
+          $('#table_id').DataTable().draw();
+        });
+      }
+
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data_master_po') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
+            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            // "dom": '<lf<t>ip>'
+            });
         $('#table_id').DataTable().draw();
       });
     }
@@ -74,25 +122,24 @@
       });
     // ----- Proses Tambah data ------
     function store() {
-        var company_id = $("#company_id").val();
-        var po_number = $("#po_number").val();
-        var po_date = $("#po_date").val();
-        var harga_layanan = $("#harga_layanan").val();
-        var jumlah_unit_po = $("#jumlah_unit_po").val();
-        var status_po = $("#status_po").val();
-        var selles = $("#selles").val();
-    
+        var company_id      = $("#company_id").val();
+        var po_number       = $("#po_number").val();
+        var po_date         = $("#po_date").val();
+        var harga_layanan   = $("#harga_layanan").val();
+        var jumlah_unit_po  = $("#jumlah_unit_po").val();
+        var status_po       = $("#status_po").val();
+        var selles          = $("#selles").val();
         $.ajax({
             type: "get",
             url: "{{ url('store_master_po') }}",
             data: {
-              company_id: company_id,
-              po_number: po_number,
-              po_date: po_date,
-              harga_layanan: harga_layanan,
-              jumlah_unit_po: jumlah_unit_po,
-              status_po: status_po,
-              selles: selles
+              company_id    :company_id,
+              po_number     :po_number,
+              po_date       :po_date,
+              harga_layanan :harga_layanan,
+              jumlah_unit_po:jumlah_unit_po,
+              status_po     :status_po,
+              selles        :selles
             },
             success: function(data) {
               swal({
@@ -129,7 +176,7 @@
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
-                        }).catch(function(timeout) { }); 
+                        }).catch(function(timeout) { });
                         read();
                     }
                 });
@@ -269,12 +316,12 @@
                     $("#item-jumlah_unit_po-"+value).hide("fast");
                     $("#item-status_po-"+value).hide("fast");
                     $("#item-selles-"+value).hide("fast");
-                   
+
                     $(".add").hide("fast");
                     $.get("{{ url('show_master_po') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
-                        
+
                     });
                 });
             }else{
@@ -306,7 +353,7 @@
                     var jumlah_unit_po = $(".jumlah_unit_po-"+value).val();
                     var status_po = $(".status_po-"+value).val();
                     var selles = $(".selles-"+value).val();
-                    
+
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_master_po') }}/"+value,
@@ -318,7 +365,7 @@
                     jumlah_unit_po: jumlah_unit_po,
                     status_po: status_po,
                     selles: selles
-                    
+
                     },
                     success: function(data) {
                       swal({
@@ -350,5 +397,9 @@
             $(".delete_all").show("fast");
             read();
         }
+
+
+
+
   </script>
    @endsection

@@ -13,7 +13,7 @@
             {{ $no++ }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company_id }}
+            {{ $item->company->company_name ??''}}
         </td>
         <td id="item-po_number-{{ $item->id}}">
             {{ $item->po_number }}
@@ -27,8 +27,17 @@
           <td id="item-jumlah_unit_po-{{ $item->id }}">
             {{ $item->jumlah_unit_po }}
         </td>
-        <td id="item-status_po-{{ $item->id}}">
-            {{ $item->status_po }}
+        <td id="item-status_po-{{ $item->id }}">
+
+            @if ($item->status_po == 'Contract')
+                <span class="badge badge-info">{{ $item->status_po }}</span>
+            @elseif ($item->status_po == 'Terminate')
+                <span class="badge badge-danger">{{ $item->status_po }}</span>
+            @elseif($item->status_po == 'Trial')
+                <span class="badge badge-primary">{{ $item->status_po }}</span>
+            @elseif($item->status_po == 'Register')
+                <span class="badge badge-success">{{ $item->status_po }}</span>
+            @endif
         </td>
         <td id="item-selles-{{ $item->id }}">
             {{ $item->selles }}

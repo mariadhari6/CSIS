@@ -10,7 +10,7 @@
     </td>
     <td>
         <select class="select" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example">
-            <option selected>Pilih status</option>
+            <option selected></option>
             <option value="Request Internal">Request Internal </option>
             <option value="Complain Internal ">Complain Internal </option>
             <option value="Request Eksternal ">Request Eksternal </option>
@@ -26,7 +26,7 @@
       </td>
     <td>
         <select class="select" id="vehicle" id="vehicle" aria-label=".form-select-lg example">
-            <option selected>Vehicle</option>
+            <option selected></option>
             <option value="B-94828-YTS">B-94828-YTS</option>
             <option value="B-76267-TWS">B-76267-TWS</option>
         </select>
@@ -39,7 +39,7 @@
     </td>
     <td>
         <select class="select" id="platform" id="platform" aria-label=".form-select-lg example">
-            <option selected>Platform</option>
+            <option selected></option>
             <option value="WA">WA</option>
             <option value="SMS">SMS</option>
             <option value="E-mail">E-mail</option>
@@ -51,7 +51,7 @@
     </td>
     <td>
         <select class="select" id="divisi" id="divisi" aria-label=".form-select-lg example">
-        <option selected>Divisi</option>
+        <option selected></option>
             <option value="Operasional (CS)">Operasional (CS)</option>
             <option value="Lintas Divisi">Lintas Divisi</option>
             <option value="Operasional (Implementor)">Operasional (Implementor)</option>
@@ -61,7 +61,7 @@
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_respond" placeholder="Waktu Respond"></div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="respond" placeholder="Respond" ></div>
+        <div class="input-div"><input type="text" class="input" id="respond" placeholder="" ></div>
     </td>
     <td>
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_kesepakatan" placeholder="Waktu Kesepakatan" ></div>
@@ -71,13 +71,13 @@
     </td>
     <td>
         <select class="select"  id="status" aria-label=".form-select-lg example">
-            <option selected>Platform</option>
+            <option selected></option>
             <option value="On Progress">On Progress</option>
             <option value="Done">Done</option>
         </select>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="status_akhir" placeholder="Status Akhir" ></div>
+        <div class="input-div"><input type="text" class="input" id="status_akhir" placeholder="" ></div>
     </td>
     <td>
         <i class="fas fa-check add" id="add" onclick="store()"></i>

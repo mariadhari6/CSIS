@@ -13,7 +13,7 @@
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-                <button class="btn btn-default filter"><i class="fas fa-filter"></i></button>
+
             </div>
 
             <table class="table table-responsive data " class="table_id" id="table_id" >

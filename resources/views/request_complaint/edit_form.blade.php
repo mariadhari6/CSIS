@@ -3,7 +3,7 @@
 
 <td>
     <select class="select company_id-{{$request_complain->id}}" id="company_id" name="company_id">
-        <option value="{{$request_complain->company}}"> {{$request_complain->companyRequest->company_name}} </option>
+        <option value="{{$request_complain->company}}"> {{$request_complain->company_id}} </option>
        @foreach ($company as $companys)
         <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
        @endforeach
@@ -21,7 +21,7 @@
 </td>
 <td>
     <select class="select pic-{{$request_complain->id}}" id="pic" name="pic">
-        <option value="{{$request_complain->pic}}"> {{$request_complain->picRequest->pic_name}} </option>
+        <option value="{{$request_complain->pic}}"> {{$request_complain->pic_id}} </option>
        @foreach ($pic as $pics)
         <option value="{{ $pics->id }}" {{ old('pic') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
         @endforeach

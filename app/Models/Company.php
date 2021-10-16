@@ -36,5 +36,10 @@ class Company extends Model
     {
          return $this->hasMany(RequestComplaintCustomer::class);
     }
+    public function masterPo()
+    {
+         return $this->hasMany(MasterPo::class);
+    }
+
 
 }

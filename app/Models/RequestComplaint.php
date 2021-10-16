@@ -16,13 +16,13 @@ class RequestComplaint extends Model
          'type_gps_id', 'equipment_gps_id', 'equipment_sensor_id', 'equipment_gsm', 'ketersediaan_kendaraan', 'keterangan', 'hasil', 'biaya_transportasi', 'teknisi_maintenance', 'req_by', 'note_maintenance'
     ];
 
-    public function companyRequest()
+    public function company()
     {
-        return $this->belongsTo(Company::class, 'id');
+        return $this->belongsTo(Company::class);
     }
 
-    public function picRequest()
+    public function pic()
     {
-        return $this->belongsTo(Pic::class, 'id');
+        return $this->belongsTo(Pic::class);
     }
 }

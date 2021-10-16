@@ -14,4 +14,11 @@ class MasterPo extends Model
     protected $fillable = [
         'company_id', 'po_number', 'po_date', 'harga_layanan', 'jumlah_unit_po', 'status_po', 'selles'
     ];
+
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
 }
