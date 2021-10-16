@@ -27,7 +27,7 @@
                         <label for="Bulan" class="col-sm-1 col-form-label">Input Bulan</label>
                         <label class="col-form-label">:</label>
                         <div class="col-sm-3">
-                            <input type="smonth" class="form-control" placeholder="Bulan">
+                            <input type="month" class="form-control" placeholder="Bulan">
                         </div>
                     </div>
                 </div>

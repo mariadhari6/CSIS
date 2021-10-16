@@ -18,4 +18,9 @@ class Sensor extends Model
     {
         return $this->hasOne(PemasanganMutasiGps::class);
     }
+
+    public function detailCustomer()
+    {
+        return $this->hasone(DetailCustomer::class);
+    }    
 }

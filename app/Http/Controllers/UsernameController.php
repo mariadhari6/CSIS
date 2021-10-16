@@ -135,5 +135,16 @@ class UsernameController extends Controller
         dd($data);
         // return view('livetable.index', compact('data'));
     }
+
+
+    public function Api(Request $request)
+    {
+        // Assuming your returning entire request payload
+    //    $data = response()->json(['status' => $request->all()], 200);
+
+    //    dd($data);
+    $input = $request->all();
+    dd($input);
+    }
 }
 

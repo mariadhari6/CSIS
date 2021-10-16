@@ -18,8 +18,6 @@ class CreateCompaniesTable extends Migration
             $table->string('company_name');
             $table->foreignId('seller_id');
             $table->string('customer_code');
-            $table->string('no_po');
-            $table->date('po_date');
             $table->foreignId('no_agreement_letter_id');
             $table->string('status');
             $table->timestamps();

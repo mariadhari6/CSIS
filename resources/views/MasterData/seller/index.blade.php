@@ -16,7 +16,7 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-          <table class="table" class="table_id" id="table_id" >
+          <table class="table table-responsive" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th width="10px">

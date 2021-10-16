@@ -18,6 +18,7 @@ class Gps extends Model
     {
         return $this->hasMany(PemasanganMutasiGps::class);
     }
+    
     public function detailCustomer()
     {
         return $this->hasMany(DetailCustomer::class);

@@ -48,7 +48,8 @@
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script> --}}
-
+    {{-- https://code.jquery.com/jquery-3.5.1.js
+https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js --}}
 
 </html>
 {{-- <script>

@@ -110,9 +110,17 @@
 
 #table tbody tr td {
     text-align: center;
+    height: 10px;
 }
 
 
 .title{
     font-size: 25px;
 }
+
+@media (min-width: 768px) {
+    .modal-xl {
+      width: 90%;
+     max-width:1650px;
+    }
+  }

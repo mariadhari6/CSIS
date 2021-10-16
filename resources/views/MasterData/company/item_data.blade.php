@@ -18,20 +18,13 @@
             {{ $companys->company_name }}
         </td>
         <td id="item-seller_id-{{ $companys->id}}">
-                {{ $companys->seller->seller_name}}
+                {{ $companys->seller->seller_name }} 
         </td>
         <td id="item-customer_code-{{ $companys->id }}">
             {{ $companys->customer_code }}
         </td>
-          <td id="item-no_po-{{ $companys->id }}">
-            {{ $companys->no_po }}
-        </td>
-        <td id="item-po_date-{{ $companys->id }}">
-            {{ $companys->po_date }}
-        </td>
-
         <td id="item-no_agreement_letter_id-{{ $companys->id}}">
-                {{ $companys->seller->no_agreement_letter}}
+                {{ $companys->seller->no_agreement_letter}} 
         </td>
         <td id="item-status-{{ $companys->id }}">
 

@@ -30,13 +30,14 @@ class GsmPreActiveController extends Controller
     public function store(Request $request)
     {
         $data = array(
-            'gsm_number'    =>  $request->gsm_number,
+            'gsm_number'        =>  $request->gsm_number,
             'serial_number'     =>  $request->serial_number,
-            'icc_id'     =>  $request->icc_id,
-            'imsi'     =>  $request->imsi,
-            'res_id'     =>  $request->res_id,
-            'expired_date'     =>  $request->expired_date,
-            'note'     =>  $request->note,
+            'icc_id'            =>  $request->icc_id,
+            'imsi'              =>  $request->imsi,
+            'res_id'            =>  $request->res_id,
+            'expired_date'      =>  $request->expired_date,
+            'note'              =>  $request->note,
+            'provider'          =>  $request->provider
         );
         GsmPreActive::insert($data);
     }
@@ -60,13 +61,14 @@ class GsmPreActiveController extends Controller
     public function update(Request $request, $id)
     {
         $data = GsmPreActive::findOrfail($id);
-        $data->gsm_number = $request->gsm_number;
-        $data->serial_number = $request->serial_number;
-        $data->icc_id = $request->icc_id;
-        $data->imsi = $request->imsi;
-        $data->res_id = $request->res_id;
-        $data->expired_date = $request->expired_date;
-        $data->note = $request->note;
+        $data->gsm_number           = $request->gsm_number;
+        $data->serial_number        = $request->serial_number;
+        $data->icc_id               = $request->icc_id;
+        $data->imsi                 = $request->imsi;
+        $data->res_id               = $request->res_id;
+        $data->expired_date         = $request->expired_date;
+        $data->note                 = $request->note;
+        $data->provider             = $request->provider;
         $data->save();
     }
 

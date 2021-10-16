@@ -20,19 +20,30 @@ class SummaryController extends Controller
 
    public function item_data(){
 
-    $company = Company::orderBy('company_name', 'DESC')->get();
-    $details = DetailCustomer::all();
-    $data = DB::table('summary_customers')->select([
+   
+
+
+    $data = DetailCustomer::with('company')->select([
         DB::raw('count(*) as jumlah'),
-        DB::raw('company_id as company')
+        DB::raw('company_id as company'),
+        DB::raw('status_po as status'),
+        DB::raw('merk as merk_gps'),
+        DB::raw('type as type_gps'),
+        DB::raw('po_number as po')
    ])
    ->groupBy('company')
+   ->groupBy('status')
+   ->groupBy('merk_gps')
+   ->groupBy('type_gps')
+   ->groupBy('po')
    ->get();
-    return view('customer.summary.item_data')->with([
-        'company' => $company,
-        'detail' => $details,
-        'data' => $data
-    ]);
+
+//    $data = DetailCustomer::with('company')->groupBy('company_id')
+//    ->selectRaw('count(*) as jumlah, company_id')
+//    ->get();
+
+    return view('customer.summary.item_data', compact('data'));
+
    }
 
    public function add_form(){
@@ -41,22 +52,42 @@ class SummaryController extends Controller
    }
 
    public function countPo(){
-    //    $data = DB::table('summary_customers')->select([
+    //    $data = DB::table('detail_customers')->select([
     //         DB::raw('count(*) as jumlah'),
-    //         DB::raw('company_id as company')
+    //         DB::raw('company_id as company'),
+    //         DB::raw('status_po as status'),
+    //         DB::raw('merk as merk_gps'),
+    //         DB::raw('type as type_gps'),
+    //         DB::raw('po_number as po')
     //    ])
     //    ->groupBy('company')
+    //    ->groupBy('status')
+    //    ->groupBy('merk_gps')
+    //    ->groupBy('type_gps')
+    //    ->groupBy('po')
     //    ->get();
-    // //    dd($data);
-    // $data = SummaryCustomer::count();
 
-    // $data = DetailCustomer::where('po_number', 1);
 
-        // $data = DetailCustomer::find(1, ['po_number'])->toArray();
-        $h = DetailCustomer::where('company_id' , 'po_number')->first();
-        // $data = $h->only('company_id', 'po_number');
+        // dd(json_decode($data));
 
-        dd($h);
-        //    return view('livetable.index', compact('data'));
+        // $i = 0;
+       
+        
+        // $data = DetailCustomer::with('company')->where('company_id', '2')->get();
+        // dd($data);
+    //     $data  = DB::table('detail_customers')->select([
+    //         DB::raw('count(*) as jumlah'),
+    //         DB::raw('company_id as coba')
+    //    ])
+    //    ->groupBy('coba')
+    //    ->get();
+
+    $data = DetailCustomer::with('company')->groupBy('company_id')
+    ->selectRaw('count(*) as jumlah, company_id')
+    ->get();
+
+
+       dd($data);
+        //  return view('livetable.index', compact('data'));
    }
 }

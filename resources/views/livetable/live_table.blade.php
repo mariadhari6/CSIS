@@ -50,6 +50,30 @@
   <script>
     $(document).ready(function() {
       read();
+
+      let details = {
+            "paging": {"start": 0, "length": 25},
+            "columns": [
+                {"name": "license_plate", "logic_operator": "like", "value": "", "operator": "AND", "table_name": "m_vehicle"}
+            ],
+            "joins": [
+                {"name": "company", "column_results": ["name"]},
+                {"name": "vehicle", "column_results": ["license_plate","name"]},
+                {"name": "vehicle_type", "column_results": ["name"]},
+                {"name": "pool", "column_results": ["name"]}
+            ],
+            "orders": {"columns": ["id"], "ascending": false}
+        };
+        $.ajax({
+        url: 'https://oslog.id/apiv5/gps/search?apiKey=8725f9e6-7713-4c99-8fd8-20ae0a523709',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(details),
+        }).done(function (data) {
+        alert('success');
+        // Redirect to response url
+        }
+
     });
     // ------ Tampil Data ------
     function read(){

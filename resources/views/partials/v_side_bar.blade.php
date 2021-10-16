@@ -57,6 +57,16 @@
                                 <span class="link-collapse">Sensor</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{url('/master_po')}}">
+                                <span class="link-collapse">Master Po</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/Vehicle')}}">
+                                <span class="link-collapse"> Master Vehicle</span>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class ="" data-toggle="collapse" href="#gsm" aria-expanded="true">
                                 <span class="link-collapse">GSM</span>
@@ -66,8 +76,8 @@
                             <div class="collapse in" id="gsm" aria-expanded="true" style="">
                                 <ul class="nav">
                                     <li>
-                                        <a href="{{url('/GsmPreActive')}}">
-                                            <span class="link-collapse">Pre Active</span>
+                                        <a href="{{url('/GsmMaster')}}">
+                                            <span class="link-collapse">Master GSM</span>
                                         </a>
                                     </li>
                                     <li>

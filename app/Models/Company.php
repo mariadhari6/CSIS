@@ -48,4 +48,13 @@ class Company extends Model
     {
         return $this->hasMany(SummaryCustomer::class);
     }
+
+    public function Po()
+    {
+        return $this->hasMany(MasterPo::class);
+    }
+
+    public function vehicle(){
+        return $this->hasMany(Vehicle::class);
+    }
 }

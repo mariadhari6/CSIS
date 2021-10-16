@@ -18,7 +18,6 @@ class CompanyController extends Controller
     {
         $seller = Seller::orderBy('seller_name', 'DESC')->get();
         return view('MasterData.company.add_form')->with([
-
             'seller' => $seller,
         ]);
     }
@@ -26,6 +25,7 @@ class CompanyController extends Controller
     public function item_data()
     {
         $company = Company::orderBy('id', 'DESC')->get();
+        
         return view('MasterData.company.item_data')->with([
             'company' => $company
         ]);
@@ -37,8 +37,6 @@ class CompanyController extends Controller
             'company_name' => 'required',
             'seller_id' => 'required',
             'customer_code' => 'required',
-            'no_po' => 'required',
-            'po_date' => 'required',
             'no_agreement_letter_id' => 'required',
             'status' => 'required',
         ]);
@@ -46,8 +44,6 @@ class CompanyController extends Controller
             'company_name'     =>  $request->company_name,
             'seller_id'    =>  $request->seller_id,
             'customer_code'     =>  $request->customer_code,
-            'no_po'     =>  $request->no_po,
-            'po_date'     =>  $request->po_date,
             'no_agreement_letter_id' => $request->no_agreement_letter_id,
             'status'     =>  $request->status,
         );
@@ -76,8 +72,6 @@ class CompanyController extends Controller
         $data->company_name = $request->company_name;
         $data->seller_id = $request->seller_id;
         $data->customer_code = $request->customer_code;
-        $data->no_po = $request->no_po;
-        $data->po_date = $request->po_date;
         $data->no_agreement_letter_id = $request->no_agreement_letter_id;
         $data->status = $request->status;
 
@@ -98,8 +92,6 @@ class CompanyController extends Controller
         $data->company_name = $request->company_name;
         $data->seller_id = $request->seller_id;
         $data->customer_code = $request->customer_code;
-        $data->no_po = $request->no_po;
-        $data->po_date = $request->po_date;
         $data->no_agreement_letter_id = $request->no_agreement_letter_id;
         $data->status = $request->status;
 
@@ -112,6 +104,7 @@ class CompanyController extends Controller
         if ($request->ajax()) {
             $ids = $request->input('id');
             DB::table('companies')->whereIn('id', $ids)->delete();
+            
         }
     }
 
@@ -129,14 +122,43 @@ class CompanyController extends Controller
             ->update(['colour' => 'black']);
     }
 
-    // public function dependentCompany($id)
-    // {
-    //     $data = DB::table("sellers")
-    //         ->join('companies', 'sellers.id', '=', 'companies.seller_id')
-    //         ->where("id", $id)
-    //         ->pluck('seler ', 'id');
-    //     return json_encode($data);
-    // }
+    public function dependentCompany($id)
+    {
+        // $data = DB::table("sellers")
+        //             ->where("id", $id)
+        //             ->pluck('no_agreement_letter', 'id');
+
+        // $data = Seller::whereId("id", $id)
+        // ->selectRaw("CONCAT ('no_agreement_letter', 'status') as columns")->pluck('columns', 'id');
+
+        // $data = DB::table("sellers")
+        //             ->where("id", $id)
+        //             ->selectRaw("CONCAT ('no_agreement_letter', 'status') as columns, id")->pluck('columns', 'id');
+
+        // $data = DB::table("sellers")
+        //             ->where("id" , $id)
+        //             ->select([
+        //                 DB::raw('no_agreement_letter as colum')
+        //             ])
+        //             ->pluck('colum', 'id');
+        
+        // $data = Seller::select(DB::raw('CONCAT(no_agreement_letter, status) AS full_name, id'))
+        //     ->where("id", $id)
+        //    ->pluck('full_name', 'id');
+
+        // $data = Seller::all()->where('id', $id)->map->only( 'id' ,'no_agreement_letter',);
+
+        $keyed = Seller::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
+            return [$item['id'] => $item->only(['no_agreement_letter','status'])
+            ];
+        });
+        
+        $data = $keyed->all();
+
+        return $data;
+        // return json_encode($data);
+        
+    }
 
 
     // public function showAgreement($id)
