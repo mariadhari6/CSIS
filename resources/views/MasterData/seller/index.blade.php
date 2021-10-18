@@ -87,39 +87,26 @@
         var seller_code = $("#seller_code").val();
         var no_agreement_letter = $("#no_agreement_letter").val();
         var status = $("#status").val();
-        if(
-            seller_name == '' ||
-            seller_code == '' ||
-            no_agreement_letter == ''
-          ) {
+        $.ajax({
+        type: "get",
+        url: "{{ url('store_seller') }}",
+        data: {
+          seller_name: seller_name,
+          seller_code: seller_code,
+          no_agreement_letter: no_agreement_letter,
+          status:status
+        },
+        success: function(data) {
           swal({
-            type: 'warning',
-            text: 'there is data that has not been filled',
+            type: 'success',
+            title: 'Data Saved',
             showConfirmButton: false,
             timer: 1500
           }).catch(function(timeout) { });
-          $("#required").text("please fill out this field");
-        } else {
-           $.ajax({
-            type: "get",
-            url: "{{ url('store_seller') }}",
-            data: {
-              seller_name: seller_name,
-              seller_code: seller_code,
-              no_agreement_letter: no_agreement_letter,
-              status:status
-            },
-            success: function(data) {
-              swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-              }).catch(function(timeout) { });
-              read();
-            }
-        })
+          read();
         }
+    })
+        
     }
 
     // -----Proses Delete Data ------

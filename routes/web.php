@@ -190,6 +190,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/importExcel_GsmMaster', [GsmMasterController::class, 'importExcel'])->name('importExcel_GsmMaster');
     Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
     Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
+        // try
+        Route::get('/try', [GsmMasterController::class, 'try']);
+
 
 
      // Request Complain

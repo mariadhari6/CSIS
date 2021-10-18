@@ -159,7 +159,7 @@
             var id = $("#table_temporary_id").find("tbody>tr:eq("+ $i +")>td:eq(0)").attr("id");
             allVals[$i] = id;
           }
-      
+
       $.each(allVals, function(index, value){
         var status_gsm = $(".temporary-status_gsm-"+value).attr("id");
         var gsm_number = $(".temporary-gsm_number-"+value).attr("id");
@@ -174,8 +174,28 @@
         var terminate_date = $(".temporary-terminate_date-"+value).attr("id");
         var note = $(".temporary-note-"+value).attr("id");
         var provider = $(".temporary-provider-"+value).attr("id");
-          if ( request_date == null) {
-            alert('column is empty')
+    
+          if ( 
+              request_date == '' ||
+              gsm_number == '' ||
+              company_id == '' ||
+              serial_number == '' ||
+              icc_id == '' ||
+              imsi == '' ||
+              res_id == '' ||
+              request_date == '' ||
+              expired_date == '' ||
+              active_date == '' ||
+              note == '' ||
+              terminate_date == '' ||
+              terminate_date == ''
+              ) {
+              swal({
+              type: 'warning',
+              text: 'there is column empty or fail format',
+              showConfirmButton: false,
+              timer: 1500
+            }).catch(function(timeout) { });
           } else {
             $.ajax({
             type: "get",

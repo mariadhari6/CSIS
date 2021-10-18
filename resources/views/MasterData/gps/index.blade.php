@@ -50,20 +50,11 @@
 
   <script>
     $(document).ready(function() {
-      read()
+      read();
 
-      $('input[type=text]').bind('change', function () {
-          var arr = []
-          $siblings = $(this).siblings();
-          alert($siblings);
-          // $.each($siblings, function (i, key) {
-          //   arr.push($(key).val()); 
-          // });
-          // if ($.inArray($(this).val(), arr) !== -1)
-          // {
-          //     alert("duplicate has been found");
-          // }
-      });    
+      $('#merk').bind('change', function () {
+        alert($(this).val());
+    });    
     
     });
     // ------ Tampil Data ------

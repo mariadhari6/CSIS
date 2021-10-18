@@ -11,10 +11,10 @@
    <td>
        <select class="select" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example">
            <option selected>Pilih status</option>
-           <option value="Request Internal">Request Internal </option>
-           <option value="Complain Internal ">Complain Internal </option>
-           <option value="Request Eksternal ">Request Eksternal </option>
-           <option value="Complain Eksternal ">Complain Eksternal</option>
+           <option value="Request Internal">Internal Request</option>
+           <option value="Complain Internal ">Internal Complain </option>
+           <option value="Request Eksternal ">Ekternal Request </option>
+           <option value="Complain Eksternal ">Eksternal Complain</option>
        </select>
    </td>
      <td>
