@@ -58,6 +58,16 @@
                                 <span class="link-collapse">Sensor</span>
                             </a>
                         </li>
+                        <li class="nav-item {{ request()->is('master_po') ? ' active' : ''}}">
+                            <a class="collapse-item @yield('master_po')" href="{{url('/master_po')}}">
+                                <span class="link-collapse">Master Po</span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="{{url('/Vehicle')}}">
+                                <span class="link-collapse"> Master Vehicle</span>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class ="" data-toggle="collapse" href="#gsm" aria-expanded="true">
                                 <span class="link-collapse">GSM</span>

@@ -11,7 +11,21 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-
+                <div class="float-left mr-2">
+                  <select class="form-control input-fixed" id="filter">
+                    <option value="{{ url('item_data_all_pemasangan') }}">All</option>
+                    <option value="{{ url('item_data_onProgress_pemasangan') }}">On Progress</option>
+                    <option value="{{ url('item_data_done_pemasangan') }}">Done</option>
+                  </select>
+                </div>
+                <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                  <div class="form-group">
+                      <input class="form-control" id="filter-date" type="month">
+                      <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
+                    </select>
+                  </div>
+                </ul>
                 <button class="btn btn-success  mr-2 edit_all">
                     <i class="fas fa-pen"></i>
                 </button>
@@ -44,12 +58,13 @@
                 <th rowspan="2" scope="col" class="list">Type Visit</th>
                 <th rowspan="2" scope="col" class="list">Note</th>
                 <th rowspan="2" scope="col" class="list">Kendaraan Pasang</th>
+                <th rowspan="2" scope="col" class="list">Status</th>
                 <th rowspan="2" scope="col" class="action">Action</th>
 
               </tr>
               <tr>
-                <th scope="col" class="list">Terpasang Sensor </th>
-                <th scope="col" class="list">Terpasang GPS</th>
+                <th scope="col" class="list">Sensor </th>
+                <th scope="col" class="list">GPS</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -79,6 +94,55 @@
         $('#table_id').DataTable().draw();
       });
     }
+        // filter bulan dan tahun
+    $('#check-btn').click(function() {
+      var date = new Date($('#filter-date').val());
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+    //   var task = val();
+        $.ajax({
+            type: "get",
+            url: "{{ url('item_data_MY_PemasanganMutasi') }}",
+            data: {
+              month: month,
+              year: year,
+
+            },
+            success: function(data) {
+              $('#table_id').DataTable().destroy();
+              $('#table_id').find("#item_data").html(data);
+              $('#table_id').dataTable( {
+                  "dom": '<"top"f>rt<"bottom"lp><"clear">'
+                  // "dom": '<lf<t>ip>'
+                  });
+              $('#table_id').DataTable().draw();
+            }
+        })
+    });
+
+    // ---- stop dropdown -----
+    $(document).on('click', '.dropdown-menu', function (e) {
+      e.stopPropagation();
+    });
+      // ------- filter change ------
+    $("#filter").change(function(){
+        var value = $(this).val();
+        filter(value);
+    });
+
+    // ------- filter --------
+      function filter(value){
+      var value = value;
+      $.get(value, {}, function(data, status) {
+          $('#table_id').DataTable().destroy();
+          $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable( {
+
+              "dom": '<"top"f>rt<"bottom"lp><"clear">'
+              });
+          $('#table_id').DataTable().draw();
+        });
+      }
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -185,6 +249,7 @@
         $("#item-type_visit-"+id).hide("fast");
         $("#item-note_pemasangan-"+id).hide("fast");
         $("#item-kendaraan_pasang-"+id).hide("fast");
+        $("#item-status_pemasangan-"+id).hide("fast");
         $.get("{{ url('show_PemasanganMutasi') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -204,6 +269,7 @@
             var type_visit = $("#type_visit").val();
             var note_pemasangan = $("#note_pemasangan").val();
             var kendaraan_pasang = $("#kendaraan_pasang").val();
+            var status_pemasangan = $("#status_pemasangan").val();
             var id = id;
             $.ajax({
                 type: "get",
@@ -221,7 +287,8 @@
                 uang_transportasi:uang_transportasi,
                 type_visit:type_visit,
                 note_pemasangan:note_pemasangan,
-                kendaraan_pasang:kendaraan_pasang
+                kendaraan_pasang:kendaraan_pasang,
+                status_pemasangan:status_pemasangan
 
                 },
                 success: function(data) {
@@ -321,6 +388,7 @@
                     $("#item-type_visit-"+value).hide("fast");
                     $("#item-note_pemasangan-"+value).hide("fast");
                     $("#item-kendaraan_pasang-"+value).hide("fast");
+                    $("#item-status_pemasangan-"+value).hide("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_PemasanganMutasi') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
@@ -361,6 +429,7 @@
                     var type_visit = $(".type_visit-"+value).val();
                     var note_pemasangan = $(".note_pemasangan-"+value).val();
                     var kendaraan_pasang = $(".kendaraan_pasang-"+value).val();
+                    var status_pemasangan = $(".status_pemasangan-"+value).val();
 
                     $.ajax({
                     type: "get",
@@ -378,7 +447,8 @@
                         uang_transportasi:uang_transportasi,
                         type_visit:type_visit,
                         note_pemasangan:note_pemasangan,
-                        kendaraan_pasang:kendaraan_pasang
+                        kendaraan_pasang:kendaraan_pasang,
+                        status_pemasangan:status_pemasangan
                     },
                     success: function(data) {
                      swal({

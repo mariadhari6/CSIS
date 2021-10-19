@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TemplateGps;
 use App\Models\Gps;
 use App\Models\MerkGps;
 use App\Models\TypeGps;
@@ -167,6 +168,6 @@ class GpsController extends Controller
     }
     public function export()
     {
-        return Excel::download(new TemplateGsm, 'template-gsm.xlsx');
+        return Excel::download(new TemplateGps, 'template-gps.xlsx');
     }
 }

@@ -2,7 +2,7 @@
 @foreach ($GsmMaster as $item)
     <tr id="edit-form-{{ $item->id }}">
          <td id="td-checkbox-{{ $item->id }}">
-            <div class="form-check">
+            <div>
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
                     <span class="form-check-sign"></span>
@@ -47,6 +47,9 @@
         </td>
         <td id="item-note-{{ $item->id }}">
             {{ $item->note }}
+        </td>
+        <td id="item-provider-{{ $item->id }}">
+            {{ $item->provider }}
         </td>
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">

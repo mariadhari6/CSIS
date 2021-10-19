@@ -3,10 +3,10 @@
     <td></td>
 
     <td>
-        <div class="input-div"><input type="text" class="input" id="sensor_name" placeholder="Sensor Name">
+        <div class="input-div"><input type="text" class="input" id="sensor_name" placeholder="Sensor Name" required>
     </td>
     <td>
-        <select class="select" id="merk_sensor" name="merk_sensor">
+        <select class="select" id="merk_sensor" name="merk_sensor" required>
             <option selected disabled>Merk Sensor</option>
 
             @foreach ($merk_sensor as $item)
@@ -16,24 +16,29 @@
         </select>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number">
+        <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number" required>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="rab_number" placeholder="Rab Number">
+        <div class="input-div"><input type="text" class="input" id="rab_number" placeholder="Rab Number" required>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input" id="waranty" placeholder="Waranty">
+        <div class="input-div"><input type="date" class="input" id="waranty" placeholder="Waranty" required>
     </td>
     <td>
-        <select class="select" id="status" aria-label=".form-select-lg example">
+        <select class="select" id="status" aria-label=".form-select-lg example" required>
             <option selected>Pilih status</option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>
         </select>
     </td>
-    <td>
-        <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()">
+
+
+     <td>
+       <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="add" onclick="store()"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 </tr>
 

@@ -16,7 +16,7 @@
             {{ $item->companyRequest->company_name }}
         </td>
         <td id="item-vehicle-{{ $item->id}}">
-            {{ $item->vehicle }}
+            {{ $item->vehicleRequest->license_plate??'' }}
         </td>
         <td id="item-waktu_kesepakatan-{{ $item->id }}">
             {{ $item->waktu_kesepakatan }}
@@ -57,6 +57,9 @@
         </td>
         <td id="item-note_maintenance-{{ $item->id}}">
             {{ $item->note_maintenance }}
+        </td>
+        <td id="item-status_maintenance-{{ $item->id}}">
+            {{ $item->status_maintenance }}
         </td>
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">

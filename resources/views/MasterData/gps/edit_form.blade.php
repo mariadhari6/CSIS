@@ -1,7 +1,7 @@
     <td></td>
     <td></td>
     <td>
-        <select class="select merk-{{$gps->id}}" id="merk" name="merk">
+        <select class="select merk-{{$gps->id}}" id="merk" name="merk" required>
             <option value="{{$gps->merkGps->id}}">{{$gps->merkGps->merk}}</option>
 
             @foreach ($merk_gps as $item)
@@ -12,7 +12,7 @@
     </td>
 
     <td>
-        <select class="select type-{{$gps->id}}" id="type" name="type">
+        <select class="select type-{{$gps->id}}" id="type" name="type" required>
             <option value="{{$gps->typeGps->id}}">{{$gps->typeGps->type}}</option>
 
             @foreach ($type_gps as $item)
@@ -25,16 +25,16 @@
         <div class="input-div"><input type="text" class="input type-{{$gps->id}}" id="type" placeholder="Type" value="{{ $gps->type}}"></i></div>
     </td> --}}
     <td>
-        <div class="input-div"><input type="text" class="input imei-{{$gps->id}}" id="imei" placeholder="IMEI" value="{{ $gps->imei}}"></i></div>
+        <div class="input-div"><input type="text" class="input imei-{{$gps->id}}" id="imei" placeholder="IMEI" value="{{ $gps->imei}}" required></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input waranty-{{$gps->id}}" id="waranty" placeholder="Waranty" value="{{ $gps->waranty}}"></i></div>
+        <div class="input-div"><input type="text" class="input waranty-{{$gps->id}}" id="waranty" placeholder="Waranty" value="{{ $gps->waranty}}" required></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input po_date-{{$gps->id}}" id="po_date" placeholder="Po Date" value="{{ $gps->po_date}}"></i></div>
+        <div class="input-div"><input type="date" class="input po_date-{{$gps->id}}" id="po_date" placeholder="Po Date" value="{{ $gps->po_date}}" required></i></div>
     </td>
     <td>
-        <select class="select status-{{$gps->id}}" id="status" aria-label=".form-select-lg example">
+        <select class="select status-{{$gps->id}}" id="status" aria-label=".form-select-lg example" required>
             <option selected>{{$gps->status}}</option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
@@ -51,11 +51,13 @@
         </select></i>
     </td>
     <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $gps->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
+        <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="edit" onclick="update({{ $gps->id}})"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $gps->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+
+
 
 
 

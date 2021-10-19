@@ -25,14 +25,6 @@
         </div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input no_po-{{$company->id}}" id="no_po" placeholder="No Po" value="{{ $company->no_po}}">
-        </div>
-    </td>
-    <td>
-        <div class="input-div"><input type="date" class="input po_date-{{$company->id}}" id="po_date" placeholder="Po Date" value="{{ $company->po_date}}">
-        </div>
-    </td>
-    <td>
         <select class="select no_agreement_letter_id-{{$company->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id-{{$company->id}}">
         @foreach ($seller as $item)
         <option value="{{ $item->id }}" {{ old('no_agreement_letter_id') == $item->id ? 'selected':'' }}>

@@ -81,7 +81,8 @@ class GsmMasterController extends Controller
             'active_date'       =>  $request->active_date,
             'expired_date'      =>  $request->expired_date,
             'terminate_date'    =>  $request->terminate_date,
-            'note'              =>  $request->note
+            'note'              =>  $request->note,
+            'provider'              =>  $request->provider
         );
         Gsm::insert($data);
     }
@@ -124,6 +125,7 @@ class GsmMasterController extends Controller
         $data->active_date = $request->active_date;
         $data->terminate_date = $request->terminate_date;
         $data->note = $request->note;
+        $data->provider = $request->provider;
         $data->save();
     }
 
@@ -142,6 +144,30 @@ class GsmMasterController extends Controller
             DB::table('gsm')->whereIn('id', $ids)->delete();
         }
     }
+    public function updateSelected(Request $request)
+    {
+        Gsm::where('item_type_id', '=', 1)
+            ->update(['colour' => 'black']);
+    }
+    public function updateall(Request $request, $id)
+    {
+        $data = Gsm::findOrfail($id);
+        $data->status_gsm = $request->status_gsm;
+        $data->gsm_number = $request->gsm_number;
+        $data->company_id = $request->company_id;
+        $data->serial_number = $request->serial_number;
+        $data->icc_id = $request->icc_id;
+        $data->imsi = $request->imsi;
+        $data->res_id = $request->res_id;
+        $data->request_date = $request->request_date;
+        $data->expired_date = $request->expired_date;
+        $data->active_date = $request->active_date;
+        $data->terminate_date = $request->terminate_date;
+        $data->note = $request->note;
+        $data->provider = $request->provider;
+        echo $id;
+    }
+
 
     public function importExcel(Request $request)
     {

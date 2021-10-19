@@ -20,19 +20,23 @@
     <option value="Eksternal Complain">Eksternal Complain</option>
     </select></i></td>
 
-    <td><select class="select pic-{{$request_complain->id}}" id="pic" name="pic">
-    {{-- <option value="{{$request_complain->pic}}"> {{$request_complain->picRequest->pic_name}} </option> --}}
+    <td><select class="select pic_id-{{$request_complain->id}}" id="pic_id" name="pic_id">
+    <option value="{{$request_complain->pic_id}}"> {{$request_complain->pic->pic_name}} </option>
 
        @foreach ($pic as $pics)
-        <option value="{{ $pics->id }}" {{ old('pic') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
+        <option value="{{ $pics->id }}" {{ old('pic_id') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
 
        @endforeach
-    </select></i></td>
-    <td><select class="select vehicle-{{$request_complain->id}}" id="vehicle" id="vehicle" aria-label=".form-select-lg example">
-    <option value="{{$request_complain->vehicle}}"> {{$request_complain->vehicle}} </option>
-    <option value="B-94828-YTS">B-94828-YTS</option>
-    <option value="B-76267-TWS">B-76267-TWS</option>
-    </select></i></td>
+    <td>
+          <select class="select vehicle-{{$request_complain->id}}" id="vehicle" name="vehicle">
+            <option value="{{$request_complain->vehicle}}"> {{$request_complain->vehicleRequest->license_plate??''}} </option>
+
+            @foreach ($vehicle as $item)
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+
+            @endforeach
+         </select></i>
+      </td>
     <td>
         <div class="input-div"><input type="datetime-local" class="input waktu_info-{{$request_complain->id}}" id="waktu_info" placeholder="Waktu Info" value="{{ str_replace(" ", "T", $request_complain->waktu_info) }}"></i></div>
     </td>

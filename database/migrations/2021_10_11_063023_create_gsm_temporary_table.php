@@ -27,6 +27,8 @@ class CreateGsmTemporaryTable extends Migration
             $table->date('active_date')->nullable();
             $table->date('terminate_date')->nullable();
             $table->string('note')->nullable();
+            $table->string('provider');
+
             $table->timestamps();
         });
     }

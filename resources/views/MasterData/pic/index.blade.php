@@ -1,14 +1,14 @@
 @extends('layouts.v_main')
 @section('title','CSIS | PIC Company')
+@section('title-table','PIC Company')
 
 @section('content')
-
-<h4 class="page-title">PIC</h4>
+<form>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <div class="text-right mt-3" id="selected">
+          <div class="text-right" id="selected">
             <button type="button" class="btn btn-primary float-left mr-2 add add-button">
               <b>Add</b>
               <i class="fas fa-plus ml-2" id="add"></i>
@@ -24,7 +24,7 @@
             <thead>
               <tr>
                 <th>
-                    <div class="form-check">
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
@@ -371,5 +371,6 @@
 
 
   </script>
+  </form>
 
    @endsection

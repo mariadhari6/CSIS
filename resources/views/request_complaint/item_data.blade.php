@@ -24,7 +24,7 @@
                 {{ $request_complains->pic->pic_name}}
         </td>
           <td id="item-vehicle-{{ $request_complains->id }}">
-            {{ $request_complains->vehicle}}
+            {{$request_complains->vehicleRequest->license_plate?? ''}}
         </td>
           <td id="item-waktu_info-{{ $request_complains->id }}">
             {{ $request_complains->waktu_info}}

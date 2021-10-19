@@ -36,8 +36,6 @@ class CompanyController extends Controller
             'company_name' => 'required',
             'seller_id' => 'required',
             'customer_code' => 'required',
-            'no_po' => 'required',
-            'po_date' => 'required',
             'no_agreement_letter_id' => 'required',
             'status' => 'required',
         ]);
@@ -45,8 +43,6 @@ class CompanyController extends Controller
             'company_name'     =>  $request->company_name,
             'seller_id'    =>  $request->seller_id,
             'customer_code'     =>  $request->customer_code,
-            'no_po'     =>  $request->no_po,
-            'po_date'     =>  $request->po_date,
             'no_agreement_letter_id' => $request->no_agreement_letter_id,
             'status'     =>  $request->status,
         );
@@ -75,8 +71,6 @@ class CompanyController extends Controller
         $data->company_name = $request->company_name;
         $data->seller_id = $request->seller_id;
         $data->customer_code = $request->customer_code;
-        $data->no_po = $request->no_po;
-        $data->po_date = $request->po_date;
         $data->no_agreement_letter_id = $request->no_agreement_letter_id;
         $data->status = $request->status;
 
@@ -97,8 +91,6 @@ class CompanyController extends Controller
         $data->company_name = $request->company_name;
         $data->seller_id = $request->seller_id;
         $data->customer_code = $request->customer_code;
-        $data->no_po = $request->no_po;
-        $data->po_date = $request->po_date;
         $data->no_agreement_letter_id = $request->no_agreement_letter_id;
         $data->status = $request->status;
 

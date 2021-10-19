@@ -11,7 +11,7 @@ class Company extends Model
     protected $table = 'companies';
 
     protected $fillable = [
-        'company_name', 'seller_id', 'customer_code', 'no_po', 'po_date', 'no_agreement_letter_id', 'status',
+        'company_name', 'seller_id', 'customer_code', 'no_agreement_letter_id', 'status',
     ];
 
     public function seller()
@@ -44,5 +44,10 @@ class Company extends Model
     public function requestComplaint()
     {
         return $this->hasMany(RequestComplaint::class);
+    }
+
+    public function masterPo()
+    {
+        return $this->hasMany(MasterPo::class, 'company_id', 'id');
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Pic;
 use App\Models\RequestComplaint;
 use App\Models\Task;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -22,14 +23,24 @@ class RequestComplaintController extends Controller
         $company = Company::orderBy('id', 'DESC')->get();
         $task_request = Task::all();
         $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
+        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
         return view('request_complaint.add_form')->with([
 
             'request_complain' => $request_complain,
             'pic'              => $pic,
             'company'              => $company,
-            'task_request'              => $task_request
+            'task_request'              => $task_request,
+            'vehicle'              => $vehicle
         ]);
     }
+    public function item_data_MY(Request $request)
+    {
+        $year = $request->year;
+        $month = $request->month;
+        $request_complain = RequestComplaint::whereMonth('waktu_info',  $month)->whereYear('waktu_info', $year)->get();
+        return view('request_complaint.item_data', compact('request_complain'));
+    }
+
 
     public function item_data()
     {
@@ -66,13 +77,16 @@ class RequestComplaintController extends Controller
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaint::findOrfail($id);
+        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
         $task_request = Task::all();
 
         return view('request_complaint.edit_form')->with([
             'request_complain' => $request_complain,
             'pic'              => $pic,
             'company'              => $company,
-            'task_request'   => $task_request
+            'task_request'   => $task_request,
+            'vehicle'              => $vehicle
+
 
         ]);
     }

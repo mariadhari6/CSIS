@@ -1,15 +1,15 @@
 @extends('layouts.v_main')
-@section('title','CSIS | Gsm Pre Active')
+@section('title','CSIS | Gsm Master')
+@section('title-table','Gsm Master')
 
 
 @section('content')
-
-<h4 class="page-title">GSM Master</h4>
+<form>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+            <div class="text-right" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button">
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" id="add"></i>
@@ -37,7 +37,7 @@
             <thead>
               <tr>
                 <th>
-                    <div class="form-check">
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
@@ -57,6 +57,7 @@
                 <th scope="col" class="list">Active Date</th>
                 <th scope="col" class="list">Terminated Date</th>
                 <th scope="col" class="list">Note</th>
+                <th scope="col" class="list">Provider</th>
                 <th scope="col" class="action">Action</th>
               </tr>
             </thead>
@@ -109,6 +110,7 @@
                       <th>Active Date</th>
                       <th>Terminated Date</th>
                       <th>Note</th>
+                      <th>Provider</th>
                     </tr>
                   </thead>
                   <tbody id="item_data_temporary">
@@ -163,6 +165,7 @@
         var active_date = $(".temporary-active_date-"+value).attr("id");
         var terminate_date = $(".temporary-terminate_date-"+value).attr("id");
         var note = $(".temporary-note-"+value).attr("id");
+        var provider = $(".temporary-provider-"+value).attr("id");
           $.ajax({
           type: "get",
           url: "{{ url('store_GsmMaster') }}",
@@ -178,7 +181,8 @@
             expired_date: expired_date,
             active_date: active_date,
             terminate_date: terminate_date,
-            note: note
+            note: note,
+           provider:provider
           },
           success: function(data) {
             swal({
@@ -289,22 +293,24 @@
         var active_date = $("#active_date").val();
         var terminate_date = $("#terminate_date").val();
         var note = $("#note").val();
+        var provider = $("#provider").val();
         $.ajax({
             type: "get",
             url: "{{ url('store_GsmMaster') }}",
             data: {
               status_gsm: status_gsm,
-              gsm_number: gsm_number,
-              company_id: company_id,
-              serial_number: serial_number,
-              icc_id: icc_id,
-              imsi: imsi,
-              res_id: res_id,
-              request_date: request_date,
-              expired_date: expired_date,
-              active_date: active_date,
-              terminate_date: terminate_date,
-              note: note
+            gsm_number: gsm_number,
+            company_id: company_id,
+            serial_number: serial_number,
+            icc_id: icc_id,
+            imsi: imsi,
+            res_id: res_id,
+            request_date: request_date,
+            expired_date: expired_date,
+            active_date: active_date,
+            terminate_date: terminate_date,
+            note: note,
+           provider:provider
             },
             success: function(data) {
              swal({
@@ -368,6 +374,7 @@
         $("#item-active_date-"+id).hide("fast");
         $("#item-terminate_date-"+id).hide("fast");
         $("#item-note-"+id).hide("fast");
+        $("#item-provider-"+id).hide("fast");
         $.get("{{ url('show_GsmMaster') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -386,6 +393,7 @@
           var active_date = $("#active_date").val();
           var terminate_date = $("#terminate_date").val();
           var note = $("#note").val();
+          var provider = $("#provider").val();
           var id = id;
             $.ajax({
                 type: "get",
@@ -402,7 +410,8 @@
                   expired_date: expired_date,
                   active_date: active_date,
                   terminate_date: terminate_date,
-                  note: note
+                  note: note,
+                  provider: provider
                 },
                 success: function(data) {
                 swal({
@@ -503,6 +512,7 @@
                     $("#item-active_date-"+value).hide("fast");
                     $("#item-terminate_date-"+value).hide("fast");
                     $("#item-note-"+value).hide("fast");
+                    $("#item-provider-"+value).hide("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_GsmMaster') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
@@ -544,22 +554,24 @@
                     var active_date = $(".active_date-"+value).val();
                     var terminate_date = $(".terminate_date-"+value).val();
                     var note = $(".note-"+value).val();
+                    var provider = $(".provider-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_GsmMaster') }}/"+value,
                     data: {
                       status_gsm: status_gsm,
-                      gsm_number: gsm_number,
-                      company_id: company_id,
-                      serial_number: serial_number,
-                      icc_id: icc_id,
-                      imsi: imsi,
-                      res_id: res_id,
-                      request_date: request_date,
-                      expired_date: expired_date,
-                      active_date: active_date,
-                      terminate_date: terminate_date,
-                      note: note
+                  gsm_number: gsm_number,
+                  company_id: company_id,
+                  serial_number: serial_number,
+                  icc_id: icc_id,
+                  imsi: imsi,
+                  res_id: res_id,
+                  request_date: request_date,
+                  expired_date: expired_date,
+                  active_date: active_date,
+                  terminate_date: terminate_date,
+                  note: note,
+                  provider: provider
                     },
                     success: function(data) {
                      swal({
@@ -595,5 +607,5 @@
   </script>
 
   <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
-
+</form>
    @endsection

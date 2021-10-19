@@ -24,13 +24,13 @@
             {{ $item->waktu_kesepakatan }}
         </td>
         <td id="item-vehicle-{{ $item->id}}">
-                {{ $item->vehicle}}
+                {{ $item->vehicleRequest->license_plate?? ''}}
         </td>
           <td id="item-imei-{{ $item->id }}">
-            {{ $item->detailCustomer->imei}}
+            {{ $item->detailCustomer->imei?? ''}}
         </td>
           <td id="item-gsm_pemasangan-{{ $item->id }}">
-            {{ $item->gsmMaster->gsm_number}}
+            {{ $item->gsmMaster->gsm_number?? ''}}
         </td>
         <td id="item-equipment_terpakai_sensor-{{ $item->id }}">
             {{$item->sensor->sensor_name?? ''}}
@@ -57,7 +57,10 @@
             {{ $item->note_pemasangan }}
         </td>
         <td id="item-kendaraan_pasang-{{ $item->id }}">
-            {{ $item->kendaraan_pasang}}
+            {{  $item->vehicleRequest->license_plate?? ''}}
+        </td>
+         <td id="item-status_pemasangan-{{ $item->id }}">
+            {{ $item->status_pemasangan}}
         </td>
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">

@@ -1,11 +1,11 @@
 <tr id="add_form">
-<form>
+
 <td></td>
 <td></td>
 
     <td>
         <select class="select @error('merk') is-invalid @enderror" id="merk" name="merk" required>
-            <option selected disabled @if (old('merk')=='' or old('merk')==0) @endif>Merk</option>
+            <option selected disabled value="" @if (old('merk')=='' or old('merk')==0) @endif>Merk</option>
 
             @foreach ($merk as $item)
             <option value="{{ $item->id }}"  {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk}}</option>
@@ -17,11 +17,11 @@
     </td>
 
     <td>
-        <select class="select @error('type') is-invalid @enderror" id="type" name="type">
-            <option selected disabled @if (old('type')=='' or old('type')==0) @endif>Type</option>
+        <select class="select @error('type') is-invalid @enderror" id="type" name="type" required>
+            <option selected disabled value="" @if (old('type')=='' or old('type')==0) @endif>Type</option>
 
             @foreach ($type as $item)
-            <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->typeGps->type_gps}}</option>
+            <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type_gps}}</option>
             @endforeach
 
         </select>
@@ -33,27 +33,27 @@
         <div class="input-div"><input type="text" class="input" id="merk" placeholder="Merk"></i>
     </td> --}}
     <td>
-        <div class="input-div"><input type="number" class="input @error('imei') is-invalid @enderror" id="imei" name="imei" placeholder="IMEI" value="{{old('imei')}}"></i>
+        <div class="input-div"><input type="number" class="input @error('imei') is-invalid @enderror" id="imei" name="imei" placeholder="IMEI" value="{{old('imei')}}" required></i>
         @error('imei')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
     </td>
 
     <td>
-        <div class="input-div"><input type="date" class="input @error('waranty') is-invalid @enderror" id="waranty" placeholder="Waranty" name="waranty" value="{{old('waranty')}}" ></i>
+        <div class="input-div"><input type="date" class="input @error('waranty') is-invalid @enderror" id="waranty" placeholder="Waranty" name="waranty" value="{{old('waranty')}}" required></i>
         @error('waranty')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input @error('po_date') is-invalid @enderror" id="po_date" placeholder="Po Date" name="po_date" value="{{old('po_date')}}"></i>
+        <div class="input-div"><input type="date" class="input @error('po_date') is-invalid @enderror" id="po_date" placeholder="Po Date" name="po_date" value="{{old('po_date')}}" required></i>
         @error('po_date')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
     </td>
     <td>
         <select class="select @error('status') is-invalid @enderror" id="status" aria-label=".form-select-lg example" required>
-            <option selected disabled>Pilih status</option>
+            <option selected disabled value="">Pilih status</option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>
@@ -63,9 +63,9 @@
         @enderror
     </td>
     <td>
-        <select class="select" id="status_ownership" aria-label=".form-select-lg example" required>
-            <option selected>Pilih Status</option>
-            <option value="-">-</option>
+        <select class="select" id="status_ownership" aria-label=".form-select-lg example">
+            <option selected disabled value="-">Pilih Status</option>
+            {{-- <option value="-">-</option> --}}
             <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
@@ -78,12 +78,12 @@
 
 
     <td>
-        <button type="submit" class="fas fa-check add" id="btn-primary-outline" onclick="store()"></button>
-        {{-- <i ></i> --}}
-        <button type="button" id="btn-primary-outline" class="fas fa-times cancel" onclick="cancel()"></button>
-        {{-- <i ></i></td> --}}
+         <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="add" onclick="store()"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
     <td>
-    </form>
+
 
 </tr>
 

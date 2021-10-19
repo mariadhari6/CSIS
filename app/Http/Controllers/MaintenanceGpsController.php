@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Sensor;
 use App\Models\Task;
 use App\Models\Teknisi;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
 class MaintenanceGpsController extends Controller
@@ -33,6 +34,21 @@ class MaintenanceGpsController extends Controller
         // dd($maintenanceGps);
         // echo $maintenanceGps->requestComplaint->company->company_name;
     }
+    public function item_data_onProgress()
+    {
+        $maintenanceGps = RequestComplaint::where('status_maintenance', 'On Progress')->get();
+        return view('VisitAssignment.MaintenanceGPS.item_data')->with([
+            'maintenanceGps' => $maintenanceGps
+        ]);
+    }
+
+    public function item_data_done()
+    {
+        $maintenanceGps = RequestComplaint::where('status_maintenance', 'Done')->get();
+        return view('VisitAssignment.MaintenanceGPS.item_data')->with([
+            'maintenanceGps' => $maintenanceGps
+        ]);
+    }
 
     public function edit_form($id)
     {
@@ -44,6 +60,7 @@ class MaintenanceGpsController extends Controller
         $teknisi_maintenance = Teknisi::orderBy('id', 'DESC')->get();
         $task = Task::where('task', 'Maintenance Sensor')->orWhere('task', 'Maintenance GPS')->get();
         $gsm_master = Gsm::where('status_gsm', 'Ready')->get();
+        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
 
 
         return view('VisitAssignment.MaintenanceGPS.edit_form')->with([
@@ -54,7 +71,8 @@ class MaintenanceGpsController extends Controller
             'teknisi_maintenance' => $teknisi_maintenance,
             'task' => $task,
             'gsm_master' => $gsm_master,
-            'company' => $company
+            'company' => $company,
+            'vehicle' => $vehicle
 
         ]);
     }
@@ -83,6 +101,7 @@ class MaintenanceGpsController extends Controller
         $data->teknisi_maintenance = $request->teknisi_maintenance;
         $data->req_by = $request->req_by;
         $data->note_maintenance = $request->note_maintenance;
+        $data->status_maintenance = $request->status_maintenance;
 
         $data->save();
     }
@@ -105,6 +124,8 @@ class MaintenanceGpsController extends Controller
         $data->teknisi_maintenance = $request->teknisi_maintenance;
         $data->req_by = $request->req_by;
         $data->note_maintenance = $request->note_maintenance;
+        $data->status_maintenance = $request->status_maintenance;
+
         echo $id;
     }
 

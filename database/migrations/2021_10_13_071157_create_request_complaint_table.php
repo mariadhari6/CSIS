@@ -18,7 +18,7 @@ class CreateRequestComplaintTable extends Migration
             $table->foreignId('company_id')->nullable(); // detail customer
             $table->string('internal_eksternal')->nullable();
             $table->foreignId('pic_id')->nullable(); // Master PIC
-            $table->string('vehicle')->nullable(); // Detail customer
+            $table->foreignId('vehicle')->nullable(); // Detail customer
             $table->dateTime('waktu_info')->nullable();
             $table->foreignId('task')->nullable(); // master Task
             $table->string('platform')->nullable();
@@ -39,7 +39,8 @@ class CreateRequestComplaintTable extends Migration
             $table->integer('uang_transportasi')->nullable();
             $table->string('type_visit')->nullable();
             $table->string('note_pemasangan')->nullable();
-            $table->string('kendaraan_pasang')->nullable();
+            $table->foreignId('kendaraan_pasang')->nullable();
+            $table->string('status_pemasangan')->nullable();
             // from maintenance
             $table->foreignId('type_gps_id')->nullable(); // Master GPS
             $table->foreignId('equipment_gps_id')->nullable(); // Master GPS
@@ -52,6 +53,8 @@ class CreateRequestComplaintTable extends Migration
             $table->foreignId('teknisi_maintenance')->nullable(); // tabel teknisi
             $table->string('req_by')->nullable();
             $table->longText('note_maintenance')->nullable();
+            $table->string('status_maintenance')->nullable();
+
             $table->timestamps();
         });
     }

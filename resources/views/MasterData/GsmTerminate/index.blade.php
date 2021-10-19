@@ -1,13 +1,14 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Gsm Terminate')
+@section('title-table', 'Gsm Terminate')
 
 @section('content')
-<h4 class="page-title">GSM Terminate</h4>
+<form>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <div class="text-right mt-3" id="selected">
+          <div class="text-right" id="selected">
             <button class="btn btn-success  mr-2 edit_all">
               <i class="fas fa-pen"></i>
             </button>
@@ -18,8 +19,8 @@
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th width="10px">
-                    <div class="form-check">
+                <th>
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
@@ -313,5 +314,5 @@
         }
 
   </script>
-
+</form>
    @endsection

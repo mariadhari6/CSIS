@@ -39,5 +39,8 @@
         <td class="temporary-note-{{ $item->id }}" id="{{ $item->note }}">
             {{ $item->note }}
         </td>
+        <td class="temporary-provider-{{ $item->id }}" id="{{ $item->provider }}">
+            {{ $item->provider }}
+        </td>
     </tr>
 @endforeach

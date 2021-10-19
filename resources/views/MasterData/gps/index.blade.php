@@ -1,14 +1,18 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Gps')
+@section('title-table','Gps')
+
 
 
 @section('content')
-<h4 class="page-title">GPS</h4>
+<form>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <div class="text-right mt-3" id="selected">
+          <table class="table table-responsive data" class="table_id" id="table_id" >
+
+          <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
                   <b> Import</b>
@@ -17,11 +21,10 @@
               <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
-          <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th width="10px">
-                    <div class="form-check">
+                <th>
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
@@ -62,13 +65,17 @@
 
       {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
        <form  method="POST" action="{{ route('importExcel_gps') }}" id="temporary_form" enctype="multipart/form-data" target="dummyframe">
-          {{-- {{method_field('')}} --}}
+
             @csrf
           <div class="mb-2">
             <input type="file" name="file" id="file_import" required="required">
             <button type="submit" class="btn btn-primary btn-xs" id="check" >Check</button>
+            <button class="btn btn-primary btn-xs" onclick="submitClick()">Check</button>
+
         </form>
             <button type="button" class="btn btn-success btn-xs" id="send" onclick="send_data()" >Send</button>
+            <a  class="btn btn-secondary btn-xs" href="/download_template_gps" style="color:white">Download Template</a>
+
           </div>
           <div class="card">
             <div class="card-body">
@@ -76,6 +83,7 @@
                 <table class="table table-bordered" id="table_temporary_id">
                   <thead>
                     <tr>
+                        <th>No</th>
                         <th>Merk</th>
                         <th>Type</th>
                         <th>IMEI</th>
@@ -106,17 +114,33 @@
     $(document).ready(function() {
       read()
       read_temporary()
+      deleteTemporary();
+      document.getElementById("check").style.visibility = "hidden";
 
     });
+       // ---- Submit form temporary ----
+    function submitClick() {
+      deleteTemporary();
+      $('#check').click();
+    }
     //------- Send Import ------
       function send_data() {
-      var merk = $(".temporary-merk").attr("id");
-      var type = $(".temporary-type").attr("id");
-      var imei = $(".temporary-imei").attr("id");
-      var waranty = $(".temporary-waranty").attr("id");
-      var po_date = $(".temporary-po_date").attr("id");
-      var status = $(".temporary-status").attr("id");
-      var status_ownership = $(".temporary-status_ownership").attr("id");
+           $rowCount = $("#table_temporary_id tr").length;
+      $rowResult = $rowCount - 1;
+      var allVals = [];
+      for($i = 0; $i < $rowResult; $i++)
+          {
+            var id = $("#table_temporary_id").find("tbody>tr:eq("+ $i +")>td:eq(0)").attr("id");
+            allVals[$i] = id;
+          }
+    $.each(allVals, function(index, value){
+      var merk = $(".temporary-merk-"+value).attr("id");
+      var type = $(".temporary-type-"+value).attr("id");
+      var imei = $(".temporary-imei-"+value).attr("id");
+      var waranty = $(".temporary-waranty-"+value).attr("id");
+      var po_date = $(".temporary-po_date-"+value).attr("id");
+      var status = $(".temporary-status-"+value).attr("id");
+      var status_ownership = $(".temporary-status_ownership-"+value).attr("id");
       $.ajax({
           type: "get",
           url: "{{ url('store_gps') }}",
@@ -142,7 +166,8 @@
             read_temporary()
             $('#importData').modal('hide');
           }
-      })
+      });
+    });
     }
 
      // ---- Close Modal -------
@@ -490,66 +515,8 @@
 
 
   </script>
-    <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
-  {{-- <div class="modal-fade" id="modal-import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-
-         <form action="{{url('/gps')}}" method="POST" id="form-import" enctype="multipart/form-data" class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">Import Data GPS</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span arial-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            {{method_field('PUT')}}
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="">File Excel GPS</label>
-                    <input type="file" name="excel-gps" required>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" >Save</button>
-        </div>
-        </form>
-     </div>
- </div> --}}
- {{-- <div class="modal fade" id="modal-import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-         <form action="{{url('/import_gps')}}" method="POST" id="form-import" enctype="multipart/form-data" class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Import Excel GPS</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{method_field('PUT')}}
-        @csrf
-            <div class="row">
-                <div class="col-md-12">
-                    <p>Import data GPS sesuai format berikut. <br><a href="{{url('')}}/excel-gps.xlsx"><i class="fa fa-download"></i> File contoh excel GPS</a></p>
-
-                </div>
-                <div class="col-md-12">
-                    <label for="">File Excel GPS</label>
-                    <input type="file" name="excel-gps" required>
-                </div>
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-    </form>
-    </div>
-  </div>
-</div> --}}
+  <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
+</form>
    @endsection
 
 

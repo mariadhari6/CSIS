@@ -2,7 +2,7 @@
 @foreach ($company as $item)
     <tr id="edit-form-{{ $item->id }}">
         <td id="td-checkbox-{{ $item->id }}">
-            <div class="form-check">
+            <div>
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
                     <span class="form-check-sign"></span>
@@ -22,17 +22,12 @@
         <td id="item-customer_code-{{ $item->id }}">
             {{ $item->customer_code }}
         </td>
-          <td id="item-no_po-{{ $item->id }}">
-            {{ $item->no_po }}
-        </td>
-        <td id="item-po_date-{{ $item->id }}">
-            {{ $item->po_date }}
-        </td>
 
         <td id="item-no_agreement_letter_id-{{ $item->id}}">
                 {{ $item->seller->no_agreement_letter}}
         </td>
         <td id="item-status-{{ $item->id }}">
+                {{-- {{ $item->status}} --}}
 
             @if ($item->status == 'Contract')
                 <span class="badge badge-info">{{ $item->status }}</span>

@@ -2,7 +2,7 @@
 @foreach ($sensor as $sensors)
     <tr id="edit-form-{{ $sensors->id }}">
          <td id="td-checkbox-{{ $sensors->id }}">
-            <div class="form-check">
+            <div>
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$sensors->id}}">
                     <span class="form-check-sign"></span>
@@ -21,6 +21,9 @@
         </td>
           <td id="item-merk_sensor-{{ $sensors->id }}">
             {{ $sensors->sensorMerk->merk_sensor}}
+        </td>
+        <td id="item-serial_number-{{ $sensors->id }}">
+            {{ $sensors->serial_number}}
         </td>
         <td id="item-rab_number-{{ $sensors->id }}">
             {{ $sensors->rab_number }}

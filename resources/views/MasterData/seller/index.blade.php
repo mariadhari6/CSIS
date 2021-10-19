@@ -1,15 +1,16 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Seller')
+@section('title-table', 'Seller')
 @section('master','show')
 @section('seller','active')
 
 @section('content')
-<h4 class="page-title">Seller</h4>
-  <div class="row">
+<form>
+    <div class="row">
     <div class="col-md-12">
-      <div class="card">
+    <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+            <div class="text-right" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add" id="add" >
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" ></i>
@@ -25,7 +26,7 @@
             <thead>
               <tr>
                 <th>
-                    <div class="form-check">
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
@@ -46,8 +47,8 @@
           </table>
         </div>
       </div>
-    </div>
-  </div>
+
+
 
   <script>
 
@@ -77,7 +78,7 @@
     }
 
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form_seller') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -89,22 +90,6 @@
         var seller_code = $("#seller_code").val();
         var no_agreement_letter = $("#no_agreement_letter").val();
         var status = $("#status").val();
-
-        if(
-            seller_name == '' ||
-            seller_code == '' ||
-            no_agreement_letter == ''
-          ) {
-          swal({
-            type: 'warning',
-            text: 'there is data that has not been filled',
-            showConfirmButton: false,
-            timer: 1500
-          }).catch(function(timeout) { });
-
-          $("#required").text("please fill out this field");
-
-        } else {
 
            $.ajax({
             type: "get",
@@ -126,7 +111,7 @@
             }
         })
 
-        }
+
     }
 
     // -----Proses Delete Data ------
@@ -365,6 +350,6 @@
 
 
   </script>
-
+</form>
 
 @endsection

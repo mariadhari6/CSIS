@@ -28,11 +28,17 @@
         <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$pemasangan_mutasi_GPS->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ str_replace(" ", "T", $pemasangan_mutasi_GPS->waktu_kesepakatan) }}"></i></div>
     </td>
 
-    <td><select class="select vehicle-{{$pemasangan_mutasi_GPS->id}}" id="vehicle" id="vehicle" aria-label=".form-select-lg example">
-    <option value="{{$pemasangan_mutasi_GPS->vehicle}}"> {{$pemasangan_mutasi_GPS->vehicle}} </option>
-    <option value="B-94828-YTS">B-94828-YTS</option>
-    <option value="B-76267-TWS">B-76267-TWS</option>
-    </select></i></td>
+    <td>
+          <select class="select vehicle-{{$pemasangan_mutasi_GPS->id}}" id="vehicle" name="vehicle">
+            <option selected value="">
+                {{ $pemasangan_mutasi_GPS->vehicleRequest->license_plate }}
+            </option>
+            @foreach ($vehicle as $item)
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+
+            @endforeach
+         </select></i>
+    </td>
 
     <td><select class="select imei-{{$pemasangan_mutasi_GPS->id}}" id="imei" name="imei">
         <option value="{{$pemasangan_mutasi_GPS->imei}}"> {{$pemasangan_mutasi_GPS->detailCustomer->imei?? ''}} </option>
@@ -93,10 +99,22 @@
     </select></i></td>
 
     <td><textarea class="form-control note_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="note_pemasangan" name="note_pemasangan" rows="3">{{$pemasangan_mutasi_GPS->note_pemasangan}}</textarea></i></td>
-    <td><select class="select kendaraan_pasang-{{$pemasangan_mutasi_GPS->id}}" id="kendaraan_pasang" id="kendaraan_pasang" aria-label=".form-select-lg example">
-    <option value="{{$pemasangan_mutasi_GPS->kendaraan_pasang}}"> {{$pemasangan_mutasi_GPS->kendaraan_pasang}} </option>
-    <option value="B-94828-YTS">B-94828-YTS</option>
-    <option value="B-76267-TWS">B-76267-TWS</option>
+     <td>
+          <select class="select kendaraan_pasang-{{$pemasangan_mutasi_GPS->id}}" id="kendaraan_pasang" name="kendaraan_pasang">
+            <option selected value="">
+                {{ $pemasangan_mutasi_GPS->vehicleKendaraanPasang->license_plate ??''}}
+            </option>
+            @foreach ($vehicle as $item)
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+
+            @endforeach
+         </select></i>
+    </td>
+
+    <td><select class="select status_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="status_pemasangan" name="status_pemasangan" aria-label=".form-select-lg example">
+    <option value=" {{$pemasangan_mutasi_GPS->status_pemasangan}}"> {{$pemasangan_mutasi_GPS->status_pemasangan}} </option>
+    <option value="Done">Done</option>
+    <option value="On Progress">On Progress</option>
     </select></i></td>
      <td>
         <i class="fas fa-check add" id="edit" onclick="update({{ $pemasangan_mutasi_GPS->id}})"></i>

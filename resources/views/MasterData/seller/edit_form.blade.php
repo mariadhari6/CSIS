@@ -25,8 +25,10 @@
         </option>
     </select>
 </td>
-<td>
-    <i class="fas fa-check add" id="edit" onclick="update({{ $seller->id}})"></i>
-    <i class="fas fa-times cancel" onclick="cancel()" ></i>
-</td>
+ <td>
+         <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="edit" onclick="update({{ $seller->id}})"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()" ></i>
+    </td>
 

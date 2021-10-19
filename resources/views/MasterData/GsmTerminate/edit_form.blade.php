@@ -1,18 +1,18 @@
     <td></td>
     <td></td>
     <td>
-        <select class="form-control status_gsm-{{$GsmTerminate->id}}" id="status_gsm" name="status_gsm">
+        <select class="form-control status_gsm-{{$GsmTerminate->id}}" id="status_gsm" name="status_gsm" required>
             <option value="Ready" {{ $GsmTerminate->status_gsm == 'Ready' ? 'selected' : ''  }}>Ready</option>
             <option value="Active" {{ $GsmTerminate->status_gsm == 'Active' ? 'selected' : ''  }}>Active</option>
             <option value="Terminate" {{ $GsmTerminate->status_gsm == 'Terminate' ? 'selected' : ''  }}>Terminate</option>
         </select>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input gsm_number-{{$GsmTerminate->id}}" id="gsm_number" placeholder="Gsm Number" value="{{ $GsmTerminate->gsm_number}}"></div>
+        <div class="input-div"><input type="text" class="input gsm_number-{{$GsmTerminate->id}}" id="gsm_number" placeholder="Gsm Number" value="{{ $GsmTerminate->gsm_number}}" required></div>
     </td>
     <td>
 
-        <select class="form-control company_id-{{$GsmTerminate->id}}" id="company_id" name="company_id">
+        <select class="form-control company_id-{{$GsmTerminate->id}}" id="company_id" name="company_id" required>
             @foreach ($company as $item)
             <option value="{{ $item->id }}" {{ $item->id == $GsmTerminate->company_id ? 'selected' : '' }}>{{ $item->company_name }}</option>
             @endforeach
@@ -20,22 +20,21 @@
     </td>
     <td>
 
-        <div class="input-div"><input type="date" class="input request_date-{{$GsmTerminate->id}}" id="request_date" placeholder="Request Date" value="{{ $GsmTerminate->request_date}}">
+        <div class="input-div"><input type="date" class="input request_date-{{$GsmTerminate->id}}" id="request_date" placeholder="Request Date" value="{{ $GsmTerminate->request_date}}" required>
         </div>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input terminate_date-{{$GsmTerminate->id}}" id="terminate_date" placeholder="Active Date" value="{{ $GsmTerminate->terminate_date}}">
+        <div class="input-div"><input type="date" class="input terminate_date-{{$GsmTerminate->id}}" id="terminate_date" placeholder="Active Date" value="{{ $GsmTerminate->terminate_date}}" required>
         </div>
     </td>
     <td>
-        <textarea class="form-control note-{{$GsmTerminate->id}}" id="note" name="note" rows="3">{{$GsmTerminate->note}}</textarea>
+        <textarea class="form-control note-{{$GsmTerminate->id}}" id="note" name="note" rows="3" required>{{$GsmTerminate->note}}</textarea>
     </td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $GsmTerminate->id}})"></i>
+   <td>
+         <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="edit" onclick="update({{ $GsmTerminate->id}})"></i>
+        </button>
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $GsmTerminate->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
 
 

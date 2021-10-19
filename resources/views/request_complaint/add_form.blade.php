@@ -31,13 +31,15 @@
          </select></i>
       </td>
 
-    <td>
-        <select class="select" id="vehicle" id="vehicle" aria-label=".form-select-lg example">
-            <option selected disabled>Vehicle</option>
-            <option value="B-94828-YTS">B-94828-YTS</option>
-            <option value="B-76267-TWS">B-76267-TWS</option>
-        </select></i>
-    </td>
+      <td>
+          <select class="select" id="vehicle" name="vehicle">
+            <option selected disabled value="">Vehicle</option>
+            @foreach ($vehicle as $item)
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+
+            @endforeach
+         </select></i>
+      </td>
     <td>
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_info" placeholder="Waktu Info"></i></div>
     </td>

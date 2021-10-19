@@ -1,66 +1,67 @@
 <?php $no=1; ?>
-   @foreach ($details as $detail )
-    <tr id="edit-form-{{ $detail->id }}">
-        <td id="td-checkbox-{{ $detail->id }}" width="100px">
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input task-select" type="checkbox" id="{{$detail->id}}">
-                    <span class="form-check-sign"></span>
-                </label>
-            </div>
-        </td>
-         <td id="item-no-{{$detail->id}}">
+@foreach ($details as $detail )
+<tr id="edit-form-{{ $detail->id }}" height="50px">
+    <td id="td-checkbox-{{ $detail->id }}" width="100px">
+        <div>
+            <label class="form-check-label">
+                <input class="form-check-input task-select" type="checkbox" id="{{$detail->id}}">
+                <span class="form-check-sign"></span>
+            </label>
+        </div>
+    </td>
+        <td id="item-no-{{ $detail->id}}">
             {{ $no++ }}
         </td>
-
-
         <td id="item-CompanyId-{{ $detail->id }}">
             {{ $detail->company->company_name}}
         </td>
         <td id="item-LicencePlate-{{ $detail->id }}">
-            {{ $detail->licence_plate }}
+            {{ $detail->vehicle->license_plate }}
         </td>
         <td id="item-VihecleType-{{ $detail->id }}">
-            {{ $detail->vihecle_type }}
+            {{ $detail->vehicle->vehicle->name }}
         </td>
         <td id="item-PoNumber-{{ $detail->id }}">
-            {{ $detail->po_number }}
+            {{ $detail->po->po_number }}
+        </td>
+        <td id="item-HargaLayanan-{{ $detail->id }}">
+            {{ $detail->po->harga_layanan }}
         </td>
         <td id="item-PoDate-{{ $detail->id }}">
-            {{ $detail->company->po_date}}
+            {{ date('d-M-Y', strtotime($detail->po->po_date))}}
         </td>
         <td id="item-StatusPo-{{ $detail->id }}">
-            {{ $detail->status_po }}
+            {{ $detail->po->status_po }}
         </td>
         <td id="item-Imei-{{ $detail->id }}">
-            {{ $detail->imei }}
+            {{ $detail->gps->imei }}
         </td>
         <td id="item-Merk-{{ $detail->id }}">
-            {{ $detail->merk }}
+            {{ $detail->gps->merk }}
         </td>
         <td id="item-Type-{{ $detail->id }}">
-            {{ $detail->type }}
+            {{ $detail->gps->type }}
         </td>
         <td id="item-GSM-{{ $detail->id }}">
-            {{ $detail->gsm }}
+            {{ $detail->gsm->gsm_number }}
         </td>
         <td id="item-Provider-{{ $detail->id }}">
-            {{ $detail->provider }}
+            {{ $detail->gsm->provider }}
         </td>
         <td id="item-SerialNumberSensor-{{ $detail->id }}">
-            {{ $detail->serial_number_sensor }}
+            {{ $detail->sensor->serial_number}}
         </td>
         <td id="item-NameSensor-{{ $detail->id }}">
-            {{ $detail->name_sensor }}
+            {{ $detail->sensor->sensor_name }}
         </td>
         <td id="item-MerkSensor-{{ $detail->id }}">
-            {{ $detail->merk_sensor }}
+            {{ $detail->sensor->merk_sensor }}
         </td>
         <td id="item-PoolName-{{ $detail->id }}">
-            {{ $detail->pool_name }}
+            {{ $detail->vehicle->pool_name }}
         </td>
         <td id="item-PoolLocation-{{ $detail->id }}">
-            {{ $detail->pool_location }}
+            {{ $detail->vehicle->pool_location }}
         </td>
         <td id="item-Waranty-{{ $detail->id }}">
             {{ $detail->waranty }}
@@ -69,10 +70,22 @@
             {{ $detail->status_layanan }}
         </td>
         <td id="item-TanggalPasang-{{ $detail->id }}">
-            {{ $detail->tanggal_pasang }}
+             {{-- {{ $detail->tanggal_pasang }}->format('d/m/Y');  --}}
+            {{ date('d-M-Y', strtotime($detail->tanggal_pasang)) }}
         </td>
         <td id="item-TanggalNonAktif-{{ $detail->id }}">
-            {{ $detail->tanggal_non_aktif }}
+            @if ($detail->tanggal_non_aktif == null)
+                {{ $detail->tanggal_non_aktif }}
+            @else
+                {{ date('d-M-Y', strtotime($detail->tanggal_non_aktif)) }}
+            @endif
+        </td>
+        <td id="item-TanggalReaktivasi-{{ $detail->id }}">
+            @if ($detail->tanggal_reaktivasi_gps == null)
+                {{ $detail->tanggal_reaktivasi_gps }}
+            @else
+                {{ date('d-M-Y', strtotime($detail->tanggal_reaktivasi_gps)) }}
+            @endif
         </td>
         <td id="td-button-{{ $detail->id }}">
             <div id="button-{{ $detail->id }}">
@@ -82,4 +95,5 @@
         </td>
     </tr>
 
-@endforeach
+   @endforeach
+

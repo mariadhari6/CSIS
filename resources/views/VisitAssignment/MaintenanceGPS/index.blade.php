@@ -8,7 +8,13 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-
+                <div class="float-left mr-2">
+                  <select class="form-control input-fixed" id="filter">
+                    <option value="{{ url('item_data_all_maintenance') }}">All</option>
+                    <option value="{{ url('item_data_onProgress_maintenance') }}">On Progress</option>
+                    <option value="{{ url('item_data_done_maintenance') }}">Done</option>
+                  </select>
+                </div>
               <button class="btn btn-success  mr-2 edit_all">
                 <i class="fas fa-pen"></i>
               </button>
@@ -41,6 +47,7 @@
                 <th rowspan="2" scope="col" class="list">Teknisi</th>
                 <th rowspan="2" scope="col" class="list">Req By</th>
                 <th rowspan="2" scope="col" class="list">Note</th>
+                <th rowspan="2" scope="col" class="list">Status</th>
                 <th rowspan="2" scope="col" class="action">Action</th>
               </tr>
               <tr>
@@ -76,7 +83,25 @@
         $('#table_id').DataTable().draw();
       });
     }
+    // ------- filter change ------
+    $("#filter").change(function(){
+        var value = $(this).val();
+        filter(value);
+    });
 
+    // ------- filter --------
+      function filter(value){
+      var value = value;
+      $.get(value, {}, function(data, status) {
+          $('#table_id').DataTable().destroy();
+          $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable( {
+
+              "dom": '<"top"f>rt<"bottom"lp><"clear">'
+              });
+          $('#table_id').DataTable().draw();
+        });
+      }
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -106,6 +131,7 @@
         var teknisi_maintenance = $("#teknisi_maintenance").val();
         var req_by = $("#req_by").val();
         var note_maintenance = $("#note_maintenance").val();
+        var status_maintenance = $("#status_maintenance").val();
 
         $.ajax({
             type: "get",
@@ -126,6 +152,7 @@
               teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
               note_maintenance: note_maintenance,
+             status_maintenance:status_maintenance
 
             },
              success: function(data) {
@@ -196,6 +223,7 @@
         $("#item-teknisi_maintenance-"+id).slideUp("fast");
         $("#item-req_by-"+id).slideUp("fast");
         $("#item-note_maintenance-"+id).slideUp("fast");
+        $("#item-status_maintenance-"+id).slideUp("fast");
         $.get("{{ url('edit_form_maintenanceGps') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -218,6 +246,7 @@
         var teknisi_maintenance = $("#teknisi_maintenance").val();
         var req_by = $("#req_by").val();
         var note_maintenance = $("#note_maintenance").val();
+        var status_maintenance = $("#status_maintenance").val();
         var id = id;
 
         $.ajax({
@@ -238,7 +267,8 @@
               biaya_transportasi: biaya_transportasi,
               teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
-              note_maintenance: note_maintenance
+              note_maintenance: note_maintenance,
+             status_maintenance:status_maintenance
             },
             success: function(data) {
               swal({
@@ -343,6 +373,7 @@
               $("#item-teknisi_maintenance-"+value).slideUp("fast");
               $("#item-req_by-"+value).slideUp("fast");
               $("#item-note_maintenance-"+value).slideUp("fast");
+              $("#item-status_maintenance-"+value).slideUp("fast");
 
               $(".add").hide("fast");
               $.get("{{ url('edit_form_maintenanceGps') }}/" + value, {}, function(data, status) {
@@ -388,6 +419,7 @@
             var teknisi_maintenance = $(".teknisi_maintenance-"+value).val();
             var req_by = $(".req_by-"+value).val();
             var note_maintenance = $(".note_maintenance-"+value).val();
+            var status_maintenance = $(".status_maintenance-"+value).val();
 
             $.ajax({
             type: "get",
@@ -408,6 +440,7 @@
               teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
               note_maintenance: note_maintenance,
+              status_maintenance: status_maintenance
             },
             success: function(data) {
             swal({

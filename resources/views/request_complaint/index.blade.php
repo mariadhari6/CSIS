@@ -12,6 +12,14 @@
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                  <div class="form-group">
+                      <input class="form-control" id="filter-date" type="month">
+                      <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
+                    </select>
+                  </div>
+                </ul>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
@@ -62,6 +70,35 @@
   <script>
     $(document).ready(function() {
       read()
+    });
+
+    // filter bulan dan tahun
+    $('#check-btn').click(function() {
+      var date = new Date($('#filter-date').val());
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+        $.ajax({
+            type: "get",
+            url: "{{ url('item_data_MY_RequestComplain') }}",
+            data: {
+              month: month,
+              year: year,
+            },
+            success: function(data) {
+              $('#table_id').DataTable().destroy();
+              $('#table_id').find("#item_data").html(data);
+              $('#table_id').dataTable( {
+                  "dom": '<"top"f>rt<"bottom"lp><"clear">'
+                  // "dom": '<lf<t>ip>'
+                  });
+              $('#table_id').DataTable().draw();
+            }
+        })
+    });
+
+    // ---- stop dropdown -----
+    $(document).on('click', '.dropdown-menu', function (e) {
+      e.stopPropagation();
     });
     // ------ Tampil Data ------
     function read(){
@@ -178,7 +215,7 @@
         $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).hide("fast");
         $("#item-internal_eksternal-"+id).hide("fast");
-        $("#item-pic_id-"+id).hide("fast");
+        $("#item-pic-"+id).hide("fast");
         $("#item-vehicle-"+id).hide("fast");
         $("#item-waktu_info-"+id).hide("fast");
         $("#item-waktu_respond-"+id).hide("fast");

@@ -1,12 +1,8 @@
 <tr id="add_form">
    <td></td>
    <td></td>
-<<<<<<< HEAD
 
    <td>
-=======
-   <td> 
->>>>>>> 514e22055a05f4fd4ac46b75f91e072eddac6b30
        <div class="input-div"><input type="date" class="input" id="request_date" placeholder="Request Date" rows="">
    </td>
     <td> <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active_date">
@@ -37,11 +33,7 @@
    <td>
       <textarea class="form-control" id="note" name="note" rows="3"></textarea>
    </td>
-<<<<<<< HEAD
     <td>
-=======
-   <td>
->>>>>>> 514e22055a05f4fd4ac46b75f91e072eddac6b30
       <i class="fas fa-check add" id="add" onclick="store()"></i>
       <i class="fas fa-times cancel" onclick="cancel()"></i>
    </td>
