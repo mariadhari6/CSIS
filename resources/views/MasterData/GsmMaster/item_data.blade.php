@@ -1,7 +1,7 @@
 <?php $no=1; ?>
 @foreach ($GsmMaster as $item)
     <tr id="edit-form-{{ $item->id }}">
-         <td id="td-checkbox-{{ $item->id }}">
+        <td id="td-checkbox-{{ $item->id }}" class="{{ $item->id }}">
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
@@ -15,13 +15,13 @@
         <td id="item-status_gsm-{{ $item->id}}">
             {{ $item->status_gsm }}
         </td>
-        <td id="item-gsm_number-{{ $item->id}}">
+        <td id="item-gsm_number-{{ $item->id}}" name="{{ $item->gsm_number }}">
             {{ $item->gsm_number }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
             {{ $item->company->company_name }}
         </td>
-        <td id="item-serial_number-{{ $item->id }}">
+        <td id="item-serial_number-{{ $item->id }}" class="item-serial_number-{{ $item->id }}" name="{{ $item->serial_number }}">
             {{ $item->serial_number }}
         </td>
           <td id="item-icc_id-{{ $item->id }}">

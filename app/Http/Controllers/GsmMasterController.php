@@ -163,17 +163,32 @@ class GsmMasterController extends Controller
 
     public function try()
     {
-        $jml =  Company::all('company_name')->count();
-        $input = 's';
+        // $jml =  Company::all('company_name')->count();
+        // $input = 's';
+        // for ($i= 0; $i <= $jml-1; $i++) { 
+        //     if( $input == Company::all('company_name')[$i]->company_name){
+        //         $input = (int) Company::all('id')[$i]->id;
+        //         break;
+        //     } else {
+        //         $input = 0;
+        //     }
+        // }
+        // return $input;
+
+        $GsmMaster = Gsm::all('gsm_number');
+        $jml =  Gsm::all('gsm_number')->count();
+        $input= 12232;
         for ($i= 0; $i <= $jml-1; $i++) { 
-            if( $input == Company::all('company_name')[$i]->company_name){
-                $input = (int) Company::all('id')[$i]->id;
+           if( $input == Gsm::all('gsm_number')[$i]->gsm_number){
+                $a = "data same";
                 break;
-            } else {
-                $input = 0;
-            }
+           } else {
+               $b = "Save succes";
+           }
         }
-        return $input;
+        
+        return $b . ' | ';
+
     }
 
 }

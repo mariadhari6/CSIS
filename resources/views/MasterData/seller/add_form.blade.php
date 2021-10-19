@@ -33,3 +33,11 @@
     </td>
 </tr>
 
+<script>
+    
+    $("#seller_code").on("input", function() {
+        if( $("#seller_name").val() ==  $(this).val() ) {
+            alert('cant same'); 
+        }
+    });
+</script>

@@ -316,47 +316,90 @@
       
     // ----- Proses Tambah data ------
     function store() {
-        var status_gsm = $("#status_gsm").val();
-        var gsm_number = $("#gsm_number").val();
-        var company_id = $("#company_id").val();
-        var serial_number = $("#serial_number").val();
-        var icc_id = $("#icc_id").val();
-        var imsi = $("#imsi").val();
-        var res_id = $("#res_id").val();
-        var request_date = $("#request_date").val();
-        var expired_date = $("#expired_date").val();
-        var active_date = $("#active_date").val();
-        var terminate_date = $("#terminate_date").val();
-        var note = $("#note").val();
-        var provider = $("#provider").val();
-        $.ajax({
-            type: "get",
-            url: "{{ url('store_GsmMaster') }}",
-            data: {
-              status_gsm: status_gsm,
-              gsm_number: gsm_number,
-              company_id: company_id,
-              serial_number: serial_number,
-              icc_id: icc_id,
-              imsi: imsi,
-              res_id: res_id,
-              request_date: request_date,
-              expired_date: expired_date,
-              active_date: active_date,
-              terminate_date: terminate_date,
-              note: note,
-              provider: provider
-            },
-            success: function(data) {
-             swal({
-                type: 'success',
-                title: 'Data Saved',
+      var status_gsm = $("#status_gsm").val();
+      var gsm_number = $("#gsm_number").val();
+      var company_id = $("#company_id").val();
+      var serial_number = $("#serial_number").val();
+      var icc_id = $("#icc_id").val();
+      var imsi = $("#imsi").val();
+      var res_id = $("#res_id").val();
+      var request_date = $("#request_date").val();
+      var expired_date = $("#expired_date").val();
+      var active_date = $("#active_date").val();
+      var terminate_date = $("#terminate_date").val();
+      var note = $("#note").val();
+      var provider = $("#provider").val();
+      
+      $rowCount = $("#table_id tr").length;
+      if ($rowCount == 2) {
+        alert('table empty')
+      } else {
+        $rowResult = $rowCount - 2;
+        var allGsmNum = [];
+        var allSerNum = [];
+        for($i = 1; $i <= $rowResult; $i++)
+            { 
+              $numArr = $i-1;
+              $gsmNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
+              $serNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(5)").attr("name");
+              allGsmNum[$numArr] = $gsmNum;
+              allSerNum[$numArr] = $serNum;
+            }
+        for (let index = 1; index <= allGsmNum.length; index++) {
+          if( gsm_number == allGsmNum[index] ){
+              swal({
+                type: 'warning',
+                text: 'GSM Number already exists',
                 showConfirmButton: false,
                 timer: 1500
-            }).catch(function(timeout) { });
-              read();
-            }
-        })
+              }).catch(function(timeout) { });
+              // alert('GSM Number already exists');
+              break;
+          } else if( serial_number == allSerNum[index]){
+              swal({
+                  type: 'warning',
+                  text: 'Serial Number already exists',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).catch(function(timeout) { });
+              // alert('Serial Number already exists');
+              break;
+          } else if( index == allGsmNum.length) {
+            // alert('success');
+            // break;
+            $.ajax({
+                type: "get",
+                url: "{{ url('store_GsmMaster') }}",
+                data: {
+                  status_gsm: status_gsm,
+                  gsm_number: gsm_number,
+                  company_id: company_id,
+                  serial_number: serial_number,
+                  icc_id: icc_id,
+                  imsi: imsi,
+                  res_id: res_id,
+                  request_date: request_date,
+                  expired_date: expired_date,
+                  active_date: active_date,
+                  terminate_date: terminate_date,
+                  note: note,
+                  provider: provider
+                },
+                success: function(data) {
+                swal({
+                    type: 'success',
+                    title: 'Data Saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                  read();
+                  // break;
+                }
+            });
+            break;
+          }    
+        }
+      }
     }
     // -----Proses Delete Data ------
     function destroy(id) {

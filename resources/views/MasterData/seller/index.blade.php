@@ -52,6 +52,7 @@
 
     $(document).ready(function() {
       read()
+    
     });
 
     // Swal.mixin({
