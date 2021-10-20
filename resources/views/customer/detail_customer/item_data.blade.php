@@ -48,15 +48,15 @@
         <td id="item-Provider-{{ $detail->id }}">
             {{ $detail->gsm->provider }}
         </td>
-        <td id="item-SerialNumberSensor-{{ $detail->id }}">
-            {{ $detail->sensor->serial_number}}
+        <td id="item-SensorAll-{{ $detail->id }}">
+            {{ $detail->sensor_all}}
         </td>
-        <td id="item-NameSensor-{{ $detail->id }}">
-            {{ $detail->sensor->sensor_name }}
+        {{-- <td id="item-NameSensor-{{ $detail->id }}">
+            {{ $detail->sensor_id }}
         </td>
         <td id="item-MerkSensor-{{ $detail->id }}">
-            {{ $detail->sensor->merk_sensor }}
-        </td>
+            {{ $detail->merk_sensor }}
+        </td> --}}
         <td id="item-PoolName-{{ $detail->id }}">
             {{ $detail->vehicle->pool_name }}
         </td>
@@ -64,7 +64,7 @@
             {{ $detail->vehicle->pool_location }}
         </td>
         <td id="item-Waranty-{{ $detail->id }}">
-            {{ $detail->waranty }}
+            {{ date('d-M-Y', strtotime($detail->waranty)) }}
         </td>
         <td id="item-StatusLayanan-{{ $detail->id }}">
             {{ $detail->status_layanan }}

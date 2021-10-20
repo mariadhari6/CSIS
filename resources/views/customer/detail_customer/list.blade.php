@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="dropdown mb-3">
-    <button class="btn btn-warning btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Company
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="list-company">
@@ -18,9 +18,14 @@
             <img class="card-img-top" src="" alt="">
             <div class="card-body">
                 <h5 class="card-title">Pilih Company</h5>
-                <p class="card-text" id="ajax-content"></p>  
+                <p class="card-text" id="ajax-content">
+                    
+                </p>  
             </div>
         </div>
+       
+  <!-- Modal -->
+ 
 
   <script>
 

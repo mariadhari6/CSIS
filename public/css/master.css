@@ -90,12 +90,12 @@
 }
 
 .action{
-    min-width: 80px;
+    min-width: 70px;
     text-align: center;
 }
 
 .list{
-    min-width: 290px;
+    min-width: 130px;
     font-size: 15px;
     text-align: center;
 }

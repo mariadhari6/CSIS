@@ -192,7 +192,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // detail customer
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
     Route::get('/item_detail/{id}', [DetailCustomerController::class, 'item_data'])->name('item_detail');
-    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
+    Route::get('/add_form_detail/{id}', [DetailCustomerController::class, 'add_form'])->name('add_detail');
     Route::get('/store_detail', [DetailCustomerController::class, 'store']);
     Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
     Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
@@ -208,7 +208,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_license/{id}', [DetailCustomerController::class, 'basedLicense']);
     Route::get('/based_po/{id}', [DetailCustomerController::class, 'basedPO']);
     Route::get('/based_ponumber/{id}', [DetailCustomerController::class, 'basedPonumber']);
-   
+    Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensorName']);
+    Route::get('/based_serialnumber/{id}', [DetailCustomerController::class, 'basedSerialNumber']);
 
     Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
     Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
@@ -253,6 +254,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
 
     Route::get('/count', [SummaryController::class, 'countPo']);
+    Route::get('/filter', [SummaryController::class, 'filter']); 
+    Route::get('/item_summary', [SummaryController::class, 'item_data']);
 
     Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
 

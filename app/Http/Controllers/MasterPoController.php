@@ -8,6 +8,8 @@ use App\Models\DetailCustomer;
 use App\Models\Vehicle;
 use App\Models\Seller;
 use App\Models\Gsm;
+use App\Models\Sensor;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -198,10 +200,37 @@ class MasterPoController extends Controller
 
     
     //  $details = DetailCustomer::with('vehicle')->get();
-    $gsm      = Gsm::orderBy('gsm_number', 'DESC' )->where('status_gsm', 'Ready')->get();
+    // $data = Sensor::groupBy('sensor_name')
+    // ->selectRaw('count(*) as jumlah, sensor_name')
+    // ->get();
+    $id = 6;
 
-   dd($gsm);
-     
+    
+    
+    $count = DetailCustomer::where('po_id', $id)->count();
+    // ->get();
+
+    $data = MasterPo::where('id', $id)->pluck('jumlah_unit_po');
+    $i = json_decode($data);
+
+    // foreach ($data as $key->jumlah_unit_po) {
+            
+    //   echo $key ;
+
+    // }
+    
+  
+    if( $count <= $data[0]){
+
+        echo "masih kurang  atau pas";
+    }else{
+        echo "kelebihan";
+    
+    }
+
+    // return $ijumlah_unit_po;
+    // return $data->jumlah;
+    
        
 
 
@@ -217,3 +246,5 @@ class MasterPoController extends Controller
     }
 
 }
+
+
