@@ -23,16 +23,8 @@
         </div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input no_po-{{$company->id}}" id="no_po" placeholder="No Po" value="{{ $company->no_po}}">
-        </div>
-    </td>
-    <td>
-        <div class="input-div"><input type="date" class="input po_date-{{$company->id}}" id="po_date" placeholder="Po Date" value="{{ $company->po_date}}">
-        </div>
-    </td>
-    <td>
         <select class="form-control no_agreement_letter_id-{{$item->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id-{{$item->id}}">
-        
+
         <option selected value="{{ $item->seller->id}}">
             {{ $item->seller->no_agreement_letter }}
         </option>

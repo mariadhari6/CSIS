@@ -13,16 +13,16 @@
             {{ $no++ }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company_id}}
+            {{ $item->company->company_name}}
         </td>
           <td id="item-internal_eksternal-{{ $item->id }}">
             {{ $item->internal_eksternal }}
         </td>
         <td id="item-pic-{{ $item->id}}">
-                {{ $item->pic_id}}
+                {{ $item->pic->pic_name}}
         </td>
           <td id="item-vehicle-{{ $item->id }}">
-            {{ $item->vehicle}}
+            {{ $item->vehicleRequest->license_plate?? ''}}
         </td>
           <td id="item-waktu_info-{{ $item->id }}">
             {{ $item->waktu_info}}

@@ -3,24 +3,38 @@
 
 @section('content')
 
-<h4 class="page-title">Request and Complain</h4>
-
-<div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+<div class="card">
+    <div class="card-body">
+            <div class="text-right" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                  <div class="form-group">
+                    {{-- <label for="smallSelect">Bulan</label> --}}
+                      <input class="form-control" id="filter-date" type="month">
+                      <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
+                      <button class="mt-1 btn btn-default" id="default-btn">default</button>
+                    </select>
+                  </div>
+                </ul>
+                <div class="float-left mr-2">
+                    <select class="form-control input-fixed" id="filter">
+                        <option value="{{ url('item_data_all_RequestComplain') }}">All</option>
+                        <option value="{{ url('item_data_Request_Internal_RequestComplain') }}">Request Internal</option>
+                        <option value="{{ url('item_data_Request_Eksternal_RequestComplain') }}">Request Eksternal</option>
+                        <option value="{{ url('item_data_Complain_Internal_RequestComplain') }}">Complain Internal</option>
+                        <option value="{{ url('item_data_Complain_Eksternal_RequestComplain') }}">Complain Eksternal</option>
+                    </select>
+                </div>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-
             </div>
 
             <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>
-                    <div class="form-check">
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
@@ -29,7 +43,7 @@
                 </th>
                 <th scope="col" class="action">No.</th>
                 <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Internal/External Request & Complain</th>
+                <th scope="col" class="list">Internal/Eksternal Request & Complain</th>
                 <th scope="col" class="list">PIC</th>
                 <th scope="col" class="list">Vehicle</th>
                 <th scope="col" class="list">Waktu Info</th>
@@ -53,13 +67,59 @@
           </table>
         </div>
       </div>
-    </div>
 
-    </div>
   <script>
     $(document).ready(function() {
       read()
     });
+
+// filter bulan dan tahun
+$('#check-btn').click(function() {
+    var date = new Date($('#filter-date').val());
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+      $.ajax({
+          type: "get",
+          url: "{{ url('item_data_MY_RequestComplain') }}",
+          data: {
+            month: month,
+            year: year,
+          },
+          success: function(data) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable( {
+                "dom": '<"top"f>rt<"bottom"lp><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+          }
+      })
+  });
+
+  // ---- stop dropdown -----
+  $(document).on('click', '.dropdown-menu', function (e) {
+    e.stopPropagation();
+  });
+
+  // ------- filter change ------
+  $("#filter").change(function(){
+    var value = $(this).val();
+    filter(value);
+});
+  // ------- filter --------
+  function filter(value){
+  var value = value;
+  $.get(value, {}, function(data, status) {
+      $('#table_id').DataTable().destroy();
+      $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
+          "dom": '<"top"f>rt<"bottom"lp><"clear">'
+          });
+      $('#table_id').DataTable().draw();
+    });
+  }
+
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data_RequestComplain') }}", {}, function(data, status) {

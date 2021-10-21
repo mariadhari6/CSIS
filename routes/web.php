@@ -12,6 +12,7 @@ use App\Http\Controllers\GsmTerminateController;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
+use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\MaintenanceGpsController;
 use App\Http\Controllers\RequestComplaintController;
 use App\Http\Controllers\PemasanganMutasiGpsController;
@@ -176,6 +177,12 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // Request Complain
     Route::get('/RequestComplain', [RequestComplaintController::class, 'index'])->name('request.complain');
     Route::get('/item_data_RequestComplain', [RequestComplaintController::class, 'item_data']);
+    Route::get('/item_data_MY_RequestComplain', [RequestComplaintController::class, 'item_data_MY']);
+    Route::get('/item_data_all_RequestComplain', [RequestComplaintController::class, 'item_data']);
+    Route::get('/item_data_Request_Internal_RequestComplain', [RequestComplaintController::class, 'item_data_Request_Internal']);
+    Route::get('/item_data_Request_Eksternal_RequestComplain', [RequestComplaintController::class, 'item_data_Request_Eksternal']);
+    Route::get('/item_data_Complain_Internal_RequestComplain', [RequestComplaintController::class, 'item_data_Complain_Internal']);
+    Route::get('/item_data_Complain_Eksternal_RequestComplain', [RequestComplaintController::class, 'item_data_Complain_Eksternal']);
     Route::get('/add_form_RequestComplain', [RequestComplaintController::class, 'add_form']);
     Route::get('/store_RequestComplain', [RequestComplaintController::class, 'store']);
     Route::get('/destroy_RequestComplain/{id}', [RequestComplaintController::class, 'destroy']);
@@ -231,14 +238,13 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     //Master PO
     Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');
     Route::get('/item_data_master_po', [MasterPoController::class, 'item_data'])->name('item_master_po');
-    Route::get('/item_data_status_master_po', [MasterPoController::class, 'item_data_status']);
-    Route::get('/item_data_contract_master_po', [MasterPoController::class, 'item_data_contract']);
-    Route::get('/item_data_terminate_master_po', [MasterPoController::class, 'item_data_terminate']);
-    Route::get('/item_data_trial_master_po', [MasterPoController::class, 'item_data_trial']);
-    Route::get('/item_data_register_master_po', [MasterPoController::class, 'item_data_register']);
-    Route::get('/item_data_company_master_po',[MasterPoController::class, 'item_data_company']);
+    Route::get('/item_data_Company_master_po', [MasterPoController::class, 'item_data_Company']);
     Route::get('/item_data_OSLOG_master_po', [MasterPoController::class, 'item_data_OSLOG']);
-    Route::get('/item_data_Rajawali_master_po', [MasterPoController::class, 'item_data_Rajawali']);
+    Route::get('/item_data_All_master_po', [MasterPoController::class, 'item_data']);
+    Route::get('/item_data_Contract_master_po', [MasterPoController::class, 'item_data_Contract']);
+    Route::get('/item_data_Terminate_master_po', [MasterPoController::class, 'item_data_Terminate']);
+    Route::get('/item_data_Trial_master_po', [MasterPoController::class, 'item_data_Trial']);
+    Route::get('/item_data_Register_master_po', [MasterPoController::class, 'item_data_Register']);
     Route::get('/add_form_master_po', [MasterPoController::class, 'add_form'])->name('add_master_po');
     Route::get('/store_master_po', [MasterPoController::class, 'store']);
     Route::get('/destroy_master_po/{id}', [MasterPoController::class, 'destroy']);
@@ -248,6 +254,22 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected_master_po', [MasterPoController::class, 'selected']);
     Route::get('/update_all/{id}', [MasterPoController::class, 'updateall']);
 
+    // Vehicle
+    Route::get('/Vehicle', [VehicleController::class, 'index'])->name('vehicle');
+    Route::get('/item_data_vehicle', [VehicleController::class, 'item_data']);
+    Route::get('/add_form_vehicle', [VehicleController::class, 'add_form']);
+    Route::get('/store_vehicle', [VehicleController::class, 'store']);
+    Route::get('/destroy_vehicle/{id}', [VehicleController::class, 'destroy']);
+    Route::get('/show_vehicle/{id}', [VehicleController::class, 'show']);
+    Route::get('/update_vehicle/{id}', [VehicleController::class, 'update']);
+    Route::get('/selectedDelete_vehicle', [VehicleController::class, 'deleteAll']);
+    Route::get('/selected_vehicle', [VehicleController::class, 'selected']);
+    Route::get('/update_all/{id}', [VehicleController::class, 'updateall']);
+    Route::get('/dependent_company/{id}', [CompanyController::class, 'dependentCompany']);
+    Route::get('/show_no_agreement/{id}', [CompanyController::class, 'showAgreement']);
+
+
+    Route::get('/cek', [MasterPoController::class, 'check']);
 });
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

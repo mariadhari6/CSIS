@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\RequestComplaint;
 use App\Models\Pic;
+use App\Models\Vehicle;
 use App\Models\RequestComplaintCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,9 +18,11 @@ class RequestComplaintController extends Controller
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
+        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
         return view('request_complaint.add_form')->with([
             'pic'              => $pic,
-            'company'          => $company
+            'company'          => $company,
+            'vehicle'          => $vehicle
         ]);
     }
 
@@ -27,6 +30,17 @@ class RequestComplaintController extends Controller
     {
         $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
         return view('request_complaint.item_data', compact('request_complain'));
+    }
+
+    public function item_data_MY(Request $request)
+    {
+        $year = $request->year;
+        $month = $request->month;
+        $request_complain = RequestComplaint::whereMonth('waktu_info',  $month)->whereYear('waktu_info', $year)->get();
+        return view('request_complaint.item_data', compact('request_complain'));
+
+        // return view('RequestComplaint.data_request_complaint.item_data', compact('request_complain'));\
+        // echo $request_complain;
     }
 
     public function store(Request $request)
@@ -51,15 +65,54 @@ class RequestComplaintController extends Controller
         );
         RequestComplaint::insert($data);
     }
+
+    public function item_data_request_internal()
+    {
+        $request_complain = RequestComplaint::where('internal_eksternal', 'Request Internal')->get();
+        return view('request_complaint.item_data')->with([
+            'request_complain' => $request_complain
+        ]);
+
+    }
+
+    public function item_data_request_eksternal()
+    {
+        $request_complain = RequestComplaint::where('internal_eksternal', 'Request Eksternal')->get();
+        return view('request_complaint.item_data')->with([
+            'request_complain' => $request_complain
+        ]);
+
+    }
+
+    public function item_data_complain_internal()
+    {
+        $request_complain = RequestComplaint::where('internal_eksternal', 'Complain Internal')->get();
+        return view('request_complaint.item_data')->with([
+            'request_complain' => $request_complain
+        ]);
+
+    }
+
+    public function item_data_complain_eksternal()
+    {
+        $request_complain = RequestComplaint::where('internal_eksternal', 'Complain Eksternal')->get();
+        return view('request_complaint.item_data')->with([
+            'request_complain' => $request_complain
+        ]);
+
+    }
+
     public function edit_form($id)
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaint::findOrfail($id);
+        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
         return view('request_complaint.edit_form')->with([
             'request_complain' => $request_complain,
             'pic'              => $pic,
-            'company'          => $company
+            'company'          => $company,
+            'vehicle'          => $vehicle
 
         ]);
 

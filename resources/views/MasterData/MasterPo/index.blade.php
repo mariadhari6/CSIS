@@ -16,18 +16,11 @@
               </button>
             <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
-                  <option value="{{ url('item_data_company_master_po') }}">Company</option>
-                  <option value="{{ url('item_data_company_master_po') }}">OSLOG</option>
-                  <option value="{{ url('item_data_company_master_po') }}">Rajawali</option>
-                </select>
-            </div>
-            <div class="float-left mr-2">
-                  <select class="form-control input-fixed" id="filter">
-                  <option value="{{ url('item_data_status_master_po') }}">Status</option>
-                  <option value="{{ url('item_data_contract_master_po') }}">Contract</option>
-                  <option value="{{ url('item_data_terminate_master_po') }}">Terminate</option>
-                  <option value="{{ url('item_data_trial_master_po') }}">Trial</option>
-                  <option value="{{ url('item_data_register_master_po') }}">Register</option>
+                  <option value="{{ url('item_data_All_master_po') }}">All Status</option>
+                  <option value="{{ url('item_data_Contract_master_po') }}">Contract</option>
+                  <option value="{{ url('item_data_Terminate_master_po') }}">Terminate</option>
+                  <option value="{{ url('item_data_Trial_master_po') }}">Trial</option>
+                  <option value="{{ url('item_data_Register_master_po') }}">Register</option>
                 </select>
             </div>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>

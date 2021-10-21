@@ -1,31 +1,29 @@
 @extends('layouts.v_main')
 
 @section('title','CSIS | Company')
+@section('title-table', 'Company')
 
 @section('content')
-<h4 class="page-title">Company</h4>
-
-  <div class="row">
-    <div class="col-md-12">
+<form>
       <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+            <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
                 <b>Add</b>
                 <i class="fas fa-plus ml-2" ></i>
               </button>
-              <button class="btn btn-success  mr-2 edit_all"> 
+              <button class="btn btn-success  mr-2 edit_all">
                 <i class="fas fa-pen"></i>
               </button>
               <button class="btn btn-danger delete_all">
                 <i class="fas fa-trash"></i>
               </button>
             </div>
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+                <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th width="10px">
-                  <div class="form-check">
+                <th>
+                    <div>
                       <label class="form-check-label">
                           <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                           <span class="form-check-sign"></span>
@@ -37,8 +35,6 @@
                 <th scope="col" class="list">Company Name</th>
                 <th scope="col" class="list">Seller</th>
                 <th scope="col" class="list">Customer Code</th>
-                <th scope="col" class="list">No PO</th>
-                <th scope="col" class="list">Po Date</th>
                 <th scope="col" class="list">No Agreement Letter</th>
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="action">Action</th>
@@ -47,12 +43,9 @@
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
-          </table>
-
-        </div>
-      </div>
+        </table>
+       </div>
     </div>
-  </div>
 
   <script>
     $(document).ready(function() {
@@ -98,8 +91,6 @@
         var company_name = $("#company_name").val();
         var seller_id = $("#seller_id").val();
         var customer_code = $("#customer_code").val();
-        var no_po = $("#no_po").val();
-        var po_date = $("#po_date").val();
         var no_agreement_letter_id = $("#no_agreement_letter_id").val();
         var status = $("#status").val();
 
@@ -110,8 +101,6 @@
               company_name: company_name,
               seller_id: seller_id,
               customer_code: customer_code,
-              no_po: no_po,
-              po_date: po_date,
               no_agreement_letter_id:no_agreement_letter_id,
               status: status
 
@@ -173,8 +162,6 @@
         $("#item-company_name-"+id).slideUp("fast");
         $("#item-seller_id-"+id).slideUp("fast");
         $("#item-customer_code-"+id).slideUp("fast");
-        $("#item-no_po-"+id).slideUp("fast");
-        $("#item-po_date-"+id).slideUp("fast");
         $("#item-no_agreement_letter_id-"+id).slideUp("fast");
         $("#item-status-"+id).slideUp("fast");
         $.get("{{ url('edit_form_company') }}/" + id, {}, function(data, status) {
@@ -187,8 +174,6 @@
         var company_name = $("#company_name").val();
         var seller_id = $('select[name="seller_id"]').val();
         var customer_code = $("#customer_code").val();
-        var no_po = $("#no_po").val();
-        var po_date = $("#po_date").val();
         var no_agreement_letter_id = $("#no_agreement_letter_id").val();
         var status = $("#status").val();
 
@@ -200,8 +185,6 @@
               company_name: company_name,
               seller_id: seller_id,
               customer_code: customer_code,
-              no_po: no_po,
-              po_date: po_date,
               no_agreement_letter_id:no_agreement_letter_id,
               status: status
             },
@@ -302,8 +285,6 @@
                     $("#item-company_name-"+value).slideUp("fast");
                     $("#item-seller_id-"+value).slideUp("fast");
                     $("#item-customer_code-"+value).slideUp("fast");
-                    $("#item-no_po-"+value).slideUp("fast");
-                    $("#item-po_date-"+value).slideUp("fast");
                     $("#item-no_agreement_letter_id-"+value).slideUp("fast");
                     $("#item-status-"+value).slideUp("fast");
 
@@ -339,8 +320,6 @@
                 var company_name = $(".company_name-"+value).val();
                 var seller_id = $(".seller_id-"+value).val();
                 var customer_code = $(".customer_code-"+value).val();
-                var no_po = $(".no_po-"+value).val();
-                var po_date = $(".po_date-"+value).val();
                 var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
                 var status = $(".status-"+value).val();
 
@@ -351,8 +330,6 @@
                     company_name: company_name,
                     seller_id: seller_id,
                     customer_code: customer_code,
-                    no_po: no_po,
-                    po_date: po_date,
                     no_agreement_letter_id:no_agreement_letter_id,
                     status: status
                 },
@@ -377,7 +354,7 @@
             });
         });
         }
-        
+
          //--------Proses Batal--------
         function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
@@ -390,7 +367,7 @@
 
 
 
-        
+
     </script>
-   
-   @endsection     
+
+   @endsection

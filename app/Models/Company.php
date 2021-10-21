@@ -11,14 +11,14 @@ class Company extends Model
     protected $table = 'companies';
 
     protected $fillable = [
-        'company_name', 'seller_id', 'customer_code', 'no_po', 'po_date', 'no_agreement_letter_id', 'status',
+        'company_name', 'seller_id', 'customer_code', 'no_agreement_letter_id', 'status',
     ];
 
     public function seller()
     {
         return $this->belongsTo(Seller::class);
     }
-    
+
     public function pic()
     {
         return $this->hasMany(Pic::class);

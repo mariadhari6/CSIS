@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\MasterPo;
-use App\Models\MasterPoTemporary;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -11,13 +10,13 @@ class MasterPoController extends Controller
 {
     public function index()
     {
-        return view('master_po.index');
+        return view('MasterData.MasterPo.index');
     }
     public function add_form()
     {
         $company = Company::orderBy('id', 'DESC')->get();
         $master_po = MasterPo::orderBy('po_number', 'DESC')->get();
-        return view('master_po.add_form')->with([
+        return view('MasterData.MasterPo.add_form')->with([
             'master_po'        => $master_po,
             'company'          => $company
         ]);
@@ -25,7 +24,7 @@ class MasterPoController extends Controller
     public function item_data()
     {
         $master_po = MasterPo::orderBy('id', 'DESC')->get();
-        return view('master_po.item_data', compact('master_po'));
+        return view('MasterData.MasterPo.item_data', compact('master_po'));
     }
     public function store(Request $request)
     {
@@ -41,63 +40,52 @@ class MasterPoController extends Controller
         MasterPo::insert($data);
     }
 
-
-
-    public function item_data_rajawali()
-    {
-        $master_po = MasterPo::where('company_id', 'Rajawali')->get();
-        return view('master_po.item_data')->with([
-            'master_po' => $master_po
-        ]);
-
-    }
-
     public function item_data_oslog()
     {
         $master_po = MasterPo::where('company_id', 'OSLOG')->get();
-        return view('master_po.item_data')->with([
+        return view('MasterData.MasterPo.item_data')->with([
             'master_po' => $master_po
         ]);
-
     }
 
     public function item_data_contract()
     {
         $master_po = MasterPo::where('status_po', 'Contract')->get();
-        return view('master_po.item_data')->with([
+        return view('MasterData.MasterPo.item_data')->with([
             'master_po' => $master_po
         ]);
     }
 
-    // public function item_data_terminate()
-    // {
-    //     $master_po = MasterPo::where('status_po', 'Terminate')->get();
-    //     return view('master_po.item_data')->with([
-    //         'master_po' => $master_po
-    //     ]);
-    // }
+    public function item_data_terminate()
+    {
+        $master_po = MasterPo::where('status_po', 'Terminate')->get();
+         return view('MasterData.MasterPo.item_data')->with([
+             'master_po' => $master_po
+         ]);
+     }
 
-    // public function item_data_trial()
-    // {
-    //     $master_po = MasterPo::where('status_po', 'Trial')->get();
-    //     return view('master_po.item_data')->with([
-    //         'master_po' => $master_po
-    //     ]);
-    // }
+     public function item_data_trial()
+     {
+         $master_po = MasterPo::where('status_po', 'Trial')->get();
+         return view('MasterData.MasterPo.item_data')->with([
+             'master_po' => $master_po
+         ]);
+     }
 
-    // public function item_data_register()
-    // {
-    //     $master_po = MasterPo::where('status_po', 'Register')->get();
-    //     return view('master_po.item_data')->with([
-    //         'master_po' => $master_po
-    //     ]);
+     public function item_data_register()
+     {
+         $master_po = MasterPo::where('status_po', 'Register')->get();
+         return view('MasterData.MasterPo.item_data')->with([
+             'master_po' => $master_po
+         ]);
 
+        }
 
     public function edit_form($id)
     {
         $company = Company::orderBy('id', 'DESC')->get();
         $master_po = MasterPo::findOrfail($id);
-        return view('master_po.edit_form')->with([
+        return view('MasterData.MasterPo.edit_form')->with([
             'master_po'        => $master_po,
             'company'          => $company
 
@@ -127,7 +115,7 @@ class MasterPoController extends Controller
     public function selected()
     {
         $master_po = MasterPo::all();
-        return view('master_po.selected')->with([
+        return view('MasterData.MasterPo.selected')->with([
             'master_po' => $master_po
         ]);
     }
