@@ -11,6 +11,7 @@ use App\Models\Sensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\RequestComplaint;
 
 class PemasanganMutasiGpsController extends Controller
 {
@@ -23,8 +24,17 @@ class PemasanganMutasiGpsController extends Controller
     public function item_data()
     {
 
-        $pemasangan_mutasi_GPS = PemasanganMutasiGps::orderBy('id', 'DESC')->get();
+        $pemasangan_mutasi_GPS =  RequestComplaint::where('task', 1)->orWhere('task', 2)->orWhere('task', 3)->get();
 
+        return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
+    }
+
+      public function item_data_MY(Request $request)
+    {
+        $year = $request->year;
+        $month = $request->month;
+        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', [1, 2, 3])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
+        // dd($pemasangan_mutasi_GPS);
         return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
     }
 

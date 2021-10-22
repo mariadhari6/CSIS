@@ -37,7 +37,7 @@
             <thead>
               <tr>
                 <th>
-                    <div class="form-check">
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
@@ -58,7 +58,7 @@
                 <th scope="col" class="list">Terminated Date</th>
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="list">Provider</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
               </tr>
             </thead>
             <tbody id="item_data">

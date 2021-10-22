@@ -13,45 +13,45 @@
             {{ $no++ }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->requestComplain->company->company_name}}
+            {{ $item->company->company_name}}
         </td>
           <td id="item-tanggal-{{ $item->id }}">
-            {{ $item->requestComplain->waktu_kesepakatan }}
+            {{ $item->waktu_kesepakatan }}
         </td>
         <td id="item-kendaraan_awal-{{ $item->id}}">
-                {{ $item->requestComplain->vehicle}}
+                {{ $item->vehicle}}
         </td>
-          <td id="item-imei-{{ $item->id }}">
-            {{ $item->detailCustomer->imei}}
+        <td id="item-imei-{{ $item->id }}">
+            {{-- {{ $item->detailCustomer->imei}} --}}
         </td>
           <td id="item-gsm_pemasangan-{{ $item->id }}">
-            {{ $item->detailCustomer->gsm}}
+            {{-- {{ $item->detailCustomer->gsm}} --}}
         </td>
 
         <td id="item-kendaraan_pasang-{{ $item->id }}">
-            {{ $item->requestComplain->vehicle}}
+            {{ $item->vehicle}}
         </td>
         <td id="item-jenis_pekerjaan-{{ $item->id }}">
-            {{ $item->requestComplain->task}}
+            {{ $item->task}}
         </td>
 
         <td id="item-equipment_terpakai_gps-{{ $item->id }}">
-            {{$item->gps->type}}
+            {{-- {{$item->gps->type}} --}}
         </td>
 
         <td id="item-equipment_terpakai_sensor-{{ $item->id }}">
-            {{$item->sensor->sensor_name}}
+            {{-- {{$item->sensor->sensor_name}} --}}
         </td>
 
         <td id="item-teknisi-{{ $item->id }}">
-            {{ $item->teknisi}}
+            {{-- {{ $item->teknisi}} --}}
         </td>
          <td id="item-uang_transportasi-{{ $item->id }}">
-        <span>Rp. </span>{{ number_format( $item->uang_transportasi)}}
+        {{-- <span>Rp. </span>{{ number_format( $item->uang_transportasi)}} --}}
 
         </td>
          <td id="item-type_visit-{{ $item->id }}">
-            {{ $item->type_visit}}
+            {{-- {{ $item->type_visit}} --}}
         </td>
         <td id="item-note-{{ $item->id }}">
             {{ $item->note }}

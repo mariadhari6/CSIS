@@ -223,6 +223,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // Pemasangan Mutasi GPS
     Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
     Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
+    Route::get('/item_data_MY_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data_MY']);
     Route::get('/add_form_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'add_form']);
     Route::get('/store_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'store']);
     Route::get('/destroy_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'destroy']);

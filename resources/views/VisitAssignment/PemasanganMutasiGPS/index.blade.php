@@ -11,10 +11,14 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button">
-                    <b>Add</b>
-                    <i class="fas fa-plus ml-2" id="add"></i>
-                </button>
+                <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                  <div class="form-group">
+                      <input class="form-control" id="filter-date" type="month">
+                      <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
+                    </select>
+                  </div>
+                </ul>
                 <button class="btn btn-success  mr-2 edit_all">
                     <i class="fas fa-pen"></i>
                 </button>
@@ -82,56 +86,33 @@
     function cancel() {
       read()
     }
-     // ------ Tambah Form Input ------
-     $('.add').click(function() {
-        $.get("{{ url('add_form_PemasanganMutasi') }}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
-        });
-      });
-    // ----- Proses Tambah data ------
-    function store() {
-        var company_id = $("#company_id").val();
-        var tanggal = $("#tanggal").val();
-        var kendaraan_awal = $("#kendaraan_awal").val();
-        var imei = $("#imei").val();
-        var gsm_pemasangan = $("#gsm_pemasangan").val();
-        var kendaraan_pasang = $("#kendaraan_pasang").val();
-        var jenis_pekerjaan = $("#jenis_pekerjaan").val();
-        var equipment_terpakai_gps = $("#equipment_terpakai_gps").val();
-        var equipment_terpakai_sensor = $("#equipment_terpakai_sensor").val();
-        var teknisi = $("#teknisi").val();
-        var uang_transportasi = $("#uang_transportasi").val();
-        var type_visit = $("#type_visit").val();
-        var note = $("#note").val();
+     
+       // filter bulan dan tahun
+       $('#check-btn').click(function() {
+        var date = new Date($('#filter-date').val());
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        //   var task = val();
         $.ajax({
             type: "get",
-            url: "{{ url('store_PemasanganMutasi') }}",
+            url: "{{ url('item_data_MY_PemasanganMutasi') }}",
             data: {
-              company_id: company_id,
-              tanggal:tanggal,
-              kendaraan_awal: kendaraan_awal,
-              imei: imei,
-              gsm_pemasangan: gsm_pemasangan,
-              kendaraan_pasang:kendaraan_pasang,
-              jenis_pekerjaan:jenis_pekerjaan,
-              equipment_terpakai_gps:equipment_terpakai_gps,
-              equipment_terpakai_sensor:equipment_terpakai_sensor,
-              teknisi:teknisi,
-              uang_transportasi:uang_transportasi,
-              type_visit:type_visit,
-              note:note
+            month: month,
+            year: year,
             },
             success: function(data) {
-             swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-              read();
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable( {
+                "dom": '<"top"f>rt<"bottom"lp><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
             }
         })
-    }
+        });
+
+
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;

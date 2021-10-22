@@ -52,6 +52,9 @@
 
     $(document).ready(function() {
       read()
+
+       // ----- freeze table -------
+       jQuery(".main-table").clone(true).appendTo('#table-scroll').addClass('clone');   
     
     });
 
