@@ -26,4 +26,9 @@ class Sensor extends Model
     {
         return $this->belongsTo(MerkSensor::class, 'merk_sensor', 'id');
     }
+
+    public function detailCustomer()
+    {
+        return $this->hasMany(DetailCustomer::class);
+    }
 }

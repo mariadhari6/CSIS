@@ -1,6 +1,7 @@
 <?php $no=1; ?>
 @foreach ($GsmTerminate as $item)
     <tr id="edit-form-{{ $item->id }}">
+
          <td id="td-checkbox-{{ $item->id }}">
             <div>
                 <label class="form-check-label">
@@ -31,7 +32,7 @@
         <td id="item-note-{{ $item->id }}">
             {{ $item->note }}
         </td>
-        <td id="td-button-{{ $item->id }}">
+              <td class="action sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>

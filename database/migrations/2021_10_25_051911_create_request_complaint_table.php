@@ -34,13 +34,13 @@ class CreateRequestComplaintTable extends Migration
             $table->foreignId('imei')->nullable(); // detail customer
             $table->foreignId('gsm_pemasangan')->nullable(); //Master GSM yg statusnya ready
             $table->foreignId('equipment_terpakai_gps')->nullable(); // master GPS
-            $table->foreignId('equipment_terpakai_sensor')->nullable(); // master sensor
+            $table->string('equipment_terpakai_sensor')->nullable(); // master sensor
             $table->foreignId('teknisi_pemasangan')->nullable(); // tabel Teknisi
             $table->integer('uang_transportasi')->nullable();
             $table->string('type_visit')->nullable();
             $table->string('note_pemasangan')->nullable();
             $table->foreignId('kendaraan_pasang')->nullable();
-            $table->string('status_pemasangan')->nullable();
+            // $table->string('status_pemasangan')->nullable();
             // from maintenance
             $table->foreignId('type_gps_id')->nullable(); // Master GPS
             $table->foreignId('equipment_gps_id')->nullable(); // Master GPS
@@ -53,7 +53,7 @@ class CreateRequestComplaintTable extends Migration
             $table->foreignId('teknisi_maintenance')->nullable(); // tabel teknisi
             $table->string('req_by')->nullable();
             $table->longText('note_maintenance')->nullable();
-            $table->string('status_maintenance')->nullable();
+            // $table->string('status_maintenance')->nullable();
 
             $table->timestamps();
         });

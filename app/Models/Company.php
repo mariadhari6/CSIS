@@ -50,4 +50,12 @@ class Company extends Model
     {
         return $this->hasMany(MasterPo::class, 'company_id', 'id');
     }
+    public function gsmTemporary()
+    {
+        return $this->hasMany(GsmTemporary::class, 'company_id', 'id');
+    }
+    public function gsm()
+    {
+        return $this->hasMany(Gsm::class, 'company_id', 'id');
+    }
 }

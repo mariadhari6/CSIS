@@ -6,7 +6,7 @@
         <div class="input-div"><input type="text" class="input" id="sensor_name" placeholder="Sensor Name" required>
     </td>
     <td>
-        <select class="select" id="merk_sensor" name="merk_sensor" required>
+        <select class="select" id="merk_sensor" name="merk_sensor" >
             <option selected disabled>Merk Sensor</option>
 
             @foreach ($merk_sensor as $item)
@@ -22,10 +22,10 @@
         <div class="input-div"><input type="text" class="input" id="rab_number" placeholder="Rab Number" required>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input" id="waranty" placeholder="Waranty" required>
+        <div class="input-div"><input type="date" class="input" id="waranty" placeholder="Waranty" >
     </td>
     <td>
-        <select class="select" id="status" aria-label=".form-select-lg example" required>
+        <select class="select" id="status" aria-label=".form-select-lg example" >
             <option selected>Pilih status</option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
@@ -34,7 +34,7 @@
     </td>
 
 
-     <td>
+     <td class="action sticky-col first-col">
        <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="add" onclick="store()"></i>
         </button>

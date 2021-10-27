@@ -34,7 +34,7 @@
         <td id="item-status-{{ $sensors->id }}">
             {{ $sensors->status }}
         </td>
-          <td id="td-button-{{ $sensors->id }}">
+          <td class="action sticky-col first-col" id="td-button-{{ $sensors->id }}">
             <div id="button-{{ $sensors->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $sensors->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $sensors->id }})"></i>

@@ -20,6 +20,7 @@ class CreateVehiclesTable extends Migration
             $table->foreignId('vehicle_id');
             $table->string('pool_name');
             $table->string('pool_location');
+            $table->string('status')->default('Ready');
             $table->timestamps();
         });
     }

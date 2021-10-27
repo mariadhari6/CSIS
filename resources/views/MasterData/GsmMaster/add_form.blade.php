@@ -1,4 +1,5 @@
 <tr id="add_form">
+
     <td></td>
     <td></td>
     <td>
@@ -59,5 +60,10 @@
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     <td>
 
-
+    <td class="action sticky-col first-col">
+         <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="add" onclick="store()"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
+    <td>
 </tr>

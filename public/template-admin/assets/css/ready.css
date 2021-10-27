@@ -2472,7 +2472,7 @@ body {
     background: #f2f8f9;
 }
 .main-panel .content {
-    padding: 30px 15px;
+    padding: 15px 1px;
     min-height: calc(100% - 123px);
     margin-top: 55px;
 }
@@ -6010,6 +6010,7 @@ body {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
+    padding : 0 0px ;
 }
 
 /*     Navbar     */

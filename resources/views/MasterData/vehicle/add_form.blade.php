@@ -2,23 +2,23 @@
     <td></td>
     <td></td>
     <td>
-        <select class="select" id="company_id">
+        <select class="select" id="company_id" required>
             @foreach ($company as $item)
                 <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
             @endforeach
         </select>
     </td>
-    <td><div class="input-div"><input type="text" class="input" id="license_plate"></td>
+    <td><div class="input-div"><input type="text" class="input" id="license_plate" required></td>
     <td>
-        <select class="select" id="vehicle_id">
+        <select class="select" id="vehicle_id" required>
             @foreach ($vehicleType as $item)
                 <option value="{{ $item->id }}" {{ old('vehicle_id') == $item->id ? 'selected':'' }}>{{ $item->name }}</option>
             @endforeach
         </select>
     </td>
-    <td><div class="input-div"><input type="text" class="input" id="pool_name"></td>
-    <td><div class="input-div"><input type="text" class="input" id="pool_location"></td>
-    <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
+    <td><div class="input-div"><input type="text" class="input" id="pool_name" required></td>
+    <td><div class="input-div"><input type="text" class="input" id="pool_location" required></td>
+    <td class="action sticky-col first-col"><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
 
 
       {{-- <script type="text/javascript">

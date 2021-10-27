@@ -1,4 +1,5 @@
- <td></td>
+
+    <td></td>
     <td></td>
     <td>
         <select class="select status_gsm-{{$GsmMaster->id}}" id="status_gsm" name="status_gsm" required>
@@ -47,9 +48,10 @@
     <td>
         <div class="input-div"><input type="text" class="input provider-{{$GsmMaster->id}}" id="provider" placeholder="Provider" value="{{ $GsmMaster->provider}}" ></div>
     </td>
-    <td>
+        <td class="action sticky-col first-col">
          <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="edit" onclick="update({{ $GsmMaster->id}})"></i>
         </button>
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
+

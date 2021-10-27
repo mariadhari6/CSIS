@@ -38,7 +38,7 @@
             <option value="Register">Register</option>
         </select>
     </td>
-    <td>
+    <td class="action sticky-col first-col">
         <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="add" onclick="store()"></i>
         </button>

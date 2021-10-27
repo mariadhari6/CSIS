@@ -43,7 +43,7 @@ class GpsController extends Controller
     }
     public function item_data_temporary()
     {
-        $gps = GpsTemporary::orderBy('id', 'DESC')->get();
+        $gps = GpsTemporary::orderBy('id', 'ASC')->get();
         return view('MasterData.gps.item_data_temporary')->with([
             'gps' => $gps
         ]);
@@ -56,14 +56,18 @@ class GpsController extends Controller
 
     public function store(Request $request)
     {
-        // $request->validate([
+        // $request->array([
         //     'merk' => 'required',
         //     'type' => 'required',
-        //     'imei' => 'required',
+        //     'imei' => 'required|min:15',
         //     'waranty' => 'required',
         //     'po_date' => 'required',
         //     'status' => 'required'
 
+        // ]);
+
+        // $this->validate($request, [
+        //     'imei.*' => 'required|min:15',
         // ]);
         $data = array(
             'merk'    =>  $request->merk,
@@ -169,5 +173,23 @@ class GpsController extends Controller
     public function export()
     {
         return Excel::download(new TemplateGps, 'template-gps.xlsx');
+    }
+
+    public function try()
+    {
+
+        $GsmMaster = Gps::all('imei');
+        $jml =  Gps::all('imei')->count();
+        $input = 12232;
+        for ($i = 0; $i <= $jml - 1; $i++) {
+            if ($input == Gps::all('imei')[$i]->gsm_number) {
+                $a = "data same";
+                break;
+            } else {
+                $b = "Save succes";
+            }
+        }
+
+        return $b . ' | ';
     }
 }

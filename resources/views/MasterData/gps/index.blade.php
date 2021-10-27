@@ -1,16 +1,17 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Gps')
 @section('title-table','Gps')
-
+@section('master','show')
+@section('gps','active')
 
 
 @section('content')
-<form>
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+
 
           <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
@@ -21,6 +22,8 @@
               <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
+          <form>
+            <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>
@@ -31,21 +34,23 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list" >Merk</th>
-                <th scope="col" class="list" >Type</th>
-                <th scope="col" class="list" >IMEI</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list" >Merk*</th>
+                <th scope="col" class="list" >Type*</th>
+                <th scope="col" class="list" >IMEI*</th>
                 <th scope="col" class="list" >Waranty</th>
-                <th scope="col" class="list" >Po Date</th>
-                <th scope="col" class="list" >Status</th>
-                <th scope="col" class="list" >Status Ownership</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="list" >Po Date*</th>
+                <th scope="col" class="list" >Status*</th>
+                <th scope="col" class="list" >Status Ownership*</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+          </form>
         {{-- </div> --}}
         </div>
       </div>
@@ -123,9 +128,12 @@
       deleteTemporary();
       $('#check').click();
     }
-    //------- Send Import ------
-      function send_data() {
-           $rowCount = $("#table_temporary_id tr").length;
+    // ------- send import -----
+    function send_data() {
+      $rowCount = $("#table_temporary_id tr").length;
+      if ($rowCount == 1) {
+        alert('table empty')
+      } else {
       $rowResult = $rowCount - 1;
       var allVals = [];
       for($i = 0; $i < $rowResult; $i++)
@@ -133,41 +141,63 @@
             var id = $("#table_temporary_id").find("tbody>tr:eq("+ $i +")>td:eq(0)").attr("id");
             allVals[$i] = id;
           }
-    $.each(allVals, function(index, value){
-      var merk = $(".temporary-merk-"+value).attr("id");
-      var type = $(".temporary-type-"+value).attr("id");
-      var imei = $(".temporary-imei-"+value).attr("id");
-      var waranty = $(".temporary-waranty-"+value).attr("id");
-      var po_date = $(".temporary-po_date-"+value).attr("id");
-      var status = $(".temporary-status-"+value).attr("id");
-      var status_ownership = $(".temporary-status_ownership-"+value).attr("id");
-      $.ajax({
-          type: "get",
-          url: "{{ url('store_gps') }}",
-          data: {
-            merk: merk,
-            type: type,
-            imei: imei,
-            waranty: waranty,
-            po_date: po_date,
-            status: status,
-            status_ownership: status_ownership,
 
-          },
-          success: function(data) {
-            swal({
-              type: 'success',
-              title: 'Data Saved',
+      $.each(allVals, function(index, value){
+        var merk = $(".temporary-merk-"+value).attr("id");
+        var type = $(".temporary-type-"+value).attr("id");
+        var imei = $(".temporary-imei-"+value).attr("id");
+        var waranty = $(".temporary-waranty-"+value).attr("id");
+        var po_date = $(".temporary-po_date-"+value).attr("id");
+        var status = $(".temporary-status-"+value).attr("id");
+        var status_ownership = $(".temporary-status_ownership-"+value).attr("id");
+
+          if (
+              merk == '' ||
+              type == '' ||
+              imei == '' ||
+              waranty == '' ||
+              po_date == '' ||
+              status == '' ||
+              status_ownership == ''
+
+              ) {
+              swal({
+              type: 'warning',
+              text: 'there is column empty or fail format',
               showConfirmButton: false,
               timer: 1500
-          }).catch(function(timeout) { });
-            read();
-            deleteTemporary();
-            read_temporary()
-            $('#importData').modal('hide');
+            }).catch(function(timeout) { });
+          } else {
+            $.ajax({
+            type: "get",
+            url: "{{ url('store_gps') }}",
+            data: {
+              merk: merk,
+              type: type,
+              imei: imei,
+              waranty: waranty,
+              po_date: po_date,
+              status: status,
+              status_ownership: status_ownership
+            },
+            success: function(data) {
+                swal({
+                  type: 'success',
+                  title: 'Data Saved',
+                  showConfirmButton: false,
+                  timer: 1500
+              }).catch(function(timeout) { });
+                read();
+                deleteTemporary();
+                read_temporary()
+                $('#importData').modal('hide');
+              }
+          });
           }
       });
-    });
+
+      }
+
     }
 
      // ---- Close Modal -------
@@ -234,6 +264,7 @@
         var po_date = $("#po_date").val();
         var status = $("#status").val();
         var status_ownership = $("#status_ownership").val();
+
         $.ajax({
             type: "get",
             url: "{{ url('store_gps') }}",
@@ -516,7 +547,7 @@
 
   </script>
   <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
-</form>
+
    @endsection
 
 

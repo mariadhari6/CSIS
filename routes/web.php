@@ -178,6 +178,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_data_temporary_GpsMaster', [GpsController::class, 'item_data_temporary']);
     Route::get('/delete_temporary_gps', [GpsController::class, 'deleteTemporary']);
     Route::get('/download_template_gps', [GpsController::class, 'export']);
+    Route::get('/try', [GpsController::class, 'try']);
 
 
 
@@ -202,6 +203,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/importExcel_GsmMaster', [GsmMasterController::class, 'importExcel'])->name('importExcel_GsmMaster');
     Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
     Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
+    // try
+    Route::get('/try', [GsmMasterController::class, 'try']);
 
     // //Request and Complent Customer
     // Route::get('/request_complent_customer', [RequestComplentCustomerController::class, 'index'])->name('request_complent_customer');
@@ -210,7 +213,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     //detail customer
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
     Route::get('/item_detail/{id}', [DetailCustomerController::class, 'item_data'])->name('item_detail');
-    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
+    Route::get('/add_form_detail/{id}', [DetailCustomerController::class, 'add_form'])->name('add_detail');
     Route::get('/store_detail', [DetailCustomerController::class, 'store']);
     Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
     Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
@@ -226,7 +229,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_license/{id}', [DetailCustomerController::class, 'basedLicense']);
     Route::get('/based_po/{id}', [DetailCustomerController::class, 'basedPO']);
     Route::get('/based_ponumber/{id}', [DetailCustomerController::class, 'basedPonumber']);
+    Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensorName']);
+    Route::get('/based_serialnumber/{id}', [DetailCustomerController::class, 'basedSerialNumber']);
     Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
+
 
     // Pemasangan Mutasi GPS
     Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
@@ -243,6 +249,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_data_onProgress_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_onProgress'])->name('item_data_onprogress');
     Route::get('/item_data_done_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_done'])->name('item_data_done');
     Route::get('/item_data_all_pemasangan', [PemasanganMutasiGpsController::class, 'item_data']);
+    Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
+    Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensorName']);
+    Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
+
     // Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
     // Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
     // Route::get('/dependent_KendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'dependentKendaraanPasang']);
@@ -274,6 +284,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // Maintenance GPS
     Route::get('/MaintenanceGps', [MaintenanceGpsController::class, 'index']);
     Route::get('/item_data_maintenanace_gps', [MaintenanceGpsController::class, 'item_data']);
+    Route::get('/item_data_MY_Maintennace', [MaintenanceGpsController::class, 'item_data_MY']);
     Route::get('/add_form_maintenanace_gps', [MaintenanceGpsController::class, 'add_form']);
     Route::get('/store_maintenanceGps', [MaintenanceGpsController::class, 'store']);
     Route::get('/destroy_maintenanceGps/{id}', [MaintenanceGpsController::class, 'destroy']);
@@ -288,6 +299,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_data_onProgress_maintenance', [MaintenanceGpsController::class, 'item_data_onProgress']);
     Route::get('/item_data_done_maintenance', [MaintenanceGpsController::class, 'item_data_done']);
     Route::get('/item_data_all_maintenance', [MaintenanceGpsController::class, 'item_data']);
+    Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensor']);
+    Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensorName']);
+    Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
 
     // Master PO
     Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');

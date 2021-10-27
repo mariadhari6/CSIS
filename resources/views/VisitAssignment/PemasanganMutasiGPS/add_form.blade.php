@@ -125,7 +125,7 @@
     </select></i></td>
 
       <td><textarea class="form-control" id="note" name="note" rows="3"></textarea></i></td>
-      <td>
+      <td class="action sticky-col first-col">
         <i class="fas fa-check add" id="add" onclick="store()"></i>
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>

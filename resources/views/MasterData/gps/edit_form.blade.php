@@ -1,3 +1,4 @@
+
     <td></td>
     <td></td>
     <td>
@@ -50,7 +51,8 @@
             <option value="Beli">Beli</option>
         </select></i>
     </td>
-    <td>
+
+    <td class="action sticky-col first-col">
         <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="edit" onclick="update({{ $gps->id}})"></i>
         </button>

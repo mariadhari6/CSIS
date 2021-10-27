@@ -39,7 +39,7 @@
                 <span class="badge badge-success">{{ $item->status }}</span>
             @endif
         </td>
-         <td id="td-button-{{ $item->id }}">
+         <td class="action sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>

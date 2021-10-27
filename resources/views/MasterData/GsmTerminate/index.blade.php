@@ -1,9 +1,10 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Gsm Terminate')
 @section('title-table', 'Gsm Terminate')
+@section('master','show')
+@section('GsmTerminate','active')
 
 @section('content')
-<form>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -16,9 +17,12 @@
               <i class="fas fa-trash"></i>
             </button>
           </div>
+          <div>
+        <form>
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
+
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -27,21 +31,23 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Status GSM</th>
-                <th scope="col" class="list">GSM Number</th>
-                <th scope="col" class="list">Company</th>
-
-                <th scope="col" class="list">Request Date</th>
-                <th scope="col" class="list">Terminate Date</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list">Status GSM*</th>
+                <th scope="col" class="list">GSM Number*</th>
+                <th scope="col" class="list">Company*</th>
+                <th scope="col" class="list">Request Date*</th>
+                <th scope="col" class="list">Terminate Date*</th>
                 <th scope="col" class="list">Note</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+        </form>
+        </div>
         </div>
       </div>
     </div>
@@ -314,5 +320,4 @@
         }
 
   </script>
-</form>
    @endsection

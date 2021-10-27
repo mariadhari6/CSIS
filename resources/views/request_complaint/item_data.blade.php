@@ -1,27 +1,28 @@
 <?php $no=1; ?>
 @foreach ($request_complain as $request_complains)
     <tr id="edit-form-{{ $request_complains->id }}">
+
+
          <td id="td-checkbox-{{ $request_complains->id }}">
-            <div class="form-check">
+            <div>
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$request_complains->id}}">
                     <span class="form-check-sign"></span>
                 </label>
             </div>
         </td>
+
         <td id="item-no-{{ $request_complains->id}}">
             {{ $no++ }}
         </td>
-
-
         <td id="item-company_id-{{ $request_complains->id}}">
-            {{ $request_complains->companyRequest->company_name}}
+            {{ $request_complains->companyRequest->company_name??''}}
         </td>
           <td id="item-internal_eksternal-{{ $request_complains->id }}">
             {{ $request_complains->internal_eksternal }}
         </td>
         <td id="item-pic-{{ $request_complains->id}}">
-                {{ $request_complains->pic->pic_name}}
+                {{ $request_complains->pic->pic_name?? ''}}
         </td>
           <td id="item-vehicle-{{ $request_complains->id }}">
             {{$request_complains->vehicleRequest->license_plate?? ''}}
@@ -63,12 +64,14 @@
         <td id="item-status_akhir-{{ $request_complains->id }}">
             {{ $request_complains->status_akhir }}
         </td>
-        <td id="td-button-{{ $request_complains->id }}">
+         <td class="action sticky-col first-col" id="td-button-{{ $request_complains->id }}">
+
             <div id="button-{{ $request_complains->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $request_complains->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $request_complains->id }})"></i>
             </div>
         </td>
+
     </tr>
 @endforeach
 

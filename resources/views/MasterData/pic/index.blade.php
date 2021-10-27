@@ -1,9 +1,10 @@
 @extends('layouts.v_main')
 @section('title','CSIS | PIC Company')
 @section('title-table','PIC Company')
+@section('master','show')
+@section('pic','active')
 
 @section('content')
-<form>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -20,9 +21,13 @@
               <i class="fas fa-trash"></i>
             </button>
           </div>
+        <form>
+
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
+
+
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -31,20 +36,23 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Pic Name</th>
-                <th scope="col" class="list">Phone</th>
-                <th scope="col" class="list">Email</th>
-                <th scope="col" class="list">Position</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list">Company*</th>
+                <th scope="col" class="list">Pic Name*</th>
+                <th scope="col" class="list">Phone*</th>
+                <th scope="col" class="list">Email*</th>
+                <th scope="col" class="list">Position*</th>
                 <th scope="col" class="list">Date of birth</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+         </form>
+
         </div>
         </div>
       </div>
@@ -371,6 +379,5 @@
 
 
   </script>
-  </form>
 
    @endsection

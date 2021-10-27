@@ -1,9 +1,10 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Master Po')
 @section('title-table','Master Po')
+@section('master','show')
+@section('master_po','active')
 
 @section('content')
-<form>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -25,9 +26,12 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
+            <form>
+
             <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
+
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -36,21 +40,23 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Company Id</th>
-                <th scope="col" class="list">Po Number</th>
-                <th scope="col" class="list">Po Date</th>
-                <th scope="col" class="list">Harga Layanan</th>
-                <th scope="col" class="list">Jumlah Unit Po</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list">Company*</th>
+                <th scope="col" class="list">Po Number*</th>
+                <th scope="col" class="list">Po Date*</th>
+                <th scope="col" class="list">Harga Layanan*</th>
+                <th scope="col" class="list">Jumlah Unit Po*</th>
                 <th scope="col" class="list">Status Po</th>
                 <th scope="col" class="list">Selles</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+         </form>
 
 
           </div>
@@ -375,5 +381,4 @@
             read();
         }
   </script>
-  </form>
    @endsection

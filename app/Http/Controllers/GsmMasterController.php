@@ -183,4 +183,21 @@ class GsmMasterController extends Controller
     {
         return Excel::download(new TemplateGsm, 'template-gsm.xlsx');
     }
+    public function try()
+    {
+
+        $GsmMaster = Gsm::all('gsm_number');
+        $jml =  Gsm::all('gsm_number')->count();
+        $input = 12232;
+        for ($i = 0; $i <= $jml - 1; $i++) {
+            if ($input == Gsm::all('gsm_number')[$i]->gsm_number) {
+                $a = "data same";
+                break;
+            } else {
+                $b = "Save succes";
+            }
+        }
+
+        return $b . ' | ';
+    }
 }

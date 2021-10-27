@@ -1,56 +1,49 @@
-<div class="title mb-1">
+
+<div class="title">
     <strong> {{ $company->company_name }}</strong>
 </div>
-      <div class="card">
-        <div class="card-body">
-            <div class="text-right" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-          <table class="table table-responsive" id="table_id">
-            <thead>
-              <tr>
-                <th>
-                    <div >
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-                </th>
-                <th scope="col" class="action">No</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">License Plate</th>
-                <th scope="col" class="list">Vehicle Type</th>
-                <th scope="col" class="list">PO Number</th>
-                <th scope="col" class="list">Harga Layanan</th>
-                <th scope="col" class="list">PO Date</th>
-                <th scope="col" class="list">Status PO</th>
-                <th scope="col" class="list">IMEI</th>
-                <th scope="col" class="list">Merk</th>
-                <th scope="col" class="list">Type</th>
-                <th scope="col" class="list">GSM</th>
-                <th scope="col" class="list">Provider</th>
-                <th scope="col" class="list">Serial Number Sensor</th>
-                <th scope="col" class="list">Sensor Name</th>
-                <th scope="col" class="list">Merk Sensor</th>
-                <th scope="col" class="list">Pool Name</th>
-                <th scope="col" class="list">Pool Location</th>
-                <th scope="col" class="list">Waranty </th>
-                <th scope="col" class="list">Status Layanan</th>
-                <th scope="col" class="list">Tanggal Pasang</th>
-                <th scope="col" class="list">Tanggal Non Active</th>
-                <th scope="col" class="list">Tanggal Reaktivasi GPS</th>
-                <th scope="col" class="action">Action</th>
-              </tr>
-            </thead>
-            <tbody  id="item_data">
 
-            </tbody>
-          </table>
-      </div>
+    <div class="text-right mt-3" id="selected">
+        <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+        <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+        <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
     </div>
+    <table class="table table-responsive" id="table_id">
+        <thead>
+          <tr>
+            <th>
+                <label class="form-check-label">
+                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                    <span class="form-check-sign"></span>
+                </label>
+            </th>
+            <th scope="col">No</th>
+            <th scope="col" class="list">Company</th>
+            <th scope="col" class="list">License Plate</th>
+            <th scope="col" class="list">Vehicle Type</th>
+            <th scope="col" class="list">PO Number</th>
+            <th scope="col" class="list">Harga Layanan</th>
+            <th scope="col" class="list">PO Date</th>
+            <th scope="col" class="list">Status PO</th>
+            <th scope="col" class="list">IMEI</th>
+            <th scope="col" class="list">Merk</th>
+            <th scope="col" class="list">Type</th>
+            <th scope="col" class="list">GSM</th>
+            <th scope="col" class="list">Provider</th>
+            <th scope="col" class="list">Sensor</th>
+            <th scope="col" class="list">Pool Name</th>
+            <th scope="col" class="list">Pool Location</th>
+            <th scope="col" class="list">Waranty </th>
+            <th scope="col" class="list">Status Layanan</th>
+            <th scope="col" class="list">Tanggal Pasang</th>
+            <th scope="col" class="list">Tanggal Non Active</th>
+            <th scope="col" class="list">Tanggal Reaktivasi GPS</th>
+            <th scope="col" class="action">Action</th>
+          </tr>
+        </thead>
+        <tbody  id="item_data">
+        </tbody>
+    </table>
 
 
 <script>
@@ -72,9 +65,12 @@
       read()
     }
     $('.add').click(function() {
-        $.get("{{ route('add_detail')}}", {}, function(data, status) {
+        var id = {{ $company->id }};
+
+        $.get("{{ url('add_form_detail') }}/" + id , {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
+
     });
     function store() {
         var CompanyId           = $("#CompanyId").val();
@@ -89,9 +85,7 @@
         var Type                = $("#Type").val();
         var GSM                 = $("#GSM").val();
         var Provider            = $("#Provider").val();
-        var SerialNumberSensor  = $("#SerialNumberSensor").val();
-        var NameSensor          = $("#NameSensor").val();
-        var MerkSensor          = $("#MerkSensor").val();
+        var SensorAll           = $("#SensorAll").val();
         var PoolName            = $("#PoolName").val();
         var PoolLocation        = $("#PoolLocation").val();
         var Waranty             = $("#Waranty").val();
@@ -115,9 +109,7 @@
                 Type                : Type,
                 GSM                 : GSM,
                 Provider            : Provider,
-                SerialNumberSensor  : SerialNumberSensor,
-                NameSensor          : NameSensor,
-                MerkSensor          : MerkSensor,
+                SensorAll           : SensorAll,
                 PoolName            : PoolName,
                 PoolLocation        : PoolLocation,
                 Waranty             : Waranty,
@@ -127,13 +119,25 @@
                 TanggalReaktivasi   : TanggalReaktivasi
             },
             success: function(data) {
-            swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { })
-              read();
+              if (data == "not") {
+                swal({
+                        type: 'error',
+                        title: 'PO is Full',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).catch(function(timeout) { })
+                    read();
+
+              }else{
+                    swal({
+                        type: 'success',
+                        title: 'Data Saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).catch(function(timeout) { })
+                    read();
+                }
+            //    alert(data)
             }
         })
     }
@@ -173,6 +177,9 @@
     }
     function edit(id){
         var id = id;
+
+        var company = {{ $company->id }}
+
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
@@ -188,9 +195,9 @@
         $("#item-Type-"+id).hide("fast");
         $("#item-GSM-"+id).hide("fast");
         $("#item-Provider-"+id).hide("fast");
-        $("#item-SerialNumberSensor-"+id).hide("fast");
-        $("#item-NameSensor-"+id).hide("fast");
-        $("#item-MerkSensor-"+id).hide("fast");
+        $("#item-SensorAll-"+id).hide("fast");
+        // $("#item-NameSensor-"+id).hide("fast");
+        // $("#item-MerkSensor-"+id).hide("fast");
         $("#item-PoolName-"+id).hide("fast");
         $("#item-PoolLocation-"+id).hide("fast");
         $("#item-Waranty-"+id).hide("fast");
@@ -198,9 +205,21 @@
         $("#item-TanggalPasang-"+id).hide("fast");
         $("#item-TanggalNonAktif-"+id).hide("fast");
         $("#item-TanggalReaktivasi-"+id).hide("fast");
-        $.get("{{ url('show_detail') }}/" + id, {}, function(data, status) {
-            $("#edit-form-"+id).prepend(data)
+        // $.get("{{ url('show_detail') }}/" + id, {}, function(data, status) {
+        //     $("#edit-form-"+id).prepend(data)
+        // });
+        $.ajax({
+            url:"{{ url('/show_detail')}}/" + id,
+            data:{
+            company : company,
+            },
+            success: function(data, status)
+            {
+                $("#edit-form-"+id).prepend(data)
+            }
+
         });
+        return true;
     }
      function update(id) {
         var CompanyId           = $("#CompanyId").val();
@@ -215,9 +234,9 @@
         var Type                = $("#Type").val();
         var GSM                 = $("#GSM").val();
         var Provider            = $("#Provider").val();
-        var SerialNumberSensor  = $("#SerialNumberSensor").val();
-        var NameSensor          = $("#NameSensor").val();
-        var MerkSensor          = $("#MerkSensor").val();
+        var SensorAll           = $("#SensorAll").val();
+        // var NameSensor          = $("#NameSensor").val();
+        // var MerkSensor          = $("#MerkSensor").val();
         var PoolName            = $("#PoolName").val();
         var PoolLocation        = $("#PoolLocation").val();
         var Waranty             = $("#Waranty").val();
@@ -242,9 +261,9 @@
                 Type                : Type,
                 GSM                 : GSM,
                 Provider            : Provider,
-                SerialNumberSensor  : SerialNumberSensor,
-                NameSensor          : NameSensor,
-                MerkSensor          : MerkSensor,
+                SensorAll           : SensorAll,
+                // NameSensor          : NameSensor,
+                // MerkSensor          : MerkSensor,
                 PoolName            : PoolName,
                 PoolLocation        : PoolLocation,
                 Waranty             : Waranty,
@@ -347,9 +366,7 @@
                     $("#item-Type-"+value).hide("fast");
                     $("#item-GSM-"+value).hide("fast");
                     $("#item-Provider-"+value).hide("fast");
-                    $("#item-SerialNumberSensor-"+value).hide("fast");
-                    $("#item-NameSensor-"+value).hide("fast");
-                    $("#item-MerkSensor-"+value).hide("fast");
+                    $("#item-SensorAll-"+value).hide("fast");
                     $("#item-PoolName-"+value).hide("fast");
                     $("#item-PoolLocation-"+value).hide("fast");
                     $("#item-Waranty-"+value).hide("fast");
@@ -384,7 +401,7 @@
                 $.each(allVals, function(index, value){
                     var CompanyId           = $(".CompanyId-"+ value).val();
                     var LicencePlate        = $(".LicencePlate-"+ value).val();
-                    var VihecleType         = $(".VehicleType-"+ value).val();
+                    var VihecleType         = $(".VihecleType-"+ value).val();
                     var PoNumber            = $(".PoNumber-"+ value).val();
                     var HargaLayanan        = $(".HargaLayanan-"+ value).val();
                     var PoDate              = $(".PoDate-"+ value).val();
@@ -394,9 +411,7 @@
                     var Type                = $(".Type-"+ value).val();
                     var GSM                 = $(".GSM-"+ value).val();
                     var Provider            = $(".Provider-"+ value).val();
-                    var SerialNumberSensor  = $(".SerialNumberSensor-"+ value).val();
-                    var NameSensor          = $(".NameSensor-"+ value).val();
-                    var MerkSensor          = $(".MerkSensor-"+ value).val();
+                    var SensorAll           = $(".SensorAll-"+ value).val();
                     var PoolName            = $(".PoolName-"+ value).val();
                     var PoolLocation        = $(".PoolLocation-"+ value).val();
                     var Waranty             = $(".Waranty-"+ value).val();
@@ -420,9 +435,7 @@
                             Type                : Type,
                             GSM                 : GSM,
                             Provider            : Provider,
-                            SerialNumberSensor  : SerialNumberSensor,
-                            NameSensor          : NameSensor,
-                            MerkSensor          : MerkSensor,
+                            SensorAll           : SensorAll,
                             PoolName            : PoolName,
                             PoolLocation        : PoolLocation,
                             Waranty             : Waranty,
@@ -449,7 +462,7 @@
                 });
             });
         }
-        //--------Proses Batal--------
+
          function batal(){
             $(".save").hide("fast");
             $(".cancel").hide("fast");

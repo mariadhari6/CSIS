@@ -27,7 +27,7 @@ class PemasanganMutasiGpsController extends Controller
     }
     public function item_data_onProgress()
     {
-        $pemasangan_mutasi_GPS = RequestComplaint::where('status_pemasangan', 'On Progress')->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', [1, 2, 3])->where('status', 'On Progress')->get();
         return view('VisitAssignment.PemasanganMutasiGPS.item_data')->with([
             'pemasangan_mutasi_GPS' => $pemasangan_mutasi_GPS
         ]);
@@ -35,7 +35,7 @@ class PemasanganMutasiGpsController extends Controller
 
     public function item_data_done()
     {
-        $pemasangan_mutasi_GPS = RequestComplaint::where('status_pemasangan', 'Done')->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', [1, 2, 3])->where('status', 'Done')->get();
         return view('VisitAssignment.PemasanganMutasiGPS.item_data')->with([
             'pemasangan_mutasi_GPS' => $pemasangan_mutasi_GPS
         ]);
@@ -43,8 +43,6 @@ class PemasanganMutasiGpsController extends Controller
 
     public function item_data()
     {
-
-
         $pemasangan_mutasi_GPS = RequestComplaint::with(['sensor'])->where('task', 1)->orWhere('task', 2)->orWhere('task', 3)->get();
 
         return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
@@ -55,7 +53,7 @@ class PemasanganMutasiGpsController extends Controller
     {
         $year = $request->year;
         $month = $request->month;
-        $pemasangan_mutasi_GPS = RequestComplaint::where('task', [1, 2, 3])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', [1, 2, 3])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
         // dd($pemasangan_mutasi_GPS);
         return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
     }
@@ -108,7 +106,7 @@ class PemasanganMutasiGpsController extends Controller
         $data->type_visit = $request->type_visit;
         $data->note_pemasangan = $request->note_pemasangan;
         $data->kendaraan_pasang = $request->kendaraan_pasang;
-        $data->status_pemasangan = $request->status_pemasangan;
+        $data->status = $request->status;
 
         $data->save();
     }
@@ -137,7 +135,7 @@ class PemasanganMutasiGpsController extends Controller
         $data->type_visit = $request->type_visit;
         $data->note_pemasangan = $request->note_pemasangan;
         $data->kendaraan_pasang = $request->kendaraan_pasang;
-        $data->status_pemasangan = $request->status_pemasangan;
+        $data->status = $request->status;
 
 
 
@@ -164,6 +162,34 @@ class PemasanganMutasiGpsController extends Controller
     {
         RequestComplaint::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
+    }
+    public function basedSensor($id)
+    {
+        $key = Sensor::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
+            return [
+                $item['id'] => $item->only(['sensor_name', 'merk_sensor'])
+            ];
+        });
+        $data = $key->all();
+        return $data;
+    }
+    public function basedSensorName($id)
+    {
+
+
+
+        $data = Sensor::where('sensor_name', $id)->get();
+
+        return $data;
+    }
+    public function basedSerialNumber($id)
+    {
+
+
+
+        $data = Sensor::where('serial_number', $id)->get();
+
+        return $data;
     }
 
     // public function dependentPemasangan($id)

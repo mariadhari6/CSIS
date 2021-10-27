@@ -1,6 +1,8 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Sensor')
 @section('title-table','Sensor')
+@section('master','show')
+@section('sensor','active')
 
 
 @section('content')
@@ -21,6 +23,7 @@
                 <i class="fas fa-trash"></i>
               </button>
           </div>
+
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -32,14 +35,14 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Sensor Name</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list">Sensor Name*</th>
                 <th scope="col" class="list">Merk Sensor</th>
-                <th scope="col" class="list">Serial Number</th>
-                <th scope="col" class="list">Rab Number</th>
+                <th scope="col" class="list">Serial Number*</th>
+                <th scope="col" class="list">Rab Number*</th>
                 <th scope="col" class="list">Waranty</th>
                 <th scope="col" class="list">Status</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">

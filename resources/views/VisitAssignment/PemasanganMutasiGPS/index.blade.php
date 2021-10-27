@@ -1,16 +1,15 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Pemasangan dan Mutasi GPS')
+@section('title-table','Pemasangan dan Mutasi GPS')
 
 
 @section('content')
-<h4 class="page-title">Pemasangan dan Mutasi GPS</h4>
-
 
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+            <div class="text-right" id="selected">
                 <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
                     <option value="{{ url('item_data_all_pemasangan') }}">All</option>
@@ -33,33 +32,33 @@
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
-
+            <form>
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th rowspan="2" width="10px" >
-                    <div class="form-check">
+                <th rowspan="2">
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
                         </label>
                     </div>
                 </th>
-                <th rowspan="2" scope="col" class="action">No.</th>
+                <th rowspan="2" scope="col" class="action-no">No.</th>
                 <th rowspan="2" scope="col" class="list">Company</th>
                 <th rowspan="2" scope="col" class="list">Jenis Pekerjaan</th>
                 <th rowspan="2" scope="col" class="list">Tanggal</th>
-                <th rowspan="2" scope="col" class="list">Kendaraan Awal</th>
-                <th rowspan="2" scope="col" class="list">IMEI</th>
-                <th rowspan="2" scope="col" class="list">GSM</th>
+                <th rowspan="2" scope="col" class="list">Kendaraan Awal*</th>
+                <th rowspan="2" scope="col" class="list">Kendaraan Pasang*</th>
+                <th rowspan="2" scope="col" class="list">IMEI*</th>
+                <th rowspan="2" scope="col" class="list">GSM*</th>
                 <th colspan="2" scope="col" class="list">Equipment</th>
-                <th rowspan="2" scope="col" class="list">Teknisi</th>
-                <th rowspan="2" scope="col" class="list">Uang Transportasi</th>
-                <th rowspan="2" scope="col" class="list">Type Visit</th>
+                <th rowspan="2" scope="col" class="list">Teknisi*</th>
+                <th rowspan="2" scope="col" class="list">Uang Transportasi*</th>
+                <th rowspan="2" scope="col" class="list">Type Visit*</th>
                 <th rowspan="2" scope="col" class="list">Note</th>
-                <th rowspan="2" scope="col" class="list">Kendaraan Pasang</th>
-                <th rowspan="2" scope="col" class="list">Status</th>
-                <th rowspan="2" scope="col" class="action">Action</th>
+                <th rowspan="2" scope="col" class="list">Status*</th>
+                <th rowspan="2" scope="col" class="action sticky-col first-col">Action</th>
 
               </tr>
               <tr>
@@ -71,6 +70,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+          </form>
         </div>
       </div>
     </div>
@@ -249,7 +249,7 @@
         $("#item-type_visit-"+id).hide("fast");
         $("#item-note_pemasangan-"+id).hide("fast");
         $("#item-kendaraan_pasang-"+id).hide("fast");
-        $("#item-status_pemasangan-"+id).hide("fast");
+        $("#item-status-"+id).hide("fast");
         $.get("{{ url('show_PemasanganMutasi') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -269,7 +269,7 @@
             var type_visit = $("#type_visit").val();
             var note_pemasangan = $("#note_pemasangan").val();
             var kendaraan_pasang = $("#kendaraan_pasang").val();
-            var status_pemasangan = $("#status_pemasangan").val();
+            var status = $("#status").val();
             var id = id;
             $.ajax({
                 type: "get",
@@ -288,7 +288,7 @@
                 type_visit:type_visit,
                 note_pemasangan:note_pemasangan,
                 kendaraan_pasang:kendaraan_pasang,
-                status_pemasangan:status_pemasangan
+                status:status
 
                 },
                 success: function(data) {
@@ -388,7 +388,7 @@
                     $("#item-type_visit-"+value).hide("fast");
                     $("#item-note_pemasangan-"+value).hide("fast");
                     $("#item-kendaraan_pasang-"+value).hide("fast");
-                    $("#item-status_pemasangan-"+value).hide("fast");
+                    $("#item-status-"+value).hide("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_PemasanganMutasi') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
@@ -429,7 +429,7 @@
                     var type_visit = $(".type_visit-"+value).val();
                     var note_pemasangan = $(".note_pemasangan-"+value).val();
                     var kendaraan_pasang = $(".kendaraan_pasang-"+value).val();
-                    var status_pemasangan = $(".status_pemasangan-"+value).val();
+                    var status = $(".status-"+value).val();
 
                     $.ajax({
                     type: "get",
@@ -448,7 +448,7 @@
                         type_visit:type_visit,
                         note_pemasangan:note_pemasangan,
                         kendaraan_pasang:kendaraan_pasang,
-                        status_pemasangan:status_pemasangan
+                        status:status
                     },
                     success: function(data) {
                      swal({

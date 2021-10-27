@@ -36,7 +36,7 @@ class MaintenanceGpsController extends Controller
     }
     public function item_data_onProgress()
     {
-        $maintenanceGps = RequestComplaint::where('status_maintenance', 'On Progress')->get();
+        $maintenanceGps = RequestComplaint::whereIn('task', [4, 5])->where('status', 'On Progress')->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
         ]);
@@ -44,10 +44,18 @@ class MaintenanceGpsController extends Controller
 
     public function item_data_done()
     {
-        $maintenanceGps = RequestComplaint::where('status_maintenance', 'Done')->get();
+        $maintenanceGps = RequestComplaint::whereIn('task', [4, 5])->where('status', 'Done')->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
         ]);
+    }
+    public function item_data_MY(Request $request)
+    {
+        $year = $request->year;
+        $month = $request->month;
+        $maintenanceGps = RequestComplaint::whereIn('task', [4, 5])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
+        // dd($pemasangan_mutasi_GPS);
+        return view('VisitAssignment.MaintenanceGPS.item_data', compact('maintenanceGps'));
     }
 
     public function edit_form($id)
@@ -101,7 +109,7 @@ class MaintenanceGpsController extends Controller
         $data->teknisi_maintenance = $request->teknisi_maintenance;
         $data->req_by = $request->req_by;
         $data->note_maintenance = $request->note_maintenance;
-        $data->status_maintenance = $request->status_maintenance;
+        $data->status = $request->status;
 
         $data->save();
     }
@@ -124,7 +132,7 @@ class MaintenanceGpsController extends Controller
         $data->teknisi_maintenance = $request->teknisi_maintenance;
         $data->req_by = $request->req_by;
         $data->note_maintenance = $request->note_maintenance;
-        $data->status_maintenance = $request->status_maintenance;
+        $data->status = $request->status;
 
         echo $id;
     }
@@ -169,5 +177,33 @@ class MaintenanceGpsController extends Controller
     {
         RequestComplaint::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
+    }
+    public function basedSensor($id)
+    {
+        $key = Sensor::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
+            return [
+                $item['id'] => $item->only(['sensor_name', 'merk_sensor'])
+            ];
+        });
+        $data = $key->all();
+        return $data;
+    }
+    public function basedSensorName($id)
+    {
+
+
+
+        $data = Sensor::where('sensor_name', $id)->get();
+
+        return $data;
+    }
+    public function basedSerialNumber($id)
+    {
+
+
+
+        $data = Sensor::where('serial_number', $id)->get();
+
+        return $data;
     }
 }

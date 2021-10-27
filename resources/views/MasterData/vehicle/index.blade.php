@@ -1,6 +1,8 @@
 @extends('layouts.v_main')
 @section('title','Master Vehicle')
 @section('title-table','Master Vehicle')
+@section('master','show')
+@section('Vehicle','active')
 
 @section('content')
 
@@ -26,12 +28,12 @@
                         </div>
                     </th>
                     <th scope="col" class="action">No.</th>
-                    <th scope="col" class="list">Company Name</th>
-                    <th scope="col" class="list">License Plate</th>
-                    <th scope="col" class="list">Vihecle Type</th>
-                    <th scope="col" class="list">Pool Name</th>
-                    <th scope="col" class="list">Pool Location</th>
-                    <th scope="col" class="action">Action</th>
+                    <th scope="col" class="list">Company Name*</th>
+                    <th scope="col" class="list">License Plate*</th>
+                    <th scope="col" class="list">Vihecle Type*</th>
+                    <th scope="col" class="list">Pool Name*</th>
+                    <th scope="col" class="list">Pool Location*</th>
+                    <th scope="col" class="action sticky-col first-col">Action</th>
 
                     </tr>
             </thead>

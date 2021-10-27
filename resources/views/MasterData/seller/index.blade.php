@@ -5,7 +5,6 @@
 @section('seller','active')
 
 @section('content')
-<form>
     <div class="row">
     <div class="col-md-12">
     <div class="card">
@@ -22,9 +21,12 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
+              <form>
+
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
+
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -33,20 +35,25 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list-seller">Seller Name</th>
-                <th scope="col" class="list-seller">Seller Code</th>
-                <th scope="col" class="list-seller">No Agreement Letter</th>
-                <th scope="col" class="list-seller">Status</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list-seller">Seller Name*</th>
+                <th scope="col" class="list-seller">Seller Code*</th>
+                <th scope="col" class="list-seller">No Agreement Letter*</th>
+                <th scope="col" class="list-seller">Status*</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
+
           </table>
+           </form>
+
         </div>
       </div>
+
 
 
 
@@ -350,6 +357,5 @@
 
 
   </script>
-</form>
 
 @endsection

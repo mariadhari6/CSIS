@@ -1,7 +1,8 @@
+
     <td></td>
     <td></td>
     <td>
-        <select class="form-control status_gsm-{{$GsmTerminate->id}}" id="status_gsm" name="status_gsm" required>
+        <select class="select status_gsm-{{$GsmTerminate->id}}" id="status_gsm" name="status_gsm" required>
             <option value="Ready" {{ $GsmTerminate->status_gsm == 'Ready' ? 'selected' : ''  }}>Ready</option>
             <option value="Active" {{ $GsmTerminate->status_gsm == 'Active' ? 'selected' : ''  }}>Active</option>
             <option value="Terminate" {{ $GsmTerminate->status_gsm == 'Terminate' ? 'selected' : ''  }}>Terminate</option>
@@ -30,7 +31,7 @@
     <td>
         <textarea class="form-control note-{{$GsmTerminate->id}}" id="note" name="note" rows="3" required>{{$GsmTerminate->note}}</textarea>
     </td>
-   <td>
+     <td class="action sticky-col first-col">
          <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="edit" onclick="update({{ $GsmTerminate->id}})"></i>
         </button>

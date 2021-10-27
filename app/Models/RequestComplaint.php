@@ -65,7 +65,11 @@ class RequestComplaint extends Model
     }
     public function gpsMaintenance()
     {
-        return $this->belongsTo(Gps::class, 'equipment_sensor_id', 'id');
+        return $this->belongsTo(Gps::class, 'equipment_gps_id', 'id');
+    }
+    public function gpsType()
+    {
+        return $this->belongsTo(Gps::class, 'type_gps_id', 'id');
     }
     public function vehicleRequest()
     {

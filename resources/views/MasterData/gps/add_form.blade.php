@@ -1,19 +1,18 @@
 <tr id="add_form">
 
+
 <td></td>
 <td></td>
 
     <td>
-        <select class="select @error('merk') is-invalid @enderror" id="merk" name="merk" required>
-            <option selected disabled value="" @if (old('merk')=='' or old('merk')==0) @endif>Merk</option>
+        <select class="select" id="merk" name="merk" required>
+            <option selected disabled value="">Merk</option>
 
             @foreach ($merk as $item)
             <option value="{{ $item->id }}"  {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk}}</option>
             @endforeach
         </select>
-        @error('merk')
-        <div class="alert alert-danger">{{$message}}</div>
-        @enderror
+
     </td>
 
     <td>
@@ -33,10 +32,8 @@
         <div class="input-div"><input type="text" class="input" id="merk" placeholder="Merk"></i>
     </td> --}}
     <td>
-        <div class="input-div"><input type="number" class="input @error('imei') is-invalid @enderror" id="imei" name="imei" placeholder="IMEI" value="{{old('imei')}}" required></i>
-        @error('imei')
-        <div class="alert alert-danger">{{$message}}</div>
-        @enderror
+        <div class="input-div"><input type="number" class="input" id="imei" name="imei" placeholder="IMEI" value="{{old('imei')}}" max="15" min="15" required></i>
+
     </td>
 
     <td>
@@ -75,9 +72,7 @@
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
     </td>
-
-
-    <td>
+  <td class="action sticky-col first-col">
          <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="add" onclick="store()"></i>
         </button>
@@ -85,5 +80,9 @@
     <td>
 
 
+
+
 </tr>
+
+
 

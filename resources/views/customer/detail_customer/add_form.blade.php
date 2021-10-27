@@ -1,9 +1,8 @@
-<tr id="add_form">
+<tr>
     <td></td>
     <td></td>
     <td>
         <select class="select" id="CompanyId" name="CompanyId">
-            <option value=""></option>
             @foreach ($company as $item)
                 <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
             @endforeach
@@ -19,16 +18,21 @@
     </td>
     <td>
         <select class="select" id="VihecleType" name="VihecleType" disabled>
-            {{-- <option value="">{{ $vehicle->vehicleType->name }}</option> --}}
+            <option value=""></option>
             @foreach ($vehicle as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle_id') == $item->id ? 'selected':'' }}>{{ $item->vehicleType->name }}</option>
+                <option value="{{ $item->id }}" {{ old('vihecle_type') == $item->id ? 'selected':'' }}>{{ $item->vehicleType->name }}</option>
             @endforeach
         </select>
+    </td>
     <td>
         <select class="select" id="PoNumber" name="PoNumber">
             <option value=""></option>
             @foreach ($po as $item)
-                <option value="{{ $item->id }}" {{ old('po_number') == $item->id ? 'selected':'' }}>{{ $item->po_number}}</option>
+                {{-- @if ($item->id == $cekdataada[0]['po_id'])
+                @if ($item->jumlah_unit_po <=  $cekdataada[0]['jumlah'])   --}}
+            <option value="{{ $item->id }}" {{ old('po_number') == $item->id ? 'selected':'' }}>{{ $item->po_number}}</option>
+                    {{-- @endif
+                @endif --}}
             @endforeach
         </select>
     </td>
@@ -97,28 +101,80 @@
         </select>
     </td>
     <td>
-        <select class="select" id="SerialNumberSensor" name="SerialNumberSensor">
-            <option value=""></option>
-            @foreach ($sensor as $item)
-                <option value="{{ $item->id }}" {{ old('serial_number_sensor') == $item->id ? 'selected':''}}>{{ $item->serial_number }}</option>
-            @endforeach
-        </select>
-    </td>
-    <td>
-        <select class="select" id="NameSensor" name="NameSensor" disabled>
-            <option value=""></option>
-            @foreach ($sensor as $item)
-                <option value="{{ $item->id }}" {{ old('name_sensor') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
-            @endforeach
-        </select>
-    </td>
-    <td>
-        <select class="select" id="MerkSensor" name="MerkSensor" disabled>
-            <option value=""></option>
-            @foreach ($sensor as $item)
-                <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':''}}>{{ $item->merk_sensor }}</option>
-            @endforeach
-        </select>
+        <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#exampleModal" id="modal">
+            Sensor
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Sensor Input</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                    {{-- <select class="form-control selectpicker" name="part" data-live-search="true" required>
+                        <option value="Select Part">Select Part</option>
+                        <option value="Part 1" data-tokens="Part 1">Part 1</option>
+                        <option value="Part 2" data-tokens="Part 2">Part 2</option>
+                        <option value="Part 3" data-tokens="Part 3">Part 3</option>
+                        <option value="Part 4" data-tokens="Part 4">Part 4</option>
+                        <option value="Part 5" data-tokens="Part 5">Part 5</option>
+                        <option value="Pravesh Pariksha" data-tokens="Pravesh Pariksha">Pravesh Pariksha</option>
+                      </select>
+                       --}}
+
+                        <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="SerialNumberSensor">Serial Number</label>
+                        </div>
+                        <select class="form-control selectpicker" id="SerialNumberSensor" name="SerialNumberSensor" data-live-search="true">
+                            <option value=""></option>
+                            @foreach ($sensor as $item)
+                                <option value="{{ $item->id }}" {{ old('serial_number') == $item->id ? 'selected':''}}>{{ $item->serial_number }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="SensorName">Name</label>
+                        </div>
+                        <select class="custom-select" id="SensorName" name="SensorName">
+                            <option value=""></option>
+                            @foreach ($sensor as $item)
+                            <option value="{{ $item->id }}" {{ old('sensor_id') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="MerkSensor">Merk</label>
+                        </div>
+                        <select class="custom-select" id="MerkSensor" name="MerkSensor">
+                            <option value=""></option>
+                            @foreach ($sensor as $item)
+                                <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':''}}>{{ $item->merk_sensor }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+
+                        <button type="button" class="btn btn-success float-right mb-2"  data-dismiss="modal"onclick="send()">Send</button>
+                        <button  type="button" class="btn btn-primary float-right mb-2 mr-2" onclick="add()" >Add</button>
+                        <button  type="button" class="btn btn-danger float-right mb-2 mr-2" id="clear">Clear</button>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text">Sensor terpilih</span>
+                        <textarea class="form-control" aria-label="With textarea" id="SensorTerpilih" disabled></textarea>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
     </td>
     <td>
         <select class="select" id="PoolName" name="PoolName" disabled>
@@ -136,7 +192,7 @@
             @endforeach
         </select>
     </td>
-    <td><div class="input-div"><input type="date" class="input" id="Waranty" placeholder="Waranty"></div></td>
+    <td><div class="input-div"><input type= "date" class="input" id="Waranty" placeholder="Waranty"></div></td>
     <td>
         <select class="select" id="StatusLayanan">
             <option value="Active">Active</option>
@@ -151,43 +207,15 @@
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 
+
+
+
     <script>
          $(document).ready(function() {
-
-            $('select[name="CompanyId"]').on('change', function() {
-                var itemID = $(this).val();
-                if(itemID) {
-                    $.ajax({
-                        url: '/based_company/'+ itemID,
-                        method: "GET",
-                        success:function(data) {
-                            $('select[name="LicencePlate').empty();
-                            $('select[name="LicencePlate').append('<option value=""> </option>');
-                                for(var i = 0 ; i < data.length ; i++) {
-                                    $('select[name="LicencePlate').append('<option value="'+ data[i].id + '"> '+ data[i].license_plate +'</option>');
-                                }
-                        }
-                    });
-
-                    $.ajax({
-                        url: '/based_po/'+ itemID,
-                        method: "GET",
-                        success:function(data) {
-                            $('select[name="PoNumber').empty();
-                            $('select[name="PoNumber').append('<option value=""></option>');
-                            console.log(data.length)
-                                for(var i = 0 ; i < data.length ; i++) {
-                                    $('select[name="PoNumber').append('<option value="'+ data[i].id + '"> '+ data[i].po_number +'</option>');
-                                }
-                        }
-                    });
-                }
-                else{
-                    $('select[name="LicencePlate"]').empty();
-                    $('select[name="PoNumber').empty();
-                }
-
+            $(function() {
+            $('.selectpicker').selectpicker();
             });
+
             $('select[name="Imei"]').on('change', function() {
                 var Id = $(this).val();
                 if(Id) {
@@ -229,27 +257,29 @@
             });
             $('select[name="SerialNumberSensor"]').on('change', function() {
                 var Id = $(this).val();
+                // alert(Id);
                 if(Id) {
                     $.ajax({
                         url: '/based_sensor/'+ Id,
                         method: "GET",
                         success:function(data) {
-                            $('select[name="NameSensor').empty();
+                            $('select[name="SensorName').empty();
                             $('select[name="MerkSensor').empty();
                                 $.each(data, function(key, value) {
-                                    $('select[name="NameSensor').append('<option value="'+ key +'">'+ value.sensor_name +'</option>');
+                                    $('select[name="SensorName').append('<option value="'+ key +'">'+ value.sensor_name +'</option>');
                                     $('select[name="MerkSensor').append('<option value="'+ key +'">'+ value.merk_sensor +'</option>');
                                });
                         }
                     });
                 }else{
-                    $('select[name="NameSensor').empty();
+                    $('select[name="SensorName').empty();
                     $('select[name="MerkSensor').empty();
                 }
 
             });
             $('select[name="LicencePlate"]').on('change', function() {
                 var Id = $(this).val();
+                // alert(Id);
                 if(Id) {
                     $.ajax({
                         url: '/based_license/'+ Id,
@@ -260,7 +290,7 @@
                             $('select[name="PoolName').empty();
                             $('select[name="PoolLocation').empty();
                                 $.each(data, function(key, value) {
-                                    $('select[name="VihecleType').append('<option value="'+ key +'">'+ value.vehicle_id +'</option>');
+                                    $('select[name="VihecleType').append('<option value="'+ key +'">'+ value.vihecle_type +'</option>');
                                     $('select[name="PoolName').append('<option value="'+ key +'">'+ value.pool_name +'</option>');
                                     $('select[name="PoolLocation').append('<option value="'+ key +'">'+ value.pool_location +'</option>');
 
@@ -301,20 +331,100 @@
 
                 }
             });
+            // $('select[name="CompanyId"]').on('change', function() {
+            //     var itemID = $(this).val();
+            //     if(itemID) {
+            //         $.ajax({
+            //             url: '/based_company/'+ itemID,
+            //             method: "GET",
+            //             success:function(data) {
+            //                 $('select[name="LicencePlate').empty();
+            //                 $('select[name="LicencePlate').append('<option value=""> </option>');
+            //                     for(var i = 0 ; i < data.length ; i++) {
+            //                         $('select[name="LicencePlate').append('<option value="'+ data[i].id + '"> '+ data[i].license_plate +'</option>');
+            //                     }
+            //             }
+            //         });
+
+            //         $.ajax({
+            //             url: '/based_po/'+ itemID,
+            //             method: "GET",
+            //             success:function(data) {
+            //                 $('select[name="PoNumber').empty();
+            //                 $('select[name="PoNumber').append('<option value=""></option>');
+            //                 console.log(data.length)
+            //                     for(var i = 0 ; i < data.length ; i++) {
+            //                         $('select[name="PoNumber').append('<option value="'+ data[i].id + '"> '+ data[i].po_number +'</option>');
+            //                     }
+            //             }
+            //         });
+            //     }
+            //     else{
+            //         $('select[name="LicencePlate"]').empty();
+            //         $('select[name="PoNumber').empty();
+            //     }
+
+            // });
+            // $('select[name="SensorName"]').on('change', function() {
+            //     var itemID = $(this).val();
+            //     // alert(itemID);
+            //     if(itemID) {
+            //         $.ajax({
+            //             url: '/based_sensor/'+ itemID,
+            //             method: "GET",
+            //             success:function(data) {
+            //                 // alert(data.length);
+            //                 $('select[name="SerialNumberSensor').empty();
+            //                 $('select[name="SerialNumberSensor').append('<option value=""> </option>');
+            //                     for(var i = 0 ; i < data.length ; i++) {
+            //                         $('select[name="SerialNumberSensor').append('<option value="'+ data[i].serial_number + '"> '+ data[i].serial_number +'</option>');
+            //                             // alert(data[i].serial_number)
+            //                     }
+            //             }
+            //         });
+            //     }
+            //     else{
+            //         $('select[name="SerialNumberSensor"]').empty();
+
+            //     }
+
+            // });
+            $('#clear').click(function(){
+                var sensorterpilih =  document.getElementById("SensorTerpilih").value;
+                if (sensorterpilih == ""){
+                    alert("No sensor selected")
+                }else{
+                    $('#SensorTerpilih').empty();
+                }
+            })
         });
+
+        function add(){
+
+            var sensor = document.getElementById("SensorName").value;
+            var serialnumber = document.getElementById("SerialNumberSensor").value;
+            var merksensor = document.getElementById("MerkSensor").value;
+            var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
+            var data = serialnumber +" "
+            var hasil = document.getElementById("SensorTerpilih").value;
+            if (data == hasil) {
+                alert("ada data yang sama");
+            }else{
+            $("#SensorTerpilih").prepend(data);
+            }
+
+         }
+
+         function send(){
+            var sensorterpilih = document.getElementById("SensorTerpilih").value;
+            if (sensorterpilih == "") {
+                alert("No sensor selected")
+            }else{
+                $('#modal').empty();
+                $('#SensorAll').empty();
+                $('#modal').append('<option value="'+ sensorterpilih + '" id="SensorAll"  data-toggle="modal" data-target="#exampleModal" > '+ sensorterpilih +'</option>');
+            }
+         }
+
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </tr>

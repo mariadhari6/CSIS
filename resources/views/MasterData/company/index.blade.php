@@ -1,6 +1,8 @@
 @extends('layouts.v_main')
 @section('title',' CSIS | Company ')
 @section('title-table', 'Company')
+@section('master','show')
+@section('company','active')
 
 
 @section('content')
@@ -31,12 +33,12 @@
                   </div>
                 </th>
                 <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Company Name</th>
-                <th scope="col" class="list">Seller</th>
-                <th scope="col" class="list">Customer Code</th>
-                <th scope="col" class="list-agreement">No Agreement Letter</th>
-                <th scope="col" class="list">Status</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="list">Company Name*</th>
+                <th scope="col" class="list">Seller*</th>
+                <th scope="col" class="list">Customer Code*</th>
+                <th scope="col" class="list-agreement">No Agreement Letter*</th>
+                <th scope="col" class="list">Status*</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">

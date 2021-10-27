@@ -1,3 +1,4 @@
+
     <td></td>
     <td></td>
 
@@ -28,12 +29,13 @@
         </div>
     </td>
      <td>
-        <div class="input-div"><input type="date" class="input date_of_birth-{{$pic->id}}" id="date_of_birth" placeholder="date_of_birth" value="{{ $pic->date_of_birth}}" required></i>
+        <div class="input-div"><input type="date" class="input date_of_birth-{{$pic->id}}" id="date_of_birth" placeholder="date_of_birth" value="{{ $pic->date_of_birth}}"></i>
         </div>
     </td>
-   <td>
+     <td class="action sticky-col first-col">
          <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="edit" onclick="update({{ $pic->id}})"></i>
         </button>
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
+

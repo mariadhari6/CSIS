@@ -1,10 +1,11 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Gsm Master')
 @section('title-table','Gsm Master')
+@section('master','show')
+@section('GsmMaster','active')
 
 
 @section('content')
-<form>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -33,9 +34,12 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
+
+            <form>
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
+
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -44,27 +48,29 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Status GSM</th>
-                <th scope="col" class="list">GSM Number</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Serial Number</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list">Status GSM*</th>
+                <th scope="col" class="list">GSM Number*</th>
+                <th scope="col" class="list">Company*</th>
+                <th scope="col" class="list">Serial Number*</th>
                 <th scope="col" class="list">ICC ID</th>
                 <th scope="col" class="list">IMSI</th>
                 <th scope="col" class="list">Res ID</th>
-                <th scope="col" class="list">Request Date</th>
+                <th scope="col" class="list">Request Date*</th>
                 <th scope="col" class="list">Expired Date</th>
                 <th scope="col" class="list">Active Date</th>
                 <th scope="col" class="list">Terminated Date</th>
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="list">Provider</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+          </form>
         </div>
       </div>
     </div>
@@ -144,6 +150,9 @@
     // ------- send import -----
     function send_data() {
       $rowCount = $("#table_temporary_id tr").length;
+      if ($rowCount == 1) {
+        alert('table empty')
+      } else {
       $rowResult = $rowCount - 1;
       var allVals = [];
       for($i = 0; $i < $rowResult; $i++)
@@ -166,38 +175,65 @@
         var terminate_date = $(".temporary-terminate_date-"+value).attr("id");
         var note = $(".temporary-note-"+value).attr("id");
         var provider = $(".temporary-provider-"+value).attr("id");
-          $.ajax({
-          type: "get",
-          url: "{{ url('store_GsmMaster') }}",
-          data: {
-            status_gsm: status_gsm,
-            gsm_number: gsm_number,
-            company_id: company_id,
-            serial_number: serial_number,
-            icc_id: icc_id,
-            imsi: imsi,
-            res_id: res_id,
-            request_date: request_date,
-            expired_date: expired_date,
-            active_date: active_date,
-            terminate_date: terminate_date,
-            note: note,
-           provider:provider
-          },
-          success: function(data) {
-            swal({
-              type: 'success',
-              title: 'Data Saved',
+
+          if (
+              request_date == '' ||
+              gsm_number == '' ||
+              company_id == '' ||
+              serial_number == '' ||
+              icc_id == '' ||
+              imsi == '' ||
+              res_id == '' ||
+              request_date == '' ||
+              expired_date == '' ||
+              active_date == '' ||
+              note == '' ||
+              terminate_date == '' ||
+              terminate_date == ''
+              ) {
+              swal({
+              type: 'warning',
+              text: 'there is column empty or fail format',
               showConfirmButton: false,
               timer: 1500
-          }).catch(function(timeout) { });
-            read();
-            deleteTemporary();
-            read_temporary()
-            $('#importData').modal('hide');
+            }).catch(function(timeout) { });
+          } else {
+            $.ajax({
+            type: "get",
+            url: "{{ url('store_GsmMaster') }}",
+            data: {
+              status_gsm: status_gsm,
+              gsm_number: gsm_number,
+              company_id: company_id,
+              serial_number: serial_number,
+              icc_id: icc_id,
+              imsi: imsi,
+              res_id: res_id,
+              request_date: request_date,
+              expired_date: expired_date,
+              active_date: active_date,
+              terminate_date: terminate_date,
+              note: note,
+              provider: provider
+            },
+            success: function(data) {
+                swal({
+                  type: 'success',
+                  title: 'Data Saved',
+                  showConfirmButton: false,
+                  timer: 1500
+              }).catch(function(timeout) { });
+                read();
+                deleteTemporary();
+                read_temporary()
+                $('#importData').modal('hide');
+              }
+          });
           }
       });
-      });
+
+      }
+
     }
 
     // ---- Close Modal -------
@@ -281,47 +317,90 @@
 
     // ----- Proses Tambah data ------
     function store() {
-        var status_gsm = $("#status_gsm").val();
-        var gsm_number = $("#gsm_number").val();
-        var company_id = $("#company_id").val();
-        var serial_number = $("#serial_number").val();
-        var icc_id = $("#icc_id").val();
-        var imsi = $("#imsi").val();
-        var res_id = $("#res_id").val();
-        var request_date = $("#request_date").val();
-        var expired_date = $("#expired_date").val();
-        var active_date = $("#active_date").val();
-        var terminate_date = $("#terminate_date").val();
-        var note = $("#note").val();
-        var provider = $("#provider").val();
-        $.ajax({
-            type: "get",
-            url: "{{ url('store_GsmMaster') }}",
-            data: {
-              status_gsm: status_gsm,
-            gsm_number: gsm_number,
-            company_id: company_id,
-            serial_number: serial_number,
-            icc_id: icc_id,
-            imsi: imsi,
-            res_id: res_id,
-            request_date: request_date,
-            expired_date: expired_date,
-            active_date: active_date,
-            terminate_date: terminate_date,
-            note: note,
-           provider:provider
-            },
-            success: function(data) {
-             swal({
-                type: 'success',
-                title: 'Data Saved',
+      var status_gsm = $("#status_gsm").val();
+      var gsm_number = $("#gsm_number").val();
+      var company_id = $("#company_id").val();
+      var serial_number = $("#serial_number").val();
+      var icc_id = $("#icc_id").val();
+      var imsi = $("#imsi").val();
+      var res_id = $("#res_id").val();
+      var request_date = $("#request_date").val();
+      var expired_date = $("#expired_date").val();
+      var active_date = $("#active_date").val();
+      var terminate_date = $("#terminate_date").val();
+      var note = $("#note").val();
+      var provider = $("#provider").val();
+
+      $rowCount = $("#table_id tr").length;
+      if ($rowCount == 2) {
+        alert('table empty')
+      } else {
+        $rowResult = $rowCount - 2;
+        var allGsmNum = [];
+        var allSerNum = [];
+        for($i = 1; $i <= $rowResult; $i++)
+            {
+              $numArr = $i-1;
+              $gsmNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
+              $serNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(5)").attr("name");
+              allGsmNum[$numArr] = $gsmNum;
+              allSerNum[$numArr] = $serNum;
+            }
+        for (let index = 0; index <= allGsmNum.length; index++) {
+          if( gsm_number == allGsmNum[index] ){
+              swal({
+                type: 'warning',
+                text: 'GSM Number already exists',
                 showConfirmButton: false,
                 timer: 1500
-            }).catch(function(timeout) { });
-              read();
-            }
-        })
+              }).catch(function(timeout) { });
+              // alert('GSM Number already exists');
+              break;
+          } else if( serial_number == allSerNum[index]){
+              swal({
+                  type: 'warning',
+                  text: 'Serial Number already exists',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).catch(function(timeout) { });
+              // alert('Serial Number already exists');
+              break;
+          } else if( index == allGsmNum.length) {
+            // alert('success');
+            // break;
+            $.ajax({
+                type: "get",
+                url: "{{ url('store_GsmMaster') }}",
+                data: {
+                  status_gsm: status_gsm,
+                  gsm_number: gsm_number,
+                  company_id: company_id,
+                  serial_number: serial_number,
+                  icc_id: icc_id,
+                  imsi: imsi,
+                  res_id: res_id,
+                  request_date: request_date,
+                  expired_date: expired_date,
+                  active_date: active_date,
+                  terminate_date: terminate_date,
+                  note: note,
+                  provider: provider
+                },
+                success: function(data) {
+                swal({
+                    type: 'success',
+                    title: 'Data Saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                  read();
+                  // break;
+                }
+            });
+            break;
+          }
+        }
+      }
     }
     // -----Proses Delete Data ------
     function destroy(id) {
@@ -560,18 +639,18 @@
                     url: "{{ url('update_GsmMaster') }}/"+value,
                     data: {
                       status_gsm: status_gsm,
-                  gsm_number: gsm_number,
-                  company_id: company_id,
-                  serial_number: serial_number,
-                  icc_id: icc_id,
-                  imsi: imsi,
-                  res_id: res_id,
-                  request_date: request_date,
-                  expired_date: expired_date,
-                  active_date: active_date,
-                  terminate_date: terminate_date,
-                  note: note,
-                  provider: provider
+                      gsm_number: gsm_number,
+                      company_id: company_id,
+                      serial_number: serial_number,
+                      icc_id: icc_id,
+                      imsi: imsi,
+                      res_id: res_id,
+                      request_date: request_date,
+                      expired_date: expired_date,
+                      active_date: active_date,
+                      terminate_date: terminate_date,
+                      note: note,
+                      provider: provider
                     },
                     success: function(data) {
                      swal({
@@ -607,5 +686,5 @@
   </script>
 
   <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
-</form>
+
    @endsection

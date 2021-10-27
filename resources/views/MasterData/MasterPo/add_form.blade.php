@@ -1,4 +1,5 @@
 <tr id="add_form">
+
     <td></td>
     <td></td>
     <td>
@@ -21,18 +22,18 @@
         <div class="input-div"><input type="text" class="input" id="jumlah_unit_po" placeholder="Jumlah Unit Po" required></div>
     </td>
     <td>
-        <select class="form-control" id="status_po" aria-label=".form-select-lg example" required>
+        <select class="form-control" id="status_po" aria-label=".form-select-lg example">
             <option selected value="not selected">Pilih status</option>
-            <option value="Contract">Contract</option>
-            <option value="Terminate">Terminate</option>
+            <option value="Sewa">Sewa</option>
+            <option value="Sewa Beli">Sewa Beli</option>
+            <option value="Beli">Beli</option>
             <option value="Trial">Trial</option>
-            <option value="Register">Register</option>
         </select>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="selles" placeholder="Selles" required>
+        <div class="input-div"><input type="text" class="input" id="selles" placeholder="Selles">
     </td>
-    <td>
+    <td class="action sticky-col first-col">
          <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="add" onclick="store()"></i>
         </button>

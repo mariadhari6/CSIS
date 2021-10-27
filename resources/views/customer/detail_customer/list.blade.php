@@ -1,10 +1,11 @@
 @extends('layouts.v_main')
 @section('title','Detail Customer')
+@section('title-table', 'Detail Customer')
 
 @section('content')
 
-<div class="dropdown mb-2">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="dropdown mb-3">
+    <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Company
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="list-company">
@@ -17,10 +18,17 @@
         <div class="card" >
             <img class="card-img-top" src="" alt="">
             <div class="card-body">
-               <strong>Pilih Company</strong>
-                <p class="card-text" id="ajax-content"></p>
+                <h5 class="card-title">Pilih Company</h5>
+                <p class="card-text" id="ajax-content">
+
+                </p>
             </div>
         </div>
+
+
+
+  <!-- Modal -->
+
 
   <script>
     $(document).ready(function() {
@@ -29,7 +37,7 @@
             var Id = $(this).attr('id');
             $("#ajax-content").empty();
             $("#list-company a").removeClass('current');
-            $("strong").remove();
+            $("h5").remove();
             $(this).addClass('current');
             $.ajax({ url:"{{ url('/detail')}}/" + Id, success: function(html)
                 {

@@ -28,9 +28,9 @@
         <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$maintenanceGps->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ str_replace(" ", "T", $maintenanceGps->waktu_kesepakatan) }}"></i></div>
     </td>
     <td>
-        <select class="select type_gps_id-{{$maintenanceGps->id}}" id="type_gps_id" name="type_gps_id-{{$maintenanceGps->id}}">
+        <select class="select type_gps_id-{{$maintenanceGps->id}}" id="type_gps_id" name="type_gps_id-{{$maintenanceGps->id}}" required>
             <option selected value="{{ $maintenanceGps->type_gps_id }}">
-                {{ $maintenanceGps->gpsMaintenance->typeGps->type_gps??'' }}
+                {{ $maintenanceGps->gpsType->typeGps->type_gps??'' }}
             </option>
 
             @foreach ($gps as $item)
@@ -55,20 +55,69 @@
 
         </select>
     </td>
+
     <td>
-        <select class="select equipment_sensor_id-{{$maintenanceGps->id}}" id="equipment_sensor_id" name="equipment_sensor_id-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->equipment_sensor_id}}">
-                {{ $maintenanceGps->sensorMaintenance->sensor_name?? '' }}
-            </option>
+    <div class="col m" id="sensor">
+        <a><option class="SensorAll-{{$maintenanceGps->id}}" value="{{ $maintenanceGps->equipment_sensor_id }}" id="equipment_sensor_id" data-toggle="modal" data-target="#exampleModal">{{ $maintenanceGps->equipment_sensor_id }}</option></a>
+    </div>
 
-            @foreach ($sensor as $item)
-            <option value="{{ $item->id }}">
-                {{ $item->sensor_name }}
-            </option>
-            @endforeach
 
-        </select>
-    </td>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Sensor</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="SensorName">Sensor Name</label>
+                    </div>
+                    <select class="custom-select" id="SensorName" name="SensorName">
+                        @foreach ($sensor as $item)
+                        <option value="{{ $item->sensor_name }}" {{ old('sensor_id') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="SerialNumberSensor">Serial Number</label>
+                    </div>
+                    <select class="custom-select" id="SerialNumberSensor" name="SerialNumberSensor">
+                        @foreach ($sensor as $item)
+                            <option value="{{ $item->id }}" {{ old('serial_number') == $item->id ? 'selected':''}}>{{ $item->serial_number }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="MerkSensor">Merk Sensor</label>
+                    </div>
+                    <select class="custom-select" id="MerkSensor" name="MerkSensor">
+                        @foreach ($sensor as $item)
+                            <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':''}}>{{ $item->merk_sensor }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+
+                    <button type="button" class="btn btn-success float-right mb-2" data-dismiss="modal" onclick="send()">Send</button>
+                    <button  class="btn btn-primary float-right mb-2 mr-2" onclick="add()" >Add</button>
+                    <button  type="button" class="btn btn-danger float-right mb-2 mr-2" id="clear">Clear</button>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-text">Sensor terpilih</span>
+                    <textarea class="form-control" aria-label="With textarea" id="SensorTerpilih" disabled>{{ $maintenanceGps->equipment_sensor_id}}</textarea>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</td>
      <td><select class="select equipment_gsm-{{$maintenanceGps->id}}" id="equipment_gsm" name="equipment_gsm">
         <option value="{{$maintenanceGps->equipment_gsm}}"> {{$maintenanceGps->gsm->gsm_number?? ''}} </option>
         @foreach ($gsm_master as $gsm_masters)
@@ -102,15 +151,15 @@
         </div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input hasil-{{$maintenanceGps->id}}" id="hasil" value="{{$maintenanceGps->hasil}}"></i>
+        <div class="input-div"><input type="text" class="input hasil-{{$maintenanceGps->id}}" id="hasil" value="{{$maintenanceGps->hasil}}" required></i>
         </div>
     </td>
     <td>
-        <div class="input-div"><input type="number" class="input biaya_transportasi-{{$maintenanceGps->id}}" id="biaya_transportasi" value="{{$maintenanceGps->biaya_transportasi}}"></i>
+        <div class="input-div"><input type="number" class="input biaya_transportasi-{{$maintenanceGps->id}}" id="biaya_transportasi" value="{{$maintenanceGps->biaya_transportasi}}" required></i>
         </div>
     </td>
    <td>
-        <select class="select teknisi_maintenance-{{$maintenanceGps->id}}" id="teknisi_maintenance" name="teknisi_maintenance">
+        <select class="select teknisi_maintenance-{{$maintenanceGps->id}}" id="teknisi_maintenance" name="teknisi_maintenance" required>
             <option selected value="{{$maintenanceGps->teknisi_maintenance}}">{{$maintenanceGps->teknisiMaintenance->teknisi_name?? ''}}</option>
             @foreach ($teknisi_maintenance as $item)
                 <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
@@ -131,14 +180,90 @@
         <div class="input-div"><input type="text" class="input note_maintenance-{{$maintenanceGps->id}}" id="note_maintenance" value="{{$maintenanceGps->note_maintenance}}"></i>
         </div>
     </td>
-    <td><select class="select status_maintenance-{{$maintenanceGps->id}}" id="status_maintenance" name="status_maintenance" aria-label=".form-select-lg example">
-    <option value=" {{$maintenanceGps->status_maintenance}}"> {{$maintenanceGps->status_maintenance}} </option>
+    <td><select class="select status-{{$maintenanceGps->id}}" id="status" name="status" aria-label=".form-select-lg example" required>
+    <option value=" {{$maintenanceGps->status}}"> {{$maintenanceGps->status}} </option>
     <option value="Done">Done</option>
     <option value="On Progress">On Progress</option>
     </select></i></td>
-    <td>
+    <td class="action sticky-col first-col">
         <i class="fas fa-check add" id="edit" onclick="update({{ $maintenanceGps->id }})"></i>
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
+
+    <script>
+     $(document).ready(function() {
+        $('select[name="SensorName"]').on('change', function() {
+            var itemID = $(this).val();
+            // alert(itemID);
+            if(itemID) {
+                $.ajax({
+                    url: '/based_sensor/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+
+                        $('select[name="SerialNumberSensor').empty();
+                        $('select[name="SerialNumberSensor').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="SerialNumberSensor').append('<option value="'+ data[i].serial_number + '"> '+ data[i].serial_number +'</option>');
+                                    // alert(data[i].serial_number)
+                            }
+                    }
+                });
+            }else{
+                $('select[name="SerialNumberSensor"]').empty();
+            }
+        });
+        $('select[name="SerialNumberSensor"]').on('change', function() {
+            var itemID = $(this).val();
+            // alert(itemID);
+            if(itemID) {
+                $.ajax({
+                    url: '/based_serialnumber/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        // alert(data.length);
+                        $('select[name="MerkSensor').empty();
+                        $('select[name="MerkSensor').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="MerkSensor').append('<option value="'+ data[i].merk_sensor + '"> '+ data[i].merk_sensor +'</option>');
+                                    // alert(data[i].serial_number)
+                            }
+                    }
+                });
+            }
+            else{
+                $('select[name="MerkSensor"]').empty();
+            }
+        });
+     $('#clear').click(function(){
+                var sensorterpilih =  document.getElementById("SensorTerpilih").value;
+                if (sensorterpilih == ""){
+                    alert("No sensor selected")
+                }else{
+                    $('#SensorTerpilih').empty();
+                }
+            })
+    });
+    function add(){
+        var sensor = document.getElementById("SensorName").value;
+        var serialnumber = document.getElementById("SerialNumberSensor").value;
+        var merksensor = document.getElementById("MerkSensor").value;
+        var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
+        var hasil = document.getElementById("SensorTerpilih").value;
+        if (data == hasil) {
+                alert("ada data yang sama");
+        }else{
+            $("#SensorTerpilih").prepend(data);
+        }
+    }
+    function send(){
+        var sensorterpilih = document.getElementById("SensorTerpilih").value;
+        $('#sensor').empty();
+        $('#sensor').append(
+            '<option value="'+ sensorterpilih + '" id="equipment_sensor_id" data-toggle="modal" data-target="#exampleModal"> '+ sensorterpilih +'</option>'
+        );
+    }
+
+</script>
 
 

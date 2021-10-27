@@ -30,7 +30,7 @@
         </select>
     </td>
     <td>
-        <select class="select" id="type_gps" name="type_gps">
+        <select class="select" id="type_gps" name="type_gps" required>
             <option selected disabled>Type Gps</option>
 
             @foreach ($gps as $item)
@@ -39,7 +39,7 @@
         </select>
     </td>
     <td>
-        <select class="select" id="equipment_gps" name="equipment_gps">
+        <select class="select" id="equipment_gps" name="equipment_gps" required>
             <option value="">equipment_gps</option>
             @foreach ($gps as $item)
                 <option value="{{ $item->id }}">{{ $item->typeGps->type }}</option>
@@ -77,7 +77,7 @@
         <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
     </td>
     <td>
-        <textarea class="form-control" id="hasil" name="hasil" rows="3"></textarea>
+        <textarea class="form-control" id="hasil" name="hasil" rows="3" required></textarea>
     </td>
     <td>
         <div class="input-div">
@@ -85,7 +85,7 @@
         </div>
     </td>
     <td>
-        <select class="select" id="teknisi" name="teknisi">
+        <select class="select" id="teknisi" name="teknisi" required>
             <option selected disabled>Teknisi</option>
             @foreach ($teknisi_maintenance as $item)
                 <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>

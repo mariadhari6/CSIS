@@ -1,13 +1,13 @@
 @extends('layouts.v_main')
-@section('title','Maintenance GPS')
+@section('title','CSIC | Maintenance GPS')
+@section('title-table','Maintenance GPS')
 
 @section('content')
-<h4 class="page-title">Maintenance GPS</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+            <div class="text-right" id="selected">
                 <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
                     <option value="{{ url('item_data_all_maintenance') }}">All</option>
@@ -15,6 +15,15 @@
                     <option value="{{ url('item_data_done_maintenance') }}">Done</option>
                   </select>
                 </div>
+
+                <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                  <div class="form-group">
+                      <input class="form-control" id="filter-date" type="month">
+                      <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
+                    </select>
+                  </div>
+                </ul>
               <button class="btn btn-success  mr-2 edit_all">
                 <i class="fas fa-pen"></i>
               </button>
@@ -22,11 +31,12 @@
                 <i class="fas fa-trash"></i>
               </button>
             </div>
+            <form>
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th rowspan="2" width="10px">
-                  <div class="form-check">
+                <th rowspan="2">
+                  <div>
                       <label class="form-check-label">
                           <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                           <span class="form-check-sign"></span>
@@ -37,18 +47,18 @@
                 <th rowspan="2" scope="col" class="list">Company</th>
                 <th rowspan="2" scope="col" class="list">Vehicle</th>
                 <th rowspan="2" scope="col" class="list">Tanggal</th>
-                <th rowspan="2" scope="col" class="list">Type GPS</th>
+                <th rowspan="2" scope="col" class="list">Type GPS*</th>
                 <th colspan="3" scope="col" class="list">Equipment</th>
                 <th rowspan="2" scope="col" class="list">Permasalahan</th>
                 <th rowspan="2" scope="col" class="list">Ketersediaan Kendaraan</th>
                 <th rowspan="2" scope="col" class="list">Keterangan</th>
-                <th rowspan="2" scope="col" class="list">Hasil</th>
-                <th rowspan="2" scope="col" class="list">Biaya Transportasi</th>
-                <th rowspan="2" scope="col" class="list">Teknisi</th>
+                <th rowspan="2" scope="col" class="list">Hasil*</th>
+                <th rowspan="2" scope="col" class="list">Biaya Transportasi*</th>
+                <th rowspan="2" scope="col" class="list">Teknisi*</th>
                 <th rowspan="2" scope="col" class="list">Req By</th>
                 <th rowspan="2" scope="col" class="list">Note</th>
-                <th rowspan="2" scope="col" class="list">Status</th>
-                <th rowspan="2" scope="col" class="action">Action</th>
+                <th rowspan="2" scope="col" class="list">Status*</th>
+                <th rowspan="2" scope="col" class="action sticky-col first-col">Action</th>
               </tr>
               <tr>
                 <th scope="col" class="list">GPS</th>
@@ -60,6 +70,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+          </form>
         </div>
       </div>
     </div>
@@ -83,6 +94,32 @@
         $('#table_id').DataTable().draw();
       });
     }
+      // filter bulan dan tahun
+    $('#check-btn').click(function() {
+      var date = new Date($('#filter-date').val());
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+    //   var task = val();
+        $.ajax({
+            type: "get",
+            url: "{{ url('item_data_MY_Maintennace') }}",
+            data: {
+              month: month,
+              year: year,
+
+            },
+            success: function(data) {
+              $('#table_id').DataTable().destroy();
+              $('#table_id').find("#item_data").html(data);
+              $('#table_id').dataTable( {
+                  "dom": '<"top"f>rt<"bottom"lp><"clear">'
+                  // "dom": '<lf<t>ip>'
+                  });
+              $('#table_id').DataTable().draw();
+            }
+        })
+    });
+
     // ------- filter change ------
     $("#filter").change(function(){
         var value = $(this).val();
@@ -131,7 +168,7 @@
         var teknisi_maintenance = $("#teknisi_maintenance").val();
         var req_by = $("#req_by").val();
         var note_maintenance = $("#note_maintenance").val();
-        var status_maintenance = $("#status_maintenance").val();
+        var status = $("#status").val();
 
         $.ajax({
             type: "get",
@@ -152,7 +189,7 @@
               teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
               note_maintenance: note_maintenance,
-             status_maintenance:status_maintenance
+             status:status
 
             },
              success: function(data) {
@@ -223,7 +260,7 @@
         $("#item-teknisi_maintenance-"+id).slideUp("fast");
         $("#item-req_by-"+id).slideUp("fast");
         $("#item-note_maintenance-"+id).slideUp("fast");
-        $("#item-status_maintenance-"+id).slideUp("fast");
+        $("#item-status-"+id).slideUp("fast");
         $.get("{{ url('edit_form_maintenanceGps') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -246,7 +283,7 @@
         var teknisi_maintenance = $("#teknisi_maintenance").val();
         var req_by = $("#req_by").val();
         var note_maintenance = $("#note_maintenance").val();
-        var status_maintenance = $("#status_maintenance").val();
+        var status = $("#status").val();
         var id = id;
 
         $.ajax({
@@ -268,7 +305,7 @@
               teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
               note_maintenance: note_maintenance,
-             status_maintenance:status_maintenance
+             status:status
             },
             success: function(data) {
               swal({
@@ -373,7 +410,7 @@
               $("#item-teknisi_maintenance-"+value).slideUp("fast");
               $("#item-req_by-"+value).slideUp("fast");
               $("#item-note_maintenance-"+value).slideUp("fast");
-              $("#item-status_maintenance-"+value).slideUp("fast");
+              $("#item-status-"+value).slideUp("fast");
 
               $(".add").hide("fast");
               $.get("{{ url('edit_form_maintenanceGps') }}/" + value, {}, function(data, status) {
@@ -419,7 +456,7 @@
             var teknisi_maintenance = $(".teknisi_maintenance-"+value).val();
             var req_by = $(".req_by-"+value).val();
             var note_maintenance = $(".note_maintenance-"+value).val();
-            var status_maintenance = $(".status_maintenance-"+value).val();
+            var status = $(".status-"+value).val();
 
             $.ajax({
             type: "get",
@@ -440,7 +477,7 @@
               teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
               note_maintenance: note_maintenance,
-              status_maintenance: status_maintenance
+              status: status
             },
             success: function(data) {
             swal({
