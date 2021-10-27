@@ -27,9 +27,10 @@ class CreateDetailCustomersTable extends Migration
             $table->string('type');
             $table->foreignId('gsm_id');
             $table->string('provider');
-            $table->foreignId('serial_number_sensor');
-            $table->foreignId('sensor_id');
-            $table->string('merk_sensor');
+            $table->string('sensor_all')->nullable();
+            $table->foreignId('serial_number_sensor')->nullable();
+            $table->foreignId('sensor_id')->nullable();
+            $table->string('merk_sensor')->nullable();
             $table->string('pool_name');
             $table->string('pool_location');
             $table->date('waranty');

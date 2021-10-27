@@ -11,6 +11,7 @@
         </div>
         <nav class="navbar navbar-header navbar-expand-lg">
             <div class="container-fluid">
+                <h5 style="color: whitesmoke">@yield('title-table')</h5>
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 
                     <li class="nav-item dropdown">

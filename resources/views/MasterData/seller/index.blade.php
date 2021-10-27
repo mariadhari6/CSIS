@@ -1,12 +1,9 @@
 @extends('layouts.v_main')
 @section('title','Seller')
+@section('title-table', 'Seller')
 
 @section('content')
 
-<div class="title">
-    <strong>Seller</strong>
-</div>
-<br>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -16,22 +13,21 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-          <table class="table table-responsive" class="table_id" id="table_id" >
+          <table class="table table-hover" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th width="10px">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
+                <th>
+                  <label class="form-check-label">
+                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                    <span class="form-check-sign"></span>
+                </label>
                 </th>
-                <th scope="col" class="action">Action</th>
-                <th scope="col" class="list">Seller Name</th>
-                <th scope="col" class="list">Seller Code</th>
-                <th scope="col" class="list">No Agreement Latter</th>
-                <th scope="col" class="list">Status</th>
+                <th scope="col">No</th>
+                <th scope="col">Seller Name</th>
+                <th scope="col">Seller Code</th>
+                <th scope="col">No Agreement Latter</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -145,9 +141,10 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-seller_name-"+id).hide("fast");
         $("#item-seller_code-"+id).hide("fast");
-        $("#item-no_agreement_latter-"+id).hide("fast");
+        $("#item-no_agreement_letter-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
         $.get("{{ url('show_seller') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
@@ -251,12 +248,13 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_seller') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-seller_name-"+value).hide("fast");
                     $("#item-seller_code-"+value).hide("fast");
                     $("#item-no_agreement_letter-"+value).hide("fast");

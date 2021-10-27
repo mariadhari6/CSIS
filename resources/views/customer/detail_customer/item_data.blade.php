@@ -49,7 +49,7 @@
             {{ $detail->gsm->provider }}
         </td>
         <td id="item-SensorAll-{{ $detail->id }}">
-            {{ $detail->sensor_all}}
+            {{ $detail->sensor_all }}
         </td>
         {{-- <td id="item-NameSensor-{{ $detail->id }}">
             {{ $detail->sensor_id }}

@@ -1,10 +1,7 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Gsm Pre Active')
-
-
+@section('title-table','Master GSM')
 @section('content')
-
-<h4 class="page-title">GSM Master</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -33,31 +30,29 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+          <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
+                  <label class="form-check-label">
+                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                    <span class="form-check-sign"></span>
+                  </label>  
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Status GSM</th>
-                <th scope="col" class="list">GSM Number</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Serial Number</th>
-                <th scope="col" class="list">ICC ID</th>
-                <th scope="col" class="list">IMSI</th>
-                <th scope="col" class="list">Res ID</th>
-                <th scope="col" class="list">Request Date</th>
-                <th scope="col" class="list">Expired Date</th>
-                <th scope="col" class="list">Active Date</th>
-                <th scope="col" class="list">Terminated Date</th>
-                <th scope="col" class="list">Note</th>
-                <th scope="col" class="list">Provider</th>
+                <th scope="col">No.</th>
+                <th scope="col">Status GSM</th>
+                <th scope="col">GSM Number</th>
+                <th scope="col">Company</th>
+                <th scope="col">Serial Number</th>
+                <th scope="col">ICC ID</th>
+                <th scope="col">IMSI</th>
+                <th scope="col">Res ID</th>
+                <th scope="col">Request Date</th>
+                <th scope="col">Expired Date</th>
+                <th scope="col">Active Date</th>
+                <th scope="col">Terminated Date</th>
+                <th scope="col">Note</th>
+                <th scope="col">Provider</th>
                 <th scope="col" class="action">Action</th>
               </tr>
             </thead>

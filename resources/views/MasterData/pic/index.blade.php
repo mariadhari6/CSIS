@@ -1,12 +1,8 @@
 @extends('layouts.v_main')
 @section('title','PIC Company')
-
+@section('title-table','PIC Company')
 @section('content')
 
-<div class="title">
-    <strong>PIC Company</strong>
-</div>
-<br>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -17,28 +13,27 @@
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
 
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+          <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
                   <th>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
+                    <label class="form-check-label">
+                      <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                      <span class="form-check-sign"></span>
+                    </label>
                 </th>
-                <th scope="col" class="action">Action</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Pic Name</th>
-                <th scope="col" class="list">Phone</th>
-                <th scope="col" class="list">Email</th>
-                <th scope="col" class="list">Position</th>
-                <th scope="col" class="list">Date of birth</th>
+                <th scope="col">No</th>
+                <th scope="col">Company</th>
+                <th scope="col">Pic Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Position</th>
+                <th scope="col">Date of birth</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
-              {{-- {{ csrf_field() }} --}}
+            
             </tbody>
           </table>
         </div>
@@ -53,9 +48,6 @@
       read()
 
     });
-
-
-    // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data_pic') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
@@ -157,12 +149,13 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
-        $("#item-company_id-"+id).slideUp("fast");
-        $("#item-pic_name-"+id).slideUp("fast");
-        $("#item-phone-"+id).slideUp("fast");
-        $("#item-email-"+id).slideUp("fast");
-        $("#item-position-"+id).slideUp("fast");
-        $("#item-date_of_birth-"+id).slideUp("fast");
+        $("#item-no-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
+        $("#item-pic_name-"+id).hide("fast");
+        $("#item-phone-"+id).hide("fast");
+        $("#item-email-"+id).hide("fast");
+        $("#item-position-"+id).hide("fast");
+        $("#item-date_of_birth-"+id).hide("fast");
         $.get("{{ url('show_pic') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -270,12 +263,13 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_pic') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).slideUp("fast");
                     $("#item-company_id-"+value).slideUp("fast");
                     $("#item-pic_name-"+value).slideUp("fast");
                     $("#item-phone-"+value).slideUp("fast");
@@ -335,7 +329,7 @@
                                     showConfirmButton: false,
                                     timer: 1500
 
-                                // $(".save").hide();
+                               
                                 });
                                 read();
 

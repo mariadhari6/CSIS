@@ -1,4 +1,4 @@
-<tr id="add_form">
+<tr>
     <td></td>
     <td></td>
     <td>
@@ -23,11 +23,16 @@
                 <option value="{{ $item->id }}" {{ old('vehicle_id') == $item->id ? 'selected':'' }}>{{ $item->vehicle->name }}</option>
             @endforeach
         </select>
+    </td>
     <td>
         <select class="select" id="PoNumber" name="PoNumber">
-            <option value=""></option>  
+            <option value=""></option>
             @foreach ($po as $item)
-                <option value="{{ $item->id }}" {{ old('po_number') == $item->id ? 'selected':'' }}>{{ $item->po_number}}</option>
+                {{-- @if ($item->id == $cekdataada[0]['po_id'])
+                @if ($item->jumlah_unit_po <=  $cekdataada[0]['jumlah'])   --}}
+            <option value="{{ $item->id }}" {{ old('po_number') == $item->id ? 'selected':'' }}>{{ $item->po_number}}</option>
+                    {{-- @endif
+                @endif --}}
             @endforeach
         </select>
     </td>
@@ -95,19 +100,12 @@
             @endforeach
         </select>
     </td>
-    <td >
-        {{-- <select class="select" id="SerialNumberSensor" name="SerialNumberSensor">
-            <option value=""></option>  
-            @foreach ($sensor as $item)
-                <option value="{{ $item->id }}" {{ old('serial_number_sensor') == $item->id ? 'selected':''}}>{{ $item->serial_number }}</option>
-            @endforeach
-        </select> --}}
-        {{-- <div class="input-div" ><input type="text" class="input" id="PoNumber" placeholder=""></div> --}}
+    <td>
         <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#exampleModal" id="modal">
             Sensor
-          </button>
-          
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -117,31 +115,46 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <label class="input-group-text" for="SensorName">Sensor Name</label>
-                        </div>
-                        <select class="custom-select" id="SensorName" name="SensorName">
-                            @foreach ($sensor as $item)
-                            <option value="{{ $item->sensor_name }}" {{ old('sensor_id') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="input-group mb-3">
+
+                    {{-- <select class="form-control selectpicker" name="part" data-live-search="true" required>
+                        <option value="Select Part">Select Part</option>
+                        <option value="Part 1" data-tokens="Part 1">Part 1</option>
+                        <option value="Part 2" data-tokens="Part 2">Part 2</option>
+                        <option value="Part 3" data-tokens="Part 3">Part 3</option>
+                        <option value="Part 4" data-tokens="Part 4">Part 4</option>
+                        <option value="Part 5" data-tokens="Part 5">Part 5</option>
+                        <option value="Pravesh Pariksha" data-tokens="Pravesh Pariksha">Pravesh Pariksha</option>
+                      </select>
+                       --}}
+
+                        <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <label class="input-group-text" for="SerialNumberSensor">Serial Number</label>
                         </div>
-                        <select class="custom-select" id="SerialNumberSensor" name="SerialNumberSensor">
+                        <select class="form-control selectpicker" id="SerialNumberSensor" name="SerialNumberSensor" data-live-search="true">
+                            <option value=""></option>
                             @foreach ($sensor as $item)
                                 <option value="{{ $item->id }}" {{ old('serial_number') == $item->id ? 'selected':''}}>{{ $item->serial_number }}</option>
+                            @endforeach
+                        </select>   
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="SensorName">Name</label>
+                        </div>
+                        <select class="custom-select" id="SensorName" name="SensorName" disabled>
+                            <option value=""></option>  
+                            @foreach ($sensor as $item)
+                            <option value="{{ $item->id }}" {{ old('sensor_id') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <label class="input-group-text" for="MerkSensor">Merk Sensor</label>
+                          <label class="input-group-text" for="MerkSensor">Merk</label>
                         </div>
-                        <select class="custom-select" id="MerkSensor" name="MerkSensor">
+                        <select class="custom-select" id="MerkSensor" name="MerkSensor" disabled>
+                            <option value=""></option>  
                             @foreach ($sensor as $item)
                                 <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':''}}>{{ $item->merk_sensor }}</option>
                             @endforeach
@@ -161,24 +174,8 @@
                 </div>
               </div>
             </div>
-          </div>
+        </div>
     </td>
-    {{-- <td>
-        <select class="select" id="NameSensor" name="NameSensor" disabled>
-            <option value=""></option>  
-            @foreach ($sensor as $item)
-                <option value="{{ $item->id }}" {{ old('name_sensor') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
-            @endforeach
-        </select>
-    </td>
-    <td>
-        <select class="select" id="MerkSensor" name="MerkSensor" disabled>
-            <option value=""></option>  
-            @foreach ($sensor as $item)
-                <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':''}}>{{ $item->merk_sensor }}</option>
-            @endforeach
-        </select>
-    </td> --}}
     <td>
         <select class="select" id="PoolName" name="PoolName" disabled>
             <option value=""></option>  
@@ -215,6 +212,9 @@
 
     <script>
          $(document).ready(function() {
+            $(function() {
+            $('.selectpicker').selectpicker();
+            });
              
             $('select[name="Imei"]').on('change', function() {
                 var Id = $(this).val();
@@ -257,27 +257,28 @@
         
             });
 
-            // $('select[name="SerialNumberSensor"]').on('change', function() {
-            //     var Id = $(this).val();
-            //     if(Id) {
-            //         $.ajax({
-            //             url: '/based_sensor/'+ Id,
-            //             method: "GET",                        
-            //             success:function(data) {
-            //                 $('select[name="NameSensor').empty();
-            //                 $('select[name="MerkSensor').empty();
-            //                     $.each(data, function(key, value) {
-            //                         $('select[name="NameSensor').append('<option value="'+ key +'">'+ value.sensor_name +'</option>');
-            //                         $('select[name="MerkSensor').append('<option value="'+ key +'">'+ value.merk_sensor +'</option>');                                 
-            //                    });
-            //             }
-            //         });
-            //     }else{
-            //         $('select[name="NameSensor').empty();
-            //         $('select[name="MerkSensor').empty();
-            //     }
+            $('select[name="SerialNumberSensor"]').on('change', function() {
+                var Id = $(this).val();
+                // alert(Id);
+                if(Id) {
+                    $.ajax({
+                        url: '/based_sensor/'+ Id,
+                        method: "GET",                        
+                        success:function(data) {
+                            $('select[name="SensorName').empty();
+                            $('select[name="MerkSensor').empty();
+                                $.each(data, function(key, value) {
+                                    $('select[name="SensorName').append('<option value="'+ key +'">'+ value.sensor_name +'</option>');
+                                    $('select[name="MerkSensor').append('<option value="'+ key +'">'+ value.merk_sensor +'</option>');                                 
+                               });
+                        }
+                    });
+                }else{
+                    $('select[name="SensorName').empty();
+                    $('select[name="MerkSensor').empty();
+                }
         
-            // });
+            });
 
             $('select[name="LicencePlate"]').on('change', function() {
                 var Id = $(this).val();
@@ -378,60 +379,34 @@
 
 
 
-            $('select[name="SensorName"]').on('change', function() {
+            // $('select[name="SensorName"]').on('change', function() {
 
-                var itemID = $(this).val();
-                // alert(itemID);
+            //     var itemID = $(this).val();
+            //     // alert(itemID);
 
-                if(itemID) {
-                    $.ajax({
-                        url: '/based_sensor/'+ itemID,
-                        method: "GET",                        
-                        success:function(data) {
-                            // alert(data.length);
+            //     if(itemID) {
+            //         $.ajax({
+            //             url: '/based_sensor/'+ itemID,
+            //             method: "GET",                        
+            //             success:function(data) {
+            //                 // alert(data.length);
 
-                            $('select[name="SerialNumberSensor').empty();
-                            $('select[name="SerialNumberSensor').append('<option value=""> </option>');
-                                for(var i = 0 ; i < data.length ; i++) {   
-                                    $('select[name="SerialNumberSensor').append('<option value="'+ data[i].serial_number + '"> '+ data[i].serial_number +'</option>');
-                                        // alert(data[i].serial_number)
-                                }   
-                        }
-                    });
-                }
-                else{
-                    $('select[name="SerialNumberSensor"]').empty();
+            //                 $('select[name="SerialNumberSensor').empty();
+            //                 $('select[name="SerialNumberSensor').append('<option value=""> </option>');
+            //                     for(var i = 0 ; i < data.length ; i++) {   
+            //                         $('select[name="SerialNumberSensor').append('<option value="'+ data[i].serial_number + '"> '+ data[i].serial_number +'</option>');
+            //                             // alert(data[i].serial_number)
+            //                     }   
+            //             }
+            //         });
+            //     }
+            //     else{
+            //         $('select[name="SerialNumberSensor"]').empty();
                  
-                }
+            //     }
         
-            });
+            // });
 
-            $('select[name="SerialNumberSensor"]').on('change', function() {
-
-               var itemID = $(this).val();
-                // alert(itemID);
-                if(itemID) {
-                    $.ajax({
-                        url: '/based_serialnumber/'+ itemID,
-                        method: "GET",                        
-                        success:function(data) {
-                            // alert(data.length);
-
-                            $('select[name="MerkSensor').empty();
-                            $('select[name="MerkSensor').append('<option value=""> </option>');
-                                for(var i = 0 ; i < data.length ; i++) {   
-                                    $('select[name="MerkSensor').append('<option value="'+ data[i].merk_sensor + '"> '+ data[i].merk_sensor +'</option>');
-                                        // alert(data[i].serial_number)
-                                }   
-                        }
-                    });
-                }
-                else{
-                    $('select[name="MerkSensor"]').empty();
-                
-                }
-
-            });
 
 
             $('#clear').click(function(){
@@ -450,19 +425,20 @@
         
         function add(){
             
-            var sensor = document.getElementById("SensorName").value;
+            // var sensor = document.getElementById("SensorName").value;
             var serialnumber = document.getElementById("SerialNumberSensor").value;
-            var merksensor = document.getElementById("MerkSensor").value;
-            var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
+            // var merksensor = document.getElementById("MerkSensor").value;
+            // var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
+            var data = serialnumber +" "
             var hasil = document.getElementById("SensorTerpilih").value;
             if (data == hasil) {
                 alert("ada data yang sama");
             }else{
             $("#SensorTerpilih").prepend(data);
             }
-           
+            
          }
-
+         
          function send(){
             var sensorterpilih = document.getElementById("SensorTerpilih").value;
             if (sensorterpilih == "") {
@@ -470,7 +446,7 @@
             }else{
                 $('#modal').empty();
                 $('#SensorAll').empty();
-                $('#modal').append('<option value="'+ sensorterpilih + '" id="SensorAll" data-toggle="modal" data-target="#exampleModal" > '+ sensorterpilih +'</option>');
+                $('#modal').append('<option value="'+ sensorterpilih + '" id="SensorAll"  data-toggle="modal" data-target="#exampleModal" > '+ sensorterpilih +'</option>');
             }
          }
        

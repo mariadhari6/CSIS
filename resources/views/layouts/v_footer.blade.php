@@ -41,6 +41,8 @@
     <script src="{{asset('template-admin')}}/assets/js/plugin/chart-circle/circles.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/ready.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
 
     {{-- Datatable --}}

@@ -13,7 +13,7 @@
         <div class="input-div"><input type="text" class="input" id="gsm_number" placeholder="GSM Number">
     </td>
     <td>
-        <select class="form-control" id="company_id" name="company_id">
+        <select class="select" id="company_id" name="company_id">
          
           <option value="-" >-</option>
          @foreach ($company as $item)

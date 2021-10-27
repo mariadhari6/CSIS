@@ -9,7 +9,8 @@ use App\Models\Vehicle;
 use App\Models\Seller;
 use App\Models\Gsm;
 use App\Models\Sensor;
-
+use App\Models\Gps;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +33,7 @@ class MasterPoController extends Controller
     }
     public function item_data()
     {
-        $master_po = MasterPo::orderBy('id', 'DESC')->get();
+        $master_po = MasterPo::orderBy('id', 'ASC')->get();
         return view('master_po.item_data')->with([
             'master_po' => $master_po
         ]);
@@ -207,37 +208,213 @@ class MasterPoController extends Controller
 
     
     
-    $count = DetailCustomer::where('po_id', $id)->count();
-    // ->get();
+    // $count = DetailCustomer::where('po_id', $id)->count();
+    // // ->get();
 
-    $data = MasterPo::where('id', $id)->pluck('jumlah_unit_po');
-    $i = json_decode($data);
+    // $data = MasterPo::where('id', $id)->pluck('jumlah_unit_po');
+    // $i = json_decode($data);
 
-    // foreach ($data as $key->jumlah_unit_po) {
+    // // foreach ($data as $key->jumlah_unit_po) {
             
-    //   echo $key ;
+    // //   echo $key ;
 
-    // }
+    // // }
     
   
-    if( $count <= $data[0]){
+    // if( $count <= $data[0]){
 
-        echo "masih kurang  atau pas";
-    }else{
-        echo "kelebihan";
+    //     echo "masih kurang  atau pas";
+    // }else{
+    //     echo "kelebihan";
     
-    }
+    // }
 
     // return $ijumlah_unit_po;
     // return $data->jumlah;
     
        
+        // $data = Carbon::now();
+        // $bulan = $data->month;
+        // $tahun = $data->year;
+
+        // return $tahun;
+        // $month = 10;
+        // $year = 2021;
+        // $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+        // ->selectRaw('count(*) as jumlah, company_id')
+        // // ->get();
+        // $id = 8;
+        // $data = DetailCustomer::where('po_id', $id )->groupBy('po_id')
+        // ->selectRaw('count(*) as jumlah, po_id')
+        // ->get();
 
 
-       
- 
+
+        // $data = DetailCustomer::where('po_id', $id)->get('gps_id');
+
+        // $data = DB::table('detail_customers')
+        // ->where('po_id', $id)
+        // ->select()
+        // ->whereRaw($where['rawQuery'], isset($where['bindParams']) ? $where['bindParams'] : array())
+        // ->get()
+        // ->groupBy('po_id');
+
+
+        // return $data;
+
+        $str = "1 2 3";
+
+        // $arr = explode(" ",$str);
+        // $count = count($arr)-1;
+
+        // for ($i=0; $i <= $count; $i++) { 
+        //     Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
+        // }
+
+        // return $arr[0];
         
-       
+        // $batas  = MasterPo::where('id', $i)->pluck('jumlah_unit_po');
+        // $id = 1;
+        // Gps::where('id', $id)->update(array('status' => 'Used'));
+
+        // $data = DetailCustomer::where('po_id', $id )->groupBy('po_id')
+        // ->selectRaw('count(*) as jumlah, po_id')
+        // ->get();
+        
+        // $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+        // ->selectRaw('count(*) as jumlah, company_id')
+        // ->get();
+
+        // jumlah total gps yang status layanan aktif   
+        // $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->count('status_layanan' , 'Active')->groupBy('company_id')->get();
+
+            //  $i = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
+            // ->groupBy('company_id')
+            // ->orderBy(DB::raw('COUNT(gps_id)','desc'))
+            // ->get(array(DB::raw('COUNT(gps_id) as total_gps_active'),'company_id'));
+
+            // $a = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)
+            // ->groupBy('company_id')
+            // ->orderBy(DB::raw('COUNT(tanggal_non_aktif)','desc'))
+            // ->get(array(DB::raw('COUNT(tanggal_non_aktif) as total_terminate'),'company_id'));
+
+
+            // $a = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
+            // ->groupBy('company_id')
+            // ->orderBy(DB::raw('COUNT(tanggal_pasang)','desc'))
+            // ->get(array(DB::raw('COUNT(tanggal_pasang) as total_penambahan'),'company_id'));
+        //     $month = 10;
+        //     $year = 2021;
+
+        //     $i = DB::table('detail_customers')
+        //     ->groupBy('company_id')
+        //     ->select('company_id', 
+        //         DB::raw('count(gps_id) as total_gps'),
+        //         DB::raw('count(tanggal_pasang) as total_penambahan')
+        //     )
+        //     ->whereRaw('MONTH(tanggal_pasang) = ?',$month)
+        //     ->whereRaw('YEAR(tanggal_pasang) = ?',$year)
+        //     ->get();
+
+
+            
+
+        // return count($i);
+        
+    //     ->select('company_id', 
+    //     DB::raw('count(tanggal_non_aktif) as total_terminate'),
+    //   )
+    //   ->whereRaw('MONTH(tanggal_non_aktif ) = ?',$month)
+    //   ->whereRaw('YEAR(tanggal_non_aktif ) = ?',$year)
+        $company = 1;
+        $details = DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company )
+                ->get();
+
+        $h =  DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company )
+        ->pluck('sensor_all');
+
+        $l = $h[0];
+        $a = explode(" ",$l );
+        $u = count($a)-1;
+ 
+ 
+        for ($i=0; $i <= $u ; $i++) { 
+
+
+            $d =  DB::table('detail_customers')
+            ->join('sensors', 'detail_customers.sensor_all' , '=', 'sensors.id')
+            ->select('detail_customers.sensor_all' , 'sensors.sensor_name')
+            ->get();
+
+            
+        
+        
+        }
+
+        $e = MasterPo::get('jumlah_unit_po');
+
+        $s = DetailCustomer::groupBy('po_id')
+            ->selectRaw('count(*) as jumlah, po_id')
+            ->get();
+        
+        // return $s[0]['jumlah'];
+
+        // $p =  DB::table('detail_customers')
+        // ->join('master_pos', 'detail_customers.po_id' , '=', 'master_pos.id')
+        // ->select('detail_customers.po_id' , 'master_pos.jumlah_unit_po')
+        // ->get();
+        // $id = 1;
+        // $po         = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $id)->pluck('jumlah_unit_po');
+
+        // $cekdataada = DetailCustomer::groupBy('po_id')
+        // ->selectRaw('count(*) as jumlah , po_id')
+        // ->get();
+
+        // return $cekdataada[0]['po_id'];
+
+
+
+        // $i = DB::table('master_pos')
+        //     ->groupBy('id')
+        //     ->select('id', 
+        //         DB::raw('jumlah_unit_po as jumlah'),
+        //     )
+        //     ->get();
+
+
+        // return $i[0]->jumlah;
+        $month = 10;
+        $year  = 2021;
+        $data = DB::table('detail_customers')
+        ->groupBy('company_id')
+        ->select('company_id', 
+            DB::raw('count(gps_id) as total_gps'),
+            DB::raw('count(tanggal_pasang) as total_penambahan')
+        )
+        ->whereRaw('MONTH(tanggal_pasang) = ?',$month)
+        ->whereRaw('YEAR(tanggal_pasang) = ?',$year)
+        ->get();
+
+        return $data[0]->company_id->company->company_name;
+        
+
+
+        
+
+        
+
+
+        
+
+
+
+
+
+
+
+
+
+        // join antara $a[] dengan id pada sensor
         
        
       

@@ -1,13 +1,7 @@
 @extends('layouts.v_main')
 @section('title','Gps')
-
-
+@section('title-table','GPS')
 @section('content')
-
-<div class="title">
-    <strong>GPS</strong>
-</div>
-<br>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -17,34 +11,29 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-
-        {{-- <div class="table-responsive"> --}}
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+          <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th width="10px">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
+                  <label class="form-check-label">
+                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                    <span class="form-check-sign"></span>
+                  </label>
                 </th>
-                <th scope="col" class="action">Action</th>
-                <th scope="col" class="list" >Merk</th>
-                <th scope="col" class="list" >Type</th>
-                <th scope="col" class="list" >IMEI</th>
-                <th scope="col" class="list" >Waranty</th>
-                <th scope="col" class="list" >Po Date</th>
-                <th scope="col" class="list" >Status</th>
-                <th scope="col" class="list" >Status Ownership</th>
+                <th scope="col">No</th>
+                <th scope="col">Merk</th>
+                <th scope="col">Type</th>
+                <th scope="col">IMEI</th>
+                <th scope="col">Waranty</th>
+                <th scope="col">Po Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Status Ownership</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
-              {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-        {{-- </div> --}}
         </div>
       </div>
     </div>
@@ -65,7 +54,8 @@
         $('#table_id').dataTable( {
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            // "dom": '<lf<t>ip>'
+            // "lengthMenu": '[[10, 25, 50, -1], [10, 25, 50, "All"]]'
+           
             });
         $('#table_id').DataTable().draw();
       });
@@ -153,6 +143,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-merk-"+id).hide("fast");
         $("#item-type-"+id).hide("fast");
         $("#item-imei-"+id).hide("fast");
@@ -267,12 +258,13 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_gps') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");  
                     $("#item-merk-"+value).hide("fast");
                     $("#item-type-"+value).hide("fast");
                     $("#item-imei-"+value).hide("fast");
@@ -310,24 +302,24 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-                    var merk = $(".merk-"+value).val();
-                    var type = $(".type-"+value).val();
-                    var imei = $(".imei-"+value).val();
-                    var waranty = $(".waranty-"+value).val();
-                    var po_date = $(".po_date-"+value).val();
-                    var status = $(".status-"+value).val();
-                    var status_ownership = $(".status_ownership-"+value).val();
+                    var merk              = $(".merk-"+value).val();
+                    var type              = $(".type-"+value).val();
+                    var imei              = $(".imei-"+value).val();
+                    var waranty           = $(".waranty-"+value).val();
+                    var po_date           = $(".po_date-"+value).val();
+                    var status            = $(".status-"+value).val();
+                    var status_ownership  = $(".status_ownership-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_gps') }}/"+value,
                     data: {
-                     merk: merk,
-                    type:type,
-                    imei: imei,
-                    waranty: waranty,
-                    po_date: po_date,
-                    status:status,
-                    status_ownership:status_ownership
+                          merk              : merk,
+                          type              : type,
+                          imei              : imei,
+                          waranty           : waranty,
+                          po_date           : po_date,
+                          status            : status,
+                          status_ownership  : status_ownership
                     },
                     success: function(data) {
                             swal({
@@ -335,18 +327,13 @@
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
                                     timer: 1500
-
-                                // $(".save").hide();
-                                });
-                                read();
-
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
-
-
+                                }).catch(function(timeout) { });
+                                  $(".add").show("fast");
+                                  $(".edit_all").show("fast");
+                                  $(".delete_all").show("fast");
+                                  $(".btn-round").hide("fast");
+                                  $(".btn-round").hide("fast");
+                                  read();
                             }
                          });
                     });
@@ -361,11 +348,7 @@
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-        }
-
-
-
-
+        }   
   </script>
    @endsection
 

@@ -1,5 +1,6 @@
 @extends('layouts.v_main')
 @section('title','Detail Customer')
+@section('title-table', 'Detail Customer')
 
 @section('content')
 
@@ -23,6 +24,8 @@
                 </p>  
             </div>
         </div>
+
+       
        
   <!-- Modal -->
  

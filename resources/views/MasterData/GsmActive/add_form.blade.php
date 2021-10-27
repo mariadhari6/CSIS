@@ -1,7 +1,7 @@
 <tr id="add_form">
     <td></td>
-    <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
-
+    <td></td>
+   
     {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}
     <td> <div class="input-div"><input type="date" class="input" id="request_date" placeholder="Request Date" rows=""></i></td>
     <td> <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active_date"></i></td>
@@ -23,8 +23,8 @@
 
        @endforeach
     </select></i></td>
-
       <td><textarea class="form-control" id="note" name="note" rows="3"></textarea></i></td>
+      <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
 
 </tr>
 

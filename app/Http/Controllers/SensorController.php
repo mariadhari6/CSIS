@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sensor;
+use App\Models\SensorName;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Contracts\DataTable;
@@ -16,9 +17,8 @@ class SensorController extends Controller
     }
     public function add_form()
     {
-        $sensor = Sensor::orderBy('sensor_name', 'DESC')->get();
+        $sensor = SensorName::orderBy('sensor_name', 'ASC')->get();
         return view('MasterData.sensor.add_form')->with([
-
             'sensor' => $sensor,
         ]);
     }

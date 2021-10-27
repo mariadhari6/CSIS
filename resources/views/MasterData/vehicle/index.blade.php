@@ -1,12 +1,8 @@
 @extends('layouts.v_main')
 @section('title','Master Vehicle')
+@section('title-table','Master Vehicle')
 
 @section('content')
-
-<div class="title">
-    <strong>Master Vehicle</strong>
-</div>
-<br>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -17,24 +13,23 @@
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
 
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+          <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                  <th width="10px">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                                <span class="form-check-sign"></span>
-                            </label>
-                        </div>
+                    <th>
+                        <label class="form-check-label">
+                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                            <span class="form-check-sign"></span>
+                        </label>
                     </th>
-                    <th scope="col" class="action">Action</th>
-                    <th scope="col" class="list">Company Name</th>
-                    <th scope="col" class="list">License Plate</th>
-                    <th scope="col" class="list">Vihecle Type</th>
-                    <th scope="col" class="list">Pool Name</th>
-                    <th scope="col" class="list">Pool Location</th>
-                    </tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">License Plate</th>
+                    <th scope="col">Vihecle Type</th>
+                    <th scope="col">Pool Name</th>
+                    <th scope="col">Pool Location</th>
+                    <th scope="col">Action</th>
+                </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
@@ -146,12 +141,13 @@
         
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
-        $("#td-button-"+id).slideUp("fast");
-        $("#item-company_id-"+id).slideUp("fast");
-        $("#item-license_plate-"+id).slideUp("fast");
-        $("#item-vehicle_id-"+id).slideUp("fast");
-        $("#item-pool_name-"+id).slideUp("fast");
-        $("#item-pool_location-"+id).slideUp("fast");
+        $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
+        $("#item-license_plate-"+id).hide("fast");
+        $("#item-vehicle_id-"+id).hide("fast");
+        $("#item-pool_name-"+id).hide("fast");
+        $("#item-pool_location-"+id).hide("fast");
         $.get("{{ url('show_vehicle') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -263,17 +259,17 @@
             $.each(allVals, function(index, value){
                 $("#td-checkbox-"+value).hide("fast");
                 $("#td-button-"+value).hide("fast");
-                $("#item-company_id-"+value).slideUp("fast");
-                $("#item-license_plate-"+value).slideUp("fast");
-                $("#item-vehicle_id-"+value).slideUp("fast");
-                $("#item-pool_name-"+value).slideUp("fast");
-                $("#item-pool_location-"+value).slideUp("fast");
+                $("#item-no-"+value).hide("fast");
+                $("#item-company_id-"+value).hide("fast");
+                $("#item-license_plate-"+value).hide("fast");
+                $("#item-vehicle_id-"+value).hide("fast");
+                $("#item-pool_name-"+value).hide("fast");
+                $("#item-pool_location-"+value).hide("fast");
 
                 $(".add").hide("fast");
                 $.get("{{ url('show_vehicle') }}/" + value, {}, function(data, status) {
                     $("#edit-form-"+value).prepend(data)
                     $("#master").prop('checked', false);
-
                 });
             });
         }else{

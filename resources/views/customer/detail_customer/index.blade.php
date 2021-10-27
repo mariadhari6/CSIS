@@ -1,56 +1,49 @@
+
 <div class="title">
     <strong> {{ $company->company_name }}</strong>  
 </div>
-      {{-- <div class="card">
-        <div class="card-body"> --}}
-            <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-          <table class="table table-responsive" id="table_id">
-            <thead>
-              <tr>
-                <th>
-                    <div >
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-                </th>
-                <th scope="col">No</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">License Plate</th>
-                <th scope="col" class="list">Vehicle Type</th>
-                <th scope="col" class="list">PO Number</th>
-                <th scope="col" class="list">Harga Layanan</th>
-                <th scope="col" class="list">PO Date</th>
-                <th scope="col" class="list">Status PO</th>
-                <th scope="col" class="list">IMEI</th>
-                <th scope="col" class="list">Merk</th>
-                <th scope="col" class="list">Type</th>
-                <th scope="col" class="list">GSM</th>
-                <th scope="col" class="list">Provider</th>
-                <th scope="col" class="list">Sensor</th>
-                {{-- <th scope="col" class="list">Sensor Name</th>
-                <th scope="col" class="list">Merk Sensor</th> --}}
-                <th scope="col" class="list">Pool Name</th>
-                <th scope="col" class="list">Pool Location</th>
-                <th scope="col" class="list">Waranty </th>
-                <th scope="col" class="list">Status Layanan</th>
-                <th scope="col" class="list">Tanggal Pasang</th>
-                <th scope="col" class="list">Tanggal Non Active</th>
-                <th scope="col" class="list">Tanggal Reaktivasi GPS</th>
-                <th scope="col" class="action">Action</th>
-              </tr>
-            </thead>
-            <tbody  id="item_data">
-                  
-            </tbody>
-          </table>
-      {{-- </div>
-    </div> --}}
+
+    <div class="text-right mt-3" id="selected">
+        <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+        <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+        <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+    </div>
+    <table class="table table-responsive" id="table_id">
+        <thead>
+          <tr>
+            <th>
+                <label class="form-check-label">
+                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                    <span class="form-check-sign"></span>
+                </label>       
+            </th>
+            <th scope="col">No</th>
+            <th scope="col" class="list">Company</th>
+            <th scope="col" class="list">License Plate</th>
+            <th scope="col" class="list">Vehicle Type</th>
+            <th scope="col" class="list">PO Number</th>
+            <th scope="col" class="list">Harga Layanan</th>
+            <th scope="col" class="list">PO Date</th>
+            <th scope="col" class="list">Status PO</th>
+            <th scope="col" class="list">IMEI</th>
+            <th scope="col" class="list">Merk</th>
+            <th scope="col" class="list">Type</th>
+            <th scope="col" class="list">GSM</th>
+            <th scope="col" class="list">Provider</th>
+            <th scope="col" class="list">Sensor</th>
+            <th scope="col" class="list">Pool Name</th>
+            <th scope="col" class="list">Pool Location</th>
+            <th scope="col" class="list">Waranty </th>
+            <th scope="col" class="list">Status Layanan</th>
+            <th scope="col" class="list">Tanggal Pasang</th>
+            <th scope="col" class="list">Tanggal Non Active</th>
+            <th scope="col" class="list">Tanggal Reaktivasi GPS</th>
+            <th scope="col" class="action">Action</th>
+          </tr>
+        </thead>
+        <tbody  id="item_data">      
+        </tbody>
+    </table>
 
 
 <script>
@@ -88,6 +81,7 @@
     });
 
     function store() {
+
         var CompanyId           = $("#CompanyId").val();
         var LicencePlate        = $("#LicencePlate").val();
         var VihecleType         = $("#VihecleType").val();
@@ -100,10 +94,7 @@
         var Type                = $("#Type").val();
         var GSM                 = $("#GSM").val();
         var Provider            = $("#Provider").val();
-        var SensorAll            = $("#SensorAll").val();
-        // var SerialNumberSensor  = $("#SerialNumberSensor").val();
-        // var NameSensor          = $("#NameSensor").val();
-        // var MerkSensor          = $("#MerkSensor").val();
+        var SensorAll           = $("#SensorAll").val();
         var PoolName            = $("#PoolName").val();
         var PoolLocation        = $("#PoolLocation").val();
         var Waranty             = $("#Waranty").val();
@@ -129,9 +120,6 @@
                 GSM                 : GSM,
                 Provider            : Provider,
                 SensorAll           : SensorAll,
-                // SerialNumberSensor  : SerialNumberSensor,
-                // NameSensor          : NameSensor,
-                // MerkSensor          : MerkSensor,
                 PoolName            : PoolName,
                 PoolLocation        : PoolLocation,
                 Waranty             : Waranty,
@@ -159,6 +147,7 @@
                     }).catch(function(timeout) { })
                     read();
                 }
+            //    alert(data)
 
             }
         })
@@ -205,6 +194,7 @@
 
     function edit(id){
         var id = id;
+       
         var company = {{ $company->id }}
        
         $("#td-checkbox-"+id).hide("fast");

@@ -1,6 +1,6 @@
 <tr id="add_form">
     <td></td>
-    <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
+    <td></td>
     <td> <div class="input-div"><input type="text" class="input" id="company_name" placeholder="Company Name" required></i></td>
     <td>
         <select class="select" id="seller_id" name="seller_id">
@@ -23,22 +23,15 @@
     </td>
         
    <td>
-       {{-- <select class="select" id="status" name="status">
+       <select class="select" id="status" name="status">
             <option selected><<--Pilih status-->></option>
             <option value="Contract">Contract</option>
             <option value="Terminate">Terminate</option>
             <option value="Trial">Trial</option>
             <option value="Register">Register</option>
-        </select> --}}
-            <select class="select" id="status" name="status">
-                <option value="">Pilih No Agreement</option>
-    
-                @foreach ($seller as $item)
-                <option value="{{ $item->id }}" {{ old('status') == $item->id ? 'selected':'' }}>{{ $item->status }}</option>
-                @endforeach
-    
-            </select>
+        </select>
     </td>
+    <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -51,16 +44,16 @@
                         success:function(data) {
                             
                             $('select[name="no_agreement_letter_id').empty();
-                            $('select[name="status').empty();
+                           
                                 $.each(data, function(key, value) {
                                     $('select[name="no_agreement_letter_id').append('<option value="'+ key +'">'+ value.no_agreement_letter +'</option>');
-                                    $('select[name="status').append('<option value="'+ key +'">'+ value.status +'</option>');
+                                   
                                 });
                         }
                     });
                 }else{
                     $('select[name="no_agreement_letter_id"]').empty();
-                    $('select[name="status"]').empty();
+                   
                 }
         
             });

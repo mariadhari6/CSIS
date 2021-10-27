@@ -1,11 +1,7 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Master Po')
+@section('title-table','Master PO')
 @section('content')
-
-<div class="title">
-    <strong>Master Po</strong>
-</div>
-<br>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -15,26 +11,26 @@
                 <button class="btn btn-success  mr-2 edit_all"><i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger delete_all"><i class="fas fa-trash"></i></button>  
             </div>
-            <table class="table table-responsive data" class="table_id" id="table_id" >
+            <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th width="10px">
-                    <div class="form-check">
+                    
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
                         </label>
-                    </div>
+                   
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Po Number</th>
-                <th scope="col" class="list">Po Date</th>
-                <th scope="col" class="list">Harga Layanan</th>
-                <th scope="col" class="list">Jumlah Unit Po</th>
-                <th scope="col" class="list">Status Po</th>
-                <th scope="col" class="list">Sales</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col">No.</th>
+                <th scope="col">Company</th>
+                <th scope="col">Po Number</th>
+                <th scope="col">Po Date</th>
+                <th scope="col">Harga Layanan</th>
+                <th scope="col">Jumlah Unit Po</th>
+                <th scope="col">Status Po</th>
+                <th scope="col">Sales</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">

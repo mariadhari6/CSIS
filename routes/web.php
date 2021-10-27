@@ -113,7 +113,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_pic/{id}', [PicController::class, 'edit_form']);
     Route::get('/update_pic/{id}', [PicController::class, 'update']);
     Route::get('/selectedDelete_pic', [PicController::class, 'deleteAll']);
-    Route::get('/selected', [PicController::class, 'selected']);
+    Route::get('/selected_pic', [PicController::class, 'selected']);
     Route::get('/update_all/{id}', [PicController::class, 'updateall']);
 
     // seller
@@ -125,7 +125,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_seller/{id}', [SellerController::class, 'edit_form']);
     Route::get('/update_seller/{id}', [SellerController::class, 'update']);
     Route::get('/selectedDelete_seller', [SellerController::class, 'deleteAll']);
-    Route::get('/selected', [SellerController::class, 'selected']);
+    Route::get('/selected_seller', [SellerController::class, 'selected']);
     Route::get('/update_all/{id}', [SellerController::class, 'updateall']);
 
     Route::get('/GsmActive', [GsmActiveController::class, 'index'])->name('GsmActive');
@@ -138,6 +138,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_GsmActive', [GsmActiveController::class, 'deleteAll']);
     Route::get('/selected', [GsmActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmActiveController::class, 'updateall']);
+    
     //Gsm Terminate
     Route::get('/GsmTerminate', [GsmTerminateController::class, 'index'])->name('GsmTerminate');
     Route::get('/item_data_GsmTerminate', [GsmTerminateController::class, 'item_data']);
@@ -161,7 +162,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_sensor/{id}', [SensorController::class, 'edit_form']);
     Route::get('/update_sensor/{id}', [SensorController::class, 'update']);
     Route::get('/selectedDelete_sensor', [SensorController::class, 'deleteAll']);
-    Route::get('/selected', [SensorController::class, 'selected']);
+    Route::get('/selected_sensor', [SensorController::class, 'selected']);
     Route::get('/update_all/{id}', [SensorController::class, 'updateall']);
 
     //Gps
@@ -173,11 +174,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/show_gps/{id}', [GpsController::class, 'edit_form']);
     Route::get('/update_gps/{id}', [GpsController::class, 'update']);
     Route::get('/selectedDelete_gps', [GpsController::class, 'deleteAll']);
-    Route::get('/selected', [GpsController::class, 'selected']);
+    Route::get('/selected_gps', [GpsController::class, 'selected']);
     Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
 
     //gsm pre active
-
     Route::get('/GsmPreActive', [GsmPreActiveController::class, 'index'])->name('GsmPreActive');
     Route::get('/item_data_GsmPreActive', [GsmPreActiveController::class, 'item_data']);
     Route::get('/add_form_GsmPreActive', [GsmPreActiveController::class, 'add_form']);
@@ -208,7 +208,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_license/{id}', [DetailCustomerController::class, 'basedLicense']);
     Route::get('/based_po/{id}', [DetailCustomerController::class, 'basedPO']);
     Route::get('/based_ponumber/{id}', [DetailCustomerController::class, 'basedPonumber']);
-    Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensorName']);
+    // Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [DetailCustomerController::class, 'basedSerialNumber']);
 
     Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
@@ -255,7 +255,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
 
     Route::get('/count', [SummaryController::class, 'countPo']);
     Route::get('/filter', [SummaryController::class, 'filter']); 
-    Route::get('/item_summary', [SummaryController::class, 'item_data']);
+    Route::get('/data-po', [SummaryController::class, 'DataPo']); 
+    Route::get('/item_summary', [SummaryController::class, 'item_summary']);
 
     Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
 
