@@ -1,9 +1,8 @@
 @extends('layouts.v_main')
-@section('title','CSIS | Master Po')
+@section('title','Master Po')
+@section('title-table','Master Po')
 
 @section('content')
-
-<h4 class="page-title">Master Po</h4>
 
   <div class="row">
     <div class="col-md-12">
@@ -14,13 +13,25 @@
               <b>Add</b>
               <i class="fas fa-plus ml-2" id="add"></i>
               </button>
+
+              <div class="float-left mr-2 dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Company
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="list-company">
+
+                @foreach ($company as $item )
+                    <a href="" class="dropdown-item" id="{{ $item->id }}">{{ $item->company_name }}</a>
+                @endforeach
+            </div>
+        </div>
             <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
                   <option value="{{ url('item_data_All_master_po') }}">All Status</option>
-                  <option value="{{ url('item_data_Contract_master_po') }}">Contract</option>
-                  <option value="{{ url('item_data_Terminate_master_po') }}">Terminate</option>
-                  <option value="{{ url('item_data_Trial_master_po') }}">Trial</option>
-                  <option value="{{ url('item_data_Register_master_po') }}">Register</option>
+                  <option value="{{ url('item_data_beli_master_po') }}">Beli</option>
+                  <option value="{{ url('item_data_sewa_master_po') }}">Sewa</option>
+                  <option value="{{ url('item_data_sewa_beli_master_po') }}">Sewa Beli</option>
+                  <option value="{{ url('item_data_trial_master_po') }}">Trial</option>
                 </select>
             </div>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
@@ -65,7 +76,22 @@
 
   <script>
     $(document).ready(function() {
-      read()
+
+        read();
+
+        $('#list-company  a').click(function(){
+            var Id = $(this).attr('id');
+
+            $.ajax({
+                url:"{{ url('/filter_company')}}/" + Id,
+                success: function(data)
+                {
+                    $("#ajax-content").empty().append(data);
+                }
+
+            });
+
+        });
 
 
     });

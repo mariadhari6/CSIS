@@ -1,67 +1,30 @@
-@extends('layouts.v_main')
-
-@section('title','Tes')
-@section('content')
-<div align="right">
-    <a class="btn btn-secondary  mr-2" href="{{ route('export') }}"><i class="fas fa-file-excel mr-2"></i>Export</a>
+<div class="title mb-1">
+    <strong> {{ $company->company_name }}</strong>
 </div>
-<br>
-
-@section('title','CSIC | Detail Customer')
-
-@section('content')
-
-<h4 class="page-title">Detail Customer</h4>
-
-
-<div class="row">
-    <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+            <div class="text-right" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-          <table class="table table-responsive" class="table_id" id="table_id">
-            <thead>
-              <tr>
-                <th width="10px">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-                </th>
-
-                <th scope="col" width="80px" >Action</th>
-                <th scope="col">Company</th>
-                <th scope="col">License Plate</th>
-                <th scope="col">Vehicle Type</th>
-                <th scope="col">PO Number</th>
-                <th scope="col">PO Date</th>
-                <th scope="col">Status PO</th>
-                <th scope="col">IMEI</th>
-                <th scope="col">Merk</th>
-                <th scope="col">Type</th>
-                <th scope="col">GSM</th>
-                <th scope="col">Provider</th>
-                <th scope="col">Serial Number Sensor</th>
-                <th scope="col">Sensor Name</th>
-                <th scope="col">Merk Sensor</th>
-                <th scope="col">Pool Name</th>
-                <th scope="col">Pool Location</th>
-                <th scope="col">Waranty</th>
-                <th scope="col">Status Layanan</th>
-                <th scope="col">Tanggal Pasang</th>
-                <th scope="col">Tanggal Non Active</th>
-
-                <th scope="col" class="action">Action</th>
+            <table class="table table-responsive" id="table_id">
+                <thead>
+                  <tr>
+                    <th>
+                        <div >
+                            <label class="form-check-label">
+                                <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                                <span class="form-check-sign"></span>
+                            </label>
+                        </div>
+                    </th>
+                    <th scope="col" class="action">No</th>
                 <th scope="col" class="list">Company</th>
                 <th scope="col" class="list">License Plate</th>
                 <th scope="col" class="list">Vehicle Type</th>
                 <th scope="col" class="list">PO Number</th>
+                <th scope="col" class="list">Harga Layanan</th>
                 <th scope="col" class="list">PO Date</th>
                 <th scope="col" class="list">Status PO</th>
                 <th scope="col" class="list">IMEI</th>
@@ -78,20 +41,15 @@
                 <th scope="col" class="list">Status Layanan</th>
                 <th scope="col" class="list">Tanggal Pasang</th>
                 <th scope="col" class="list">Tanggal Non Active</th>
+                <th scope="col" class="list">Tanggal Reaktivasi GPS</th>
+                <th scope="col" class="action">Action</th>
+            </tr>
+        </thead>
+        <tbody  id="item_data">
 
-              </tr>
-            </thead>
-            <tbody  id="item_data">
-                   {{-- {{ csrf_field() }} --}}
-            </tbody>
-          </table>
-
-
-          </table>
-
-      </div>
-    </div>
-  </div>
+        </tbody>
+    </table>
+</div>
 </div>
 
 <script>
@@ -99,72 +57,77 @@
         read();
     });
     function read(){
-      $.get("{{ route('item_detail')}}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
+        var id = {{ $company->id }};
+        $.get("{{ url('item_detail') }}/" + id , {}, function(data, status) {
+         $('#table_id').DataTable().destroy();
+         $('#table_id').find("#item_data").html(data);
+         $('#table_id').dataTable( {
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            } );
+        });
         $('#table_id').DataTable().draw();
       });
     }
     function cancel() {
-      read()
-    }
-    $('.add').click(function() {
-        $.get("{{ route('add_detail')}}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
+        read()
+      }
+      $('.add').click(function() {
+          $.get("{{ route('add_detail')}}", {}, function(data, status) {
+            $('#table_id tbody').prepend(data);
+          });
         });
-    });
-    function store() {
-        var CompanyId           = $("#CompanyId").val();
-        var LicencePlate        = $("#LicencePlate").val();
-        var VihecleType         = $("#VihecleType").val();
-        var PoNumber            = $("#PoNumber").val();
-        var PoDate              = $("#PoDate").val();
-        var StatusPo            = $("#StatusPo").val();
-        var Imei                = $("#Imei").val();
-        var Merk                = $("#Merk").val();
-        var Type                = $("#Type").val();
-        var GSM                 = $("#GSM").val();
-        var Provider            = $("#Provider").val();
-        var SerialNumberSensor  = $("#SerialNumberSensor").val();
-        var NameSensor          = $("#NameSensor").val();
-        var MerkSensor          = $("#MerkSensor").val();
-        var PoolName            = $("#PoolName").val();
-        var PoolLocation        = $("#PoolLocation").val();
-        var Waranty             = $("#Waranty").val();
-        var StatusLayanan       = $("#StatusLayanan").val();
-        var TanggalPasang       = $("#TanggalPasang").val();
-        var TanggalNonAktif     = $("#TanggalNonAktif").val();
-        $.ajax({
-            type: "get",
-            url: "{{ url('store_detail')}}",
-            data: {
-                CompanyId           : CompanyId,
-                LicencePlate        : LicencePlate,
-                VihecleType         : VihecleType,
-                PoNumber            : PoNumber,
-                PoDate              : PoDate,
-                StatusPo            : StatusPo,
-                Imei                : Imei,
-                Merk                : Merk,
-                Type                : Type,
-                GSM                 : GSM,
-                Provider            : Provider,
-                SerialNumberSensor  : SerialNumberSensor,
-                NameSensor          : NameSensor,
-                MerkSensor          : MerkSensor,
-                PoolName            : PoolName,
-                PoolLocation        : PoolLocation,
-                Waranty             : Waranty,
-                StatusLayanan       : StatusLayanan,
-                TanggalPasang       : TanggalPasang,
-                TanggalNonAktif     : TanggalNonAktif
-            },
-            success: function(data) {
-            swal({
-                type: 'success',
+        function store() {
+            var CompanyId           = $("#CompanyId").val();
+            var LicencePlate        = $("#LicencePlate").val();
+            var VihecleType         = $("#VihecleType").val();
+            var PoNumber            = $("#PoNumber").val();
+            var HargaLayanan        = $("#HargaLayanan").val();
+            var PoDate              = $("#PoDate").val();
+            var StatusPo            = $("#StatusPo").val();
+            var Imei                = $("#Imei").val();
+            var Merk                = $("#Merk").val();
+            var Type                = $("#Type").val();
+            var GSM                 = $("#GSM").val();
+            var Provider            = $("#Provider").val();
+            var SerialNumberSensor  = $("#SerialNumberSensor").val();
+            var NameSensor          = $("#NameSensor").val();
+            var MerkSensor          = $("#MerkSensor").val();
+            var PoolName            = $("#PoolName").val();
+            var PoolLocation        = $("#PoolLocation").val();
+            var Waranty             = $("#Waranty").val();
+            var StatusLayanan       = $("#StatusLayanan").val();
+            var TanggalPasang       = $("#TanggalPasang").val();
+            var TanggalNonAktif     = $("#TanggalNonAktif").val();
+            var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
+            $.ajax({
+                type: "get",
+                url: "{{ url('store_detail')}}",
+                data: {
+                    CompanyId           : CompanyId,
+                    LicencePlate        : LicencePlate,
+                    VihecleType         : VihecleType,
+                    PoNumber            : PoNumber,
+                    HargaLayanan        : HargaLayanan,
+                    PoDate              : PoDate,
+                    StatusPo            : StatusPo,
+                    Imei                : Imei,
+                    Merk                : Merk,
+                    Type                : Type,
+                    GSM                 : GSM,
+                    Provider            : Provider,
+                    SerialNumberSensor  : SerialNumberSensor,
+                    NameSensor          : NameSensor,
+                    MerkSensor          : MerkSensor,
+                    PoolName            : PoolName,
+                    PoolLocation        : PoolLocation,
+                    Waranty             : Waranty,
+                    StatusLayanan       : StatusLayanan,
+                    TanggalPasang       : TanggalPasang,
+                    TanggalNonAktif     : TanggalNonAktif,
+                    TanggalReaktivasi   : TanggalReaktivasi
+                },
+                success: function(data) {
+                swal({
+                    type: 'success',
                 title: 'Data Saved',
                 showConfirmButton: false,
                 timer: 1500
@@ -211,10 +174,12 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-CompanyId-"+id).hide("fast");
         $("#item-LicencePlate-"+id).hide("fast");
         $("#item-VihecleType-"+id).hide("fast");
         $("#item-PoNumber-"+id).hide("fast");
+        $("#item-HargaLayanan-"+id).hide("fast");
         $("#item-PoDate-"+id).hide("fast");
         $("#item-StatusPo-"+id).hide("fast");
         $("#item-Imei-"+id).hide("fast");
@@ -231,80 +196,87 @@
         $("#item-StatusLayanan-"+id).hide("fast");
         $("#item-TanggalPasang-"+id).hide("fast");
         $("#item-TanggalNonAktif-"+id).hide("fast");
+        $("#item-TanggalReaktivasi-"+id).hide("fast");
         $.get("{{ url('show_detail') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
-     function update(id) {
-        var CompanyId           = $("#CompanyId").val();
-        var LicencePlate        = $("#LicencePlate").val();
-        var VihecleType         = $("#VihecleType").val();
-        var PoNumber            = $("#PoNumber").val();
-        var PoDate              = $("#PoDate").val();
-        var StatusPo            = $("#StatusPo").val();
-        var Imei                = $("#Imei").val();
-        var Merk                = $("#Merk").val();
-        var Type                = $("#Type").val();
-        var GSM                 = $("#GSM").val();
-        var Provider            = $("#Provider").val();
-        var SerialNumberSensor  = $("#SerialNumberSensor").val();
-        var NameSensor          = $("#NameSensor").val();
-        var MerkSensor          = $("#MerkSensor").val();
-        var PoolName            = $("#PoolName").val();
-        var PoolLocation        = $("#PoolLocation").val();
-        var Waranty             = $("#Waranty").val();
-        var StatusLayanan       = $("#StatusLayanan").val();
-        var TanggalPasang       = $("#TanggalPasang").val();
-        var TanggalNonAktif     = $("#TanggalNonAktif").val();
-            var id = id;
-            $.ajax({
-                type: "get",
-                url: "{{ url('update_detail') }}/"+id,
-                data: {
-                CompanyId           : CompanyId,
-                LicencePlate        : LicencePlate,
-                VihecleType         : VihecleType,
-                PoNumber            : PoNumber,
-                PoDate              : PoDate,
-                StatusPo            : StatusPo,
-                Imei                : Imei,
-                Merk                : Merk,
-                Type                : Type,
-                GSM                 : GSM,
-                Provider            : Provider,
-                SerialNumberSensor  : SerialNumberSensor,
-                NameSensor          : NameSensor,
-                MerkSensor          : MerkSensor,
-                PoolName            : PoolName,
-                PoolLocation        : PoolLocation,
-                Waranty             : Waranty,
-                StatusLayanan       : StatusLayanan,
-                TanggalPasang       : TanggalPasang,
-                TanggalNonAktif     : TanggalNonAktif
-                },
-                success: function(data) {
-                swal({
-                    type: 'success',
-                    title: ' Data Updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).catch(function(timeout) { })
-                read()
-                }
-            });
-        }
-        $('#master').on('click', function(e) {
-          if($(this).is(':checked',true) ){
-                $(".task-select").prop('checked', true)
-          } else {
-              $(".task-select").prop('checked',false);
-          }
+    function update(id) {
+       var CompanyId           = $("#CompanyId").val();
+       var LicencePlate        = $("#LicencePlate").val();
+       var VihecleType         = $("#VihecleType").val();
+       var PoNumber            = $("#PoNumber").val();
+       var HargaLayanan        = $("#HargaLayanan").val();
+       var PoDate              = $("#PoDate").val();
+       var StatusPo            = $("#StatusPo").val();
+       var Imei                = $("#Imei").val();
+       var Merk                = $("#Merk").val();
+       var Type                = $("#Type").val();
+       var GSM                 = $("#GSM").val();
+       var Provider            = $("#Provider").val();
+       var SerialNumberSensor  = $("#SerialNumberSensor").val();
+       var NameSensor          = $("#NameSensor").val();
+       var MerkSensor          = $("#MerkSensor").val();
+       var PoolName            = $("#PoolName").val();
+       var PoolLocation        = $("#PoolLocation").val();
+       var Waranty             = $("#Waranty").val();
+       var StatusLayanan       = $("#StatusLayanan").val();
+       var TanggalPasang       = $("#TanggalPasang").val();
+       var TanggalNonAktif     = $("#TanggalNonAktif").val();
+       var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
+           var id = id;
+           $.ajax({
+               type: "get",
+               url: "{{ url('update_detail') }}/"+id,
+               data: {
+               CompanyId           : CompanyId,
+               LicencePlate        : LicencePlate,
+               VihecleType         : VihecleType,
+               PoNumber            : PoNumber,
+               HargaLayanan        : HargaLayanan,
+               PoDate              : PoDate,
+               StatusPo            : StatusPo,
+               Imei                : Imei,
+               Merk                : Merk,
+               Merk                : Merk,
+               Type                : Type,
+               GSM                 : GSM,
+               Provider            : Provider,
+               SerialNumberSensor  : SerialNumberSensor,
+               NameSensor          : NameSensor,
+               MerkSensor          : MerkSensor,
+               PoolName            : PoolName,
+               PoolLocation        : PoolLocation,
+               Waranty             : Waranty,
+               StatusLayanan       : StatusLayanan,
+               TanggalPasang       : TanggalPasang,
+               TanggalNonAktif     : TanggalNonAktif,
+               TanggalNonAktif     : TanggalNonAktif,
+               TanggalReaktivasi   : TanggalReaktivasi
+               },
+               success: function(data) {
+               swal({
+                type: 'success',
+                title: ' Data Updated',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { })
+            read()
+            }
         });
-        $('.delete_all').on('click', function(){
-        //   event.preventDefault();
-            var allVals = [];
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
+    }
+    $('#master').on('click', function(e) {
+      if($(this).is(':checked',true) ){
+            $(".task-select").prop('checked', true)
+      } else {
+          $(".task-select").prop('checked',false);
+      }
+    });
+    $('.delete_all').on('click', function(){
+    //   event.preventDefault();
+        var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
             });
                 if (allVals.length > 0) {
                     var _token = $('input[name="_token"]').val();
@@ -357,16 +329,18 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('/selected_detail') }}", {}, function(data, status) {
+                $.get("{{ url('selected_detail') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
                     $("#item-CompanyId-"+value).hide("fast");
                     $("#item-LicencePlate-"+value).hide("fast");
                     $("#item-VihecleType-"+value).hide("fast");
                     $("#item-PoNumber-"+value).hide("fast");
+                    $("#item-HargaLayanan-"+value).hide("fast");
                     $("#item-PoDate-"+value).hide("fast");
                     $("#item-StatusPo-"+value).hide("fast");
                     $("#item-Imei-"+value).hide("fast");
@@ -413,6 +387,7 @@
                     var LicencePlate        = $(".LicencePlate-"+ value).val();
                     var VihecleType         = $(".VehicleType-"+ value).val();
                     var PoNumber            = $(".PoNumber-"+ value).val();
+                    var HargaLayanan        = $(".HargaLayanan-"+ value).val();
                     var PoDate              = $(".PoDate-"+ value).val();
                     var StatusPo            = $(".StatusPo-"+ value).val();
                     var Imei                = $(".Imei-"+ value).val();
@@ -429,6 +404,7 @@
                     var StatusLayanan       = $(".StatusLayanan-"+ value).val();
                     var TanggalPasang       = $(".TanggalPasang-"+ value).val();
                     var TanggalNonAktif     = $(".TanggalNonAktif-"+ value).val();
+                    var TanggalReaktivasi   = $(".TanggalReaktivitas-"+ value).val();
                     $.ajax({
                         type: "get",
                         url: "{{ url('update_detail') }}/"+value,
@@ -437,6 +413,7 @@
                             LicencePlate        : LicencePlate,
                             VihecleType         : VihecleType,
                             PoNumber            : PoNumber,
+                            HargaLayanan        : HargaLayanan,
                             PoDate              : PoDate,
                             StatusPo            : StatusPo,
                             Imei                : Imei,
@@ -452,36 +429,37 @@
                             Waranty             : Waranty,
                             StatusLayanan       : StatusLayanan,
                             TanggalPasang       : TanggalPasang,
-                            TanggalNonAktif     : TanggalNonAktif
+                            TanggalNonAktif     : TanggalNonAktif,
+                            TanggalReaktivasi   : TanggalReaktivasi
                         },
                         success: function(data) {
-                                // swal("Done!","It was succesfully Update","success");
-                                swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).catch(function(timeout) { })
-                                read();
-
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                read();
+                            swal({
+                                type: 'success',
+                                title: 'The selected data has been updated',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).catch(function(timeout) {});
+                            $(".save").hide("fast");
+                            $(".cancel").hide("fast");
+                            $(".add").show("fast");
+                            $(".edit_all").show("fast");
+                            $(".delete_all").show("fast");
+                            read();
                             }
                     });
                 });
             });
         }
         //--------Proses Batal--------
-        function cancelUpdateSelected(){
-            $("#save-selected").hide("fast");
-            $("#cancel-selected").hide("fast");
+        function batal(){
+            $(".save").hide("fast");
+            $(".cancel").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-            }
-</script>
 
-@endsection
+        }
+
+
+</script>

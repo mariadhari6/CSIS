@@ -22,10 +22,10 @@
     <td>
         <select class="form-control status_po-{{$master_po->id}}" id="status_po" aria-label=".form-select-lg example">
             <option selected value="{{$master_po->status_po}}">{{$master_po->status_po}}</option>
-            <option value="Contract">Contract</option>
-            <option value="Terminate">Terminate</option>
+            <option value="Beli">Beli</option>
+            <option value="Sewa">Sewa</option>
+            <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
-            <option value="Register">Register</option>
         </select>
     </td>
     <td>

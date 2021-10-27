@@ -1,19 +1,21 @@
 @extends('layouts.v_main')
-@section('title','CSIS | Request and Complain')
+@section('title','Request and Complain')
+@section('title-table','Request and Complain')
 
 @section('content')
 
-<div class="card">
-    <div class="card-body">
-            <div class="text-right" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                  <div class="form-group">
-                    {{-- <label for="smallSelect">Bulan</label> --}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right" id="selected">
+                        <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                        <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                        <div class="form-group">
+                            {{-- <label for="smallSelect">Bulan</label> --}}
                       <input class="form-control" id="filter-date" type="month">
                       <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
-                      <button class="mt-1 btn btn-default" id="default-btn">default</button>
                     </select>
                   </div>
                 </ul>
@@ -65,6 +67,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+
         </div>
       </div>
 

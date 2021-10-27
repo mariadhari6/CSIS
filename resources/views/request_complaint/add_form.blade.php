@@ -73,7 +73,7 @@
     </td>
     <td>
         <select class="select"  id="status" aria-label=".form-select-lg example">
-            <option selected></option>
+            <option disabled value="On Progress">On Progress</option>
             <option value="On Progress">On Progress</option>
             <option value="Done">Done</option>
         </select>

@@ -4,13 +4,17 @@ use App\Models\Company;
 use App\Models\MasterPo;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\DB;
+use Psy\Command\WhereamiCommand;
 use Yajra\DataTables\Facades\DataTables;
 
 class MasterPoController extends Controller
 {
     public function index()
     {
-        return view('MasterData.MasterPo.index');
+        $company = Company::orderBy('id', 'DESC')->get();
+        return view('MasterData.MasterPo.index')->with([
+            'company'          => $company
+        ]);
     }
     public function add_form()
     {
@@ -40,41 +44,32 @@ class MasterPoController extends Controller
         MasterPo::insert($data);
     }
 
-    public function item_data_oslog()
+    public function item_data_beli()
     {
-        $master_po = MasterPo::where('company_id', 'OSLOG')->get();
+        $master_po = MasterPo::where('status_po', 'Beli')->get();
         return view('MasterData.MasterPo.item_data')->with([
             'master_po' => $master_po
         ]);
     }
 
-    public function item_data_contract()
+    public function item_data_sewa()
     {
-        $master_po = MasterPo::where('status_po', 'Contract')->get();
-        return view('MasterData.MasterPo.item_data')->with([
-            'master_po' => $master_po
-        ]);
-    }
-
-    public function item_data_terminate()
-    {
-        $master_po = MasterPo::where('status_po', 'Terminate')->get();
+        $master_po = MasterPo::where('status_po', 'Sewa')->get();
          return view('MasterData.MasterPo.item_data')->with([
              'master_po' => $master_po
+         ]);
+     }
+     public function item_data_sewa_beli()
+     {
+         $master_po = MasterPo::where('status_po', 'Sewa Beli')->get();
+         return view('MasterData.MasterPo.item_data')->with([
+            'master_po' => $master_po
          ]);
      }
 
      public function item_data_trial()
      {
          $master_po = MasterPo::where('status_po', 'Trial')->get();
-         return view('MasterData.MasterPo.item_data')->with([
-             'master_po' => $master_po
-         ]);
-     }
-
-     public function item_data_register()
-     {
-         $master_po = MasterPo::where('status_po', 'Register')->get();
          return view('MasterData.MasterPo.item_data')->with([
              'master_po' => $master_po
          ]);
@@ -152,6 +147,16 @@ class MasterPoController extends Controller
     {
         MasterPo::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
+    }
+    public function filter_company($id)
+    {
+
+
+        $master_po = MasterPo::orderBy('id', 'DESC')->where('company_id', $id)->get();
+        return view('MasterData.MasterPo.item_data')->with([
+            'master_po' => $master_po
+        ]);
+
     }
 
 }

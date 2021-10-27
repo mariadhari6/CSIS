@@ -8,28 +8,28 @@
        @endforeach
     </select>
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="po_number" placeholder="Po Number">
     </td>
     <td>
         <div class="input-div"><input type="datetime-local" class="input" id="po_date" placeholder="Po Date"></div>
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="harga_layanan" placeholder="Harga Layanan">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="jumlah_unit_po" placeholder="Jumlah Unit Po">
     </td>
     <td>
         <select class="form-control" id="status_po" aria-label=".form-select-lg example">
             <option selected value="not selected">Pilih status</option>
-            <option value="Contract">Contract</option>
-            <option value="Terminate">Terminate</option>
+            <option value="Beli">Beli</option>
+            <option value="Sewa">Sewa</option>
+            <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
-            <option value="Register">Register</option>
         </select>
-    </td>   
-    <td> 
+    </td>
+    <td>
         <div class="input-div"><input type="text" class="input" id="selles" placeholder="Selles">
     </td>
     <td>

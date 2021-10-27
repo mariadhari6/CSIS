@@ -2,7 +2,7 @@
 @foreach ($request_complain as $item)
     <tr id="edit-form-{{ $item->id }}">
          <td id="td-checkbox-{{ $item->id }}">
-            <div class="form-check">
+            <div>
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
                     <span class="form-check-sign"></span>
@@ -13,13 +13,13 @@
             {{ $no++ }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company->company_name}}
+            {{ $item->company->company_name ?? ''}}
         </td>
           <td id="item-internal_eksternal-{{ $item->id }}">
             {{ $item->internal_eksternal }}
         </td>
         <td id="item-pic-{{ $item->id}}">
-                {{ $item->pic->pic_name}}
+                {{ $item->pic->pic_name ?? ''}}
         </td>
           <td id="item-vehicle-{{ $item->id }}">
             {{ $item->vehicleRequest->license_plate?? ''}}

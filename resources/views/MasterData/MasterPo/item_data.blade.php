@@ -28,21 +28,12 @@
             {{ $item->jumlah_unit_po }}
         </td>
         <td id="item-status_po-{{ $item->id }}">
-
-            @if ($item->status_po == 'Contract')
-                <span class="badge badge-info">{{ $item->status_po }}</span>
-            @elseif ($item->status_po == 'Terminate')
-                <span class="badge badge-danger">{{ $item->status_po }}</span>
-            @elseif($item->status_po == 'Trial')
-                <span class="badge badge-primary">{{ $item->status_po }}</span>
-            @elseif($item->status_po == 'Register')
-                <span class="badge badge-success">{{ $item->status_po }}</span>
-            @endif
+            {{ $item->status_po }}
         </td>
         <td id="item-selles-{{ $item->id }}">
             {{ $item->selles }}
         </td>
-        
+
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
