@@ -1,8 +1,9 @@
 <tr id="add_form">
     <td></td>
     <td></td>
+
     <td>
-        <select class="form-control" id="company_id" name="company_id">
+        <select class="select" id="company_id" name="company_id">
 
         @foreach ($company as $item)
             <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
@@ -10,19 +11,19 @@
 
         </select></i>
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="pic_name" placeholder="Pic Name">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="phone" placeholder="Phone">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="email" placeholder="Email">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="position" placeholder="Position">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="date" class="input" id="date_of_birth" placeholder="Date of birth">
     </td>
     <td>

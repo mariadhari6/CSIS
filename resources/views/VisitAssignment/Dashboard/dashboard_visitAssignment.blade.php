@@ -129,29 +129,34 @@
     // const DATA_COUNT = 7;
     // const NUMBER_CFG =  {count: DATA_COUNT, min: -100, max: 100};
 
-    var cData = JSON.parse(`<?php echo $chart_company; ?>`);
-    const labels = [...new Set(cData.company)];
+    var company = JSON.parse(`<?php echo $chart_company; ?>`);
+    var vehicle = JSON.parse(`<?php echo $chart_vehicle; ?>`);
+
+    const labels = [...new Set(company.company)];
+    const count_vehicle = [...new Set(vehicle.vehicle)];
+
+    alert(count_vehicle);
     
     const data = {
     labels: labels,
     datasets: [
         {
         label: 'Vehicle',
-        data: [1,2],
+        data: count_vehicle,
         borderColor: '#3366cc',
         backgroundColor: '#3366cc',
         },
 
         {
         label: 'Times',
-        data: [1,2],
+        data: [2,2],
         borderColor: '#b35900',
         backgroundColor: '#b35900',
         },
 
         {
         label: 'Cost',
-        data: [1,2],
+        data: [2,2],
         borderColor: '#737373',
         backgroundColor: '#737373',
         }
@@ -170,7 +175,7 @@
         },
         title: {
             display: true,
-            text: 'Chart.js Bar Chart'
+            text: 'Cost Per-Company'
         }
         }
     },

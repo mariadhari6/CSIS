@@ -181,6 +181,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_data_terminate_GsmMaster', [GsmMasterController::class, 'item_data_terminate']);
     Route::get('/add_form_GsmMaster', [GsmMasterController::class, 'add_form']);
     Route::get('/store_GsmMaster', [GsmMasterController::class, 'store']);
+    Route::post('/save_import_GsmMaster', [GsmMasterController::class, 'save_import']);
     Route::get('/destroy_GsmMaster/{id}', [GsmMasterController::class, 'destroy']);
     Route::get('/show_GsmMaster/{id}', [GsmMasterController::class, 'edit_form']);
     Route::get('/update_GsmMaster/{id}', [GsmMasterController::class, 'update']);

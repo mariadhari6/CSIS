@@ -16,7 +16,7 @@
     </div>
 </td>
 <td>
-    <select class="form-control status-{{$seller->id}}" id="status" aria-label=".form-select-lg example">
+    <select class="select status-{{$seller->id}}" id="status" aria-label=".form-select-lg example">
         <option selected value="{{  $seller->status == 'Active' ? 'Active' : 'In Active'}}">
             {{  $seller->status == 'Active' ? 'Active' : 'In Active'}}
         </option>

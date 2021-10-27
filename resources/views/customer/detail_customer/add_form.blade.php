@@ -1,13 +1,15 @@
 <tr id="add_form">
-    <td width=""></td>
-    <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
-    <td>
-        <select class="select" id="CompanyId">
-            <option value="" disabled selected>Company</option>
-            <option value="1">1</option>
-        </select>
-    </td>
-    <td>
+    <td width="80px"></td>
+    <td width="80px"></td>
+    <td><select class="select" id="CompanyId" name="company_id">
+       @foreach ($company as $companys)
+        <option value="{{ $companys->id }}" {{ old('CompanyId') == $companys->id  ? 'selected':'' }}>
+        {{$companys->company_name}}
+        </option>
+
+       @endforeach
+    </select></i></td>
+    <td >
         <select class="select" id="LicencePlate">
             <option value="" disabled selected>Licence Plate</option>
             <option value="1">1</option>
@@ -51,4 +53,7 @@
     <td><div class="input-div"><input type="text" class="input" id="StatusLayanan" placeholder="Status Layanan"></div></td>
     <td><div class="input-div"><input type="date" class="input" id="TanggalPasang" placeholder="Tanggal Pasang"></div></td>
     <td><div class="input-div"><input type="date" class="input" id="TanggalNonAktif" placeholder="TanggalNonAktif"></div></td>
+    <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
+
 </tr>
+

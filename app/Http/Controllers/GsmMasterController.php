@@ -7,6 +7,7 @@ use App\Imports\GsmMasterImport;
 use App\Models\Company;
 use App\Models\Gsm;
 use App\Models\GsmTemporary;
+use App\Models\RequestComplaint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -67,6 +68,32 @@ class GsmMasterController extends Controller
         ]);
     }
 
+    public function save_import(Request $request)
+    {
+        $dataRequest = json_decode($request->data);
+        foreach ($dataRequest as $key => $value) {
+            $data = array(
+                'status_gsm'        =>  $value->status_gsm,
+                'gsm_number'        =>  $value->gsm_number,
+                'company_id'        =>  Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                'serial_number'     =>  $value->serial_number,
+                'icc_id'            =>  $value->icc_id,
+                'imsi'              =>  $value->imsi,
+                'res_id'            =>  $value->res_id,
+                'request_date'      =>  $value->request_date,
+                'expired_date'      =>  $value->expired_date,
+                'active_date'       =>  $value->active_date,
+                'terminate_date'    =>  $value->terminate_date,
+                'note'              =>  $value->note,
+                'provider'          =>  $value->provider
+            );
+            Gsm::insert($data);
+            // $status_gsm = $value->status_gsm
+            // dd($value->status_gsm);
+        }
+       
+    }
+
     public function store(Request $request)
     {
         $data = array(
@@ -78,7 +105,6 @@ class GsmMasterController extends Controller
             'imsi'              =>  $request->imsi,
             'res_id'            =>  $request->res_id,
             'request_date'      =>  $request->request_date,
-            'expired_date'      =>  $request->expired_date,
             'active_date'       =>  $request->active_date,
             'expired_date'      =>  $request->expired_date,
             'terminate_date'    =>  $request->terminate_date,
@@ -163,32 +189,55 @@ class GsmMasterController extends Controller
 
     public function try()
     {
-        // $jml =  Company::all('company_name')->count();
-        // $input = 's';
+        $jml =  Company::all('company_name')->count();
+        $input = Company::where('company_name', 'Adib')->firstOrFail()->id;
         // for ($i= 0; $i <= $jml-1; $i++) { 
-        //     if( $input == Company::all('company_name')[$i]->company_name){
-        //         $input = (int) Company::all('id')[$i]->id;
+        //     if( $input == Company::all('company_name')[$i]['company_name']){
+        //         $input = Company::all('id')[$i]['id'];
         //         break;
         //     } else {
         //         $input = 0;
         //     }
         // }
-        // return $input;
 
-        $GsmMaster = Gsm::all('gsm_number');
-        $jml =  Gsm::all('gsm_number')->count();
-        $input= 12232;
-        for ($i= 0; $i <= $jml-1; $i++) { 
-           if( $input == Gsm::all('gsm_number')[$i]->gsm_number){
-                $a = "data same";
-                break;
-           } else {
-               $b = "Save succes";
-           }
-        }
+        return $input;
+
+        // $GsmMaster = Gsm::all('gsm_number');
+        // $jml =  Gsm::all('gsm_number')->count();
+        // $input= 12232;
+        // for ($i= 0; $i <= $jml-1; $i++) { 
+        //    if( $input == Gsm::all('gsm_number')[$i]->gsm_number){
+        //         $count_vehicle = "data same";
+        //         break;
+        //    } else {
+        //        $b = "Save succes";
+        //    }
+        // }
         
-        return $b . ' | ';
+        // return $b . ' | ';
 
+        //chart
+        // $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
+
+        // $company = [];
+        // $vehicle = [];
+        // $count_vehicle = array();
+        
+        // foreach ($request_complain as $item) {
+        //     $company['company'][] = $item->company->company_name;
+        //     $vehicle['vehicle'][] = $item->vehicle;
+        // }
+
+        // $count_data_vehicle = array_count_values($vehicle['vehicle']);
+
+        // for ($i=0; $i <= count($vehicle['vehicle']) - 1 ; $i++) { 
+        //     $count_vehicle[$i] = $count_data_vehicle[$vehicle['vehicle'][$i]];
+        // }
+
+        // $company['chart_company'] = json_encode($company);
+        // $vehicle['chart_vehicle'] = json_encode($count_vehicle);
+        // return $$vehicle['chart_vehicle'][0];
+        
     }
 
 }

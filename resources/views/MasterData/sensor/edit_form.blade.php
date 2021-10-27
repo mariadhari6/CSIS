@@ -16,7 +16,7 @@
         <div class="input-div"><input type="date" class="input waranty-{{$sensor->id}}" id="waranty" placeholder="Waranty" value="{{ $sensor->waranty}}"></div>
     </td>
     <td>
-        <select class="form-control status-{{$sensor->id}}" id="status" aria-label=".form-select-lg example">
+        <select class="select status-{{$sensor->id}}" id="status" aria-label=".form-select-lg example">
             <option selected>{{$sensor->status}}</option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
