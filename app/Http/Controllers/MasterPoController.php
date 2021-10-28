@@ -171,6 +171,7 @@ class MasterPoController extends Controller
         return view('master_po.item_data')->with([
             'master_po' => $master_po
         ]);
+
     }
 
 
@@ -221,139 +222,12 @@ class MasterPoController extends Controller
 
     public function check(){
 
-        // $master_po = Seller::pluck('no_agreement_letter', 'id');
-            // $id = 1;
-        //     $master_po = Seller::select(DB::raw('CONCAT(no_agreement_letter, " - ", status) AS full_name, id'))
-        //    ->pluck('full_name', 'id');
-        $id = 1;
-        // $data = Seller::all()->where('id', $id)->map->only('no_agreement_letter')->iterator_to_array();
-        // $data = DB::table("sellers")
-        //             ->where("id", $id)
-        //             ->pluck('no_agreement_letter', 'id');
-
-        // $data = Seller::all()->where('id', $id) ->mapWithKeys(function ($item){
-        //  return [
-        //     $item['id'] => Seller($item)->only(['no_agreement_letter', 'status'])->all()
-        //  ];
-        // });
-
-        // $keyed = Seller::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
-        //     return [$item['id'] => $item->only(['seller_name','seller_code'])
-        //     ];
-        // });
-        
-        // $data = $keyed->all();
-        // $id = "OSLOG" ;
-    //     $id = 1;
-
-    //    return collect([
-    //         ['id' => 1, 'name' => 'A'],
-    //         ['id' => 1, 'name' => 'B'],
-    //         ['id' => 3, 'name' => 'C']
-    //     ])->where('id', $id)->mapWithKeys(function($item){
-    //         return [
-    //             $item['id'] => collect($item)->only(['name'])->all()
-    //         ];
-    //     });
-
-        // $key = Vehicle::all()->where('company_id', $id)->mapWithKeys(function ($item) {
-        //     return [$item['company_id'] => $item->only(['license_plate', 'vehicle_id'])
-        //     ];
-        // });
-
-
-    //    $all = Vehicle::all()->where('company_id', $id);
-    //    $keyed = $all->mapWithKeys(function ($item) {
-    //     return [$item['company_id'] => $item
-    // ];
-    // });
-        // $key = Vehicle::orderBy('id', 'DESC')->where('company_id', $id)->orWhere('company_id', $id)->get();
-        
-        // $key = Vehicle::all()->where('company_id', $id)->groupBy('license_plate');
-
-       
-        // dd($key->all());
-
-      
-    // $data = Vehicle::with('company')->groupBy('company_id')
-    // ->selectRaw('count(*) as jumlah, company_id')
-    // ->selectRaw('license_plate as plate')
-    // ->get();
-    // $id = 1;
-    // $key = Vehicle::all()->where('company_id', $id)->mapToDictionary(function ($item){
-    //     return [$item['company_id'] => $item['license_plate']
-    // ];
-    // });
-
-    // $key = Vehicle::all()->where('company_id', $id)->mapWithKeys(function ($item, $key) {
-    //     return [$item['company_id'] => $item->only(['license_plate'])
-    //     ];
-    // });
-
-    
-    //  $details = DetailCustomer::with('vehicle')->get();
-    // $data = Sensor::groupBy('sensor_name')
-    // ->selectRaw('count(*) as jumlah, sensor_name')
-    // ->get();
-    $id = 6;
-
-    
-    
-    // $count = DetailCustomer::where('po_id', $id)->count();
-    // // ->get();
-
-    // $data = MasterPo::where('id', $id)->pluck('jumlah_unit_po');
-    // $i = json_decode($data);
-
-    // // foreach ($data as $key->jumlah_unit_po) {
-            
-    // //   echo $key ;
-
-    // // }
-    
   
-    // if( $count <= $data[0]){
-
-    //     echo "masih kurang  atau pas";
-    // }else{
-    //     echo "kelebihan";
     
-    // }
-
-    // return $ijumlah_unit_po;
-    // return $data->jumlah;
-    
-       
-        // $data = Carbon::now();
-        // $bulan = $data->month;
-        // $tahun = $data->year;
-
-        // return $tahun;
-        // $month = 10;
-        // $year = 2021;
-        // $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
-        // ->selectRaw('count(*) as jumlah, company_id')
-        // // ->get();
-        // $id = 8;
-        // $data = DetailCustomer::where('po_id', $id )->groupBy('po_id')
-        // ->selectRaw('count(*) as jumlah, po_id')
-        // ->get();
 
 
 
-        // $data = DetailCustomer::where('po_id', $id)->get('gps_id');
-
-        // $data = DB::table('detail_customers')
-        // ->where('po_id', $id)
-        // ->select()
-        // ->whereRaw($where['rawQuery'], isset($where['bindParams']) ? $where['bindParams'] : array())
-        // ->get()
-        // ->groupBy('po_id');
-
-
-        // return $data;
-
-        $str = "1 2 3";
+        // $str = "1 2 3";
 
         // $arr = explode(" ",$str);
         // $count = count($arr)-1;
@@ -417,36 +291,33 @@ class MasterPoController extends Controller
     //   )
     //   ->whereRaw('MONTH(tanggal_non_aktif ) = ?',$month)
     //   ->whereRaw('YEAR(tanggal_non_aktif ) = ?',$year)
-        $company = 1;
-        $details = DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company )
-                ->get();
+        // $company = 1;
+        // $details = DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company )
+        //         ->get();
 
-        $h =  DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company )
-        ->pluck('sensor_all');
+        // $h =  DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company )
+        // ->pluck('sensor_all');
 
-        $l = $h[0];
-        $a = explode(" ",$l );
-        $u = count($a)-1;
+        // $l = $h[0];
+        // $a = explode(" ",$l );
+        // $u = count($a)-1;
  
  
-        for ($i=0; $i <= $u ; $i++) { 
+        // for ($i=0; $i <= $u ; $i++) { 
 
 
-            $d =  DB::table('detail_customers')
-            ->join('sensors', 'detail_customers.sensor_all' , '=', 'sensors.id')
-            ->select('detail_customers.sensor_all' , 'sensors.sensor_name')
-            ->get();
+       
 
             
         
         
-        }
+        // }
 
-        $e = MasterPo::get('jumlah_unit_po');
+        // $e = MasterPo::get('jumlah_unit_po');
 
-        $s = DetailCustomer::groupBy('po_id')
-            ->selectRaw('count(*) as jumlah, po_id')
-            ->get();
+        // $s = DetailCustomer::groupBy('po_id')
+        //     ->selectRaw('count(*) as jumlah, po_id')
+        //     ->get();
         
         // return $s[0]['jumlah'];
 
@@ -474,21 +345,49 @@ class MasterPoController extends Controller
 
 
         // return $i[0]->jumlah;
-        $month = 10;
-        $year  = 2021;
-        $data = DB::table('detail_customers')
-        ->groupBy('company_id')
-        ->select('company_id', 
-            DB::raw('count(gps_id) as total_gps'),
-            DB::raw('count(tanggal_pasang) as total_penambahan')
-        )
-        ->whereRaw('MONTH(tanggal_pasang) = ?',$month)
-        ->whereRaw('YEAR(tanggal_pasang) = ?',$year)
-        ->get();
-
-        return $data[0]->company_id->company->company_name;
         
+        // $data = DB::table('detail_customers')
+        // ->groupBy('company_id')
+        // ->select('company_id', 
+        //     DB::raw('count(gps_id) as total_gps'),
+        //     DB::raw('count(tanggal_pasang) as total_penambahan')
+        // )
+        // ->whereRaw('MONTH(tanggal_pasang) = ?',$month)
+        // ->whereRaw('YEAR(tanggal_pasang) = ?',$year)
+        // ->get();
 
+        // return $data[0]->company_id->company->company_name;
+        
+        // $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+        // ->select('company_id', 
+        //     DB::raw('count(gps_id) as total_gps'),
+        // )
+        // ->get();
+
+        // $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+        // ->selectRaw('count(*) as jumlah, company_id')
+        // ->get();
+
+        // $data1 = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+        // ->select('company_id', 
+        //     DB::raw('count(gps_id) AS total_gps WHERE status_layanan = "In Active"'),
+        //     DB::raw('count(tanggal_pasang) AS penambahan_layanan '),
+        // )   
+        // ->get();
+
+        // $data2 = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)->groupBy('company_id')
+        // ->select('company_id', 
+        //     DB::raw('count(tanggal_non_aktif) as total_terminate '),
+        // )   
+        // ->get();
+
+
+        
+        // $merge=$data2->merge($data1);
+
+        // $out=(int)$data2->total_terminate-(int)$data1->penambahan_layanan;
+    
+        // return $out;
 
         
 
@@ -507,8 +406,40 @@ class MasterPoController extends Controller
 
         // join antara $a[] dengan id pada sensor
         
-       
-      
+            $d =  DB::table('detail_customers')
+            ->join('sensors', 'detail_customers.sensor_all' , '=', 'sensors.id')
+            ->select('detail_customers.sensor_all' , 'sensors.sensor_name')
+            ->get();
+
+            // return $d;
+            $month = 11;
+            $year  = 2021;
+            // $users = DB::table('detail_customers')
+            // ->selectRaw('count(gps_id) as total_gps  WHERE status_layanan = Active, company_id')
+            // ->groupBy('company_id')
+            // ->get();
+
+           
+
+
+            // $data1 = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+            // ->select('company_id', 
+            //     DB::raw('count(gps_id) as total_gps'),
+            //     DB::raw('count(tanggal_pasang) as penambahan_layanan '),
+            // )   
+            // ->get();
+
+
+            // $data2 = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)->groupBy('company_id')
+            // ->select('company_id', 
+            //     DB::raw('count(tanggal_non_aktif) as total_terminate '),
+            // )
+            // ->union($data1)   
+            // ->get();
+
+
+            return $d ;
+    
 
 
     }

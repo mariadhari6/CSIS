@@ -1,5 +1,5 @@
 <tr>
-    <form id="basic">
+   
     <td></td>
     <td></td>
     <td>
@@ -185,10 +185,7 @@
         </select>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input  @error('tanggal_pasang') is-invalid @enderror" id="TanggalPasang" required name="tanggal_pasang"></div>
-        @error('tanggal_pasang')
-        <div class="alert alert-danger">{{$message}}</div>
-        @enderror
+        <div class="input-div"><input type="date" class="input" id="TanggalPasang" name="tanggal_pasang" required></div>
     </td>
     <td><div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div></td>        
     <td><div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div></td>
@@ -444,10 +441,12 @@
                 $('#modal').append('<option value="'+ sensorterpilih + '" id="SensorAll"  data-toggle="modal" data-target="#exampleModal" > '+ sensorterpilih +'</option>');
             }
          }
+
+        
        
     </script> 
     
-</form>
+
 </tr>
 
 

@@ -46,6 +46,7 @@
                 </thead>
                 <tbody id="item_data">
                 </tbody>
+                
             </table>
           </div>
         </div>
@@ -67,6 +68,9 @@
                     </thead>
                     <tbody id="data-po">
                     </tbody>
+                    <tfoot id="total_revenue">
+                      
+                    </tfoot>
                   </table>
               </div>
           </div>
@@ -134,6 +138,7 @@
       var month   = month;
       var year    = year;
       $("#data-po").empty();
+     
       $.ajax({ 
           url:"{{ url('/data-po')}}",
           data:{
@@ -143,6 +148,7 @@
           }, 
           success: function(html){
               $("#data-po").empty().append(html);
+             
           }
       });
       return true;

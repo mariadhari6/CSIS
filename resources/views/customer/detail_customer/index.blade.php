@@ -1,4 +1,3 @@
-
 <div class="title">
     <strong> {{ $company->company_name }}</strong>  
 </div>
@@ -7,7 +6,7 @@
         <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
         <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
     </div>
-    
+
     <table class="table table-responsive" id="table_id">
         <thead>
           <tr>
@@ -44,14 +43,13 @@
         <tbody  id="item_data">      
         </tbody>
     </table>
-
+  
 
 
 <script>
 
     $(document).ready(function() {
-        read();
-        
+        read();   
     });
 
     function read(){
@@ -84,6 +82,8 @@
 
     function store(){
 
+        // $("#basic").validate(); 
+
         var CompanyId           = $("#CompanyId").val();
         var LicencePlate        = $("#LicencePlate").val();
         var VihecleType         = $("#VihecleType").val();
@@ -104,6 +104,11 @@
         var TanggalPasang       = $("#TanggalPasang").val();
         var TanggalNonAktif     = $("#TanggalNonAktif").val();
         var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
+
+        if (TanggalPasang == ""){
+            alert("Tangggal pasang wajib diisi");
+            return false;
+        }   
 
         $.ajax({
             type: "get",
@@ -147,6 +152,7 @@
                         timer: 1500
                     }).catch(function(timeout){ })
                     read();
+                    
                 }
             }  
         });       
@@ -254,7 +260,12 @@
         var TanggalNonAktif     = $("#TanggalNonAktif").val();
         var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
 
-        
+        if (StatusLayanan == "In Active") {
+            if (TanggalNonAktif == "") {
+                alert("non aktif");
+                return false
+            }
+        }
             $.ajax({
                 type: "get",
                 url: "{{ url('update_detail') }}/"+id,
@@ -510,7 +521,3 @@
         }
 
 </script>
-
-
-
-

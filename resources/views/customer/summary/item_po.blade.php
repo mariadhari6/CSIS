@@ -6,5 +6,6 @@
      <td>{{ $item->po->harga_layanan }}</td>
      <td>{{ $item->po->harga_layanan* $item->jumlah }}</td>
      <td>{{ $item->po->status_po }}</td> --}}
+     <td>SUM({{ $item->po->harga_layanan* $item->jumlah }})</td>
 </tr>
 @endforeach

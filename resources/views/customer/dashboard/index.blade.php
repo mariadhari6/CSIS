@@ -63,7 +63,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
 
     $(document).ready(function() {
 
@@ -81,7 +81,7 @@
             $('#dashboardCustomer').DataTable().draw();
         });
     }
-</script>
+</script> --}}
 
 
 @endsection

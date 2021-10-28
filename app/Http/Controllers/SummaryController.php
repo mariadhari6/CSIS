@@ -39,37 +39,34 @@ class SummaryController extends Controller{
 
        if ($company == "") {
 
-            $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
-            ->groupBy('company_id')
-            ->selectRaw('count(*) as jumlah, company_id')
-            ->get();
-            $terminate = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)
-            ->count('gps_id');
-            $penambahan =  DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
-            ->count('gps_id');
+        $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+        ->where('status_layanan', "Active")
+        ->select('company_id', 
+            DB::raw('count(gps_id) as total_gps'),
+            DB::raw('count(tanggal_pasang) as penambahan_layanan '),
+        )   
+        ->get();
+            
             return view('customer.summary.item_summary')->with([
                 'data'  => $data,
                 'month' => $month,
                 'year'  => $year,
-                'terminate' => $terminate,
-                'penambahan' => $penambahan
+               
             ]);
 
        }else{
-            $data = DetailCustomer::where('company_id', $company)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
-            ->groupBy('company_id')
-            ->selectRaw('count(*) as jumlah, company_id')
+            $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+            ->where('status_layanan', "Active")
+            ->select('company_id', 
+                DB::raw('count(gps_id) as total_gps'),
+                DB::raw('count(tanggal_pasang) as penambahan_layanan '),
+            )   
             ->get();
-            $terminate = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)
-            ->count('gps_id');
-            $penambahan =  DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
-            ->count('gps_id');
             return view('customer.summary.item_summary')->with([
                 'data' => $data,
                 'month' => $month,
                 'year'  => $year,
-                'terminate' => $terminate,
-                'penambahan' => $penambahan
+               
             ]);
         }
    }
@@ -89,6 +86,7 @@ class SummaryController extends Controller{
         return view('customer.summary.item_po')->with([
             'data' => $data,
         ]);
+       
 
 
 
@@ -100,38 +98,41 @@ class SummaryController extends Controller{
         $now    = Carbon::now();
         $month  = $now->month;
         $year   = $now->year;
-        
-        // $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
-        // ->selectRaw('count(*) as jumlah, company_id')
-        // ->get();
-        // $terminate = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)
-        // ->count('gps_id');
-        // $penambahan =  DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
-        // ->count('gps_id');
-        $data = DB::table('detail_customers')
-        ->groupBy('company_id')
+    
+
+        $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+        ->where('status_layanan', "Active")
         ->select('company_id', 
             DB::raw('count(gps_id) as total_gps'),
-            DB::raw('count(tanggal_pasang) as total_penambahan')
-        )
-        ->whereRaw('MONTH(tanggal_pasang) = ?',$month)
-        ->whereRaw('YEAR(tanggal_pasang) = ?',$year)
+            DB::raw('count(tanggal_pasang) as penambahan_layanan '),
+        )   
         ->get();
 
-        $le = count($data);
-        
-        for ($i=0; $i <= $le ; $i++) { 
+     
+
         return view('customer.summary.item_summary')->with([
-            'data'  => $data[$i],
+            'data'  => $data,
             'month' => $month,
             'year'  => $year,
-            // 'terminate'  => $terminate,
-            // 'penambahan' => $penambahan
+           
         ]);
-    }
+   
 
        
    }
+
+
+
+
+
+      // $data2 = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)->groupBy('company_id')->where('status_layanan', "In Active")
+        // ->select('company_id', 
+        //     DB::raw('count(tanggal_non_aktif) as total_terminate '),
+        // )   
+        // ->get();
+
+        // $merge=$data1->merge($data2);
+
 
 
 
