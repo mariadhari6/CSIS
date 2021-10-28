@@ -87,7 +87,7 @@
                 {{ date('d-M-Y', strtotime($detail->tanggal_reaktivasi_gps)) }}
             @endif 
         </td>
-        <td id="td-button-{{ $detail->id }}">
+        <td  class="action sticky-col first-col" id="td-button-{{ $detail->id }}" >
             <div id="button-{{ $detail->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $detail->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $detail->id }})"></i>

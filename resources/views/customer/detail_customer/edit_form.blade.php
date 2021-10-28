@@ -176,7 +176,7 @@
 <td><div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div></td>
 <td><div class="input-div"><input type="date" class="input TanggalNonAktif-{{ $details->id }}" id="TanggalNonAktif" value="{{ $details->tanggal_non_aktif }}"></div></td>
 <td><div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}"></div></td>
-<td>
+<td class="action sticky-col first-col">
     <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
 </td>
 
@@ -185,8 +185,8 @@
     $(document).ready(function() {
 
         $('select[name="SerialNumberSensor"]').on('change', function() {
+
                 var Id = $(this).val();
-                // alert(Id);
                 if(Id) {
                     $.ajax({
                         url: '/based_sensor/'+ Id,
@@ -205,26 +205,24 @@
                     $('select[name="MerkSensor').empty();
                 }
         
-        s});
+        });
 
         $('select[name="LicencePlate"]').on('change', function() {
+            
                 var Id = $(this).val();
-                // alert(Id);
                 if(Id) {
                     $.ajax({
                         url: '/based_license/'+ Id,
                         method: "GET",                        
                         success:function(data) {
-                        
                             $('select[name="VihecleType').empty();
                             $('select[name="PoolName').empty();
                             $('select[name="PoolLocation').empty();
-                                $.each(data, function(key, value) {
-                                    $('select[name="VihecleType').append('<option value="'+ key +'">'+ value.vehicle_id +'</option>');
-                                    $('select[name="PoolName').append('<option value="'+ key +'">'+ value.pool_name +'</option>');
-                                    $('select[name="PoolLocation').append('<option value="'+ key +'">'+ value.pool_location +'</option>');
-                                                                     
-                               });
+                            $.each(data, function(key, value) {
+                                $('select[name="VihecleType').append('<option value="'+ key +'">'+ value.vehicle_id +'</option>');
+                                $('select[name="PoolName').append('<option value="'+ key +'">'+ value.pool_name +'</option>');
+                                $('select[name="PoolLocation').append('<option value="'+ key +'">'+ value.pool_location +'</option>');
+                            });   
                         }
                     });
                 }

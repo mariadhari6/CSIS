@@ -123,11 +123,24 @@
       width: 90%;
      max-width:1650px;
     }
-  }
-
-/* #table-detail{
-    width: 1024px;
-    text-align: center;
 }
- */
+
+.unstyled-button {
+    border: none;
+    padding: 0;
+    background: none;
+}
+
+.sticky-col {
+    position: -webkit-sticky;
+    position: sticky;
+    background-color: white;
+}
+
+.first-col {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    right: 0px;
+}
 

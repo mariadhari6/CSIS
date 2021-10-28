@@ -271,6 +271,12 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
      Route::get('/selectedDelete_master_po', [MasterPoController::class, 'deleteAll']);
      Route::get('/selected_master_po', [MasterPoController::class, 'selected']);
      Route::get('/update_all/{id}', [MasterPoController::class, 'updateall']);
+     Route::get('/item_data_All_master_po', [MasterPoController::class, 'item_data']);
+     Route::get('/item_data_beli_master_po', [MasterPoController::class, 'item_data_Beli']);
+     Route::get('/item_data_sewa_master_po', [MasterPoController::class, 'item_data_Sewa']);
+     Route::get('/item_data_sewa_beli_master_po', [MasterPoController::class, 'item_data_Sewa_Beli']);
+     Route::get('/item_data_trial_master_po', [MasterPoController::class, 'item_data_Trial']);
+     Route::get('/filter_company/{id}', [MasterPoController::class, 'filter_company']);
 
      Route::get('/Vehicle', [VehicleController::class, 'index'])->name('company');
      Route::get('/item_data_vehicle', [VehicleController::class, 'item_data']);

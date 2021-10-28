@@ -11,9 +11,10 @@
 @endforeach
 
 
-{{-- <td>{{ $no++ }}</td>
+
+{{-- <td>{{ $no++ }}</td>  
 <td id ="key">{{ $item->company->company_name }}</td>
-<td>{{ $item->jumlah }}</td>
+<td>{{ $item->jumlah }}</td>  
 <td>{{ $terminate}}</td>
 <td>{{ $penambahan }}</td>
 <td><i class="fas fa-eye" id="{{ $item->company->company_name }}" onclick="detail({{ $item->company_id}},{{ $month }},{{ $year }})"></i></td> --}}

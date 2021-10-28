@@ -13,6 +13,7 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
+          <form>
           <table class="table table-hover" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -34,6 +35,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+        </form>  
 
         </div>
       </div>
@@ -339,4 +341,5 @@
 
 
   </script>
+
    @endsection

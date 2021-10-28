@@ -17,12 +17,13 @@
     
         <div class="card" >
             <img class="card-img-top" src="" alt="">
-            <div class="card-body">
-                <h5 class="card-title">Pilih Company</h5>
-                <p class="card-text" id="ajax-content">
-                    
-                </p>  
-            </div>
+          
+                <div class="card-body">
+                    <h5 class="card-title">Pilih Company</h5>
+                        <p class="card-text" id="ajax-content">
+                        </p>  
+                </div>
+          
         </div>
 
        
@@ -53,5 +54,4 @@
         });
     });
   </script>
-
 @endsection

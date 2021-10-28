@@ -8,6 +8,28 @@
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+                <div class="float-left mr-2">
+                  <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Company</div>
+                    </div>
+                    <select class="form-control" id="filter-company">
+                        <option value=""></option>
+                      @foreach ($company as $item)
+                        <option value="{{ $item->id }}"> {{ $item->company_name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="float-left mr-2">
+                  <select class="form-control input-fixed" id="filter">
+                    <option value="{{ url('item_data_All_master_po') }}">All Status</option>
+                    <option value="{{ url('item_data_beli_master_po') }}">Beli</option>
+                    <option value="{{ url('item_data_sewa_master_po') }}">Sewa</option>
+                    <option value="{{ url('item_data_sewa_beli_master_po') }}">Sewa Beli</option>
+                    <option value="{{ url('item_data_trial_master_po') }}">Trial</option>
+                  </select>
+                </div>
                 <button class="btn btn-success  mr-2 edit_all"><i class="fas fa-pen"></i></button>
                 <button class="btn btn-danger delete_all"><i class="fas fa-trash"></i></button>  
             </div>
@@ -15,12 +37,10 @@
             <thead>
               <tr>
                 <th width="10px">
-                    
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                   
+                    <label class="form-check-label">
+                      <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                      <span class="form-check-sign"></span>
+                    </label>
                 </th>
                 <th scope="col">No.</th>
                 <th scope="col">Company</th>
@@ -44,9 +64,42 @@
   </div>
   <script>
 
-    $(document).ready(function() {
-      read()
+    $(document).ready(function(){
+      read();  
     });
+
+
+    $("#filter-company").change(function(){
+      var value = $(this).val();
+      $.ajax({ 
+        url:"{{ url('/filter_company')}}/" + value,
+        success: function(data, status){
+          $('#table_id').find("#item_data").html(data);
+        }
+            
+      });
+      return true;
+    });
+
+  
+       // ------ Filter change ------
+    $("#filter").change(function(){
+      var value = $(this).val();
+      filter(value);
+    });
+
+      // ------ Filter ------
+    function filter(value){
+      var value = value;
+      $.get(value, {}, function(data, status) {
+          $('#table_id').DataTable().destroy();
+          $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable( {
+              "dom": '<"top"f>rt<"bottom"lp><"clear">'
+              });
+          $('#table_id').DataTable().draw();
+      });
+    }
 
     // ------ Tampil Data ------
     function read(){

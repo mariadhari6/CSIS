@@ -2,12 +2,12 @@
 <div class="title">
     <strong> {{ $company->company_name }}</strong>  
 </div>
-
     <div class="text-right mt-3" id="selected">
         <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
         <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
         <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
     </div>
+    
     <table class="table table-responsive" id="table_id">
         <thead>
           <tr>
@@ -38,7 +38,7 @@
             <th scope="col" class="list">Tanggal Pasang</th>
             <th scope="col" class="list">Tanggal Non Active</th>
             <th scope="col" class="list">Tanggal Reaktivasi GPS</th>
-            <th scope="col" class="action">Action</th>
+            <th scope="col" class="action sticky-col first-col">Action</th>
           </tr>
         </thead>
         <tbody  id="item_data">      
@@ -46,10 +46,12 @@
     </table>
 
 
+
 <script>
 
     $(document).ready(function() {
         read();
+        
     });
 
     function read(){
@@ -57,30 +59,30 @@
         var id = {{ $company->id }}; 
 
         $.get("{{ url('item_detail') }}/" + id , {}, function(data, status) {
-         $('#table_id').DataTable().destroy();
-         $('#table_id').find("#item_data").html(data);
-         $('#table_id').dataTable( {
-            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable({
+                "dom": '<"top"f>rt<"bottom"lp><"clear">'
             });
-        $('#table_id').DataTable().draw();
-      }); 
+            $('#table_id').DataTable().draw();
+        }); 
     }
 
-    function cancel() {
-      read()
+    function cancel(){
+      read();
     }
 
 
-    $('.add').click(function() {
+    $('.add').click(function(){
+
         var id = {{ $company->id }}; 
-        
         $.get("{{ url('add_form_detail') }}/" + id , {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
         
     });
 
-    function store() {
+    function store(){
 
         var CompanyId           = $("#CompanyId").val();
         var LicencePlate        = $("#LicencePlate").val();
@@ -128,36 +130,33 @@
                 TanggalNonAktif     : TanggalNonAktif,
                 TanggalReaktivasi   : TanggalReaktivasi
             },
-            success: function(data) {
-              if (data == "not") {
+            success: function(data){
+              if (data == "not"){
                 swal({
-                        type: 'error',
-                        title: 'PO is Full',
-                        showConfirmButton: false,
-                        timer: 2000
-                    }).catch(function(timeout) { })
-                    read();
-                  
+                    type: 'error',
+                    title: 'PO is Full',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).catch(function(timeout) { })
+                read();
               }else{
                     swal({
                         type: 'success',
                         title: 'Data Saved',
                         showConfirmButton: false,
                         timer: 1500
-                    }).catch(function(timeout) { })
+                    }).catch(function(timeout){ })
                     read();
                 }
-            //    alert(data)
-
-            }
-        })
+            }  
+        });       
     }
 
 
-    // -----Proses Delete Data ------
-    function destroy(id) {
+   
+    function destroy(id){
+        
         var id = id;
-
         swal({
             title: 'Are you sure?',
             text: "You want delete to this data!",
@@ -168,33 +167,30 @@
             confirmButtonText: 'Yes Delete',
             showLoaderOnConfirm: true,
             preConfirm: function() {
-              return new Promise(function(resolve) {
-                $.ajax({
-                    type: "get",
-                    url: "{{ url('destroy_detail') }}/" + id,
-                    data: "id=" + id,
-                    success: function(data) {
-                        // swal("Done!","It was succesfully deleted!","success");
-                        swal({
-                            type: 'success',
-                            title: 'Data Deleted',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).catch(function(timeout) { })
-                        read();
-                    }
+                return new Promise(function(resolve) {
+                    $.ajax({
+                        type: "get",
+                        url: "{{ url('destroy_detail') }}/" + id,
+                        data: "id=" + id,
+                        success: function(data) {
+                            swal({
+                                type: 'success',
+                                title: 'Data Deleted',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).catch(function(timeout) { })
+                            read();
+                        }
+                    });
                 });
-
-              });
             },
             allowOutsideClick: false
-      });
-
+        });
     }
 
     function edit(id){
+
         var id = id;
-       
         var company = {{ $company->id }}
        
         $("#td-checkbox-"+id).hide("fast");
@@ -213,8 +209,6 @@
         $("#item-GSM-"+id).hide("fast");
         $("#item-Provider-"+id).hide("fast");
         $("#item-SensorAll-"+id).hide("fast");
-        // $("#item-NameSensor-"+id).hide("fast");
-        // $("#item-MerkSensor-"+id).hide("fast");
         $("#item-PoolName-"+id).hide("fast");
         $("#item-PoolLocation-"+id).hide("fast");
         $("#item-Waranty-"+id).hide("fast");
@@ -223,16 +217,12 @@
         $("#item-TanggalNonAktif-"+id).hide("fast");
         $("#item-TanggalReaktivasi-"+id).hide("fast");
 
-        // $.get("{{ url('show_detail') }}/" + id, {}, function(data, status) {
-        //     $("#edit-form-"+id).prepend(data)
-        // });
         $.ajax({ 
             url:"{{ url('/show_detail')}}/" + id,
             data:{
             company : company,
             }, 
-            success: function(data, status)
-            {
+            success: function(data, status){
                 $("#edit-form-"+id).prepend(data)
             }
                 
@@ -240,8 +230,9 @@
         return true;
     }
 
-     function update(id) {
+     function update(id){
 
+        var id = id;
         var CompanyId           = $("#CompanyId").val();
         var LicencePlate        = $("#LicencePlate").val();
         var VihecleType         = $("#VihecleType").val();
@@ -255,8 +246,6 @@
         var GSM                 = $("#GSM").val();
         var Provider            = $("#Provider").val();
         var SensorAll           = $("#SensorAll").val();
-        // var NameSensor          = $("#NameSensor").val();
-        // var MerkSensor          = $("#MerkSensor").val();
         var PoolName            = $("#PoolName").val();
         var PoolLocation        = $("#PoolLocation").val();
         var Waranty             = $("#Waranty").val();
@@ -264,7 +253,8 @@
         var TanggalPasang       = $("#TanggalPasang").val();
         var TanggalNonAktif     = $("#TanggalNonAktif").val();
         var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
-            var id = id;
+
+        
             $.ajax({
                 type: "get",
                 url: "{{ url('update_detail') }}/"+id,
@@ -282,8 +272,6 @@
                 GSM                 : GSM,
                 Provider            : Provider,
                 SensorAll           : SensorAll,
-                // NameSensor          : NameSensor,
-                // MerkSensor          : MerkSensor,
                 PoolName            : PoolName,
                 PoolLocation        : PoolLocation,
                 Waranty             : Waranty,
@@ -292,49 +280,43 @@
                 TanggalNonAktif     : TanggalNonAktif,
                 TanggalReaktivasi   : TanggalReaktivasi
                 },
-                success: function(data) {
-                swal({
-                    type: 'success',
-                    title: ' Data Updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).catch(function(timeout) { })
-                read()
-
+                success: function(data){
+                    swal({
+                        type: 'success',
+                        title: ' Data Updated',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).catch(function(timeout) { })
+                    read();
                 }
-
-
             });
         }
 
 
 
         $('#master').on('click', function(e) {
-          if($(this).is(':checked',true) ){
+
+            if($(this).is(':checked',true) ){
                 $(".task-select").prop('checked', true)
-          } else {
+            }
+            else{
               $(".task-select").prop('checked',false);
-          }
+            }
 
         });
 
         $('.delete_all').on('click', function(){
-        //   event.preventDefault();
 
             var allVals = [];
-
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
-
             });
 
-                if (allVals.length > 0) {
+            if (allVals.length > 0){
 
-                    var _token = $('input[name="_token"]').val();
+                var _token = $('input[name="_token"]').val();
 
-                    // alert(allVals);
-
-                    swal({
+                swal({
                     title: 'Are you sure?',
                     text: "You want delete Selected data !",
                     type: 'warning',
@@ -343,34 +325,34 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes Delete',
                     showLoaderOnConfirm: true,
-                    preConfirm: function() {
-                    return new Promise(function(resolve) {
-                        $.ajax({
-                            url: "{{ url('selectedDelete_detail') }}",
-                            method: "GET",
-                            data: {
-                                id: allVals,
-                                _token: _token
-                            },
-                            success: function(data) {
-                                // swal("Done!","It was succesfully deleted!","success");
-                                swal({
-                                    type: 'success',
-                                    title: 'The selected data has been deleted',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).catch(function(timeout) { })
-                                $("#master").prop('checked', false);
-                                read();
+                    preConfirm: function(){
+                        return new Promise(function(resolve){
+                            $.ajax({
+                                url: "{{ url('selectedDelete_detail') }}",
+                                method: "GET",
+                                data: {
+                                    id: allVals,
+                                    _token: _token
+                                },
+                                success: function(data) {
+                                    swal({
+                                        type: 'success',
+                                        title: 'The selected data has been deleted',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).catch(function(timeout) { })
 
+                                    $("#master").prop('checked', false);
+                                    read();
                                 }
                             });
-                    });
+                        });
                     },
                     allowOutsideClick: false
                 });
 
-            }else{
+            }
+            else{
                 alert('Select the row you want to delete')
             }
 
@@ -384,8 +366,8 @@
 
 
             $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
 
+                allVals.push($(this).attr("id"));
             });
 
             if (allVals.length > 0){
@@ -499,38 +481,36 @@
                             TanggalReaktivasi   : TanggalReaktivasi
                         },
                         success: function(data) {
-                                swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).catch(function(timeout) {});
-                                $(".save").hide("fast");
-                                $(".cancel").hide("fast");
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                read();
-
-                            }
+                            swal({
+                                type: 'success',
+                                title: 'The selected data has been updated',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).catch(function(timeout) {});    
+                            $(".save").hide("fast");
+                            $(".cancel").hide("fast");
+                            $(".add").show("fast");
+                            $(".edit_all").show("fast");
+                            $(".delete_all").show("fast");
+                            read();
+                        }
                     });
                 });
-
             });
-
         }
+      
+        function batal(){
 
-       
-         function batal(){
             $(".save").hide("fast");
             $(".cancel").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-            }
-
-        
+        }
 
 </script>
+
+
+
 

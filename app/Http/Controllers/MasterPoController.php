@@ -18,7 +18,10 @@ class MasterPoController extends Controller
 {
     public function index()
     {
-        return view('master_po.index');
+        $company = Company::orderBy('company_name', 'DESC')->get();
+        return view('master_po.index')->with([
+            'company' => $company
+        ]);
     }
     public function add_form()
     {
@@ -127,6 +130,94 @@ class MasterPoController extends Controller
         MasterPo::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
     }
+
+    public function item_data_beli(){
+
+        $master_po = MasterPo::where('status_po', 'Beli')->get();
+        return view('master_po.item_data')->with([
+            'master_po' => $master_po
+        ]);
+    }
+
+    public function item_data_sewa(){
+
+        $master_po = MasterPo::where('status_po', 'Sewa')->get();
+         return view('master_po.item_data')->with([
+             'master_po' => $master_po
+         ]);
+    }
+
+    public function item_data_sewa_beli(){
+
+         $master_po = MasterPo::where('status_po', 'Sewa Beli')->get();
+         return view('master_po.item_data')->with([
+            'master_po' => $master_po
+         ]);
+    }
+
+    public function item_data_trial(){
+
+        $master_po = MasterPo::where('status_po', 'Trial')->get();
+        return view('master_po.item_data')->with([
+            'master_po' => $master_po
+        ]);
+
+    }
+
+
+    public function filter_company($id){
+
+        $master_po = MasterPo::where('company_id', $id)->get();
+        return view('master_po.item_data')->with([
+            'master_po' => $master_po
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function check(){
 

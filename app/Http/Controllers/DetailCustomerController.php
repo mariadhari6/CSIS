@@ -38,30 +38,15 @@ class DetailCustomerController extends Controller
         $gsm        = Gsm::orderBy('gsm_number', 'DESC' )->where('status_gsm', 'Ready')->get();
         $sensor     = Sensor::orderBy('serial_number', 'DESC')->where('status', 'Ready')->get();
         $vehicle    = Vehicle::orderBy('license_plate', 'DESC')->where('company_id', $id)->where('status', 'Ready')->get();
-        $cekdataada = DetailCustomer::groupBy('po_id')
-                    ->selectRaw('count(*) as jumlah , po_id')
-                    ->get();
+        $po         = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $id)->get();
 
-        
-        $i = DB::table('master_pos')->groupBy('id')
-            ->select('id', DB::raw('jumlah_unit_po as jumlah'),)
-            ->get();
-        
-            // return $i[0]->jumlah;
-
-     
-        
-        // if($cekdataada[0]['po_id'] == $i[0]->id ){
-        //     if ($cekdataada[0]['jumlah'] <= $i[0]->jumlah) {
-        //         $po = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $id)->get();
-               
-        //     }
-        // }
-
-        $po = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $id)
-            // ->where('jumlah_unit_po' ,'<=', $cekdataada[0]['jumlah'])
-            ->get();
-
+        // $cekdataada = DetailCustomer::groupBy('po_id')
+        //             ->selectRaw('count(*) as jumlah , po_id')
+        //             ->get();
+       
+        // $i = DB::table('master_pos')->groupBy('id')
+        //     ->select('id', DB::raw('jumlah_unit_po as jumlah'),)
+        //     ->get();
         
         return view('customer.detail_customer.add_form')->with([
             'company'   => $company ,
@@ -150,7 +135,8 @@ class DetailCustomerController extends Controller
         $gsm        = Gsm::orderBy('gsm_number', 'DESC' )->get();
         // $sensor = Sensor::groupBy('sensor_name')
         // ->selectRaw('count(*) as jumlah, sensor_name')
-        // ->get();        $sensor     = Sensor::orderBy('serial_number', 'DESC')->get();
+        // ->get();   
+        $sensor     = Sensor::orderBy('serial_number', 'DESC')->get();
         $po         = MasterPo::where('company_id', $data)->get();
         $vehicle    = Vehicle::where('company_id', $data)->get();
         return view('customer.detail_customer.edit_form')->with([
