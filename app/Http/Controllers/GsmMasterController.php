@@ -72,24 +72,54 @@ class GsmMasterController extends Controller
     {
         $dataRequest = json_decode($request->data);
         foreach ($dataRequest as $key => $value) {
-            $data = array(
-                'status_gsm'        =>  $value->status_gsm,
-                'gsm_number'        =>  $value->gsm_number,
-                'company_id'        =>  Company::where('company_name', $value->company_id)->firstOrFail()->id,
-                'serial_number'     =>  $value->serial_number,
-                'icc_id'            =>  $value->icc_id,
-                'imsi'              =>  $value->imsi,
-                'res_id'            =>  $value->res_id,
-                'request_date'      =>  $value->request_date,
-                'expired_date'      =>  $value->expired_date,
-                'active_date'       =>  $value->active_date,
-                'terminate_date'    =>  $value->terminate_date,
-                'note'              =>  $value->note,
-                'provider'          =>  $value->provider
-            );
-            Gsm::insert($data);
-            // $status_gsm = $value->status_gsm
-            // dd($value->status_gsm);
+            $gsmNumber = $value->gsm_number;
+            $serialNumber = $value->serial_number;
+            $checkGsm = Gsm::where('gsm_number', '=', $gsmNumber)->first();
+            $checkSerial = Gsm::where('serial_number', '=', $serialNumber)->first();
+            if ($checkGsm === null  && $checkSerial === null ) {
+                try {
+                    $data = array(
+                        'status_gsm'        =>  $value->status_gsm,
+                        'gsm_number'        =>  $value->gsm_number,
+                        'company_id'        =>  Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                        'serial_number'     =>  $value->serial_number,
+                        'icc_id'            =>  $value->icc_id,
+                        'imsi'              =>  $value->imsi,
+                        'res_id'            =>  $value->res_id,
+                        'request_date'      =>  $value->request_date,
+                        'expired_date'      =>  $value->expired_date,
+                        'active_date'       =>  $value->active_date,
+                        'terminate_date'    =>  $value->terminate_date,
+                        'note'              =>  $value->note,
+                        'provider'          =>  $value->provider
+                    );
+                    Gsm::insert($data);
+                    // return 'success';
+                } catch (\Throwable $th) {
+                    return 'fail';
+                }
+            } else {
+                return 'fail';
+            }
+
+            // $data = array(
+            //     'status_gsm'        =>  $value->status_gsm,
+            //     'gsm_number'        =>  $value->gsm_number,
+            //     'company_id'        =>  Company::where('company_name', $value->company_id)->firstOrFail()->id,
+            //     'serial_number'     =>  $value->serial_number,
+            //     'icc_id'            =>  $value->icc_id,
+            //     'imsi'              =>  $value->imsi,
+            //     'res_id'            =>  $value->res_id,
+            //     'request_date'      =>  $value->request_date,
+            //     'expired_date'      =>  $value->expired_date,
+            //     'active_date'       =>  $value->active_date,
+            //     'terminate_date'    =>  $value->terminate_date,
+            //     'note'              =>  $value->note,
+            //     'provider'          =>  $value->provider
+            // );
+            // Gsm::insert($data);
+            // // $status_gsm = $value->status_gsm
+            // // dd($value->status_gsm);
         }
        
     }

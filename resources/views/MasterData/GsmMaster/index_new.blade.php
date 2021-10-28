@@ -87,7 +87,6 @@
               <br>
               <input type="file" id="excel_file" />
               <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
-              <button type="button" class="btn btn-success btn-xs" id="send" onclick="tes()" >tes</button>
               <a  class="btn btn-secondary btn-xs" href="/download_template_gsm" style="color:white">Download Template</a>
             </div>
             <div class="card-body">
@@ -179,22 +178,22 @@
           gsmNumberID = document.querySelectorAll("#table-data-1");
           serialNumberID = document.querySelectorAll("#table-data-3");
           for (indexA = 0; indexA < gsmNumberID.length; indexA++) {
-            var gsmNumberValue = gsmNumberID[indexA].innerText; //0
+            var gsmNumberValue = gsmNumberID[indexA].innerText;
             var serialNumberValue = serialNumberID[indexA].innerText;
             $rowCount = $("#table_id tr").length;
-            if ($rowCount == 1) {
+            if ($rowCount == 2) {
               // alert('table empty')
             } else {
-              $rowResult = $rowCount - 1;
+              $rowResult = $rowCount - 2;
               var allGsmNum = [];
               var allSerNum = [];
-              for($i = 0; $i < $rowResult; $i++)
+              for($i = 1; $i <= $rowResult; $i++)
                   { 
-                    // $numArr = $i-1;
+                    $numArr = $i-1;
                     $gsmNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
                     $serNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(5)").attr("name");
-                    allGsmNum[$i] = $gsmNum;
-                    allSerNum[$i] = $serNum;
+                    allGsmNum[$numArr] = $gsmNum;
+                    allSerNum[$numArr] = $serNum;
                   }
                   // alert(allGsmNum[0]);
               for (let index = 0; index < allGsmNum.length; index++) {
@@ -277,17 +276,6 @@
       };
     });
 
-    // tes function
-    function tes() {
-      // gsmNumberID = document.querySelectorAll("#table-data-1");
-      // alert(gsmNumberID[1].innerText);
-      $rowCount = $("#table_id tr").length;
-      $i = 1;
-      $gsmNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
-
-      alert($gsmNum);
-    }
-
       // ---- Submit form temporary ----
     function submitClick() {
       deleteTemporary();
@@ -328,33 +316,50 @@
       var tes = $("#importTable").find("tbody>tr:eq(1)>td:eq(1)").attr("style");
       var success;
 
-      $.ajax({
-        type: 'POST',
-        dataType: 'JSON', 
-        url: "{{ url('save_import_GsmMaster') }}",
-        data: {
-           data   : JSON.stringify(data) ,
-          _token  : '{!! csrf_token() !!}'
-        } ,
-        error: function(er) {
-          if(er.responseText === 'fail' ){
-            // alert("save failed");
-            swal({
+      // if(tes === 'background-color: rgb(232, 131, 125);'){
+      //   alert('success');
+      // } else {
+      //   alert('erross')
+      // }
+
+      for (let index = 1; index <= trLength; index++) {
+          for (let index2 = 0; index2 < thLength; index2++) {
+            var item = $("#importTable").find("tbody>tr:eq(" + index + ")>td:eq(" + index2 + ")").attr("style");
+            if(item === 'background-color: rgb(232, 131, 125);' ){
+              swal({
                 type: 'warning',
                 text: 'Duplicate data or error format',
                 showConfirmButton: false,
                 timer: 1500
               }).catch(function(timeout) { });
-          } else {
+              success = 1;
+              break;
+            } 
+          }
+          if(success == 1){
+            break;
+          } else if(index == trLength) {
             try {
-            swal({ 
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-            read();
-            $('#importData').modal('hide');
+              alert('tes');
+              $.ajax({
+              type: 'POST',
+              dataType: 'JSON', 
+              url: "{{ url('save_import_GsmMaster') }}",
+              data: {
+                data   : JSON.stringify(data) ,
+                _token  : '{!! csrf_token() !!}'
+              } ,
+              error: function(data) {
+                  swal({ 
+                    type: 'success',
+                    title: 'Data Saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                  read();
+                  $('#importData').modal('hide');
+                }
+            });
             } catch (error) {
               swal({
                 type: 'warning',
@@ -362,11 +367,32 @@
                 showConfirmButton: false,
                 timer: 1500
               }).catch(function(timeout) { });
-
+              success = 1;
+              break;
             }
           }
-          }
-      });
+      }
+
+
+      // $.ajax({
+      //   type: 'POST',
+      //   dataType: 'JSON', 
+      //   url: "{{ url('save_import_GsmMaster') }}",
+      //   data: {
+      //      data   : JSON.stringify(data) ,
+      //     _token  : '{!! csrf_token() !!}'
+      //   } ,
+      //   error: function(data) {
+      //       swal({ 
+      //         type: 'success',
+      //         title: 'Data Saved',
+      //         showConfirmButton: false,
+      //         timer: 1500
+      //     }).catch(function(timeout) { });
+      //       read();
+      //       $('#importData').modal('hide');
+      //     }
+      // });
       
     }
 
