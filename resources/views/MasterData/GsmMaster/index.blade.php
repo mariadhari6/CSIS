@@ -87,7 +87,6 @@
               <br>
               <input type="file" id="excel_file" />
               <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
-              <button type="button" class="btn btn-success btn-xs" id="send" onclick="tes()" >tes</button>
               <a  class="btn btn-secondary btn-xs" href="/download_template_gsm" style="color:white">Download Template</a>
             </div>
             <div class="card-body">
@@ -112,12 +111,6 @@
       });
 
       read()
-      // read_temporary()
-      // deleteTemporary();
-      // --- hide submit button ----
-      // document.getElementById("check").style.visibility = "hidden";
-
-      // import excel change date
     });
 
      // -- excel export to html tabel --
@@ -277,23 +270,6 @@
       };
     });
 
-    // tes function
-    function tes() {
-      // gsmNumberID = document.querySelectorAll("#table-data-1");
-      // alert(gsmNumberID[1].innerText);
-      $rowCount = $("#table_id tr").length;
-      $i = 1;
-      $gsmNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
-
-      alert($gsmNum);
-    }
-
-      // ---- Submit form temporary ----
-    function submitClick() {
-      deleteTemporary();
-      $('#check').click();
-    }
-
     // ------- save data import -----
     function save_data() {
       var total = 0;
@@ -377,17 +353,6 @@
         $('#importData').modal('hide');
     });
 
-    // ------- Delete Temporary -----
-    function deleteTemporary() {
-      $.ajax({
-          type: "get",
-          url: "{{ url('delete_temporary') }}",
-          success: function(data) {
-              
-          }
-      });
-    }
-
     // ------- filter change ------
     $("#filter").change(function(){ 
         var value = $(this).val();
@@ -419,13 +384,6 @@
             // "dom": '<lf<t>ip>'
             });
         $('#table_id').DataTable().draw();
-      });
-    }
-
-    // ------ Tampil Data Temporary------
-    function read_temporary(){
-      $.get("{{ url('item_data_temporary_GsmMaster') }}", {}, function(data, status) {
-        $('#table_temporary_id').find("#item_data_temporary").html(data);
       });
     }
 
@@ -506,35 +464,35 @@
           } else if( index == allGsmNum.length) {
             // alert('success');
             // break;
-            // $.ajax({
-            //     type: "get",
-            //     url: "{{ url('store_GsmMaster') }}",
-            //     data: {
-            //       status_gsm: status_gsm,
-            //       gsm_number: gsm_number,
-            //       company_id: company_id,
-            //       serial_number: serial_number,
-            //       icc_id: icc_id,
-            //       imsi: imsi,
-            //       res_id: res_id,
-            //       request_date: request_date,
-            //       expired_date: expired_date,
-            //       active_date: active_date,
-            //       terminate_date: terminate_date,
-            //       note: note,
-            //       provider: provider
-            //     },
-            //     success: function(data) {
-            //     swal({
-            //         type: 'success',
-            //         title: 'Data Saved',
-            //         showConfirmButton: false,
-            //         timer: 1500
-            //     }).catch(function(timeout) { });
-            //       read();
-            //       // break;
-            //     }
-            // });
+            $.ajax({
+                type: "get",
+                url: "{{ url('store_GsmMaster') }}",
+                data: {
+                  status_gsm: status_gsm,
+                  gsm_number: gsm_number,
+                  company_id: company_id,
+                  serial_number: serial_number,
+                  icc_id: icc_id,
+                  imsi: imsi,
+                  res_id: res_id,
+                  request_date: request_date,
+                  expired_date: expired_date,
+                  active_date: active_date,
+                  terminate_date: terminate_date,
+                  note: note,
+                  provider: provider
+                },
+                success: function(data) {
+                swal({
+                    type: 'success',
+                    title: 'Data Saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                  read();
+                  // break;
+                }
+            });
             break;
           }    
         }
@@ -823,7 +781,7 @@
 
   </script>
 
-  <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
+  {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
    @endsection
 
