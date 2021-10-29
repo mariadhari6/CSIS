@@ -11,14 +11,14 @@ class MasterPoController extends Controller
 {
     public function index()
     {
-        $company = Company::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('company_name', 'DESC')->get();
         return view('MasterData.MasterPo.index')->with([
             'company'          => $company
         ]);
     }
     public function add_form()
     {
-        $company = Company::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('company_name', 'DESC')->get();
         $master_po = MasterPo::orderBy('po_number', 'DESC')->get();
         return view('MasterData.MasterPo.add_form')->with([
             'master_po'        => $master_po,

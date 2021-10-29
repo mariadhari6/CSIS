@@ -14,15 +14,16 @@
               <i class="fas fa-plus ml-2" id="add"></i>
               </button>
 
-              <div class="float-left mr-2 dropdown">
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Company
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="list-company">
-
+              <div class="float-left mr-2">
+                  <div class="input-group mb-2 mr-sm-2">
+                      <div class="input-group-prepend">
+                </div>
+                <select class="form-control" id="filter-company">
+                    <option value="">Company</option>
                 @foreach ($company as $item )
-                    <a href="" class="dropdown-item" id="{{ $item->id }}">{{ $item->company_name }}</a>
+                    <option value="{{ $item->id }}"> {{ $item->company_name }}</option>
                 @endforeach
+                </select>
             </div>
         </div>
             <div class="float-left mr-2">
@@ -41,11 +42,10 @@
             <thead>
               <tr>
                 <th width="10px">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input select-all-checkbox" type="checkbox" id="master">
+                        <span class="form-check-sign"></span>
+                    </label>
                     </div>
                 </th>
                 <th scope="col" class="action">No.</th>
@@ -76,25 +76,20 @@
 
   <script>
     $(document).ready(function() {
-
         read();
+    });
 
-        $('#list-company  a').click(function(){
-            var Id = $(this).attr('id');
-
+        $('#filter-company').change(function(){
+            var value = $(this).val();
             $.ajax({
-                url:"{{ url('/filter_company')}}/" + Id,
-                success: function(data)
-                {
-                    $("#ajax-content").empty().append(data);
+                url:"{{ url('/filter_company')}}/" + value,
+                success: function(data, status){
+                    $('#table_id').find("#item_data").html(data);
                 }
 
             });
-
+            return true;
         });
-
-
-    });
 
 
       // ------ Filter change ------
