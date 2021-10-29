@@ -71,26 +71,26 @@ class SummaryController extends Controller{
         }
    }
 
-   public function DataPo(Request $request){
+    public function DataPo(Request $request){
        
        $company = $request->company;
        $month   = $request->month;
        $year    = $request->year;
 
-       $data = DetailCustomer::where('company_id', $company)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
-       ->groupBy('company_id')->groupBy('po_id')
+       $data = DetailCustomer::where('company_id', $company)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year) ->where('status_layanan', "Active")
+       ->groupBy('company_id', 'po_id')
        ->selectRaw('company_id')
-       ->selectRaw('count(*) as jumlah, po_id')
+       ->selectRaw('po_id')
+       ->selectRaw('sum(harga_layanan) as total, po_id')
        ->get();
+
+
+       
 
         return view('customer.summary.item_po')->with([
             'data' => $data,
         ]);
-       
-
-
-
-   }
+    }
 
 
    public function item_summary(){
@@ -108,8 +108,7 @@ class SummaryController extends Controller{
         )   
         ->get();
 
-     
-
+        
         return view('customer.summary.item_summary')->with([
             'data'  => $data,
             'month' => $month,

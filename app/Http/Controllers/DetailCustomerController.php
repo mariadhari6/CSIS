@@ -26,7 +26,7 @@ class DetailCustomerController extends Controller
         $company = Company::findOrFail($id);
         $details = DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company->id )
         ->get();
-
+    
         return view('customer.detail_customer.item_data', compact('details'));
     }
 
@@ -117,7 +117,6 @@ class DetailCustomerController extends Controller
         else{
             return $x;
         }
-   
     }
 
     public function destroy($id){
@@ -174,6 +173,7 @@ class DetailCustomerController extends Controller
         $data->tanggal_non_aktif     = $request->TanggalNonAktif;
         $data->tgl_reaktivasi_gps    = $request->TanggalReaktivasi;
         $data->save();
+
     }
 
     public function deleteAll(Request $request)

@@ -57,7 +57,7 @@ class DetailCustomer extends Model
 
         return $this->hasMany(SummaryCustomer::class);
     }
-
+    
     public function gps() {
         
         return $this->belongsTo(Gps::class);

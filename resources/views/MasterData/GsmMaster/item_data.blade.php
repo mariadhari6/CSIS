@@ -17,7 +17,12 @@
             {{ $item->gsm_number }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company->company_name }}
+            
+            @if ( $item->company_id != null)
+                {{ $item->company->company_name }}
+            @else
+                {{ $item->company_id }}
+            @endif
         </td>
         <td id="item-serial_number-{{ $item->id }}">
             {{ $item->serial_number }}

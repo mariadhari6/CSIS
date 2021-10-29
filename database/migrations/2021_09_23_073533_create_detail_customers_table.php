@@ -17,7 +17,7 @@ class CreateDetailCustomersTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('company_id');
             $table->string('licence_plate');
-            $table->string('vihecle_type');
+            $table->string('vehicle_id');
             $table->foreignId('po_id');
             $table->integer('harga_layanan');
             $table->foreignId('po_date');

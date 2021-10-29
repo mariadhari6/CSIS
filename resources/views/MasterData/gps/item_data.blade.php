@@ -1,5 +1,5 @@
-@foreach ($gps as $gpses)
 <?php $no=1; ?>
+@foreach ($gps as $gpses)
     <tr id="edit-form-{{ $gpses->id }}">
         <td id="td-checkbox-{{ $gpses->id }}">
                 <label class="form-check-label">
@@ -8,7 +8,7 @@
                 </label>
         </td>
         <td id="item-no-{{ $gpses->id}}">
-            {{ $no++ }}
+          {{ $no++ }}
         </td>
         <td id="item-merk-{{ $gpses->id}}">
             {{ $gpses->merk }}

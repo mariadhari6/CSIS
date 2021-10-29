@@ -411,9 +411,9 @@ class MasterPoController extends Controller
             ->select('detail_customers.sensor_all' , 'sensors.sensor_name')
             ->get();
 
-            // return $d;
-            $month = 11;
-            $year  = 2021;
+            // // return $d;
+            // $month = 11;
+            // $year  = 2021;
             // $users = DB::table('detail_customers')
             // ->selectRaw('count(gps_id) as total_gps  WHERE status_layanan = Active, company_id')
             // ->groupBy('company_id')
@@ -438,8 +438,32 @@ class MasterPoController extends Controller
             // ->get();
 
 
-            return $d ;
+          
+
+            $company = 5;
+            $month = 10;
+            $year = 2021;
+
+            // $data = DetailCustomer::where('company_id', $company)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
+            // ->groupBy('company_id')->groupBy('po_id')
+            // ->selectRaw('company_id')
+            // ->selectRaw('po_id')
+            // ->get();
+
+        //    return DetailCustomer::join('master_pos', 'master_pos.harga_layanan', '=' , 'detail_customers.id' )
+        //     ->get(['detail_customers.id', DB::raw('sum(master_pos.value) as value')])
+        //     ->sum('value');
+
+            // $d =  DetailCustomer::join('master_pos', 'detail_customers.harga_layanan' , '=', 'master_pos.id')
+            // ->select('detail_customers.harga_layanan' , 'master_pos.harga_layanan')
+            // ->get();
+
+            // $t = DetailCustomer::with('sensor')->get();
+
+            // dd($t);
+            return $d;
     
+            // return $data ;
 
 
     }

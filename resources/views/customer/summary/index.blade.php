@@ -53,25 +53,8 @@
       </div>
       <div class="col-sm-8">
           <div class="card">
-              <div class="card-body">
-                <table class="table table-sm" id="table-detail">
-                    <thead>
-                      <tr>
-                        <th scope="col">Company</th>
-                        <th scope="col">No Po</th>
-                        <th scope="col">Jumlah Unit Po</th>
-                        <th scope="col">Harga Layanan</th>
-                        <th scope="col">Revenue</th>
-                        <th scope="col">Status PO</th>
-                        <th scope="col">Jumlah GPS terpasang</th>
-                      </tr>
-                    </thead>
-                    <tbody id="data-po">
-                    </tbody>
-                    <tfoot id="total_revenue">
-                      
-                    </tfoot>
-                  </table>
+              <div class="card-body" id="data-po">
+               
               </div>
           </div>
       </div>

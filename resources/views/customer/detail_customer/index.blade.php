@@ -49,7 +49,9 @@
 <script>
 
     $(document).ready(function() {
-        read();   
+        read();
+
+       
     });
 
     function read(){
@@ -262,8 +264,15 @@
 
         if (StatusLayanan == "In Active") {
             if (TanggalNonAktif == "") {
-                alert("non aktif");
-                return false
+                alert("Tanggal Non Aktif belum diisi ");
+                return false ;
+            }
+        }else if(StatusLayanan == "Active"){
+            if(TanggalNonAktif != ""){
+                if (TanggalReaktivasi == "") {
+                    alert("Tanggal Reaktivasi wajib diisi");
+                    return false;
+                }
             }
         }
             $.ajax({
@@ -421,8 +430,6 @@
                         $("#master").prop('checked', false);
                     });
                 });
-
-
             }else{
                 alert('Select the row you want to edit')
             }
@@ -519,5 +526,8 @@
             $(".delete_all").show("fast");
             read();
         }
+
+
+     
 
 </script>
