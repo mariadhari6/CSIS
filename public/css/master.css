@@ -224,21 +224,6 @@
 }
 
 /* Space among tr */
-.nopadding {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* freeze table */
-/* .headcol {
-    position: absolute;
-    width: 1em;
-    left: 0;
-    top: auto;
-    border-top-width: 1px;
-    margin-top: -1px;
-    background-color: rgb(162, 162, 162);
-} */
 
 .sticky-col {
     position: -webkit-sticky;
