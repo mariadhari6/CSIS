@@ -1,5 +1,8 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Sensor')
+@section('title-table','Sensor')
+@section('master','show')
+@section('sensor','active')
 
 
 @section('content')
@@ -12,7 +15,7 @@
             <div class="text-right mt-3" id="selected">
             <button type="button" class="btn btn-primary float-left mr-2 add"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>  
+                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
             <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
@@ -25,22 +28,22 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Sensor Name</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list">Sensor Name*</th>
                 <th scope="col" class="list">Merk Sensor</th>
-                <th scope="col" class="list">Serial Number</th>
-                <th scope="col" class="list">Rab Number</th>
+                <th scope="col" class="list">Serial Number*</th>
+                <th scope="col" class="list">Rab Number*</th>
                 <th scope="col" class="list">Waranty</th>
                 <th scope="col" class="list">Status</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-        
-        
+
+
           </div>
         </div>
         </div>
@@ -125,7 +128,7 @@
                             title: 'Data Deleted',
                             showConfirmButton: false,
                             timer: 1500
-                        }).catch(function(timeout) { }); 
+                        }).catch(function(timeout) { });
                         read();
                     }
                 });
@@ -264,7 +267,7 @@
                     $.get("{{ url('show_sensor') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
-                        
+
                     });
                 });
             }else{
@@ -337,4 +340,5 @@
             read();
         }
   </script>
+  </form>
    @endsection

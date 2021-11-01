@@ -118,7 +118,7 @@
          <option value="Mukhti">Mukhti</option>
       </select>
    </td>
-   <td> 
+   <td>
       <div class="input-div"><input type="number" class="input" id="uang_transportasi" placeholder="Uang Transpotasi" >
    </td>
    <td>
@@ -126,9 +126,9 @@
          <option value="" disabled selected>Type Visit</option>
          <option value="Visit SLA">Visit SLA</option>
          <option value="Visit Berbayar">Visit Berbayar</option>
-      </select>   
+      </select>
    <td>
-      <textarea class="form-control" id="note" name="note" rows="3"></textarea>  
+      <textarea class="form-control" id="note" name="note" rows="3"></textarea>
    </td>
    <td>
       <i class="fas fa-check add" id="add" onclick="store()"></i>

@@ -28,7 +28,7 @@
       {{$request_complains->vehicle}}
       </option>
       @endforeach
-   </select>   
+   </select>
 </td>
 <td>
    <select class="select imei-{{$pemasangan_mutasi_GPS->id}}" id="imei" name="imei">
@@ -48,7 +48,7 @@
       {{$detail->gsm}}
       </option>
       @endforeach
-   </select>   
+   </select>
 </td>
 <td>
    <select class="select kendaraan_pasang-{{$pemasangan_mutasi_GPS->id}}" id="kendaraan_pasang" name="kendaraan_pasang">
@@ -78,7 +78,7 @@
       {{$gpses->type}}
       </option>
       @endforeach
-   </select>   
+   </select>
 </td>
 <td>
    <select class="select equipment_terpakai_sensor-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_sensor" name="equipment_terpakai_sensor">
@@ -88,7 +88,7 @@
       {{$sensors->sensor_name}}
       </option>
       @endforeach
-   </select>   
+   </select>
 </td>
 <td>
    <select class="select teknisi-{{$pemasangan_mutasi_GPS->id}}" id="teknisi" name="teknisi" aria-label=".form-select-lg example">
@@ -97,7 +97,7 @@
       <option value="Rifai">Rifai</option>
       <option value="Arief">Arief</option>
       <option value="Mukhti">Mukhti</option>
-   </select>   
+   </select>
 </td>
 <td>
     <div class="input-div"><input type="number" class="input uang_transportasi-{{$pemasangan_mutasi_GPS->id}}" id="uang_transportasi" placeholder="Uang Transportasi" value="{{ $pemasangan_mutasi_GPS->uang_transportasi}}"></i></div>
@@ -107,7 +107,7 @@
       <option value=" {{$pemasangan_mutasi_GPS->type_visit}}"> {{$pemasangan_mutasi_GPS->type_visit}} </option>
       <option value="Visit SLA">Visit SLA</option>
       <option value="Visit Berbayar">Visit Berbayar</option>
-   </select>   
+   </select>
 </td>
 <td>
    <textarea class="form-control note-{{$pemasangan_mutasi_GPS->id}}" id="note" name="note" rows="3">{{$pemasangan_mutasi_GPS->note}}</textarea></i>
@@ -143,11 +143,26 @@ $(document).ready(function() {
                             $('select[name="jenis_pekerjaan').append('<option value="'+ key +'">'+ value +'</option>');
                         });
                 }
-            });
-        }else{
-            $('select[name="tanggal"]').empty();
-            $('select[name="jenis_pekerjaan"]').empty();
-        }
+            })
     });
-});
+    function add(){
+        var sensor = document.getElementById("SensorName").value;
+        var serialnumber = document.getElementById("SerialNumberSensor").value;
+        var merksensor = document.getElementById("MerkSensor").value;
+        var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
+        var hasil = document.getElementById("SensorTerpilih").value;
+        if (data == hasil) {
+                alert("ada data yang sama");
+        }else{
+            $("#SensorTerpilih").prepend(data);
+        }
+    }
+    function send(){
+        var sensorterpilih = document.getElementById("SensorTerpilih").value;
+        $('#sensor').empty();
+        $('#sensor').append(
+            '<option value="'+ sensorterpilih + '" id="equipment_terpakai_sensor" data-toggle="modal" data-target="#exampleModal"> '+ sensorterpilih +'</option>'
+        );
+    }
+
 </script>

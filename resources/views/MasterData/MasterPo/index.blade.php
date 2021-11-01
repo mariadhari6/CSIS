@@ -1,6 +1,8 @@
 @extends('layouts.v_main')
-@section('title','Master Po')
+@section('title','CSIS | Master Po')
 @section('title-table','Master Po')
+@section('master','show')
+@section('master_po','active')
 
 @section('content')
 
@@ -13,6 +15,7 @@
               <b>Add</b>
               <i class="fas fa-plus ml-2" id="add"></i>
               </button>
+
 
               <div class="float-left mr-2">
                   <div class="input-group mb-2 mr-sm-2">
@@ -33,6 +36,7 @@
                   <option value="{{ url('item_data_sewa_master_po') }}">Sewa</option>
                   <option value="{{ url('item_data_sewa_beli_master_po') }}">Sewa Beli</option>
                   <option value="{{ url('item_data_trial_master_po') }}">Trial</option>
+
                 </select>
             </div>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
@@ -105,13 +109,11 @@
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable( {
-
               "dom": '<"top"f>rt<"bottom"lp><"clear">'
               });
           $('#table_id').DataTable().draw();
         });
       }
-
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data_master_po') }}", {}, function(data, status) {
@@ -230,7 +232,6 @@
                 type: "get",
                 url: "{{ url('update_master_po') }}/"+id,
                 data: {
-
                 company_id: company_id,
                 po_number: po_number,
                 po_date:po_date,
@@ -330,12 +331,10 @@
                     $("#item-jumlah_unit_po-"+value).hide("fast");
                     $("#item-status_po-"+value).hide("fast");
                     $("#item-selles-"+value).hide("fast");
-
                     $(".add").hide("fast");
                     $.get("{{ url('show_master_po') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
-
                     });
                 });
             }else{
@@ -348,7 +347,6 @@
             $(".task-select:checked").each(function() {
                 allVals.push($(this).attr("id"));
             });
-
             swal({
                 title: "Are you sure?",
                 text: "Do you want to do an update?",
@@ -367,7 +365,6 @@
                     var jumlah_unit_po = $(".jumlah_unit_po-"+value).val();
                     var status_po = $(".status_po-"+value).val();
                     var selles = $(".selles-"+value).val();
-
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_master_po') }}/"+value,
@@ -379,7 +376,6 @@
                     jumlah_unit_po: jumlah_unit_po,
                     status_po: status_po,
                     selles: selles
-
                     },
                     success: function(data) {
                       swal({

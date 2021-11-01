@@ -18,6 +18,7 @@
     <td>
         <div class="input-div"><input type="text" class="input" id="customer_code" placeholder="Customer Code" required>
     </td>
+
     <td>
         <select class="select" id="no_agreement_letter_id" name="no_agreement_letter_id" required>
             <option value="">Pilih No Agreement</option>
@@ -44,6 +45,7 @@
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('select[name="seller_id"]').on('change', function() {
@@ -61,6 +63,7 @@
                             });
                     }
                 });
+
             }else{
                 $('select[name="no_agreement_letter_id"]').empty();
             }

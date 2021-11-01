@@ -23,6 +23,7 @@ class DetailCustomer extends Model
         'type',
         'gsm_id',
         'provider',
+        'sensor_all',
         'serial_number_sensor',
         'sensor_id',
         'merk_sensor',
@@ -37,6 +38,7 @@ class DetailCustomer extends Model
 
     public function pemasanganMutasiGps()
     {
+
         return $this->hasMany(PemasanganMutasiGps::class);
     }
 

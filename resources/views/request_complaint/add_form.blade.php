@@ -1,4 +1,6 @@
 <tr id="add_form">
+
+    <td></td>
     <td></td>
     <td></td>
     <td>

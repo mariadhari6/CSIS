@@ -22,4 +22,30 @@ class Gps extends Model
     {
         return $this->hasMany(DetailCustomer::class);
     }
+    public function maintenanceGps()
+    {
+        return $this->hasMany(MaintenanceGps::class);
+    }
+    public function merkGps()
+    {
+        return $this->belongsTo(MerkGps::class, 'merk');
+    }
+    public function typeGps()
+    {
+        return $this->belongsTo(TypeGps::class, 'type', 'id');
+    }
+
+    public function requestComplaintMaintenance()
+    {
+        return $this->hasMany(RequestComplaint::class, 'equipment_gps_id', 'id');
+    }
+    public function requestComplaintMaintenanceType()
+    {
+        return $this->hasMany(RequestComplaint::class, 'type_gps_id', 'id');
+    }
+
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaint::class, 'equipment_terpakai_gps', 'id');
+    }
 }

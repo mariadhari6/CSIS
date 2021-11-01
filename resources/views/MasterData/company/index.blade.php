@@ -81,7 +81,6 @@
      // ------ Tambah Form Input ------
      $('.add').click(function() {
         $.get("{{ url('add_form_company') }}", {}, function(data, status) {
-
           $('#table_id tbody').prepend(data);
         });
       });
@@ -157,8 +156,9 @@
     function edit(id){
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
-        $("#item-no-"+id).hide("fast");
+        // $("#item-no-"+id).hide("fast");
         $("#td-button-"+id).slideUp("fast");
+        $("#item-no-"+id).slideUp("fast");
         $("#item-company_name-"+id).slideUp("fast");
         $("#item-seller_id-"+id).slideUp("fast");
         $("#item-customer_code-"+id).slideUp("fast");
@@ -347,8 +347,8 @@
                   $(".add").show("fast");
                   $(".edit_all").show("fast");
                   $(".delete_all").show("fast");
-                  $(".btn-round").hide("fast");
-                  $(".btn-round").hide("fast");
+                  $("#save-selected").hide("fast");
+                  $("#cancel-selected").hide("fast");
                 }
             });
             });
@@ -370,4 +370,6 @@
 
     </script>
 
+  </script>
+</form>
    @endsection

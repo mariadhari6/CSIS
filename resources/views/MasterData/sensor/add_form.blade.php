@@ -1,19 +1,19 @@
 <tr id="add_form">
     <td></td>
     <td></td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="sensor_name" placeholder="Sensor Name">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="merk_sensor" placeholder="Merk Sensor">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="rab_number" placeholder="Rab Number">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="date" class="input" id="waranty" placeholder="Waranty">
     </td>
     <td>
@@ -24,7 +24,12 @@
             <option value="Error">Error</option>
         </select>
     </td>
-    <td>
-        <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()">
+
+
+     <td class="action sticky-col first-col">
+       <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="add" onclick="store()"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 </tr>

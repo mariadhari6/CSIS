@@ -172,6 +172,9 @@
     }
     function edit(id){
         var id = id;
+
+        var company = {{ $company->id }}
+
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
@@ -187,9 +190,9 @@
         $("#item-Type-"+id).hide("fast");
         $("#item-GSM-"+id).hide("fast");
         $("#item-Provider-"+id).hide("fast");
-        $("#item-SerialNumberSensor-"+id).hide("fast");
-        $("#item-NameSensor-"+id).hide("fast");
-        $("#item-MerkSensor-"+id).hide("fast");
+        $("#item-SensorAll-"+id).hide("fast");
+        // $("#item-NameSensor-"+id).hide("fast");
+        // $("#item-MerkSensor-"+id).hide("fast");
         $("#item-PoolName-"+id).hide("fast");
         $("#item-PoolLocation-"+id).hide("fast");
         $("#item-Waranty-"+id).hide("fast");
@@ -200,6 +203,7 @@
         $.get("{{ url('show_detail') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
+        return true;
     }
     function update(id) {
        var CompanyId           = $("#CompanyId").val();
@@ -348,9 +352,7 @@
                     $("#item-Type-"+value).hide("fast");
                     $("#item-GSM-"+value).hide("fast");
                     $("#item-Provider-"+value).hide("fast");
-                    $("#item-SerialNumberSensor-"+value).hide("fast");
-                    $("#item-NameSensor-"+value).hide("fast");
-                    $("#item-MerkSensor-"+value).hide("fast");
+                    $("#item-SensorAll-"+value).hide("fast");
                     $("#item-PoolName-"+value).hide("fast");
                     $("#item-PoolLocation-"+value).hide("fast");
                     $("#item-Waranty-"+value).hide("fast");
@@ -385,7 +387,7 @@
                 $.each(allVals, function(index, value){
                     var CompanyId           = $(".CompanyId-"+ value).val();
                     var LicencePlate        = $(".LicencePlate-"+ value).val();
-                    var VihecleType         = $(".VehicleType-"+ value).val();
+                    var VihecleType         = $(".VihecleType-"+ value).val();
                     var PoNumber            = $(".PoNumber-"+ value).val();
                     var HargaLayanan        = $(".HargaLayanan-"+ value).val();
                     var PoDate              = $(".PoDate-"+ value).val();
@@ -395,9 +397,7 @@
                     var Type                = $(".Type-"+ value).val();
                     var GSM                 = $(".GSM-"+ value).val();
                     var Provider            = $(".Provider-"+ value).val();
-                    var SerialNumberSensor  = $(".SerialNumberSensor-"+ value).val();
-                    var NameSensor          = $(".NameSensor-"+ value).val();
-                    var MerkSensor          = $(".MerkSensor-"+ value).val();
+                    var SensorAll           = $(".SensorAll-"+ value).val();
                     var PoolName            = $(".PoolName-"+ value).val();
                     var PoolLocation        = $(".PoolLocation-"+ value).val();
                     var Waranty             = $(".Waranty-"+ value).val();
@@ -421,9 +421,7 @@
                             Type                : Type,
                             GSM                 : GSM,
                             Provider            : Provider,
-                            SerialNumberSensor  : SerialNumberSensor,
-                            NameSensor          : NameSensor,
-                            MerkSensor          : MerkSensor,
+                            SensorAll           : SensorAll,
                             PoolName            : PoolName,
                             PoolLocation        : PoolLocation,
                             Waranty             : Waranty,

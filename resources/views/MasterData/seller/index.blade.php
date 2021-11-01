@@ -1,46 +1,52 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Seller')
 @section('content')
-<h4 class="page-title">Seller</h4>
-  <div class="row">
+    <div class="row">
     <div class="col-md-12">
-      <div class="card">
+    <div class="card">
         <div class="card-body">
             <div class="text-right mt-3" id="selected">
             <button type="button" class="btn btn-primary float-left mr-2 add" id="add" >
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" ></i>
                 </button>
-                <button class="btn btn-success  mr-2 edit_all"> 
+                <button class="btn btn-success  mr-2 edit_all">
                   <i class="fas fa-pen"></i>
                 </button>
                 <button class="btn btn-danger  delete_all">
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
+              <form>
+
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
+
                 <th>
-                    <div class="form-check">
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list-seller">Seller Name</th>
-                <th scope="col" class="list-seller">Seller Code</th>
-                <th scope="col" class="list-seller">No Agreement Letter</th>
-                <th scope="col" class="list-seller">Status</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list-seller">Seller Name*</th>
+                <th scope="col" class="list-seller">Seller Code*</th>
+                <th scope="col" class="list-seller">No Agreement Letter*</th>
+                <th scope="col" class="list-seller">Status*</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
             {{-- {{ csrf_field() }} --}}
             </tbody>
+
           </table>
+           </form>
+
         </div>
       </div>
     </div>
@@ -69,7 +75,7 @@
       read()
     }
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
         $.get("{{ url('add_form_seller') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -81,10 +87,10 @@
         var no_agreement_letter = $("#no_agreement_letter").val();
         var status = $("#status").val();
 
-        if( 
+        if(
             seller_name == '' ||
             seller_code == '' ||
-            no_agreement_letter == '' 
+            no_agreement_letter == ''
           ) {
           swal({
             type: 'warning',
@@ -155,6 +161,7 @@
         $("#td-checkbox-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
         $("#item-seller_name-"+id).hide("fast");
         $("#item-seller_code-"+id).hide("fast");
         $("#item-no_agreement_letter-"+id).hide("fast");
@@ -337,8 +344,8 @@
             $(".delete_all").show("fast");
             read();
         }
-        
-       
+
+
   </script>
 
 

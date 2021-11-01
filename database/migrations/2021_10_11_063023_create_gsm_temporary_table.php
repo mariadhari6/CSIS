@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGsmPreActivesTable extends Migration
+class CreateGsmTemporaryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,22 @@ class CreateGsmPreActivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('gsm_pre_actives', function (Blueprint $table) {
+        Schema::create('gsm_temporary', function (Blueprint $table) {
             $table->id();
+            $table->string('status_gsm');
             $table->string('gsm_number');
+            $table->foreignId('company_id')->nullable();
             $table->string('serial_number');
             $table->string('icc_id');
             $table->string('imsi');
             $table->string('res_id');
-            $table->date('expired_date');
-            $table->string('note');
+            $table->date('request_date')->nullable();
+            $table->date('expired_date')->nullable();
+            $table->date('active_date')->nullable();
+            $table->date('terminate_date')->nullable();
+            $table->string('note')->nullable();
+            $table->string('provider');
+
             $table->timestamps();
         });
     }
@@ -33,6 +40,6 @@ class CreateGsmPreActivesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gsm_pre_actives');
+        Schema::dropIfExists('gsm_temporary');
     }
 }

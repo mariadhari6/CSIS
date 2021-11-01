@@ -1,5 +1,8 @@
 @extends('layouts.v_main')
 @section('title','CSIS | PIC Company')
+@section('title-table','PIC Company')
+@section('master','show')
+@section('pic','active')
 
 @section('content')
 
@@ -9,18 +12,20 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <div class="text-right mt-3" id="selected">
+          <div class="text-right" id="selected">
             <button type="button" class="btn btn-primary float-left mr-2 add add-button">
               <b>Add</b>
               <i class="fas fa-plus ml-2" id="add"></i>
             </button>
-            <button class="btn btn-success  mr-2 edit_all"> 
+            <button class="btn btn-success  mr-2 edit_all">
               <i class="fas fa-pen"></i>
             </button>
             <button class="btn btn-danger  delete_all">
               <i class="fas fa-trash"></i>
             </button>
           </div>
+        <form>
+
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -32,20 +37,23 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Pic Name</th>
-                <th scope="col" class="list">Phone</th>
-                <th scope="col" class="list">Email</th>
-                <th scope="col" class="list">Position</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list">Company*</th>
+                <th scope="col" class="list">Pic Name*</th>
+                <th scope="col" class="list">Phone*</th>
+                <th scope="col" class="list">Email*</th>
+                <th scope="col" class="list">Position*</th>
                 <th scope="col" class="list">Date of birth</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+         </form>
+
         </div>
         </div>
       </div>
@@ -161,6 +169,7 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
+
         $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-pic_name-"+id).slideUp("fast");

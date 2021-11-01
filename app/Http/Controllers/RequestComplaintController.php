@@ -25,22 +25,19 @@ class RequestComplaintController extends Controller
             'vehicle'          => $vehicle
         ]);
     }
-
-    public function item_data()
-    {
-        $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
-        return view('request_complaint.item_data', compact('request_complain'));
-    }
-
     public function item_data_MY(Request $request)
     {
         $year = $request->year;
         $month = $request->month;
         $request_complain = RequestComplaint::whereMonth('waktu_info',  $month)->whereYear('waktu_info', $year)->get();
         return view('request_complaint.item_data', compact('request_complain'));
+    }
 
-        // return view('RequestComplaint.data_request_complaint.item_data', compact('request_complain'));\
-        // echo $request_complain;
+
+    public function item_data()
+    {
+        $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
+        return view('request_complaint.item_data', compact('request_complain'));
     }
 
     public function store(Request $request)
@@ -127,7 +124,7 @@ class RequestComplaintController extends Controller
         $data = RequestComplaint::findOrfail($id);
         $data->company_id           = $request->company_id;
         $data->internal_eksternal   = $request->internal_eksternal;
-        $data->pic_id                  = $request->pic;
+        $data->pic_id               = $request->pic;
         $data->vehicle              = $request->vehicle;
         $data->waktu_info           = $request->waktu_info;
         $data->task                 = $request->task;
@@ -157,6 +154,7 @@ class RequestComplaintController extends Controller
         $data->pic_id = $request->pic;
         $data->vehicle = $request->vehicle;
         $data->waktu_info = $request->waktu_info;
+        $data->waktu_respond = $request->waktu_respond;
         $data->task = $request->task;
         $data->platform = $request->platform;
         $data->detail_task = $request->detail_task;

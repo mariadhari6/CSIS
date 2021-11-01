@@ -11,7 +11,7 @@ class MaintenanceGps extends Model
 
     protected $guard = ['id'];
 
-    public function requestComplaint()
+    public function requestComplain()
     {
         return $this->belongsTo(RequestComplaintCustomer::class, 'company_id');
     }
@@ -26,8 +26,8 @@ class MaintenanceGps extends Model
         return $this->belongsTo(Sensor::class, 'equipment_sensor_id');
     }
 
-    public function pic()
+    public function teknisiMaintenance()
     {
-        return $this->belongsTo(Pic::class, 'teknisi_id');
+        return $this->belongsTo(Teknisi::class, 'teknisi_id');
     }
 }

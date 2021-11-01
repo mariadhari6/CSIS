@@ -29,45 +29,47 @@
             <li class="nav-item">
 
             <li class="nav-item
-                {{ request()->is('seller') ? ' active' : ''}}
-                {{ request()->is('Company') ? ' active' : ''}}
-                {{ request()->is('pic') ? ' active' : ''}}
-                {{ request()->is('gps') ? ' active' : ''}}
-                {{ request()->is('sensor') ? ' active' : ''}}
-                {{ request()->is('GsmPreActive') ? ' active' : ''}}
-                {{ request()->is('GsmActive') ? ' active' : ''}}
-                {{ request()->is('GsmTerminate') ? ' active' : ''}}
+            {{ request()->is('seller') ? ' active' : ''}}
+            {{ request()->is('Company') ? ' active' : ''}}
+            {{ request()->is('pic') ? ' active' : ''}}
+            {{ request()->is('gps') ? ' active' : ''}}
+            {{ request()->is('sensor') ? ' active' : ''}}
+            {{ request()->is('master_po') ? ' active' : ''}}
+            {{ request()->is('Vehicle') ? ' active' : ''}}
+            {{ request()->is('GsmMaster') ? ' active' : ''}}
+            {{ request()->is('Active') ? ' active' : ''}}
+            {{ request()->is('Terminate') ? ' active' : ''}}
             ">
                 <a class="" data-toggle="collapse" href="#masterData" aria-expanded="true">
                     <i class="fas fa-table"></i>
                     <p>Master Data</p>
                     <span class="caret"></span>
                 </a>
-                <div class="collapse in" id="masterData" aria-expanded="true" style="">
+                <div class="collapse @yield('master')" id="masterData" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="{{url('/seller')}}">
+                            <a class="collapse-item @yield('seller')" href="{{url('/seller')}}">
                                 <span class="link-collapse">Seller</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{url('/Company') }}">
+                        <li class="nav-item {{ request()->is('Company') ? ' active' : ''}}">
+                            <a class="collapse-item @yield('company')" href="{{url('/Company') }}">
                                 <span class="link-collapse">Company</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{url('/pic') }}">
+                        <li class="nav-item {{ request()->is('pic') ? ' active' : ''}}">
+                            <a class="collapse-item @yield('pic')" href="{{url('/pic') }}">
                                 <span class="link-collapse">PIC</span></span>
                             </a>
                         </li>
 
-                        <li>
-                            <a href="{{url('/gps')}}">
+                        <li class="nav-item {{ request()->is('gps') ? ' active' : ''}}">
+                            <a class="collapse-item @yield('gps')" href="{{url('/gps')}}">
                                 <span class="link-collapse">GPS</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{url('/sensor')}}">
+                        <li class="nav-item {{ request()->is('sensor') ? ' active' : ''}}">
+                            <a class="collapse-item @yield('sensor')" href="{{url('/sensor')}}">
                                 <span class="link-collapse">Sensor</span>
                             </a>
                         </li>
@@ -87,20 +89,21 @@
                                 <span class="caret"></span>
                             </a>
 
-                            <div class="collapse in" id="gsm" aria-expanded="true" style="">
+                            <div class="collapse @yield('gsm')" id="gsm" aria-expanded="true" style="">
                                 <ul class="nav">
-                                    <li>
-                                        <a href="{{url('/GsmPreActive')}}">
-                                            <span class="link-collapse">Pre Active</span>
+
+                                    <li class="nav-item {{ request()->is('GsmMaster') ? ' active' : ''}}">
+                                        <a class="collapse-item @yield('GsmMaster')" href="{{url('/GsmMaster')}}">
+                                            <span class="link-collapse">Master Gsm</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{url('/GsmActive') }}">
+                                    <li class="nav-item {{ request()->is('Active') ? ' active' : ''}}">
+                                        <a class="collapse-item @yield('Active')" href="{{url('/GsmActive') }}">
                                             <span class="link-collapse">Active</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{url('/GsmTerminate') }}">
+                                    <li class="nav-item {{ request()->is('GsmTerminate') ? ' active' : ''}}">
+                                        <a class="collapse-item @yield('Terminate')" href="{{url('/GsmTerminate') }}">
                                             <span class="link-collapse">Terminated</span>
                                         </a>
                                     </li>
@@ -120,7 +123,7 @@
                     <p>Customer</p>
                     <span class="caret"></span>
                 </a>
-                <div class="collapse in" id="customer" aria-expanded="true" style="">
+                <div class="collapse @yield('customer')" id="customer" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
                             <a href="{{url('/detail_customer') }}">
@@ -140,13 +143,15 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item
+            {{ request()->is('RequestComplain') ? ' active' : ''}}"
+            ">
                 <a class="" data-toggle="collapse" href="#request&complain" aria-expanded="true">
                     <i class="fas fa-comments"></i>
                     <p>Request & Complain</p>
                     <span class="caret"></span>
                 </a>
-                <div class="collapse in" id="request&complain" aria-expanded="true" style="">
+                <div class="collapse @yield('requestComplain')" id="request&complain" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
                             <a href="{{url('/RequestComplain')}}">
@@ -159,6 +164,7 @@
             <li class="nav-item
                 {{ request()->is('MaintenanceGps') ? ' active' : ''}}
                 {{ request()->is('PemasanganMutasi') ? ' active' : ''}}
+                {{ request()->is('dashboard_visit_assignment') ? ' active' : ''}}
             ">
                 <a class="" data-toggle="collapse" href="#visit" aria-expanded="true">
                     <i class="fas fa-user-cog"></i>
@@ -187,11 +193,11 @@
                     </ul>
                 </div>
             </li>
-
+{{--
             <li class="nav-item">
 
                 <a href="{{ url('/livetable') }}">Example Crud</a>
-            </li>
+            </li> --}}
 
 
         </ul>

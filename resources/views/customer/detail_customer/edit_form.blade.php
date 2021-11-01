@@ -28,7 +28,9 @@
             <option value="{{ $item->id }}" {{ $details->id  == $item->id ? 'selected':'' }}>{{ $item->po_number }}</option>
         @endforeach
     </select>
+
 </td>
+<td><div class="input-div"><input type="date" class="input Waranty-{{ $details->id }}" id="Waranty" value="{{ $details->waranty }}"></div></td>
 <td>
     <select class="select HargaLayanan-{{ $details->id }}" id="HargaLayanan">
         @foreach ($po as $item)

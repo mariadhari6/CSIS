@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MerkSensor;
 use App\Models\Sensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,9 +18,11 @@ class SensorController extends Controller
     public function add_form()
     {
         $sensor = Sensor::orderBy('sensor_name', 'DESC')->get();
+        $merk_sensor = MerkSensor::orderBy('id', 'DESC')->get();
         return view('MasterData.sensor.add_form')->with([
 
             'sensor' => $sensor,
+            'merk_sensor' => $merk_sensor
         ]);
     }
 
@@ -46,10 +49,12 @@ class SensorController extends Controller
 
     public function edit_form($id)
     {
-
+        $merk_sensor = MerkSensor::orderBy('id', 'DESC')->get();
         $sensor = Sensor::findOrfail($id);
         return view('MasterData.sensor.edit_form')->with([
             'sensor' => $sensor,
+            'merk_sensor' => $merk_sensor
+
 
         ]);
     }

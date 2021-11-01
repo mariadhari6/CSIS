@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGsmTerminatesTable extends Migration
+class CreateMasterPosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGsmTerminatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('gsm_terminates', function (Blueprint $table) {
+        Schema::create('master_pos', function (Blueprint $table) {
             $table->id();
             $table->date('request_date');
             $table->date('active_date');
@@ -21,7 +21,12 @@ class CreateGsmTerminatesTable extends Migration
             $table->foreignId('gsm_active_id');
             $table->string('status_active');
             $table->foreignId('company_id');
-            $table->string('note');
+            $table->string('po_number');
+            $table->string('po_date');
+            $table->string('harga_layanan');
+            $table->string('jumlah_unit_po');
+            $table->string('status_po');
+            $table->string('selles');
             $table->timestamps();
         });
     }
@@ -33,6 +38,6 @@ class CreateGsmTerminatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gsm_terminates');
+        Schema::dropIfExists('master_pos');
     }
 }
