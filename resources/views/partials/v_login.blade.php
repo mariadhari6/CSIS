@@ -19,7 +19,7 @@
                     <img src="{{ asset('images/csis.png')}}" alt="" class="img-fluid">
                 </div>
                 <div class="col-lg-7 px-5 pt-5">
-                    <h1 class="font-weight-bold py-3">Login</h1>
+                    {{-- <h1 class="font-weight-bold py-3">Login</h1> --}}
                     <form>
                         <div class="form-row">
                             <div class="col-lg-7">

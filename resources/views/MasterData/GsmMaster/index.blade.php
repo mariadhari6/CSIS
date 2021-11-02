@@ -4,13 +4,12 @@
 
 @section('content')
 
-<h4 class="page-title">GSM Master</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button">
+            <div class="text-right" id="selected">
+                <button type="button" class="btn btn-primary btn-sm float-left mr-2 add add-button">
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" id="add"></i>
                 </button>
@@ -22,14 +21,14 @@
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
                   </select>
                 </div>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                <button type="button" class="btn btn-success btn-sm float-left mr-2" data-toggle="modal" data-target="#importData">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
-                <button class="btn btn-success  mr-2 edit_all"> 
+                <button class="btn btn-success btn-sm  mr-2 edit_all"> 
                   <i class="fas fa-pen"></i>
                 </button>
-                <button class="btn btn-danger delete_all">
+                <button class="btn btn-danger btn-sm delete_all">
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
@@ -203,6 +202,7 @@
                 }    
               }
             }
+            alert( typeof serialNumberValue );
           }
 
           // change format RequestDate
@@ -379,7 +379,7 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
-
+            "pageLength": 50,
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });

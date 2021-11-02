@@ -80,6 +80,22 @@
     margin-left: 20px;
 }
 
+.dataTables_filter {
+    position: relative;
+    right: 150px;
+    bottom: 38px;
+}
+
+.text-right {
+    position: relative;
+    top: 0px;
+}
+
+.table {
+    position: relative;
+    bottom: 25px;
+}
+
 /* #table_id {
     position: relative;
     bottom: 0px;
@@ -99,11 +115,6 @@
     min-width: 180px;
     font-size: 15px;
     text-align: center;
-}
-.dataTables_filter {
-    position: relative;
-    right: 150px;
-    bottom: 35px;
 }
 
 .fa-times {

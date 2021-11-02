@@ -84,13 +84,8 @@ class PemasanganMutasiGpsController extends Controller
 
     public function edit_form($id)
     {
-        $pemasangan_mutasi_GPS = PemasanganMutasiGps::findOrfail($id);
-        $details = DetailCustomer::orderBy('id', 'DESC')->get();
-        $request_complain = RequestComplaintCustomer::orderBy('id', 'DESC')->get();
-        $pic = Pic::orderBy('id', 'DESC')->get();
-        $sensor = Sensor::orderBy('id', 'DESC')->get();
-        $gps = Gps::orderBy('id', 'DESC')->get();
-        return view('VisitAssignment.PemasanganMutasiGPS.edit_form', compact('pemasangan_mutasi_GPS', 'details', 'request_complain', 'pic', 'sensor', 'gps'));
+        $pemasangan_mutasi_GPS = $pemasangan_mutasi_GPS = RequestComplaint::findOrfail($id);
+        return view('VisitAssignment.PemasanganMutasiGPS.edit_form', compact('pemasangan_mutasi_GPS'));
     }
 
     public function update(Request $request, $id)

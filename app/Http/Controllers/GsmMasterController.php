@@ -78,7 +78,7 @@ class GsmMasterController extends Controller
             $serialNumber = $value->serial_number;
             $checkGsm = Gsm::where('gsm_number', '=', $gsmNumber)->first();
             $checkSerial = Gsm::where('serial_number', '=', $serialNumber)->first();
-            if ($checkGsm === null || $checkSerial === null ) {
+            if ($checkGsm === null && $checkSerial === null ) {
                 $data[$key] = array(
                     'status_gsm'        =>  $value->status_gsm,
                     'gsm_number'        =>  $value->gsm_number,
@@ -115,7 +115,7 @@ class GsmMasterController extends Controller
             return 'fail';
         } else {
             try {
-                $gsmTemporary = GsmTemporary::orderBy('id', 'ASC')->get();
+                $gsmTemporary = GsmTemporary::orderBy('id', 'DESC')->get();
                 foreach ($gsmTemporary as $key => $value){
                     $data[$key] = array(
                         'status_gsm'        =>  $value->status_gsm,

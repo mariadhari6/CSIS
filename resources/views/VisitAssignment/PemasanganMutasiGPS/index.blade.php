@@ -1,11 +1,9 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Pemasangan dan Mutasi GPS')
 
-
 @section('content')
 <h4 class="page-title">Pemasangan dan Mutasi GPS</h4>
-
-
+<form>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -387,4 +385,5 @@
             read();
         }
   </script>
-   @endsection
+</form>
+@endsection

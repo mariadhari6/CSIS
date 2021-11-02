@@ -44,6 +44,9 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                @if (session('error'))
+                                    {{session('error')}}
+                                 @endif
                             </div>
                         </div>
                         <div class="form-row">
