@@ -6,7 +6,8 @@
         <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
         <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
     </div>
-
+   
+  
     <table class="table table-responsive" id="table_id">
         <thead>
           <tr>
@@ -15,7 +16,7 @@
                     <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                     <span class="form-check-sign"></span>
                 </label>       
-            </th>
+            </th>   
             <th scope="col">No</th>
             <th scope="col" class="list">Company</th>
             <th scope="col" class="list">License Plate</th>
@@ -43,8 +44,9 @@
         <tbody  id="item_data">      
         </tbody>
     </table>
-  
 
+   
+  
 
 <script>
 
@@ -53,7 +55,7 @@
 
        
     });
-
+    
     function read(){
 
         var id = {{ $company->id }}; 
@@ -84,7 +86,6 @@
 
     function store(){
 
-        // $("#basic").validate(); 
 
         var CompanyId           = $("#CompanyId").val();
         var LicencePlate        = $("#LicencePlate").val();
@@ -108,8 +109,8 @@
         var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
 
         if (TanggalPasang == ""){
-            alert("Tangggal pasang wajib diisi");
-            return false;
+            $("#TanggalPasang[data-toggle='popover']").popover('show');
+            return false; 
         }   
 
         $.ajax({
@@ -145,16 +146,15 @@
                     showConfirmButton: false,
                     timer: 2000
                 }).catch(function(timeout) { })
-                read();
+                    read();
               }else{
                     swal({
                         type: 'success',
                         title: 'Data Saved',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2000
                     }).catch(function(timeout){ })
                     read();
-                    
                 }
             }  
         });       
@@ -264,17 +264,18 @@
 
         if (StatusLayanan == "In Active") {
             if (TanggalNonAktif == "") {
-                alert("Tanggal Non Aktif belum diisi ");
+                $("#TanggalNonAktif[data-toggle='popover']").popover('show');
                 return false ;
             }
         }else if(StatusLayanan == "Active"){
             if(TanggalNonAktif != ""){
                 if (TanggalReaktivasi == "") {
-                    alert("Tanggal Reaktivasi wajib diisi");
+                    $("#TanggalReaktivasi[data-toggle='popover']").popover('show');
                     return false;
                 }
             }
         }
+        
             $.ajax({
                 type: "get",
                 url: "{{ url('update_detail') }}/"+id,
@@ -307,6 +308,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     }).catch(function(timeout) { })
+                    // $("[data-toggle='popover']").popover('close');
                     read();
                 }
             });

@@ -227,10 +227,11 @@ class MasterPoController extends Controller
 
 
 
-        // $str = "1 2 3";
+        // $str = "Door(234,a)";
 
-        // $arr = explode(" ",$str);
-        // $count = count($arr)-1;
+        // $arr = explode("()",$str);
+        // return $arr;
+        // $count = count($arr)-1;  
 
         // for ($i=0; $i <= $count; $i++) { 
         //     Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
@@ -440,9 +441,9 @@ class MasterPoController extends Controller
 
           
 
-            $company = 5;
-            $month = 10;
-            $year = 2021;
+            // $company = 5;
+            // $month = 10;
+            // $year = 2021;
 
             // $data = DetailCustomer::where('company_id', $company)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
             // ->groupBy('company_id')->groupBy('po_id')
@@ -461,9 +462,22 @@ class MasterPoController extends Controller
             // $t = DetailCustomer::with('sensor')->get();
 
             // dd($t);
-            return $d;
+            // return $d;
     
             // return $data ;
+            // $i = 7;
+            // $details    = DetailCustomer::where('po_id', $i)->count();
+
+            // return $details;
+            $i = 7;
+            $s                       = MasterPo::where('id', $i)->pluck('jumlah_unit_po');
+
+            return $s[0];
+            // $banyak_po_di_details    = DetailCustomer::where('po_id', $i)->count();
+
+            // MasterPo::where('id', $i)->update(array('count' => $banyak_po_di_details)) ;  
+
+
 
 
     }

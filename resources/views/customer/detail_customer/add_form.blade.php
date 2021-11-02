@@ -1,5 +1,4 @@
 <tr>
-   
     <td></td>
     <td></td>
     <td>
@@ -185,7 +184,7 @@
         </select>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input" id="TanggalPasang" name="tanggal_pasang" required></div>
+        <div class="input-div"><input type="date" class="input" id="TanggalPasang" name="tanggal_pasang" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div>
     </td>
     <td><div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div></td>        
     <td><div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div></td>
@@ -195,9 +194,6 @@
         </button> 
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
-
-    
-    
 
     <script>
 
@@ -387,7 +383,7 @@
             //                 $('select[name="SerialNumberSensor').append('<option value=""> </option>');
             //                     for(var i = 0 ; i < data.length ; i++) {   
             //                         $('select[name="SerialNumberSensor').append('<option value="'+ data[i].serial_number + '"> '+ data[i].serial_number +'</option>');
-            //                             // alert(data[i].serial_number)
+            //                          16-Nov-2021   // alert(data[i].serial_number)
             //                     }   
             //             }
             //         });

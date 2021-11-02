@@ -3,7 +3,7 @@
     <td></td>
     <td> <div class="input-div"><input type="text" class="input" id="seller_name" placeholder="Seller name" required></i></td>
     <td> <div class="input-div"><input type="text" class="input" id="seller_code" placeholder="Seller code" required></i></td>
-    <td> <div class="input-div"><input type="text" class="input" id="no_agreement_letter" placeholder="No_agreement_later" required></i></td>
+    <td> <div class="input-div"><input type="text" class="input" id="no_agreement_letter" placeholder="No_agreement_later"  data-toggle="popover" title="Popover Header" data-content="Some content inside the popover"></i></td>
     <td>
         <select class="select" id="status" required>
             <option selected>Pilih status</option>

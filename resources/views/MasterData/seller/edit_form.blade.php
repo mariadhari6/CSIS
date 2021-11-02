@@ -7,7 +7,7 @@
         <div class="input-div"><input type="text" class="input seller_code-{{$seller->id}}" id="seller_code" placeholder="Seller Code" value="{{ $seller->seller_code}}"></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input no_agreement_letter-{{$seller->id}}" id="no_agreement_letter" placeholder="No Agreement Latter" value="{{ $seller->no_agreement_letter}}"></i></div>
+        <div class="input-div"><input type="text" class="input no_agreement_letter-{{$seller->id}}" id="no_agreement_letter" placeholder="No Agreement Latter" value="{{ $seller->no_agreement_letter}}" required></i></div>
     </td>
     <td>
         <select class="select status-{{$seller->id}}" id="status" aria-label=".form-select-lg example">

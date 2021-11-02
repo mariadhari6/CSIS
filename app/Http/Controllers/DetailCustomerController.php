@@ -26,7 +26,33 @@ class DetailCustomerController extends Controller
         $company = Company::findOrFail($id);
         $details = DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company->id )
         ->get();
+        
+        for ($i=0; $i <= count($details)-1 ; $i++) { 
+        
+            $loop_row   = $details[$i]->sensor_all;
+            if ($loop_row != "") {
+                
+                $data_sensor_all = explode(" ",$loop_row);
     
+                $temp_sensor = "";
+                foreach($data_sensor_all as $item ){
+                    $cari_sensor = Sensor::where('id', $item)->get();
+    
+                    if ($temp_sensor == "") {
+                        $temp_sensor = $cari_sensor[0]->sensor_name."(".$cari_sensor[0]->serial_number.",".$cari_sensor[0]->merk_sensor.")";
+                    }else{
+                        $temp_sensor .= "; " .$cari_sensor[0]->sensor_name."(".$cari_sensor[0]->serial_number.",".$cari_sensor[0]->merk_sensor.")";
+                    }
+    
+                }
+    
+                $details[$i]["sensor_all_name"] = $temp_sensor; 
+            }else{
+                $empty = "";
+                $details[$i]["sensor_all_name"] = $empty; 
+            }
+        }
+
         return view('customer.detail_customer.item_data', compact('details'));
     }
 
@@ -38,15 +64,9 @@ class DetailCustomerController extends Controller
         $gsm        = Gsm::orderBy('gsm_number', 'DESC' )->where('status_gsm', 'Ready')->get();
         $sensor     = Sensor::orderBy('serial_number', 'DESC')->where('status', 'Ready')->get();
         $vehicle    = Vehicle::orderBy('license_plate', 'DESC')->where('company_id', $id)->where('status', 'Ready')->get();
-        $po         = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $id)->get();
 
-        // $cekdataada = DetailCustomer::groupBy('po_id')
-        //             ->selectRaw('count(*) as jumlah , po_id')
-        //             ->get();
-       
-        // $i = DB::table('master_pos')->groupBy('id')
-        //     ->select('id', DB::raw('jumlah_unit_po as jumlah'),)
-        //     ->get();
+
+        $po         = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $id)->where('count', '!=', 0)->get();
         
         return view('customer.detail_customer.add_form')->with([
             'company'   => $company ,
@@ -91,32 +111,24 @@ class DetailCustomerController extends Controller
         $gsm_id         = $request->GSM;
         $gps_id         = $request->Imei;
         $sensor_all     = $request->SensorAll;
-       
+        $i              = $request->PoNumber;
 
-        $i      = $request->PoNumber;
-        $batas  = MasterPo::where('id', $i)->pluck('jumlah_unit_po');
-        $cek    = DetailCustomer::where('po_id', $i)->count();
-        $a      = $batas[0] - 1;
-        $x      = "not";
-        if ($cek <= $a) {
-
-            if ($sensor_all != ""){
-
-                $arr            = explode(" ",$sensor_all);
-                $lengthArr      = count($arr)-1;
-                for ($i=0; $i <= $lengthArr; $i++) { 
-                    Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
-                }  
-            } 
-             
-            Vehicle::where('id', $license_id)->update(array('status' => 'Used'));
-            Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Used'));
-            Gps::where('id', $gps_id)->update(array('status' => 'Used'));
-            DetailCustomer::insert($data);
+    
+        $jumlah_unit_per_po      = MasterPo::where('id', $i)->pluck('jumlah_unit_po');
+        $jumlah_po_di_detail     = DetailCustomer::where('po_id', $i)->count();
+        $tersedia                = $jumlah_unit_per_po[0] - ($jumlah_po_di_detail+1);
+        MasterPo::where('id', $i)->update(array('count' => $tersedia));
+        if ($sensor_all != ""){
+            $arr            = explode(" ",$sensor_all);
+            $lengthArr      = count($arr)-1;
+            for ($i=0; $i <= $lengthArr; $i++) { 
+                Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
+            }  
         }
-        else{
-            return $x;
-        }
+        Vehicle::where('id', $license_id)->update(array('status' => 'Used'));
+        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Used'));
+        Gps::where('id', $gps_id)->update(array('status' => 'Used'));
+        DetailCustomer::insert($data);
     }
 
     public function destroy($id){
@@ -172,6 +184,7 @@ class DetailCustomerController extends Controller
         $data->tanggal_pasang        = $request->TanggalPasang;
         $data->tanggal_non_aktif     = $request->TanggalNonAktif;
         $data->tgl_reaktivasi_gps    = $request->TanggalReaktivasi;
+            
         $data->save();
 
     }
@@ -238,7 +251,7 @@ class DetailCustomerController extends Controller
         return $data;
     }
 
-    public function basedPonumber($id){
+    public function basedPonumber($id){ 
         
         $key = MasterPo::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
                 return [$item['id'] => $item->only(['harga_layanan','po_date','status_po'])

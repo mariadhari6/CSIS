@@ -50,14 +50,12 @@
             {{ $detail->gsm->provider }}
         </td>
         <td id="item-SensorAll-{{ $detail->id }}" >
-            {{ $detail->sensor_all }}
+            @if ($detail->sensor_all_name == "0")
+                -
+            @else 
+            {{ $detail->sensor_all_name }}
+            @endif
         </td>
-        {{-- <td id="item-NameSensor-{{ $detail->id }}">
-            {{ $detail->sensor_id }}
-        </td>
-        <td id="item-MerkSensor-{{ $detail->id }}">
-            {{ $detail->merk_sensor }}
-        </td> --}}
         <td id="item-PoolName-{{ $detail->id }}">
             {{ $detail->vehicle->pool_name }}
         </td>
@@ -95,16 +93,6 @@
             </div>
         </td>
     </tr>
-
-
-    {{-- <script>
-        var value = {{ $detail->id }}
-        var a =  document.getElementById("item-SensorAll-"+value).value;
-         var u = $("#item-SensorAll-"+value).val();
-        // const Arr = a.split(" ");
-        // document.getElementById("item-SensorAll-"+value).innerHTML = Arr;
-        console.log(u);
-    </script> --}}
 
    @endforeach
 

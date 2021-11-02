@@ -1,7 +1,7 @@
 <td></td>
 <td></td>
 <td>
-    <select class="form-control status_gsm-{{$GsmMaster->id}}" id="status_gsm" name="status_gsm">
+    <select class="select status_gsm-{{$GsmMaster->id}}" id="status_gsm" name="status_gsm">
         <option value="Ready" {{ $GsmMaster->status_gsm == 'Ready' ? 'selected' : ''  }}>Ready</option>
         <option value="Active" {{ $GsmMaster->status_gsm == 'Active' ? 'selected' : ''  }}>Active</option>
         <option value="Terminate" {{ $GsmMaster->status_gsm == 'Terminate' ? 'selected' : ''  }}>Terminate</option>
@@ -11,7 +11,7 @@
     <div class="input-div"><input type="text" class="input gsm_number-{{$GsmMaster->id}}" id="gsm_number" placeholder="Gsm Number" value="{{ $GsmMaster->gsm_number}}"></div>
 </td>
 <td>
-    <select class="form-control company_id-{{$GsmMaster->id}}" id="company_id" name="company_id">
+    <select class="select company_id-{{$GsmMaster->id}}" id="company_id" name="company_id">
         @foreach ($company as $item)
         <option value="{{ $item->id }}" {{ $item->id == $GsmMaster->company_id ? 'selected' : '' }}>{{ $item->company_name }}</option>
         @endforeach
@@ -42,10 +42,10 @@
     <div class="input-div"><input type="date" class="input terminate_date-{{$GsmMaster->id}}" id="terminate_date" placeholder="Terminate Date" value="{{ $GsmMaster->terminate_date}}"></div>
 </td>
 <td>
-    <textarea class="form-control note-{{$GsmMaster->id}}" id="note" name="note" >{{$GsmMaster->note}}</textarea>
+    <textarea class="select note-{{$GsmMaster->id}}" id="note" name="note" >{{$GsmMaster->note}}</textarea>
 </td>
 <td>
-    <select class="form-control provider-{{$GsmMaster->id}}" id="provider" name="provider">
+    <select class="select provider-{{$GsmMaster->id}}" id="provider" name="provider">
         <option value="{{ $GsmMaster->provider }}" class="input provider-{{ $GsmMaster->id }}">{{ $GsmMaster->provider }}</option>
             <option value="Telkomsel">Telkomsel</option>
             <option value="XL Axiata">XL Axiata</option>
