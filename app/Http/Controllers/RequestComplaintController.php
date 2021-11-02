@@ -16,7 +16,10 @@ class RequestComplaintController extends Controller
     }
     public function add_form()
     {
-        $pic = Pic::orderBy('id', 'DESC')->get();
+        // $pic = Pic::orderBy('id', 'DESC')->get();
+        $pic = Pic::groupBy('company_id')
+            ->selectRaw('count(*) as jumlah, company_id')
+            ->get();
         $company = Company::orderBy('id', 'DESC')->get();
         $vehicle = Vehicle::orderBy('id', 'DESC')->get();
         return view('request_complaint.add_form')->with([
@@ -184,5 +187,16 @@ class RequestComplaintController extends Controller
     {
         RequestComplaint::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
+    }
+    public function basedPic($id)
+    {
+
+
+
+        $data = Pic::where('company_id', $id )->get();
+
+        return $data;
+
+
     }
 }

@@ -38,12 +38,6 @@ class Company extends Model
     }
     public function masterPo()
     {
-         return $this->hasMany(MasterPo::class);
-    }
-
-
-    public function masterPo()
-    {
         return $this->hasMany(MasterPo::class, 'company_id', 'id');
     }
     public function gsmTemporary()

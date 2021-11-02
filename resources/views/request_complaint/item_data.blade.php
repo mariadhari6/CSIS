@@ -19,7 +19,7 @@
             {{ $item->internal_eksternal }}
         </td>
         <td id="item-pic-{{ $item->id}}">
-                {{ $item->pic->pic_name ?? ''}}
+            {{ $item->pic->pic_name}}
         </td>
           <td id="item-vehicle-{{ $item->id }}">
             {{ $item->vehicleRequest->license_plate?? ''}}

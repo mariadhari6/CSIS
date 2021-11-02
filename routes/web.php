@@ -18,6 +18,7 @@ use App\Http\Controllers\RequestComplaintController;
 use App\Http\Controllers\PemasanganMutasiGpsController;
 use App\Http\Controllers\MasterPoController;
 
+use App\Models\MasterPo;
 use App\Models\DetailCustomer;
 use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
@@ -73,16 +74,16 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
     Route::get('export', [UsernameController::class, 'export'])->name('export');
 
-    Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
-    Route::get('/item_detail', [DetailCustomerController::class, 'itemDetail'])->name('item_detail');
-    Route::get('/item_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
-    Route::get('/add_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
-    Route::get('/store_detail', [DetailCustomerController::class, 'store'])->name('save_detail');
-    Route::get('/delete_detail/{id}', [DetailCustomerController::class, 'destroy']);
-    Route::get('/show_detail/{id}', [DetailCustomerController::class, 'show']);
-    Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
-    Route::get('/delete_all', [DetailCustomerController::class, 'deleteAll'])->name('deleteAll_detail');
-    Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
+    // Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
+    // Route::get('/item_detail', [DetailCustomerController::class, 'itemDetail'])->name('item_detail');
+    // Route::get('/item_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
+    // Route::get('/add_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
+    // Route::get('/store_detail', [DetailCustomerController::class, 'store'])->name('save_detail');
+    // Route::get('/delete_detail/{id}', [DetailCustomerController::class, 'destroy']);
+    // Route::get('/show_detail/{id}', [DetailCustomerController::class, 'show']);
+    // Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
+    // Route::get('/delete_all', [DetailCustomerController::class, 'deleteAll'])->name('deleteAll_detail');
+    // Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
 
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
@@ -218,6 +219,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_RequestComplain', [RequestComplaintController::class, 'deleteAll']);
     Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
+    Route::get('/based_pic/{id}', [RequestComplaintController::class, 'basedPic']);
     //detail customer
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
     Route::get('/item_detail/{id}', [DetailCustomerController::class, 'item_data'])->name('item_detail');
@@ -286,25 +288,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensor']);
     Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
-
-    // Master PO
-    Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');
-    Route::get('/item_data_master_po', [MasterPoController::class, 'item_data'])->name('item_master_po');
-    Route::get('/add_form_master_po', [MasterPoController::class, 'add_form'])->name('add_master_po');
-    Route::get('/store_master_po', [MasterPoController::class, 'store']);
-    Route::get('/destroy_master_po/{id}', [MasterPoController::class, 'destroy']);
-    Route::get('/show_master_po/{id}', [MasterPoController::class, 'edit_form']);
-    Route::get('/update_master_po/{id}', [MasterPoController::class, 'update']);
-    Route::get('/selectedDelete_master_po', [MasterPoController::class, 'deleteAll']);
-    Route::get('/selected_master_po', [MasterPoController::class, 'selected']);
-    Route::get('/update_all/{id}', [MasterPoController::class, 'updateall']);
-    Route::get('/item_data_contract_master_po', [MasterPoController::class, 'item_data_contract']);
-    Route::get('/item_data_terminate_master_po', [MasterPoController::class, 'item_data_terminate']);
-    Route::get('/item_data_trial_master_po', [MasterPoController::class, 'item_data_trial']);
-    Route::get('/item_data_register_master_po', [MasterPoController::class, 'item_data_register']);
-    Route::get('/item_data_master_po_all', [MasterPoController::class, 'item_data']);
-
-
     //Master PO
     Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');
     Route::get('/item_data_master_po', [MasterPoController::class, 'item_data'])->name('item_master_po');
@@ -322,7 +305,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected_master_po', [MasterPoController::class, 'selected']);
     Route::get('/update_all/{id}', [MasterPoController::class, 'updateall']);
     Route::get('/filter_company/{id}', [MasterPoController::class, 'filter_company']);
-
     // Vehicle
     Route::get('/Vehicle', [VehicleController::class, 'index'])->name('vehicle');
     Route::get('/item_data_vehicle', [VehicleController::class, 'item_data']);

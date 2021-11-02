@@ -2,13 +2,15 @@
 
     <td></td>
     <td></td>
-    <td></td>
     <td>
-        <select class="select" id="company_id" name="company_id">
-       @foreach ($company as $companys)
-        <option value="{{ $companys->id }}">{{ $companys->company_name }}</option>
-       @endforeach
-    </select>
+        <select class="select" id="company_id" name="company_id" required>
+            <option selected disabled></option>
+
+            @foreach ($pic as $item )
+            <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
+
+            @endforeach
+        </select></i>
     </td>
     <td>
         <select class="select" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example">
@@ -17,23 +19,24 @@
             <option value="Complain Internal ">Complain Internal </option>
             <option value="Request Eksternal ">Request Eksternal </option>
             <option value="Complain Eksternal ">Complain Eksternal</option>
-        </select>
+        </select></i>
     </td>
-      <td>
-          <select class="select" id="pic" name="pic">
+    <td>
+        <select class="select" id="pic" name="pic" required>
+            <option selected disabled>-</option>
             @foreach ($pic as $item)
-                <option value="{{ $item->id }}">{{ $item->pic_name }}</option>
+                <option value="{{ $item->id }}" {{ old('pic_id') == $item->id ? 'selected':'' }}>{{ $item->pic_name }}</option>
+            @endforeach
+        </select></i>
+    </td>
+    <td>
+        <select class="select" id="vehicle" name="vehicle">
+            <option selected disabled value=""></option>
+            @foreach ($vehicle as $item)
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+
             @endforeach
          </select>
-      </td>
-      <td>
-        <select class="select" id="vehicle" name="vehicle">
-          <option selected disabled value="">Vehicle</option>
-          @foreach ($vehicle as $item)
-              <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
-
-          @endforeach
-       </select></i>
     </td>
     <td>
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_info" placeholder="Waktu Info"></div>
@@ -42,13 +45,13 @@
         <textarea class="form-control" id="task" name="task" ></textarea>
     </td>
     <td>
-        <select class="select" id="platform" id="platform" aria-label=".form-select-lg example">
+        <select class="select" id="platform" id="platform" aria-label=".form-select-lg example" required>
             <option selected></option>
             <option value="WA">WA</option>
             <option value="SMS">SMS</option>
             <option value="E-mail">E-mail</option>
             <option value="Telepon">Telepon</option>
-        </select>
+        </select></i>
     </td>
     <td>
         <textarea class="form-control" id="detail_task" name="detail_task" ></textarea>
@@ -87,5 +90,41 @@
         <i class="fas fa-check add" id="add" onclick="store()"></i>
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
+
+    {{--  <select class="select @error('type') is-invalid @enderror" id="type" name="type" required>
+
+        @foreach ($pic as $item )
+        <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->company->company_name }}
+
+        @endforeach
+    </select>  --}}
+
+
+<script>
+    $('select[name="company_id"]').on('change', function() {
+            var itemID = $(this).val();
+           // {{--  alert(itemID);  --}}
+            if(itemID) {
+                $.ajax({
+                    url: '/based_pic/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="pic').empty();
+                        $('select[name="pic').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="pic').append('<option value="'+ data[i].id + '"> '+ data[i].pic_name +'</option>');
+                                // 16-Nov-2021   alert(data[i].serial_number)
+                            }
+                    }
+                });
+            }
+            else{
+                $('select[name="pic"]').empty();
+
+            }
+
+         });
+</script>
 
 </tr>
