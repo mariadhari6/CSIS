@@ -31,7 +31,7 @@ class DetailCustomer extends Model
         'pool_name',
         'pool_location',
         'waranty',
-        'status_layanan',
+        'status_id',
         'tanggal_pasang',
         'tanggal_non_aktif',
         'tgl_reaktivasi_gps'
@@ -77,4 +77,10 @@ class DetailCustomer extends Model
 
         return $this->belongsTo(Vehicle::class);
     }
+
+    public function status() {
+
+        return $this->belongsTo(ServiceStatus::class);
+    }
+    
 }

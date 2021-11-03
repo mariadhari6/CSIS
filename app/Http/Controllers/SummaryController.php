@@ -77,7 +77,7 @@ class SummaryController extends Controller{
        $month   = $request->month;
        $year    = $request->year;
 
-       $data = DetailCustomer::where('company_id', $company)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year) ->where('status_layanan', "Active")
+       $data = DetailCustomer::where('company_id', $company)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year) ->where('status_temporary', "1")
        ->groupBy('company_id', 'po_id')
        ->selectRaw('company_id')
        ->selectRaw('po_id')
@@ -101,16 +101,20 @@ class SummaryController extends Controller{
     
 
         $data = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
-        ->where('status_layanan', "Active")
+        ->where('status_temporary', "1")
         ->select('company_id', 
             DB::raw('count(gps_id) as total_gps'),
             DB::raw('count(tanggal_pasang) as penambahan_layanan '),
+            
         )   
         ->get();
 
-        
+        $terminate = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)->where('status_id', '2')
+        ->groupBy('company_id')->select('company_id', DB::raw('count(tanggal_non_aktif) as jml_nonaktif '))->get();
+                
         return view('customer.summary.item_summary')->with([
             'data'  => $data,
+            'terminate' => $terminate,
             'month' => $month,
             'year'  => $year,
            

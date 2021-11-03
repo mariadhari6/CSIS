@@ -167,10 +167,10 @@
 </td>
 <td><div class="input-div"><input type="date" class="input Waranty-{{ $details->id }}" id="Waranty" value="{{ $details->waranty }}"></div></td>
 <td>
-    <select class="select StatusLayanan-{{ $details->id }}" id="StatusLayanan">    
-        <option value="{{ $details->status_layanan }}" class="input StatusLayanan-{{ $details->id }}">{{ $details->status_layanan }}</option>
-        <option value="Active">Active</option>
-        <option value="In Active">In Active</option>
+    <select class="select StatusLayanan-{{ $details->id }}" id="StatusLayanan"> 
+        @foreach ($status_layanan as $item)
+            <option value="{{ $item->id }}" {{ $details->status_id == $item->id ? 'selected':'' }}>{{ $item->service_status_name }}</option>
+        @endforeach
     </select>
 </td>
 <td><div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div></td>

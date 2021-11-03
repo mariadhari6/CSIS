@@ -10,53 +10,59 @@ use App\Models\Seller;
 use App\Models\Gsm;
 use App\Models\Sensor;
 use App\Models\Gps;
+use App\Models\ServiceStatus;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MasterPoController extends Controller
 {
-    public function index()
-    {
+    public function index(){
+
         $company = Company::orderBy('company_name', 'DESC')->get();
         return view('master_po.index')->with([
             'company' => $company
         ]);
     }
-    public function add_form()
-    {
+    public function add_form(){
+
         $master_po  = MasterPo::orderBy('po_number', 'DESC')->get();
         $sales      = Sales::orderBy('name', 'DESC')->get();
         $company    = Company::orderBy('company_name', 'DESC')->get();
+
         return view('master_po.add_form')->with([
             'master_po' => $master_po,
             'sales'     => $sales,
             'company'   => $company
         ]);
     }
-    public function item_data()
-    {
+    public function item_data(){
+
         $master_po = MasterPo::orderBy('id', 'ASC')->get();
         return view('master_po.item_data')->with([
             'master_po' => $master_po
         ]);
     }
-    public function store(Request $request)
-    {
+
+
+    public function store(Request $request){
+
         $data = array(
-            'company_id' => $request->company_id,
-            'po_number' => $request->po_number,
-            'po_date' => $request->po_date,
-            'harga_layanan' => $request->harga_layanan,
-            'jumlah_unit_po' => $request->jumlah_unit_po,
-            'status_po' => $request->status_po,
-            'sales_id' => $request->sales_id
+            'company_id'        => $request->company_id,
+            'po_number'         => $request->po_number,
+            'po_date'           => $request->po_date,
+            'harga_layanan'     => $request->harga_layanan,
+            'jumlah_unit_po'    => $request->jumlah_unit_po,
+            'status_po'         => $request->status_po,
+            'sales_id'          => $request->sales_id,
+            'count'             => $request->jumlah_unit_po
         );
+
         MasterPo::insert($data);
     }
 
-    public function edit_form($id)
-    {
+    public function edit_form($id){
+
         $master_po = MasterPo::findOrfail($id);
         $sales      = Sales::orderBy('name', 'DESC')->get();
         $company    = Company::orderBy('company_name', 'DESC')->get();
@@ -68,14 +74,14 @@ class MasterPoController extends Controller
         ]);
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id){
+
         $data = MasterPo::findOrfail($id);
         $data->delete();
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
+
         $data = MasterPo::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->po_number = $request->po_number;
@@ -88,16 +94,16 @@ class MasterPoController extends Controller
         $data->save();
     }
 
-    public function selected()
-    {
+    public function selected(){
+
         $master_po = MasterPo::all();
         return view('master_po.selected')->with([
             'master_po' => $master_po
         ]);
     }
 
-    public function updateall(Request $request, $id)
-    {
+    public function updateall(Request $request, $id){
+
         $data = Gps::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->po_number = $request->po_number;
@@ -469,14 +475,21 @@ class MasterPoController extends Controller
             // $details    = DetailCustomer::where('po_id', $i)->count();
 
             // return $details;
-            $i = 7;
-            $s                       = MasterPo::where('id', $i)->pluck('jumlah_unit_po');
+            // $i = 7;
+            // $s                       = MasterPo::where('id', $i)->pluck('jumlah_unit_po');
 
-            return $s[0];
+            // return $s[0];
             // $banyak_po_di_details    = DetailCustomer::where('po_id', $i)->count();
 
             // MasterPo::where('id', $i)->update(array('count' => $banyak_po_di_details)) ;  
+            // $status_layanan = ServiceStatus::all();
 
+            $month = 11;
+            $year  = 2021; 
+            $terminate = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)->where('status_id', '2')
+            ->groupBy('company_id')->select('company_id', DB::raw('count(tanggal_non_aktif) as jml_nonaktif '))->get();
+
+            return $terminate;
 
 
 
