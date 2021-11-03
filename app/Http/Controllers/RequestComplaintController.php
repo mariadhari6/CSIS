@@ -19,11 +19,13 @@ class RequestComplaintController extends Controller
     }
     public function add_form()
     {
-        $pic = Pic::orderBy('id', 'DESC')->get();
-        $company = Company::orderBy('id', 'DESC')->get();
-        $task_request = Task::all();
+        $pic = Pic::groupBy('company_id')
+            ->selectRaw('count(*) as jumlah, company_id')
+            ->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
+        $task_request = Task::orderBy('id', 'ASC')->get();
         $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
-        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
+        $vehicle = Vehicle::orderBy('id', 'ASC')->get();
         return view('request_complaint.add_form')->with([
 
             'request_complain' => $request_complain,
@@ -41,7 +43,37 @@ class RequestComplaintController extends Controller
         return view('request_complaint.item_data', compact('request_complain'));
     }
 
+    public function item_data_request_internal()
+    {
+        $request_complain = RequestComplaint::where('internal_eksternal', 'Request Internal')->get();
+        return view('request_complaint.item_data')->with([
+            'request_complain' => $request_complain
+        ]);
+    }
 
+    public function item_data_request_eksternal()
+    {
+        $request_complain = RequestComplaint::where('internal_eksternal', 'Request Eksternal')->get();
+        return view('request_complaint.item_data')->with([
+            'request_complain' => $request_complain
+        ]);
+    }
+
+    public function item_data_complain_internal()
+    {
+        $request_complain = RequestComplaint::where('internal_eksternal', 'Complain Internal')->get();
+        return view('request_complaint.item_data')->with([
+            'request_complain' => $request_complain
+        ]);
+    }
+
+    public function item_data_complain_eksternal()
+    {
+        $request_complain = RequestComplaint::where('internal_eksternal', 'Complain Eksternal')->get();
+        return view('request_complaint.item_data')->with([
+            'request_complain' => $request_complain
+        ]);
+    }
     public function item_data()
     {
         $request_complain = RequestComplaint::all();
@@ -169,5 +201,14 @@ class RequestComplaintController extends Controller
     {
         RequestComplaint::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
+    }
+    public function basedPic($id)
+    {
+
+
+
+        $data = Pic::where('company_id', $id)->get();
+
+        return $data;
     }
 }

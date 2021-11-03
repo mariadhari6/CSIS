@@ -35,7 +35,7 @@
         </td>
 
         <td id="item-task-{{ $request_complains->id }}">
-            {{ $request_complains->taskRequest->task}}
+            {{ $request_complains->taskRequest->task??''}}
         </td>
         <td id="item-platform-{{ $request_complains->id }}">
             {{ $request_complains->platform}}
@@ -71,7 +71,7 @@
                 <i class="fas fa-trash delete" onclick="destroy({{ $request_complains->id }})"></i>
             </div>
         </td>
-
     </tr>
+
 @endforeach
 

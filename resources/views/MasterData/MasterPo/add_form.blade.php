@@ -22,7 +22,7 @@
         <div class="input-div"><input type="text" class="input" id="jumlah_unit_po" placeholder="Jumlah Unit Po" required></div>
     </td>
     <td>
-        <select class="form-control" id="status_po" aria-label=".form-select-lg example">
+        <select class="select" id="status_po" aria-label=".form-select-lg example">
             <option selected value="not selected">Pilih status</option>
             <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>

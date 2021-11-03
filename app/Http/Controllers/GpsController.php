@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use App\Imports\GpsImport;
+use App\Models\Company;
 use App\Models\GpsTemporary;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -22,13 +23,17 @@ class GpsController extends Controller
     public function add_form()
     {
         $gps = Gps::orderBy('id', 'DESC')->get();
-        $merk = MerkGps::orderBy('id', 'DESC')->get();
-        $type = TypeGps::orderBy('id', 'DESC')->get();
+        $merk = MerkGps::groupBy('merk_gps')
+            ->selectRaw('count(*) as jumlah, merk_gps')
+            ->get();
+        // $merk = MerkGps::orderBy('id', 'DESC')->get();
+
+        // $type = TypeGps::orderBy('id', 'DESC')->get();
         return view('MasterData.gps.add_form')->with([
 
             'gps' => $gps,
             'merk' => $merk,
-            'type' => $type
+            // 'type' => $type
 
         ]);
     }
@@ -54,24 +59,45 @@ class GpsController extends Controller
         GpsTemporary::truncate();
     }
 
+    public function save_import(Request $request)
+    {
+        $dataRequest = json_decode($request->data);
+        foreach ($dataRequest as $key => $value) {
+            $imeiNumber = $value->imei;
+            $checkImei = Gps::where('imei', '=', $imeiNumber)->first();
+            if ($checkImei === null) {
+                try {
+                    $data = array(
+                        'merk'        =>  $value->merk,
+                        'type'        =>  $value->type,
+                        'imei'        =>  $value->imei,
+                        'waranty'     =>  $value->waranty,
+                        'po_date'     =>  $value->po_date,
+                        'status'           =>  $value->status,
+                        'status_ownership' =>  $value->status_ownership,
+
+                    );
+                    Gps::insert($data);
+                    // return 'success';
+                } catch (\Throwable $th) {
+                    return 'fail';
+                }
+            } else {
+                return 'fail';
+            }
+        }
+    }
+
     public function store(Request $request)
     {
-        // $request->array([
-        //     'merk' => 'required',
-        //     'type' => 'required',
-        //     'imei' => 'required|min:15',
-        //     'waranty' => 'required',
-        //     'po_date' => 'required',
-        //     'status' => 'required'
 
-        // ]);
 
         // $this->validate($request, [
         //     'imei.*' => 'required|min:15',
         // ]);
         $data = array(
             'merk'    =>  $request->merk,
-            'type'     =>  $request->type,
+            'type'   =>  $request->type,
             'imei'     =>  $request->imei,
             'waranty'     =>  $request->waranty,
             'po_date'     =>  $request->po_date,
@@ -83,13 +109,16 @@ class GpsController extends Controller
 
     public function edit_form($id)
     {
-        $merk_gps = MerkGps::orderBy('id', 'DESC')->get();
-        $type_gps = TypeGps::orderBy('id', 'DESC')->get();
+        $merk = MerkGps::groupBy('merk_gps')
+            ->selectRaw('count(*) as jumlah, merk_gps')
+            ->get();
+        // $merk_gps = MerkGps::orderBy('id', 'DESC')->get();
+        // $type_gps = TypeGps::orderBy('id', 'DESC')->get();
         $gps = Gps::findOrfail($id);
         return view('MasterData.gps.edit_form')->with([
             'gps' => $gps,
-            'merk_gps' => $merk_gps,
-            'type_gps' => $type_gps
+            'merk' => $merk,
+            // 'type_gps' => $type_gps
 
         ]);
     }
@@ -117,12 +146,12 @@ class GpsController extends Controller
     {
         $gps = Gps::all();
         $merk_gps = MerkGps::all();
-        $type_gps = TypeGps::all();
+        // $type_gps = TypeGps::all();
 
         return view('MasterData.gps.selected')->with([
             'gps' => $gps,
             'merk_gps' => $merk_gps,
-            'type_gps' => $type_gps
+            // 'type_gps' => $type_gps
         ]);
     }
 
@@ -178,18 +207,17 @@ class GpsController extends Controller
     public function try()
     {
 
-        $GsmMaster = Gps::all('imei');
-        $jml =  Gps::all('imei')->count();
-        $input = 12232;
-        for ($i = 0; $i <= $jml - 1; $i++) {
-            if ($input == Gps::all('imei')[$i]->gsm_number) {
-                $a = "data same";
-                break;
-            } else {
-                $b = "Save succes";
-            }
-        }
+        $input = MerkGps::where('merk', 'Ruptela')->firstOrFail()->id;
+        // $input = TypeGps::where('type_gps', 'FM Pro 4')->firstOrFail()->id;
+        return $input;
+    }
+    public function basedType($id)
+    {
 
-        return $b . ' | ';
+
+
+        $data = MerkGps::where('merk_gps', $id)->get();
+
+        return $data;
     }
 }

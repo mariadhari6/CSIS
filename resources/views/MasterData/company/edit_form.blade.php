@@ -37,10 +37,8 @@
     <td>
         <select class="select status-{{$company->id}}" id="status" name="status" required>
             <option selected value="{{$company->status}}">{{$company->status}}</option>
-            <option value="Contract">Contract</option>
-            <option value="Terminate">Terminate</option>
-            <option value="Trial">Trial</option>
-            <option value="Register">Register</option>
+             <option value="Active">Active</option>
+            <option value="In Active">In Active</option>
         </select>
     </td>
     <td class="action sticky-col first-col">

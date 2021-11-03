@@ -28,11 +28,11 @@ class Gps extends Model
     }
     public function merkGps()
     {
-        return $this->belongsTo(MerkGps::class, 'merk');
+        return $this->belongsTo(MerkGps::class, 'merk', 'id');
     }
     public function typeGps()
     {
-        return $this->belongsTo(TypeGps::class, 'type', 'id');
+        return $this->belongsTo(MerkGps::class, 'type', 'id');
     }
 
     public function requestComplaintMaintenance()

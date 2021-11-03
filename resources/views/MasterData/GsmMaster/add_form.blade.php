@@ -14,7 +14,7 @@
         <div class="input-div"><input type="text" class="input" id="gsm_number" placeholder="GSM Number" required>
     </td>
     <td>
-        <select class="form-control" id="company_id" name="company_id" required>
+        <select class="select" id="company_id" name="company_id" required>
 
           <option value="-" >-</option>
          @foreach ($company as $item)
@@ -53,12 +53,6 @@
      <td>
         <div class="input-div"><input type="text" class="input" id="provider" placeholder="Provider">
     </td>
-    <td>
-         <button class="unstyled-button" type="submit">
-            <i class="fas fa-check add" id="add" onclick="store()"></i>
-        </button>
-        <i class="fas fa-times cancel" onclick="cancel()"></i>
-    <td>
 
     <td class="action sticky-col first-col">
          <button class="unstyled-button" type="submit">

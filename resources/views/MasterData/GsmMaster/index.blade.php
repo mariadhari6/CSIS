@@ -1,11 +1,12 @@
 @extends('layouts.v_main')
-@section('title','CSIS | Gsm Master')
-@section('title-table','Gsm Master')
+@section('title','CSIS | Master GSM')
+@section('title-table','Master GSM')
 @section('master','show')
 @section('GsmMaster','active')
 
 
 @section('content')
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -15,6 +16,10 @@
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" id="add"></i>
                 </button>
+                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                  <b> Import</b>
+                  <i class="fas fa-file-excel ml-2"></i>
+                </button>
                 <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
                     <option value="{{ url('item_data_all_GsmMaster') }}">All</option>
@@ -23,23 +28,17 @@
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
                   </select>
                 </div>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
-                  <b> Import</b>
-                  <i class="fas fa-file-excel ml-2"></i>
-                </button>
-                <button class="btn btn-success  mr-2 edit_all">
-                  <i class="fas fa-pen"></i>
+
+                <button class="btn btn-success edit_all">
+                <i class="fas fa-edit"></i>
                 </button>
                 <button class="btn btn-danger delete_all">
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
-
-            <form>
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -49,28 +48,26 @@
                     </div>
                 </th>
                 <th scope="col" class="action-no">No.</th>
-                <th scope="col" class="list">Status GSM*</th>
-                <th scope="col" class="list">GSM Number*</th>
-                <th scope="col" class="list">Company*</th>
+                <th scope="col" class="list-gsm">Status GSM*</th>
+                <th scope="col" class="list-gsmNumber">GSM Number*</th>
+                <th scope="col" class="list-company">Company*</th>
                 <th scope="col" class="list">Serial Number*</th>
                 <th scope="col" class="list">ICC ID</th>
                 <th scope="col" class="list">IMSI</th>
                 <th scope="col" class="list">Res ID</th>
-                <th scope="col" class="list">Request Date*</th>
+                <th scope="col" class="list">Request Date</th>
                 <th scope="col" class="list">Expired Date</th>
                 <th scope="col" class="list">Active Date</th>
                 <th scope="col" class="list">Terminated Date</th>
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="list">Provider</th>
-                <th scope="col" class="action sticky-col first-col">Action</th>
-
+                <th scope="col" class="sticky-col first-col">Action</th>
               </tr>
             </thead>
             <tbody id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-          </form>
         </div>
       </div>
     </div>
@@ -87,43 +84,16 @@
 					</button>
 				</div>
 				<div class="modal-body">
-        <form action="{{ route('importExcel_GsmMaster') }}" method="POST" id="temporary_form" enctype="multipart/form-data" target="dummyframe">
-          {{ csrf_field() }}
-          <div class="mb-2">
-            <input type="file" name="file" id="file_import" required="required">
-            <button type="submit" class="btn btn-primary btn-xs" id="check" ></button>
-            <button class="btn btn-primary btn-xs" onclick="submitClick()">Check</button>
-        </form>
-            <button type="button" class="btn btn-success btn-xs" id="send" onclick="send_data()" >Send</button>
-            <a  class="btn btn-secondary btn-xs" href="/download_template_gsm" style="color:white">Download Template</a>
-          </div>
           <div class="card">
+            <div class="card-header">
+              <b>Select Excel File</b>
+              <br>
+              <input type="file" id="excel_file" />
+              <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
+              <a  class="btn btn-secondary btn-xs" href="/download_template_gsm" style="color:white">Download Template</a>
+            </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="table_temporary_id">
-                  <thead>
-                    <tr>
-                      <th>No.</th>
-                      <th>Status GSM</th>
-                      <th>GSM Number</th>
-                      <th>Company</th>
-                      <th>Serial Number</th>
-                      <th>ICC ID</th>
-                      <th>IMSI</th>
-                      <th>Res ID</th>
-                      <th>Request Date</th>
-                      <th>Expired Date</th>
-                      <th>Active Date</th>
-                      <th>Terminated Date</th>
-                      <th>Note</th>
-                      <th>Provider</th>
-                    </tr>
-                  </thead>
-                  <tbody id="item_data_temporary">
-
-                  </tbody>
-                </table>
-              </div>
+              <div id="excel_data" ></div>
             </div>
           </div>
         </div>
@@ -136,123 +106,241 @@
 	</div>
   <script>
     $(document).ready(function() {
-      read()
-      read_temporary()
-      deleteTemporary();
-      // --- hide submit button ----
-      document.getElementById("check").style.visibility = "hidden";
-    });
-      // ---- Submit form temporary ----
-    function submitClick() {
-      deleteTemporary();
-      $('#check').click();
-    }
-    // ------- send import -----
-    function send_data() {
-      $rowCount = $("#table_temporary_id tr").length;
-      if ($rowCount == 1) {
-        alert('table empty')
-      } else {
-      $rowResult = $rowCount - 1;
-      var allVals = [];
-      for($i = 0; $i < $rowResult; $i++)
-          {
-            var id = $("#table_temporary_id").find("tbody>tr:eq("+ $i +")>td:eq(0)").attr("id");
-            allVals[$i] = id;
-          }
-
-      $.each(allVals, function(index, value){
-        var status_gsm = $(".temporary-status_gsm-"+value).attr("id");
-        var gsm_number = $(".temporary-gsm_number-"+value).attr("id");
-        var company_id = $(".temporary-company_id-"+value).attr("id");
-        var serial_number = $(".temporary-serial_number-"+value).attr("id");
-        var icc_id = $(".temporary-icc_id-"+value).attr("id");
-        var imsi = $(".temporary-imsi-"+value).attr("id");
-        var res_id = $(".temporary-res_id-"+value).attr("id");
-        var request_date = $(".temporary-request_date-"+value).attr("id");
-        var expired_date = $(".temporary-expired_date-"+value).attr("id");
-        var active_date = $(".temporary-active_date-"+value).attr("id");
-        var terminate_date = $(".temporary-terminate_date-"+value).attr("id");
-        var note = $(".temporary-note-"+value).attr("id");
-        var provider = $(".temporary-provider-"+value).attr("id");
-
-          if (
-              request_date == '' ||
-              gsm_number == '' ||
-              company_id == '' ||
-              serial_number == '' ||
-              icc_id == '' ||
-              imsi == '' ||
-              res_id == '' ||
-              request_date == '' ||
-              expired_date == '' ||
-              active_date == '' ||
-              note == '' ||
-              terminate_date == '' ||
-              terminate_date == ''
-              ) {
-              swal({
-              type: 'warning',
-              text: 'there is column empty or fail format',
-              showConfirmButton: false,
-              timer: 1500
-            }).catch(function(timeout) { });
-          } else {
-            $.ajax({
-            type: "get",
-            url: "{{ url('store_GsmMaster') }}",
-            data: {
-              status_gsm: status_gsm,
-              gsm_number: gsm_number,
-              company_id: company_id,
-              serial_number: serial_number,
-              icc_id: icc_id,
-              imsi: imsi,
-              res_id: res_id,
-              request_date: request_date,
-              expired_date: expired_date,
-              active_date: active_date,
-              terminate_date: terminate_date,
-              note: note,
-              provider: provider
-            },
-            success: function(data) {
-                swal({
-                  type: 'success',
-                  title: 'Data Saved',
-                  showConfirmButton: false,
-                  timer: 1500
-              }).catch(function(timeout) { });
-                read();
-                deleteTemporary();
-                read_temporary()
-                $('#importData').modal('hide');
-              }
-          });
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
       });
-
+      read()
+    });
+     // -- excel export to html tabel --
+    const excel_file = document.getElementById("excel_file");
+    excel_file.addEventListener("change", (event) => {
+      if (
+        ![
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.ms-excel",
+        ].includes(event.target.files[0].type)
+      ) {
+        document.getElementById("excel_data").innerHTML =
+          '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+        excel_file.value = "";
+        return false;
       }
+      var reader = new FileReader();
+      reader.readAsArrayBuffer(event.target.files[0]);
+      reader.onload = function (event) {
+        var data = new Uint8Array(reader.result);
+        var work_book = XLSX.read(data, { type: "array" });
+        var sheet_name = work_book.SheetNames;
+        var sheet_data = XLSX.utils.sheet_to_json(
+          work_book.Sheets[sheet_name[0]],
+          { header: 1 }
+        );
+        if (sheet_data.length > 0) {
+          var table_output = '<table class="table table-bordered" id="importTable">';
+          for (var row = 0; row < sheet_data.length; row++) {
+            table_output += "<tr>";
+
+            for (var cell = 0; cell < sheet_data[row].length; cell++) {
+              if (row == 0) {
+                table_output += "<th>" + sheet_data[row][cell] + "</th>";
+              } else {
+                table_output += '<td contenteditable id="table-data-' + cell + '" >' + sheet_data[row][cell] + "</td>";
+              }
+            }
+
+            table_output += "</tr>";
+          }
+
+          table_output += "</table>";
+
+          document.getElementById("excel_data").innerHTML = table_output;
+
+           // check duplicate data
+          gsmNumberID = document.querySelectorAll("#table-data-1");
+          serialNumberID = document.querySelectorAll("#table-data-3");
+          for (indexA = 0; indexA < gsmNumberID.length; indexA++) {
+            var gsmNumberValue = gsmNumberID[indexA].innerText; //0
+            var serialNumberValue = serialNumberID[indexA].innerText;
+            $rowCount = $("#table_id tr").length;
+            if ($rowCount == 1) {
+              // alert('table empty')
+            } else {
+              $rowResult = $rowCount - 1;
+              var allGsmNum = [];
+              var allSerNum = [];
+              for($i = 0; $i < $rowResult; $i++)
+                  {
+                    // $numArr = $i-1;
+                    $gsmNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
+                    $serNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(5)").attr("name");
+                    allGsmNum[$i] = $gsmNum;
+                    allSerNum[$i] = $serNum;
+                  }
+                  // alert(allGsmNum[0]);
+              for (let index = 0; index < allGsmNum.length; index++) {
+                if( gsmNumberValue == allGsmNum[index] ){
+                    gsmNumberID[indexA].style.backgroundColor = "#e8837d";
+                    if( serialNumberValue == allSerNum[index] ){
+                      serialNumberID[indexA].style.backgroundColor = "#e8837d";
+                    }
+                } else if( serialNumberValue == allSerNum[index]){
+                    serialNumberID[indexA].style.backgroundColor = "#e8837d";
+                } else if( index == allGsmNum.length) {
+
+                }
+              }
+            }
+          }
+
+          // change format RequestDate
+          requestDate = document.querySelectorAll("#table-data-7");
+          for (i = 0; i < requestDate.length; i++) {
+            var excelDate = requestDate[i].innerText;
+            var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+            try {
+                  var converted_date = date.toISOString().split('T')[0];
+                }
+                catch(err) {
+                  // var converted_date = 'wrong date format';
+                  requestDate[i].style.backgroundColor = "#e8837d";
+                }
+            requestDate[i].innerHTML = converted_date;
+          }
+
+        // change format expiredDate
+        expiredDate = document.querySelectorAll("#table-data-8");
+        for (i = 0; i < expiredDate.length; i++) {
+          var excelDate = expiredDate[i].innerText;
+          var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+          try {
+                var converted_date = date.toISOString().split('T')[0];
+              }
+              catch(err) {
+                // var converted_date = 'wrong date format';
+                expiredDate[i].style.backgroundColor = "#e8837d";
+              }
+            expiredDate[i].innerHTML = converted_date;
+        }
+
+        // change format activeDate
+        activeDate = document.querySelectorAll("#table-data-9");
+        for (i = 0; i < activeDate.length; i++) {
+          var excelDate = activeDate[i].innerText;
+          var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+          try {
+                var converted_date = date.toISOString().split('T')[0];
+              }
+              catch(err) {
+                // var converted_date = 'wrong date format';
+                activeDate[i].style.backgroundColor = "#e8837d";
+              }
+            activeDate[i].innerHTML = converted_date;
+        }
+
+        // change format terminatedDate
+        terminatedDate = document.querySelectorAll("#table-data-10");
+        for (i = 0; i < terminatedDate.length; i++) {
+          var excelDate = terminatedDate[i].innerText;
+          var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+          try {
+                var converted_date = date.toISOString().split('T')[0];
+              }
+              catch(err) {
+                // var converted_date = 'wrong date format';
+                terminatedDate[i].style.backgroundColor = "#e8837d";
+              }
+            terminatedDate[i].innerHTML = converted_date;
+        }
+
+        }
+        excel_file.value = "";
+      };
+    });
+
+    // ------- save data import -----
+    function save_data() {
+      var total = 0;
+      var jsonTable = $('#importTable tbody tr:has(td)').map(function () {
+          var $td = $('td', this);
+          total += parseFloat($td.eq(2).text());
+          return {
+              status_gsm    : $td.eq(0).text(),
+              gsm_number    : $td.eq(1).text(),
+              company_id    : $td.eq(2).text(),
+              serial_number : $td.eq(3).text(),
+              icc_id        : $td.eq(4).text(),
+              imsi          : $td.eq(5).text(),
+              res_id        : $td.eq(6).text(),
+              request_date  : $td.eq(7).text(),
+              expired_date  : $td.eq(8).text(),
+              active_date   : $td.eq(9).text(),
+              terminate_date: $td.eq(10).text(),
+              note          : $td.eq(11).text(),
+              provider      : $td.eq(12).text()
+          }
+      }).get();
+
+      $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
+      data = {};
+      data = jsonTable;
+
+      // console.log(data[0]['status_gsm'])
+      var thLength = $('#importTable th').length;
+      var trLength = $("#importTable td").closest("tr").length;
+      var item = document.querySelectorAll("#table-data-8");
+      var tes = $("#importTable").find("tbody>tr:eq(1)>td:eq(1)").attr("style");
+      var success;
+
+      $.ajax({
+        type: 'POST',
+        dataType: 'JSON',
+        url: "{{ url('save_import_GsmMaster') }}",
+        data: {
+           data   : JSON.stringify(data) ,
+          _token  : '{!! csrf_token() !!}'
+        } ,
+        error: function(er) {
+          if(er.responseText === 'fail' ){
+            // alert("save failed");
+            swal({
+                type: 'warning',
+                text: 'Duplicate data or error format',
+                showConfirmButton: false,
+                timer: 1500
+              }).catch(function(timeout) { });
+          } else {
+            try {
+            swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
+            read();
+            $('#importData').modal('hide');
+            } catch (error) {
+              swal({
+                type: 'warning',
+                text: 'Duplicate data or error format',
+                showConfirmButton: false,
+                timer: 1500
+              }).catch(function(timeout) { });
+
+            }
+          }
+          }
+      });
 
     }
 
     // ---- Close Modal -------
     $('#close-modal').click(function() {
-        deleteTemporary();
-        read_temporary()
+        // deleteTemporary();
+        // read_temporary()
         $('#importData').modal('hide');
     });
-
-    // ------- Delete Temporary -----
-    function deleteTemporary() {
-      $.ajax({
-          type: "get",
-          url: "{{ url('delete_temporary') }}",
-          success: function(data) {
-
-          }
-      });
-    }
 
     // ------- filter change ------
     $("#filter").change(function(){
@@ -267,7 +355,6 @@
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable( {
-
               "dom": '<"top"f>rt<"bottom"lp><"clear">'
               });
           $('#table_id').DataTable().draw();
@@ -280,18 +367,12 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
+                        "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
         $('#table_id').DataTable().draw();
-      });
-    }
-
-    // ------ Tampil Data Temporary------
-    function read_temporary(){
-      $.get("{{ url('item_data_temporary_GsmMaster') }}", {}, function(data, status) {
-        $('#table_temporary_id').find("#item_data_temporary").html(data);
       });
     }
 
@@ -333,7 +414,7 @@
 
       $rowCount = $("#table_id tr").length;
       if ($rowCount == 2) {
-        alert('table empty')
+        // alert('table empty')
       } else {
         $rowResult = $rowCount - 2;
         var allGsmNum = [];
@@ -346,8 +427,10 @@
               allGsmNum[$numArr] = $gsmNum;
               allSerNum[$numArr] = $serNum;
             }
-        for (let index = 0; index <= allGsmNum.length; index++) {
+            // alert(allGsmNum[0]);
+        for (let index = 0; index < allGsmNum.length; index++) {
           if( gsm_number == allGsmNum[index] ){
+            // alert('already exists');
               swal({
                 type: 'warning',
                 text: 'GSM Number already exists',
@@ -357,13 +440,15 @@
               // alert('GSM Number already exists');
               break;
           } else if( serial_number == allSerNum[index]){
+
               swal({
                   type: 'warning',
                   text: 'Serial Number already exists',
                   showConfirmButton: false,
                   timer: 1500
                 }).catch(function(timeout) { });
-              // alert('Serial Number already exists');
+
+
               break;
           } else if( index == allGsmNum.length) {
             // alert('success');
@@ -685,6 +770,6 @@
 
   </script>
 
-  <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
+  {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
    @endsection

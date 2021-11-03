@@ -43,8 +43,31 @@ class PemasanganMutasiGpsController extends Controller
 
     public function item_data()
     {
-        $pemasangan_mutasi_GPS = RequestComplaint::with(['sensor'])->where('task', 1)->orWhere('task', 2)->orWhere('task', 3)->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::where('task', 1)->orWhere('task', 2)->orWhere('task', 3)->get();
+        for ($i = 0; $i <= count($pemasangan_mutasi_GPS) - 1; $i++) {
 
+            $loop_row   = $pemasangan_mutasi_GPS[$i]->equipment_terpakai_sensor;
+            if ($loop_row != "") {
+
+                $data_equipment_terpakai_sensor = explode(" ", $loop_row);
+
+                $temp_sensor = "";
+                foreach ($data_equipment_terpakai_sensor as $item) {
+                    $cari_sensor = Sensor::where('id', $item)->get();
+
+                    if ($temp_sensor == "") {
+                        $temp_sensor = $cari_sensor[0]->sensor_name . "(" . $cari_sensor[0]->serial_number . "," . $cari_sensor[0]->merk_sensor . ")";
+                    } else {
+                        $temp_sensor .= "; " . $cari_sensor[0]->sensor_name . "(" . $cari_sensor[0]->serial_number . "," . $cari_sensor[0]->merk_sensor . ")";
+                    }
+                }
+
+                $pemasangan_mutasi_GPS[$i]["equipment_terpakai_sensor_all_name"] = $temp_sensor;
+            } else {
+                $empty = "";
+                $pemasangan_mutasi_GPS[$i]["equipment_terpakai_sensor_all_name"] = $empty;
+            }
+        }
         return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
         // dd($pemasangan_mutasi_GPS);
     }
@@ -70,7 +93,8 @@ class PemasanganMutasiGpsController extends Controller
         $company = Company::orderBy('id', 'DESC')->get();
         $details = DetailCustomer::orderBy('id', 'DESC')->get();
         $pemasangan_mutasi_GPS = RequestComplaint::findOrfail($id);
-        $sensor = Sensor::orderBy('id', 'DESC')->get();
+        $sensor = Sensor::orderBy('id', 'ASC')
+            ->get();
         $gps = Gps::orderBy('id', 'DESC')->get();
         $vehicle = Vehicle::orderBy('id', 'DESC')->get();
         $teknisi = Teknisi::orderBy('id', 'DESC')->get();
@@ -107,8 +131,21 @@ class PemasanganMutasiGpsController extends Controller
         $data->note_pemasangan = $request->note_pemasangan;
         $data->kendaraan_pasang = $request->kendaraan_pasang;
         $data->status = $request->status;
+        $equipment_terpakai_sensor     = $request->equipment_terpakai_sensor;
 
-        $data->save();
+        // $a      = $batas[0] - 1;
+        // $x      = "not";
+
+
+        if ($equipment_terpakai_sensor != "") {
+
+            $arr            = explode(" ", $equipment_terpakai_sensor);
+            $lengthArr      = count($arr) - 1;
+            for ($i = 0; $i <= $lengthArr; $i++) {
+                Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
+            }
+            $data->save();
+        }
     }
 
     public function selected()
@@ -173,24 +210,25 @@ class PemasanganMutasiGpsController extends Controller
         $data = $key->all();
         return $data;
     }
-    public function basedSensorName($id)
-    {
+
+    // public function basedSensorName($id)
+    // {
 
 
 
-        $data = Sensor::where('sensor_name', $id)->get();
+    //     $data = Sensor::where('sensor_name', $id)->get();
 
-        return $data;
-    }
-    public function basedSerialNumber($id)
-    {
+    //     return $data;
+    // }
+    // public function basedSerialNumber($id)
+    // {
 
 
 
-        $data = Sensor::where('serial_number', $id)->get();
+    //     $data = Sensor::where('serial_number', $id)->get();
 
-        return $data;
-    }
+    //     return $data;
+    // }
 
     // public function dependentPemasangan($id)
     // {

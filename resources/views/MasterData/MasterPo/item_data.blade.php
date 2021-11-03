@@ -14,7 +14,7 @@
             {{ $no++ }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company->company_name}}
+            {{ $item->company->company_name??''}}
         </td>
         <td id="item-po_number-{{ $item->id}}">
             {{ $item->po_number }}
@@ -30,13 +30,13 @@
         </td>
         <td id="item-status_po-{{ $item->id }}">
 
-            @if ($item->status_po == 'Contract')
+            @if ($item->status_po == 'Beli')
                 <span class="badge badge-info">{{ $item->status_po }}</span>
-            @elseif ($item->status_po == 'Terminate')
+            @elseif ($item->status_po == 'Trial')
                 <span class="badge badge-danger">{{ $item->status_po }}</span>
-            @elseif($item->status_po == 'Trial')
+            @elseif($item->status_po == 'Sewa Beli')
                 <span class="badge badge-primary">{{ $item->status_po }}</span>
-            @elseif($item->status_po == 'Register')
+            @elseif($item->status_po == 'Sewa')
                 <span class="badge badge-success">{{ $item->status_po }}</span>
             @endif
         </td>

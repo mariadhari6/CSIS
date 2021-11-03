@@ -127,7 +127,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#edit">
+                            <a href="{{ route('summary')}}">
                                 <span class="link-collapse">Summary</span>
                             </a>
                         </li>

@@ -6,6 +6,7 @@
 
 
 @section('content')
+<form >
 
   <div class="row">
     <div class="col-md-12">
@@ -21,10 +22,18 @@
                     </select>
                   </div>
                 </ul>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <div class="float-left mr-2">
+                    <select class="form-control input-fixed" id="filter">
+                        <option value="{{ url('item_data_all_RequestComplain') }}">All</option>
+                        <option value="{{ url('item_data_Request_Internal_RequestComplain') }}">Request Internal</option>
+                        <option value="{{ url('item_data_Request_Eksternal_RequestComplain') }}">Request Eksternal</option>
+                        <option value="{{ url('item_data_Complain_Internal_RequestComplain') }}">Complain Internal</option>
+                        <option value="{{ url('item_data_Complain_Eksternal_RequestComplain') }}">Complain Eksternal</option>
+                    </select>
+                </div>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-edit"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-
 
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
@@ -38,7 +47,7 @@
                     </div>
                 </th>
                 <th scope="col" class="action-no">No.</th>
-                <th scope="col" class="list">Company*</th>
+                <th scope="col" class="list-company">Company*</th>
                 <th scope="col" class="list">Internal/External*</th>
                 <th scope="col" class="list-pic">PIC*</th>
                 <th scope="col" class="list">Vehicle*</th>
@@ -98,6 +107,23 @@
         })
     });
 
+  // ------- filter change ------
+  $("#filter").change(function(){
+    var value = $(this).val();
+    filter(value);
+});
+  // ------- filter --------
+  function filter(value){
+  var value = value;
+  $.get(value, {}, function(data, status) {
+      $('#table_id').DataTable().destroy();
+      $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
+          "dom": '<"top"f>rt<"bottom"lp><"clear">'
+          });
+      $('#table_id').DataTable().draw();
+    });
+  }
     // ---- stop dropdown -----
     $(document).on('click', '.dropdown-menu', function (e) {
       e.stopPropagation();
@@ -109,6 +135,7 @@
          $('#table_id').DataTable().destroy();
          $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
@@ -145,7 +172,24 @@
         var waktu_solve = $("#waktu_solve").val();
         var status = $("#status").val();
         var status_akhir = $("#status_akhir").val();
-        $.ajax({
+        if(
+        company_id == "" ||
+        internal_eksternal == "" ||
+        pic_id =="" ||
+        vehicle =="" ||
+        waktu_respond =="" ||
+        task =="" ||
+        platform=="" ||
+        detail_task=="" ||
+        divisi =="" ||
+        respond=="" ||
+        waktu_kesepakatan=="" ||
+        waktu_solve=="" ||
+        status==""
+        ){
+
+        }else {
+            $.ajax({
             type: "get",
             url: "{{ url('store_RequestComplain') }}",
             data: {
@@ -175,6 +219,10 @@
               read();
             }
         })
+
+        }
+
+
     }
     // -----Proses Delete Data ------
     function destroy(id) {
@@ -480,5 +528,7 @@
 
 
   </script>
+          </form>
+
    @endsection
 

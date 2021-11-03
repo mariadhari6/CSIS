@@ -17,7 +17,7 @@ class CreateDetailCustomersTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('company_id');
             $table->string('licence_plate');
-            $table->string('vihecle_type');
+            $table->string('vehicle_id');
             $table->foreignId('po_id');
             $table->integer('harga_layanan');
             $table->foreignId('po_date');
@@ -27,7 +27,10 @@ class CreateDetailCustomersTable extends Migration
             $table->string('type');
             $table->foreignId('gsm_id');
             $table->string('provider');
-            $table->string('sensor_all');
+            $table->string('sensor_all')->nullable();
+            $table->foreignId('serial_number_sensor')->nullable();
+            $table->foreignId('sensor_id')->nullable();
+            $table->string('merk_sensor')->nullable();
             $table->string('pool_name');
             $table->string('pool_location');
             $table->date('waranty');

@@ -3,7 +3,7 @@
     <td></td>
     <td>
     <select class="select company_id-{{$master_po->id}}" id="company_id" name="company_id" required>
-        <option value="{{$master_po->company_id}}"> {{$master_po->company->company_name}}</option>
+        <option value="{{$master_po->company_id}}"> {{$master_po->company->company_name??''}}</option>
        @foreach ($company as $companys)
         <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
        @endforeach
@@ -21,7 +21,7 @@
         <div class="input-div"><input type="text" class="input jumlah_unit_po-{{$master_po->id}}" id="jumlah_unit_po" placeholder="Jumlah Unit Po" value="{{ $master_po->jumlah_unit_po}}" required></i></div>
     </td>
     <td>
-        <select class="form-control status_po-{{$master_po->id}}" id="status_po" aria-label=".form-select-lg example">
+        <select class="select status_po-{{$master_po->id}}" id="status_po" aria-label=".form-select-lg example">
             <option selected value="{{$master_po->status_po}}">{{$master_po->status_po}}</option>
              <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>

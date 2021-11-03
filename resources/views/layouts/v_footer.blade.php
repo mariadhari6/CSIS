@@ -1,7 +1,7 @@
 
 
             </div>
-            <footer class="footer">
+            {{-- <footer class="footer">
 
                 <div class="container-fluid">
                     <nav class="pull-left">
@@ -22,7 +22,7 @@
                         2021, made Operasional by, Integrasia Utama
                     </div>
                 </div>
-            </footer>
+            </footer> --}}
         </div>
     </div>
 </div>
@@ -42,7 +42,7 @@
     <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/ready.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     {{-- Datatable --}}
     <script src="//cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>

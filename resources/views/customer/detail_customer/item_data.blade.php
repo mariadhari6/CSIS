@@ -1,14 +1,15 @@
 <?php $no=1; ?>
 @foreach ($details as $detail )
 <tr id="edit-form-{{ $detail->id }}" height="50px">
-    <td id="td-checkbox-{{ $detail->id }}" width="100px">
-        <div>
-            <label class="form-check-label">
-                <input class="form-check-input task-select" type="checkbox" id="{{$detail->id}}">
-                <span class="form-check-sign"></span>
-            </label>
-        </div>
-    </td>
+
+        <td id="td-checkbox-{{ $detail->id }}" width="100px">
+            <div>
+                <label class="form-check-label">
+                    <input class="form-check-input task-select" type="checkbox" id="{{$detail->id}}">
+                    <span class="form-check-sign"></span>
+                </label>
+            </div>
+        </td>
         <td id="item-no-{{ $detail->id}}">
             {{ $no++ }}
         </td>
@@ -34,13 +35,13 @@
             {{ $detail->po->status_po }}
         </td>
         <td id="item-Imei-{{ $detail->id }}">
-            {{ $detail->gps->imei??'' }}
+            {{ $detail->gps->imei }}
         </td>
         <td id="item-Merk-{{ $detail->id }}">
-            {{ $detail->gps->merk??'' }}
+            {{ $detail->gps->merk }}
         </td>
         <td id="item-Type-{{ $detail->id }}">
-            {{ $detail->gps->type??'' }}
+            {{ $detail->gps->type }}
         </td>
         <td id="item-GSM-{{ $detail->id }}">
             {{ $detail->gsm->gsm_number }}
@@ -48,15 +49,11 @@
         <td id="item-Provider-{{ $detail->id }}">
             {{ $detail->gsm->provider }}
         </td>
-        <td id="item-SensorAll-{{ $detail->id }}">
-            {{ $detail->sensor_all }}
+        <td id="item-SensorAll-{{ $detail->id }}" >
+
+             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $detail->sensor_all_name }}" ></i>
+
         </td>
-        {{-- <td id="item-NameSensor-{{ $detail->id }}">
-            {{ $detail->sensor_id }}
-        </td>
-        <td id="item-MerkSensor-{{ $detail->id }}">
-            {{ $detail->merk_sensor }}
-        </td> --}}
         <td id="item-PoolName-{{ $detail->id }}">
             {{ $detail->vehicle->pool_name }}
         </td>
@@ -81,18 +78,24 @@
             @endif
         </td>
         <td id="item-TanggalReaktivasi-{{ $detail->id }}">
-            @if ($detail->tanggal_reaktivasi_gps == null)
-                {{ $detail->tanggal_reaktivasi_gps }}
+            @if ($detail->tgl_reaktivasi_gps == null)
+                {{ $detail->tgl_reaktivasi_gps }}
             @else
-                {{ date('d-M-Y', strtotime($detail->tanggal_reaktivasi_gps)) }}
+                {{ date('d-M-Y', strtotime($detail->tgl_reaktivasi_gps)) }}
             @endif
         </td>
-        <td id="td-button-{{ $detail->id }}">
+        <td  class="action sticky-col first-col" id="td-button-{{ $detail->id }}" >
             <div id="button-{{ $detail->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $detail->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $detail->id }})"></i>
             </div>
         </td>
     </tr>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 
    @endforeach
+

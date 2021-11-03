@@ -5776,10 +5776,12 @@ body {
 }
 
 .input-fixed {
-    width: 200px;
+    position: relative;
+    width: 150px;
 }
 
 .form-control.input-full {
+    position: relative;
     width: 100% !important;
 }
 

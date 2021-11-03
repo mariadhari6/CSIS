@@ -14,8 +14,12 @@
               <b>Add</b>
               <i class="fas fa-plus ml-2" id="add"></i>
             </button>
+            <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                  <b> Import</b>
+                  <i class="fas fa-file-excel ml-2"></i>
+            </button>
             <button class="btn btn-success  mr-2 edit_all">
-              <i class="fas fa-pen"></i>
+              <i class="fas fa-edit"></i>
             </button>
             <button class="btn btn-danger  delete_all">
               <i class="fas fa-trash"></i>
@@ -37,11 +41,11 @@
                     </div>
                 </th>
                 <th scope="col" class="action-no">No.</th>
-                <th scope="col" class="list">Company*</th>
+                <th scope="col" class="list-company">Company*</th>
                 <th scope="col" class="list">Pic Name*</th>
                 <th scope="col" class="list">Phone*</th>
                 <th scope="col" class="list">Email*</th>
-                <th scope="col" class="list">Position*</th>
+                <th scope="col" class="list-picPosition">Position*</th>
                 <th scope="col" class="list">Date of birth</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
@@ -57,21 +61,187 @@
         </div>
       </div>
     </div>
+ <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
+		<div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role="document">
+			<div class="modal-content-full-width modal-content">
+				<div class="modal-header-full-width modal-header bg-primary">
+					<h6 class="modal-title">Import data</h6>
+					<button type="button" class="close" id="close-modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+          <div class="card">
+            <div class="card-header">
+              <b>Select Excel File</b>
+              <br>
+              <input type="file" id="excel_file" />
+              <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
+              <a  class="btn btn-secondary btn-xs" href="/download_template_pic" style="color:white">Download Template</a>
+            </div>
+            <div class="card-body">
+              <div id="excel_data" ></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer-full-width  modal-footer">
 
+        </div>
+        </div>
+			</div>
+		</div>
+	</div>
   <script>
     $(document).ready(function() {
-
+    $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
       read()
+    });
+    const excel_file = document.getElementById("excel_file");
+    excel_file.addEventListener("change", (event) => {
+            if (
+        ![
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.ms-excel",
+        ].includes(event.target.files[0].type)
+        ) {
+        document.getElementById("excel_data").innerHTML =
+          '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+        excel_file.value = "";
+        return false;
+      }
+      var reader = new FileReader();
+      reader.readAsArrayBuffer(event.target.files[0]);
+      reader.onload = function (event) {
+        var data = new Uint8Array(reader.result);
+        var work_book = XLSX.read(data, { type: "array" });
+        var sheet_name = work_book.SheetNames;
+        var sheet_data = XLSX.utils.sheet_to_json(
+          work_book.Sheets[sheet_name[0]],
+          { header: 1 }
+        );
+        if (sheet_data.length > 0) {
+            var table_output = '<table class="table table-bordered" id="importTable">';
+                for (var row = 0; row < sheet_data.length; row++) {
+                 table_output += "<tr>";
+                    for (var cell = 0; cell < sheet_data[row].length; cell++) {
+              if (row == 0) {
+                table_output += "<th>" + sheet_data[row][cell] + "</th>";
+              } else {
+                table_output += '<td contenteditable id="table-data-' + cell + '" >' + sheet_data[row][cell] + "</td>";
+              }
+            }
+            table_output += "</tr>";
 
+            }
+            table_output += "</table>";
+             document.getElementById("excel_data").innerHTML = table_output;
+
+        }
+        dateOfBirth = document.querySelectorAll("#table-data-5");
+          for (i = 0; i < dateOfBirth.length; i++) {
+            var excelDate = dateOfBirth[i].innerText;
+            var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+            try {
+                  var converted_date = date.toISOString().split('T')[0];
+                }
+                catch(err) {
+                  // var converted_date = 'wrong date format';
+                  dateOfBirth[i].style.backgroundColor = "#e8837d";
+                }
+            dateOfBirth[i].innerHTML = converted_date;
+          }
+
+
+            excel_file.value = "";
+
+
+        };
     });
 
+    function save_data() {
+        var total = 0;
+        var jsonTable = $('#importTable tbody tr:has(td)').map(function () {
+            var $td = $('td', this);
+            total += parseFloat($td.eq(2).text());
+            return{
+                company_id        : $td.eq(0).text(),
+                pic_name          : $td.eq(1).text(),
+                phone             : $td.eq(2).text(),
+                email             : $td.eq(3).text(),
+                position          : $td.eq(4).text(),
+                date_of_birth     : $td.eq(5).text(),
 
+            }
+
+        }).get();
+      $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
+        data = {};
+        data = jsonTable;
+        //
+        var thLength = $('#importTable th').length;
+        var trLength = $("#importTable td").closest("tr").length;
+        var item = document.querySelectorAll("#table-data-8");
+        var tes = $("#importTable").find("tbody>tr:eq(1)>td:eq(1)").attr("style");
+        var success;
+        $.ajax({
+        type: 'POST',
+        dataType: 'JSON',
+        url: "{{ url('/save_import_pic') }}",
+        data: {
+           data   : JSON.stringify(data) ,
+          _token  : '{!! csrf_token() !!}'
+        } ,
+        error: function(er) {
+          if(er.responseText === 'fail' ){
+            // alert("save failed");
+            swal({
+                type: 'warning',
+                text: 'Duplicate data or error format, Imei must 15 character',
+                showConfirmButton: false,
+                timer: 1500
+              }).catch(function(timeout) { });
+          } else {
+              try {
+            swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
+            read();
+            $('#importData').modal('hide');
+            } catch (error) {
+              swal({
+                type: 'warning',
+                text: 'Duplicate data or error format',
+                showConfirmButton: false,
+                timer: 1500
+              }).catch(function(timeout) { });
+
+            }
+          }
+          }
+      });
+    }
+
+
+     // ---- Close Modal -------
+    $('#close-modal').click(function() {
+        // deleteTemporary();
+        // read_temporary()
+        $('#importData').modal('hide');
+    });
     // ------ Tampil Data ------
     function read(){
       $.get("{{ url('item_data_pic') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
 

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TamplateMasterVehicle;
+use App\Imports\VehicleImport;
 use App\Models\Company;
 use App\Models\Vehicle;
 use App\Models\VehicleType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class VehicleController extends Controller
@@ -33,7 +36,48 @@ class VehicleController extends Controller
             'vehicle' => $vehicle
         ]);
     }
+    public function save_import(Request $request)
+    {
+        $dataRequest = json_decode($request->data);
+        foreach ($dataRequest as $key => $value) {
+            $licensePlateNum = $value->license_plate;
+            $checklicensePlate = Vehicle::where('license_plate', '=', $licensePlateNum)->first();
+            if ($checklicensePlate === null) {
+                try {
 
+
+                    $data = array(
+                        'company_id'    => Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                        'license_plate' => $value->license_plate,
+                        'vehicle_id'    => VehicleType::where('name', $value->vehicle_id)->firstOrFail()->id,
+                        'pool_name'     => $value->pool_name,
+                        'pool_location' => $value->pool_location,
+                        // $i = VehicleType::where('id', 2)->get();
+                        // // echo $i[0]['name'];
+                        // if ($value->vehicle_id == $i[0]['name']) {
+                        //     echo 'data ada';
+                        // } else {
+                        //     echo gettype($value->vehicle_id) . ' == ' .  $i[0]['name'];
+                        // }
+                        // echo $value->vehicle_id;
+
+
+                    );
+                    // $i = VehicleType::where('name')
+                    // echo $data;
+                    // if($value->vehicle_id == VehicleType:: where())
+                    Vehicle::insert($data);
+                } catch (\Throwable $th) {
+                    return 'fail';
+                }
+
+                //     } else {
+                //         return 'fail';
+                //     }
+
+            }
+        }
+    }
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -124,5 +168,19 @@ class VehicleController extends Controller
     {
         Company::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
+    }
+
+    public function importExcel(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('MasterVehicle', $nameFile);
+
+        Excel::import(new VehicleImport, public_path('/MasterVehicle/' . $nameFile));
+        // return redirect('/GsmMaster');
+    }
+    public function export()
+    {
+        return Excel::download(new TamplateMasterVehicle, 'template-vehicle.xlsx');
     }
 }

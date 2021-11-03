@@ -119,7 +119,7 @@
                     </div>
                     <select class="custom-select" id="SensorName" name="SensorName" disabled>
                         @foreach ($sensor as $item)
-                        <option value="{{ $item->sensor_name }}" {{ old('sensor_id') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
+                        <option value="{{ $item->id }}" {{ old('sensor_name') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -174,17 +174,21 @@
     </select>
 </td>
 <td><div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div></td>
-<td><div class="input-div"><input type="date" class="input TanggalNonAktif-{{ $details->id }}" id="TanggalNonAktif" value="{{ $details->tanggal_non_aktif }}"></div></td>
-<td><div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}"></div></td>
 <td>
+    <div class="input-div"><input type="date" class="input TanggalNonAktif-{{ $details->id }}" id="TanggalNonAktif" value="{{ $details->tanggal_non_aktif }}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field"></div>
+</td>
+<td><div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div></td>
+<td class="action sticky-col first-col">
     <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
 </td>
 
 <script>
+
     $(document).ready(function() {
+
         $('select[name="SerialNumberSensor"]').on('change', function() {
+
                 var Id = $(this).val();
-                // alert(Id);
                 if(Id) {
                     $.ajax({
                         url: '/based_sensor/'+ Id,
@@ -203,25 +207,24 @@
                     $('select[name="MerkSensor').empty();
                 }
 
-        s});
+        });
+
         $('select[name="LicencePlate"]').on('change', function() {
+
                 var Id = $(this).val();
-                // alert(Id);
                 if(Id) {
                     $.ajax({
                         url: '/based_license/'+ Id,
                         method: "GET",
                         success:function(data) {
-
                             $('select[name="VihecleType').empty();
                             $('select[name="PoolName').empty();
                             $('select[name="PoolLocation').empty();
-                                $.each(data, function(key, value) {
-                                    $('select[name="VihecleType').append('<option value="'+ key +'">'+ value.vehicle_id +'</option>');
-                                    $('select[name="PoolName').append('<option value="'+ key +'">'+ value.pool_name +'</option>');
-                                    $('select[name="PoolLocation').append('<option value="'+ key +'">'+ value.pool_location +'</option>');
-
-                               });
+                            $.each(data, function(key, value) {
+                                $('select[name="VihecleType').append('<option value="'+ key +'">'+ value.vehicle_id +'</option>');
+                                $('select[name="PoolName').append('<option value="'+ key +'">'+ value.pool_name +'</option>');
+                                $('select[name="PoolLocation').append('<option value="'+ key +'">'+ value.pool_location +'</option>');
+                            });
                         }
                     });
                 }
@@ -231,6 +234,7 @@
                     $('select[name="PoolLocation').empty();
                 }
         });
+
             $('select[name="PoNumber"]').on('change', function() {
                 var Id = $(this).val();
 
@@ -260,6 +264,7 @@
 
                 }
             });
+
             $('select[name="Imei"]').on('change', function() {
                 var Id = $(this).val();
                 if(Id) {
@@ -281,6 +286,8 @@
                 }
 
             });
+
+
             $('select[name="GSM"]').on('change', function() {
                 var Id = $(this).val();
                 if(Id) {
@@ -308,7 +315,10 @@
                     $('#SensorTerpilih').empty();
                 }
             })
+
     });
+
+
     function add(){
         // var sensor = document.getElementById("SensorName").value;
         var serialnumber = document.getElementById("SerialNumberSensor").value;
@@ -322,11 +332,18 @@
             $("#SensorTerpilih").prepend(data);
         }
     }
+
     function send(){
+
         var sensorterpilih = document.getElementById("SensorTerpilih").value;
         $('#sensor').empty();
         $('#sensor').append(
             '<option value="'+ sensorterpilih + '" id="SensorAll" data-toggle="modal" data-target="#exampleModal"> '+ sensorterpilih +'</option>'
         );
     }
+
 </script>
+
+
+
+

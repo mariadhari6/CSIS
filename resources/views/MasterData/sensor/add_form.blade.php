@@ -3,17 +3,17 @@
     <td></td>
 
     <td>
-        <div class="input-div"><input type="text" class="input" id="sensor_name" placeholder="Sensor Name" required>
-    </td>
-    <td>
-        <select class="select" id="merk_sensor" name="merk_sensor" >
-            <option selected disabled>Merk Sensor</option>
+        <select class="select" id="sensor_name" name="sensor_name" aria-placeholder="Sensor_name">
+            <option selected disabled></option>
 
-            @foreach ($merk_sensor as $item)
-            <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':'' }}>{{ $item->merk_sensor}}</option>
+            @foreach ($sensorName as $item)
+            <option value="{{ $item->sensor_name }}" {{ old('sensor_name') == $item->id ? 'selected':'' }}>{{ $item->sensor_name}}</option>
             @endforeach
 
         </select>
+    </td>
+    <td>
+        <div class="input-div"><input type="text" class="input" id="merk_sensor" placeholder="merk_sensor" >
     </td>
     <td>
         <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number" required>

@@ -15,10 +15,10 @@
     <td><select class="select internal_eksternal-{{$request_complain->id}}" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example" required>
     <option value="{{$request_complain->internal_eksternal}}"> {{$request_complain->internal_eksternal}} </option>
     <option selected>{{$request_complain->internal_eksternal}}</option>
-    <option value="Internal Request">Internal Request</option>
-    <option value="Internal Complain">Internal Complain</option>
-    <option value="Eksternal Request">Eksternal Request</option>
-    <option value="Eksternal Complain">Eksternal Complain</option>
+   <option value="Request Internal">Request Internal</option>
+    <option value="Complain Internal">Complain Internal</option>
+    <option value="Request Eksternal">Request Eksternal</option>
+    <option value="Complain Eksternal">Complain Eksternal</option>
     </select></i></td>
 
     <td><select class="select pic_id-{{$request_complain->id}}" id="pic_id" name="pic_id" required>
@@ -47,7 +47,7 @@
 
     <td>
         <select class="select task-{{$request_complain->id}}" id="task" name="task" required>
-        <option value="{{$request_complain->task}}"> {{$request_complain->taskRequest->task}} </option>
+        <option value="{{$request_complain->task}}"> {{$request_complain->taskRequest->task??''}} </option>
        @foreach ($task_request as $item)
         <option value="{{ $item->id }}" {{ old('task') == $item->id ? 'selected':'' }}>{{ $item->task }}</option>
 

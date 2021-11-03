@@ -1,18 +1,19 @@
     <td></td>
     <td></td>
     <td>
-        <div class="input-div"><input type="text" class="input sensor_name-{{$sensor->id}}" id="sensor_name" placeholder="Sensor Name" value="{{ $sensor->sensor_name}}" required></div>
-    </td>
-    <td>
-        <select class="select merk_sensor-{{$sensor->id}}" id="merk_sensor" name="merk_sensor" >
-            <option value="{{$sensor->merk_sensor}}">{{$sensor->sensorMerk->merk_sensor}}</option>
+        <select class="select sensor_name-{{$sensor->id}}" id="sensor_name" name="sensor_name" >
+            <option value="{{$sensor->sensor_name}}">{{$sensor->sensor_name}}</option>
 
-            @foreach ($merk_sensor as $item)
-            <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':'' }}>{{ $item->merk_sensor}}</option>
+            @foreach ($sensorName as $item)
+            <option value="{{ $item->id }}" {{ old('sensor_name') == $item->id ? 'selected':'' }}>{{ $item->sensor_name}}</option>
             @endforeach
 
         </select>
     </td>
+    <td>
+        <div class="input-div"><input type="text" class="input merk_sensor-{{$sensor->id}}" id="merk_sensor" placeholder="Merk sensor" value="{{ $sensor->merk_sensor}}" required></div>
+    </td>
+
     <td>
         <div class="input-div"><input type="text" class="input serial_number-{{$sensor->id}}" id="serial_number" placeholder="Serial Number" value="{{ $sensor->serial_number}}" required></div>
     </td>

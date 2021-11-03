@@ -16,7 +16,7 @@
         </td>
 
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company->company_name}}
+            {{ $item->company->company_name??''}}
         </td>
         <td id="item-pic_name-{{ $item->id}}">
             {{ $item->pic_name }}

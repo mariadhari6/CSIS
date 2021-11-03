@@ -22,9 +22,9 @@ class Sensor extends Model
     {
         return $this->hasMany(RequestComplaint::class, 'id', 'equipment_terpakai_sensor');
     }
-    public function sensorMerk()
+    public function sensorName()
     {
-        return $this->belongsTo(MerkSensor::class, 'merk_sensor', 'id');
+        return $this->belongsTo(SensorName::class, 'sensor_name', 'id');
     }
 
     public function detailCustomer()

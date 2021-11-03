@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TamplateCompany;
+use App\Imports\CompanyImport;
 use App\Models\Company;
 use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class CompanyController extends Controller
@@ -29,6 +32,28 @@ class CompanyController extends Controller
             'company' => $company
         ]);
     }
+    public function save_import(Request $request)
+    {
+        $dataRequest = json_decode($request->data);
+        foreach ($dataRequest as $key => $value) {
+            try {
+                $data = array(
+                    'company_name'        => $value->company_name,
+                    'seller_id'        =>  Seller::where('seller_name', $value->seller_id)->firstOrFail()->id,
+                    'customer_code'        =>  $value->customer_code,
+                    'no_agreement_letter_id'     => Seller::where('no_agreement_letter', $value->no_agreement_letter_id)->firstOrFail()->id,
+                    'status'     =>  $value->status,
+
+
+                );
+                Company::insert($data);
+                // return 'success';
+            } catch (\Throwable $th) {
+                return 'fail';
+            }
+        }
+    }
+
 
     public function store(Request $request)
     {
@@ -126,7 +151,19 @@ class CompanyController extends Controller
             ->pluck('no_agreement_letter', 'id');
         return json_encode($data);
     }
+    public function importExcel(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('MasterCompany', $nameFile);
 
+        Excel::import(new CompanyImport, public_path('/MasterCompany/' . $nameFile));
+        // return redirect('/GsmMaster');
+    }
+    public function export()
+    {
+        return Excel::download(new TamplateCompany, 'template-company.xlsx');
+    }
 
     // public function showAgreement($id)
     // {
