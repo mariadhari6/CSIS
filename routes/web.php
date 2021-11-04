@@ -5,6 +5,7 @@ use App\Http\Controllers\UsernameController;
 use App\Http\Controllers\DetailCustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GpsController;
 use App\Http\Controllers\GsmActiveController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\SensorController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\DashboardVisitAssignmentController;
 use App\Http\Controllers\MaintenanceGpsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestComplaintController;
 use App\Http\Controllers\RequestComplaintCustomerController;
 use App\Models\DetailCustomer;
@@ -255,6 +257,13 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
      //Dashboar Visit Assignment
      Route::get('/dashboard_visit_assignment', [DashboardVisitAssignmentController::class, 'index']);
 
+
+     // Edit Password
+    Route::get('change-password', [ChangePasswordController::class, 'index']);
+    Route::post('change-password', [ChangePasswordController::class, 'store'])->name('change.password');
+    // Edit Profile
+    Route::get('profile',  [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
 
 });
 

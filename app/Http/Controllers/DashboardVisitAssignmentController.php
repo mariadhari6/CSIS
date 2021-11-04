@@ -25,12 +25,14 @@ class DashboardVisitAssignmentController extends Controller
 
         $count_data_vehicle = array_count_values($vehicle['vehicle']);
 
-        for ($i=0; $i <= count($vehicle['vehicle']) - 1 ; $i++) { 
-            $count_vehicle[$i] = $count_data_vehicle[$vehicle['vehicle'][$i]];
-        }
+        // for ($i=0; $i <= count($vehicle['vehicle']) - 1 ; $i++) { 
+        //     $count_vehicle[$i] = $count_data_vehicle[$vehicle['vehicle'][$i]];
+        // }
 
         $company['chart_company'] = json_encode($company);
-        $vehicle['chart_vehicle'] = json_encode($count_vehicle);
+        $vehicle['chart_vehicle'] = json_encode($vehicle);
+
+        // dd()
 
         return view('VisitAssignment.Dashboard.dashboard_visitAssignment', $company, $vehicle);
     }

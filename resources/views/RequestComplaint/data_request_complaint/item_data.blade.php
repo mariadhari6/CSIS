@@ -48,14 +48,14 @@
          <td id="item-waktu_kesepakatan-{{ $item->id }}">
             {{ $item->waktu_kesepakatan}}
         </td>
+        <td id="item-status_akhir-{{ $item->id }}">
+            {{ $item->status_akhir }}
+        </td>
          <td id="item-waktu_solve-{{ $item->id }}">
             {{ $item->waktu_solve}}
         </td>
         <td id="item-status-{{ $item->id }}">
             {{ $item->status }}
-        </td>
-        <td id="item-status_akhir-{{ $item->id }}">
-            {{ $item->status_akhir }}
         </td>
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">

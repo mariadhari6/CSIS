@@ -2,7 +2,7 @@
 <td></td>
 <td>
     <div class="input-div">
-        <input type="text" class="input seller_name-{{$seller->id}}" id="seller_name" placeholder="Seller Name" value="{{ $seller->seller_name}}">
+        <input type="text" class="input seller_name-{{$seller->id}}" id="seller_name" placeholder="Seller Name" value="{{ $seller->seller_name}}" required>
     </div>
 </td>
 <td>
@@ -25,8 +25,12 @@
         </option>
     </select>
 </td>
+<label for="cars">Choose a car:</label>
+
 <td>
-    <i class="fas fa-check add" id="edit" onclick="update({{ $seller->id}})"></i>
+    <button class="unstyled-button" type="submit">
+        <i class="fas fa-check add" id="edit" onclick="update({{ $seller->id}})" ></i>
+    </button>
     <i class="fas fa-times cancel" onclick="cancel()" ></i>
 </td>
 

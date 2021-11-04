@@ -11,11 +11,8 @@
         </div>
         <nav class="navbar navbar-header navbar-expand-lg">
             <div class="container-fluid">
-
                 <button class="mt-1 btn btn-light btn-sm" >@yield('title-table')</button>
-
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{ asset('images/admin.png') }}" alt="user-img" width="36" class="img-circle"><span id="user">{{Auth::user()->name}}</span></span> </a>
                         <ul class="dropdown-menu dropdown-user">
@@ -24,11 +21,11 @@
                                     <div class="u-img"><img src="{{ asset('images/admin.png') }}" alt="user"></div>
                                     <div class="u-text">
                                         <h4>{{Auth::user()->name}}</h4>
-                                        <p class="text-muted">{{Auth::user()->email}}</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <p class="text-muted">{{Auth::user()->email}}</p><a href="/profile" class="btn btn-rounded btn-danger btn-sm">Edit Profile</a></div>
                                     </div>
                                 </li>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
+                                <a class="dropdown-item" href="/change-password"><i class="ti-user"></i>Change Password</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>{{ __('Logout') }}</a>

@@ -26,6 +26,15 @@
         </select>
     </td>
     <td>
+        <select class="select" name="cars" id="cars" aria-label=".form-select-lg example" required>
+            <option value="">None</option>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+         </select>
+    </td>
+    <td>
         <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="add" onclick="store()"></i>
         </button>

@@ -38,7 +38,6 @@
             <div class="card card-stats card-primary-tua">
                 <div class="card-body">
                     <div class="row">
-
                         <div class="col-12 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Perbaikan Pertipe GPS</p>
@@ -131,32 +130,30 @@
 
     var company = JSON.parse(`<?php echo $chart_company; ?>`);
     var vehicle = JSON.parse(`<?php echo $chart_vehicle; ?>`);
-
-    const labels = [...new Set(company.company)];
-    const count_vehicle = [...new Set(vehicle.vehicle)];
-
-    alert(count_vehicle);
-    
+    const labels = [ ...new Set(company.company) ];
+    const count_vehicle = [ ...new Set(vehicle.vehicle) ];
+    // console.log(company);
+    // console.log(vehicle);
     const data = {
     labels: labels,
     datasets: [
         {
         label: 'Vehicle',
-        data: count_vehicle,
+        data: [1,2,3,4],
         borderColor: '#3366cc',
         backgroundColor: '#3366cc',
         },
 
         {
         label: 'Times',
-        data: [2,2],
+        data: [5,6,7,8],
         borderColor: '#b35900',
         backgroundColor: '#b35900',
         },
 
         {
         label: 'Cost',
-        data: [2,2],
+        data: [9,10,11,12],
         borderColor: '#737373',
         backgroundColor: '#737373',
         }
