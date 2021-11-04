@@ -20,15 +20,15 @@
     </select></i>
 </td>
 <td>
-    <select class="form-control pic_id-{{$item->id}}" id="pic_id" name="pic_id-{{$item->id}}">
+    <select class="form-control pic_id-{{$request_complain->id}}" id="pic_id" name="pic_id-{{$request_complain->id}}">
 
-        <option selected value="{{ $item->company->id}}">
-            {{ $item->company->pic }}
+        <option selected value="{{ $request_complain->company->id}}">
+            {{ $request_complain->company->pic }}
         </option>
 
-        @foreach ($company as $item)
-        <option value="{{ $item->id }}" {{ old('pic_id') == $item->id ? 'selected':'' }}>
-            {{ $item->pic }}
+        @foreach ($company as $request_complain)
+        <option value="{{ $request_complain->id }}" {{ old('pic_id') == $request_complain->id ? 'selected':'' }}>
+            {{ $request_complain->pic }}
         </option>
         @endforeach
 
