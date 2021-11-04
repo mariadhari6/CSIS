@@ -215,6 +215,27 @@ class PemasanganMutasiGpsController extends Controller
         return $data;
     }
 
+    public function basedVehicle($id)
+    {
+
+
+
+        $data = DetailCustomer::where('company_id', $id)->get();
+
+        return $data;
+    }
+
+    public function basedImei($id)
+    {
+        $key = DetailCustomer::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
+            return [
+                $item['id'] => $item->only(['gsm_id', 'type'])
+            ];
+        });
+        $data = $key->all();
+        return $data;
+    }
+
     // public function basedSensorName($id)
     // {
 

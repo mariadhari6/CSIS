@@ -14,19 +14,19 @@
             {{ $no++ }}
         </td>
         <td id="item-CompanyId-{{ $detail->id }}">
-            {{ $detail->company->company_name}}
+            {{ $detail->company->company_name??''}}
         </td>
         <td id="item-LicencePlate-{{ $detail->id }}">
-            {{ $detail->vehicle->license_plate }}
+            {{ $detail->vehicle->license_plate??'' }}
         </td>
         <td id="item-VihecleType-{{ $detail->id }}">
-            {{ $detail->vehicle->vehicleType->name }}
+            {{ $detail->vehicle->vehicleType->name??'' }}
         </td>
         <td id="item-PoNumber-{{ $detail->id }}">
-            {{ $detail->po->po_number }}
+            {{ $detail->po->po_number??'' }}
         </td>
         <td id="item-HargaLayanan-{{ $detail->id }}">
-            {{ $detail->po->harga_layanan }}
+            {{ $detail->po->harga_layanan??'' }}
         </td>
         <td id="item-PoDate-{{ $detail->id }}">
             {{ date('d-M-Y', strtotime($detail->po->po_date))}}
@@ -35,19 +35,19 @@
             {{ $detail->po->status_po }}
         </td>
         <td id="item-Imei-{{ $detail->id }}">
-            {{ $detail->gps->imei }}
+            {{ $detail->gps->imei??'' }}
         </td>
         <td id="item-Merk-{{ $detail->id }}">
-            {{ $detail->gps->merk }}
+            {{ $detail->gps->merk??'' }}
         </td>
         <td id="item-Type-{{ $detail->id }}">
-            {{ $detail->gps->type }}
+            {{ $detail->gps->type??'' }}
         </td>
         <td id="item-GSM-{{ $detail->id }}">
-            {{ $detail->gsm->gsm_number }}
+            {{ $detail->gsm->gsm_number??'' }}
         </td>
         <td id="item-Provider-{{ $detail->id }}">
-            {{ $detail->gsm->provider }}
+            {{ $detail->gsm->provider??'' }}
         </td>
         <td id="item-SensorAll-{{ $detail->id }}" >
 
@@ -55,10 +55,10 @@
 
         </td>
         <td id="item-PoolName-{{ $detail->id }}">
-            {{ $detail->vehicle->pool_name }}
+            {{ $detail->vehicle->pool_name??'' }}
         </td>
         <td id="item-PoolLocation-{{ $detail->id }}">
-            {{ $detail->vehicle->pool_location }}
+            {{ $detail->vehicle->pool_location??'' }}
         </td>
         <td id="item-Waranty-{{ $detail->id }}">
             {{ date('d-M-Y', strtotime($detail->waranty)) }}

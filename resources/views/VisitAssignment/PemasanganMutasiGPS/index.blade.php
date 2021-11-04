@@ -4,7 +4,7 @@
 
 
 @section('content')
- <form>
+ {{-- <form> --}}
 
   <div class="row">
     <div class="col-md-12">
@@ -49,8 +49,8 @@
                 <th scope="col" class="list-company">Company</th>
                 <th scope="col" class="list">Jenis Pekerjaan</th>
                 <th scope="col" class="list">Tanggal</th>
-                <th scope="col" class="list">Kendaraan Awal*</th>
-                <th scope="col" class="list">Kendaraan Pasang*</th>
+                <th scope="col" class="list">Kendaraan Awal</th>
+                <th scope="col" class="list">Kendaraan Pasang</th>
                 <th scope="col" class="list">IMEI*</th>
                 <th scope="col" class="list">GSM*</th>
                 <th scope="col" class="list">GPS</th>
@@ -69,6 +69,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+          </form>
         </div>
       </div>
     </div>
@@ -486,6 +487,6 @@
 
 
   </script>
-          </form>
+          {{-- </form> --}}
 
    @endsection

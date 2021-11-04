@@ -58,4 +58,8 @@ class Company extends Model
     {
         return $this->hasMany(Gsm::class, 'company_id', 'id');
     }
+    public function detailCustomer()
+    {
+        return $this->hasMany(DetailCustomer::class, 'company_id', 'id');
+    }
 }

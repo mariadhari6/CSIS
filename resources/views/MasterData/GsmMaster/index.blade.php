@@ -6,7 +6,6 @@
 
 
 @section('content')
-
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -36,6 +35,8 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
+<form>
+
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -68,6 +69,8 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+        </form>
+
         </div>
       </div>
     </div>
@@ -769,7 +772,6 @@
 
 
   </script>
-
   {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
    @endsection

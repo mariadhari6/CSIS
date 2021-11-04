@@ -25,7 +25,7 @@
         </td>
         @if ($item->vehicle != null)
              <td id="item-vehicle-{{ $item->id}}">
-                {{ $item->vehicleRequest->license_plate?? ''}}
+                {{ $item->detailCustomerVehicle->vehicle->license_plate?? ''}}
             </td>
         @elseif ($item->vehicle == null)
              <td id="item-vehicle-{{ $item->id}}">
@@ -45,7 +45,7 @@
 
         @if ($item->imei != null)
         <td id="item-imei-{{ $item->id }}">
-            {{ $item->detailCustomer->gps->imei?? ''}}
+            {{ $item->detailCustomerImei->gps->imei?? ''}}
         </td>
         @elseif ($item->imei == null)
           <td id="item-imei-{{ $item->id }}">
@@ -55,14 +55,22 @@
 
         @if ($item->gsm_pemasangan != null)
           <td id="item-gsm_pemasangan-{{ $item->id }}">
-            {{ $item->gsmMaster->gsm_number?? ''}}
+            {{ $item->detailCustomerGsm->gsm->gsm_number?? ''}}
           </td>
         @elseif ($item->gsm_pemasangan == null)
            <td id="item-gsm_pemasangan-{{ $item->id }}">
             -
           </td>
         @endif
-
+          @if ($item->equipment_terpakai_gps != null)
+        <td id="item-equipment_terpakai_gps-{{ $item->id }}">
+            {{$item->detailCustomerGps->gps->type?? ''}}
+        </td>
+        @elseif ($item->equipment_terpakai_gps == null)
+        <td id="item-equipment_terpakai_gps-{{ $item->id }}">
+            -
+        </td>
+        @endif
         @if ($item->equipment_terpakai_sensor_all_name != null)
         <td id="item-equipment_terpakai_sensor-{{ $item->id }}">
              <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $item->equipment_terpakai_sensor_all_name }}" ></i>
@@ -74,15 +82,7 @@
         </td>
         @endif
 
-        @if ($item->equipment_terpakai_gps != null)
-        <td id="item-equipment_terpakai_gps-{{ $item->id }}">
-            {{$item->gpsPemasangan->type?? ''}}
-        </td>
-        @elseif ($item->equipment_terpakai_gps == null)
-        <td id="item-equipment_terpakai_gps-{{ $item->id }}">
-            -
-        </td>
-        @endif
+
 
         @if ($item->teknisi_pemasangan != null)
         <td id="item-teknisi_pemasangan-{{ $item->id }}">

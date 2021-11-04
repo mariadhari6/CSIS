@@ -84,4 +84,24 @@ class DetailCustomer extends Model
 
         return $this->belongsTo(Vehicle::class, 'licence_plate', 'id');
     }
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaint::class);
+    }
+    public function requestComplaintImei()
+    {
+        return $this->hasMany(RequestComplaint::class, 'imei', 'id');
+    }
+    public function requestComplaintCompany()
+    {
+        return $this->hasMany(RequestComplaint::class, 'company_id', 'id');
+    }
+    public function requestComplaintVehicle()
+    {
+        return $this->hasMany(RequestComplaint::class, 'vehicle', 'id');
+    }
+    public function requestComplaintGps()
+    {
+        return $this->hasMany(RequestComplaint::class, 'equipment_terpakai_gps', 'id');
+    }
 }
