@@ -41,7 +41,7 @@ class RequestComplaint extends Model
     }
     public function detailCustomer()
     {
-        return $this->belongsTo(DetailCustomer::class, 'imei', 'id');
+        return $this->belongsTo(DetailCustomer::class);
     }
     public function gsmMaster()
     {

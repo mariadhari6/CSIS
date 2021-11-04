@@ -53,8 +53,8 @@
                 <th scope="col" class="list">Kendaraan Pasang*</th>
                 <th scope="col" class="list">IMEI*</th>
                 <th scope="col" class="list">GSM*</th>
-                <th scope="col" class="list">Sensor </th>
                 <th scope="col" class="list">GPS</th>
+                <th scope="col" class="list">Sensor </th>
                 <th scope="col" class="list">Teknisi*</th>
                 <th scope="col" class="list">Uang Transportasi*</th>
                 <th scope="col" class="list">Type Visit*</th>
@@ -271,8 +271,8 @@
             var kendaraan_pasang = $("#kendaraan_pasang").val();
             var status = $("#status").val();
             var id = id;
-        if(kendaraan_pasang == "" || vehicle == "" || imei =="" || gsm_pemasangan =="" || teknisi_pemasangan =="" || uang_transportasi =="" || type_visit==""  ){
-        } else{
+        if(kendaraan_pasang == "" || vehicle == "" || imei =="" || gsm_pemasangan =="" || teknisi_pemasangan =="" || uang_transportasi =="" || type_visit=="" || status=="" ){
+        } else {
             $.ajax({
                 type: "get",
                 url: "{{ url('update_PemasanganMutasi') }}/"+id,

@@ -3,7 +3,7 @@
     <td></td>
     <td>
         <select class="select merk-{{$gps->id}}" id="merk" name="merk" required>
-            {{-- <option value="{{$gps->merk}}"></option> --}}
+            {{-- <option value=""></option> --}}
 
             @foreach ($merk as $item)
             <option value="{{ $item->merk_gps }}" {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>

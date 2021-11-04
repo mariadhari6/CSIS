@@ -35,8 +35,8 @@
       <td>
           <select class="select" id="vehicle" name="vehicle" required>
             <option selected disabled value=""></option>
-            @foreach ($vehicle as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+            @foreach ($detail as $item)
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate }}</option>
 
             @endforeach
          </select></i>
@@ -71,6 +71,14 @@
 
     <td>
         <textarea class="form-control" id="detail_task" name="detail_task" required ></textarea></i>
+    </td>
+    <td>
+        <select class="select" id="divisi" name="divisi" aria-label=".form-select-lg example" required>
+            <option selected disabled></option>
+            <option value="Opersional (CS)">Opersional (CS)</option>
+            <option value="Lintas Divisi">Lintas Divisi</option>
+            <option value="Operasional (Implementor)">Operasional (Implementor)</option>
+        </select></i>
     </td>
     <td>
         <div class="input-div"><input type="text" class="input" id="divisi" placeholder="Divisi" required></i></div>

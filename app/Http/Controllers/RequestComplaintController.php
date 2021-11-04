@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\DetailCustomer;
 use App\Models\Pic;
 use App\Models\RequestComplaint;
 use App\Models\Task;
@@ -26,13 +27,17 @@ class RequestComplaintController extends Controller
         $task_request = Task::orderBy('id', 'ASC')->get();
         $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
         $vehicle = Vehicle::orderBy('id', 'ASC')->get();
+        $detail = DetailCustomer::orderBy('id', 'ASC')->get();
+
         return view('request_complaint.add_form')->with([
 
             'request_complain' => $request_complain,
             'pic'              => $pic,
             'company'              => $company,
             'task_request'              => $task_request,
-            'vehicle'              => $vehicle
+            'vehicle'              => $vehicle,
+            'detail'              => $detail
+
         ]);
     }
     public function item_data_MY(Request $request)
@@ -106,7 +111,9 @@ class RequestComplaintController extends Controller
 
     public function edit_form($id)
     {
-        $pic = Pic::orderBy('id', 'DESC')->get();
+        $pic = Pic::groupBy('company_id')
+            ->selectRaw('count(*) as jumlah, company_id')
+            ->get();
         $company = Company::orderBy('id', 'DESC')->get();
         $request_complain = RequestComplaint::findOrfail($id);
         $vehicle = Vehicle::orderBy('id', 'DESC')->get();

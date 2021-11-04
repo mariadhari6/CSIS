@@ -6,7 +6,7 @@
 
     <td>
         <select class="select" id="merk" name="merk" required>
-            {{-- <option value="">ok</option> --}}
+            {{-- <option value=""></option> --}}
             @foreach ($merk as $item)
             <option value="{{ $item->merk_gps }}"  {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>
             @endforeach
@@ -47,7 +47,7 @@
         @enderror
     </td>
     <td>
-        <select class="select @error('status') is-invalid @enderror" id="status" aria-label=".form-select-lg example" name="status" required>
+        <select class="select @error('status') is-invalid @enderror" id="status" aria-label=".form-select-lg example" name="status" aria-placeholder="status" required>
             <option value=""></option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
@@ -60,9 +60,9 @@
     <td id="statusOwnership">
         <select class="select" id="status_ownership" name= "status_ownership"aria-label=".form-select-lg example">
             {{-- <option selected disabled value="-">Pilih Status</option> --}}
-            <option value="-">-</option>
-
             {{-- <option value="-">-</option> --}}
+
+            <option value="-">-</option>
             <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
@@ -95,6 +95,18 @@
                             <option value="">-</option>
                         </select>`
                        );
+                }else if(itemID == 'Error'){
+                    $('#statusOwnership').empty();
+                        $('#statusOwnership').append(
+                            `<select class="select" id="status_ownership">
+                                    <option value="Lokasi Customer">Lokasi Customer</option>
+                                    <option value="Lokasi Integrasia">Lokasi Integrasia</option>
+                                    <option value="GPS sudah di Return">GPS sudah di Return</option>
+
+                            </select>`
+                        );
+
+
                 }else {
                         $('#statusOwnership').empty();
                         $('#statusOwnership').append(

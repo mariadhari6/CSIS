@@ -42,10 +42,13 @@
         </td>
 
         <td id="item-detail_task-{{ $request_complains->id }}">
-            {{ $request_complains->detail_task}}
+             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{$request_complains->detail_task }}" ></i>
+
+            {{-- {{ $request_complains->detail_task}} --}}
         </td>
 
         <td id="item-divisi-{{ $request_complains->id }}">
+
             {{ $request_complains->divisi}}
         </td>
 
@@ -72,6 +75,10 @@
             </div>
         </td>
     </tr>
-
+<script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 @endforeach
 

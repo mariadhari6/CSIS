@@ -28,18 +28,18 @@
         <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$pemasangan_mutasi_GPS->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ str_replace(" ", "T", $pemasangan_mutasi_GPS->waktu_kesepakatan) }}"></i></div>
     </td>
     <td>
-          <select class="select vehicle-{{$pemasangan_mutasi_GPS->id}}" id="vehicle" name="vehicle">
+          <select class="select vehicle-{{$pemasangan_mutasi_GPS->id}}" id="vehicle" name="vehicle" required>
             <option selected value="">
                 {{-- {{ $pemasangan_mutasi_GPS->vehicleRequest->license_plate??'' }} --}}
             </option>
-            @foreach ($vehicle as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+            @foreach ($details as $item)
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate }}</option>
 
             @endforeach
          </select></i>
     </td>
     <td>
-          <select class="select kendaraan_pasang-{{$pemasangan_mutasi_GPS->id}}" id="kendaraan_pasang" name="kendaraan_pasang">
+          <select class="select kendaraan_pasang-{{$pemasangan_mutasi_GPS->id}}" id="kendaraan_pasang" name="kendaraan_pasang" required>
             <option selected value="">
                 {{-- {{ $pemasangan_mutasi_GPS->vehicleKendaraanPasang->license_plate ??''}} --}}
             </option>
@@ -52,7 +52,7 @@
 
 
     <td><select class="select imei-{{$pemasangan_mutasi_GPS->id}}" id="imei" name="imei" required>
-        <option value=""> {{$pemasangan_mutasi_GPS->detailCustomer->imei?? ''}} </option>
+        <option value=""> {{$pemasangan_mutasi_GPS->detailCustomer->gps->imei?? ''}} </option>
         @foreach ($details as $detail)
         <option value="{{ $detail->id }}" {{ old('imei') == $detail->id  ? 'selected':'' }}>
         {{$detail->gps->imei}}
@@ -69,6 +69,15 @@
 
        @endforeach
     </select></i></td>
+      <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps">
+        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->gpsPemasangan->type??''}} </option>
+        @foreach ($gps as $gpses)
+        <option value="{{ $gpses->id }}" {{ old('equipment_terpakai_gps') == $gpses->id  ? 'selected':'' }}>
+        {{$gpses->type??''}}
+        </option>
+
+       @endforeach
+    </select></i></td>
      {{-- <td><select class="select equipment_terpakai_sensor-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_sensor" name="equipment_terpakai_sensor">
         <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_sensor}}"> {{$pemasangan_mutasi_GPS->sensor->sensor_name?? ''}} </option>
         @foreach ($sensor as $sensors)
@@ -78,9 +87,15 @@
        @endforeach
     </select></i></td> --}}
 <td>
+    {{-- <div class="col m" id="sensor">
+        <a><option class="SensorAll-{{$pemasangan_mutasi_GPS->id}}" value="{{ $pemasangan_mutasi_GPS->equipment_terpakai_sensor }}" id="equipment_terpakai_sensor" data-toggle="modal" data-target="#exampleModal">{{ $pemasangan_mutasi_GPS->equipment_terpakai_sensor }}</option></a> --}}
     <div class="col m" id="sensor">
-        <a><option class="SensorAll-{{$pemasangan_mutasi_GPS->id}}" value="{{ $pemasangan_mutasi_GPS->equipment_terpakai_sensor }}" id="equipment_terpakai_sensor" data-toggle="modal" data-target="#exampleModal">{{ $pemasangan_mutasi_GPS->equipment_terpakai_sensor }}</option></a>
+    <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#exampleModal" id="modal">
+            <option class="SensorAll-{{$pemasangan_mutasi_GPS->id}}" value="{{ $pemasangan_mutasi_GPS->equipment_terpakai_sensor }}" id="equipment_terpakai_sensor" data-toggle="modal" data-target="#exampleModal">{{ $pemasangan_mutasi_GPS->equipment_terpakai_sensor }}</option>
+
+    </button>
     </div>
+
 
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -141,15 +156,7 @@
     </div>
 </td>
 
-    <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps">
-        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->gpsPemasangan->type??''}} </option>
-        @foreach ($gps as $gpses)
-        <option value="{{ $gpses->id }}" {{ old('equipment_terpakai_gps') == $gpses->id  ? 'selected':'' }}>
-        {{$gpses->type??''}}
-        </option>
 
-       @endforeach
-    </select></i></td>
 
 
 

@@ -89,7 +89,7 @@ class MaintenanceGpsController extends Controller
     public function edit_form($id)
     {
         $maintenanceGps = RequestComplaint::findOrfail($id);
-        $gps = Gps::orderBy('id', 'DESC')->get();
+        $gps = Gps::where('status', 'Ready')->get();
         $company = Company::orderBy('id', 'DESC')->get();
         $pic = Pic::orderBy('id', 'DESC')->get();
         $sensor = Sensor::orderBy('id', 'DESC')->get();

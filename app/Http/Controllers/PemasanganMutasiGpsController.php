@@ -95,7 +95,7 @@ class PemasanganMutasiGpsController extends Controller
         $pemasangan_mutasi_GPS = RequestComplaint::findOrfail($id);
         $sensor = Sensor::orderBy('id', 'ASC')
             ->get();
-        $gps = Gps::orderBy('id', 'DESC')->get();
+        $gps = Gps::where('status', 'Ready')->get();
         $vehicle = Vehicle::orderBy('id', 'DESC')->get();
         $teknisi = Teknisi::orderBy('id', 'DESC')->get();
         $task = Task::where('task', 'Pemasangan GPS')->orWhere('task', 'Pelepasan GPS')->orWhere('task', 'Mutasi')->get();
@@ -132,6 +132,8 @@ class PemasanganMutasiGpsController extends Controller
         $data->kendaraan_pasang = $request->kendaraan_pasang;
         $data->status = $request->status;
         $equipment_terpakai_sensor     = $request->equipment_terpakai_sensor;
+        $gsm_id = $request->gsm_pemasangan;
+        $gps_terpakai = $request->equipment_terpakai_gps;
 
         // $a      = $batas[0] - 1;
         // $x      = "not";
@@ -145,6 +147,8 @@ class PemasanganMutasiGpsController extends Controller
                 Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
             }
             $data->save();
+            Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active'));
+            Gps::where('id', $gps_terpakai)->update(array('status' => 'Used'));
         }
     }
 

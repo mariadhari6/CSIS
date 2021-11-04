@@ -5,7 +5,7 @@
 
 
     <td><select class="select company_id-{{$request_complain->id}}" id="company_id" name="company_id" required>
-        <option value="{{$request_complain->company_id}}"> {{$request_complain->companyRequest->company_name??''}} </option>
+        <option value=""> {{$request_complain->companyRequest->company_name??''}} </option>
        @foreach ($company as $companys)
         <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
 
@@ -22,7 +22,7 @@
     </select></i></td>
 
     <td><select class="select pic_id-{{$request_complain->id}}" id="pic_id" name="pic_id" required>
-    <option value="{{$request_complain->pic_id}}"> {{$request_complain->pic->pic_name??''}} </option>
+    <option value=""> {{$request_complain->pic->pic_name??''}} </option>
 
        @foreach ($pic as $pics)
         <option value="{{ $pics->id }}" {{ old('pic_id') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
@@ -89,5 +89,30 @@
     <td class="action sticky-col first-col">
         <i class="fas fa-check add" id="edit" onclick="update({{ $request_complain->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
+
+    <script>
+         $('select[name="company_id"]').on('change', function() {
+            var itemID = $(this).val();
+           // {{--  alert(itemID);  --}}
+            if(itemID) {
+                $.ajax({
+                    url: '/based_pic/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="pic_id').empty();
+                        $('select[name="pic_id').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="pic_id').append('<option value="'+ data[i].id + '"> '+ data[i].pic_name +'</option>');
+                                // 16-Nov-2021   alert(data[i].serial_number)
+                            }
+                    }
+                });
+            }
+            else{
+                $('select[name="pic_id"]').empty();
+            }
+         });
+    </script>
 
 

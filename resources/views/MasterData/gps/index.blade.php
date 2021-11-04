@@ -249,7 +249,7 @@
                 type: 'warning',
                 text: 'Duplicate data or error format, Imei must 15 character',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 15000
               }).catch(function(timeout) { });
           } else {
               try {
@@ -322,7 +322,35 @@
         // alert(merk);
         //
             // break;
-         if (imei.length != 15){
+    $rowCount = $("#table_id tr").length;
+      if ($rowCount == 2) {
+        // alert('table empty')
+      } else {
+        $rowResult = $rowCount - 2;
+        var allimeiNum = [];
+        // var allSerNum = [];
+        for($i = 1; $i <= $rowResult; $i++)
+            {
+              $numArr = $i-1;
+              $imeiNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
+            //   $serNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(5)").attr("name");
+              allimeiNum[$numArr] = $imeiNum;
+            //   allSerNum[$numArr] = $serNum;
+            }
+            // alert(allimeiNum[0]);
+        for (let index = 0; index < allimeiNum.length; index++) {
+          if( imei == allimeiNum[index] ){
+            // alert('already exists');
+              swal({
+                type: 'warning',
+                text: 'imei Number already exists',
+                showConfirmButton: false,
+                timer: 1500
+              }).catch(function(timeout) { });
+              // alert('GSM Number already exists');
+              break;
+
+        }else if (imei.length != 15){
 
              swal({
                 type: 'warning',
@@ -331,7 +359,7 @@
                 timer: 1500
             }).catch(function(timeout) { });
 
-        }else if(imei.length == 15 ) {
+        }else if(imei.length == 15 && index == allimeiNum.length ) {
 
         $.ajax({
             type: "get",
@@ -356,7 +384,11 @@
 
             }
         });
+        break;
         }
+        }
+      }
+
 
         // break;
 
