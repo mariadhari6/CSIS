@@ -32,7 +32,13 @@
     </td>
     <td>
         <select class="select sales_id-{{ $master_po->id }}" id="sales_id">    
-            <option value="{{ $master_po->sales_id }}" class="input sales_id-{{ $master_po->id }}">{{ $master_po->sales->name }}</option>
+            <option value="{{ $master_po->sales_id }}" class="input sales_id-{{ $master_po->id }}">
+            @if ($master_po->sales_id == "-")
+                -
+            @else
+                {{ $master_po->sales->name }}
+            @endif    
+            </option>
             @foreach ($sales as $item)
                 <option value="{{ $item->id }}" {{ old('sales_id') == $item->id ? 'selected':''}}>{{ $item->name }}</option>
             @endforeach

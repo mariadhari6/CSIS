@@ -31,7 +31,11 @@
             {{ $item->status_po }}
         </td>
         <td id="item-sales_id-{{ $item->id }}">
-            {{ $item->sales->name }}
+            @if ($item->sales_id == "-")
+                -
+            @else
+                {{ $item->sales->name }}
+            @endif
         </td> 
         <td id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">

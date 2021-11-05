@@ -18,7 +18,7 @@ class DetailCustomerController extends Controller
 {
     public function index()
     {
-        $data = Company::orderBy('id', 'DESC')->get();
+        $data = Company::orderBy('company_name', 'ASC')->get();
         return view('customer.detail_customer.list',compact('data'));
     }
 
@@ -59,7 +59,6 @@ class DetailCustomerController extends Controller
 
     public function add_form($id)
     {
-
         $company        = Company::orderBy('company_name', 'DESC')->where('id', $id)->get();
         $imei           = Gps::orderBy('imei', 'DESC')->where('status', 'Ready')->get();
         $gsm            = Gsm::orderBy('gsm_number', 'DESC' )->where('status_gsm', 'Ready')->get();

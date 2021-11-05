@@ -33,7 +33,7 @@ class CreateDetailCustomersTable extends Migration
             $table->string('merk_sensor')->nullable();
             $table->string('pool_name');
             $table->string('pool_location');
-            $table->date('waranty');
+            $table->date('waranty')->nullable();
             $table->string('status_layanan');
             $table->date('tanggal_pasang');
             $table->date('tanggal_non_aktif')->nullable();

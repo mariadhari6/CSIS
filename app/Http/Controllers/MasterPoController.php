@@ -38,7 +38,7 @@ class MasterPoController extends Controller
     }
     public function item_data(){
 
-        $master_po = MasterPo::orderBy('id', 'ASC')->get();
+        $master_po = MasterPo::orderBy('id', 'DESC')->get();
         return view('master_po.item_data')->with([
             'master_po' => $master_po
         ]);
@@ -413,10 +413,10 @@ class MasterPoController extends Controller
 
         // join antara $a[] dengan id pada sensor
         
-            $d =  DB::table('detail_customers')
-            ->join('sensors', 'detail_customers.sensor_all' , '=', 'sensors.id')
-            ->select('detail_customers.sensor_all' , 'sensors.sensor_name')
-            ->get();
+            // $d =  DB::table('detail_customers')
+            // ->join('sensors', 'detail_customers.sensor_all' , '=', 'sensors.id')
+            // ->select('detail_customers.sensor_all' , 'sensors.sensor_name')
+            // ->get();
 
             // // return $d;
             // $month = 11;
@@ -484,17 +484,305 @@ class MasterPoController extends Controller
             // MasterPo::where('id', $i)->update(array('count' => $banyak_po_di_details)) ;  
             // $status_layanan = ServiceStatus::all();
 
-            $month = 11;
-            $year  = 2021; 
-            $terminate = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)->where('status_id', '2')
-            ->groupBy('company_id')->select('company_id', DB::raw('count(tanggal_non_aktif) as jml_nonaktif '))->get();
+          
 
-            return $terminate;
+            // $data_pasang = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+            // ->where('status_id', "1")
+            // ->select('company_id', 
+            //     DB::raw('count(gps_id) as total_gps'),
+            //     DB::raw('count(tanggal_pasang) as penambahan_layanan ')
+            // )   
+            // ->get();
+
+            // $data_terminate = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)->groupBy('company_id')
+            // ->where('status_temporary', "1")
+            // ->select('company_id', 
+            //     DB::raw('count(tanggal_non_aktif) as terminate '),
+            // )
+            // ->get();
+
+            // $data = array();
+            // $company_id_terminate = array(); // [12, 2, 4, 1]
+            // $company_id_pasang = array();
+
+            // foreach($data_terminate as $dt) {
+            //     array_push($company_id_terminate, $dt['company_id']);
+            // }
+
+            // foreach($data_pasang as $dp) {
+            //     array_push($company_id_pasang, $dp['company_id']);
+            // }
+
+            // print(count($data_terminate));
+
+            // for ($i=0; $i < count($data_pasang); $i++) {
+            //     $data_ = $data_pasang[$i];
+
+            //     if (in_array($data_['company_id'], $company_id_terminate)) {
+            //         // print('ada');
+            //         $idx_terminate = array_search($data_['company_id'], $company_id_terminate); // get index of terminate
+            //         $data_['terminate'] = $data_terminate[$idx_terminate]['terminate'];
+            //         // print($data_['terminate']);
+            //     }
+            //     else {
+            //         $data_['terminate'] = 0;
+            //     }
+
+            //     array_push($data, $data_);
+            // }
+
+            // if (count($data_pasang) > 0 && count($data_terminate) > 0) {
+            //     for ($i=0; $i < count($data_pasang); $i++) {
+            //         $data_ = $data_pasang[$i];
+    
+            //         if (in_array($data_['company_id'], $company_id_terminate)) {
+            //             // print('ada');
+            //             $idx_terminate = array_search($data_['company_id'], $company_id_terminate); // get index of terminate
+            //             $data_['terminate'] = $data_terminate[$idx_terminate]['terminate'];
+            //             // print($data_['terminate']);
+            //         }
+            //         else {
+            //             $data_['terminate'] = 0;
+            //         }
+    
+            //         array_push($data, $data_);
+            //     }
+            // }
+
+            // else if (count($data_pasang) < 1 && count($data_terminate) > 0) {
+            //     for ($i=0; $i < count($data_terminate); $i++) {
+            //         $data_ = $data_terminate[$i];
+    
+            //         if (in_array($data_['company_id'], $company_id_pasang)) {
+            //             // print('ada');
+            //             $idx_terminate = array_search($data_['company_id'], $company_id_pasang); // get index of terminate
+            //             $data_['terminate'] = $data_terminate[$idx_terminate]['terminate'];
+            //             // print($data_['terminate']);
+            //         }
+            //         else {
+            //             $data_['terminate'] = 0;
+            //         }
+    
+            //         array_push($data, $data_);
+            //     }
+            // }
+    
+            // return $data;
+
+           // 4 November 2021
+
+        //    $data_pasang = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+        //    ->where('status_temporary', "1")
+        //    ->select('company_id',
+        //        DB::raw('count(tanggal_pasang) as penambahan_layanan ')
+        //    )   
+        //    ->get();
+   
+        //    $data_terminate = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)->groupBy('company_id')
+        //    ->where('status_id', "2")
+        //    ->select('company_id', 
+        //        DB::raw('count(tanggal_non_aktif) as terminate '),
+        //    )   
+        //    ->get();
+
+       
+
+        //    $data = array();
+        //    $company_id_terminate = array(); // [12, 2, 4, 1]
+          
+   
+        //    foreach($data_terminate as $dt) {
+        //        array_push($company_id_terminate, $dt['company_id']);
+        //    }
+        
+           
+        //         for ($i=0; $i < count($data_pasang); $i++) {
+        //             $data_ = $data_pasang[$i];
+                    
+        //             if (in_array($data_['company_id'], $company_id_terminate)) {
+
+        //                 $idx_terminate = array_search($data_['company_id'], $company_id_terminate); // get index of terminate
+        //                 $data_['terminate'] = $data_terminate[$idx_terminate]['terminate']; // hasil terminate masuk
+        //             }
+        //             else {
+        //                 $data_['terminate'] = 0;
+        //             }
+        //             array_push($data, $data_);
+                    
+        //         }
+        
+    
+        //    $data_complete = array();
+        //    $company_id_total_gps = array();
+
+        //    foreach($total_gps as $st){
+        //        array_push($company_id_total_gps, $st['company_id']);
+        //    }
+
+        //     for ($i=0; $i < count($data) ; $i++) { 
+        //       $data_finish = $data[$i];
+
+        //       if (in_array($data_finish['company_id'], $company_id_total_gps)) {
+        //         $idx_total_gps  = array_search($data_finish['company_id'], $company_id_total_gps);
+        //         $data_finish['total'] = $total_gps[$idx_total_gps]['total_gps'];
+
+                  
+        //       }else{
+        //           $data_finish['total'] = 0; 
+        //       }
+
+        //       array_push($data_complete, $data_finish);
+
+        //   }
+
+        //   return $data_complete;  
+
+        // $month = 11;
+        // $year  = 2021; 
+        // $company = 66;
+        
+        // $data = DetailCustomer::where('company_id', $company)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->where('status_temporary', "1")
+        // ->groupBy('company_id', 'po_id')
+        // ->selectRaw('company_id')
+        // ->selectRaw('po_id')
+        // ->get();
+
+        //  return $data;
+      
+        
+        // for ($i=0; $i < count($data) ; $i++) { 
+        //     $i = $data[$i]->po_id;
+
+         
+
+        //     $cari_po = MasterPO::where('id', $i)->get();
+        //     // return $cari_po;
+        //     $jumlah = $cari_po[0]->jumlah_unit_po;
+        //     $harga  = $cari_po[0]->harga_layanan;
+
+        //     $hasil_perkalian = $jumlah * $harga;
+
+        //     $data[$i]['hasil_perkalian'] = $hasil_perkalian;
+        //     // print($hasil_perkalian);
+        // }
+
+
+        // $master = MasterPo::where('company_id', 66)
+        // ->selectRaw('count(harga_layanan) as total harga_layanan')
+        // ->get();
+
+        // return $master;
+
+
+
+        // 5 November 2021
+
+        $month = 11;
+        $year  = 2021; 
+
+        $total_gps = DetailCustomer::groupBy('company_id')->where('status_id', "1")
+        ->select('company_id', 
+            DB::raw('count(gps_id) as total_gps'),
+        )->get();
+
+        $data_pasang = DetailCustomer::whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)->groupBy('company_id')
+        ->select('company_id',
+            DB::raw('count(tanggal_pasang) as penambahan_layanan ')
+        )->get();
+
+        $data_terminate = DetailCustomer::whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)->groupBy('company_id')
+        ->where('status_id', "2")
+        ->select('company_id', 
+            DB::raw('count(tanggal_non_aktif) as terminate '),
+        )->get();
+
+        $data = array();
+        $company_id_pasang = array();
+
+        foreach($data_pasang as $dt ){
+            array_push($company_id_pasang, $dt['company_id']);
+        }
+
+        for ($i=0; $i < count($total_gps); $i++) {
+            $data_ = $total_gps[$i];
+            if(in_array($data_['company_id'], $company_id_pasang)) {
+
+                $idx_pasang = array_search($data_['company_id'], $company_id_pasang); // get index of terminate
+                $data_['penambahan'] = $data_pasang[$idx_pasang]['penambahan_layanan']; // hasil terminate masuk
+            }
+            else {
+                $data_['penambahan'] = 0;
+            }
+            array_push($data, $data_);
+                             
+        }
+
+        $data_complete = array();
+        $company_id_terminate = array(); // [12, 2, 4, 1]   
+        foreach($data_terminate as $ds) {
+            array_push($company_id_terminate, $ds['company_id']);
+        }
+        for ($i=0; $i < count($data) ; $i++) { 
+            $data_finish = $data[$i];
+
+            if (in_array($data_finish['company_id'], $company_id_terminate)) {
+              $idx_terminate = array_search($data_finish['company_id'], $company_id_terminate);
+              $data_finish['terminate'] = $data_terminate[$idx_terminate]['terminate'];
+   
+            }
+            else{
+                $data_finish['terminate'] = 0; 
+            }
+            array_push($data_complete, $data_finish);
+        }
+
+    
+        return $data_complete;
+
+
+           
+
+
+        
+           
+             
+    
+        // return $data;
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+        
+
+
+     
+
+
+        
+    
+        
+
 
 
 
     }
 
 }
+
+// $d =  DB::table('detail_customers')
+// ->join('pics', 'detail_customers.company_id' , '=', 'pics.company_id')
+// ->select('detail_customers.company_id' , 'pics.pic_name')
+// ->get();
+
+// return $d;
 
 

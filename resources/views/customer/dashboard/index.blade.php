@@ -2,8 +2,6 @@
 @section('title','Dashboard Customer')
 @section('title-table', 'Dashboard Customer')
 @section('content')
-
-
 <div class="row">
     <div class="col-md-12">
         <div class="card">

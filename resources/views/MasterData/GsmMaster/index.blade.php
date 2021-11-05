@@ -30,7 +30,7 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
-          <table class="table table-hover data" class="table_id" id="table_id" >
+          <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>

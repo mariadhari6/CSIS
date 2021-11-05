@@ -35,9 +35,9 @@
             <th scope="col" class="list">Pool Location</th>
             <th scope="col" class="list">Waranty </th>
             <th scope="col" class="list">Status Layanan</th>
-            <th scope="col" class="list">*Tanggal Pasang</th>
-            <th scope="col" class="list">*Tanggal Non Active</th>
-            <th scope="col" class="list">*Tanggal Reaktivasi GPS</th>
+            <th scope="col" class="list">Tanggal Pasang*</th>
+            <th scope="col" class="list">Tanggal Non Active*</th>
+            <th scope="col" class="list">Tanggal Reaktivasi GPS*</th>
             <th scope="col" class="action sticky-col first-col">Action</th>
           </tr>
         </thead>
