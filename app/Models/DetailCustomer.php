@@ -98,7 +98,7 @@ class DetailCustomer extends Model
     public function vehicle()
     {
 
-        return $this->belongsTo(Vehicle::class);
+        return $this->belongsTo(Vehicle::class, 'license_plate', 'id');
     }
 
     public function status()

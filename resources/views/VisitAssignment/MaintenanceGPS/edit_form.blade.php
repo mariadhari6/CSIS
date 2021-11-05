@@ -8,7 +8,7 @@
             </option>
 
             @foreach ($details as $item)
-            <option value="{{ $item->id }}">{{ $item->company->company_name }}</option>
+            <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
             @endforeach
 
         </select>
@@ -33,7 +33,7 @@
                 {{ $maintenanceGps->detailCustomerVehicle->vehicle->license_plate??'' }}
             </option>
             @foreach ($details as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate }}</option>
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle}}</option>
 
             @endforeach
          </select></i>
@@ -42,16 +42,17 @@
         <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$maintenanceGps->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ str_replace(" ", "T", $maintenanceGps->waktu_kesepakatan) }}"></i></div>
     </td>
     <td>
-        <select class="select type_gps_id-{{$maintenanceGps->id}}" id="type_gps_id" name="type_gps_id-{{$maintenanceGps->id}}" required>
-            <option selected value="">
+        <select class="select type_gps_id-{{$maintenanceGps->id}}" id="type_gps_id" name="type_gps_id" required>
+            {{-- <option selected value="">
                 {{ $maintenanceGps->gpsType->type??'' }}
-            </option>
+            </option> --}}
 
             @foreach ($details as $item)
-            <option value="{{ $item->id }}">
-                {{ $item->gps->type??'' }}
+            <option value="{{ $item->id }}" >
+                {{ $item->type }}
             </option>
             @endforeach
+
 
         </select>
     </td>
@@ -68,9 +69,9 @@
 
      <td><select class="select equipment_gsm-{{$maintenanceGps->id}}" id="equipment_gsm" name="equipment_gsm">
         <option value="{{$maintenanceGps->equipment_gsm}}"> {{$maintenanceGps->gsm->gsm_number?? ''}} </option>
-        @foreach ($details as $item)
+        @foreach ($gsm_master as $item)
         <option value="{{ $item->id }}" {{ old('equipment_gsm') == $item->id  ? 'selected':'' }}>
-        {{$item->gsm->gsm_number}}
+        {{$item->gsm_number}}
         </option>
 
        @endforeach
@@ -158,8 +159,20 @@
                             }
                     }
                 });
-                }
-            else{
+                $.ajax({
+                    url: '/based_vehicle/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="type_gps_id').empty();
+                        $('select[name="type_gps_id').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="type_gps_id').append('<option value="'+ data[i].id + '"> '+ data[i].type.gps.type +'</option>');
+                                // 16-Nov-2021   alert(data[i].serial_number)
+                            }
+                    }
+                });
+                }else{
                 $('select[name="vehicle"]').empty();
                 // $('select[name="imei"]').empty();
 

@@ -24,17 +24,13 @@ class Vehicle extends Model
         return $this->belongsTo(VehicleType::class, 'vehicle_id', 'id');
     }
 
-    public function detail()
+    public function detailCustomer()
     {
 
         return $this->hasMany(DetailCustomer::class, 'licence_plate', 'id');
     }
 
-    public function requestComplaint()
-    {
 
-        return $this->hasMany(RequestComplaint::class, 'vehicle', 'id');
-    }
 
     public function requestComplaintKendaraan()
     {
