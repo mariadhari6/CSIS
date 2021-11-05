@@ -14,19 +14,19 @@
             {{ $no++ }}
         </td>
         <td id="item-CompanyId-{{ $detail->id }}">
-            {{ $detail->company->company_name??''}}
+            {{ $detail->company->company_name}}
         </td>
         <td id="item-LicencePlate-{{ $detail->id }}">
-            {{ $detail->vehicle->license_plate??'' }}
+            {{ $detail->vehicle->license_plate }}
         </td>
         <td id="item-VihecleType-{{ $detail->id }}">
-            {{ $detail->vehicle->vehicleType->name??'' }}
+            {{ $detail->vehicle->vehicleType->name }}
         </td>
         <td id="item-PoNumber-{{ $detail->id }}">
-            {{ $detail->po->po_number??'' }}
+            {{ $detail->po->po_number }}
         </td>
         <td id="item-HargaLayanan-{{ $detail->id }}">
-            {{ $detail->po->harga_layanan??'' }}
+            {{ $detail->po->harga_layanan }}
         </td>
         <td id="item-PoDate-{{ $detail->id }}">
             {{ date('d-M-Y', strtotime($detail->po->po_date))}}
@@ -35,36 +35,42 @@
             {{ $detail->po->status_po }}
         </td>
         <td id="item-Imei-{{ $detail->id }}">
-            {{ $detail->gps->imei??'' }}
+            {{ $detail->gps->imei }}
         </td>
         <td id="item-Merk-{{ $detail->id }}">
-            {{ $detail->gps->merk??'' }}
+            {{ $detail->gps->merk }}
         </td>
         <td id="item-Type-{{ $detail->id }}">
-            {{ $detail->gps->type??'' }}
+            {{ $detail->gps->type }}
         </td>
         <td id="item-GSM-{{ $detail->id }}">
-            {{ $detail->gsm->gsm_number??'' }}
+            {{ $detail->gsm->gsm_number }}
         </td>
         <td id="item-Provider-{{ $detail->id }}">
-            {{ $detail->gsm->provider??'' }}
+            {{ $detail->gsm->provider }}
         </td>
-        <td id="item-SensorAll-{{ $detail->id }}" >
-
-             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $detail->sensor_all_name }}" ></i>
-
+        <td id="item-SensorAll-{{ $detail->id }}">
+            @if ($detail->sensor_all_name == "")
+                -
+            @else
+                <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $detail->sensor_all_name }}" ></i>
+            @endif
         </td>
         <td id="item-PoolName-{{ $detail->id }}">
-            {{ $detail->vehicle->pool_name??'' }}
+            {{ $detail->vehicle->pool_name }}
         </td>
         <td id="item-PoolLocation-{{ $detail->id }}">
-            {{ $detail->vehicle->pool_location??'' }}
+            {{ $detail->vehicle->pool_location }}
         </td>
         <td id="item-Waranty-{{ $detail->id }}">
+            @if ($detail->waranty == "")
+                -
+            @else
             {{ date('d-M-Y', strtotime($detail->waranty)) }}
+            @endif
         </td>
         <td id="item-StatusLayanan-{{ $detail->id }}">
-            {{ $detail->status_layanan }}
+            {{ $detail->status->service_status_name }}
         </td>
         <td id="item-TanggalPasang-{{ $detail->id }}">
              {{-- {{ $detail->tanggal_pasang }}->format('d/m/Y');  --}}
@@ -91,6 +97,7 @@
             </div>
         </td>
     </tr>
+
     <script>
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover();

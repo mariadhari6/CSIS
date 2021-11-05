@@ -91,7 +91,9 @@ class PemasanganMutasiGpsController extends Controller
     {
 
         $company = Company::orderBy('id', 'DESC')->get();
-        $details = DetailCustomer::orderBy('id', 'DESC')->get();
+        $details = DetailCustomer::groupBy('company_id')
+            ->selectRaw('count(*) as jumlah, company_id')
+            ->get();
         $pemasangan_mutasi_GPS = RequestComplaint::findOrfail($id);
         $sensor = Sensor::orderBy('id', 'ASC')
             ->get();

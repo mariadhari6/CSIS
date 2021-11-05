@@ -272,7 +272,7 @@
             var kendaraan_pasang = $("#kendaraan_pasang").val();
             var status = $("#status").val();
             var id = id;
-        if(kendaraan_pasang == "" || vehicle == "" || imei =="" || gsm_pemasangan =="" || teknisi_pemasangan =="" || uang_transportasi =="" || type_visit=="" || status=="" ){
+        if(imei =="" || gsm_pemasangan =="" || teknisi_pemasangan =="" || uang_transportasi =="" || type_visit=="" || status=="" ){
         } else {
             $.ajax({
                 type: "get",

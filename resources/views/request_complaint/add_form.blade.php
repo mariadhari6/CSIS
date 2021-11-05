@@ -5,7 +5,7 @@
 
     <td>
         <select class="select" id="company_id" name="company_id" required>
-            {{-- <option selected disabled></option> --}}
+            <option class="hidden"> ---select company---</option>
 
             @foreach ($detail as $item )
             <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
@@ -59,7 +59,7 @@
     </td>
 
       <td>
-        <select class="select" id="platform" id="platform" aria-label=".form-select-lg example" required>
+        <select class="select" id="platform" name="platform" aria-label=".form-select-lg example" required>
             <option selected disabled></option>
             <option value="WA">WA</option>
             <option value="SMS">SMS</option>

@@ -224,8 +224,8 @@
                 swal({
                     type: 'warning',
                 text: 'Duplicate data or error format',
-                showConfirmButton: false,
-                timer: 1500
+                showCloseButton: true,
+                showConfirmButton: false
               }).catch(function(timeout) { });
 
             } else {
@@ -242,8 +242,8 @@
                 swal({
                 type: 'warning',
                 text: 'Duplicate data or error format',
-                showConfirmButton: false,
-                timer: 1500
+                showCloseButton: true,
+                showConfirmButton: false
               }).catch(function(timeout) { });
 
             }

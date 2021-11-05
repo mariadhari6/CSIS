@@ -26,6 +26,14 @@ class MasterPo extends Model
 
     public function detail()
     {
-        return $this->hasMany(DetailCustomer::class);
+        return $this->hasMany(DetailCustomer::class, 'po_date', 'id');
+    }
+    public function detailHargalayanan()
+    {
+        return $this->hasMany(DetailCustomer::class, 'harga_layanan', 'id');
+    }
+    public function detailPonumber()
+    {
+        return $this->hasMany(DetailCustomer::class, 'po_id', 'id');
     }
 }

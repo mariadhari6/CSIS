@@ -248,8 +248,8 @@
             swal({
                 type: 'warning',
                 text: 'Duplicate data or error format, Imei must 15 character',
-                showConfirmButton: false,
-                timer: 15000
+                showCloseButton: true,
+                showConfirmButton: false
               }).catch(function(timeout) { });
           } else {
               try {
@@ -265,8 +265,8 @@
               swal({
                 type: 'warning',
                 text: 'Duplicate data or error format',
-                showConfirmButton: false,
-                timer: 1500
+                showCloseButton: true,
+                showConfirmButton: false
               }).catch(function(timeout) { });
 
             }

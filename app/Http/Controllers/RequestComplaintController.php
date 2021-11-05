@@ -88,7 +88,7 @@ class RequestComplaintController extends Controller
     }
     public function item_data()
     {
-        $request_complain = RequestComplaint::all();
+        $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
         return view('request_complaint.item_data', compact('request_complain'));
         // dd($request_complain);
     }
@@ -118,7 +118,9 @@ class RequestComplaintController extends Controller
 
     public function edit_form($id)
     {
-        $pic = Pic::groupBy('company_id')
+        $pic = Pic::orderBy('id', 'DESC')->get();
+
+        $detail = DetailCustomer::groupBy('company_id')
             ->selectRaw('count(*) as jumlah, company_id')
             ->get();
         $company = Company::orderBy('id', 'DESC')->get();
@@ -131,7 +133,9 @@ class RequestComplaintController extends Controller
             'pic'              => $pic,
             'company'              => $company,
             'task_request'   => $task_request,
-            'vehicle'              => $vehicle
+            'vehicle'              => $vehicle,
+            'detail'              => $detail
+
 
 
         ]);

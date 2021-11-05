@@ -15,6 +15,9 @@
         <td id="item-company_id-{{ $item->id}}">
             {{ $item->companyRequest->company_name }}
         </td>
+        <td id="item-task-{{ $item->id}}">
+            {{ $item->taskRequest->task }}
+        </td>
         <td id="item-vehicle-{{ $item->id}}">
             {{ $item->vehicleRequest->license_plate??'' }}
         </td>
@@ -71,9 +74,7 @@
         </td>
         @endif
 
-        <td id="item-task-{{ $item->id}}">
-            {{ $item->taskRequest->task }}
-        </td>
+
 
         @if ($item->ketersediaan_kendaraan !=null)
         <td id="item-ketersediaan_kendaraan-{{ $item->id}}">

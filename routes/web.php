@@ -328,9 +328,11 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_data_onProgress_maintenance', [MaintenanceGpsController::class, 'item_data_onProgress']);
     Route::get('/item_data_done_maintenance', [MaintenanceGpsController::class, 'item_data_done']);
     Route::get('/item_data_all_maintenance', [MaintenanceGpsController::class, 'item_data']);
-    Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensor']);
+    // Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensor']);
     // Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensorName']);
-    Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
+    // Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
+    Route::get('/based_vehicle/{id}', [MaintenanceGpsController::class, 'basedVehicle']);
+
 
     // Master PO
     Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');

@@ -327,3 +327,7 @@ font-family:verdana, Helvetica;
     background-color: deepskyblue;
 }
 
+.hidden{
+    display: none;
+}
+

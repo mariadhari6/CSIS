@@ -35,9 +35,9 @@
             <th scope="col" class="list">Pool Location</th>
             <th scope="col" class="list">Waranty </th>
             <th scope="col" class="list">Status Layanan</th>
-            <th scope="col" class="list">Tanggal Pasang</th>
-            <th scope="col" class="list">Tanggal Non Active</th>
-            <th scope="col" class="list">Tanggal Reaktivasi GPS</th>
+            <th scope="col" class="list">Tanggal Pasang*</th>
+            <th scope="col" class="list">Tanggal Non Active*</th>
+            <th scope="col" class="list">Tanggal Reaktivasi GPS*</th>
             <th scope="col" class="action sticky-col first-col">Action</th>
           </tr>
         </thead>
@@ -52,8 +52,6 @@
 
     $(document).ready(function() {
         read();
-
-
     });
 
     function read(){
@@ -74,7 +72,6 @@
       read();
     }
 
-
     $('.add').click(function(){
 
         var id = {{ $company->id }};
@@ -83,6 +80,12 @@
         });
 
     });
+
+    $("#TanggalPasang").on({
+            "click": function(){
+                $("#TanggalPasang[data-toggle='popover']").popover('hide');
+            }
+        });
 
     function store(){
 
@@ -110,7 +113,9 @@
 
         if (TanggalPasang == ""){
             $("#TanggalPasang[data-toggle='popover']").popover('show');
+
             return false;
+
         }
 
         $.ajax({
@@ -139,23 +144,13 @@
                 TanggalReaktivasi   : TanggalReaktivasi
             },
             success: function(data){
-              if (data == "not"){
                 swal({
-                    type: 'error',
-                    title: 'PO is Full',
+                    type: 'success',
+                    title: 'Data Saved',
                     showConfirmButton: false,
                     timer: 2000
-                }).catch(function(timeout) { })
+                }).catch(function(timeout){ })
                     read();
-              }else{
-                    swal({
-                        type: 'success',
-                        title: 'Data Saved',
-                        showConfirmButton: false,
-                        timer: 2000
-                    }).catch(function(timeout){ })
-                    read();
-                }
             }
         });
     }
@@ -262,12 +257,12 @@
         var TanggalNonAktif     = $("#TanggalNonAktif").val();
         var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
 
-        if (StatusLayanan == "In Active") {
+        if (StatusLayanan == "2") {
             if (TanggalNonAktif == "") {
                 $("#TanggalNonAktif[data-toggle='popover']").popover('show');
                 return false ;
             }
-        }else if(StatusLayanan == "Active"){
+        }else if(StatusLayanan == "1"){
             if(TanggalNonAktif != ""){
                 if (TanggalReaktivasi == "") {
                     $("#TanggalReaktivasi[data-toggle='popover']").popover('show');

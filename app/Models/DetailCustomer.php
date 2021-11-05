@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DetailCustomer extends Model
 {
     use HasFactory;
+
     protected $table = 'detail_customers';
 
     protected $fillable = [
@@ -30,7 +31,7 @@ class DetailCustomer extends Model
         'pool_name',
         'pool_location',
         'waranty',
-        'status_layanan',
+        'status_id',
         'tanggal_pasang',
         'tanggal_non_aktif',
         'tgl_reaktivasi_gps'
@@ -78,30 +79,31 @@ class DetailCustomer extends Model
 
         return $this->belongsTo(MasterPo::class);
     }
+    // public function poNumber()
+    // {
+
+    //     return $this->belongsTo(MasterPo::class, 'po_id', 'id');
+    // }
+    // public function poDate()
+    // {
+
+    //     return $this->belongsTo(MasterPo::class, 'po_date', 'id');
+    // }
+    // public function poh()
+    // {
+
+    //     return $this->belongsTo(MasterPo::class, 'po_date', 'id');
+    // }
 
     public function vehicle()
     {
 
-        return $this->belongsTo(Vehicle::class, 'licence_plate', 'id');
+        return $this->belongsTo(Vehicle::class);
     }
-    public function requestComplaint()
+
+    public function status()
     {
-        return $this->hasMany(RequestComplaint::class);
-    }
-    public function requestComplaintImei()
-    {
-        return $this->hasMany(RequestComplaint::class, 'imei', 'id');
-    }
-    public function requestComplaintCompany()
-    {
-        return $this->hasMany(RequestComplaint::class, 'company_id', 'id');
-    }
-    public function requestComplaintVehicle()
-    {
-        return $this->hasMany(RequestComplaint::class, 'vehicle', 'id');
-    }
-    public function requestComplaintGps()
-    {
-        return $this->hasMany(RequestComplaint::class, 'equipment_terpakai_gps', 'id');
+
+        return $this->belongsTo(ServiceStatus::class);
     }
 }

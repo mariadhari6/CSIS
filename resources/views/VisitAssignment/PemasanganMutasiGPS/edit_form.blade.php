@@ -4,7 +4,7 @@
     <td>
         <select class="select company_id-{{$pemasangan_mutasi_GPS->id}}" id="company_id" name="company_id" >
 
-        <option value=" {{$pemasangan_mutasi_GPS->company_id}}"> {{$pemasangan_mutasi_GPS->company->company_name??''}} </option>
+        <option value=" {{$pemasangan_mutasi_GPS->company_id}}"> {{$pemasangan_mutasi_GPS->companyRequest->company_name??''}} </option>
         @foreach ($details as $item)
         <option value="{{ $item->company_id }}" {{ old('company_id') == $item->id  ? 'selected':'' }}>
         {{$item->company->company_name}}
@@ -44,7 +44,7 @@
             {{-- <option value="-">
                 {{ $pemasangan_mutasi_GPS->vehicleKendaraanPasang->license_plate ??''}}
             </option> --}}
-            <option value="-">-</option>
+            <option value=""></option>
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('kendaraan_pasang') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
 
