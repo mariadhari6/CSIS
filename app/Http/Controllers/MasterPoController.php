@@ -14,6 +14,10 @@ use App\Models\ServiceStatus;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\TamplateMasterPo;
+use App\Imports\MasterPoImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\Facades\DataTables;
 
 class MasterPoController extends Controller
 {
@@ -126,7 +130,6 @@ class MasterPoController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
-
             return DataTables::of(MasterPo::all())->make(true);
         }
     }
@@ -181,59 +184,27 @@ class MasterPoController extends Controller
     }
 
 
+    public function importExcel(Request $request) {
+
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('DataMasterPo', $nameFile);
+
+        Excel::import(new MasterPoImport, public_path('/DataMasterPo/' . $nameFile));
+        // return redirect('/GsmMaster');
+    }
+
+    public function export() {
+
+        return Excel::download(new TamplateMasterPo, 'template-MasterPo.xlsx');
+    }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function check(){
-
+    public function check() {
   
-    
-
-
-
-        // $str = "Door(234,a)";
+      // $str = "Door(234,a)";
 
         // $arr = explode("()",$str);
         // return $arr;
@@ -809,5 +780,8 @@ class MasterPoController extends Controller
 // ->get();
 
 // return $d;
+
+
+
 
 

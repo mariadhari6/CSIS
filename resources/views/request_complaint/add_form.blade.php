@@ -1,66 +1,153 @@
 <tr id="add_form">
+
     <td></td>
-    <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
-    <td><select class="form-control" id="company" name="company">
-       @foreach ($company as $companys)
-        <option value="{{ $companys->id }}" {{ old('company') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
+    <td></td>
+
+    <td>
+        <select class="select" id="company_id" name="company_id" required>
+            <option class="hidden"> ---select company---</option>
+
+            @foreach ($detail as $item )
+            <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
+
+            @endforeach
+        </select></i>
+    </td>
+    <td>
+        <select class="select" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example" required>
+            <option selected disabled></option>
+            <option value="Request Internal">Request Internal</option>
+            <option value="Complain Internal">Complain Internal</option>
+            <option value="Request Eksternal">Request Eksternal</option>
+            <option value="Complain Eksternal">Complain Eksternal</option>
+        </select></i>
+    </td>
+      <td>
+          <select class="select" id="pic_id" name="pic_id" required>
+            {{-- <option selected disabled></option> --}}
+            @foreach ($pic as $item)
+                <option value="{{ $item->id }}" {{ old('pic_id') == $item->id ? 'selected':'' }}>{{ $item->pic_name }}</option>
+
+            @endforeach
+         </select></i>
+      </td>
+
+      <td>
+          <select class="select" id="vehicle" name="vehicle" required>
+            {{-- <option selected disabled value=""></option> --}}
+            @foreach ($detail as $item)
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??'' }}</option>
+
+            @endforeach
+         </select></i>
+      </td>
+    <td>
+        <div class="input-div"><input type="datetime-local" class="input" id="waktu_info" placeholder="Waktu Info"></i></div>
+    </td>
+    <td>
+        <div class="input-div"><input type="datetime-local" class="input" id="waktu_respond" placeholder="Waktu Respond" required></i></div>
+    </td>
+
+    <td>
+        <select class="select" id="task" name="task" required>
+            <option selected disabled value=""></option>
+       @foreach ($task_request as $item)
+        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->task }}</option>
 
        @endforeach
-    </select></i></td>
-    <td><select class="select" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example">
-    <option selected>Pilih status</option>
-    <option value="Internal Request">Internal Request</option>
-    <option value="Internal Complain">Internal Complain</option>
-    <option value="Eksternal Request">Eksternal Request</option>
-    <option value="Eksternal Complain">Eksternal Complain</option>
-    </select></i></td>
-      <td><select class="select" id="pic" name="pic">
-       @foreach ($pic as $pics)
-        <option value="{{ $pic->id }}" {{ old('pic') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
+    </select></i>
+    </td>
 
-       @endforeach
-    </select></i></td>
-
-    <td><select class="select" id="vehicle" id="vehicle" aria-label=".form-select-lg example">
-    <option selected>Vehicle</option>
-    <option value="B-94828-YTS">B-94828-YTS</option>
-    <option value="B-76267-TWS">B-76267-TWS</option>
-    </select></i></td>
-    <td>
-        <div class="input-div"><input type="datetime-local" class="input" id="waktu_info" placeholder="Waktu Info" value="{{ $request_complain->waktu_info}}"></i></div>
-    </td>
-    <td><textarea class="form-control" id="task" name="task" >{{$request_complain->task}}</textarea></i></td>
-
-
-     <td><select class="select" id="platform" id="platform" aria-label=".form-select-lg example">
-    <option selected>Platform</option>
-    <option value="WA">WA</option>
-    <option value="SMS">SMS</option>
-    <option value="E-mail">E-mail</option>
-    <option value="Telepon">Telepon</option>
-    </select></i></td>
-
-    <td><textarea class="form-control" id="detail_task" name="detail_task" >{{$request_complain->detail_task}}</textarea></i></td>
-    <td>
-        <div class="input-div"><input type="text" class="input" id="divisi" placeholder="Divisi" value="{{ $request_complain->divisi}}"></i></div>
-    </td>
-    <td>
-        <div class="input-div"><input type="text" class="input" id="respond" placeholder="Respond" value="{{ $request_complain->respond}}"></i></div>
-    </td>
-    <td>
-        <div class="input-div"><input type="datetime-local" class="input" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ $request_complain->waktu_kesepakatan}}"></i></div>
-    </td>
-    <td>
-        <div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="waktu Solve" value="{{ $request_complain->waktu_solve}}"></i></div>
-    </td>
-    <td>
-        <div class="input-div"><input type="text" class="input" id="status" placeholder="status" value="{{ $request_complain->status}}"></i></div>
-    </td>
-    <td>
-        <div class="input-div"><input type="text" class="input" id="status_akhir" placeholder="status akhir" value="{{ $request_complain->status_akhir}}"></i></div>
+      <td>
+        <select class="select" id="platform" name="platform" aria-label=".form-select-lg example" required>
+            <option selected disabled></option>
+            <option value="WA">WA</option>
+            <option value="SMS">SMS</option>
+            <option value="E-mail">E-mail</option>
+            <option value="Telepon">Telepon</option>
+        </select></i>
     </td>
 
 
+    <td>
+        <textarea class="form-control" id="detail_task" name="detail_task" required ></textarea></i>
+    </td>
+    <td>
+        <select class="select" id="divisi" name="divisi" aria-label=".form-select-lg example" required>
+            <option selected disabled></option>
+            <option value="Opersional (CS)">Opersional (CS)</option>
+            <option value="Lintas Divisi">Lintas Divisi</option>
+            <option value="Operasional (Implementor)">Operasional (Implementor)</option>
+        </select></i>
+    </td>
+    {{-- <td>
+        <div class="input-div"><input type="text" class="input" id="divisi" placeholder="Divisi" required></i></div>
+    </td> --}}
+    <td>
+        <div class="input-div"><input type="text" class="input" id="respond" placeholder="Respond" required></i></div>
+    </td>
+    <td>
+        <div class="input-div"><input type="datetime-local" class="input" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" required ></i></div>
+    </td>
+    <td>
+        <div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="waktu Solve" required ></i></div>
+    </td>
+    <td>
+        <select class="select"  id="status" aria-label=".form-select-lg example" required>
+            <option disabled value="On Progress">Status</option>
+            <option value="On Progress">On Progress</option>
+            <option value="Done">Done</option>
+        </select></i>
+    </td>
+    <td>
+        <div class="input-div"><input type="text" class="input" id="status_akhir" placeholder="status akhir" ></i></div>
+    </td>
+     <td class="action sticky-col first-col">
+         <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="add" onclick="store()"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
+    <td>
+
+    <script>
+    $('select[name="company_id"]').on('change', function() {
+            var itemID = $(this).val();
+            // alert(itemID);
+            if(itemID) {
+                $.ajax({
+                    url: '/based_pic/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="pic_id').empty();
+                        $('select[name="pic_id').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="pic_id').append('<option value="'+ data[i].id + '"> '+ data[i].pic_name +'</option>');
+                                // 16-Nov-2021   alert(data[i].serial_number)
+                            }
+                    }
+                });
+                 $.ajax({
+                    url: '/based_vehicle/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="vehicle').empty();
+                        $('select[name="vehicle').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_id +'</option>');
+                                // 16-Nov-2021   alert(data[i].serial_number)
+                            }
+                    }
+                });
+            }
+            else{
+                $('select[name="pic_id"]').empty();
+                $('select[name="vehicle"]').empty();
+
+            }
+         });
+</script>
 
 </tr>
 

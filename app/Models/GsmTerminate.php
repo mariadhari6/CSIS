@@ -17,13 +17,14 @@ class GsmTerminate extends Model
     public function gsmActive()
     {
 
-        return $this->belongsTo(GsmActive::class, 'gsm_pre_active_id');
+        return $this->belongsTo(GsmActive::class);
     }
 
     public function company()
     {
         return $this->belongsTo(GsmActive::class, 'company_id');
     }
+    
     public function gsmPreActive()
     {
         return $this->belongsTo(GsmPreActive::class, 'gsm_number');

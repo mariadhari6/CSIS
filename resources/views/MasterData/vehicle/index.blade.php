@@ -49,7 +49,6 @@
 
      // ------ Tampil Data ------
     function read(){
-
       $.get("{{ url('item_data_vehicle') }}", {}, function(data, status) {
          $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -78,7 +77,6 @@
         var vehicle_id      = $("#vehicle_id").val();
         var pool_name       = $("#pool_name").val();
         var pool_location   = $("#pool_location").val();
-
         $.ajax({
             type: "get",
             url: "{{ url('store_vehicle') }}",
@@ -88,7 +86,6 @@
               vehicle_id    : vehicle_id,
               pool_name     : pool_name,
               pool_location : pool_location
-
             },
              success: function(data) {
                 swal({
@@ -130,7 +127,6 @@
                         read();
                     }
                 });
-
               });
             },
             allowOutsideClick: false
@@ -160,7 +156,6 @@
         var vehicle_id      = $("#vehicle_id").val();
         var pool_name       = $("#pool_name").val();
         var pool_location   = $("#pool_location").val();
-
         var id = id;
         $.ajax({
             type: "get",
@@ -183,7 +178,6 @@
             }
         });
     }
-
     $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
               $(".task-select").prop('checked', true);
@@ -296,7 +290,6 @@
             showLoaderOnConfirm: true,
         }).then((willDelete) => {
             $.each(allVals, function(index, value){
-
                 var company_id      = $(".company_id-"+value).val();
                 var license_plate   = $(".license_plate-"+value).val();
                 var vehicle_id      = $(".vehicle_id-"+value).val();

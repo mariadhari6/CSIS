@@ -11,7 +11,7 @@ class Vehicle extends Model
     protected $table = 'vehicles';
 
     protected $fillable = [
-        'company_id', 'license_plate', 'vehicle_id', 'pool_name', 'pool_location'
+        'company_id', 'license_plate', 'vehicle_id', 'pool_name', 'pool_location', 'status'
     ];
 
     public function company(){
@@ -28,7 +28,10 @@ class Vehicle extends Model
     }
 
 
+    public function requestComplaintKendaraan()
+    {
 
-
+        return $this->hasMany(RequestComplaint::class, 'kendaraan_pasang', 'id');
+    }
 
 }

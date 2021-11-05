@@ -8,15 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class Sensor extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $table = 'sensors';
 
     protected $fillable = [
         'sensor_name', 'merk_sensor', 'serial_number', 'rab_number', 'waranty', 'status'
     ];
-    public function pemasanganMutasiGps()
+    public function requestComplaint()
     {
-        return $this->hasOne(PemasanganMutasiGps::class);
+        return $this->hasOne(RequestComplaint::class, 'id', 'equipment_sensor_id');
+    }
+
+    public function requestComplaintPemasangan()
+    {
+        return $this->hasMany(RequestComplaint::class, 'id', 'equipment_terpakai_sensor');
+    }
+    public function sensorName()
+    {
+        return $this->belongsTo(SensorName::class, 'sensor_name', 'id');
+    }
+
+    public function detailCustomer()
+    {
+        return $this->hasMany(DetailCustomer::class);
     }
 
     public function detailCustomer()

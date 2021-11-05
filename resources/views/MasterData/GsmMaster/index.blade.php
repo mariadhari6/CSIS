@@ -601,7 +601,6 @@
 
 
   </script>
-
-  <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe>
+  {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
    @endsection

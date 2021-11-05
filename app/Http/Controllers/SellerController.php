@@ -2,52 +2,78 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Exports\TamplateSeller;
+use App\Imports\SellerImport;
 use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class SellerController extends Controller
 {
-    public function index()
-    {
+    public function index() {
+
         return view('MasterData.seller.index');
     }
 
-    public function add_form()
-    {
+    public function add_form() {
 
         return view('MasterData.seller.add_form');
     }
 
-    public function item_data()
-    {
+    public function item_data() {
+
         $seller = Seller::orderBy('id', 'DESC')->get();
         return view('MasterData.seller.item_data')->with([
             'seller' => $seller
         ]);
     }
 
-    public function store(Request $request)
-    {
+    public function save_import(Request $request) {
+
+        $dataRequest = json_decode($request->data);
+        foreach ($dataRequest as $key => $value) {
+            $sellerCode = $value->seller_code;
+            $noAgreementLetter = $value->no_agreement_letter;
+            $checSellerCode = Seller::where('seller_code', '=', $sellerCode)->first();
+            $checkAgreementLetter = Seller::where('no_agreement_letter', '=', $noAgreementLetter)->first();
+            if ($checSellerCode === null  && $checkAgreementLetter === null) {
+                try {
+                    $data = array(
+                        'seller_name'           => $value->seller_name,
+                        'seller_code'           => $value->seller_code,
+                        'no_agreement_letter'   => $value->no_agreement_letter,
+                        'status'                => $value->status
+                    );
+                    Seller::insert($data);
+                    // return 'success';
+                } catch (\Throwable $th) {
+                    return 'fail';
+                }
+            } else {
+                return 'fail';
+            }
+        }
+    }
+
+    public function store(Request $request) {
+
         $data = array(
-            'seller_name' => $request->seller_name,
-            'seller_code' => $request->seller_code,
-            'no_agreement_letter' => $request->no_agreement_letter,
-            'status' => $request->status
+            'seller_name'           => $request->seller_name,
+            'seller_code'           => $request->seller_code,
+            'no_agreement_letter'   => $request->no_agreement_letter,
+            'status'                => $request->status
         );
 
         Seller::insert($data);
-
     }
 
-    public function edit_form($id)
-    {
+    public function edit_form($id) {
+        
         $seller    = Seller::findOrfail($id);
         return view('MasterData.seller.edit_form')->with([
             'seller' => $seller,
-
         ]);
     }
 
@@ -106,5 +132,20 @@ class SellerController extends Controller
     {
         Seller::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
+    }
+
+    public function importExcel(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('DataSeller', $nameFile);
+
+        Excel::import(new SellerImport, public_path('/DataSeller/' . $nameFile));
+        // return redirect('/GsmMaster');
+    }
+
+    public function export()
+    {
+        return Excel::download(new TamplateSeller, 'template-seller.xlsx');
     }
 }

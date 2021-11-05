@@ -8,7 +8,7 @@
         <tr>
           <th scope="col">Company</th>
           <th scope="col">No Po</th>
-          <th scope="col" rowspan="<?= $rowspan; ?>">Jumlah Unit Po</th>
+          <th scope="col">Jumlah Unit Po</th>
           <th scope="col">Harga Layanan</th>
           <th scope="col">Revenue</th>
           <th scope="col">Status PO</th>

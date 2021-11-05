@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SummaryCustomer extends Model
 {
-    use HasFactory;
-
     protected $table = 'summary_customers';
 
     protected $fillable = [
@@ -30,8 +28,8 @@ class SummaryCustomer extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function detail(){
+    public function detail()
+    {
         return $this->belongsTo(DetailCustomer::class);
     }
-
 }

@@ -1,51 +1,70 @@
 @extends('layouts.v_main')
-@section('title','Request and Complain')
+@section('title','CSIS | Request and Complain')
+@section('title-table','Request and Complain')
+@section('requestComplain','show')
+@section('RequestComplain','active')
 
 
 @section('content')
-
-<div align="right">
-  </div>
-  <br>
-  <div id="message"></div>
+<form >
 
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+            <div class="text-right" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                  <div class="form-group">
+                      <input class="form-control" id="filter-date" type="month">
+                      <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
+                    </select>
+                  </div>
+                </ul>
+                <div class="float-left mr-2">
+                    <select class="form-control input-fixed" id="filter">
+                        <option value="{{ url('item_data_all_RequestComplain') }}">All</option>
+                        <option value="{{ url('item_data_Request_Internal_RequestComplain') }}">Request Internal</option>
+                        <option value="{{ url('item_data_Request_Eksternal_RequestComplain') }}">Request Eksternal</option>
+                        <option value="{{ url('item_data_Complain_Internal_RequestComplain') }}">Complain Internal</option>
+                        <option value="{{ url('item_data_Complain_Eksternal_RequestComplain') }}">Complain Eksternal</option>
+                    </select>
+                </div>
+                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-edit"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-
 
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>
-                    <div class="form-check">
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">Action</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Internal/External Request & Complain</th>
-                <th scope="col" class="list">PIC</th>
-                <th scope="col" class="list">Vehicle</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list-company">Company*</th>
+                <th scope="col" class="list">Internal/External*</th>
+                <th scope="col" class="list">PIC*</th>
+                <th scope="col" class="list">Vehicle*</th>
                 <th scope="col" class="list">Waktu Info</th>
-                <th scope="col" class="list">Task</th>
-                <th scope="col" class="list">Platform</th>
-                <th scope="col" class="list">Detail Taks</th>
-                <th scope="col" class="list">Divisi</th>
-                <th scope="col" class="list">Respond</th>
-                <th scope="col" class="list">Waktu Kesepakatan</th>
-                <th scope="col" class="list">waktu Solve</th>
-                <th scope="col" class="list">Status</th>
+                <th scope="col" class="list">Waktu Respond*</th>
+                <th scope="col" class="list">Task*</th>
+                <th scope="col" class="list">Platform*</th>
+                <th scope="col" class="list">Detail Taks*</th>
+                <th scope="col" class="list">Divisi*</th>
+                <th scope="col" class="list">Respond*</th>
+                <th scope="col" class="list">Waktu Kesepakatan*</th>
+                <th scope="col" class="list">waktu Solve*</th>
+                <th scope="col" class="list">Status*</th>
                 <th scope="col" class="list">Status Akhir</th>
+                 <th scope="col" class="action sticky-col first-col">Action</th>
+
+
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -63,6 +82,52 @@
     $(document).ready(function() {
       read()
     });
+
+    // filter bulan dan tahun
+    $('#check-btn').click(function() {
+      var date = new Date($('#filter-date').val());
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+        $.ajax({
+            type: "get",
+            url: "{{ url('item_data_MY_RequestComplain') }}",
+            data: {
+              month: month,
+              year: year,
+            },
+            success: function(data) {
+              $('#table_id').DataTable().destroy();
+              $('#table_id').find("#item_data").html(data);
+              $('#table_id').dataTable( {
+                  "dom": '<"top"f>rt<"bottom"lp><"clear">'
+                  // "dom": '<lf<t>ip>'
+                  });
+              $('#table_id').DataTable().draw();
+            }
+        })
+    });
+
+  // ------- filter change ------
+  $("#filter").change(function(){
+    var value = $(this).val();
+    filter(value);
+});
+  // ------- filter --------
+  function filter(value){
+  var value = value;
+  $.get(value, {}, function(data, status) {
+      $('#table_id').DataTable().destroy();
+      $('#table_id').find("#item_data").html(data);
+        $('#table_id').dataTable( {
+          "dom": '<"top"f>rt<"bottom"lp><"clear">'
+          });
+      $('#table_id').DataTable().draw();
+    });
+  }
+    // ---- stop dropdown -----
+    $(document).on('click', '.dropdown-menu', function (e) {
+      e.stopPropagation();
+    });
     // ------ Tampil Data ------
     function read(){
 
@@ -70,11 +135,13 @@
          $('#table_id').DataTable().destroy();
          $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
         $('#table_id').DataTable().draw();
+
       });
     }
     // ---- Tombol Cancel -----
@@ -90,11 +157,12 @@
       });
     // ----- Proses Tambah data ------
     function store() {
-        var company = $("#company").val();
-        var internal_external = $("#internal_external").val();
-        var pic = $("#pic").val();
+        var company_id = $("#company_id").val();
+        var internal_eksternal = $("#internal_eksternal").val();
+        var pic_id = $("#pic_id").val();
         var vehicle = $("#vehicle").val();
         var waktu_info = $("#waktu_info").val();
+        var waktu_respond = $("#waktu_respond").val();
         var task = $("#task").val();
         var platform = $("#platform").val();
         var detail_task = $("#detail_task").val();
@@ -104,15 +172,33 @@
         var waktu_solve = $("#waktu_solve").val();
         var status = $("#status").val();
         var status_akhir = $("#status_akhir").val();
-        $.ajax({
+        if(
+        company_id == "" ||
+        internal_eksternal == "" ||
+        pic_id =="" ||
+        vehicle =="" ||
+        waktu_respond =="" ||
+        task =="" ||
+        platform=="" ||
+        detail_task=="" ||
+        divisi =="" ||
+        respond=="" ||
+        waktu_kesepakatan=="" ||
+        waktu_solve=="" ||
+        status==""
+        ){
+
+        }else {
+            $.ajax({
             type: "get",
             url: "{{ url('store_RequestComplain') }}",
             data: {
-              company: company,
-              internal_external:internal_external,
-              pic: pic,
+              company_id: company_id,
+              internal_eksternal:internal_eksternal,
+              pic_id: pic_id,
               vehicle: vehicle,
               waktu_info: waktu_info,
+             waktu_respond:waktu_respond,
               task:task,
               platform:platform,
               detail_task:detail_task,
@@ -133,6 +219,10 @@
               read();
             }
         })
+
+        }
+
+
     }
     // -----Proses Delete Data ------
     function destroy(id) {
@@ -173,18 +263,20 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
-        $("#item-company-"+id).hide("fast");
-        $("#item-internal_external-"+id).hide("fast");
+        $("#item-no-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
+        $("#item-internal_eksternal-"+id).hide("fast");
         $("#item-pic-"+id).hide("fast");
         $("#item-vehicle-"+id).hide("fast");
         $("#item-waktu_info-"+id).hide("fast");
-        $("#item-taks-"+id).hide("fast");
+        $("#item-waktu_respond-"+id).hide("fast");
+        $("#item-task-"+id).hide("fast");
         $("#item-platform-"+id).hide("fast");
         $("#item-detail_task-"+id).hide("fast");
         $("#item-divisi-"+id).hide("fast");
         $("#item-respond-"+id).hide("fast");
         $("#item-waktu_kesepakatan-"+id).hide("fast");
-        $("#item-waktu_solved-"+id).hide("fast");
+        $("#item-waktu_solve-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
         $("#item-status_akhir-"+id).hide("fast");
         $.get("{{ url('show_RequestComplain') }}/" + id, {}, function(data, status) {
@@ -193,11 +285,12 @@
     }
     // ------ Proses Update Data ------
         function update(id) {
-            var company = $("#company").val();
+            var company_id = $("#company_id").val();
             var internal_eksternal = $("#internal_eksternal").val();
-            var pic = $("#pic").val();
+            var pic_id = $("#pic_id").val();
             var vehicle = $("#vehicle").val();
             var waktu_info = $("#waktu_info").val();
+            var waktu_respond = $("#waktu_respond").val();
             var task = $("#task").val();
             var platform = $("#platform").val();
             var detail_task = $("#detail_task").val();
@@ -212,11 +305,12 @@
                 type: "get",
                 url: "{{ url('update_RequestComplain') }}/"+id,
                 data: {
-                company: company,
-                internal_external:internal_external,
-                pic: pic,
+                company_id: company_id,
+                internal_eksternal:internal_eksternal,
+                pic_id: pic_id,
                 vehicle: vehicle,
                 waktu_info: waktu_info,
+                waktu_respond: waktu_respond,
                 task:task,
                 platform:platform,
                 detail_task:detail_task,
@@ -308,23 +402,25 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('/selected') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-                    $("#item-company-"+value).hide("fast");
-                    $("#item-internal_external-"+value).hide("fast");
-                    $("#item-pic-"+value).hide("fast");
+                    $("#item-no-"+value).hide("fast");
+                    $("#item-company_id-"+value).hide("fast");
+                    $("#item-internal_eksternal-"+value).hide("fast");
+                    $("#item-pic_id-"+value).hide("fast");
                     $("#item-vehicle-"+value).hide("fast");
                     $("#item-waktu_info-"+value).hide("fast");
+                    $("#item-waktu_respond-"+value).hide("fast");
                     $("#item-task-"+value).hide("fast");
                     $("#item-platform-"+value).hide("fast");
                     $("#item-detail_task-"+value).hide("fast");
                     $("#item-divisi-"+value).hide("fast");
                     $("#item-respond-"+value).hide("fast");
-                    $("#item-waktu_kesepakatan"+value).hide("fast");
+                    $("#item-waktu_kesepakatan-"+value).hide("fast");
                     $("#item-waktu_solve-"+value).hide("fast");
                     $("#item-status-"+value).hide("fast");
                     $("#item-status_akhir-"+value).hide("fast");
@@ -359,11 +455,12 @@
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
 
-                    var company = $(".company-"+value).val();
-                    var internal_external = $(".internal_external-"+value).val();
-                    var pic = $(".pic-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
+                    var internal_eksternal = $(".internal_eksternal-"+value).val();
+                    var pic_id = $(".pic_id-"+value).val();
                     var vehicle = $(".vehicle-"+value).val();
                     var waktu_info = $(".waktu_info-"+value).val();
+                    var waktu_respond = $(".waktu_respond-"+value).val();
                     var task = $(".task-"+value).val();
                     var platform = $(".platform-"+value).val();
                     var detail_task = $(".detail_task-"+value).val();
@@ -377,11 +474,12 @@
                     type: "get",
                     url: "{{ url('update_RequestComplain') }}/"+value,
                     data: {
-                       company: company,
-                        internal_external:internal_external,
-                        pic: pic,
+                       company_id: company_id,
+                        internal_eksternal:internal_eksternal,
+                        pic_id: pic_id,
                         vehicle: vehicle,
                         waktu_info: waktu_info,
+                        waktu_respond:waktu_respond,
                         task:task,
                         platform:platform,
                         detail_task:detail_task,
@@ -430,5 +528,7 @@
 
 
   </script>
+          </form>
+
    @endsection
 
