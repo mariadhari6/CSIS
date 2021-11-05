@@ -1,10 +1,9 @@
 @php
-    $total = 0 ;
-
-$rowspan = count($data);
+     $total = 0 ;
+     $rowspan = count($data);
 @endphp
 
-<table  class="table">
+<table class="table">
      <thead>
         <tr>
           <th scope="col">Company</th>
@@ -25,11 +24,10 @@ $rowspan = count($data);
                <td>Rp.{{ number_format($item->po->harga_layanan) }}</td>
                <td>Rp.{{ number_format($item->po->harga_layanan * $item->po->jumlah_unit_po) }}</td>
                <td>{{ $item->po->status_po }}</td>       
-               <td>hallo</td>
+               <td>{{ $item->jumlah_per_po }}</td>
                @php
                $total +=  $item->po->harga_layanan * $item->po->jumlah_unit_po;
                @endphp
-
           </tr> 
           @endforeach         
      </tbody>

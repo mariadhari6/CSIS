@@ -162,14 +162,17 @@ class SummaryController extends Controller{
     public function DataPo(Request $request){
        
        $company = $request->company;
-       $month   = $request->month;
-       $year    = $request->year;
+    //    $month   = $request->month;
+    //    $year    = $request->year;
 
-       $data = DetailCustomer::where('company_id', $company)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year) ->where('status_temporary', "1")
+       $data = DetailCustomer::where('company_id', $company)
        ->groupBy('company_id', 'po_id')
        ->selectRaw('company_id')
        ->selectRaw('po_id')
-       ->get();
+       ->select('po_id', 
+        DB::raw('count(po_id) as jumlah_per_po '),
+        DB::raw('company_id')
+        )->get();
 
         return view('customer.summary.item_po')->with([
             'data' => $data,

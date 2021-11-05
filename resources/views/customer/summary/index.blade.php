@@ -30,7 +30,7 @@
   </div>
 
   <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-5">
         <div class="card" id="card-table">
           <div class="card-body">
             <table class="table" id="table_id">
@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-10">
+      <div class="col-sm-7">
           <div class="card">
               <div class="card-body" id="data-po">
                
