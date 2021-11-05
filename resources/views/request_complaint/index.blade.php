@@ -3,6 +3,7 @@
 @section('title-table','Request and Complain')
 
 @section('content')
+<form >
 
     <div class="row">
         <div class="col-md-12">
@@ -74,6 +75,7 @@
   <script>
     $(document).ready(function() {
       read()
+
     });
 
 // filter bulan dan tahun
@@ -145,6 +147,7 @@ $('#check-btn').click(function() {
           $('#table_id tbody').prepend(data);
         });
       });
+
     // ----- Proses Tambah data ------
     function store() {
         var company_id = $("#company_id").val();
@@ -162,7 +165,24 @@ $('#check-btn').click(function() {
         var waktu_solve = $("#waktu_solve").val();
         var status = $("#status").val();
         var status_akhir = $("#status_akhir").val();
-        $.ajax({
+        if(
+        company_id == "" ||
+        internal_eksternal == "" ||
+        pic_id == "" ||
+        vehicle =="" ||
+        waktu_respond =="" ||
+        task =="" ||
+        platform=="" ||
+        detail_task=="" ||
+        divisi =="" ||
+        respond=="" ||
+        waktu_kesepakatan=="" ||
+        waktu_solve=="" ||
+        status==""
+        ){
+
+        }else {
+            $.ajax({
             type: "get",
             url: "{{ url('store_RequestComplain') }}",
             data: {
@@ -192,6 +212,10 @@ $('#check-btn').click(function() {
               read();
             }
         })
+
+        }
+
+
     }
     // -----Proses Delete Data ------
     function destroy(id) {
@@ -408,4 +432,6 @@ $('#check-btn').click(function() {
             read();
             }
   </script>
+          </form>
+
    @endsection

@@ -5,6 +5,7 @@ use App\Models\RequestComplaint;
 use App\Models\Pic;
 use App\Models\Vehicle;
 use App\Models\RequestComplaintCustomer;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -17,6 +18,7 @@ class RequestComplaintController extends Controller
     public function add_form()
     {
         // $pic = Pic::orderBy('id', 'DESC')->get();
+        $task = Task::orderBy('id', 'DESC')->get();
         $pic = Pic::groupBy('company_id')
             ->selectRaw('count(*) as jumlah, company_id')
             ->get();
@@ -25,7 +27,8 @@ class RequestComplaintController extends Controller
         return view('request_complaint.add_form')->with([
             'pic'              => $pic,
             'company'          => $company,
-            'vehicle'          => $vehicle
+            'vehicle'          => $vehicle,
+            'task'             => $task
         ]);
     }
     public function item_data_MY(Request $request)
@@ -190,13 +193,13 @@ class RequestComplaintController extends Controller
     }
     public function basedPic($id)
     {
-
-
-
         $data = Pic::where('company_id', $id )->get();
-
         return $data;
-
-
+    }
+    public function basedRequest($id)
+    {
+        $id = "Request" ;
+        $data = Task::where('jenis', $id )->get();
+        return $data;
     }
 }

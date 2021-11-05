@@ -64,4 +64,11 @@
             </div>
         </td>
     </tr>
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
+
 @endforeach

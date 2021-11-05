@@ -4,8 +4,7 @@
     <td></td>
     <td>
         <select class="select" id="company_id" name="company_id" required>
-            <option selected disabled></option>
-
+            <option selected></option>
             @foreach ($pic as $item )
             <option value="{{ $item->company_id }}">{{ $item->company->company_name ?? '' }}</option>
 
@@ -23,7 +22,7 @@
     </td>
     <td>
         <select class="select" id="pic" name="pic" required>
-            <option selected disabled>-</option>
+            <option selected></option>
             @foreach ($pic as $item)
                 <option value="{{ $item->id }}" {{ old('pic_id') == $item->id ? 'selected':'' }}>{{ $item->pic_name }}</option>
             @endforeach
@@ -31,7 +30,7 @@
     </td>
     <td>
         <select class="select" id="vehicle" name="vehicle">
-            <option selected disabled value=""></option>
+            <option selected></option>
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
 
@@ -42,7 +41,13 @@
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_info" placeholder="Waktu Info"></div>
     </td>
     <td>
-        <textarea class="form-control" id="task" name="task" ></textarea>
+        <select class="select" id="task" name="task">
+            <option selected></option>
+            @foreach ($task as $item )
+                <option value="{{ $item->id }}" {{ old('task') == $item->id ? 'selected':'' }}>{{ $item->task }}</option>
+
+            @endforeach
+        </select>
     </td>
     <td>
         <select class="select" id="platform" id="platform" aria-label=".form-select-lg example" required>
@@ -58,7 +63,7 @@
     </td>
     <td>
         <select class="select" id="divisi" id="divisi" aria-label=".form-select-lg example">
-        <option selected></option>
+            <option selected></option>
             <option value="Operasional (CS)">Operasional (CS)</option>
             <option value="Lintas Divisi">Lintas Divisi</option>
             <option value="Operasional (Implementor)">Operasional (Implementor)</option>
@@ -73,11 +78,11 @@
     <td>
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_kesepakatan" placeholder="Waktu Kesepakatan" ></div>
     </td>
-    <td>
+    <td id="td-solve">
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="Waktu Solve" ></div>
     </td>
-    <td>
-        <select class="select"  id="status" aria-label=".form-select-lg example">
+    <td >
+        <select class="select"  id="status" aria-label=".form-select-lg example" name="status" >
             <option disabled value="On Progress">On Progress</option>
             <option value="On Progress">On Progress</option>
             <option value="Done">Done</option>
@@ -89,19 +94,10 @@
     <td>
         <i class="fas fa-check add" id="add" onclick="store()"></i>
         <i class="fas fa-times cancel" onclick="cancel()"></i>
-    </td>
+    <td>
 
-    {{--  <select class="select @error('type') is-invalid @enderror" id="type" name="type" required>
-
-        @foreach ($pic as $item )
-        <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->company->company_name }}
-
-        @endforeach
-    </select>  --}}
-
-
-<script>
-    $('select[name="company_id"]').on('change', function() {
+    <script>
+        $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();
            // {{--  alert(itemID);  --}}
             if(itemID) {
@@ -110,21 +106,55 @@
                     method: "GET",
                     success:function(data) {
                         //alert(data.length);
-                        $('select[name="pic').empty();
-                        $('select[name="pic').append('<option value=""> </option>');
+                        $('select[name="pic_id').empty();
+                        $('select[name="pic_id').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
-                                $('select[name="pic').append('<option value="'+ data[i].id + '"> '+ data[i].pic_name +'</option>');
-                                // 16-Nov-2021   alert(data[i].serial_number)
+                                $('select[name="pic_id').append('<option value="'+ data[i].id + '"> '+ data[i].pic_name +'</option>');
                             }
                     }
                 });
             }
             else{
-                $('select[name="pic"]').empty();
-
+                $('select[name="pic_id"]').empty();
             }
+        });
 
-         });
+        $('select[name="status"]').on('change', function() {
+            var itemID = $(this).val();
+           if(itemID == "On Progress"){
+               $('#td-solve').empty();
+               $('#td-solve').append(
+                `<div class="input-div"><input type="text" class="input" id="waktu_solve" placeholder="Waktu Solve" disabled></div>`
+               );
+           }else{
+                $('#td-solve').empty();
+                $('#td-solve').append(
+                `<div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="Waktu Solve"></div>`
+                );
+           }
+        });
+
+        $('select[name="internal_eksternal"]').on('change', function() {
+            var itemID = $(this).val();
+           // alert(itemID)
+            if(itemID == "Request Internal" || itemID == "Request Eksternal" ) {
+                $.ajax({
+                    url: '/based_request/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="task').empty();
+                        $('select[name="task').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="task').append('<option value="'+ data[i].id + '"> '+ data[i].task +'</option>');
+                            }
+                    }
+                });
+            }
+            else{
+                $('select[name="task"]').empty();
+            }
+        });
 </script>
 
 </tr>

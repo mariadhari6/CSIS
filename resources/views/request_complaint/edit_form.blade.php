@@ -13,10 +13,10 @@
     <select class="select internal_eksternal-{{$request_complain->id}}" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example">
         <option value="{{$request_complain->internal_eksternal}}"> {{$request_complain->internal_eksternal}} </option>
         <option selected>{{$request_complain->internal_eksternal}}</option>
-        <option value="Internal Request">Internal Request</option>
-        <option value="Internal Complain">Internal Complain</option>
-        <option value="Eksternal Request">Eksternal Request</option>
-        <option value="Eksternal Complain">Eksternal Complain</option>
+        <option value="Request Internal ">Request Internal</option>
+        <option value="Complain Internal ">Complain Internal</option>
+        <option value="Request Eksternal ">Request Eksternal</option>
+        <option value="Complain Eksternal ">Complain Eksternal</option>
     </select></i>
 </td>
 <td>

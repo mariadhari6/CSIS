@@ -29,4 +29,8 @@ class RequestComplaint extends Model
     {
         return $this->belongsTo(Vehicle::class, 'vehicle', 'id');
     }
+    public function task()
+    {
+        return $this->belongsTo(Task::class, 'task', 'id');
+    }
 }
