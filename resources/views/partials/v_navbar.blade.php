@@ -11,7 +11,7 @@
         </div>
         <nav class="navbar navbar-header navbar-expand-lg">
             <div class="container-fluid">
-                <button class="mt-1 btn btn-light btn-sm" >@yield('title-table')</button>
+                <h6 style="color: whitesmoke">@yield('title-table')</h6>
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{ asset('images/admin.png') }}" alt="user-img" width="36" class="img-circle"><span id="user">{{Auth::user()->name}}</span></span> </a>

@@ -27,7 +27,7 @@ class Vehicle extends Model
     public function detail()
     {
 
-        return $this->hasMany(DetailCustomer::class);
+        return $this->hasMany(DetailCustomer::class, 'licence_plate', 'id');
     }
 
     public function requestComplaint()

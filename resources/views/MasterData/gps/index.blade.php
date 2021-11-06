@@ -1,20 +1,31 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Gps')
+@section('title-table','Master GPS')
+@section('master','show')
+@section('gps','active')
 
 
 @section('content')
 
-<h4 class="page-title">GPS</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <div class="text-right mt-3" id="selected">
+
+
+          <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-              <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
+                  <b> Import</b>
+                  <i class="fas fa-file-excel ml-2"></i>
+                </button>
+              <button class="btn btn-success edit_all">
+                <i class="fas fa-edit"></i>
+              </button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+          <form>
+            <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>
@@ -25,52 +36,268 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list" >Merk</th>
-                <th scope="col" class="list" >Type</th>
-                <th scope="col" class="list" >IMEI</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list" >Merk*</th>
+                <th scope="col" class="list" >Type*</th>
+                <th scope="col" class="list" >IMEI*</th>
                 <th scope="col" class="list" >Waranty</th>
-                <th scope="col" class="list" >Po Date</th>
-                <th scope="col" class="list" >Status</th>
-                <th scope="col" class="list" >Status Ownership</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="list" >Po Date*</th>
+                <th scope="col" class="list" >Status*</th>
+                <th scope="col" class="list" >Status Ownership*</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+          </form>
         {{-- </div> --}}
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Modal Import -->
+  <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
+		<div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role="document">
+			<div class="modal-content-full-width modal-content">
+				<div class="modal-header-full-width modal-header bg-primary">
+					<h6 class="modal-title">Import data</h6>
+					<button type="button" class="close" id="close-modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+          <div class="card">
+            <div class="card-header">
+              <b>Select Excel File</b>
+              <br>
+              <input type="file" id="excel_file" />
+              <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
+              <a  class="btn btn-secondary btn-xs" href="/download_template_gps" style="color:white">Download Template</a>
+            </div>
+            <div class="card-body">
+              <div id="excel_data" ></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer-full-width  modal-footer">
 
-
+        </div>
+        </div>
+			</div>
+		</div>
+	</div>
   <script>
     $(document).ready(function() {
-      read();
-
-      $('#merk').bind('change', function () {
-        alert($(this).val());
-    });    
-    
+        $.ajaxSetup({
+            headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+      read()
     });
+    // -- excel export to html tabel---
+
+    const excel_file = document.getElementById("excel_file");
+    excel_file.addEventListener("change",(event)=>{
+        if(
+            ![
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "application/vnd.ms-excel",
+            ].includes(event.target.files[0].type)
+        ) {
+            document.getElementById("excel_data").innerHTML =
+            '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+            excel_file.value = "";
+            return false;
+        }
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(event.target.files[0]);
+        reader.onload = function (event) {
+            var data = new Uint8Array(reader.result);
+            var work_book = XLSX.read(data,{type: "array"});
+            var sheet_name = work_book.SheetNames;
+            var sheet_data = XLSX.utils.sheet_to_json(
+                work_book.Sheets[sheet_name[0]],
+                {header: 1}
+            );
+                    if (sheet_data.length > 0){
+                        var table_output = '<table class="table table-bordered" id="importTable">';
+                        for(var row = 0; row < sheet_data.length; row++) {
+                            table_output += "<tr>";
+
+                            for (var cell = 0; cell < sheet_data[row].length; cell++){
+                                if (row == 0) {
+                                    table_output += "<th>" + sheet_data[row][cell] + "</th>";
+                                } else {
+                                    table_output += '<td contenteditable id="table-data-' + cell +'" >' + sheet_data[row][cell] + "</td>";
+                                }
+                            }
+                            table_output += "</tr>";
+                        }
+                        table_output += "</table>";
+
+                        document.getElementById("excel_data").innerHTML = table_output;
+
+                        //check duplicate data
+                        console.log('tes');
+                        imeiNumber = document.querySelectorAll("#table-data-2");
+                        for(indexA = 0; indexA < imeiNumber.length; indexA++){
+                        var imeiValue = imeiNumber[indexA].innerText;
+                        $rowCount = $("#table_id tr").length;
+                        // console.log(imeiValue);
+
+                        if ($rowCount==1){
+
+                        } else {
+                          $rowResult = $rowCount -1;
+                          var allImei = [];
+                          for($i = 0; $i < $rowResult; $i++)
+                          {
+                            $imeiNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
+                            allImei[$i] = $imeiNum;
+                          }
+                          for (let index = 0; index < allImei.length; index++) {
+                            if( imeiValue == allImei[index] ){
+                              imeiNumber[indexA].style.backgroundColor = "#e8837d";
+                            } else if ( index == allImei.length){
+
+                            }
+                          }
+                        }
+                        }
+
+
+
+
+         // change Waranty format
+        warantyDate = document.querySelectorAll("#table-data-3");
+        for (i = 0; i < warantyDate.length; i++) {
+            var excelDate = warantyDate[i].innerText;
+            var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+            try{
+                var converted_date = date.toISOString().split('T')[0];
+            }
+            catch(err) {
+                warantyDate[i].style.backgroundColor = "#e8837d";
+            }
+            warantyDate[i].innerHTML = converted_date;
+        }
+        // change PO Date format
+        po_Date = document.querySelectorAll("#table-data-4");
+        for (i = 0; i < po_Date.length; i++) {
+            var excelDate = po_Date[i].innerText;
+            var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+            try{
+                var converted_date = date.toISOString().split('T')[0];
+            }
+            catch(err) {
+                po_Date[i].style.backgroundColor = "#e8837d";
+            }
+            po_Date[i].innerHTML = converted_date;
+
+        }
+        // Imei Harus 15 caracter Import
+        //
+        }
+            excel_file.value = "";
+        };
+    });
+
+
+    // -- save data import  -----
+    function save_data() {
+        var total = 0;
+        var jsonTable = $('#importTable tbody tr:has(td)').map(function () {
+            var $td = $('td', this);
+            total += parseFloat($td.eq(2).text());
+            return{
+                merk                : $td.eq(0).text(),
+                type                : $td.eq(1).text(),
+                imei                : $td.eq(2).text(),
+                waranty             : $td.eq(3).text(),
+                po_date             : $td.eq(4).text(),
+                status              : $td.eq(5).text(),
+                status_ownership    : $td.eq(6).text(),
+            }
+        }).get();
+      $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
+        data = {};
+        data = jsonTable;
+        //
+        var thLength = $('#importTable th').length;
+        var trLength = $("#importTable td").closest("tr").length;
+        var item = document.querySelectorAll("#table-data-8");
+        var tes = $("#importTable").find("tbody>tr:eq(1)>td:eq(1)").attr("style");
+        var success;
+        $.ajax({
+        type: 'POST',
+        dataType: 'JSON',
+        url: "{{ url('/save_import_gps') }}",
+        data: {
+           data   : JSON.stringify(data) ,
+          _token  : '{!! csrf_token() !!}'
+        } ,
+        error: function(er) {
+          if(er.responseText === 'fail' ){
+            // alert("save failed");
+            swal({
+                type: 'warning',
+                text: 'Duplicate data or error format, Imei must 15 character',
+                showConfirmButton: false,
+                timer: 15000
+              }).catch(function(timeout) { });
+          } else {
+              try {
+            swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
+            read();
+            $('#importData').modal('hide');
+            } catch (error) {
+              swal({
+                type: 'warning',
+                text: 'Duplicate data or error format',
+                showConfirmButton: false,
+                timer: 1500
+              }).catch(function(timeout) { });
+
+            }
+          }
+          }
+      });
+    }
+
+
+     // ---- Close Modal -------
+    $('#close-modal').click(function() {
+        read();
+        $('#importData').modal('hide');
+        // alert('close')
+    });
+
+
     // ------ Tampil Data ------
     function read(){
-
       $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
-
+              "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
         $('#table_id').DataTable().draw();
       });
     }
+
+
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -91,6 +318,48 @@
         var po_date = $("#po_date").val();
         var status = $("#status").val();
         var status_ownership = $("#status_ownership").val();
+        // alert(merk);
+        //
+            // break;
+    $rowCount = $("#table_id tr").length;
+      if ($rowCount == 2) {
+        // alert('table empty')
+      } else {
+        $rowResult = $rowCount - 2;
+        var allimeiNum = [];
+        // var allSerNum = [];
+        for($i = 1; $i <= $rowResult; $i++)
+            {
+              $numArr = $i-1;
+              $imeiNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
+            //   $serNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(5)").attr("name");
+              allimeiNum[$numArr] = $imeiNum;
+            //   allSerNum[$numArr] = $serNum;
+            }
+            // alert(allimeiNum[0]);
+        for (let index = 0; index < allimeiNum.length; index++) {
+          if( imei == allimeiNum[index] ){
+            // alert('already exists');
+              swal({
+                type: 'warning',
+                text: 'imei Number already exists',
+                showConfirmButton: false,
+                timer: 1500
+              }).catch(function(timeout) { });
+              // alert('GSM Number already exists');
+              break;
+
+        }else if (imei.length != 15){
+
+             swal({
+                type: 'warning',
+                title: 'Imei must be 15 Character',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
+
+        }else if(imei.length == 15 && index == allimeiNum.length ) {
+
         $.ajax({
             type: "get",
             url: "{{ url('store_gps') }}",
@@ -113,7 +382,18 @@
               read();
 
             }
-        })
+        });
+        break;
+        }
+        }
+      }
+
+
+        // break;
+
+
+        // }
+
     }
     // -----Proses Delete Data ------
     function destroy(id) {
@@ -154,6 +434,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
+        $("#item-no-"+id).slideUp("fast");
         $("#item-merk-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
         $("#item-type-"+id).hide("fast");
@@ -275,6 +556,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
+                    $("#item-no-"+value).slideUp("fast");
                     $("#item-merk-"+value).hide("fast");
                     $("#item-no-"+value).hide("fast");
                     $("#item-type-"+value).hide("fast");
@@ -366,9 +648,17 @@
             read();
         }
 
+        // destro datatable
+        function dataLengthAll() {
+          $('#table_id').DataTable().destroy();
+        }
+        
+
 
 
 
   </script>
+
    @endsection
+
 

@@ -42,6 +42,11 @@
         {{-- charts --}}
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://www.chartjs.org/samples/2.9.4/utils.js"></script>
+          {{-- javascript Excel convert to table html --}}
+        <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+        {{-- boostrap-select --}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
         {{-- javascript Excel convert to table html --}}
         <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>

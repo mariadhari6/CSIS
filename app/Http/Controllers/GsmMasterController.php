@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
+
 class GsmMasterController extends Controller
 {
     public function index()
     {
         return view('MasterData.GsmMaster.index');
     }
-    
+
     public function add_form()
     {
         $company = Company::orderBy('id', 'DESC')->get();
@@ -107,7 +108,7 @@ class GsmMasterController extends Controller
                 }
 
             } else {
-                return 'fail';
+                $fail = 1;
             }
         }
         if( $fail === 1 ){
@@ -218,16 +219,6 @@ class GsmMasterController extends Controller
             $ids = $request->input('id');
             DB::table('gsm')->whereIn('id', $ids)->delete();
         }
-    }
-
-    public function importExcel(Request $request)
-    {
-        $file = $request->file('file');
-        $nameFile = $file->getClientOriginalName();
-        $file->move('DataGsmMaster', $nameFile);
-        
-        Excel::import(new GsmMasterImport, public_path('/DataGsmMaster/'.$nameFile));
-        // return redirect('/GsmMaster');
     }
 
     public function export()

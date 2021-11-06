@@ -1,45 +1,53 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Gsm Terminate')
+@section('title-table', 'Gsm Terminate')
+@section('master','show')
+@section('GsmTerminate','active')
 
 @section('content')
-<h4 class="page-title">GSM Terminate</h4>
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <div class="text-right mt-3" id="selected">
-            <button class="btn btn-success  mr-2 edit_all"> 
-              <i class="fas fa-pen"></i>
+          <div class="text-right" id="selected">
+            <button class="btn btn-success edit_all">
+                <i class="fas fa-edit"></i>
             </button>
             <button class="btn btn-danger  delete_all">
               <i class="fas fa-trash"></i>
             </button>
           </div>
+          <div>
+        <form>
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th width="10px">
-                    <div class="form-check">
+
+                <th>
+                    <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                             <span class="form-check-sign"></span>
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Status GSM</th>
-                <th scope="col" class="list">GSM Number</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Request Date</th>
-                <th scope="col" class="list">Terminate Date</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list">Status GSM*</th>
+                <th scope="col" class="list">GSM Number*</th>
+                <th scope="col" class="list-company">Company*</th>
+                <th scope="col" class="list">Request Date*</th>
+                <th scope="col" class="list">Terminate Date*</th>
                 <th scope="col" class="list">Note</th>
-                <th scope="col" class="action">Action</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+        </form>
+        </div>
         </div>
       </div>
     </div>
@@ -59,6 +67,7 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
@@ -72,7 +81,7 @@
     function cancel() {
       read()
     }
-     
+
     // -----Proses Delete Data ------
    function destroy(id) {
         var id = id;
@@ -312,5 +321,4 @@
         }
 
   </script>
-
    @endsection

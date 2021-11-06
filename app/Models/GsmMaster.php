@@ -14,5 +14,8 @@ class GsmMaster extends Model
     protected $fillable = [
         'gsm_number', 'serial_number', 'icc_id', 'imsi', 'res_id', 'expired_date', 'note', 'status_gsm'
     ];
-
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaint::class);
+    }
 }

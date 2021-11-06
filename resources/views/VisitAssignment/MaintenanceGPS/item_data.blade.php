@@ -2,7 +2,7 @@
 @foreach ($maintenanceGps as $item)
     <tr id="edit-form-{{ $item->id }}">
         <td id="td-checkbox-{{ $item->id }}">
-            <div class="form-check">
+            <div>
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
                     <span class="form-check-sign"></span>
@@ -12,52 +12,137 @@
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
-        <td id="item-company-{{ $item->id}}">
-            {{ $item->company_id}}
+        <td id="item-company_id-{{ $item->id}}">
+            {{ $item->companyRequest->company_name }}
         </td>
         <td id="item-vehicle-{{ $item->id}}">
-            {{ $item->vehicle }}
+            {{ $item->vehicleRequest->license_plate??'' }}
         </td>
-        <td id="item-tanggal-{{ $item->id }}">
+        <td id="item-waktu_kesepakatan-{{ $item->id }}">
             {{ $item->waktu_kesepakatan }}
         </td>
-        <td id="item-type_gps-{{ $item->id }}">
-            {{-- {{ $item->gps->type }} --}}
+
+        @if ($item->type_gps_id !=null)
+            <td id="item-type_gps_id-{{ $item->id }}">
+            {{ $item->gpsType->type??''}}
+            </td>
+        @elseif ($item->type_gps_id ==null)
+            <td id="item-type_gps_id-{{ $item->id }}">
+                -
+            </td>
+        @endif
+
+        @if ($item->equipment_gps_id !=null)
+        <td id="item-equipment_gps_id-{{ $item->id }}">
+            {{ $item->gpsMaintenance->type??''}}
         </td>
-        <td id="item-equipment_gps-{{ $item->id }}">
-            {{-- {{ $item->gps->type }} --}}
+        @elseif ($item->equipment_gps_id ==null)
+        <td id="item-equipment_gps_id-{{ $item->id }}">
+            -
         </td>
-        <td id="item-equipment_sensor-{{ $item->id}}">
-            {{-- {{ $item->sensor->sensor_name }} --}}
+        @endif
+
+        @if ($item->equipment_sensor_id_all_name != null)
+        <td id="item-equipment_sensor_id-{{ $item->id }}">
+             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $item->equipment_sensor_id_all_name }}" ></i>
+
         </td>
+        @elseif ($item->equipment_sensor_id_all_name == null)
+        <td id="item-equipment_sensor_id-{{ $item->id }}">
+            -
+        </td>
+        @endif
+
+        {{-- <td id="item-equipment_sensor_id-{{ $item->id }}" >
+
+             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $item->equipment_sensor_id_all_name }}" ></i>
+
+            {{-- {{ $item->equipment_sensor_id_all_name }} --}}
+
+        {{-- </td> --}}
+
+        @if ($item->equipment_gsm !=null)
         <td id="item-equipment_gsm-{{ $item->id}}">
-            {{ $item->equipment_gsm }}
+            {{ $item->gsm->gsm_number?? ''}}
         </td>
-        <td id="item-permasalahan-{{ $item->id}}">
-            {{ $item->detail_task }}
+        @elseif ($item->equipment_gsm ==null)
+         <td id="item-equipment_gsm-{{ $item->id}}">
+            -
         </td>
+        @endif
+
+        <td id="item-task-{{ $item->id}}">
+            {{ $item->taskRequest->task }}
+        </td>
+
+        @if ($item->ketersediaan_kendaraan !=null)
         <td id="item-ketersediaan_kendaraan-{{ $item->id}}">
             {{ $item->ketersediaan_kendaraan }}
         </td>
+        @elseif ($item->ketersediaan_kendaraan ==null)
+         <td id="item-ketersediaan_kendaraan-{{ $item->id}}">
+            -
+        </td>
+        @endif
+
+        @if ($item->keterangan !=null)
         <td id="item-keterangan-{{ $item->id}}">
             {{ $item->keterangan }}
         </td>
+        @elseif ($item->keterangan ==null)
+        <td id="item-keterangan-{{ $item->id}}">
+            -
+        </td>
+        @endif
+
+        @if ($item->hasil !=null)
         <td id="item-hasil-{{ $item->id}}">
             {{ $item->hasil }}
         </td>
+        @elseif ($item->hasil ==null)
+        <td id="item-hasil-{{ $item->id}}">
+            -
+        </td>
+        @endif
+
         <td id="item-biaya_transportasi-{{ $item->id}}">
-            {{ $item->biaya_transportasi }}
+        <span>Rp. </span>{{ number_format( $item->biaya_transportasi)}}
+
         </td>
-        <td id="item-teknisi-{{ $item->id}}">
-            {{ $item->teknisi }}
+
+        @if ($item->teknisi_maintenance !=null)
+        <td id="item-teknisi_maintenance-{{ $item->id}}">
+            {{ $item->teknisiMaintenance->teknisi_name??'' }}
         </td>
+        @elseif ($item->teknisi_maintenance ==null)
+        <td id="item-teknisi_maintenance-{{ $item->id}}">
+            -
+        </td>
+        @endif
+
+        @if ($item->req_by !=null)
         <td id="item-req_by-{{ $item->id}}">
             {{ $item->req_by }}
         </td>
-        <td id="item-note-{{ $item->id}}">
-            {{ $item->note }}
+        @elseif ($item->req_by ==null)
+        <td id="item-req_by-{{ $item->id}}">
+            -
         </td>
-        <td id="td-button-{{ $item->id }}">
+        @endif
+
+        @if ($item->note_maintenance !=null)
+        <td id="item-note_maintenance-{{ $item->id}}">
+            {{ $item->note_maintenance }}
+        </td>
+        @elseif ($item->note_maintenance ==null)
+        <td id="item-note_maintenance-{{ $item->id}}">
+            -
+        </td>
+        @endif
+        <td id="item-status-{{ $item->id}}">
+            {{ $item->status }}
+        </td>
+        <td class="action sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
                 {{-- <button onclick="edit({{ $item->id }})">edit</button> --}}
@@ -66,5 +151,10 @@
             </div>
         </td>
     </tr>
+     <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 @endforeach
 

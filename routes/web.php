@@ -17,11 +17,16 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\DashboardVisitAssignmentController;
+
+use App\Http\Controllers\RequestComplaintController;
+use App\Http\Controllers\MasterPoController;
+use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\MaintenanceGpsController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RequestComplaintController;
 use App\Http\Controllers\RequestComplaintCustomerController;
+use App\Http\Controllers\SummaryController;
 use App\Models\DetailCustomer;
+use App\Models\PemasanganMutasiGps;
 use App\Models\Username;
 
 use Illuminate\Support\Facades\Auth;
@@ -98,6 +103,11 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [CompanyController::class, 'updateall']);
     Route::get('/dependent_company/{id}', [CompanyController::class, 'dependentCompany']);
     Route::get('/show_no_agreement/{id}', [CompanyController::class, 'showAgreement']);
+    Route::post('/save_import_Company', [CompanyController::class, 'save_import']);
+    Route::post('/importExcel_Company', [CompanyController::class, 'importExcel'])->name('importExcel_Company');
+    Route::get('/download_template_Company', [CompanyController::class, 'export']);
+
+
 
     // pic
     Route::get('/pic', [PicController::class, 'index'])->name('pic');
@@ -110,7 +120,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_pic', [PicController::class, 'deleteAll']);
     Route::get('/selected_pic', [PicController::class, 'selected']);
     Route::get('/update_all/{id}', [PicController::class, 'updateall']);
-    
+    Route::post('/save_import_pic', [PicController::class, 'save_import']);
+    Route::post('/importExcel_pic', [PicController::class, 'importExcel'])->name('importExcel_pic');
+    Route::get('/download_template_pic', [PicController::class, 'export']);
+
     // seller
     Route::get('/seller', [SellerController::class, 'index'])->name('seller');
     Route::get('/item_data_seller', [SellerController::class, 'item_data']);
@@ -122,6 +135,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_seller', [SellerController::class, 'deleteAll']);
     Route::get('/selected_seller', [SellerController::class, 'selected']);
     Route::get('/update_all/{id}', [SellerController::class, 'updateall']);
+    Route::post('/save_import_seller', [SellerController::class, 'save_import']);
+    Route::post('/importExcel_seller', [SellerController::class, 'importExcel'])->name('importExcel_seller');
+    Route::get('/download_template_seller', [SellerController::class, 'export']);
+
 
     // GSM Aktiv
     Route::get('/GsmActive', [GsmActiveController::class, 'index'])->name('GsmActive');
@@ -160,6 +177,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_sensor', [SensorController::class, 'deleteAll']);
     Route::get('/selected_sensor', [SensorController::class, 'selected']);
     Route::get('/update_all/{id}', [SensorController::class, 'updateall']);
+    Route::post('/save_import_sensor', [SensorController::class, 'save_import']);
+    Route::post('/importExcel_sensor', [SensorController::class, 'importExcel'])->name('importExcel_sensor');
+    Route::get('/download_template_sensor', [SensorController::class, 'export']);
 
     //Gps
     Route::get('/gps', [GpsController::class, 'index'])->name('gps');
@@ -172,6 +192,18 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_gps', [GpsController::class, 'deleteAll']);
     Route::get('/selected_gps', [GpsController::class, 'selected']);
     Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
+    // Route::put('/import_gps', [GpsController::class, 'ImportGps']);
+    Route::post('/importExcel_gps', [GpsController::class, 'importExcel'])->name('importExcel_gps');
+    Route::get('/item_data_temporary_GpsMaster', [GpsController::class, 'item_data_temporary']);
+    Route::get('/delete_temporary_gps', [GpsController::class, 'deleteTemporary']);
+    Route::get('/download_template_gps', [GpsController::class, 'export']);
+    // Route::get('/try', [GpsController::class, 'try']);
+    Route::post('/save_import_gps', [GpsController::class, 'save_import']);
+    Route::get('/based_merksensor/{id}', [GpsController::class, 'basedType']);
+
+
+
+
 
     //gsm Master
     Route::get('/GsmMaster', [GsmMasterController::class, 'index'])->name('GsmMaster');
@@ -196,25 +228,14 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
         // try
         Route::get('/try', [GsmMasterController::class, 'try']);
 
-
-
-     // Request Complain
-     Route::get('/requestcomplaint', [RequestComplaintController::class, 'index'])->name('request.complain');
-     Route::get('/item_data_RequestComplain', [RequestComplaintController::class, 'item_data']);
-     Route::get('/item_data_MY_RequestComplain', [RequestComplaintController::class, 'item_data_MY']);
-     Route::get('/add_form_RequestComplain', [RequestComplaintController::class, 'add_form']);
-     Route::get('/store_RequestComplain', [RequestComplaintController::class, 'store']);
-     Route::get('/destroy_RequestComplain/{id}', [RequestComplaintController::class, 'destroy']);
-     Route::get('/show_RequestComplain/{id}', [RequestComplaintController::class, 'edit_form']);
-     Route::get('/update_RequestComplain/{id}', [RequestComplaintController::class, 'update']);
-     Route::get('/selectedDelete_RequestComplain', [RequestComplaintController::class, 'deleteAll']);
-     Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
-     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
+    // //Request and Complent Customer
+    // Route::get('/request_complent_customer', [RequestComplentCustomerController::class, 'index'])->name('request_complent_customer');
+    // Route::get('/item_data_reqcomp_cust', [RequestComplentCustomerController::class, 'item_data'])->name('item_data_reqcomp_cust');
 
     //detail customer
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
-    Route::get('/item_data_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
-    Route::get('/add_form_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
+    Route::get('/item_detail/{id}', [DetailCustomerController::class, 'item_data'])->name('item_detail');
+    Route::get('/add_form_detail/{id}', [DetailCustomerController::class, 'add_form'])->name('add_detail');
     Route::get('/store_detail', [DetailCustomerController::class, 'store']);
     Route::get('/destroy_detail/{id}', [DetailCustomerController::class, 'destroy']);
     Route::get('/show_detail/{id}', [DetailCustomerController::class, 'edit_form']);
@@ -222,7 +243,19 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_detail', [DetailCustomerController::class, 'deleteAll']);
     Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
     Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
-    
+    Route::get('/coba', [DetailCustomerController::class, 'coba']);
+    Route::get('/based_company/{id}', [DetailCustomerController::class, 'basedCompany']);
+    Route::get('/based_imei/{id}', [DetailCustomerController::class, 'basedImei']);
+    Route::get('/based_gsm/{id}', [DetailCustomerController::class, 'basedGsm']);
+    Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensor']);
+    Route::get('/based_license/{id}', [DetailCustomerController::class, 'basedLicense']);
+    Route::get('/based_po/{id}', [DetailCustomerController::class, 'basedPO']);
+    Route::get('/based_ponumber/{id}', [DetailCustomerController::class, 'basedPonumber']);
+    // Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensorName']);
+    Route::get('/based_serialnumber/{id}', [DetailCustomerController::class, 'basedSerialNumber']);
+    Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
+
+
     // Pemasangan Mutasi GPS
     Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
     Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
@@ -235,13 +268,51 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
     Route::get('/selected_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'selected']);
     Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
+    Route::get('/item_data_onProgress_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_onProgress'])->name('item_data_onprogress');
+    Route::get('/item_data_done_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_done'])->name('item_data_done');
+    Route::get('/item_data_all_pemasangan', [PemasanganMutasiGpsController::class, 'item_data']);
+    Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
+    Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensorName']);
+    Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
+
+    // Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
+    // Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
+    // Route::get('/dependent_KendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'dependentKendaraanPasang']);
+
     Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
     Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
     // Route::get('/dependent_KendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'dependentKendaraanPasang']);
+    // Request Complain
+    Route::get('/RequestComplain', [RequestComplaintController::class, 'index'])->name('request.complain');
+    Route::get('/item_data_RequestComplain', [RequestComplaintController::class, 'item_data']);
+    Route::get('/item_data_MY_RequestComplain', [RequestComplaintController::class, 'item_data_MY']);
+    Route::get('/item_data_all_RequestComplain', [RequestComplaintController::class, 'item_data']);
+    Route::get('/item_data_Request_Internal_RequestComplain', [RequestComplaintController::class, 'item_data_Request_Internal']);
+    Route::get('/item_data_Request_Eksternal_RequestComplain', [RequestComplaintController::class, 'item_data_Request_Eksternal']);
+    Route::get('/item_data_Complain_Internal_RequestComplain', [RequestComplaintController::class, 'item_data_Complain_Internal']);
+    Route::get('/item_data_Complain_Eksternal_RequestComplain', [RequestComplaintController::class, 'item_data_Complain_Eksternal']);
+    Route::get('/add_form_RequestComplain', [RequestComplaintController::class, 'add_form']);
+    Route::get('/store_RequestComplain', [RequestComplaintController::class, 'store']);
+    Route::get('/destroy_RequestComplain/{id}', [RequestComplaintController::class, 'destroy']);
+    Route::get('/show_RequestComplain/{id}', [RequestComplaintController::class, 'edit_form']);
+    Route::get('/update_RequestComplain/{id}', [RequestComplaintController::class, 'update']);
+    Route::get('/selectedDelete_RequestComplain', [RequestComplaintController::class, 'deleteAll']);
+    Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
+    Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
+    Route::get('/based_pic/{id}', [RequestComplaintController::class, 'basedPic']);
+
+    //Dashboar Visit Assignment
+    Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
+    Route::get('/item_data_DashboardVisitAssignment', [DashboardVisitAssignmentController::class, 'item_data']);
+    Route::get('/item_data_DetailCostPercompany', [DashboardVisitAssignmentController::class, 'detailPercompany']);
+    Route::get('/item_data_TypeGps', [DashboardVisitAssignmentController::class, 'perTypeGps']);
+    Route::get('/item_data_teknisi', [DashboardVisitAssignmentController::class, 'tugasPerTeknisi']);
+
 
     // Maintenance GPS
     Route::get('/MaintenanceGps', [MaintenanceGpsController::class, 'index']);
     Route::get('/item_data_maintenanace_gps', [MaintenanceGpsController::class, 'item_data']);
+    Route::get('/item_data_MY_Maintennace', [MaintenanceGpsController::class, 'item_data_MY']);
     Route::get('/add_form_maintenanace_gps', [MaintenanceGpsController::class, 'add_form']);
     Route::get('/store_maintenanceGps', [MaintenanceGpsController::class, 'store']);
     Route::get('/destroy_maintenanceGps/{id}', [MaintenanceGpsController::class, 'destroy']);
@@ -254,21 +325,81 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_maintenanceGps', [MaintenanceGpsController::class, 'deleteAll']);
     Route::get('/selected_maintenanceGps', [MaintenanceGpsController::class, 'selected']);
 
-     //Dashboar Visit Assignment
-     Route::get('/dashboard_visit_assignment', [DashboardVisitAssignmentController::class, 'index']);
+    //Dashboar Visit Assignment
+    Route::get('/dashboard_visit_assignment', [DashboardVisitAssignmentController::class, 'index']);
 
 
-     // Edit Password
+    // Edit Password
     Route::get('change-password', [ChangePasswordController::class, 'index']);
     Route::post('change-password', [ChangePasswordController::class, 'store'])->name('change.password');
     // Edit Profile
     Route::get('profile',  [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
 
+    Route::get('/item_data_onProgress_maintenance', [MaintenanceGpsController::class, 'item_data_onProgress']);
+    Route::get('/item_data_done_maintenance', [MaintenanceGpsController::class, 'item_data_done']);
+    Route::get('/item_data_all_maintenance', [MaintenanceGpsController::class, 'item_data']);
+    Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensor']);
+    // Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensorName']);
+    Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
+
+    // Master PO
+    Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');
+    Route::get('/item_data_master_po', [MasterPoController::class, 'item_data'])->name('item_master_po');
+    Route::get('/add_form_master_po', [MasterPoController::class, 'add_form'])->name('add_master_po');
+    Route::get('/store_master_po', [MasterPoController::class, 'store']);
+    Route::get('/destroy_master_po/{id}', [MasterPoController::class, 'destroy']);
+    Route::get('/show_master_po/{id}', [MasterPoController::class, 'edit_form']);
+    Route::get('/update_master_po/{id}', [MasterPoController::class, 'update']);
+    Route::get('/selectedDelete_master_po', [MasterPoController::class, 'deleteAll']);
+    Route::get('/selected_master_po', [MasterPoController::class, 'selected']);
+    Route::get('/update_all/{id}', [MasterPoController::class, 'updateall']);
+    Route::get('/item_data_All_master_po', [MasterPoController::class, 'item_data']);
+    Route::get('/item_data_beli_master_po', [MasterPoController::class, 'item_data_Beli']);
+    Route::get('/item_data_sewa_master_po', [MasterPoController::class, 'item_data_Sewa']);
+    Route::get('/item_data_sewa_beli_master_po', [MasterPoController::class, 'item_data_Sewa_Beli']);
+    Route::get('/item_data_trial_master_po', [MasterPoController::class, 'item_data_Trial']);
+    Route::get('/filter_company/{id}', [MasterPoController::class, 'filter_company']);
+    Route::get('/item_data_All_company_master_po', [MasterPoController::class, 'item_data']);
+    Route::post('/save_import_masterPo', [MasterPoController::class, 'save_import']);
+    Route::post('/importExcel_masterPo', [MasterPoController::class, 'importExcel'])->name('importExcel_masterPo');
+    Route::get('/download_template_masterPo', [MasterPoController::class, 'export']);
+
+
+
+    //Dashboar Visit Assignment
+    Route::get('/dashboard_visit_assignment', [DashboardVisitAssignmentController::class, 'index']);
+
+    // Vehicle
+    Route::get('/Vehicle', [VehicleController::class, 'index'])->name('vehicle');
+    Route::get('/item_data_vehicle', [VehicleController::class, 'item_data']);
+    Route::get('/add_form_vehicle', [VehicleController::class, 'add_form']);
+    Route::get('/store_vehicle', [VehicleController::class, 'store']);
+    Route::get('/destroy_vehicle/{id}', [VehicleController::class, 'destroy']);
+    Route::get('/show_vehicle/{id}', [VehicleController::class, 'show']);
+    Route::get('/update_vehicle/{id}', [VehicleController::class, 'update']);
+    Route::get('/selectedDelete_vehicle', [VehicleController::class, 'deleteAll']);
+    Route::get('/selected_vehicle', [VehicleController::class, 'selected']);
+    Route::get('/update_all/{id}', [VehicleController::class, 'updateall']);
+    Route::get('/dependent_company/{id}', [CompanyController::class, 'dependentCompany']);
+    Route::get('/show_no_agreement/{id}', [CompanyController::class, 'showAgreement']);
+    Route::post('/save_import_MasterVehicle', [VehicleController::class, 'save_import']);
+    Route::post('/importExcel_MasterVehicle', [VehicleController::class, 'importExcel'])->name('importExcel_MasterVehicle');
+    Route::get('/download_template_MasterVehicle', [VehicleController::class, 'export']);
+
+    Route::get('/cek', [MasterPoController::class, 'check']);
+
+    //Summary Detail Customer
+    Route::get('/count', [SummaryController::class, 'countPo']);
+    Route::get('/filter', [SummaryController::class, 'filter']);
+    Route::get('/data-po', [SummaryController::class, 'DataPo']);
+    Route::get('/item_summary', [SummaryController::class, 'item_summary']);
+    Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
+    Route::get('/item_summary', [SummaryController::class, 'item_summary'])->name('item_summary');
+    Route::get('/add_summary', [DetailCustomerController::class, 'add_form'])->name('add_summary');
 });
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

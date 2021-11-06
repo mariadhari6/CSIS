@@ -11,14 +11,14 @@ class Company extends Model
     protected $table = 'companies';
 
     protected $fillable = [
-        'company_name', 'seller_id', 'customer_code', 'no_po', 'po_date', 'no_agreement_letter_id', 'status',
+        'company_name', 'seller_id', 'customer_code', 'no_agreement_letter_id', 'status',
     ];
 
     public function seller()
     {
         return $this->belongsTo(Seller::class);
     }
-    
+
     public function pic()
     {
         return $this->hasMany(Pic::class);
@@ -32,10 +32,30 @@ class Company extends Model
     {
         return $this->hasMany(GsmTerminate::class);
     }
+    public function maintenanceGps()
+    {
+        return $this->hasMany(MaintenanceGps::class);
+    }
+    public function pemasanganMutasiGps()
+    {
+        return $this->hasMany(PemasanganMutasiGps::class);
+    }
     //---------------------//
-    // public function requestComplaint()
-    // {
-    //     return $this->hasMany(RequestComplaintCustomer::class);
-    // }
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaint::class);
+    }
 
+    public function masterPo()
+    {
+        return $this->hasMany(MasterPo::class, 'company_id', 'id');
+    }
+    public function gsmTemporary()
+    {
+        return $this->hasMany(GsmTemporary::class, 'company_id', 'id');
+    }
+    public function gsm()
+    {
+        return $this->hasMany(Gsm::class, 'company_id', 'id');
+    }
 }

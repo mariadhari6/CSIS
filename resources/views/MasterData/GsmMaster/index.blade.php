@@ -21,7 +21,7 @@
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
                   </select>
                 </div>
-                <button type="button" class="btn btn-success btn-sm float-left mr-2" data-toggle="modal" data-target="#importData">
+                <button type="button" class="btn btn-success btn-sm float-left mr-2" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()>
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
@@ -202,7 +202,7 @@
                 }    
               }
             }
-            alert( typeof serialNumberValue );
+            // alert( typeof serialNumberValue );
           }
 
           // change format RequestDate
@@ -335,8 +335,8 @@
               swal({
                 type: 'warning',
                 text: 'Duplicate data or error format',
-                showConfirmButton: false,
-                timer: 1500
+                showCloseButton: true,
+                showConfirmButton: false
               }).catch(function(timeout) { });
 
             }
@@ -349,7 +349,7 @@
     // ---- Close Modal -------
     $('#close-modal').click(function() {
         // deleteTemporary();
-        // read_temporary()
+        read()
         $('#importData').modal('hide');
     });
 
@@ -767,6 +767,7 @@
             });
         });
         }
+
         //--------Proses Batal--------
         function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
@@ -777,7 +778,10 @@
             read();
         }
 
-
+         // destro datatable
+         function dataLengthAll() {
+          $('#table_id').DataTable().destroy();
+        }
 
   </script>
 

@@ -358,8 +358,8 @@
 
             //--------Proses Batal--------
         function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+            $(".btn-round").hide("fast");
+            $(".btn-round").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
