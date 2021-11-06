@@ -26,7 +26,7 @@
     </td>
     <td>
         <select class="select" id="status" aria-label=".form-select-lg example" required>
-            <option value="">Pilih status</option>
+            <option  class="hidden" value="">--Pilih Status--</option>
             <option value="Active">Active</option>
             <option value="In Active">In Active</option>
         </select>

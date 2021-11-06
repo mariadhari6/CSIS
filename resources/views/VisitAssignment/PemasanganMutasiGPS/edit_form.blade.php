@@ -33,7 +33,7 @@
                 {{ $pemasangan_mutasi_GPS->detailCustomerVehicle->vehicle->license_plate??'' }}
             </option>
             @foreach ($details as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate }}</option>
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??''}}</option>
 
             @endforeach
          </select></i>
@@ -66,7 +66,7 @@
         <option value="{{$pemasangan_mutasi_GPS->gsm_pemasangan}}"> {{$pemasangan_mutasi_GPS->detailCustomerGsm->gsm->gsm_number?? ''}} </option>
         @foreach ($details as $item)
         <option value="{{ $item->id }}" {{ old('gsm_pemasangan') == $item->id  ? 'selected':'' }}>
-        {{$item->gsm->gsm_number}}
+        {{$item->gsm->gsm_number??''}}
         </option>
 
        @endforeach

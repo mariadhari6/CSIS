@@ -76,20 +76,7 @@
 
        @endforeach
     </select></i></td>
-    <td>
-        <select class="select task-{{$maintenanceGps->id}}" id="task" name="task-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->task}}">
-                {{ $maintenanceGps->taskRequest->task }}
-            </option>
 
-            @foreach ($task as $item)
-            <option value="{{ $item->id }}">
-                {{ $item->task }}
-            </option>
-            @endforeach
-
-        </select>
-    </td>
  <td><select class="select ketersediaan_kendaraan-{{$maintenanceGps->id}}" id="ketersediaan_kendaraan" name="ketersediaan_kendaraan" aria-label=".form-select-lg example">
     <option value=" {{$maintenanceGps->ketersediaan_kendaraan}}"> {{$maintenanceGps->ketersediaan_kendaraan}} </option>
     <option value="Tersedia">Tersedia</option>
@@ -167,7 +154,7 @@
                         $('select[name="type_gps_id').empty();
                         $('select[name="type_gps_id').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
-                                $('select[name="type_gps_id').append('<option value="'+ data[i].id + '"> '+ data[i].type.gps.type +'</option>');
+                                $('select[name="type_gps_id').append('<option value="'+ data[i].id + '"> '+ data[i].type+'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)
                             }
                     }

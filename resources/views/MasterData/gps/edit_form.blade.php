@@ -36,7 +36,7 @@
     </td>
     <td>
         <select class="select status-{{$gps->id}}" id="status" name="status" aria-label=".form-select-lg example" required>
-            <option selected>{{$gps->status}}</option>
+            <option class="hidden" selected>{{$gps->status}}</option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>
@@ -44,11 +44,11 @@
     </td>
     <td  id="statusOwnership">
         <select class="select status_ownership-{{$gps->id}}" id="status_ownership" name="status_ownership"aria-label=".form-select-lg example">
-            <option selected>{{$gps->status_ownership}}</option>
-            <option value="Sewa">Sewa</option>
+            <option class="hidden" selected>{{$gps->status_ownership}}</option>
+            {{-- <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
-            <option value="Beli">Beli</option>
+            <option value="Beli">Beli</option> --}}
         </select></i>
     </td>
 
@@ -71,6 +71,18 @@
                             <option value="">-</option>
                         </select>`
                        );
+                }else if(itemID == 'Error'){
+                    $('#statusOwnership').empty();
+                        $('#statusOwnership').append(
+                            `<select class="select" id="status_ownership">
+                                    <option value="Lokasi Customer">Lokasi Customer</option>
+                                    <option value="Lokasi Integrasia">Lokasi Integrasia</option>
+                                    <option value="GPS sudah di Return">GPS sudah di Return</option>
+
+                            </select>`
+                        );
+
+
                 }else {
                         $('#statusOwnership').empty();
                         $('#statusOwnership').append(

@@ -4,7 +4,7 @@
 
     <td>
         <select class="select" id="sensor_name" name="sensor_name" aria-placeholder="Sensor_name">
-            <option selected disabled></option>
+            <option class="hidden">--Pilih Sensor Name--</option>
 
             @foreach ($sensorName as $item)
             <option value="{{ $item->sensor_name }}" {{ old('sensor_name') == $item->id ? 'selected':'' }}>{{ $item->sensor_name}}</option>
@@ -26,7 +26,7 @@
     </td>
     <td>
         <select class="select" id="status" aria-label=".form-select-lg example" >
-            <option selected>Pilih status</option>
+            <option selected class="hidden">--Pilih Status--</option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>

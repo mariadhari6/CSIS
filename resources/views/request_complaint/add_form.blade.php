@@ -89,12 +89,12 @@
     <td>
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" required ></i></div>
     </td>
-    <td>
+    <td id="td-solve">
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="waktu Solve" required ></i></div>
     </td>
     <td>
-        <select class="select"  id="status" aria-label=".form-select-lg example" required>
-            <option disabled value="On Progress">Status</option>
+        <select class="select"  id="status" name="status" aria-label=".form-select-lg example" required>
+            <option class="hidden" value="On Progress">On Progress</option>
             <option value="On Progress">On Progress</option>
             <option value="Done">Done</option>
         </select></i>
@@ -147,6 +147,22 @@
 
             }
          });
+
+         // status waktu solve
+         $('select[name="status"]').on('change', function() {
+            var itemID = $(this).val();
+           if(itemID == "On Progress"){
+               $('#td-solve').empty();
+               $('#td-solve').append(
+                `<div class="input-div"><input type="text" class="input" id="waktu_solve" placeholder="Waktu Solve" disabled></div>`
+               );
+           }else{
+                $('#td-solve').empty();
+                $('#td-solve').append(
+                `<div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="Waktu Solve"></div>`
+                );
+           }
+        });
 </script>
 
 </tr>

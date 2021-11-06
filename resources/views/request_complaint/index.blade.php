@@ -184,7 +184,6 @@
         divisi =="" ||
         respond=="" ||
         waktu_kesepakatan=="" ||
-        waktu_solve=="" ||
         status==""
         ){
 

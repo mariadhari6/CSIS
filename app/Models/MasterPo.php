@@ -17,8 +17,9 @@ class MasterPo extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class, 'company_id', 'id');
+        return $this->belongsTo(Company::class);
     }
+
     public function sales()
     {
         return $this->belongsTo(Sales::class);
@@ -26,14 +27,14 @@ class MasterPo extends Model
 
     public function detail()
     {
-        return $this->hasMany(DetailCustomer::class, 'po_date', 'id');
+        return $this->hasMany(DetailCustomer::class);
     }
-    public function detailHargalayanan()
-    {
-        return $this->hasMany(DetailCustomer::class, 'harga_layanan', 'id');
-    }
-    public function detailPonumber()
-    {
-        return $this->hasMany(DetailCustomer::class, 'po_id', 'id');
-    }
+    // public function detailHargalayanan()
+    // {
+    //     return $this->hasMany(DetailCustomer::class, 'harga_layanan', 'id');
+    // }
+    // public function detailPonumber()
+    // {
+    //     return $this->hasMany(DetailCustomer::class);
+    // }
 }

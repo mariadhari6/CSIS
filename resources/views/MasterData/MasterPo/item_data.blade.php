@@ -23,7 +23,8 @@
             {{ $item->po_date }}
         </td>
         <td id="item-harga_layanan-{{ $item->id}}">
-            {{ $item->harga_layanan }}
+        <span>Rp. </span>{{ number_format( $item->harga_layanan)}}
+
         </td>
           <td id="item-jumlah_unit_po-{{ $item->id }}">
             {{ $item->jumlah_unit_po }}

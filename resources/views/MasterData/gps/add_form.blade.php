@@ -6,7 +6,7 @@
 
     <td>
         <select class="select" id="merk" name="merk" required>
-            {{-- <option value=""></option> --}}
+            <option class="hidden" value="">--Pilih Merk--</option>
             @foreach ($merk as $item)
             <option value="{{ $item->merk_gps }}"  {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>
             @endforeach
@@ -15,16 +15,15 @@
     </td>
 
     <td>
-        <select class="select @error('type') is-invalid @enderror" id="type" name="type" required>
+        <select class="select" id="type" name="type" required>
+            {{-- <option class="hidden" value="">--Pilih Type--</option> --}}
 
             @foreach ($merk as $item)
             <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type_gps}}</option>
             @endforeach
 
         </select>
-         @error('type')
-        <div class="alert alert-danger">{{$message}}</div>
-        @enderror
+
     </td>
      {{-- <td>
         <div class="input-div"><input type="text" class="input" id="merk" placeholder="Merk"></i>
@@ -48,7 +47,7 @@
     </td>
     <td>
         <select class="select @error('status') is-invalid @enderror" id="status" aria-label=".form-select-lg example" name="status" aria-placeholder="status" required>
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>
@@ -132,7 +131,7 @@
                         success:function(data) {
                             // alert(data.length);
                             $('select[name="type').empty();
-                            $('select[name="type').append('<option value=""> </option>');
+                            // $('select[name="type').append('<option value=""> </option>');
                                 for(var i = 0 ; i < data.length ; i++) {
                                     $('select[name="type').append('<option value="'+ data[i].type_gps+ '"> '+ data[i].type_gps +'</option>');
                                         // alert(data[i].serial_number)
