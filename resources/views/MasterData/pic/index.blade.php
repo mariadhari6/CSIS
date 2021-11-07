@@ -1,17 +1,10 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
-@section('title','PIC Company')
-@section('title-table','PIC Company')
-@section('content')
-
-=======
 @section('title','CSIS | PIC Company')
 @section('title-table','PIC Company')
 @section('master','show')
 @section('pic','active')
 
 @section('content')
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -34,27 +27,9 @@
           </div>
         <form>
 
-          <table class="table table-hover data" class="table_id" id="table_id" >
+          <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-<<<<<<< HEAD
-                  <th>
-                    <label class="form-check-label">
-                      <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                      <span class="form-check-sign"></span>
-                    </label>
-                </th>
-                <th scope="col">No</th>
-                <th scope="col">Company</th>
-                <th scope="col">Pic Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Email</th>
-                <th scope="col">Position</th>
-                <th scope="col">Date of birth</th>
-                <th scope="col">Action</th>
-=======
-
-
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -71,12 +46,10 @@
                 <th scope="col" class="list-picPosition">Position*</th>
                 <th scope="col" class="list">Date of birth</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
-
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
               </tr>
             </thead>
             <tbody  id="item_data">
-            
+              {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
          </form>
@@ -185,8 +158,6 @@
 
         };
     });
-<<<<<<< HEAD
-=======
 
     function save_data() {
         var total = 0;
@@ -262,7 +233,6 @@
         $('#importData').modal('hide');
     });
     // ------ Tampil Data ------
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
     function read(){
       $.get("{{ url('item_data_pic') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
@@ -365,15 +335,6 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
-<<<<<<< HEAD
-        $("#item-no-"+id).hide("fast");
-        $("#item-company_id-"+id).hide("fast");
-        $("#item-pic_name-"+id).hide("fast");
-        $("#item-phone-"+id).hide("fast");
-        $("#item-email-"+id).hide("fast");
-        $("#item-position-"+id).hide("fast");
-        $("#item-date_of_birth-"+id).hide("fast");
-=======
 
         $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).slideUp("fast");
@@ -382,7 +343,6 @@
         $("#item-email-"+id).slideUp("fast");
         $("#item-position-"+id).slideUp("fast");
         $("#item-date_of_birth-"+id).slideUp("fast");
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
         $.get("{{ url('show_pic') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -496,11 +456,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-<<<<<<< HEAD
-                    $("#item-no-"+value).slideUp("fast");
-=======
                     $("#item-no-"+value).hide("fast");
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
                     $("#item-company_id-"+value).slideUp("fast");
                     $("#item-pic_name-"+value).slideUp("fast");
                     $("#item-phone-"+value).slideUp("fast");
@@ -555,22 +511,6 @@
                     },
                     success: function(data) {
                     swal({
-<<<<<<< HEAD
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-
-                               
-                                });
-                                read();
-
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
-=======
                           type: 'success',
                           title: 'The selected data has been updated',
                           showConfirmButton: false,
@@ -585,7 +525,6 @@
                       $(".delete_all").show("fast");
                       $(".btn-round").hide("fast");
                       $(".btn-round").hide("fast");
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
                     }
                 });
             });

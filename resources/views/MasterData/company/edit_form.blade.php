@@ -1,21 +1,6 @@
-<<<<<<< HEAD
-    <td></td>
-=======
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
     <td></td>
     <td></td>
-
-
     <td>
-<<<<<<< HEAD
-        <div class="input-div"><input type="text" class="input company_name-{{$company->id}}" id="company_name" placeholder="Company Name" value="{{ $company->company_name}}"></i></div>
-    </td>
-    <td>
-       <select class="form-control seller_id-{{$company->id}}"  id="seller_id" name="seller_id">
-            @foreach ($seller as $sellers)
-                <option value="{{ $sellers->id }}" {{ old('seller_id') == $sellers->id ? 'selected':'' }}>{{ $sellers->seller_name }}</option>
-            @endforeach
-=======
         <div class="input-div"><input type="text" class="input company_name-{{$company->id}}" id="company_name" placeholder="Company Name" value="{{ $company->company_name}}" required></i>
         </div>
     </td>
@@ -31,7 +16,6 @@
         </option>
        @endforeach
 
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
         </select>
     </td>
     <td>
@@ -39,27 +23,6 @@
         </div>
     </td>
     <td>
-<<<<<<< HEAD
-        <select class="form-control no_agreement_letter_id-{{$company->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id">
-            @foreach ($seller as $sellers)
-                <option value="{{ $sellers->id }}" {{ old('no_agreement_letter_id') == $sellers->id ? 'selected':'' }}>{{ $sellers->no_agreement_letter }}</option>
-            @endforeach
-        </select>
-    </td>
-    <td>
-        <select class="form-control" id="status" name="status">
-            <option selected>{{$company->status}}</option>
-            <option value="Contract">Contract</option>
-            <option value="Terminate">Terminate</option>
-            <option value="Trial">Trial</option>
-            <option value="Register">Register</option>
-        </select>
-    </td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $company->id}})"></i>
-        <i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
-=======
         <select class="select no_agreement_letter_id-{{$company->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id-{{$company->id}}" required>
         @foreach ($seller as $item)
         <option value="{{ $item->id }}" {{ old('no_agreement_letter_id') == $item->id ? 'selected':'' }}>
@@ -104,4 +67,3 @@
             });
         });
     </script>
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb

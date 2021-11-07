@@ -1,27 +1,4 @@
 <tr id="add_form">
-<<<<<<< HEAD
-    <td></td>
-    <td></td>
-    
-
-    {{-- <td> <div class="input-div"><input type="text" class="input" id="seller_id" placeholder="Seller id"></i></div></td> --}}
-    <td> <div class="input-div"><input type="text" class="input" id="merk" placeholder="Merk"></i></td>
-    <td> <div class="input-div"><input type="text" class="input" id="type" placeholder="Type"></i></td>
-    <td> <div class="input-div"><input type="text" class="input" id="imei" placeholder="IMEI"></i></td>
-    <td> <div class="input-div"><input type="date" class="input" id="waranty" placeholder="Waranty"></i></td>
-    <td> <div class="input-div"><input type="date" class="input" id="po_date" placeholder="Po Date"></i></td>
-    <td>
-        <select class="select" id="status" aria-label=".form-select-lg example">
-            <option selected>Pilih status</option>
-            <option value="Ready">Ready</option>
-            <option value="Used">Used</option>
-            <option value="Error">Error</option>
-        </select>
-    </td>
-    <td>
-        <select class="select" id="status_ownership" aria-label=".form-select-lg example">
-            <option selected>Pilih Status</option>
-=======
 
 
 <td></td>
@@ -86,16 +63,10 @@
             {{-- <option value="-">-</option> --}}
 
             <option value="-">-</option>
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
             <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
             <option value="Beli">Beli</option>
-<<<<<<< HEAD
-        </select>
-    </td>
-    <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
-=======
         </select></i>
         @error('status_ownership')
         <div class="alert alert-danger">{{$message}}</div>
@@ -111,7 +82,6 @@
 
 
 
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
 </tr>
 <script>
     $('select[name="status"]').on('change', function() {
@@ -173,7 +143,6 @@
                     $('select[name="type"]').empty();
 
                 }
-
             });
 </script>
 

@@ -1,44 +1,15 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
-@section('title','Sensor')
-@section('title-table','Sensor')
-=======
 @section('title','CSIS | Master Sensor')
 @section('title-table','Master Sensor')
 @section('master','show')
 @section('sensor','active')
 
 
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
 @section('content')
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-<<<<<<< HEAD
-            <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-          <table class="table table-hover " class="table_id" id="table_id" >
-            <thead>
-              <tr>
-                <th>
-                  <label class="form-check-label">
-                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                    <span class="form-check-sign"></span>
-                </label>
-                </th>
-                <th scope="col">No</th>
-                <th scope="col">Sensor Name</th>
-                <th scope="col">Merk Sensor</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">Rab Number</th>
-                <th scope="col">Waranty</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-=======
           <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
                 <b>Add</b>
@@ -76,7 +47,6 @@
                 <th scope="col" class="list">Waranty</th>
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
               </tr>
             </thead>
             <tbody  id="item_data">

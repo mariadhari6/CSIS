@@ -6,8 +6,7 @@
         <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
         <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
     </div>
-   
-  
+
     <table class="table table-responsive" id="table_id">
         <thead>
           <tr>
@@ -45,7 +44,6 @@
         </tbody>
     </table>
 
-   
 
 <script>
 
@@ -53,14 +51,13 @@
         read();
     });
 
-    function read(){
-
+    function read() {
         var id = {{ $company->id }}; 
-
         $.get("{{ url('item_detail') }}/" + id , {}, function(data, status) {
             $('#table_id').DataTable().destroy();
             $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable({
+                "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
                 "dom": '<"top"f>rt<"bottom"lp><"clear">'
             });
             $('#table_id').DataTable().draw();
@@ -71,24 +68,20 @@
       read();
     }
 
-    $('.add').click(function(){
+    $('.add').click(function() {
 
         var id = {{ $company->id }}; 
         $.get("{{ url('add_form_detail') }}/" + id , {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
-        
     });
 
-    $("#TanggalPasang").on({
-            "click": function(){
-                $("#TanggalPasang[data-toggle='popover']").popover('hide');  
-            }
-        });
+    $("#TanggalPasang").on({"click": function() {
+        $("#TanggalPasang[data-toggle='popover']").popover('hide');  
+        }
+    });
 
-    function store(){
-
-
+    function store() {
         var CompanyId           = $("#CompanyId").val();
         var LicencePlate        = $("#LicencePlate").val();
         var VihecleType         = $("#VihecleType").val();
@@ -110,11 +103,9 @@
         var TanggalNonAktif     = $("#TanggalNonAktif").val();
         var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
 
-        if (TanggalPasang == ""){   
+        if (TanggalPasang == "") {   
             $("#TanggalPasang[data-toggle='popover']").popover('show');
-          
             return false; 
-           
         }
        
         $.ajax({
@@ -157,7 +148,7 @@
 
    
     function destroy(id){
-        
+
         var id = id;
         swal({
             title: 'Are you sure?',
@@ -226,13 +217,12 @@
             }, 
             success: function(data, status){
                 $("#edit-form-"+id).prepend(data)
-            }
-                
+            }                
         });
         return true;
     }
 
-     function update(id){
+    function update(id){
 
         var id = id;
         var CompanyId           = $("#CompanyId").val();
@@ -269,176 +259,169 @@
                 }
             }
         }
-        
-            $.ajax({
-                type: "get",
-                url: "{{ url('update_detail') }}/"+id,
-                data: {
-                CompanyId           : CompanyId,
-                LicencePlate        : LicencePlate,
-                VihecleType         : VihecleType,
-                PoNumber            : PoNumber,
-                HargaLayanan        : HargaLayanan,
-                PoDate              : PoDate,
-                StatusPo            : StatusPo,
-                Imei                : Imei,
-                Merk                : Merk,
-                Type                : Type,
-                GSM                 : GSM,
-                Provider            : Provider,
-                SensorAll           : SensorAll,
-                PoolName            : PoolName,
-                PoolLocation        : PoolLocation,
-                Waranty             : Waranty,
-                StatusLayanan       : StatusLayanan,
-                TanggalPasang       : TanggalPasang,
-                TanggalNonAktif     : TanggalNonAktif,
-                TanggalReaktivasi   : TanggalReaktivasi
-                },
-                success: function(data){
-                    swal({
-                        type: 'success',
-                        title: ' Data Updated',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).catch(function(timeout) { })
-                    // $("[data-toggle='popover']").popover('close');
-                    read();
-                }
-            });
-        }
 
+        $.ajax({
 
-
-        $('#master').on('click', function(e) {
-
-            if($(this).is(':checked',true) ){
-                $(".task-select").prop('checked', true)
-            }
-            else{
-              $(".task-select").prop('checked',false);
-            }
-
-        });
-
-        $('.delete_all').on('click', function(){
-
-            var allVals = [];
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-
-            if (allVals.length > 0){
-
-                var _token = $('input[name="_token"]').val();
-
+            type: "get",
+            url: "{{ url('update_detail') }}/"+id,
+            data: {
+            CompanyId           : CompanyId,
+            LicencePlate        : LicencePlate,
+            VihecleType         : VihecleType,
+            PoNumber            : PoNumber,
+            HargaLayanan        : HargaLayanan,
+            PoDate              : PoDate,
+            StatusPo            : StatusPo,
+            Imei                : Imei,
+            Merk                : Merk,
+            Type                : Type,
+            GSM                 : GSM,
+            Provider            : Provider,
+            SensorAll           : SensorAll,
+            PoolName            : PoolName,
+            PoolLocation        : PoolLocation,
+            Waranty             : Waranty,
+            StatusLayanan       : StatusLayanan,
+            TanggalPasang       : TanggalPasang,
+            TanggalNonAktif     : TanggalNonAktif,
+            TanggalReaktivasi   : TanggalReaktivasi
+            },
+            success: function(data) {
                 swal({
-                    title: 'Are you sure?',
-                    text: "You want delete Selected data !",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes Delete',
-                    showLoaderOnConfirm: true,
-                    preConfirm: function(){
-                        return new Promise(function(resolve){
-                            $.ajax({
-                                url: "{{ url('selectedDelete_detail') }}",
-                                method: "GET",
-                                data: {
-                                    id: allVals,
-                                    _token: _token
-                                },
-                                success: function(data) {
-                                    swal({
-                                        type: 'success',
-                                        title: 'The selected data has been deleted',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    }).catch(function(timeout) { })
-
-                                    $("#master").prop('checked', false);
-                                    read();
-                                }
-                            });
-                        });
-                    },
-                    allowOutsideClick: false
-                });
-
+                    type: 'success',
+                    title: ' Data Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { })
+                    read();
             }
-            else{
-                alert('Select the row you want to delete')
-            }
+                
+        });    
+    }
 
+    $('#master').on('click', function(e) {
+
+        if ($(this).is(':checked',true) ) {
+            $(".task-select").prop('checked', true)
+        }
+        else {
+            $(".task-select").prop('checked',false);
+        }
+    });
+
+    $('.delete_all').on('click', function() {
+
+        var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
         });
 
+        if (allVals.length > 0) {
 
-        $('.edit_all').on('click', function(e){
-
-            var allVals = [];
             var _token = $('input[name="_token"]').val();
 
+            swal({
+                title: 'Are you sure?',
+                text: "You want delete Selected data !",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Delete',
+                showLoaderOnConfirm: true,
+                preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        $.ajax({
+                            url: "{{ url('selectedDelete_detail') }}",
+                            method: "GET",
+                            data: {
+                                id: allVals,
+                                _token: _token
+                            },
+                            success: function(data) {
+                                swal({
+                                    type: 'success',
+                                    title: 'The selected data has been deleted',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).catch(function(timeout) { })
 
-            $(".task-select:checked").each(function() {
-
-                allVals.push($(this).attr("id"));
-            });
-
-            if (allVals.length > 0){
-
-                // alert(allVals);
-                $(".edit_all").hide("fast");
-                $(".delete_all").hide("fast");
-                $.get("{{ url('selected_detail') }}", {}, function(data, status) {
-                    $("#selected").prepend(data)
-
-                });
-
-                $.each(allVals, function(index, value){
-
-                    $("#td-checkbox-"+value).hide("fast");
-                    $("#td-button-"+value).hide("fast");
-                    $("#item-no-"+value).hide("fast");
-                    $("#item-CompanyId-"+value).hide("fast");
-                    $("#item-LicencePlate-"+value).hide("fast");
-                    $("#item-VihecleType-"+value).hide("fast");
-                    $("#item-PoNumber-"+value).hide("fast");
-                    $("#item-HargaLayanan-"+value).hide("fast");
-                    $("#item-PoDate-"+value).hide("fast");
-                    $("#item-StatusPo-"+value).hide("fast");
-                    $("#item-Imei-"+value).hide("fast");
-                    $("#item-Merk-"+value).hide("fast");
-                    $("#item-Type-"+value).hide("fast");
-                    $("#item-GSM-"+value).hide("fast");
-                    $("#item-Provider-"+value).hide("fast");
-                    $("#item-SensorAll-"+value).hide("fast");
-                    $("#item-PoolName-"+value).hide("fast");
-                    $("#item-PoolLocation-"+value).hide("fast");
-                    $("#item-Waranty-"+value).hide("fast");
-                    $("#item-StatusLayanan-"+value).hide("fast");
-                    $("#item-TanggalPasang-"+value).hide("fast");
-                    $("#item-TanggalNonAktif-"+value).hide("fast");
-                    $(".add").hide("fast");
-                    $.get("{{ url('show_detail') }}/" + value, {}, function(data, status) {
-                        $("#edit-form-"+value).prepend(data)
-                        $("#master").prop('checked', false);
+                                $("#master").prop('checked', false);
+                                read();
+                            }
+                        });
                     });
-                });
-            }else{
-                alert('Select the row you want to edit')
-            }
+                },
+                allowOutsideClick: false
+            });
+        }
+        else{
+            alert('Select the row you want to delete')
+        }
+    });
+
+    $('.edit_all').on('click', function(e){
+
+        var allVals = [];
+        var _token = $('input[name="_token"]').val();
+
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
         });
 
+        if (allVals.length > 0) {
 
-        function updateSelected() {
-            var allVals = [];
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
+            $(".edit_all").hide("fast");
+            $(".delete_all").hide("fast");
+            $.get("{{ url('selected_detail') }}", {}, function(data, status) {
+                $("#selected").prepend(data)
+
             });
 
-            swal({
+            $.each(allVals, function(index, value) {
+
+                $("#td-checkbox-"+value).hide("fast");
+                $("#td-button-"+value).hide("fast");
+                $("#item-no-"+value).hide("fast");
+                $("#item-CompanyId-"+value).hide("fast");
+                $("#item-LicencePlate-"+value).hide("fast");
+                $("#item-VihecleType-"+value).hide("fast");
+                $("#item-PoNumber-"+value).hide("fast");
+                $("#item-HargaLayanan-"+value).hide("fast");
+                $("#item-PoDate-"+value).hide("fast");
+                $("#item-StatusPo-"+value).hide("fast");
+                $("#item-Imei-"+value).hide("fast");
+                $("#item-Merk-"+value).hide("fast");
+                $("#item-Type-"+value).hide("fast");
+                $("#item-GSM-"+value).hide("fast");
+                $("#item-Provider-"+value).hide("fast");
+                $("#item-SensorAll-"+value).hide("fast");
+                $("#item-PoolName-"+value).hide("fast");
+                $("#item-PoolLocation-"+value).hide("fast");
+                $("#item-Waranty-"+value).hide("fast");
+                $("#item-StatusLayanan-"+value).hide("fast");
+                $("#item-TanggalPasang-"+value).hide("fast");
+                $("#item-TanggalNonAktif-"+value).hide("fast");
+                $(".add").hide("fast");
+                $.get("{{ url('show_detail') }}/" + value, {}, function(data, status) {
+                    $("#edit-form-"+value).prepend(data)
+                    $("#master").prop('checked', false);
+                });
+            });
+        }
+        else{
+            alert('Select the row you want to edit')
+        }
+    });
+
+
+    function updateSelected() {
+        var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
+        });
+
+        swal({
                 title: "Are you sure?",
                 text: "Do you want to do an update?",
                 type: "info",
@@ -511,19 +494,15 @@
                     });
                 });
             });
-        }
-      
-        function batal(){
+    }
 
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
-            $(".add").show("fast");
-            $(".edit_all").show("fast");
-            $(".delete_all").show("fast");
-            read();
-        }
-
-
-     
+    function batal() {
+        $(".save").hide("fast");
+        $(".cancel").hide("fast");
+        $(".add").show("fast");
+        $(".edit_all").show("fast");
+        $(".delete_all").show("fast");
+        read();
+    }
 
 </script>

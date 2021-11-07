@@ -1,12 +1,4 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
-@section('title','Seller')
-@section('title-table', 'Seller')
-
-@section('content')
-
-  <div class="row">
-=======
 @section('title','CSIS | Seller')
 @section('title-table', 'Seller')
 @section('master','show')
@@ -14,7 +6,6 @@
 
 @section('content')
     <div class="row">
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
     <div class="col-md-12">
     <div class="card">
         <div class="card-body">
@@ -34,31 +25,13 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
-<<<<<<< HEAD
-          <form>
-          <table class="table table-hover" class="table_id" id="table_id" >
-=======
               <form>
 
-          <table class="table table-responsive data" class="table_id" id="table_id" >
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
+          <table class="table table-hover data" class="table_id" id="table_id" >
             <thead>
               <tr>
 
                 <th>
-<<<<<<< HEAD
-                  <label class="form-check-label">
-                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                    <span class="form-check-sign"></span>
-                </label>
-                </th>
-                <th scope="col">No</th>
-                <th scope="col">Seller Name</th>
-                <th scope="col">Seller Code</th>
-                <th scope="col">No Agreement Latter</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-=======
                     <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -73,7 +46,6 @@
                 <th scope="col" class="list-seller">Status*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -81,11 +53,7 @@
             </tbody>
 
           </table>
-<<<<<<< HEAD
-        </form>  
-=======
            </form>
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
 
         </div>
       </div>
@@ -127,19 +95,12 @@
   <script>
 
     $(document).ready(function() {
-<<<<<<< HEAD
-
-      read();
-
-
-=======
       $.ajaxSetup({
             header:{
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
       });
       read()
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
     });
 
     // -- excel import to html table --
@@ -587,14 +548,6 @@
             read();
         }
 
-
-
-
-
   </script>
 
-<<<<<<< HEAD
-   @endsection
-=======
 @endsection
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb

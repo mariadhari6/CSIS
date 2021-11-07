@@ -1,35 +1,4 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
-@section('title','Company')
-@section('title-table', 'Company')
-@section('content')
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-             <div class="text-right mt-3" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-             </div>
-          <table class="table table-hover data" class="table_id" id="table_id" >
-            <thead>
-              <tr>
-                <th>
-                  <label class="form-check-label">
-                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                    <span class="form-check-sign"></span>
-                  </label>
-                </th>
-                <th scope="col">No</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">Seller</th>
-                <th scope="col">Customer Code</th>
-                <th scope="col">No Agreement Letter</th>
-                <th scope="col">Status</th>
-                <th scope="col"class="action">Action</th>
-
-=======
 @section('title',' CSIS | Company ')
 @section('title-table', 'Company')
 @section('master','show')
@@ -37,7 +6,7 @@
 
 
 @section('content')
-<form>
+
       <div class="card">
         <div class="card-body">
             <div class="text-right" id="selected">
@@ -56,6 +25,7 @@
                 <i class="fas fa-trash"></i>
               </button>
             </div>
+            <form>
              <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -74,13 +44,13 @@
                 <th scope="col" class="list-agreement">No Agreement Letter*</th>
                 <th scope="col" class="list">Status*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
               </tbody>
              </table>
+            </form>
             </div>
         </div>
         {{-- modal Import --}}
@@ -283,11 +253,7 @@
               company_name: company_name,
               seller_id: seller_id,
               customer_code: customer_code,
-<<<<<<< HEAD
-              no_agreement_letter_id:no_agreement_letter_id,
-=======
               no_agreement_letter_id: no_agreement_letter_id,
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
               status: status
 
             },
@@ -343,7 +309,6 @@
     function edit(id){
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
-<<<<<<< HEAD
         $("#td-button-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
         $("#item-company_name-"+id).hide("fast");
@@ -351,18 +316,7 @@
         $("#item-customer_code-"+id).hide("fast");
         $("#item-no_agreement_letter_id-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
-        $.get("{{ url('show_company') }}/" + id, {}, function(data, status) {
-=======
-        // $("#item-no-"+id).hide("fast");
-        $("#td-button-"+id).slideUp("fast");
-        $("#item-no-"+id).slideUp("fast");
-        $("#item-company_name-"+id).slideUp("fast");
-        $("#item-seller_id-"+id).slideUp("fast");
-        $("#item-customer_code-"+id).slideUp("fast");
-        $("#item-no_agreement_letter_id-"+id).slideUp("fast");
-        $("#item-status-"+id).slideUp("fast");
         $.get("{{ url('edit_form_company') }}/" + id, {}, function(data, status) {
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
             $("#edit-form-"+id).prepend(data)
         });
     }
@@ -458,108 +412,44 @@
    });
 
     // form edit all
-    $('.edit_all').on('click', function(e){
+    $('.edit_all').on('click', function(e) {
 
-    var allVals = [];
-    var _token = $('input[name="_token"]').val();
+      var allVals = [];
+      var _token = $('input[name="_token"]').val();
 
-    $(".task-select:checked").each(function() {
-        allVals.push($(this).attr("id"));
+      $(".task-select:checked").each(function() {
+          allVals.push($(this).attr("id"));
+      });
+      if (allVals.length > 0){
+          $(".edit_all").hide("fast");
+          $(".delete_all").hide("fast");
+          $.get("{{ url('selected_company') }}", {}, function(data, status) {
+              $("#selected").prepend(data)
+          });
+          $.each(allVals, function(index, value){
+              $("#td-checkbox-"+value).hide("fast");
+              $("#td-button-"+value).hide("fast");
+              $("#item-no-"+value).slideUp("fast");
+              $("#item-company_name-"+value).slideUp("fast");
+              $("#item-seller_id-"+value).slideUp("fast");
+              $("#item-customer_code-"+value).slideUp("fast");
+              $("#item-no_agreement_letter_id-"+value).slideUp("fast");
+              $("#item-status-"+value).slideUp("fast");
+
+              $(".add").hide("fast");
+              $.get("{{ url('edit_form_company') }}/" + value, {}, function(data, status) {
+                  $("#edit-form-"+value).prepend(data)
+                  $("#master").prop('checked', false);
+              });
+          });
+      }
+      else {
+          alert('Select the row you want to edit')
+      }
+
     });
-    if (allVals.length > 0){
-        $(".edit_all").hide("fast");
-        $(".delete_all").hide("fast");
-        $.get("{{ url('selected_company') }}", {}, function(data, status) {
-            $("#selected").prepend(data)
-        });
-        $.each(allVals, function(index, value){
-            $("#td-checkbox-"+value).hide("fast");
-            $("#td-button-"+value).hide("fast");
-            $("#item-no-"+value).slideUp("fast");
-            $("#item-company_name-"+value).slideUp("fast");
-            $("#item-seller_id-"+value).slideUp("fast");
-            $("#item-customer_code-"+value).slideUp("fast");
-            $("#item-no_agreement_letter_id-"+value).slideUp("fast");
-            $("#item-status-"+value).slideUp("fast");
 
-            $(".add").hide("fast");
-            $.get("{{ url('edit_form_company') }}/" + value, {}, function(data, status) {
-                $("#edit-form-"+value).prepend(data)
-                $("#master").prop('checked', false);
-            });
-        });
-    }else{
-        alert('Select the row you want to edit')
-    }
-    });
-
-<<<<<<< HEAD
-        // form edit all
-
-            $('.edit_all').on('click', function(e){
-
-            var allVals = [];
-
-            var _token = $('input[name="_token"]').val();
-
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-            if (allVals.length > 0){
-                
-                $(".edit_all").hide("fast");
-                $(".delete_all").hide("fast");
-                $.get("{{ url('selected_master_po') }}", {}, function(data, status) {
-                    $("#selected").prepend(data)
-                });
-                $.each(allVals, function(index, value){
-                    $("#td-checkbox-"+value).hide("fast");
-                    $("#td-button-"+value).hide("fast");
-                    $("#item-company_name-"+value).slideUp("fast");
-                    $("#item-seller_id-"+value).slideUp("fast");
-                    $("#item-customer_code-"+value).slideUp("fast");
-                    $("#item-no_agreement_letter_id-"+value).slideUp("fast");
-                    $("#item-status-"+value).slideUp("fast");
-
-                    $(".add").hide("fast");
-                    $.get("{{ url('show_company') }}/" + value, {}, function(data, status) {
-                        $("#edit-form-"+value).prepend(data)
-                        $("#master").prop('checked', false);
-
-                    });
-                });
-            }else{
-                alert('Select the row you want to edit')
-            }
-=======
-      // ------ Proses Update Data ------
-    function updateSelected() {
-        var allVals = [];
-
-        $(".task-select:checked").each(function() {
-            allVals.push($(this).attr("id"));
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
-        });
-        swal({
-            title: "Are you sure?",
-            text: "Do you want to do an update?",
-            type: "info",
-            showCancelButton: true,
-            confirmButtonColor: '#00FF00',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes Update',
-            showLoaderOnConfirm: true,
-        }).then((willDelete) => {
-            $.each(allVals, function(index, value){
-                var company_name = $(".company_name-"+value).val();
-                var seller_id = $(".seller_id-"+value).val();
-                var customer_code = $(".customer_code-"+value).val();
-                var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
-                var status = $(".status-"+value).val();
-
-<<<<<<< HEAD
-          // ------ Proses Update Data ------
-        function updateSelected() {
+     function updateSelected() {
 
             var allVals = [];
 
@@ -607,64 +497,71 @@
                             $(".btn-round").hide("fast");
                     }
                 });
-=======
-                $.ajax({
-                type: "get",
-                url: "{{ url('update_company') }}/"+value,
-                data: {
-                    company_name: company_name,
-                    seller_id: seller_id,
-                    customer_code: customer_code,
-                    no_agreement_letter_id:no_agreement_letter_id,
-                    status: status
-                },
-                success: function(data) {
-                swal({
-                      type: 'success',
-                      title: 'The selected data has been updated',
-                      showConfirmButton: false,
-                      timer: 1500
-
-                  // $(".save").hide();
-                  });
-                  read();
-
-                  $(".add").show("fast");
-                  $(".edit_all").show("fast");
-                  $(".delete_all").show("fast");
-                  $("#save-selected").hide("fast");
-                  $("#cancel-selected").hide("fast");
-                }
-            });
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
 
             });
-        });
+          });
         }
+        function updateSelected() {
 
-<<<<<<< HEAD
-        function batal(){
+          var allVals = [];
+
+          $(".task-select:checked").each(function() {
+              allVals.push($(this).attr("id"));
+          });
+          swal({
+              title: "Are you sure?",
+              text: "Do you want to do an update?",
+              type: "info",
+              showCancelButton: true,
+              confirmButtonColor: '#00FF00',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes Update',
+              showLoaderOnConfirm: true,
+          }).then((willDelete) => {
+              $.each(allVals, function(index, value){
+                  var company_name = $(".company_name-"+value).val();
+                  var seller_id = $(".seller_id-"+value).val();
+                  var customer_code = $(".customer_code-"+value).val();
+                  var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
+                  var status = $(".status-"+value).val();
+                  $.ajax({
+                  type: "get",
+                  url: "{{ url('update_company') }}/"+value,
+                  data: {
+                      company_name: company_name,
+                      seller_id: seller_id,
+                      customer_code: customer_code,
+                      no_agreement_letter_id:no_agreement_letter_id,
+                      status: status
+                  },
+                  success: function(data) {
+                  swal({
+                        type: 'success',
+                        title: 'The selected data has been updated',
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                          read();
+                          $(".add").show("fast");
+                          $(".edit_all").show("fast");
+                          $(".delete_all").show("fast");
+                          $(".btn-round").hide("fast");
+                          $(".btn-round").hide("fast");
+                  }
+              });
+
+              });
+            });
+          }
+
+        function batal() {
             $(".save").hide("fast");
             $(".cancel").hide("fast");
-=======
-         //--------Proses Batal--------
-        function cancelUpdateSelected(){
-            $("#save-selected").hide("fast");
-            $("#cancel-selected").hide("fast");
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-<<<<<<< HEAD
-            }
-  </script>
-=======
         }
-
-
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
-
   </script>
-</form>
-   @endsection
+
+@endsection

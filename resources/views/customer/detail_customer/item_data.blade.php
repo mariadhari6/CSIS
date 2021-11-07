@@ -1,7 +1,6 @@
 <?php $no=1; ?>
 @foreach ($details as $detail )
 <tr id="edit-form-{{ $detail->id }}" height="50px">
-
         <td id="td-checkbox-{{ $detail->id }}" width="100px">
             <div>
                 <label class="form-check-label">
@@ -17,10 +16,10 @@
             {{ $detail->company->company_name}}
         </td>
         <td id="item-LicencePlate-{{ $detail->id }}">
-            {{ $detail->vehicle->license_plate }}
+            {{ $detail->vehicle->license_plate}}
         </td>
         <td id="item-VihecleType-{{ $detail->id }}">
-            {{ $detail->vehicle->vehicle->name }}
+            {{ $detail->vehicle->vehicle->name}}
         </td>
         <td id="item-PoNumber-{{ $detail->id }}">
             {{ $detail->po->po_number }}

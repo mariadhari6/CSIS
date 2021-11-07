@@ -32,8 +32,8 @@ class Sensor extends Model
         return $this->hasMany(DetailCustomer::class);
     }
 
-    public function detailCustomer()
-    {
-        return $this->hasone(DetailCustomer::class);
-    }    
+    // public function detailCustomer()
+    // {
+    //     return $this->hasone(DetailCustomer::class);
+    // }    
 }

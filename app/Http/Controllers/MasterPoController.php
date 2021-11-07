@@ -10,6 +10,7 @@ use App\Models\Seller;
 use App\Models\Gsm;
 use App\Models\Sensor;
 use App\Models\Gps;
+use App\Models\VehicleType;
 use App\Models\ServiceStatus;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ use App\Exports\TamplateMasterPo;
 use App\Imports\MasterPoImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+
 
 class MasterPoController extends Controller
 {
@@ -367,9 +369,45 @@ class MasterPoController extends Controller
     
         // return $out;
 
-        
+        // $i = DetailCustomer::orderBy('company_id', "ASC")->with('company')->get();
+        // dd($i);
 
         
+        // $company = $i->company->company_name;
+
+        // dd($company);
+
+
+        // $key = Vehicle::with('vehicle')->get();
+
+        // dd($key);
+        $id = 196;
+        $vehicle = Vehicle::with('vehicle')->where('id', $id)->get();
+        $key = $vehicle->mapWithKeys(function ($item, $key) {
+            return [
+                $item['id'] => $item->only(['vehicle_id', 'pool_name', 'pool_location'])
+            ];
+        });
+
+        $data = $key->all();
+        // dd($key);
+
+        $g = array();
+       
+        foreach( $data as $a){
+            $i = $a['vehicle_id'];
+
+            $cari_vehicleType = VehicleType::where('id' , $i)->get();
+
+            $a['vehicle_name'] = $cari_vehicleType[0]->name;
+            $a['id'] = $id;
+
+            array_push($g, $a);
+
+            return $g;
+
+        }
+
 
 
         
@@ -603,41 +641,41 @@ class MasterPoController extends Controller
 
         //   return $data_complete;  
 
-        $company = 66;
+        // $company = 66;
 
-        $data = DetailCustomer::where('company_id', $company)
-        ->groupBy('company_id', 'po_id')
-        ->selectRaw('company_id')
-        ->selectRaw('po_id')
-        ->get();
-        //  return $data;
+        // $data = DetailCustomer::where('company_id', $company)
+        // ->groupBy('company_id', 'po_id')
+        // ->selectRaw('company_id')
+        // ->selectRaw('po_id')
+        // ->get();
+        // //  return $data;
            
-        $banyak_po = DetailCustomer::where('company_id', $company)->groupBy('company_id')
-            ->select('company_id', 
-                DB::raw('count(po_id) as jumlah_po '),
-            )
-            ->get();
+        // $banyak_po = DetailCustomer::where('company_id', $company)->groupBy('company_id')
+        //     ->select('company_id', 
+        //         DB::raw('count(po_id) as jumlah_po '),
+        //     )
+        //     ->get();
 
-            $h = DetailCustomer::where('company_id', $company)->groupBy('po_id')
-            ->selectRaw('po_id')
-            ->select('po_id', 
-                DB::raw('count(po_id) as jumlah_po '),
-            )
-            ->get();
+        //     $h = DetailCustomer::where('company_id', $company)->groupBy('po_id')
+        //     ->selectRaw('po_id')
+        //     ->select('po_id', 
+        //         DB::raw('count(po_id) as jumlah_po '),
+        //     )
+        //     ->get();
 
 
             // return $h;
 
 
-            $i = DetailCustomer::where('company_id', $company)
-            ->groupBy('company_id', 'po_id')
-            ->selectRaw('company_id')
-            ->selectRaw('po_id')
-            ->select('po_id', 
-             DB::raw('count(po_id) as jumlah_po '),
-             )->get();
+            // $i = DetailCustomer::where('company_id', $company)
+            // ->groupBy('company_id', 'po_id')
+            // ->selectRaw('company_id')
+            // ->selectRaw('po_id')
+            // ->select('po_id', 
+            //  DB::raw('count(po_id) as jumlah_po '),
+            //  )->get();
 
-             return $i;
+            //  return $i;
 
         //  $banyak_po_id = DetailCustomer::groupBy('company_id')
         //  ->selectRaw('count(po_id) as jumlah po, company_id')

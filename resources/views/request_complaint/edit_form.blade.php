@@ -2,8 +2,6 @@
     <td></td>
     <td></td>
 
-
-
     <td><select class="select company_id-{{$request_complain->id}}" id="company_id" name="company_id" required>
         <option value="{{$request_complain->company_id}}"> {{$request_complain->companyRequest->company_name??''}} </option>
         @foreach ($detail as $item )

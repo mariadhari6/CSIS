@@ -23,7 +23,6 @@
                 </a>
             </li>
 
-
             <li class="nav-item
             {{ request()->is('seller') ? ' active' : ''}}
             {{ request()->is('Company') ? ' active' : ''}}

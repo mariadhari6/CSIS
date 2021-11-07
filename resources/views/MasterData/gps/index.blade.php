@@ -1,9 +1,4 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
-@section('title','Gps')
-@section('title-table','GPS')
-@section('content')
-=======
 @section('title','CSIS | Gps')
 @section('title-table','Master GPS')
 @section('master','show')
@@ -12,38 +7,10 @@
 
 @section('content')
 
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-<<<<<<< HEAD
-            <div class="text-right mt-3" id="selected">
-               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-          <table class="table table-hover data" class="table_id" id="table_id" >
-            <thead>
-              <tr>
-                <th width="10px">
-                  <label class="form-check-label">
-                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                    <span class="form-check-sign"></span>
-                  </label>
-                </th>
-                <th scope="col">No</th>
-                <th scope="col">Merk</th>
-                <th scope="col">Type</th>
-                <th scope="col">IMEI</th>
-                <th scope="col">Waranty</th>
-                <th scope="col">Po Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Status Ownership</th>
-                <th scope="col">Action</th>
-=======
-
-
           <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
@@ -77,17 +44,13 @@
                 <th scope="col" class="list" >Status Ownership*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
               </tr>
             </thead>
             <tbody  id="item_data">
             </tbody>
           </table>
-<<<<<<< HEAD
-=======
           </form>
         {{-- </div> --}}
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
         </div>
       </div>
     </div>
@@ -470,11 +433,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
-<<<<<<< HEAD
-        $("#item-no-"+id).hide("fast");
-=======
         $("#item-no-"+id).slideUp("fast");
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
         $("#item-merk-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
         $("#item-type-"+id).hide("fast");
@@ -596,11 +555,7 @@
                 $.each(allVals, function(index, value){
                     $("#td-checkbox-"+value).hide("fast");
                     $("#td-button-"+value).hide("fast");
-<<<<<<< HEAD
-                    $("#item-no-"+value).hide("fast");  
-=======
                     $("#item-no-"+value).slideUp("fast");
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
                     $("#item-merk-"+value).hide("fast");
                     $("#item-no-"+value).hide("fast");
                     $("#item-type-"+value).hide("fast");
@@ -687,8 +642,7 @@
             read();
         }   
   </script>
-{{-- //   <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
-   @endsection
+@endsection
 
 

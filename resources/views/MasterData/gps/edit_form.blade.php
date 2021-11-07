@@ -1,9 +1,5 @@
-
     <td></td>
     <td></td>
-<<<<<<< HEAD
-    <td></td>   
-=======
     <td>
         <select class="select merk-{{$gps->id}}" id="merk" name="merk" required>
             {{-- <option value=""></option> --}}
@@ -15,7 +11,6 @@
         </select>
     </td>
 
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
     <td>
         <select class="select type-{{$gps->id}}" id="type" name="type" required>
             {{-- <option value="{{$gps->type}}">{{$gps->type}}</option> --}}
@@ -46,36 +41,13 @@
             <option value="Error">Error</option>
         </select></i>
     </td>
-<<<<<<< HEAD
-    <td>
-        <select class="select status-{{$gps->id}}" id="status" aria-label=".form-select-lg example">
-            <option selected>{{$gps->status}}</option>
-            <option value="Ready">Ready</option>
-            <option value="Used">Used</option>
-            <option value="Error">Error</option>
-        </select>
-    </td>
-
-    <td>
-        <select class="select status_ownership-{{$gps->id}}"" id="status_ownership" aria-label=".form-select-lg example">
-=======
     <td  id="statusOwnership">
         <select class="select status_ownership-{{$gps->id}}" id="status_ownership" name="status_ownership"aria-label=".form-select-lg example">
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
             <option selected>{{$gps->status_ownership}}</option>
             <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
             <option value="Beli">Beli</option>
-<<<<<<< HEAD
-        </select>
-    </td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $gps->id}})"></i>
-        <i class="fas fa-times cancel" onclick="cancel()"></i>
-    </td>
-
-=======
         </select></i>
     </td>
 
@@ -142,5 +114,4 @@
 
 
 
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
 

@@ -26,8 +26,7 @@ class Vehicle extends Model
         
         return $this->hasMany(DetailCustomer::class);
     }
-
-
+    
     public function requestComplaintKendaraan()
     {
 

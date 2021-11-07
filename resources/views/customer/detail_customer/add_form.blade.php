@@ -206,6 +206,7 @@
              
             $('select[name="Imei"]').on('change', function(){
                 var Id = $(this).val();
+                // alert(Id)
                 if(Id) {
                     $.ajax({
                         url: '/based_imei/'+ Id,
@@ -284,9 +285,9 @@
                             $('select[name="PoolName').empty();
                             $('select[name="PoolLocation').empty();
                             $.each(data, function(key, value) {
-                                $('select[name="VihecleType').append('<option value="'+ key +'">'+ value.vehicle_id +'</option>');
-                                $('select[name="PoolName').append('<option value="'+ key +'">'+ value.pool_name +'</option>');
-                                $('select[name="PoolLocation').append('<option value="'+ key +'">'+ value.pool_location +'</option>');
+                                $('select[name="VihecleType').append('<option value="'+ value.id +'">'+ value.vehicle_name +'</option>');
+                                $('select[name="PoolName').append('<option value="'+ value.id  +'">'+ value.pool_name +'</option>');
+                                $('select[name="PoolLocation').append('<option value="'+ value.id  +'">'+ value.pool_location +'</option>');
                             });    
                         }
                     });

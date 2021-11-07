@@ -1,7 +1,6 @@
 @extends('layouts.v_main')
 @section('title','CSIC | Maintenance GPS')
 @section('title-table','Maintenance GPS')
-
 @section('content')
     <form onsubmit="return false">
 

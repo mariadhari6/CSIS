@@ -31,28 +31,29 @@
 
   <div class="row">
       <div class="col-sm-5">
-        <div class="card" id="card-table">
+        <div class="card" id="card-table" style="width: 40rem;">
           <div class="card-body">
-            <table class="table" id="table_id">
-                <thead>
-                  <tr>
-                      <th>No</th>
-                      <th>Company</th>
-                      <th>Total GPS</th>
-                      <th>Terminate Layanan</th>
-                      <th>Penambahan Layanan</th>
-                      <th>Act</th>
-                  </tr>
-                </thead>
-                <tbody id="item_data">
-                </tbody>
-                
-            </table>
+              <div id="table-scroll" class="table-scroll">
+                  <table class="table table-sm" id="table_summary">
+                      <thead class="fixedheader">
+                        <tr>
+                            <th width="10px">No</th>
+                            <th width="230px">Company</th>
+                            <th width="50px">Total GPS</th>
+                            <th width="50px">Terminate Layanan</th>
+                            <th width="50px">Penambahan Layanan</th>
+                            <th>Act</th>
+                        </tr>
+                      </thead>
+                      <tbody id="item_summary">
+                      </tbody>
+                  </table>
+              </div> 
           </div>
         </div>
       </div>
-      <div class="col-sm-7">
-          <div class="card">
+      <div class="col-sm-2">
+          <div class="card"  style="width: 55rem;">
               <div class="card-body" id="data-po">
                
               </div>
@@ -66,6 +67,10 @@
 
     $(document).ready(function() {
       read();
+
+
+
+     
 
     });
 
@@ -83,7 +88,7 @@
           Year    : Year
         }, 
         success: function(data, status){
-          $('#table_id').find("#item_data").html(data);
+          $('#table_summary').find("#item_summary").html(data);
         }           
       });
 
@@ -97,7 +102,7 @@
       var Month  = data.getMonth() + 1 ;
       var Year   = data.getFullYear();
       
-      $("#item_data").empty();
+      $("#item_summary").empty();
       $("#data-po").empty();
       $.ajax({ 
         url:"{{ url('/filter')}}",
@@ -108,7 +113,7 @@
         }, 
         success: function(data){
 
-          $('#table_id').find("#item_data").html(data);
+          $('#table_summary').find("#item_summary").html(data);
         }
             
       });
@@ -116,10 +121,14 @@
     }
 
 
-    function detail(company,month,year){
+    function detail(company,month,year) {
+      
       var company = company;
       var month   = month;
       var year    = year;
+      
+      $("#list-" + company).addClass('highlighted').siblings().removeClass("highlighted");
+     
       $("#data-po").empty();
      
       $.ajax({ 
@@ -135,23 +144,8 @@
           }
       });
       return true;
+      
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
   </script>  
 
   @endsection

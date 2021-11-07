@@ -1,4 +1,4 @@
-/* icon */
+
 
 .fa-trash {
     color: red;
@@ -35,11 +35,7 @@
     border-bottom: 2px solid #946868;
 }
 
-<<<<<<< HEAD
-.input{
-=======
 .input {
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
     position: absolute;
     left: 0;
     top: 0;
@@ -78,13 +74,12 @@
     color: white;
 }
 
-/* Datatable */
+
 .dataTables_length {
     margin-top: 5px;
     margin-left: 20px;
 }
 
-<<<<<<< HEAD
 .dataTables_filter {
     position: relative;
     right: 150px;
@@ -102,28 +97,26 @@
 
 /* tabel livetable */
 
-=======
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
 #table_id {
     position: relative;
     bottom: 0px;
     text-align: center;
+    table-layout: auto;
 }
 
-<<<<<<< HEAD
+
 #table tbody tr td {
     text-align: center;
     height: 10px;
-=======
+}
+
 .action {
     /* position: fixed; */
     min-width: 80px;
     text-align: center;
     background-color: #fff;
-
-
-
 }
+
 /* .list-freeze {
     min-width: 80px;
     font-size: 15px;
@@ -137,9 +130,11 @@
     min-width: 30px;
     text-align: center;
 }
+
 .list {
+
     position: relative;
-    min-width: 140px;
+    min-width: 50px;
     font-size: 15px;
     text-align: center;
 }
@@ -199,21 +194,20 @@
     position: relative;
     right: 150px;
     bottom: 35px;
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
+
 }
 
 
-<<<<<<< HEAD
-.title{
+.title {
     font-size: 25px;
 }
 
 @media (min-width: 768px) {
     .modal-xl {
-      width: 90%;
-     max-width:1650px;
-    }
-=======
+    width: 90%;
+    max-width:1650px;
+}
+
 .input-div {
     position: relative;
     display: grid;
@@ -236,12 +230,11 @@
     font-size: 0.8rem;
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
+
 }
 
 .unstyled-button {
     border: none;
-<<<<<<< HEAD
     padding: 0;
     background: none;
 }
@@ -251,21 +244,6 @@
     position: sticky;
     background-color: white;
 }
-=======
-    border-bottom: 2px solid #79b5dd;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 20%;
-    outline: none;
-    background: none;
-    padding: 0.3rem 0.7rem;
-    font-size: 0.8rem;
-    color: #555;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
 
 .first-col {
     width: 100px;
@@ -273,40 +251,20 @@
     max-width: 100px;
     right: 0px;
 }
-<<<<<<< HEAD
 
-.fa-eye .popover{
-    width:400px;
-    height:100px;   
-}
-
-.fa-eye:hover{
-    background-color: deepskyblue;
-=======
 #detailcustomer tbody tr td {
     text-align: center;
 }
-.list{
+
+.list {
     min-width: 250px;
     font-size: 15px;
     text-align: center;
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
+
 }
 
-<<<<<<< HEAD
 
-=======
-/* .delete_all{
-    display: none;
-}
-.edit_all{
-    display: none;
-}
-.add {
-    display: none;
-} */
 
-/* Modal */
 .modal-dialog-full-width {
     width: 100% !important;
     height: 100% !important;
@@ -330,7 +288,7 @@
     border-top: 1px solid #9ea2a2 !important;
 }
 
-/* Submit button */
+
 .unstyled-button {
     border: none;
     padding: 0;
@@ -362,11 +320,9 @@
       width: 90%;
      max-width:1650px;
     }
-  }
-  .error
-{
-color:red;
-font-family:verdana, Helvetica;
+}.error{
+    color:red;
+    font-family:verdana, Helvetica;
 }
 
 
@@ -379,8 +335,64 @@ font-family:verdana, Helvetica;
     background-color: deepskyblue;
 }
 
-.hidden{
-    display: none;
+.highlighted{
+    background: #b3ccff;
 }
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
+
+#key{
+    text-align: left;
+ 
+
+}
+
+#table_summary{
+    table-layout: auto;
+    width: 580px;     
+}
+
+.table-scroll {
+    position: relative;
+    width:100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    height: 589px;
+  }
+
+.table-wrap {
+    position: relative;
+  }
+
+.table-scroll th,
+.table-scroll td {
+  padding: 5px 10px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.table-scroll thead th {
+    background-color: #f2f2f2;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#data-po table thead th,
+#data-po table tbody td
+{
+    text-align: center;
+}
+
+#data-po table thead th
+{
+    background-color: #f2f2f2;
+}
+
+
+#data-po table tbody td#key
+{
+    text-align: left;
+}
+
+
 

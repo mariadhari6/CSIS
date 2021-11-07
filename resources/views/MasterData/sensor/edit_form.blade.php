@@ -1,7 +1,5 @@
     <td></td>
     <td></td>
-<<<<<<< HEAD
-=======
     <td>
         <select class="select sensor_name-{{$sensor->id}}" id="sensor_name" name="sensor_name" >
             <option value="{{$sensor->sensor_name}}">{{$sensor->sensor_name}}</option>
@@ -12,7 +10,6 @@
 
         </select>
     </td>
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
     <td>
         <div class="input-div"><input type="text" class="input merk_sensor-{{$sensor->id}}" id="merk_sensor" placeholder="Merk sensor" value="{{ $sensor->merk_sensor}}" required></div>
     </td>
@@ -40,20 +37,4 @@
         </button>
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
-<<<<<<< HEAD
-    <td>
-        <select class="select status-{{$sensor->id}}" id="status" aria-label=".form-select-lg example">
-            <option selected>{{$sensor->status}}</option>
-            <option value="Ready">Ready</option>
-            <option value="Used">Used</option>
-            <option value="Error">Error</option>
-        </select>
-    </td>
-<td>
-    <i class="fas fa-check add" id="edit" onclick="update({{ $sensor->id}})"></i>
-    <i class="fas fa-times cancel" onclick="cancel()"></i>
-</td>
-
-=======
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
 

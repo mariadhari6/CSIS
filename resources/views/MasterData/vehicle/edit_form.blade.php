@@ -1,7 +1,5 @@
     <td></td>
-    <td>
-        <i class="fas fa-check add" id="edit" onclick="update({{ $vehicle->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
-    </td>
+    <td></td>
     <td>
         <select class="select company_id-{{$vehicle->id}}" id="company_id" name="company_id">
             @foreach ($company as $item)
@@ -24,4 +22,7 @@
     </td>
     <td>
         <div class="input-div"><input type="text" class="input pool_location-{{$vehicle->id}}" id="pool_location" value="{{ $vehicle->pool_location }}"></div>
+    </td>
+    <td>
+        <i class="fas fa-check add" id="edit" onclick="update({{ $vehicle->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>

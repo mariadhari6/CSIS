@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Company;
 use App\Models\DetailCustomer;
 use App\Models\Gps;
@@ -20,9 +19,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PemasanganMutasiGpsController extends Controller
 {
-    public function index()
-    {
-        // $pemasangan_mutasi_GPS = PemasanganMutasiGps::with('requestComplain')->get();
+    public function index() {
+        
         return view('VisitAssignment.PemasanganMutasiGPS.index');
     }
     public function item_data_onProgress()
