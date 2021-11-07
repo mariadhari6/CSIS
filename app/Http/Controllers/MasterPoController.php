@@ -46,7 +46,7 @@ class MasterPoController extends Controller
                     'harga_layanan'     =>  $value->harga_layanan,
                     'jumlah_unit_po'    =>  $value->jumlah_unit_po,
                     'status_po'         => $value->status_po,
-                    'selles'            =>  $value->selles,
+                    'sales_id'            =>  $value->sales_id,
                     'count'             => $value->jumlah_unit_po,
 
                 );
@@ -71,7 +71,7 @@ class MasterPoController extends Controller
             'harga_layanan'     => $request->harga_layanan,
             'jumlah_unit_po'    => $request->jumlah_unit_po,
             'status_po'         => $request->status_po,
-            'selles'            => $request->selles,
+            'sales_id'            => $request->sales_id,
             // 'count'             => $request->jumlah_unit_po,
         );
         MasterPo::insert($data);
@@ -165,7 +165,7 @@ class MasterPoController extends Controller
         $data->harga_layanan    = $request->harga_layanan;
         $data->jumlah_unit_po   = $request->jumlah_unit_po;
         $data->status_po        = $request->status_po;
-        $data->selles           = $request->selles;
+        $data->sales_id           = $request->sales_id;
         $data->count           = $request->jumlah_unit_po;
 
 
@@ -189,7 +189,7 @@ class MasterPoController extends Controller
         $data->harga_layanan    = $request->harga_layanan;
         $data->jumlah_unit_po   = $request->jumlah_unit_po;
         $data->status_po        = $request->status_po;
-        $data->selles           = $request->selles;
+        $data->sales_id           = $request->sales_id;
         echo $id;
     }
 

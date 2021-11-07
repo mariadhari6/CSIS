@@ -11,7 +11,7 @@ class MasterPo extends Model
     protected $table = 'master_pos';
 
     protected $fillable = [
-        'company_id', 'po_number', 'po_date', 'harga_layanan', 'jumlah_unit_po', 'status_po', 'selles', 'count'
+        'company_id', 'po_number', 'po_date', 'harga_layanan', 'jumlah_unit_po', 'status_po', 'sales_id', 'count'
     ];
 
 
@@ -22,12 +22,12 @@ class MasterPo extends Model
 
     public function sales()
     {
-        return $this->belongsTo(Sales::class);
+        return $this->belongsTo(Sales::class, 'sales_id', 'id');
     }
 
     public function detail()
     {
-        return $this->hasMany(DetailCustomer::class);
+        return $this->hasMany(DetailCustomer::class, 'po_number', 'id');
     }
     // public function detailHargalayanan()
     // {

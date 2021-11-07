@@ -4,9 +4,9 @@
     <td>
         <select class="select company_id-{{$pemasangan_mutasi_GPS->id}}" id="company_id" name="company_id" >
 
-        <option value=" {{$pemasangan_mutasi_GPS->company_id}}"> {{$pemasangan_mutasi_GPS->companyRequest->company_name??''}} </option>
+        <option class="hidden" value=" {{$pemasangan_mutasi_GPS->company_id}}"> {{$pemasangan_mutasi_GPS->companyRequest->company_name??''}} </option>
         @foreach ($details as $item)
-        <option value="{{ $item->company_id }}" {{ old('company_id') == $item->id  ? 'selected':'' }}>
+        <option value="{{ $item->company_id }}">
         {{$item->company->company_name}}
         </option>
 
@@ -16,7 +16,7 @@
     <td><select class="select task-{{$pemasangan_mutasi_GPS->id}}" id="task" name="task">
         <option value="{{$pemasangan_mutasi_GPS->task}} "> {{$pemasangan_mutasi_GPS->taskRequest->task}} </option>
         @foreach ($task as $tasks)
-        <option value="{{ $tasks->id }}" {{ old('task') == $tasks->id  ? 'selected':'' }}>
+        <option value="{{ $tasks->id }}">
             {{$tasks->task}}
         </option>
 
@@ -33,7 +33,7 @@
                 {{ $pemasangan_mutasi_GPS->detailCustomerVehicle->vehicle->license_plate??'' }}
             </option>
             @foreach ($details as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??''}}</option>
+                <option value="{{ $item->id }}">{{ $item->vehicle->license_plate??''}}</option>
 
             @endforeach
          </select></i>
@@ -235,7 +235,7 @@
 
             }
          });
-         $('select[name="imei"]').on('change', function(){
+         $('select[name="vehicle"]').on('change', function(){
                 var Id = $(this).val();
                 // alert(Id);
                 if(Id) {
@@ -243,9 +243,11 @@
                         url: '/based_imei/'+ Id,
                         method: "GET",
                         success:function(data) {
+                            $('select[name="imei').empty();
                             $('select[name="gsm_pemasangan').empty();
                             $('select[name="equipment_terpakai_gps').empty();
                             $.each(data, function(key, value) {
+                                $('select[name="imei').append('<option value="'+ key +'">'+ value.imei +'</option>');
                                 $('select[name="gsm_pemasangan').append('<option value="'+ key +'">'+ value.gsm_id +'</option>');
                                 $('select[name="equipment_terpakai_gps').append('<option value="'+ key +'">'+ value.type +'</option>');
                             });
@@ -253,6 +255,7 @@
                     });
                 }
                 else{
+                    $('select[name="imei').empty();
                     $('select[name="gsm_pemasangan').empty();
                     $('select[name="equipment_terpakai_gps').empty();
                 }

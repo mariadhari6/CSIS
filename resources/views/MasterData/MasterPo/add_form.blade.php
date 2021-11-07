@@ -4,6 +4,7 @@
     <td></td>
     <td>
         <select class="select" id="company_id" name="company_id" required>
+            <option class="hidden">--Pilih Company--</option>
        @foreach ($company as $companys)
         <option value="{{ $companys->id }}">{{ $companys->company_name }}</option>
        @endforeach
@@ -23,19 +24,24 @@
     </td>
     <td>
         <select class="select" id="status_po" aria-label=".form-select-lg example">
-            <option selected value="not selected">Pilih status</option>
+            <option selected class="hidden" value="not selected">--Pilih Status--</option>
             <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Beli">Beli</option>
             <option value="Trial">Trial</option>
         </select>
     </td>
-    <td>
-        <div class="input-div"><input type="text" class="input" id="selles" placeholder="Selles">
+     <td>
+        <select class="select" id="sales_id" name="sales_id" required>
+            <option class="hidden">--Pilih Salles--</option>
+       @foreach ($sales as $item)
+        <option value="{{ $item->id }}">{{ $item->name }}</option>
+       @endforeach
+    </select>
     </td>
     <td class="action sticky-col first-col">
-         <button class="unstyled-button" type="submit">
-            <i class="fas fa-check add" id="add" onclick="store()"></i>
+         <button class="unstyled-button" type="submit" id="add">
+            <i class="fas fa-check add"  onclick="store()"></i>
         </button>
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     <td>

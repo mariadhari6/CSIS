@@ -75,6 +75,13 @@ class DetailCustomer extends Model
         return $this->belongsTo(MasterPo::class);
     }
 
+    public function poNumber()
+    {
+
+        return $this->belongsTo(MasterPo::class);
+    }
+
+
     public function vehicle()
     {
 
@@ -85,5 +92,10 @@ class DetailCustomer extends Model
     {
 
         return $this->belongsTo(ServiceStatus::class);
+    }
+
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaint::class);
     }
 }

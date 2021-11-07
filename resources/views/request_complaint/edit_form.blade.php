@@ -30,10 +30,10 @@
        @endforeach
     <td>
           <select class="select vehicle-{{$request_complain->id}}" id="vehicle" name="vehicle" required>
-            <option value="{{$request_complain->vehicle}}"> {{$request_complain->detailCustomerVehicle->vehicle->license_plate??''}} </option>
+            <option value="{{$request_complain->vehicle}}">{{$request_complain->vehicleRequest->license_plate??''}}</option>
 
             @foreach ($detail as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??'' }}</option>
+                <option value="{{ $item->id }}">{{ $item->vehicle->license_plate??'' }}</option>
 
             @endforeach
          </select></i>
@@ -106,7 +106,7 @@
                     success:function(data) {
                         //alert(data.length);
                         $('select[name="pic_id').empty();
-                        $('select[name="pic_id').append('<option value=""> </option>');
+                        // $('select[name="pic_id').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
                                 $('select[name="pic_id').append('<option value="'+ data[i].id + '"> '+ data[i].pic_name +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)
@@ -119,7 +119,7 @@
                     success:function(data) {
                         //alert(data.length);
                         $('select[name="vehicle').empty();
-                        $('select[name="vehicle').append('<option value=""> </option>');
+                        // $('select[name="vehicle').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
                                 $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_id +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)

@@ -231,6 +231,15 @@ class MaintenanceGpsController extends Controller
 
         return $data;
     }
+    public function basedImei($id)
+    {
+
+
+
+        $data = DetailCustomer::where('vehicle', $id)->get();
+
+        return $data;
+    }
     // public function basedSensorName($id)
     // {
 

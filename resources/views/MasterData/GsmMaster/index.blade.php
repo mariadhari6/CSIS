@@ -49,7 +49,7 @@
                     </div>
                 </th>
                 <th scope="col" class="action-no">No.</th>
-                <th scope="col" class="list-gsm">Status GSM*</th>
+                <th scope="col" class="list">Status GSM*</th>
                 <th scope="col" class="list-gsmNumber">GSM Number*</th>
                 <th scope="col" class="list-company">Company*</th>
                 <th scope="col" class="list">Serial Number*</th>

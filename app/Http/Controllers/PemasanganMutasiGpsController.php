@@ -231,7 +231,7 @@ class PemasanganMutasiGpsController extends Controller
     {
         $key = DetailCustomer::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
             return [
-                $item['id'] => $item->only(['gsm_id', 'type'])
+                $item['id'] => $item->only(['gsm_id', 'type', 'imei'])
             ];
         });
         $data = $key->all();

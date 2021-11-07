@@ -5,7 +5,7 @@
 
     <td>
         <select class="select" id="company_id" name="company_id" required>
-            <option class="hidden"> ---select company---</option>
+            <option class="hidden"> --Pilih Company--</option>
 
             @foreach ($detail as $item )
             <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
@@ -15,7 +15,7 @@
     </td>
     <td>
         <select class="select" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example" required>
-            <option selected disabled></option>
+            <option selected disabled class="hidden">--Pilih Internal/External--</option>
             <option value="Request Internal">Request Internal</option>
             <option value="Complain Internal">Complain Internal</option>
             <option value="Request Eksternal">Request Eksternal</option>
@@ -25,6 +25,8 @@
       <td>
           <select class="select" id="pic_id" name="pic_id" required>
             {{-- <option selected disabled></option> --}}
+            <option class="hidden"> --Pilih PIC--</option>
+
             @foreach ($pic as $item)
                 <option value="{{ $item->id }}" {{ old('pic_id') == $item->id ? 'selected':'' }}>{{ $item->pic_name }}</option>
 
@@ -35,6 +37,8 @@
       <td>
           <select class="select" id="vehicle" name="vehicle" required>
             {{-- <option selected disabled value=""></option> --}}
+            <option class="hidden"> --Pilih Vehicle--</option>
+
             @foreach ($detail as $item)
                 <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??'' }}</option>
 

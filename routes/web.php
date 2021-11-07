@@ -269,7 +269,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_data_done_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_done'])->name('item_data_done');
     Route::get('/item_data_all_pemasangan', [PemasanganMutasiGpsController::class, 'item_data']);
     Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
-    Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensorName']);
+    // Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
     Route::get('/based_vehicle/{id}', [PemasanganMutasiGpsController::class, 'basedVehicle']);
     Route::get('/based_imei/{id}', [PemasanganMutasiGpsController::class, 'basedImei']);

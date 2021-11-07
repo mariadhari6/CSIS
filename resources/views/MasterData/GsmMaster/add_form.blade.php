@@ -3,8 +3,8 @@
     <td></td>
     <td></td>
     <td>
-        <select class="select" id="status_gsm" aria-label=".form-select-lg example" required>
-            <option value=""></option>
+        <select class="select" id="status_gsm" name="status" aria-label=".form-select-lg example" required>
+            <option value="" class="hidden">--Pilih Status--</option>
             {{-- <option value="">-</option> --}}
             <option value="Ready">Ready</option>
             <option value="Active">Active</option>
@@ -14,10 +14,10 @@
     <td>
         <div class="input-div"><input type="text" class="input" id="gsm_number" placeholder="GSM Number" required>
     </td>
-    <td>
+    <td id="td-company">
         <select class="select" id="company_id" name="company_id" required>
 
-          <option value="" >-</option>
+          <option value="" class="hidden">--Pilih Company--</option>
          @foreach ($company as $item)
           <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
          @endforeach
@@ -62,3 +62,32 @@
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     <td>
 </tr>
+
+<script>
+     // Status ready tidak bisa pilih company
+         $('select[name="status"]').on('change', function() {
+            var itemID = $(this).val();
+           if(itemID == "Ready"){
+               $('#td-company').empty();
+               $('#td-company').append(
+                 `<select class="select" id="" disable>
+                     <option value="">-</option>
+
+
+                </select>`
+               );
+           }else if(itemID == "Active" || "Terminate"){
+                $('#td-company').empty();
+                $('#td-company').append(
+                `<select class="select" id="company_id" disable>
+                <option value="" class="hidden">--Pilih Company--</option>
+                        @foreach ($company as $item)
+                        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+                        @endforeach
+
+
+                </select>`
+                );
+           }
+        });
+</script>

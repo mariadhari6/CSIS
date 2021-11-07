@@ -29,6 +29,11 @@ class Vehicle extends Model
 
         return $this->hasMany(DetailCustomer::class);
     }
+    public function requestComplaintVehicle()
+    {
+
+        return $this->hasMany(RequestComplaint::class, 'vehicle', 'id');
+    }
 
 
 
