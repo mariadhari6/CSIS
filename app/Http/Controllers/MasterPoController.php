@@ -12,6 +12,7 @@ use App\Models\Sensor;
 use App\Models\Gps;
 use App\Models\VehicleType;
 use App\Models\ServiceStatus;
+use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -371,7 +372,8 @@ class MasterPoController extends Controller
 
         // $i = DetailCustomer::orderBy('company_id', "ASC")->with('company')->get();
         // dd($i);
-
+        // return $data;
+ 
         
         // $company = $i->company->company_name;
 
@@ -381,32 +383,81 @@ class MasterPoController extends Controller
         // $key = Vehicle::with('vehicle')->get();
 
         // dd($key);
-        $id = 196;
-        $vehicle = Vehicle::with('vehicle')->where('id', $id)->get();
-        $key = $vehicle->mapWithKeys(function ($item, $key) {
-            return [
-                $item['id'] => $item->only(['vehicle_id', 'pool_name', 'pool_location'])
-            ];
-        });
+        // $id = 196;
+        // $vehicle = Vehicle::with('vehicle')->where('id', $id)->get();
+        // $key = $vehicle->mapWithKeys(function ($item, $key) {
+        //     return [
+        //         $item['id'] => $item->only(['vehicle_id', 'pool_name', 'pool_location'])
+        //     ];
+        // });
 
-        $data = $key->all();
-        // dd($key);
+        // $data = $key->all();
+        // // dd($key);
 
-        $g = array();
+        // $g = array();
        
-        foreach( $data as $a){
-            $i = $a['vehicle_id'];
+        // foreach( $data as $a){
+        //     $i = $a['vehicle_id'];
 
-            $cari_vehicleType = VehicleType::where('id' , $i)->get();
+        //     $cari_vehicleType = VehicleType::where('id' , $i)->get();
 
-            $a['vehicle_name'] = $cari_vehicleType[0]->name;
-            $a['id'] = $id;
+        //     $a['vehicle_name'] = $cari_vehicleType[0]->name;
+        //     $a['id'] = $id;
 
-            array_push($g, $a);
+        //     array_push($g, $a);
 
-            return $g;
+        //     return $g;
 
-        }
+        // } // $id = 196;
+        // $vehicle = Vehicle::with('vehicle')->where('id', $id)->get();
+        // $key = $vehicle->mapWithKeys(function ($item, $key) {
+        //     return [
+        //         $item['id'] => $item->only(['vehicle_id', 'pool_name', 'pool_location'])
+        //     ];
+        // });
+
+        // $data = $key->all();
+        // // dd($key);
+
+        // $g = array();
+       
+        // foreach( $data as $a){
+        //     $i = $a['vehicle_id'];
+
+        //     $cari_vehicleType = VehicleType::where('id' , $i)->get();
+
+        //     $a['vehicle_name'] = $cari_vehicleType[0]->name;
+        //     $a['id'] = $id;
+
+        //     array_push($g, $a);
+
+        //     return $g;
+
+        // }
+
+        // $id = 66 ;
+        // $data = DetailCustomer::where('company_id', $id)->get();
+        // $batas = count($data);
+      
+        // for ($i=0; $i < count($data) ; $i++) { 
+        //     $loop = $data[$i]->vehicle_id;
+            
+        //     $cari_vehicle = Vehicle::where('id', $loop)->get();
+
+        //     $data[$i]['vehicle_license_plate'] = $cari_vehicle[0]->license_plate;
+            
+        // }
+
+        // print($data[0]);
+
+        $data = Task::where('jenis', '=', 'request')->get();
+        
+        return $data;
+
+
+        
+
+    
 
 
 
@@ -420,7 +471,7 @@ class MasterPoController extends Controller
 
 
 
-        // join antara $a[] dengan id pada sensor
+        // join antara $a[] denga->company_id pada sensor
         
             // $d =  DB::table('detail_customers')
             // ->join('sensors', 'detail_customers.sensor_all' , '=', 'sensors.id')

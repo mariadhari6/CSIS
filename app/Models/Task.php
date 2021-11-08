@@ -10,6 +10,10 @@ class Task extends Model
     use HasFactory;
     protected $table = 'tasks';
 
+    protected $fillable = [
+        'task', 'jenis'
+    ];
+
     public function requestComplaint()
     {
         return $this->hasMany(RequestComplaint::class, 'task', 'id');

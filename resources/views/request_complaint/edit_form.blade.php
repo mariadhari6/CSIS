@@ -77,14 +77,14 @@
         <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$request_complain->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ str_replace(" ", "T", $request_complain->waktu_kesepakatan) }}" required ></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="datetime-local" class="input waktu_solve-{{$request_complain->id}}" id="waktu_solve" placeholder="waktu Solve" value="{{ str_replace(" ", "T", $request_complain->waktu_solve) }}" required></i></div>
-    </td>
-   <td>
         <select class="select status-{{$request_complain->id}}"  id="status" aria-label=".form-select-lg example" required>
             <option value="{{$request_complain->status}}"> {{$request_complain->status}} </option>
             <option value="On Progress">On Progress</option>
             <option value="Done">Done</option>
         </select></i>
+    </td>
+    <td>
+        <div class="input-div"><input type="datetime-local" class="input waktu_solve-{{$request_complain->id}}" id="waktu_solve" placeholder="waktu Solve" value="{{ str_replace(" ", "T", $request_complain->waktu_solve) }}" required></i></div>
     </td>
     <td>
         <div class="input-div"><input type="text" class="input status_akhir-{{$request_complain->id}}" id="status_akhir" placeholder="status akhir" value="{{ $request_complain->status_akhir}}" required ></i></div>
@@ -102,7 +102,6 @@
                     url: '/based_pic/'+ itemID,
                     method: "GET",
                     success:function(data) {
-                        //alert(data.length);
                         $('select[name="pic_id').empty();
                         $('select[name="pic_id').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
@@ -115,12 +114,12 @@
                     url: '/based_vehicle/'+ itemID,
                     method: "GET",
                     success:function(data) {
-                        //alert(data.length);
+                    
                         $('select[name="vehicle').empty();
                         $('select[name="vehicle').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
                                 $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_id +'</option>');
-                                // 16-Nov-2021   alert(data[i].serial_number)
+                                
                             }
                     }
                 });
@@ -130,7 +129,27 @@
                 $('select[name="vehicle"]').empty();
 
             }
-         });
+        });
+
+        
+        $('select[name="status"]').on('change', function() {
+            var itemID = $(this).val();
+            
+            if(itemID == "On Progress"){
+               $('#td-solve').empty();
+               $('#td-solve').append(
+                `<div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="Waktu Solve" disabled></div>`
+               );
+            }
+            else{
+                $('#td-solve').empty();
+                $('#td-solve').append(
+                `<div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="Waktu Solve"></div>`
+                );
+            }
+        });
+
+
     </script>
 
 

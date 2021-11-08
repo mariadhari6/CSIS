@@ -97,7 +97,7 @@ class DetailCustomerController extends Controller
             "pool_name"             => $request->PoolName,
             "pool_location"         => $request->PoolLocation,
             "waranty"               => $request->Waranty,
-            "status_id"        => $request->StatusLayanan,
+            "status_id"             => $request->StatusLayanan,
             "tanggal_pasang"        => $request->TanggalPasang,
             "tanggal_non_aktif"     => $request->TanggalNonAktif,
             "tgl_reaktivasi_gps"    => $request->TanggalReaktivasi
@@ -108,6 +108,7 @@ class DetailCustomerController extends Controller
         $gps_id         = $request->Imei;
         $sensor_all     = $request->SensorAll;
         $i              = $request->PoNumber;
+        $company        = $request->CompanyId;
 
 
         $jumlah_unit_per_po      = MasterPo::where('id', $i)->pluck('jumlah_unit_po');
@@ -122,7 +123,7 @@ class DetailCustomerController extends Controller
             }
         }
         Vehicle::where('id', $license_id)->update(array('status' => 'Used'));
-        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Used'));
+        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Used', 'company_id' => $company ));
         Gps::where('id', $gps_id)->update(array('status' => 'Used'));
         DetailCustomer::insert($data);
     }

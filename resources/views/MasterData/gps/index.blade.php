@@ -6,7 +6,6 @@
 
 
 @section('content')
-
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -22,7 +21,7 @@
               </button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
-          <form>
+        
             <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -43,14 +42,12 @@
                 <th scope="col" class="list" >Status*</th>
                 <th scope="col" class="list" >Status Ownership*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
-
               </tr>
             </thead>
             <tbody  id="item_data">
             </tbody>
           </table>
-          </form>
-        {{-- </div> --}}
+         
         </div>
       </div>
     </div>
@@ -88,16 +85,17 @@
 		</div>
 	</div>
   <script>
+
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-      read()
+      read();
     });
-    // -- excel export to html tabel---
 
+    // -- excel export to html tabel---
     const excel_file = document.getElementById("excel_file");
     excel_file.addEventListener("change",(event)=>{
         if(
@@ -287,11 +285,10 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
-              "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "lengthMenu": '[[10, 25, 50, -1], [10, 25, 50, "All"]]'
-           
-            });
+        });
         $('#table_id').DataTable().draw();
       });
     }
@@ -310,16 +307,14 @@
       });
     // ----- Proses Tambah data ------
     function store() {
-        var merk = $("#merk").val();
-        var type = $("#type").val();
-        var imei = $("#imei").val();
-        var waranty = $("#waranty").val();
-        var po_date = $("#po_date").val();
-        var status = $("#status").val();
-        var status_ownership = $("#status_ownership").val();
-        // alert(merk);
-        //
-            // break;
+        var merk              = $("#merk").val();
+        var type              = $("#type").val();
+        var imei              = $("#imei").val();
+        var waranty           = $("#waranty").val();
+        var po_date           = $("#po_date").val();
+        var status            = $("#status").val();
+        var status_ownership  = $("#status_ownership").val();
+
     $rowCount = $("#table_id tr").length;
       if ($rowCount == 2) {
         // alert('table empty')

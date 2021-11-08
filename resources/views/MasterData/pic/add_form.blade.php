@@ -11,19 +11,19 @@
         </select></i>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="pic_name" placeholder="Pic Name" required>
+        <div class="input-div"><input type="text" class="input" id="pic_name" required>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="phone" placeholder="Phone" required>
+        <div class="input-div"><input type="text" class="input" id="phone" required>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="email" placeholder="Email" required>
+        <div class="input-div"><input type="text" class="input" id="email"  required>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="position" placeholder="Position" required>
+        <div class="input-div"><input type="text" class="input" id="position"  required>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input" id="date_of_birth" placeholder="Date of birth">
+        <div class="input-div"><input type="date" class="input" id="date_of_birth">
     </td>
      <td class="action sticky-col first-col">
          <button class="unstyled-button" type="submit">

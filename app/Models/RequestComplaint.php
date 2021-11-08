@@ -9,7 +9,7 @@ class RequestComplaint extends Model
 {
     use HasFactory;
 
-    protected $table = 'request_complaint_customers';
+    protected $table = 'request_complaint';
 
     protected $fillable = [
         'company_id', 'internal_eksternal', 'pic_id', 'vehicle', 'waktu_info', 'task', 'platform', 'detail_task', 'divisi', 'waktu_respond', 'respond', 'waktu_kesepakatan', 'waktu_solve', 'status', 'status_akhir',

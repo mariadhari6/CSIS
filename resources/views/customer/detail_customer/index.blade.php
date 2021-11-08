@@ -3,7 +3,9 @@
 </div>
     <div class="text-right mt-3" id="selected">
         <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-        <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-pen"></i></button>
+        <button class="btn btn-success  mr-2 edit_all">
+            <i class="fas fa-edit"></i>
+        </button>
         <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
     </div>
 
@@ -345,8 +347,7 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 }).catch(function(timeout) { })
-
-                                $("#master").prop('checked', false);
+                                    $("#master").prop('checked', false);
                                 read();
                             }
                         });
@@ -360,7 +361,10 @@
         }
     });
 
+
     $('.edit_all').on('click', function(e){
+
+        var company = {{ $company->id }}
 
         var allVals = [];
         var _token = $('input[name="_token"]').val();
@@ -403,9 +407,14 @@
                 $("#item-TanggalPasang-"+value).hide("fast");
                 $("#item-TanggalNonAktif-"+value).hide("fast");
                 $(".add").hide("fast");
-                $.get("{{ url('show_detail') }}/" + value, {}, function(data, status) {
-                    $("#edit-form-"+value).prepend(data)
-                    $("#master").prop('checked', false);
+                $.ajax({ 
+                    url:"{{ url('/show_detail')}}/" + value,
+                    data:{
+                    company : company,
+                    }, 
+                    success: function(data, status){
+                        $("#edit-form-"+value).prepend(data)
+                    }                
                 });
             });
         }

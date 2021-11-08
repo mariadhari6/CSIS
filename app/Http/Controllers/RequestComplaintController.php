@@ -214,6 +214,27 @@ class RequestComplaintController extends Controller
     public function basedVehicle($id) {
 
         $data = DetailCustomer::where('company_id', $id)->get();
+
+        for ($i=0; $i < count($data) ; $i++) { 
+            $loop = $data[$i]->vehicle_id;
+            $cari_vehicle = Vehicle::where('id', $loop)->get();
+            $data[$i]['vehicle_license_plate'] = $cari_vehicle[0]->license_plate;
+            
+        }
+
+        return $data;
+    }
+
+    public function basedInternalEksternal(Request $request) {
+
+        $id = $request->request_complain;
+    
+        if ($id == "Request Internal" || $id == "Request Eksternal") {
+            $data = Task::where('jenis', '=', 'request')->get();
+        }
+        else{
+            $data = Task::where('jenis', '=', 'complain')->get();   
+        }
         return $data;
     }
 }

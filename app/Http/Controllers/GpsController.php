@@ -26,15 +26,10 @@ class GpsController extends Controller
         $merk = MerkGps::groupBy('merk_gps')
             ->selectRaw('count(*) as jumlah, merk_gps')
             ->get();
-        // $merk = MerkGps::orderBy('id', 'DESC')->get();
 
-        // $type = TypeGps::orderBy('id', 'DESC')->get();
         return view('MasterData.gps.add_form')->with([
-
             'gps' => $gps,
             'merk' => $merk,
-            // 'type' => $type
-
         ]);
     }
 
@@ -78,7 +73,7 @@ class GpsController extends Controller
 
                     );
                     Gps::insert($data);
-                    // return 'success';
+                 
                 } catch (\Throwable $th) {
                     return 'fail';
                 }
@@ -90,19 +85,14 @@ class GpsController extends Controller
 
     public function store(Request $request)
     {
-
-
-        // $this->validate($request, [
-        //     'imei.*' => 'required|min:15',
-        // ]);
         $data = array(
-            'merk'    =>  $request->merk,
-            'type'   =>  $request->type,
-            'imei'     =>  $request->imei,
-            'waranty'     =>  $request->waranty,
-            'po_date'     =>  $request->po_date,
-            'status'     =>  $request->status,
-            'status_ownership' => $request->status_ownership
+            'merk'              =>  $request->merk,
+            'type'              =>  $request->type,
+            'imei'              =>  $request->imei,
+            'waranty'           =>  $request->waranty,
+            'po_date'           =>  $request->po_date,
+            'status'            =>  $request->status,
+            'status_ownership'  => $request->status_ownership
         );
         Gps::insert($data);
     }
@@ -112,13 +102,10 @@ class GpsController extends Controller
         $merk = MerkGps::groupBy('merk_gps')
             ->selectRaw('count(*) as jumlah, merk_gps')
             ->get();
-        // $merk_gps = MerkGps::orderBy('id', 'DESC')->get();
-        // $type_gps = TypeGps::orderBy('id', 'DESC')->get();
         $gps = Gps::findOrfail($id);
         return view('MasterData.gps.edit_form')->with([
-            'gps' => $gps,
-            'merk' => $merk,
-            // 'type_gps' => $type_gps
+            'gps'   => $gps,
+            'merk'  => $merk,
 
         ]);
     }

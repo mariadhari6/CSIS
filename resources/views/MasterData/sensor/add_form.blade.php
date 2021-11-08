@@ -3,8 +3,7 @@
     <td></td>
     <td>
         <select class="select" id="sensor_name" name="sensor_name" aria-placeholder="Sensor_name">
-            <option selected disabled></option>
-
+            <option style="display:none;"></option>
             @foreach ($sensorName as $item)
             <option value="{{ $item->sensor_name }}" {{ old('sensor_name') == $item->id ? 'selected':'' }}>{{ $item->sensor_name}}</option>
             @endforeach
@@ -12,20 +11,20 @@
         </select>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="merk_sensor" placeholder="merk_sensor" >
+        <div class="input-div"><input type="text" class="input" id="merk_sensor">
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number" required>
+        <div class="input-div"><input type="text" class="input" id="serial_number" required>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="rab_number" placeholder="Rab Number" required>
+        <div class="input-div"><input type="text" class="input" id="rab_number" required>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input" id="waranty" placeholder="Waranty" >
+        <div class="input-div"><input type="date" class="input" id="waranty" >
     </td>
     <td>
         <select class="select" id="status" aria-label=".form-select-lg example" >
-            <option selected>Pilih status</option>
+            <option style="display:none;"></option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>

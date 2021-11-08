@@ -116,7 +116,6 @@
     text-align: center;
     background-color: #fff;
 }
-
 /* .list-freeze {
     min-width: 80px;
     font-size: 15px;
@@ -214,7 +213,7 @@
     grid-template-columns: 7% 93%;
     margin: 0px;
     padding: 13px;
-    border-bottom: 2px solid #79b5dd;
+    border-bottom: 2px solid black;
 }
 
 .input {
@@ -228,7 +227,7 @@
     background: none;
     padding: 1rem 0.7rem;
     font-size: 0.8rem;
-    color: #555;
+    color:black;
     font-family: Arial, Helvetica, sans-serif;
 
 }

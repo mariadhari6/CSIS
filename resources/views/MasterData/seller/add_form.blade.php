@@ -6,7 +6,7 @@
     <td> <div class="input-div"><input type="text" class="input" id="no_agreement_letter" placeholder="No_agreement_later"  data-toggle="popover" title="Popover Header" data-content="Some content inside the popover"></i></td>
     <td>
         <select class="select" id="status" required>
-            <option selected>Pilih status</option>
+            <option style="display:none;"></option>
             <option value="Active">Active</option>
             <option value="In Active">In Active</option>
         </select>

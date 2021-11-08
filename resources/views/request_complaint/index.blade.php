@@ -6,7 +6,7 @@
 
 
 @section('content')
-<form >
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -33,7 +33,7 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-edit"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-
+        <form >
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -58,8 +58,8 @@
                 <th scope="col" class="list">Divisi*</th>
                 <th scope="col" class="list">Respond*</th>
                 <th scope="col" class="list">Waktu Kesepakatan*</th>
-                <th scope="col" class="list">waktu Solve*</th>
                 <th scope="col" class="list">Status*</th>
+                <th scope="col" class="list">waktu Solve*</th>
                 <th scope="col" class="list">Status Akhir</th>
                  <th scope="col" class="action sticky-col first-col">Action</th>
 
@@ -70,6 +70,8 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+          </form>
+
         </div>
       </div>
     </div>
@@ -154,6 +156,7 @@
           $('#table_id tbody').prepend(data);
         });
       });
+
     // ----- Proses Tambah data ------
     function store() {
         var company_id = $("#company_id").val();
@@ -171,21 +174,8 @@
         var waktu_solve = $("#waktu_solve").val();
         var status = $("#status").val();
         var status_akhir = $("#status_akhir").val();
-        if(
-        company_id == "" ||
-        internal_eksternal == "" ||
-        pic_id =="" ||
-        vehicle =="" ||
-        waktu_respond =="" ||
-        task =="" ||
-        platform=="" ||
-        detail_task=="" ||
-        divisi =="" ||
-        respond=="" ||
-        waktu_kesepakatan=="" ||
-        waktu_solve=="" ||
-        status==""
-        ){
+
+        if(company_id =="" || internal_eksternal=="" || pic_id=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status==""){
 
         }else {
             $.ajax({
@@ -265,7 +255,7 @@
         $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).hide("fast");
         $("#item-internal_eksternal-"+id).hide("fast");
-        $("#item-pic-"+id).hide("fast");
+        $("#item-pic_id-"+id).hide("fast");
         $("#item-vehicle-"+id).hide("fast");
         $("#item-waktu_info-"+id).hide("fast");
         $("#item-waktu_respond-"+id).hide("fast");
@@ -527,7 +517,5 @@
 
 
   </script>
-  </form>
 
-@endsection
-
+   @endsection

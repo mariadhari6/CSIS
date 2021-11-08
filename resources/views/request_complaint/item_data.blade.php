@@ -58,11 +58,11 @@
          <td id="item-waktu_kesepakatan-{{ $request_complains->id }}">
             {{ $request_complains->waktu_kesepakatan}}
         </td>
-         <td id="item-waktu_solve-{{ $request_complains->id }}">
-            {{ $request_complains->waktu_solve}}
-        </td>
         <td id="item-status-{{ $request_complains->id }}">
             {{ $request_complains->status }}
+        </td>
+         <td id="item-waktu_solve-{{ $request_complains->id }}">
+            {{ $request_complains->waktu_solve}}
         </td>
         <td id="item-status_akhir-{{ $request_complains->id }}">
             {{ $request_complains->status_akhir }}
