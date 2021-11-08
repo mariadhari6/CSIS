@@ -2,6 +2,7 @@
  <td></td>
     <td>
         <select class="select company_id-{{$vehicle->id}}" id="company_id" name="company_id" required>
+            <option class="hidden" value="{{$vehicle->company_id}}">{{$vehicle->company->company_name}}</option>
             @foreach ($company as $item)
                 <option value="{{ $item->id }}" {{ $item->id == $vehicle->company_id ? 'selected' : '' }}>{{ $item->company_name }}</option>
             @endforeach
@@ -12,6 +13,7 @@
     </td>
     <td>
         <select class="select vehicle_id-{{$vehicle->id}}" id="vehicle_id" name="vehicle_id" required>
+            <option class="hidden" value="{{$vehicle->vehicle_id}}">{{$vehicle->vehicleType->name}}</option>
             @foreach ($vehicleType as $item)
                 <option value="{{ $item->id }}" {{ $item->id == $vehicle->vehicle_id ? 'selected' : '' }}>{{ $item->name }}</option>
             @endforeach

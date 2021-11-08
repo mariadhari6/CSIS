@@ -334,11 +334,17 @@
 /* hidden option */
 .hidden {
     display: none;
+
 }
 
+<<<<<<< HEAD
 /* Frezee Header */
 /* #freeze-header {
     position: sticky;
     top: 0;
     z-index: 2;
 } */
+=======
+
+
+>>>>>>> 2f96e8b79482d261a9710a502c6a67356e5c817a

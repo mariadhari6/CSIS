@@ -38,11 +38,6 @@ class DetailCustomer extends Model
     ];
 
 
-    public function pemasanganMutasiGps()
-    {
-
-        return $this->hasMany(PemasanganMutasiGps::class);
-    }
 
     public function company()
     {
@@ -79,31 +74,28 @@ class DetailCustomer extends Model
 
         return $this->belongsTo(MasterPo::class);
     }
-    // public function poNumber()
-    // {
 
-    //     return $this->belongsTo(MasterPo::class, 'po_id', 'id');
-    // }
-    // public function poDate()
-    // {
+    public function poNumber()
+    {
 
-    //     return $this->belongsTo(MasterPo::class, 'po_date', 'id');
-    // }
-    // public function poh()
-    // {
+        return $this->belongsTo(MasterPo::class);
+    }
 
-    //     return $this->belongsTo(MasterPo::class, 'po_date', 'id');
-    // }
 
     public function vehicle()
     {
 
-        return $this->belongsTo(Vehicle::class, 'license_plate', 'id');
+        return $this->belongsTo(Vehicle::class);
     }
 
     public function status()
     {
 
         return $this->belongsTo(ServiceStatus::class);
+    }
+
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaint::class);
     }
 }

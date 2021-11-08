@@ -231,6 +231,44 @@ class MaintenanceGpsController extends Controller
 
         return $data;
     }
+    public function basedImei($id)
+    {
+
+
+
+        $data = DetailCustomer::where('vehicle', $id)->get();
+
+        return $data;
+    }
+
+    public function basedGps($id)
+    {
+        $key = DetailCustomer::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
+            return [
+                $item['id'] => $item->only(['type'])
+            ];
+        });
+        $data = $key->all();
+        $complete = array();
+
+        foreach ($data as $a) {
+
+            $j = $a['type'];
+
+
+
+            $cari_gpsType = Gps::where('id', $j)->get();
+            $a['type_gps'] = $cari_gpsType[0]->type;
+            // $a['imei_gps'] = $cari_gpsType[0]->imei;
+
+            $a['id'] = $id;
+
+
+            array_push($complete, $a);
+        }
+
+        return $complete;
+    }
     // public function basedSensorName($id)
     // {
 

@@ -50,11 +50,19 @@ class RequestComplaint extends Model
     {
         return $this->belongsTo(DetailCustomer::class, 'gsm_pemasangan', 'id');
     }
+    // public function detailCustomerTypegps()
+    // {
+    //     return $this->belongsTo(DetailCustomer::class, 'type_gps_id', 'id');
+    // }
     public function detailCustomerCompany()
     {
         return $this->belongsTo(DetailCustomer::class, 'company_id', 'id');
     }
     public function detailCustomerVehicle()
+    {
+        return $this->belongsTo(DetailCustomer::class, 'vehicle', 'id');
+    }
+    public function detailCustomerVehicleRequest()
     {
         return $this->belongsTo(DetailCustomer::class, 'vehicle', 'id');
     }
@@ -85,12 +93,12 @@ class RequestComplaint extends Model
     }
     public function gpsMaintenance()
     {
-        return $this->belongsTo(Gps::class, 'equipment_gps_id', 'id');
+        return $this->belongsTo(DetailCustomer::class, 'type_gps_id', 'id');
     }
-    public function gpsType()
-    {
-        return $this->belongsTo(Gps::class, 'type_gps_id', 'id');
-    }
+    // public function gpsType()
+    // {
+    //     return $this->belongsTo(Gps::class, 'type_gps_id', 'id');
+    // }
     public function vehicleRequest()
     {
         return $this->belongsTo(Vehicle::class, 'vehicle', 'id');

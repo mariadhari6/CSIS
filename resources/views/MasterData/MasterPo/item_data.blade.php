@@ -23,7 +23,8 @@
             {{ $item->po_date }}
         </td>
         <td id="item-harga_layanan-{{ $item->id}}">
-            {{ $item->harga_layanan }}
+        <span>Rp. </span>{{ number_format( $item->harga_layanan)}}
+
         </td>
           <td id="item-jumlah_unit_po-{{ $item->id }}">
             {{ $item->jumlah_unit_po }}
@@ -40,8 +41,8 @@
                 <span class="badge badge-success">{{ $item->status_po }}</span>
             @endif
         </td>
-        <td id="item-selles-{{ $item->id }}">
-            {{ $item->selles }}
+        <td id="item-sales_id-{{ $item->id }}">
+            {{ $item->sales->name??''}}
         </td>
          <td class="action sticky-col first-col"id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">

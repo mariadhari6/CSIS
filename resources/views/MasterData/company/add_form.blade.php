@@ -7,7 +7,7 @@
         </td>
     <td>
         <select class="select" id="seller_id" name="seller_id" required>
-
+            <option class="hidden" value="">--Pilih Seller--</option>
             @foreach ($seller as $item)
             <option value="{{ $item->id }}" {{ old('seller_id') == $item->id ? 'selected':'' }}>{{ $item->seller_name }}</option>
             @endforeach
@@ -19,7 +19,7 @@
     </td>
 
     <td>
-        <select class="select" id="no_agreement_letter_id" name="no_agreement_letter_id" required>
+        <select class="select" id="no_agreement_letter_id" name="no_agreement_letter_id" required disabled>
 
             @foreach ($seller as $item)
             <option value="{{ $item->id }}" {{ old('no_agreement_letter_id') == $item->id ? 'selected':'' }}>{{ $item->no_agreement_letter }}</option>

@@ -5892,10 +5892,15 @@ body {
 .table th {
     font-size: 12px;
     border-color: #ebedf2 !important;
+<<<<<<< HEAD
     /* border: 0px; */
     /* padding: 0;
     margin: 0;
     border-collapse: collapse; */
+=======
+    padding: 0.75rem !important;
+
+>>>>>>> 2f96e8b79482d261a9710a502c6a67356e5c817a
 }
 
 /* table full-width */

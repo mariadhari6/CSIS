@@ -63,7 +63,7 @@
                 <th scope="col" class="list">Harga Layanan*</th>
                 <th scope="col" class="list">Jumlah Unit Po*</th>
                 <th scope="col" class="list">Status Po</th>
-                <th scope="col" class="list">Selles</th>
+                <th scope="col" class="list">Salles</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
               </tr>
@@ -202,7 +202,7 @@
               harga_layanan :$td.eq(3).text(),
               jumlah_unit_po:$td.eq(4).text(),
               status_po     :$td.eq(5).text(),
-              selles        :$td.eq(6).text()
+              sales_id        :$td.eq(6).text()
 
             }
 
@@ -326,7 +326,7 @@
         var harga_layanan   = $("#harga_layanan").val();
         var jumlah_unit_po  = $("#jumlah_unit_po").val();
         var status_po       = $("#status_po").val();
-        var selles          = $("#selles").val();
+        var sales_id          = $("#sales_id").val();
         $.ajax({
             type: "get",
             url: "{{ url('store_master_po') }}",
@@ -337,7 +337,7 @@
               harga_layanan :harga_layanan,
               jumlah_unit_po:jumlah_unit_po,
               status_po     :status_po,
-              selles        :selles
+              sales_id        :sales_id
             },
             success: function(data) {
               swal({
@@ -395,7 +395,7 @@
         $("#item-harga_layanan-"+id).hide("fast");
         $("#item-jumlah_unit_po-"+id).hide("fast");
         $("#item-status_po-"+id).hide("fast");
-        $("#item-selles-"+id).hide("fast");
+        $("#item-sales_id-"+id).hide("fast");
         $.get("{{ url('show_master_po') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -408,7 +408,7 @@
             var harga_layanan = $("#harga_layanan").val();
             var jumlah_unit_po = $("#jumlah_unit_po").val();
             var status_po = $("#status_po").val();
-            var selles = $("#selles").val();
+            var sales_id = $("#sales_id").val();
             var id = id;
             $.ajax({
                 type: "get",
@@ -420,7 +420,7 @@
                 harga_layanan: harga_layanan,
                 jumlah_unit_po: jumlah_unit_po,
                 status_po: status_po,
-                selles: selles
+                sales_id: sales_id
                 },
                 success: function(data) {
                   swal({
@@ -512,7 +512,7 @@
                     $("#item-harga_layanan-"+value).hide("fast");
                     $("#item-jumlah_unit_po-"+value).hide("fast");
                     $("#item-status_po-"+value).hide("fast");
-                    $("#item-selles-"+value).hide("fast");
+                    $("#item-sales_id-"+value).hide("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_master_po') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
@@ -546,7 +546,7 @@
                     var harga_layanan = $(".harga_layanan-"+value).val();
                     var jumlah_unit_po = $(".jumlah_unit_po-"+value).val();
                     var status_po = $(".status_po-"+value).val();
-                    var selles = $(".selles-"+value).val();
+                    var sales_id = $(".sales_id-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_master_po') }}/"+value,
@@ -557,7 +557,7 @@
                     harga_layanan: harga_layanan,
                     jumlah_unit_po: jumlah_unit_po,
                     status_po: status_po,
-                    selles: selles
+                    sales_id: sales_id
                     },
                     success: function(data) {
                       swal({

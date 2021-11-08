@@ -233,7 +233,11 @@ class RequestComplaintController extends Controller
     {
 
         $data = DetailCustomer::where('company_id', $id)->get();
-
+        for ($i = 0; $i < count($data); $i++) {
+            $loop = $data[$i]->vehicle_id;
+            $cari_vehicle = Vehicle::where('id', $loop)->get();
+            $data[$i]['vehicle_license_plate'] = $cari_vehicle[0]->license_plate;
+        }
         return $data;
         // echo json_encode(array('data' => $data));
         // die;

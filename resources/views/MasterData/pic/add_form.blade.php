@@ -6,7 +6,7 @@
 
     <td>
         <select class="select" id="company_id" name="company_id" required>
-
+        <option value="" class="hidden">--Pilih Company--</option>
         @foreach ($company as $item)
             <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
         @endforeach

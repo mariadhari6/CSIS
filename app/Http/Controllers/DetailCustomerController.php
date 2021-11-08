@@ -10,6 +10,7 @@ use App\Models\Sensor;
 use App\Models\MasterPo;
 use App\Models\ServiceStatus;
 use App\Models\Vehicle;
+use App\Models\VehicleType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
@@ -246,9 +247,21 @@ class DetailCustomerController extends Controller
                 $item['id'] => $item->only(['vehicle_id', 'pool_name', 'pool_location'])
             ];
         });
-
         $data = $key->all();
-        return $data;
+        $complete = array();
+
+        foreach ($data as $a) {
+
+            $i = $a['vehicle_id'];
+            $cari_vehicleType = VehicleType::where('id', $i)->get();
+            $a['vehicle_name'] = $cari_vehicleType[0]->name;
+            $a['id'] = $id;
+
+
+            array_push($complete, $a);
+        }
+
+        return $complete;
     }
 
     public function basedPonumber($id)
