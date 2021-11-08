@@ -43,8 +43,8 @@
         </select></i>
     </td>
     <td  id="statusOwnership">
-        <select class="select status_ownership-{{$gps->id}}" id="status_ownership" name="status_ownership"aria-label=".form-select-lg example">
-            <option class="hidden" selected>{{$gps->status_ownership}}</option>
+        <select class="select status_ownership-{{$gps->id}}" id="status_ownership" name="status_ownership" aria-label=".form-select-lg example">
+            <option class="hidden" value="{{$gps->status_ownership}}" selected>{{$gps->status_ownership}}</option>
             {{-- <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
@@ -67,8 +67,8 @@
                 if(itemID == 'Ready') {
                     $('#statusOwnership').empty();
                    $('#statusOwnership').append(
-                       `<select class="select"  disable>
-                            <option value="">-</option>
+                       `<select class="select" id="status_ownership"  disable>
+                            <option value="-">-</option>
                         </select>`
                        );
                 }else if(itemID == 'Error'){

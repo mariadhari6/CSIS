@@ -10,13 +10,9 @@
         </select>
     </td>
     <td>
-<<<<<<< HEAD
-        <select class="select @error('type') is-invalid @enderror" id="type" name="type" required>
-=======
         <select class="select" id="type" name="type" required>
             {{-- <option class="hidden" value="">--Pilih Type--</option> --}}
 
->>>>>>> 2f96e8b79482d261a9710a502c6a67356e5c817a
             @foreach ($merk as $item)
             <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type_gps}}</option>
             @endforeach

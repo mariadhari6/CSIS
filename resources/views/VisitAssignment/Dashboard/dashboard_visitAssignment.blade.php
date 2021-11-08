@@ -154,15 +154,18 @@
         <div class="col-md-6">
             <div class="card">
                 <div>
-                    <canvas id="visitSla"></canvas>
+                    <canvas id="visitBerbayar"></canvas>
                 </div>
             </div>
         </div> 
 
         <div class="col-md-6">
             <div class="card">
+            <div class="card-header">
+                <b><p style="text-align: center">Visit SLA</p></b>
+            </div>
                 <div>
-                    <canvas id="visitBerbayar"></canvas>
+                    <canvas id="visitSla"></canvas>
                 </div>
             </div>
         </div> 
@@ -455,13 +458,19 @@
         '#ff8000',
         '#7a7168'
     ],
-        hoverOffset: 4
-    }]
+        hoverOffset: 2
+    }],
+    
+
+   
     };
 
     const configVisitSla = {
         type: 'pie',
         data: dataVisitSla,
+        options: {
+                    maintainAspectRatio: false,
+                }
     };
 
     var VisitSla = new Chart(
