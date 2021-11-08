@@ -22,19 +22,19 @@
         <div class="input-div"><input type="text" class="input serial_number-{{$GsmMaster->id}}" id="serial_number" placeholder="Serial Number" value="{{ $GsmMaster->serial_number}}" required></div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input icc_id-{{$GsmMaster->id}}" id="icc_id" placeholder="ICC_ID" value="{{ $GsmMaster->icc_id}}" required></div>
+        <div class="input-div"><input type="text" class="input icc_id-{{$GsmMaster->id}}" id="icc_id" placeholder="ICC_ID" value="{{ $GsmMaster->icc_id}}"></div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input imsi-{{$GsmMaster->id}}" id="imsi" placeholder="IMSI" value="{{ $GsmMaster->imsi}}" required></div>
+        <div class="input-div"><input type="text" class="input imsi-{{$GsmMaster->id}}" id="imsi" placeholder="IMSI" value="{{ $GsmMaster->imsi}}"></div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input res_id-{{$GsmMaster->id}}" id="res_id" placeholder="Res ID" value="{{ $GsmMaster->res_id}}" required></div>
+        <div class="input-div"><input type="text" class="input res_id-{{$GsmMaster->id}}" id="res_id" placeholder="Res ID" value="{{ $GsmMaster->res_id}}"></div>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input request_date-{{$GsmMaster->id}}" id="request_date" placeholder="Request Date" value="{{ $GsmMaster->expired_date}}" required></div>
+        <div class="input-div"><input type="date" class="input request_date-{{$GsmMaster->id}}" id="request_date" placeholder="Request Date" value="{{ $GsmMaster->expired_date}}"></div>
     </td>
     <td>
-        <div class="input-div"><input type="date" class="input expired_date-{{$GsmMaster->id}}" id="expired_date" placeholder="Expired Date" value="{{ $GsmMaster->expired_date}}" required></div>
+        <div class="input-div"><input type="date" class="input expired_date-{{$GsmMaster->id}}" id="expired_date" placeholder="Expired Date" value="{{ $GsmMaster->expired_date}}"></div>
     </td>
     <td>
         <div class="input-div"><input type="date" class="input active_date-{{$GsmMaster->id}}" id="active_date" placeholder="Active Date" value="{{ $GsmMaster->active_date}}" ></div>
@@ -43,7 +43,7 @@
         <div class="input-div"><input type="date" class="input terminate_date-{{$GsmMaster->id}}" id="terminate_date" placeholder="Terminate Date" value="{{ $GsmMaster->terminate_date}}" ></div>
     </td>
     <td>
-        <textarea class="form-control note-{{$GsmMaster->id}}" id="note" name="note" required >{{$GsmMaster->note}}</textarea>
+        <textarea class="form-control note-{{$GsmMaster->id}}" id="note" name="note" >{{$GsmMaster->note}}</textarea>
     </td>
     <td>
         <div class="input-div"><input type="text" class="input provider-{{$GsmMaster->id}}" id="provider" placeholder="Provider" value="{{ $GsmMaster->provider}}" ></div>
