@@ -111,6 +111,7 @@ class GsmMasterController extends Controller
                 $fail = 1;
             }
         }
+        
         if( $fail === 1 ){
             GsmTemporary::truncate();
             return 'fail';

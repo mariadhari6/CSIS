@@ -20,14 +20,19 @@ class RequestComplaintController extends Controller
     }
     public function add_form()
     {
-        $pic = Pic::groupBy('company_id')
+        $detail = DetailCustomer::groupBy('company_id')
             ->selectRaw('count(*) as jumlah, company_id')
             ->get();
+        // $details = DetailCustomer::where($)with('vehicle')->get();
+        $pic = Pic::orderBy('pic_name', 'ASC')->get();
+
         $company = Company::orderBy('company_name', 'ASC')->get();
         $task_request = Task::orderBy('id', 'ASC')->get();
         $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
         $vehicle = Vehicle::orderBy('id', 'ASC')->get();
-        $detail = DetailCustomer::orderBy('id', 'ASC')->get();
+        // $details = DetailCustomer::orderBy('id', 'ASC')->get();
+        // $
+
 
         return view('request_complaint.add_form')->with([
 
@@ -36,7 +41,9 @@ class RequestComplaintController extends Controller
             'company'              => $company,
             'task_request'              => $task_request,
             'vehicle'              => $vehicle,
-            'detail'              => $detail
+            'detail'              => $detail,
+            // 'details'              => $details
+
 
         ]);
     }
@@ -81,7 +88,7 @@ class RequestComplaintController extends Controller
     }
     public function item_data()
     {
-        $request_complain = RequestComplaint::all();
+        $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
         return view('request_complaint.item_data', compact('request_complain'));
         // dd($request_complain);
     }
@@ -111,7 +118,9 @@ class RequestComplaintController extends Controller
 
     public function edit_form($id)
     {
-        $pic = Pic::groupBy('company_id')
+        $pic = Pic::orderBy('id', 'DESC')->get();
+
+        $detail = DetailCustomer::groupBy('company_id')
             ->selectRaw('count(*) as jumlah, company_id')
             ->get();
         $company = Company::orderBy('id', 'DESC')->get();
@@ -124,7 +133,9 @@ class RequestComplaintController extends Controller
             'pic'              => $pic,
             'company'              => $company,
             'task_request'   => $task_request,
-            'vehicle'              => $vehicle
+            'vehicle'              => $vehicle,
+            'detail'              => $detail
+
 
 
         ]);
@@ -192,7 +203,7 @@ class RequestComplaintController extends Controller
     {
         if ($request->ajax()) {
             $ids = $request->input('id');
-            DB::table('request_complaint_customers')->whereIn('id', $ids)->delete();
+            DB::table('request_complaint')->whereIn('id', $ids)->delete();
         }
     }
 
@@ -217,5 +228,14 @@ class RequestComplaintController extends Controller
         $data = Pic::where('company_id', $id)->get();
 
         return $data;
+    }
+    public function basedVehicle($id)
+    {
+
+        $data = DetailCustomer::where('company_id', $id)->get();
+
+        return $data;
+        // echo json_encode(array('data' => $data));
+        // die;
     }
 }

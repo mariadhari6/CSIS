@@ -62,22 +62,58 @@ class GpsController extends Controller
     public function save_import(Request $request)
     {
         $dataRequest = json_decode($request->data);
+        $data = [];
+        $fail = 0;
         foreach ($dataRequest as $key => $value) {
             $imeiNumber = $value->imei;
             $checkImei = Gps::where('imei', '=', $imeiNumber)->first();
             if ($checkImei === null) {
-                $data = array(
-                    'merk'        =>  $value->merk,
-                    'type'        =>  $value->type,
+                $data[$key] = array(
+                    'merk'        =>  (string) $value->merk,
+                    'type'        =>  (string) $value->type,
                     'imei'        =>  $value->imei,
                     'waranty'     =>  $value->waranty,
                     'po_date'     =>  $value->po_date,
-                    'status'           =>  $value->status,
-                    'status_ownership' =>  $value->status_ownership,
-
+                    'status'           =>  (string) $value->status,
+                    'status_ownership' =>  (string) $value->status_ownership,
                 );
-                GpsTemp::insert($data);
+                // GpsTemporary::insert($data);
+
+                $imeiReq = $data[$key]['imei'];
+                $checkImei = GpsTemporary::where('imei', '=', $imeiReq)->first();
+
+                if ($checkImei === null ) {
+                    GpsTemporary::insert($data[$key]);
+                } else {
+                    $fail = 1;
+                }
+                // echo $data;
             } else {
+                $fail = 1;
+            }
+        }
+
+        if( $fail === 1 ){
+            GpsTemporary::truncate();
+            return 'fail';
+        } else {
+            try {
+                $gpsTemporary = GpsTemporary::orderBy('id', 'DESC')->get();
+                foreach ($gpsTemporary as $key => $value){
+                    $data[$key] = array(
+                        'merk'        =>  (string) $value->merk,
+                        'type'        =>  (string) $value->type,
+                        'imei'        =>  $value->imei,
+                        'waranty'     =>  $value->waranty,
+                        'po_date'     =>  $value->po_date,
+                        'status'           =>  (string) $value->status,
+                        'status_ownership' =>  (string) $value->status_ownership,
+                    );
+                    Gps::insert($data[$key]);
+                    $dataDelete = GpsTemporary::findOrfail($value->id);
+                    $dataDelete->delete();
+                }
+            } catch (\Throwable $th) {
                 return 'fail';
             }
         }

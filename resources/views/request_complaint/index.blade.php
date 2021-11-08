@@ -49,7 +49,7 @@
                 <th scope="col" class="action-no">No.</th>
                 <th scope="col" class="list-company">Company*</th>
                 <th scope="col" class="list">Internal/External*</th>
-                <th scope="col" class="list-pic">PIC*</th>
+                <th scope="col" class="list">PIC*</th>
                 <th scope="col" class="list">Vehicle*</th>
                 <th scope="col" class="list">Waktu Info</th>
                 <th scope="col" class="list">Waktu Respond*</th>

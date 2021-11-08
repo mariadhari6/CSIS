@@ -1,9 +1,8 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Gsm Pre Active')
 
-
 @section('content')
-
+<form onsubmit="return false">
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -32,10 +31,10 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
-          <table class="table table-responsive data" class="table_id" id="table_id" style= "display: block";>
+          <table class="table table-responsive data" class="table_id" id="table_id">
             <thead>
               <tr>
-                <th>
+                <th class="freeze-header">
                     <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -43,20 +42,20 @@
                         </label>
                     </div>
                 </th>
-                <th scope="col" class="action">No.</th>
-                <th scope="col" class="list">Status GSM</th>
-                <th scope="col" class="list">GSM Number</th>
-                <th scope="col" class="list">Company</th>
-                <th scope="col" class="list">Serial Number</th>
-                <th scope="col" class="list">ICC ID</th>
-                <th scope="col" class="list">IMSI</th>
-                <th scope="col" class="list">Res ID</th>
-                <th scope="col" class="list">Request Date</th>
-                <th scope="col" class="list">Expired Date</th>
-                <th scope="col" class="list">Active Date</th>
-                <th scope="col" class="list">Terminated Date</th>
-                <th scope="col" class="list">Note</th>
-                <th scope="col" class="list">Provider</th>
+                <th scope="col" class="action freeze-header">No.</th>
+                <th scope="col" class="list freeze-header">Status GSM</th>
+                <th scope="col" class="list freeze-header">GSM Number</th>
+                <th scope="col" class="list freeze-header">Company</th>
+                <th scope="col" class="list freeze-header">Serial Number</th>
+                <th scope="col" class="list freeze-header">ICC ID</th>
+                <th scope="col" class="list freeze-header">IMSI</th>
+                <th scope="col" class="list freeze-header">Res ID</th>
+                <th scope="col" class="list freeze-header">Request Date</th>
+                <th scope="col" class="list freeze-header">Expired Date</th>
+                <th scope="col" class="list freeze-header">Active Date</th>
+                <th scope="col" class="list freeze-header">Terminated Date</th>
+                <th scope="col" class="list freeze-header">Note</th>
+                <th scope="col" class="list freeze-header">Provider</th>
                 <th scope="col" class="sticky-col first-col">Action</th>
               </tr>
             </thead>
@@ -68,6 +67,7 @@
       </div>
     </div>
   </div>
+</form>
 
   <!-- Modal Import -->
   <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
@@ -784,7 +784,6 @@
         }
 
   </script>
-
   {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
    @endsection

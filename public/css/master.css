@@ -297,7 +297,7 @@
 }
 
 /* Space among tr */
-
+/* Freze button */
 .sticky-col {
     position: -webkit-sticky;
     position: sticky;
@@ -335,3 +335,10 @@
 .hidden {
     display: none;
 }
+
+/* Frezee Header */
+/* #freeze-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+} */

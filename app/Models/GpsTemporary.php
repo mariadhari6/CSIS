@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GpsTemporary extends Model
 {
     use HasFactory;
-    protected $table = 'gps_temp';
+    protected $table = 'gps_temporaries';
 
     protected $fillable = [
         'merk', 'type', 'imei', 'waranty', 'po_date', 'status', 'status_ownership'

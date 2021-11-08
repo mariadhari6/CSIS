@@ -5,9 +5,13 @@
 
     <td>
         <select class="select" id="company_id" name="company_id" required>
+<<<<<<< HEAD
             <option class="hidden"> -- select an option -- </option>
+=======
+            <option class="hidden"> ---select company---</option>
+>>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
 
-            @foreach ($pic as $item )
+            @foreach ($detail as $item )
             <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
 
             @endforeach
@@ -24,7 +28,7 @@
     </td>
       <td>
           <select class="select" id="pic_id" name="pic_id" required>
-            <option selected disabled></option>
+            {{-- <option selected disabled></option> --}}
             @foreach ($pic as $item)
                 <option value="{{ $item->id }}" {{ old('pic_id') == $item->id ? 'selected':'' }}>{{ $item->pic_name }}</option>
 
@@ -34,9 +38,9 @@
 
       <td>
           <select class="select" id="vehicle" name="vehicle" required>
-            <option selected disabled value=""></option>
+            {{-- <option selected disabled value=""></option> --}}
             @foreach ($detail as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate }}</option>
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??'' }}</option>
 
             @endforeach
          </select></i>
@@ -59,7 +63,7 @@
     </td>
 
       <td>
-        <select class="select" id="platform" id="platform" aria-label=".form-select-lg example" required>
+        <select class="select" id="platform" name="platform" aria-label=".form-select-lg example" required>
             <option selected disabled></option>
             <option value="WA">WA</option>
             <option value="SMS">SMS</option>
@@ -80,9 +84,9 @@
             <option value="Operasional (Implementor)">Operasional (Implementor)</option>
         </select></i>
     </td>
-    <td>
+    {{-- <td>
         <div class="input-div"><input type="text" class="input" id="divisi" placeholder="Divisi" required></i></div>
-    </td>
+    </td> --}}
     <td>
         <div class="input-div"><input type="text" class="input" id="respond" placeholder="Respond" required></i></div>
     </td>
@@ -112,7 +116,7 @@
     <script>
     $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();
-           // {{--  alert(itemID);  --}}
+            // alert(itemID);
             if(itemID) {
                 $.ajax({
                     url: '/based_pic/'+ itemID,
@@ -127,9 +131,24 @@
                             }
                     }
                 });
+                 $.ajax({
+                    url: '/based_vehicle/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="vehicle').empty();
+                        $('select[name="vehicle').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_id +'</option>');
+                                // 16-Nov-2021   alert(data[i].serial_number)
+                            }
+                    }
+                });
             }
             else{
                 $('select[name="pic_id"]').empty();
+                $('select[name="vehicle"]').empty();
+
             }
          });
 </script>

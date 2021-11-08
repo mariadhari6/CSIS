@@ -3,7 +3,7 @@
 @section('title-table','Pemasangan dan Mutasi GPS')
 
 @section('content')
- <form>
+ {{-- <form> --}}
 
   <div class="row">
     <div class="col-md-12">
@@ -48,8 +48,8 @@
                 <th scope="col" class="list-company">Company</th>
                 <th scope="col" class="list">Jenis Pekerjaan</th>
                 <th scope="col" class="list">Tanggal</th>
-                <th scope="col" class="list">Kendaraan Awal*</th>
-                <th scope="col" class="list">Kendaraan Pasang*</th>
+                <th scope="col" class="list">Kendaraan Awal</th>
+                <th scope="col" class="list">Kendaraan Pasang</th>
                 <th scope="col" class="list">IMEI*</th>
                 <th scope="col" class="list">GSM*</th>
                 <th scope="col" class="list">GPS</th>
@@ -68,6 +68,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+          </form>
         </div>
       </div>
     </div>
@@ -270,7 +271,7 @@
             var kendaraan_pasang = $("#kendaraan_pasang").val();
             var status = $("#status").val();
             var id = id;
-        if(kendaraan_pasang == "" || vehicle == "" || imei =="" || gsm_pemasangan =="" || teknisi_pemasangan =="" || uang_transportasi =="" || type_visit=="" || status=="" ){
+        if(imei =="" || gsm_pemasangan =="" || teknisi_pemasangan =="" || uang_transportasi =="" || type_visit=="" || status=="" ){
         } else {
             $.ajax({
                 type: "get",
@@ -485,6 +486,6 @@
 
 
   </script>
-          </form>
+          {{-- </form> --}}
 
    @endsection

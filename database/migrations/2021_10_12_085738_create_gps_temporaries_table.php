@@ -15,8 +15,8 @@ class CreateGpsTemporariesTable extends Migration
     {
         Schema::create('gps_temporaries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('merk')->nullable();
-            $table->foreignId('type')->nullable();
+            $table->string('merk')->nullable();
+            $table->string('type')->nullable();
             $table->bigInteger('imei')->nullable();
             $table->date('waranty');
             $table->date('po_date');

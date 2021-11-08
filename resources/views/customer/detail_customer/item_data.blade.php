@@ -49,10 +49,12 @@
         <td id="item-Provider-{{ $detail->id }}">
             {{ $detail->gsm->provider }}
         </td>
-        <td id="item-SensorAll-{{ $detail->id }}" >
-
-             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $detail->sensor_all_name }}" ></i>
-
+        <td id="item-SensorAll-{{ $detail->id }}">
+            @if ($detail->sensor_all_name == "")
+                -
+            @else
+                <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $detail->sensor_all_name }}" ></i>
+            @endif
         </td>
         <td id="item-PoolName-{{ $detail->id }}">
             {{ $detail->vehicle->pool_name }}
@@ -61,10 +63,14 @@
             {{ $detail->vehicle->pool_location }}
         </td>
         <td id="item-Waranty-{{ $detail->id }}">
+            @if ($detail->waranty == "")
+                -
+            @else
             {{ date('d-M-Y', strtotime($detail->waranty)) }}
+            @endif
         </td>
         <td id="item-StatusLayanan-{{ $detail->id }}">
-            {{ $detail->status_layanan }}
+            {{ $detail->status->service_status_name }}
         </td>
         <td id="item-TanggalPasang-{{ $detail->id }}">
              {{-- {{ $detail->tanggal_pasang }}->format('d/m/Y');  --}}
@@ -91,6 +97,7 @@
             </div>
         </td>
     </tr>
+
     <script>
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover();

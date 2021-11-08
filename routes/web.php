@@ -274,6 +274,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
     Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
+    Route::get('/based_vehicle/{id}', [PemasanganMutasiGpsController::class, 'basedVehicle']);
+    Route::get('/based_imei/{id}', [PemasanganMutasiGpsController::class, 'basedImei']);
 
     // Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
     // Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
@@ -300,13 +302,15 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
     Route::get('/based_pic/{id}', [RequestComplaintController::class, 'basedPic']);
+    Route::get('/based_vehicle/{id}', [RequestComplaintController::class, 'basedVehicle']);
+
 
     //Dashboar Visit Assignment
     Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
-    Route::get('/item_data_DashboardVisitAssignment', [DashboardVisitAssignmentController::class, 'item_data']);
-    Route::get('/item_data_DetailCostPercompany', [DashboardVisitAssignmentController::class, 'detailPercompany']);
-    Route::get('/item_data_TypeGps', [DashboardVisitAssignmentController::class, 'perTypeGps']);
-    Route::get('/item_data_teknisi', [DashboardVisitAssignmentController::class, 'tugasPerTeknisi']);
+    // Route::get('/item_data_DashboardVisitAssignment', [DashboardVisitAssignmentController::class, 'item_data']);
+    // Route::get('/item_data_DetailCostPercompany', [DashboardVisitAssignmentController::class, 'detailPercompany']);
+    // Route::get('/item_data_TypeGps', [DashboardVisitAssignmentController::class, 'perTypeGps']);
+    // Route::get('/item_data_teknisi', [DashboardVisitAssignmentController::class, 'tugasPerTeknisi']);
 
 
     // Maintenance GPS
@@ -325,10 +329,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_maintenanceGps', [MaintenanceGpsController::class, 'deleteAll']);
     Route::get('/selected_maintenanceGps', [MaintenanceGpsController::class, 'selected']);
 
-    //Dashboar Visit Assignment
-    Route::get('/dashboard_visit_assignment', [DashboardVisitAssignmentController::class, 'index']);
-
-
+   
     // Edit Password
     Route::get('change-password', [ChangePasswordController::class, 'index']);
     Route::post('change-password', [ChangePasswordController::class, 'store'])->name('change.password');
@@ -339,9 +340,11 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_data_onProgress_maintenance', [MaintenanceGpsController::class, 'item_data_onProgress']);
     Route::get('/item_data_done_maintenance', [MaintenanceGpsController::class, 'item_data_done']);
     Route::get('/item_data_all_maintenance', [MaintenanceGpsController::class, 'item_data']);
-    Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensor']);
+    // Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensor']);
     // Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensorName']);
-    Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
+    // Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
+    Route::get('/based_vehicle/{id}', [MaintenanceGpsController::class, 'basedVehicle']);
+
 
     // Master PO
     Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');
@@ -365,10 +368,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/importExcel_masterPo', [MasterPoController::class, 'importExcel'])->name('importExcel_masterPo');
     Route::get('/download_template_masterPo', [MasterPoController::class, 'export']);
 
-
-
-    //Dashboar Visit Assignment
-    Route::get('/dashboard_visit_assignment', [DashboardVisitAssignmentController::class, 'index']);
 
     // Vehicle
     Route::get('/Vehicle', [VehicleController::class, 'index'])->name('vehicle');

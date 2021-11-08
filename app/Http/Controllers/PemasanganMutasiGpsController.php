@@ -91,7 +91,9 @@ class PemasanganMutasiGpsController extends Controller
     {
 
         $company = Company::orderBy('id', 'DESC')->get();
-        $details = DetailCustomer::orderBy('id', 'DESC')->get();
+        $details = DetailCustomer::groupBy('company_id')
+            ->selectRaw('count(*) as jumlah, company_id')
+            ->get();
         $pemasangan_mutasi_GPS = RequestComplaint::findOrfail($id);
         $sensor = Sensor::orderBy('id', 'ASC')
             ->get();
@@ -209,6 +211,27 @@ class PemasanganMutasiGpsController extends Controller
         $key = Sensor::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
             return [
                 $item['id'] => $item->only(['sensor_name', 'merk_sensor'])
+            ];
+        });
+        $data = $key->all();
+        return $data;
+    }
+
+    public function basedVehicle($id)
+    {
+
+
+
+        $data = DetailCustomer::where('company_id', $id)->get();
+
+        return $data;
+    }
+
+    public function basedImei($id)
+    {
+        $key = DetailCustomer::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
+            return [
+                $item['id'] => $item->only(['gsm_id', 'type'])
             ];
         });
         $data = $key->all();

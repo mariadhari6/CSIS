@@ -5,11 +5,11 @@
 
 
     <td><select class="select company_id-{{$request_complain->id}}" id="company_id" name="company_id" required>
-        <option value=""> {{$request_complain->companyRequest->company_name??''}} </option>
-       @foreach ($company as $companys)
-        <option value="{{ $companys->id }}" {{ old('company_id') == $companys->id ? 'selected':'' }}>{{ $companys->company_name }}</option>
+        <option value="{{$request_complain->company_id}}"> {{$request_complain->companyRequest->company_name??''}} </option>
+        @foreach ($detail as $item )
+            <option name="company" value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
 
-       @endforeach
+            @endforeach
     </select></i></td>
 
     <td><select class="select internal_eksternal-{{$request_complain->id}}" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example" required>
@@ -22,7 +22,7 @@
     </select></i></td>
 
     <td><select class="select pic_id-{{$request_complain->id}}" id="pic_id" name="pic_id" required>
-    <option value=""> {{$request_complain->pic->pic_name??''}} </option>
+    <option value="{{$request_complain->pic_id}}"> {{$request_complain->pic->pic_name??''}} </option>
 
        @foreach ($pic as $pics)
         <option value="{{ $pics->id }}" {{ old('pic_id') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
@@ -30,16 +30,16 @@
        @endforeach
     <td>
           <select class="select vehicle-{{$request_complain->id}}" id="vehicle" name="vehicle" required>
-            <option value=""> {{$request_complain->vehicleRequest->license_plate??''}} </option>
+            <option value="{{$request_complain->vehicle}}"> {{$request_complain->detailCustomerVehicle->vehicle->license_plate??''}} </option>
 
-            @foreach ($vehicle as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+            @foreach ($detail as $item)
+                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??'' }}</option>
 
             @endforeach
          </select></i>
       </td>
     <td>
-        <div class="input-div"><input type="datetime-local" class="input waktu_info-{{$request_complain->id}}" id="waktu_info" placeholder="Waktu Info" value="{{ str_replace(" ", "T", $request_complain->waktu_info) }}" required></i></div>
+        <div class="input-div"><input type="datetime-local" class="input waktu_info-{{$request_complain->id}}" id="waktu_info" placeholder="Waktu Info" value="{{ str_replace(" ", "T", $request_complain->waktu_info) }}" ></i></div>
     </td>
     <td>
         <div class="input-div"><input type="datetime-local" class="input waktu_respond-{{$request_complain->id}}" id="waktu_respond" placeholder="Waktu Respond" value="{{ str_replace(" ", "T", $request_complain->waktu_respond) }}" required ></i></div>
@@ -65,7 +65,12 @@
 
     <td><textarea class="form-control detail_task-{{$request_complain->id}}" id="detail_task" required >{{$request_complain->detail_task}}</textarea></i></td>
     <td>
-        <div class="input-div"><input type="text" class="input divisi-{{$request_complain->id}}" id="divisi" placeholder="Divisi" value="{{ $request_complain->divisi}}" required></i></div>
+        <select class="select" id="divisi" name="divisi" aria-label=".form-select-lg example" required>
+            <option selected value="{{$request_complain->detail_task}}">{{$request_complain->detail_task}}</option>
+            <option value="Opersional (CS)">Opersional (CS)</option>
+            <option value="Lintas Divisi">Lintas Divisi</option>
+            <option value="Operasional (Implementor)">Operasional (Implementor)</option>
+        </select></i>
     </td>
     <td>
         <div class="input-div"><input type="text" class="input respond-{{$request_complain->id}}" id="respond" placeholder="Respond" value="{{ $request_complain->respond}}" required></i></div>
@@ -91,9 +96,9 @@
     </td>
 
     <script>
-         $('select[name="company_id"]').on('change', function() {
+        $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();
-           // {{--  alert(itemID);  --}}
+            // alert(itemID);
             if(itemID) {
                 $.ajax({
                     url: '/based_pic/'+ itemID,
@@ -108,9 +113,24 @@
                             }
                     }
                 });
+                 $.ajax({
+                    url: '/based_vehicle/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="vehicle').empty();
+                        $('select[name="vehicle').append('<option value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_id +'</option>');
+                                // 16-Nov-2021   alert(data[i].serial_number)
+                            }
+                    }
+                });
             }
             else{
                 $('select[name="pic_id"]').empty();
+                $('select[name="vehicle"]').empty();
+
             }
          });
     </script>

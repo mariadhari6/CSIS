@@ -15,13 +15,13 @@ class CreateGpsTable extends Migration
     {
         Schema::create('gps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('merk');
-            $table->foreignId('type');
-            $table->bigInteger('imei');
+            $table->string('merk')->nullable();
+            $table->string('type')->nullable();
+            $table->bigInteger('imei')->nullable();
             $table->date('waranty');
             $table->date('po_date');
             $table->string('status');
-            $table->string('status_ownership');
+            $table->string('status_ownership')->nullable();
             $table->timestamps();
         });
     }
