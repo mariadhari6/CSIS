@@ -242,4 +242,17 @@ class RequestComplaintController extends Controller
         // echo json_encode(array('data' => $data));
         // die;
     }
+    public function basedInternalEksternal(Request $request)
+    {
+
+        $id = $request->request_complain;
+
+        if ($id == "Request Internal" || $id == "Request Eksternal") {
+            $data = Task::where('jenis', '=', 'request')->get();
+        } else {
+            $data = Task::where('jenis', '=', 'complain')->get();
+        }
+
+        return $data;
+    }
 }

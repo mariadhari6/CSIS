@@ -72,7 +72,7 @@ class MasterPoController extends Controller
             'jumlah_unit_po'    => $request->jumlah_unit_po,
             'status_po'         => $request->status_po,
             'sales_id'            => $request->sales_id,
-            // 'count'             => $request->jumlah_unit_po,
+            'count'             => $request->jumlah_unit_po,
         );
         MasterPo::insert($data);
     }

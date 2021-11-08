@@ -20,7 +20,7 @@
             {{ $detail->vehicle->license_plate }}
         </td>
         <td id="item-VihecleType-{{ $detail->id }}">
-            {{ $detail->vehicle->vehicleType->name }}
+            {{ $detail->vehicle->vehicle->name }}
         </td>
         <td id="item-PoNumber-{{ $detail->id }}">
             {{ $detail->po->po_number }}

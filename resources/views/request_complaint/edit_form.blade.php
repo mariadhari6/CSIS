@@ -66,7 +66,7 @@
     <td><textarea class="form-control detail_task-{{$request_complain->id}}" id="detail_task" required >{{$request_complain->detail_task}}</textarea></i></td>
     <td>
         <select class="select" id="divisi" name="divisi" aria-label=".form-select-lg example" required>
-            <option selected value="{{$request_complain->detail_task}}">{{$request_complain->detail_task}}</option>
+            <option selected value="{{$request_complain->divisi}}">{{$request_complain->divisi}}</option>
             <option value="Opersional (CS)">Opersional (CS)</option>
             <option value="Lintas Divisi">Lintas Divisi</option>
             <option value="Operasional (Implementor)">Operasional (Implementor)</option>

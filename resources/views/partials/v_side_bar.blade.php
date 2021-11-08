@@ -110,6 +110,34 @@
                     </ul>
                 </div>
             </li>
+             <li class="nav-item
+                {{ request()->is('detail_customer') ? ' active' : ''}}
+            ">
+                <a class="" data-toggle="collapse" href="#customer" aria-expanded="true">
+                    <i class="fas fa-user-friends"></i>
+                    <p>Data Customer</p>
+                    <span class="caret"></span>
+                </a>
+                <div class="collapse @yield('customer')" id="customer" aria-expanded="true" style="">
+                    <ul class="nav">
+                        <li class="nav-item {{ request()->is('detail_customer') ? ' active' : ''}}">
+                            <a class="collapse-item @yield('detail_customer')" href="{{url('/detail_customer')}}">
+                                <span class="link-collapse">Detail Customer</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('summary')}}">
+                                <span class="link-collapse">Summary</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#edit">
+                                <span class="link-collapse">Dashboard Customer</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
 
             <li class="nav-item
@@ -165,35 +193,8 @@
                     </ul>
                 </div>
             </li>
-              <li class="nav-item
-                {{ request()->is('detail_customer') ? ' active' : ''}}
-            ">
-                <a class="" data-toggle="collapse" href="#customer" aria-expanded="true">
-                    <i class="fas fa-user-friends"></i>
-                    <p>Data Customer</p>
-                    <span class="caret"></span>
-                </a>
-                <div class="collapse @yield('customer')" id="customer" aria-expanded="true" style="">
-                    <ul class="nav">
-                        <li class="nav-item {{ request()->is('detail_customer') ? ' active' : ''}}">
-                            <a class="collapse-item @yield('detail_customer')" href="{{url('/detail_customer')}}">
-                                <span class="link-collapse">Detail Customer</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('summary')}}">
-                                <span class="link-collapse">Summary</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#edit">
-                                <span class="link-collapse">Dashboard Customer</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-{{--
+
+                {{--
             <li class="nav-item">
 
                 <a href="{{ url('/livetable') }}">Example Crud</a>

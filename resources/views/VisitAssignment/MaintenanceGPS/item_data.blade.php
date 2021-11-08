@@ -19,7 +19,7 @@
             {{ $item->taskRequest->task }}
         </td>
         <td id="item-vehicle-{{ $item->id}}">
-            {{ $item->detailCustomerVehicle->vehicle->license_plate??'' }}
+            {{ $item->detailCustomerVehicleRequest->vehicle->license_plate??'' }}
         </td>
         <td id="item-waktu_kesepakatan-{{ $item->id }}">
             {{ $item->waktu_kesepakatan }}

@@ -30,10 +30,10 @@
     <td>
           <select class="select vehicle-{{$maintenanceGps->id}}" id="vehicle" name="vehicle">
             <option value="{{$maintenanceGps->vehicle}}">
-                {{ $maintenanceGps->detailCustomerVehicle->vehicle->license_plate??'' }}
+                {{ $maintenanceGps->detailCustomerVehicleRequest->vehicle->license_plate??'' }}
             </option>
             @foreach ($details as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle}}</option>
+                <option value="{{ $item->id }}">{{ $item->vehicle}}</option>
 
             @endforeach
          </select></i>
@@ -70,7 +70,7 @@
      <td><select class="select equipment_gsm-{{$maintenanceGps->id}}" id="equipment_gsm" name="equipment_gsm">
         <option value="{{$maintenanceGps->equipment_gsm}}"> {{$maintenanceGps->gsm->gsm_number?? ''}} </option>
         @foreach ($gsm_master as $item)
-        <option value="{{ $item->id }}" {{ old('equipment_gsm') == $item->id  ? 'selected':'' }}>
+        <option value="{{ $item->id }}">
         {{$item->gsm_number}}
         </option>
 

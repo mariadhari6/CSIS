@@ -3,10 +3,10 @@
     <td></td>
     <td>
         <select class="select merk-{{$gps->id}}" id="merk" name="merk" required>
-            {{-- <option value=""></option> --}}
+            <option class="hidden" value="{{$gps->merk}}">{{$gps->merk}}</option>
 
             @foreach ($merk as $item)
-            <option value="{{ $item->merk_gps }}" {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>
+            <option value="{{ $item->merk_gps }}">{{ $item->merk_gps}}</option>
             @endforeach
 
         </select>
@@ -14,10 +14,10 @@
 
     <td>
         <select class="select type-{{$gps->id}}" id="type" name="type" required>
-            {{-- <option value="{{$gps->type}}">{{$gps->type}}</option> --}}
+            <option class="hidden" value="{{$gps->type}}">{{$gps->type}}</option>
 
             @foreach ($merk as $item)
-            <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type_gps}}</option>
+            <option value="{{ $item->id }}">{{ $item->type_gps}}</option>
             @endforeach
 
         </select>
@@ -43,8 +43,8 @@
         </select></i>
     </td>
     <td  id="statusOwnership">
-        <select class="select status_ownership-{{$gps->id}}" id="status_ownership" name="status_ownership"aria-label=".form-select-lg example">
-            <option class="hidden" selected>{{$gps->status_ownership}}</option>
+         <select class="select status_ownership-{{$gps->id}}" id="status_ownership" name="status_ownership" aria-label=".form-select-lg example">
+            <option class="hidden" selected value="{{$gps->status_ownership}}">{{$gps->status_ownership}}</option>
             {{-- <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
@@ -67,8 +67,8 @@
                 if(itemID == 'Ready') {
                     $('#statusOwnership').empty();
                    $('#statusOwnership').append(
-                       `<select class="select"  disable>
-                            <option value="">-</option>
+                       `<select class="select" id="status_ownership">
+                            <option value="-">-</option>
                         </select>`
                        );
                 }else if(itemID == 'Error'){
@@ -83,7 +83,7 @@
                         );
 
 
-                }else {
+                }else if(itemID == 'Used') {
                         $('#statusOwnership').empty();
                         $('#statusOwnership').append(
                             `<select class="select" id="status_ownership">
@@ -108,7 +108,7 @@
                         success:function(data) {
                             // alert(data.length);
                             $('select[name="type').empty();
-                            $('select[name="type').append('<option value=""> </option>');
+                            $('select[name="type').append('<option class="hidden" value=""> </option>');
                                 for(var i = 0 ; i < data.length ; i++) {
                                     $('select[name="type').append('<option value="'+ data[i].type_gps + '"> '+ data[i].type_gps +'</option>');
                                         // alert(data[i].serial_number)

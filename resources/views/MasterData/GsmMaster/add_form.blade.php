@@ -49,7 +49,7 @@
         <div class="input-div"><input type="date" class="input" id="terminate_date" placeholder="Terminate Date">
     </td>
     <td>
-        <textarea class="form-control" id="note" name="note" required ></textarea>
+        <textarea class="form-control" id="note" name="note"></textarea>
     </td>
      <td>
         <div class="input-div"><input type="text" class="input" id="provider" placeholder="Provider">

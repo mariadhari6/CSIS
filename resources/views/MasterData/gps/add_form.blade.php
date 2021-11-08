@@ -61,11 +61,11 @@
             {{-- <option selected disabled value="-">Pilih Status</option> --}}
             {{-- <option value="-">-</option> --}}
 
-            <option value="-">-</option>
+            {{-- <option value="-">-</option>
             <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
-            <option value="Beli">Beli</option>
+            <option value="Beli">Beli</option> --}}
         </select></i>
         @error('status_ownership')
         <div class="alert alert-danger">{{$message}}</div>
@@ -90,8 +90,8 @@
                 if(itemID == 'Ready') {
                     $('#statusOwnership').empty();
                    $('#statusOwnership').append(
-                       `<select class="select"  disable>
-                            <option value="">-</option>
+                       `<select class="select" id="status_ownership"  disable>
+                            <option value="-">-</option>
                         </select>`
                        );
                 }else if(itemID == 'Error'){
@@ -133,7 +133,7 @@
                             $('select[name="type').empty();
                             // $('select[name="type').append('<option value=""> </option>');
                                 for(var i = 0 ; i < data.length ; i++) {
-                                    $('select[name="type').append('<option value="'+ data[i].type_gps+ '"> '+ data[i].type_gps +'</option>');
+                                    $('select[name="type').append('<option value="'+ data[i].id+ '"> '+ data[i].type_gps +'</option>');
                                         // alert(data[i].serial_number)
                                 }
                         }

@@ -24,7 +24,7 @@
               </button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
-          <form>
+          <form onsubmit="return false">
             <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -360,6 +360,14 @@
             }).catch(function(timeout) { });
 
         }else if(imei.length == 15 && index == allimeiNum.length ) {
+         }else {
+              $success = true;
+        break;
+        }
+        }
+      }
+
+      if($success === true) {
 
         $.ajax({
             type: "get",
@@ -384,9 +392,7 @@
 
             }
         });
-        break;
-        }
-        }
+
       }
 
 

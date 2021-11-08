@@ -170,6 +170,31 @@
                 );
            }
         });
+
+        $('select[name="internal_eksternal"]').on('change', function() {
+                var request_complain = $(this).val();
+                // alert(itemID);
+                if(request_complain) {
+                    $.ajax({
+                        url: '/based_internal_eksternal',
+                        method: "GET",
+                        data  :{
+                            request_complain : request_complain
+                        },
+                        success:function(data) {
+                            $('select[name="task').empty();
+                            $('select[name="task').append('<option style="display:none"></option>');
+                                for(var i = 0 ; i < data.length ; i++) {
+                                    $('select[name="task').append('<option value="'+ data[i].id + '"> '+ data[i].task +'</option>');
+                                }
+                        }
+                    });
+                }
+                else{
+                    $('select[name="task"]').empty();
+
+                }
+            });
 </script>
 
 </tr>

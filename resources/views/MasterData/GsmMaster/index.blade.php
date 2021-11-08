@@ -1,24 +1,15 @@
 @extends('layouts.v_main')
-@section('title','CSIS | Master GSM')
-@section('title-table','Master GSM')
-@section('master','show')
-@section('GsmMaster','active')
-
+@section('title','CSIS | Gsm Pre Active')
 
 @section('content')
+<form onsubmit="return false">
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
             <div class="text-right" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button">
-                  <b>Add</b>
-                  <i class="fas fa-plus ml-2" id="add"></i>
-                </button>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
-                  <b> Import</b>
-                  <i class="fas fa-file-excel ml-2"></i>
-                </button>
+                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+
                 <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
                     <option value="{{ url('item_data_all_GsmMaster') }}">All</option>
@@ -27,21 +18,19 @@
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
                   </select>
                 </div>
-
-                <button class="btn btn-success edit_all">
+                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                  <b> Import</b>
+                  <i class="fas fa-file-excel ml-2"></i>
+                </button>
+              <button class="btn btn-success edit_all">
                 <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn btn-danger delete_all">
-                  <i class="fas fa-trash"></i>
-                </button>
+              </button>
+              <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-            <div class="outer">
-        <form>
-
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+          <table class="table table-responsive data" class="table_id" id="table_id">
             <thead>
               <tr>
-                <th>
+                <th class="freeze-header">
                     <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -70,13 +59,11 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-        </form>
-        </div>
-
         </div>
       </div>
     </div>
   </div>
+</form>
 
   <!-- Modal Import -->
   <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
@@ -109,6 +96,7 @@
 			</div>
 		</div>
 	</div>
+
   <script>
     $(document).ready(function() {
       $.ajaxSetup({
@@ -116,10 +104,13 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
       });
+
       read()
     });
+
      // -- excel export to html tabel --
     const excel_file = document.getElementById("excel_file");
+
     excel_file.addEventListener("change", (event) => {
       if (
         ![
@@ -129,21 +120,31 @@
       ) {
         document.getElementById("excel_data").innerHTML =
           '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+
         excel_file.value = "";
+
         return false;
       }
+
       var reader = new FileReader();
+
       reader.readAsArrayBuffer(event.target.files[0]);
+
       reader.onload = function (event) {
         var data = new Uint8Array(reader.result);
+
         var work_book = XLSX.read(data, { type: "array" });
+
         var sheet_name = work_book.SheetNames;
+
         var sheet_data = XLSX.utils.sheet_to_json(
           work_book.Sheets[sheet_name[0]],
           { header: 1 }
         );
+
         if (sheet_data.length > 0) {
           var table_output = '<table class="table table-bordered" id="importTable">';
+
           for (var row = 0; row < sheet_data.length; row++) {
             table_output += "<tr>";
 
@@ -197,6 +198,7 @@
                 }
               }
             }
+            // alert( typeof serialNumberValue );
           }
 
           // change format RequestDate
@@ -343,7 +345,7 @@
     // ---- Close Modal -------
     $('#close-modal').click(function() {
         // deleteTemporary();
-        // read_temporary()
+        read()
         $('#importData').modal('hide');
     });
 
@@ -360,6 +362,7 @@
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable( {
+
               "dom": '<"top"f>rt<"bottom"lp><"clear">'
               });
           $('#table_id').DataTable().draw();
@@ -372,8 +375,7 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
-                        "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-
+            "pageLength": 50,
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
@@ -417,6 +419,36 @@
       var note = $("#note").val();
       var provider = $("#provider").val();
 
+      // $.ajax({
+      //       type: "get",
+      //       url: "{{ url('store_GsmMaster') }}",
+      //       data: {
+      //         status_gsm: status_gsm,
+      //         gsm_number: gsm_number,
+      //         company_id: company_id,
+      //         serial_number: serial_number,
+      //         icc_id: icc_id,
+      //         imsi: imsi,
+      //         res_id: res_id,
+      //         request_date: request_date,
+      //         expired_date: expired_date,
+      //         active_date: active_date,
+      //         terminate_date: terminate_date,
+      //         note: note,
+      //         provider: provider
+      //       },
+      //       success: function(data) {
+      //       swal({
+      //           type: 'success',
+      //           title: 'Data Saved',
+      //           showConfirmButton: false,
+      //           timer: 1500
+      //       }).catch(function(timeout) { });
+      //         read();
+      //         // break;
+      //       }
+      //   });
+
       $rowCount = $("#table_id tr").length;
       if ($rowCount == 2) {
         // alert('table empty')
@@ -455,43 +487,45 @@
 
 
               break;
-          } else if( index == allGsmNum.length) {
-            // alert('success');
-            // break;
-            $.ajax({
-                type: "get",
-                url: "{{ url('store_GsmMaster') }}",
-                data: {
-                  status_gsm: status_gsm,
-                  gsm_number: gsm_number,
-                  company_id: company_id,
-                  serial_number: serial_number,
-                  icc_id: icc_id,
-                  imsi: imsi,
-                  res_id: res_id,
-                  request_date: request_date,
-                  expired_date: expired_date,
-                  active_date: active_date,
-                  terminate_date: terminate_date,
-                  note: note,
-                  provider: provider
-                },
-                success: function(data) {
-                swal({
-                    type: 'success',
-                    title: 'Data Saved',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).catch(function(timeout) { });
-                  read();
-                  // break;
-                }
-            });
-            break;
+          } else {
+              $success = true;
           }
         }
       }
+
+      if($success === true) {
+        $.ajax({
+            type: "get",
+            url: "{{ url('store_GsmMaster') }}",
+            data: {
+              status_gsm: status_gsm,
+              gsm_number: gsm_number,
+              company_id: company_id,
+              serial_number: serial_number,
+              icc_id: icc_id,
+              imsi: imsi,
+              res_id: res_id,
+              request_date: request_date,
+              expired_date: expired_date,
+              active_date: active_date,
+              terminate_date: terminate_date,
+              note: note,
+              provider: provider
+            },
+            success: function(data) {
+            swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
+              read();
+              // break;
+            }
+        });
+      }
     }
+
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -761,6 +795,7 @@
             });
         });
         }
+
         //--------Proses Batal--------
         function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
@@ -771,7 +806,10 @@
             read();
         }
 
-
+         // destro datatable
+         function dataLengthAll() {
+          $('#table_id').DataTable().destroy();
+        }
 
   </script>
   {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}

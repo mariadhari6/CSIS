@@ -302,6 +302,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
     Route::get('/based_pic/{id}', [RequestComplaintController::class, 'basedPic']);
     Route::get('/based_vehicleRequest/{id}', [RequestComplaintController::class, 'basedVehicle']);
+    Route::get('/based_internal_eksternal', [RequestComplaintController::class, 'basedInternalEksternal']);
 
 
     //Dashboar Visit Assignment

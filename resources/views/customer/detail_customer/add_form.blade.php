@@ -20,7 +20,7 @@
         <select class="select" id="VihecleType" name="VihecleType" disabled>
             <option value=""></option>
             @foreach ($vehicle as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle_id') == $item->id ? 'selected':'' }}>{{ $item->vehicleType->name }}</option>
+                <option value="{{ $item->id }}" {{ old('vehicle_id') == $item->id ? 'selected':'' }}>{{ $item->vehicle->name }}</option>
             @endforeach
         </select>
     </td>

@@ -6,7 +6,6 @@
 
 
 @section('content')
-<form>
       <div class="card">
         <div class="card-body">
             <div class="text-right" id="selected">
@@ -25,6 +24,8 @@
                 <i class="fas fa-trash"></i>
               </button>
             </div>
+            <form>
+
              <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -49,6 +50,8 @@
               {{-- {{ csrf_field() }} --}}
               </tbody>
              </table>
+            </form>
+
             </div>
         </div>
         {{-- modal Import --}}
@@ -516,5 +519,4 @@
 
 
   </script>
-</form>
    @endsection
