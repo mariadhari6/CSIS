@@ -24,18 +24,18 @@
     <td><select class="select pic_id-{{$request_complain->id}}" id="pic_id" name="pic_id" required>
     <option value="{{$request_complain->pic_id}}"> {{$request_complain->pic->pic_name??''}} </option>
 
-       @foreach ($pic as $pics)
+       {{-- @foreach ($pic as $pics)
         <option value="{{ $pics->id }}" {{ old('pic_id') == $pics->id ? 'selected':'' }}>{{ $pics->pic_name }}</option>
 
-       @endforeach
+       @endforeach --}}
     <td>
           <select class="select vehicle-{{$request_complain->id}}" id="vehicle" name="vehicle" required>
-            <option value="{{$request_complain->vehicle}}">{{$request_complain->vehicleRequest->license_plate??''}}</option>
+            <option value="{{$request_complain->vehicle}}">{{$request_complain->detailCustomerVehicleRequest->vehicle->license_plate??''}}</option>
 
-            @foreach ($detail as $item)
+            {{-- @foreach ($detail as $item)
                 <option value="{{ $item->id }}">{{ $item->vehicle->license_plate??'' }}</option>
 
-            @endforeach
+            @endforeach --}}
          </select></i>
       </td>
     <td>
@@ -78,16 +78,17 @@
     <td>
         <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$request_complain->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ str_replace(" ", "T", $request_complain->waktu_kesepakatan) }}" required ></i></div>
     </td>
-    <td>
-        <div class="input-div"><input type="datetime-local" class="input waktu_solve-{{$request_complain->id}}" id="waktu_solve" placeholder="waktu Solve" value="{{ str_replace(" ", "T", $request_complain->waktu_solve) }}" required></i></div>
-    </td>
-   <td>
+     <td>
         <select class="select status-{{$request_complain->id}}"  id="status" aria-label=".form-select-lg example" required>
             <option value="{{$request_complain->status}}"> {{$request_complain->status}} </option>
             <option value="On Progress">On Progress</option>
             <option value="Done">Done</option>
         </select></i>
     </td>
+    <td>
+        <div class="input-div"><input type="datetime-local" class="input waktu_solve-{{$request_complain->id}}" id="waktu_solve" placeholder="waktu Solve" value="{{ str_replace(" ", "T", $request_complain->waktu_solve) }}" required></i></div>
+    </td>
+
     <td>
         <div class="input-div"><input type="text" class="input status_akhir-{{$request_complain->id}}" id="status_akhir" placeholder="status akhir" value="{{ $request_complain->status_akhir}}" required ></i></div>
     </td>
@@ -114,14 +115,14 @@
                     }
                 });
                  $.ajax({
-                    url: '/based_vehicle/'+ itemID,
+                    url: '/based_vehicleRequest/'+ itemID,
                     method: "GET",
                     success:function(data) {
                         //alert(data.length);
                         $('select[name="vehicle').empty();
                         // $('select[name="vehicle').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
-                                $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_id +'</option>');
+                                $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_license_plate +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)
                             }
                     }

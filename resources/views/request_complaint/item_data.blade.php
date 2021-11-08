@@ -21,11 +21,11 @@
           <td id="item-internal_eksternal-{{ $request_complains->id }}">
             {{ $request_complains->internal_eksternal }}
         </td>
-        <td id="item-pic-{{ $request_complains->id}}">
+        <td id="item-pic_id-{{ $request_complains->id}}">
                 {{ $request_complains->pic->pic_name?? ''}}
         </td>
           <td id="item-vehicle-{{ $request_complains->id }}">
-            {{$request_complains->vehicleRequest->license_plate??''}}
+            {{$request_complains->detailCustomerVehicleRequest->vehicle->license_plate??''}}
         </td>
           <td id="item-waktu_info-{{ $request_complains->id }}">
             {{ $request_complains->waktu_info}}
@@ -58,11 +58,12 @@
          <td id="item-waktu_kesepakatan-{{ $request_complains->id }}">
             {{ $request_complains->waktu_kesepakatan}}
         </td>
-         <td id="item-waktu_solve-{{ $request_complains->id }}">
-            {{ $request_complains->waktu_solve}}
-        </td>
+
         <td id="item-status-{{ $request_complains->id }}">
             {{ $request_complains->status }}
+        </td>
+          <td id="item-waktu_solve-{{ $request_complains->id }}">
+            {{ $request_complains->waktu_solve}}
         </td>
         <td id="item-status_akhir-{{ $request_complains->id }}">
             {{ $request_complains->status_akhir }}

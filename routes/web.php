@@ -242,7 +242,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [DetailCustomerController::class, 'updateall']);
     Route::get('/coba', [DetailCustomerController::class, 'coba']);
     Route::get('/based_company/{id}', [DetailCustomerController::class, 'basedCompany']);
-    Route::get('/based_imei/{id}', [DetailCustomerController::class, 'basedImei']);
+    Route::get('/based_imeiDetail/{id}', [DetailCustomerController::class, 'basedImei']);
     Route::get('/based_gsm/{id}', [DetailCustomerController::class, 'basedGsm']);
     Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensor']);
     Route::get('/based_license/{id}', [DetailCustomerController::class, 'basedLicense']);
@@ -271,8 +271,10 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
     // Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
-    Route::get('/based_vehicle/{id}', [PemasanganMutasiGpsController::class, 'basedVehicle']);
+    Route::get('/based_vehiclePemasangan/{id}', [PemasanganMutasiGpsController::class, 'basedVehicle']);
     Route::get('/based_imei/{id}', [PemasanganMutasiGpsController::class, 'basedImei']);
+    Route::get('/based_kendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'basedKendaraanPasang']);
+
 
     // Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
     // Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
@@ -299,7 +301,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
     Route::get('/based_pic/{id}', [RequestComplaintController::class, 'basedPic']);
-    Route::get('/based_vehicle/{id}', [RequestComplaintController::class, 'basedVehicle']);
+    Route::get('/based_vehicleRequest/{id}', [RequestComplaintController::class, 'basedVehicle']);
 
 
     //Dashboar Visit Assignment
@@ -331,7 +333,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensor']);
     // Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensorName']);
     // Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
-    Route::get('/based_vehicle/{id}', [MaintenanceGpsController::class, 'basedVehicle']);
+    Route::get('/based_vehicleMaintenance/{id}', [MaintenanceGpsController::class, 'basedVehicle']);
+    Route::get('/based_typegps/{id}', [MaintenanceGpsController::class, 'basedGps']);
 
 
     // Master PO

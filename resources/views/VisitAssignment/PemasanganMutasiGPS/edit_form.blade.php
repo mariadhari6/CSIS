@@ -53,7 +53,7 @@
     </td>
 
 
-    <td><select class="select imei-{{$pemasangan_mutasi_GPS->id}}" id="imei" name="imei" required>
+    <td><select class="select imei-{{$pemasangan_mutasi_GPS->id}}" id="imei" name="imei" required disabled>
         <option value="{{$pemasangan_mutasi_GPS->imei}}"> {{$pemasangan_mutasi_GPS->detailCustomerImei->gps->imei?? ''}} </option>
         @foreach ($details as $detail)
         <option value="{{ $detail->id }}" {{ old('imei') == $detail->id  ? 'selected':'' }}>
@@ -62,7 +62,7 @@
        @endforeach
     </select></i></td>
 
-     <td><select class="select gsm_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="gsm_pemasangan" name="gsm_pemasangan" required>
+     <td><select class="select gsm_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="gsm_pemasangan" name="gsm_pemasangan" required disabled>
         <option value="{{$pemasangan_mutasi_GPS->gsm_pemasangan}}"> {{$pemasangan_mutasi_GPS->detailCustomerGsm->gsm->gsm_number?? ''}} </option>
         @foreach ($details as $item)
         <option value="{{ $item->id }}" {{ old('gsm_pemasangan') == $item->id  ? 'selected':'' }}>
@@ -71,7 +71,7 @@
 
        @endforeach
     </select></i></td>
-      <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps">
+      <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps" disabled>
         <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->detailCustomerGps->gps->type??''}} </option>
         @foreach ($gps as $gpses)
         <option value="{{ $gpses->id }}" {{ old('equipment_terpakai_gps') == $gpses->id  ? 'selected':'' }}>
@@ -203,34 +203,34 @@
             // alert(itemID);
             if(itemID) {
                 $.ajax({
-                    url: '/based_vehicle/'+ itemID,
+                    url: '/based_vehiclePemasangan/'+ itemID,
                     method: "GET",
                     success:function(data) {
                         //alert(data.length);
                         $('select[name="vehicle').empty();
-                        $('select[name="vehicle').append('<option value=""> </option>');
+                        $('select[name="vehicle').append('<option class="hidden" value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
-                                $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_id +'</option>');
+                                $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_license_plate +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)
                             }
                     }
                 });
                  $.ajax({
-                    url: '/based_vehicle/'+ itemID,
+                    url: '/based_kendaraanPasang/'+ itemID,
                     method: "GET",
                     success:function(data) {
                         //alert(data.length);
-                        $('select[name="imei').empty();
-                        $('select[name="imei').append('<option value=""> </option>');
+                        $('select[name="kendaraan_pasang').empty();
+                        $('select[name="kendaraan_pasang').append('<option class="hidden" value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
-                                $('select[name="imei').append('<option value="'+ data[i].id + '"> '+ data[i].imei +'</option>');
+                                $('select[name="kendaraan_pasang').append('<option value="'+ data[i].id + '"> '+ data[i].license_plate +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)
                             }
                     }
                 });
             }
             else{
-                $('select[name="vehicle"]').empty();
+                // $('select[name="vehicle"]').empty();
                 $('select[name="imei"]').empty();
 
             }
@@ -247,9 +247,9 @@
                             $('select[name="gsm_pemasangan').empty();
                             $('select[name="equipment_terpakai_gps').empty();
                             $.each(data, function(key, value) {
-                                $('select[name="imei').append('<option value="'+ key +'">'+ value.imei +'</option>');
-                                $('select[name="gsm_pemasangan').append('<option value="'+ key +'">'+ value.gsm_id +'</option>');
-                                $('select[name="equipment_terpakai_gps').append('<option value="'+ key +'">'+ value.type +'</option>');
+                                $('select[name="imei').append('<option value="'+ value.id +'">'+ value.imei_gps +'</option>');
+                                $('select[name="gsm_pemasangan').append('<option value="'+ value.id +'">'+ value.number_gsm +'</option>');
+                                $('select[name="equipment_terpakai_gps').append('<option value="'+ value.id +'">'+ value.type_gps +'</option>');
                             });
                         }
                     });

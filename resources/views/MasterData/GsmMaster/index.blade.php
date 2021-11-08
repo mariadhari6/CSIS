@@ -35,7 +35,8 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
-<form>
+            <div class="outer">
+        <form>
 
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
@@ -70,6 +71,7 @@
             </tbody>
           </table>
         </form>
+        </div>
 
         </div>
       </div>

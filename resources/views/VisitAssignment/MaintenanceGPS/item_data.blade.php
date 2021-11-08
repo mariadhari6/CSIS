@@ -19,7 +19,7 @@
             {{ $item->taskRequest->task }}
         </td>
         <td id="item-vehicle-{{ $item->id}}">
-            {{ $item->detailCustomerVehicle->gps->license_plate??'' }}
+            {{ $item->detailCustomerVehicle->vehicle->license_plate??'' }}
         </td>
         <td id="item-waktu_kesepakatan-{{ $item->id }}">
             {{ $item->waktu_kesepakatan }}
@@ -27,7 +27,7 @@
 
         @if ($item->type_gps_id !=null)
             <td id="item-type_gps_id-{{ $item->id }}">
-            {{ $item->gpsMaintenance->gps->type??''}}
+            {{$item->gpsMaintenance->gps->type}}
             </td>
         @elseif ($item->type_gps_id ==null)
             <td id="item-type_gps_id-{{ $item->id }}">

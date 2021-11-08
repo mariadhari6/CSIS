@@ -43,7 +43,7 @@ class PemasanganMutasiGpsController extends Controller
 
     public function item_data()
     {
-        $pemasangan_mutasi_GPS = RequestComplaint::where('task', 1)->orWhere('task', 2)->orWhere('task', 3)->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::orderBy('id', 'DESC')->where('task', 1)->orWhere('task', 2)->orWhere('task', 3)->get();
         for ($i = 0; $i <= count($pemasangan_mutasi_GPS) - 1; $i++) {
 
             $loop_row   = $pemasangan_mutasi_GPS[$i]->equipment_terpakai_sensor;
@@ -95,8 +95,8 @@ class PemasanganMutasiGpsController extends Controller
             ->selectRaw('count(*) as jumlah, company_id')
             ->get();
         $pemasangan_mutasi_GPS = RequestComplaint::findOrfail($id);
-        $sensor = Sensor::orderBy('id', 'ASC')
-            ->get();
+        $sensor         = Sensor::orderBy('serial_number', 'DESC')->where('status', 'Ready')->get();
+
         $gps = Gps::where('status', 'Ready')->get();
         $vehicle = Vehicle::orderBy('id', 'DESC')->get();
         $teknisi = Teknisi::orderBy('id', 'DESC')->get();
@@ -134,8 +134,8 @@ class PemasanganMutasiGpsController extends Controller
         $data->kendaraan_pasang = $request->kendaraan_pasang;
         $data->status = $request->status;
         $equipment_terpakai_sensor     = $request->equipment_terpakai_sensor;
-        $gsm_id = $request->gsm_pemasangan;
-        $gps_terpakai = $request->equipment_terpakai_gps;
+        // $gsm_id = $request->gsm_pemasangan;
+        // $gps_terpakai = $request->equipment_terpakai_gps;
 
         // $a      = $batas[0] - 1;
         // $x      = "not";
@@ -149,8 +149,8 @@ class PemasanganMutasiGpsController extends Controller
                 Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
             }
             $data->save();
-            Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active'));
-            Gps::where('id', $gps_terpakai)->update(array('status' => 'Used'));
+            // Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active'));
+            // Gps::where('id', $gps_terpakai)->update(array('status' => 'Used'));
         }
     }
 
@@ -223,7 +223,11 @@ class PemasanganMutasiGpsController extends Controller
 
 
         $data = DetailCustomer::where('company_id', $id)->get();
-
+        for ($i = 0; $i < count($data); $i++) {
+            $loop = $data[$i]->vehicle_id;
+            $cari_vehicle = Vehicle::where('id', $loop)->get();
+            $data[$i]['vehicle_license_plate'] = $cari_vehicle[0]->license_plate;
+        }
         return $data;
     }
 
@@ -235,6 +239,37 @@ class PemasanganMutasiGpsController extends Controller
             ];
         });
         $data = $key->all();
+        $complete = array();
+
+        foreach ($data as $a) {
+
+            $i = $a['gsm_id'];
+            $j = $a['type'];
+            $j = $a['imei'];
+
+
+            $cari_Gsm = Gsm::where('id', $i)->get();
+            $a['number_gsm'] = $cari_Gsm[0]->gsm_number;
+            $cari_gpsType = Gps::where('id', $j)->get();
+            $a['type_gps'] = $cari_gpsType[0]->type;
+            $a['imei_gps'] = $cari_gpsType[0]->imei;
+
+            $a['id'] = $id;
+
+
+            array_push($complete, $a);
+        }
+
+        return $complete;
+    }
+
+    public function basedKendaraanPasang($id)
+    {
+
+
+
+        $data = Vehicle::where('company_id', $id)->get();
+
         return $data;
     }
 

@@ -269,7 +269,7 @@
                 var Id = $(this).val();
                 if(Id) {
                     $.ajax({
-                        url: '/based_imei/'+ Id,
+                        url: '/based_imeiDetail/'+ Id,
                         method: "GET",
                         success:function(data) {
                             $('select[name="Merk').empty();

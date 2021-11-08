@@ -63,6 +63,10 @@ class RequestComplaint extends Model
     {
         return $this->belongsTo(DetailCustomer::class, 'vehicle', 'id');
     }
+    public function detailCustomerVehicleRequest()
+    {
+        return $this->belongsTo(DetailCustomer::class, 'vehicle', 'id');
+    }
     public function detailCustomerGps()
     {
         return $this->belongsTo(DetailCustomer::class, 'equipment_terpakai_gps', 'id');
@@ -90,7 +94,7 @@ class RequestComplaint extends Model
     }
     public function gpsMaintenance()
     {
-        return $this->belongsTo(Gps::class, 'type_gps_id', 'id');
+        return $this->belongsTo(DetailCustomer::class, 'type_gps_id', 'id');
     }
     // public function gpsType()
     // {

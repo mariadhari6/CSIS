@@ -49,7 +49,7 @@
 
             @foreach ($details as $item)
             <option value="{{ $item->id }}" >
-                {{ $item->type }}
+                {{ $item->type}}
             </option>
             @endforeach
 
@@ -134,7 +134,7 @@
             // alert(itemID);
             if(itemID) {
                 $.ajax({
-                    url: '/based_vehicle/'+ itemID,
+                    url: '/based_vehicleMaintenance/'+ itemID,
                     method: "GET",
                     success:function(data) {
                         //alert(data.length);
@@ -146,26 +146,47 @@
                             }
                     }
                 });
-                $.ajax({
-                    url: '/based_vehicle/'+ itemID,
-                    method: "GET",
-                    success:function(data) {
-                        //alert(data.length);
-                        $('select[name="type_gps_id').empty();
-                        $('select[name="type_gps_id').append('<option value=""> </option>');
-                            for(var i = 0 ; i < data.length ; i++) {
-                                $('select[name="type_gps_id').append('<option value="'+ data[i].id + '"> '+ data[i].type+'</option>');
-                                // 16-Nov-2021   alert(data[i].serial_number)
-                            }
-                    }
-                });
+                // $.ajax({
+                //     url: '/based_vehicle/'+ itemID,
+                //     method: "GET",
+                //     success:function(data) {
+                //         //alert(data.length);
+                //         $('select[name="type_gps_id').empty();
+                //         $('select[name="type_gps_id').append('<option value=""> </option>');
+                //             for(var i = 0 ; i < data.length ; i++) {
+                //                 $('select[name="type_gps_id').append('<option value="'+ data[i].id + '"> '+ data[i].type+'</option>');
+                //                 // 16-Nov-2021   alert(data[i].serial_number)
+                //             }
+                //     }
+                // });
                 }else{
                 $('select[name="vehicle"]').empty();
-                // $('select[name="imei"]').empty();
+                // $('select[name="type_gps_id"]').empty();
 
             }
          });
 
+            $('select[name="vehicle"]').on('change', function(){
+                var Id = $(this).val();
+                // alert(Id);
+                if(Id) {
+                    $.ajax({
+                        url: '/based_typegps/'+ Id,
+                        method: "GET",
+                        success:function(data) {
+                            $('select[name="type_gps_id').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="type_gps_id').append('<option value="'+ value.id +'">'+ value.type_gps +'</option>');
+
+                            });
+                        }
+                    });
+                }
+                else{
+                    $('select[name="type_gps_id').empty();
+
+                }
+            });
 </script>
 
 
