@@ -180,6 +180,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_data_terminate_GsmMaster', [GsmMasterController::class, 'item_data_terminate']);
     Route::get('/add_form_GsmMaster', [GsmMasterController::class, 'add_form']);
     Route::get('/store_GsmMaster', [GsmMasterController::class, 'store']);
+    Route::post('/save_import_GsmMaster', [GsmMasterController::class, 'save_import']);
     Route::get('/destroy_GsmMaster/{id}', [GsmMasterController::class, 'destroy']);
     Route::get('/show_GsmMaster/{id}', [GsmMasterController::class, 'edit_form']);
     Route::get('/update_GsmMaster/{id}', [GsmMasterController::class, 'update']);
@@ -259,6 +260,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
     Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
+    Route::get('/based_vehicle/{id}', [PemasanganMutasiGpsController::class, 'basedVehicle']);
+    Route::get('/based_imei/{id}', [PemasanganMutasiGpsController::class, 'basedImei']);
 
     // Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
     // Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
@@ -319,9 +322,21 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [VehicleController::class, 'updateall']);
     Route::get('/dependent_company/{id}', [CompanyController::class, 'dependentCompany']);
     Route::get('/show_no_agreement/{id}', [CompanyController::class, 'showAgreement']);
+    Route::post('/save_import_MasterVehicle', [VehicleController::class, 'save_import']);
+    Route::post('/importExcel_MasterVehicle', [VehicleController::class, 'importExcel'])->name('importExcel_MasterVehicle');
+    Route::get('/download_template_MasterVehicle', [VehicleController::class, 'export']);
 
 
     Route::get('/cek', [MasterPoController::class, 'check']);
+
+    //Summary Detail Customer
+    Route::get('/count', [SummaryController::class, 'countPo']);
+    Route::get('/filter', [SummaryController::class, 'filter']);
+    Route::get('/data-po', [SummaryController::class, 'DataPo']);
+    Route::get('/item_summary', [SummaryController::class, 'item_summary']);
+    Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
+    Route::get('/item_summary', [SummaryController::class, 'item_summary'])->name('item_summary');
+    Route::get('/add_summary', [DetailCustomerController::class, 'add_form'])->name('add_summary');
 });
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

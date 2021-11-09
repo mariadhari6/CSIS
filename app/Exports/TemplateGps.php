@@ -16,7 +16,7 @@ class TemplateGps implements FromCollection
         return new EloquentCollection(
             [
                 [
-                    'Merk', 'Type', 'IMEI', 'Waranty', 'PO date', 'Status', 'Status ownership'
+                    'Merk*', 'Type*', 'IMEI*', 'Waranty', 'PO date*', 'Status*', 'Status ownership*'
                 ]
 
             ]

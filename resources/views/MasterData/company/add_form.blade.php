@@ -7,7 +7,6 @@
         </td>
     <td>
         <select class="select" id="seller_id" name="seller_id" required>
-            <option value="">Pilih Seller Name</option>
 
             @foreach ($seller as $item)
             <option value="{{ $item->id }}" {{ old('seller_id') == $item->id ? 'selected':'' }}>{{ $item->seller_name }}</option>
@@ -21,7 +20,6 @@
 
     <td>
         <select class="select" id="no_agreement_letter_id" name="no_agreement_letter_id" required>
-            <option value="">Pilih No Agreement</option>
 
             @foreach ($seller as $item)
             <option value="{{ $item->id }}" {{ old('no_agreement_letter_id') == $item->id ? 'selected':'' }}>{{ $item->no_agreement_letter }}</option>
@@ -31,11 +29,9 @@
     </td>
     <td>
         <select class="select" id="status" name="status" required>
-            <option selected>Pilih status</option>
-            <option value="Contract">Contract</option>
-            <option value="Terminate">Terminate</option>
-            <option value="Trial">Trial</option>
-            <option value="Register">Register</option>
+            <option value="Active">Active</option>
+            <option value="In Active">In Active</option>
+
         </select>
     </td>
     <td>

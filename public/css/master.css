@@ -108,13 +108,40 @@
     text-align: center;
 }
 .list {
+    position: relative;
     min-width: 140px;
     font-size: 15px;
     text-align: center;
 }
+
+.list-gsm {
+    position: relative;
+    min-width: 90px;
+    font-size: 13px;
+    text-align: center;
+}
+.list-gsmNumber {
+    position: relative;
+    min-width: 90px;
+    font-size: 13px;
+    text-align: left;
+}
+.list-company {
+    position: relative;
+    min-width: 270px;
+    font-size: 13px;
+    text-align: center;
+}
+
 .list-pic {
     position: relative;
     min-width: 60px;
+    font-size: 15px;
+    text-align: center;
+}
+.list-picPosition {
+    position: relative;
+    min-width: 150px;
     font-size: 15px;
     text-align: center;
 }
@@ -125,6 +152,16 @@
 }
 .list-seller {
     min-width: 180px;
+    font-size: 15px;
+    text-align: center;
+}
+.list-sellerName {
+    min-width: 270px;
+    font-size: 15px;
+    text-align: center;
+}
+.list-sellerCode {
+    min-width: 90px;
     font-size: 15px;
     text-align: center;
 }
@@ -246,3 +283,44 @@
     padding: 0 !important;
     margin: 0 !important;
 }
+
+.sticky-col {
+    position: -webkit-sticky;
+    position: sticky;
+    background-color: white;
+}
+
+.first-col {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    right: 0px;
+}
+
+
+@media (min-width: 768px) {
+    .modal-xl {
+      width: 90%;
+     max-width:1650px;
+    }
+  }
+  .error
+{
+color:red;
+font-family:verdana, Helvetica;
+}
+
+
+.fa-eye .popover{
+    width:400px;
+    height:100px;
+}
+
+.fa-eye:hover{
+    background-color: deepskyblue;
+}
+
+.hidden{
+    display: none;
+}
+

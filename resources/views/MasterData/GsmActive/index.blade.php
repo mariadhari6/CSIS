@@ -10,9 +10,9 @@
       <div class="card">
         <div class="card-body">
              <div class="text-right" id="selected">
-                <button class="btn btn-success  mr-2 edit_all">
-                  <i class="fas fa-pen"></i>
-                </button>
+                <button class="btn btn-success edit_all">
+                <i class="fas fa-edit"></i>
+              </button>
                 <button class="btn btn-danger  delete_all">
                   <i class="fas fa-trash"></i>
                 </button>
@@ -33,7 +33,7 @@
                 <th scope="col" class="action-no">No.</th>
                 <th scope="col" class="list">Status GSM*</th>
                 <th scope="col" class="list">GSM Number*</th>
-                <th scope="col" class="list">Company*</th>
+                <th scope="col" class="list-company">Company*</th>
                 <th scope="col" class="list">Request Date*</th>
                 <th scope="col" class="list">Active Date*</th>
                 <th scope="col" class="list">Note</th>
@@ -68,6 +68,7 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'

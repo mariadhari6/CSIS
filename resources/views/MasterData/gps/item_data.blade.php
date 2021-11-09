@@ -2,7 +2,7 @@
 @foreach ($gps as $item)
     <tr id="edit-form-{{ $item->id }}">
 
-         <td id="td-checkbox-{{ $item->id }}">
+         <td id="td-checkbox-{{ $item->id }}" class="{{ $item->id }}">
             <div>
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
@@ -18,12 +18,12 @@
                 {{ $sellers->company->company_name}}
         </td> --}}
         <td id="item-merk-{{ $item->id}}">
-            {{ $item->merkGps->merk ?? ''}}
+            {{ $item->merk}}
         </td>
           <td id="item-type-{{ $item->id }}">
-            {{ $item->typeGps->type_gps ?? '' }}
+            {{ $item->type }}
         </td>
-          <td id="item-imei-{{ $item->id }}">
+          <td id="item-imei-{{ $item->id }}" name="{{$item->imei}}" class="item-imei-{{$item->id}}">
             {{ $item->imei }}
         </td>
         <td id="item-waranty-{{ $item->id }}">
@@ -38,7 +38,7 @@
           <td id="item-status_ownership-{{ $item->id }}">
             {{ $item->status_ownership }}
           </td>
-          <td class="action sticky-col first-col" id="td-button-{{ $item->id }}">
+          <td class="sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>

@@ -15,6 +15,9 @@
         <td id="item-company_id-{{ $item->id}}">
             {{ $item->companyRequest->company_name }}
         </td>
+        <td id="item-task-{{ $item->id}}">
+            {{ $item->taskRequest->task }}
+        </td>
         <td id="item-vehicle-{{ $item->id}}">
             {{ $item->vehicleRequest->license_plate??'' }}
         </td>
@@ -24,7 +27,7 @@
 
         @if ($item->type_gps_id !=null)
             <td id="item-type_gps_id-{{ $item->id }}">
-            {{ $item->gpsType->typeGps->type_gps??''}}
+            {{ $item->gpsType->type??''}}
             </td>
         @elseif ($item->type_gps_id ==null)
             <td id="item-type_gps_id-{{ $item->id }}">
@@ -34,7 +37,7 @@
 
         @if ($item->equipment_gps_id !=null)
         <td id="item-equipment_gps_id-{{ $item->id }}">
-            {{ $item->gpsMaintenance->typeGps->type_gps??''}}
+            {{ $item->gpsMaintenance->type??''}}
         </td>
         @elseif ($item->equipment_gps_id ==null)
         <td id="item-equipment_gps_id-{{ $item->id }}">
@@ -42,15 +45,24 @@
         </td>
         @endif
 
-        @if ($item->equipment_sensor_id !=null)
-            <td id="item-equipment_sensor_id-{{ $item->id}}">
-                {{ $item->sensorMaintenance->sensor_name?? '' }}
-            </td>
-        @elseif ($item->equipment_sensor_id ==null)
-            <td id="item-equipment_sensor_id-{{ $item->id}}">
+        @if ($item->equipment_sensor_id_all_name != null)
+        <td id="item-equipment_sensor_id-{{ $item->id }}">
+             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $item->equipment_sensor_id_all_name }}" ></i>
+
+        </td>
+        @elseif ($item->equipment_sensor_id_all_name == null)
+        <td id="item-equipment_sensor_id-{{ $item->id }}">
             -
-            </td>
+        </td>
         @endif
+
+        {{-- <td id="item-equipment_sensor_id-{{ $item->id }}" >
+
+             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $item->equipment_sensor_id_all_name }}" ></i>
+
+            {{-- {{ $item->equipment_sensor_id_all_name }} --}}
+
+        {{-- </td> --}}
 
         @if ($item->equipment_gsm !=null)
         <td id="item-equipment_gsm-{{ $item->id}}">
@@ -62,9 +74,7 @@
         </td>
         @endif
 
-        <td id="item-task-{{ $item->id}}">
-            {{ $item->taskRequest->task }}
-        </td>
+
 
         @if ($item->ketersediaan_kendaraan !=null)
         <td id="item-ketersediaan_kendaraan-{{ $item->id}}">
@@ -142,5 +152,10 @@
             </div>
         </td>
     </tr>
+     <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 @endforeach
 

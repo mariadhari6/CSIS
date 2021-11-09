@@ -13,7 +13,7 @@
             {{ $no++ }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company->company_name ??''}}
+            {{ $item->company->company_name??''}}
         </td>
         <td id="item-po_number-{{ $item->id}}">
             {{ $item->po_number }}

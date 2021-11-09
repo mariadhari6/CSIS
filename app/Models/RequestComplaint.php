@@ -16,14 +16,78 @@ class RequestComplaint extends Model
          'type_gps_id', 'equipment_gps_id', 'equipment_sensor_id', 'equipment_gsm', 'ketersediaan_kendaraan', 'keterangan', 'hasil', 'biaya_transportasi', 'teknisi_maintenance', 'req_by', 'note_maintenance'
     ];
 
-    public function company()
+    public function companyRequest()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
-
     public function pic()
     {
-        return $this->belongsTo(Pic::class);
+        return $this->belongsTo(Pic::class, 'pic_id', 'id');
+    }
+    public function taskRequest()
+    {
+        return $this->belongsTo(Task::class, 'task', 'id');
+    }
+    public function teknisi()
+    {
+        return $this->belongsTo(Teknisi::class, 'teknisi_pemasangan', 'id');
+    }
+    public function teknisiMaintenance()
+    {
+        return $this->belongsTo(Teknisi::class, 'teknisi_maintenance', 'id');
+    }
+    public function detailCustomer()
+    {
+        return $this->belongsTo(DetailCustomer::class);
+    }
+    public function detailCustomerImei()
+    {
+        return $this->belongsTo(DetailCustomer::class, 'imei', 'id');
+    }
+    public function detailCustomerGsmPemasangan()
+    {
+        return $this->belongsTo(DetailCustomer::class, 'gsm_pemasangan', 'id');
+    }
+    public function detailCustomerCompany()
+    {
+        return $this->belongsTo(DetailCustomer::class, 'company_id', 'id');
+    }
+    public function detailCustomerVehicle()
+    {
+        return $this->belongsTo(DetailCustomer::class, 'vehicle', 'id');
+    }
+    public function detailCustomerGps()
+    {
+        return $this->belongsTo(DetailCustomer::class, 'equipment_terpakai_gps', 'id');
+    }
+    public function detailCustomerGsm()
+    {
+        return $this->belongsTo(DetailCustomer::class, 'gsm_pemasangan', 'id'); // GSM apa gps?
+    }
+
+    public function gsm()
+    {
+        return $this->belongsTo(Gsm::class, 'equipment_gsm', 'id'); // GSM apa gps?
+    }
+    public function sensor()
+    {
+        return $this->belongsTo(Sensor::class, 'equipment_terpakai_sensor', 'id');
+    }
+    public function sensorMaintenance()
+    {
+        return $this->belongsTo(Sensor::class, 'equipment_sensor_id', 'id');
+    }
+    public function gpsPemasangan()
+    {
+        return $this->belongsTo(Gps::class, 'equipment_terpakai_gps', 'id');
+    }
+    public function gpsMaintenance()
+    {
+        return $this->belongsTo(Gps::class, 'equipment_gps_id', 'id');
+    }
+    public function gpsType()
+    {
+        return $this->belongsTo(Gps::class, 'type_gps_id', 'id');
     }
     public function vehicleRequest()
     {

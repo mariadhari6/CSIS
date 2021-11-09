@@ -1,7 +1,6 @@
 <?php $no=1; ?>
 @foreach ($GsmMaster as $item)
     <tr id="edit-form-{{ $item->id }}">
-
         <td id="td-checkbox-{{ $item->id }}" class="{{ $item->id }}">
             <div>
                 <label class="form-check-label">
@@ -20,7 +19,7 @@
             {{ $item->gsm_number }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company->company_name }}
+            {{ $item->company->company_name??'' }}
         </td>
         <td id="item-serial_number-{{ $item->id }}" class="item-serial_number-{{ $item->id }}" name="{{ $item->serial_number }}">
             {{ $item->serial_number }}
@@ -52,12 +51,11 @@
         <td id="item-provider-{{ $item->id }}">
             {{ $item->provider }}
         </td>
-          <td class="action sticky-col first-col" id="td-button-{{ $item->id }}">
+        <td class="sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
             </div>
         </td>
-
     </tr>
 @endforeach

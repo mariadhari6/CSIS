@@ -4,6 +4,7 @@
 
 
 @section('content')
+ {{-- <form> --}}
 
   <div class="row">
     <div class="col-md-12">
@@ -26,7 +27,7 @@
                   </div>
                 </ul>
                 <button class="btn btn-success  mr-2 edit_all">
-                    <i class="fas fa-pen"></i>
+                    <i class="fas fa-edit"></i>
                 </button>
                 <button class="btn btn-danger  delete_all">
                     <i class="fas fa-trash"></i>
@@ -36,7 +37,7 @@
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th rowspan="2">
+                <th>
                     <div>
                         <label class="form-check-label">
                             <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -44,27 +45,25 @@
                         </label>
                     </div>
                 </th>
-                <th rowspan="2" scope="col" class="action-no">No.</th>
-                <th rowspan="2" scope="col" class="list">Company</th>
-                <th rowspan="2" scope="col" class="list">Jenis Pekerjaan</th>
-                <th rowspan="2" scope="col" class="list">Tanggal</th>
-                <th rowspan="2" scope="col" class="list">Kendaraan Awal*</th>
-                <th rowspan="2" scope="col" class="list">Kendaraan Pasang*</th>
-                <th rowspan="2" scope="col" class="list">IMEI*</th>
-                <th rowspan="2" scope="col" class="list">GSM*</th>
-                <th colspan="2" scope="col" class="list">Equipment</th>
-                <th rowspan="2" scope="col" class="list">Teknisi*</th>
-                <th rowspan="2" scope="col" class="list">Uang Transportasi*</th>
-                <th rowspan="2" scope="col" class="list">Type Visit*</th>
-                <th rowspan="2" scope="col" class="list">Note</th>
-                <th rowspan="2" scope="col" class="list">Status*</th>
-                <th rowspan="2" scope="col" class="action sticky-col first-col">Action</th>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list-company">Company</th>
+                <th scope="col" class="list">Jenis Pekerjaan</th>
+                <th scope="col" class="list">Tanggal</th>
+                <th scope="col" class="list">Kendaraan Awal</th>
+                <th scope="col" class="list">Kendaraan Pasang</th>
+                <th scope="col" class="list">IMEI*</th>
+                <th scope="col" class="list">GSM*</th>
+                <th scope="col" class="list">GPS</th>
+                <th scope="col" class="list">Sensor </th>
+                <th scope="col" class="list">Teknisi*</th>
+                <th scope="col" class="list">Uang Transportasi*</th>
+                <th scope="col" class="list">Type Visit*</th>
+                <th scope="col" class="list">Note</th>
+                <th scope="col" class="list">Status*</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
 
               </tr>
-              <tr>
-                <th scope="col" class="list">Sensor </th>
-                <th scope="col" class="list">GPS</th>
-              </tr>
+
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
@@ -88,6 +87,8 @@
          $('#table_id').DataTable().destroy();
          $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
@@ -271,6 +272,8 @@
             var kendaraan_pasang = $("#kendaraan_pasang").val();
             var status = $("#status").val();
             var id = id;
+        if(imei =="" || gsm_pemasangan =="" || teknisi_pemasangan =="" || uang_transportasi =="" || type_visit=="" || status=="" ){
+        } else {
             $.ajax({
                 type: "get",
                 url: "{{ url('update_PemasanganMutasi') }}/"+id,
@@ -301,6 +304,7 @@
                 read();
                 }
             });
+        }
         }
         // checkbox all
         $('#master').on('click', function(e) {
@@ -479,4 +483,6 @@
             read();
         }
   </script>
+          {{-- </form> --}}
+
    @endsection

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeGpsTable extends Migration
+class CreateServiceStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateTypeGpsTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_gps', function (Blueprint $table) {
+        Schema::create('service_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreateTypeGpsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_gps');
+        Schema::dropIfExists('service_statuses');
     }
 }

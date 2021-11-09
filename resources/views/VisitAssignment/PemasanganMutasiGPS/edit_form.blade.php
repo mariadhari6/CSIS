@@ -143,17 +143,22 @@ $(document).ready(function() {
                             $('select[name="jenis_pekerjaan').append('<option value="'+ key +'">'+ value +'</option>');
                         });
                 }
-            })
-    });
-    function add(){
-        var sensor = document.getElementById("SensorName").value;
-        var serialnumber = document.getElementById("SerialNumberSensor").value;
-        var merksensor = document.getElementById("MerkSensor").value;
-        var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
-        var hasil = document.getElementById("SensorTerpilih").value;
-        if (data == hasil) {
+            });
+
+        });
+
+
+     function add(){
+
+            // var sensor = document.getElementById("SensorName").value;
+            var serialnumber = document.getElementById("SerialNumberSensor").value;
+            // var merksensor = document.getElementById("MerkSensor").value;
+            // var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
+            var data = serialnumber +" "
+            var hasil = document.getElementById("SensorTerpilih").value;
+            if (data == hasil) {
                 alert("ada data yang sama");
-        }else{
+            }else{
             $("#SensorTerpilih").prepend(data);
         }
     }

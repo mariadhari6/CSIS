@@ -16,9 +16,14 @@
             @endforeach
         </select>
     </td>
-    <td><div class="input-div"><input type="text" class="input" id="pool_name"></td>
-    <td><div class="input-div"><input type="text" class="input" id="pool_location"></td>
-    <td><i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i></td>
+    <td><div class="input-div"><input type="text" class="input" id="pool_name" required></td>
+    <td><div class="input-div"><input type="text" class="input" id="pool_location" required></td>
+    <td class="action sticky-col first-col">
+       <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="add" onclick="store()"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
+    </td>
 
 
       {{-- <script type="text/javascript">

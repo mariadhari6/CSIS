@@ -7,7 +7,7 @@ use App\Models\DetailCustomer;
 use App\Models\Gps;
 use App\Models\Gsm;
 use App\Models\MasterPo;
-use App\Models\Sensor;
+use App\Models\ServiceStatus;
 use App\Models\Vehicle;
 use App\Models\Test;
 use Illuminate\Support\Facades\Http;
@@ -15,9 +15,10 @@ use Illuminate\Http\Request;
 
 class DetailCustomerController extends Controller
 {
+
     public function index()
     {
-        $data = Company::orderBy('id', 'DESC')->get();
+        $data = Company::orderBy('company_name', 'ASC')->get();
         return view('customer.detail_customer.list', compact('data'));
     }
 
@@ -26,23 +27,51 @@ class DetailCustomerController extends Controller
         $company = Company::findOrfail($id);
         $details = DetailCustomer::where('company_id', $company->id)->get();
 
+        for ($i = 0; $i <= count($details) - 1; $i++) {
+
+            $loop_row   = $details[$i]->sensor_all;
+            if ($loop_row != "") {
+
+                $data_sensor_all = explode(" ", $loop_row);
+
+                $temp_sensor = "";
+                foreach ($data_sensor_all as $item) {
+                    $cari_sensor = Sensor::where('id', $item)->get();
+
+                    if ($temp_sensor == "") {
+                        $temp_sensor = $cari_sensor[0]->sensor_name . "(" . $cari_sensor[0]->serial_number . "," . $cari_sensor[0]->merk_sensor . ")";
+                    } else {
+                        $temp_sensor .= "; " . $cari_sensor[0]->sensor_name . "(" . $cari_sensor[0]->serial_number . "," . $cari_sensor[0]->merk_sensor . ")";
+                    }
+                }
+
+                $details[$i]["sensor_all_name"] = $temp_sensor;
+            } else {
+                $empty = "";
+                $details[$i]["sensor_all_name"] = $empty;
+            }
+        }
+
         return view('customer.detail_customer.item_data', compact('details'));
     }
 
-    public function add_form(){
-        $company    = Company::orderBy('company_name', 'DESC')->get();
-        $imei       = Gps::orderBy('imei', 'DESC')->where('status', 'Ready')->get();
-        $gsm        = Gsm::orderBy('gsm_number', 'DESC')->where('status_gsm', 'Ready')->get();
-        $sensor     = Sensor::orderBy('sensor_name', 'DESC')->where('status', 'Ready')->get();
-        $po         = MasterPo::orderBy('po_number', 'DESC')->get();
-        $vehicle    = Vehicle::orderBy('license_plate', 'DESC')->get();
+    public function add_form($id)
+    {
+        $company        = Company::orderBy('company_name', 'DESC')->where('id', $id)->get();
+        $imei           = Gps::orderBy('imei', 'DESC')->where('status', 'Ready')->get();
+        $gsm            = Gsm::orderBy('gsm_number', 'DESC')->where('status_gsm', 'Ready')->get();
+        $sensor         = Sensor::orderBy('serial_number', 'DESC')->where('status', 'Ready')->get();
+        $vehicle        = Vehicle::orderBy('license_plate', 'DESC')->where('company_id', $id)->where('status', 'Ready')->get();
+        $po             = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $id)->where('count', '!=', 0)->get();
+        $status_layanan = ServiceStatus::orderBy('service_status_name', 'ASC')->get();
         return view('customer.detail_customer.add_form')->with([
-            'company'   => $company,
-            'imei'      => $imei,
-            'gsm'       => $gsm,
-            'sensor'    => $sensor,
-            'po'        => $po,
-            'vehicle'   => $vehicle
+            'company'           => $company,
+            'imei'              => $imei,
+            'gsm'               => $gsm,
+            'sensor'            => $sensor,
+            'po'                => $po,
+            'vehicle'           => $vehicle,
+            'status_layanan'    => $status_layanan
         ]);
     }
 
@@ -68,12 +97,33 @@ class DetailCustomerController extends Controller
             "pool_name"             => $request->PoolName,
             "pool_location"         => $request->PoolLocation,
             "waranty"               => $request->Waranty,
-            "status_layanan"        => $request->StatusLayanan,
+            "status_id"        => $request->StatusLayanan,
             "tanggal_pasang"        => $request->TanggalPasang,
             "tanggal_non_aktif"     => $request->TanggalNonAktif,
             "tgl_reaktivasi_gps"    => $request->TanggalReaktivasi
         );
 
+        $license_id     = $request->LicencePlate;
+        $gsm_id         = $request->GSM;
+        $gps_id         = $request->Imei;
+        $sensor_all     = $request->SensorAll;
+        $i              = $request->PoNumber;
+
+
+        $jumlah_unit_per_po      = MasterPo::where('id', $i)->pluck('jumlah_unit_po');
+        $jumlah_po_di_detail     = DetailCustomer::where('po_id', $i)->count();
+        $tersedia                = $jumlah_unit_per_po[0] - ($jumlah_po_di_detail + 1);
+        MasterPo::where('id', $i)->update(array('count' => $tersedia));
+        if ($sensor_all != "") {
+            $arr            = explode(" ", $sensor_all);
+            $lengthArr      = count($arr) - 1;
+            for ($i = 0; $i <= $lengthArr; $i++) {
+                Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
+            }
+        }
+        Vehicle::where('id', $license_id)->update(array('status' => 'Used'));
+        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Used'));
+        Gps::where('id', $gps_id)->update(array('status' => 'Used'));
         DetailCustomer::insert($data);
     }
 
@@ -86,22 +136,26 @@ class DetailCustomerController extends Controller
 
     public function edit_form(Request $request, $id)
     {
-        $details    = DetailCustomer::findOrfail($id);
-        $company    = Company::orderBy('company_name', 'DESC')->get();
-        $imei       = Gps::orderBy('imei', 'DESC')->where('status', 'Ready')->get();
-        $gsm        = Gsm::orderBy('gsm_number', 'DESC')->where('status_gsm', 'Ready')->get();
-        $sensor     = Sensor::orderBy('sensor_name', 'DESC')->get();
-        $po         = MasterPo::orderBy('po_number', 'DESC')->get();
-        $vehicle    = Vehicle::orderBy('license_plate', 'DESC')->get();
-        return view('customer.detail_customer.edit_form')->with([
-            'details'   => $details,
-            'company'   => $company,
-            'imei'      => $imei,
-            'gsm'       => $gsm,
-            'sensor'    => $sensor,
-            'po'        => $po,
-            'vehicle'   => $vehicle
 
+        $data = $request->company;
+        $details        = DetailCustomer::findOrfail($id);
+        $company        = Company::where('id', $data)->get();
+        $imei           = Gps::orderBy('imei', 'DESC')->get();
+        $gsm            = Gsm::orderBy('gsm_number', 'DESC')->get();
+        $sensor         = Sensor::orderBy('serial_number', 'DESC')->get();
+        $po             = MasterPo::where('company_id', $data)->get();
+        $vehicle        = Vehicle::where('company_id', $data)->get();
+        $status_layanan = ServiceStatus::orderBy('service_status_name', 'ASC')->get();
+
+        return view('customer.detail_customer.edit_form')->with([
+            'details'           => $details,
+            'company'           => $company,
+            'imei'              => $imei,
+            'gsm'               => $gsm,
+            'sensor'            => $sensor,
+            'po'                => $po,
+            'vehicle'           => $vehicle,
+            'status_layanan'    => $status_layanan
         ]);
     }
 
@@ -126,10 +180,11 @@ class DetailCustomerController extends Controller
         $data->pool_name             = $request->PoolName;
         $data->pool_location         = $request->PoolLocation;
         $data->waranty               = $request->Waranty;
-        $data->status_layanan        = $request->StatusLayanan;
+        $data->status_id             = $request->StatusLayanan;
         $data->tanggal_pasang        = $request->TanggalPasang;
         $data->tanggal_non_aktif     = $request->TanggalNonAktif;
         $data->tgl_reaktivasi_gps    = $request->TanggalReaktivasi;
+
         $data->save();
     }
 
@@ -247,5 +302,43 @@ class DetailCustomerController extends Controller
         $data = $key->all();
         return $data;
     }
+
+    // public function basedPO($id){
+
+    //     $data = MasterPo::where('company_id', $id)->get();
+    //     return $data;
+    // }
+
+    // public function basedCompany($id)
+    // {
+    //     $data = Vehicle::where('company_id', $id)->get();
+    //     return $data;
+    // }
+
+
+    // public function basedSensorName($id)
+    // {
+
+
+
+    //     $data = Sensor::where('sensor_name', $id )->get();
+
+    //     return $data;
+
+
+    // }
+    // public function basedSerialNumber($id)
+    // {
+
+
+
+    //     $data = Sensor::where('serial_number', $id )->get();
+
+    //     return $data;
+
+
+    // }
+
+
 }
 

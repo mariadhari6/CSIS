@@ -21,7 +21,7 @@
         <div class="input-div"><input type="text" class="input" id="jumlah_unit_po" placeholder="Jumlah Unit Po">
     </td>
     <td>
-        <select class="form-control" id="status_po" aria-label=".form-select-lg example">
+        <select class="select" id="status_po" aria-label=".form-select-lg example">
             <option selected value="not selected">Pilih status</option>
             <option value="Beli">Beli</option>
             <option value="Sewa">Sewa</option>

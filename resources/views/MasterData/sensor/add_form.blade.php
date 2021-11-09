@@ -2,13 +2,20 @@
     <td></td>
     <td></td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="sensor_name" placeholder="Sensor Name">
+        <select class="select" id="sensor_name" name="sensor_name" aria-placeholder="Sensor_name">
+            <option selected disabled></option>
+
+            @foreach ($sensorName as $item)
+            <option value="{{ $item->sensor_name }}" {{ old('sensor_name') == $item->id ? 'selected':'' }}>{{ $item->sensor_name}}</option>
+            @endforeach
+
+        </select>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="merk_sensor" placeholder="Merk Sensor">
+        <div class="input-div"><input type="text" class="input" id="merk_sensor" placeholder="merk_sensor" >
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number">
+        <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number" required>
     </td>
     <td>
         <div class="input-div"><input type="text" class="input" id="rab_number" placeholder="Rab Number">

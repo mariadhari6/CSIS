@@ -3,6 +3,8 @@
 @section('title-table','Maintenance GPS')
 
 @section('content')
+    <form onsubmit="return false">
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -25,17 +27,16 @@
                   </div>
                 </ul>
               <button class="btn btn-success  mr-2 edit_all">
-                <i class="fas fa-pen"></i>
+                <i class="fas fa-edit"></i>
               </button>
               <button class="btn btn-danger delete_all">
                 <i class="fas fa-trash"></i>
               </button>
             </div>
-            <form>
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-                <th rowspan="2">
+                <th>
                   <div>
                       <label class="form-check-label">
                           <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -43,34 +44,30 @@
                       </label>
                   </div>
                 </th>
-                <th rowspan="2" scope="col" class="action">No.</th>
-                <th rowspan="2" scope="col" class="list">Company</th>
-                <th rowspan="2" scope="col" class="list">Vehicle</th>
-                <th rowspan="2" scope="col" class="list">Tanggal</th>
-                <th rowspan="2" scope="col" class="list">Type GPS*</th>
-                <th colspan="3" scope="col" class="list">Equipment</th>
-                <th rowspan="2" scope="col" class="list">Permasalahan</th>
-                <th rowspan="2" scope="col" class="list">Ketersediaan Kendaraan</th>
-                <th rowspan="2" scope="col" class="list">Keterangan</th>
-                <th rowspan="2" scope="col" class="list">Hasil*</th>
-                <th rowspan="2" scope="col" class="list">Biaya Transportasi*</th>
-                <th rowspan="2" scope="col" class="list">Teknisi*</th>
-                <th rowspan="2" scope="col" class="list">Req By</th>
-                <th rowspan="2" scope="col" class="list">Note</th>
-                <th rowspan="2" scope="col" class="list">Status*</th>
-                <th rowspan="2" scope="col" class="action sticky-col first-col">Action</th>
-              </tr>
-              <tr>
+                <th scope="col" class="action-no">No.</th>
+                <th scope="col" class="list-company">Company</th>
+                <th scope="col" class="list">Permasalahan</th>
+                <th scope="col" class="list">Vehicle</th>
+                <th scope="col" class="list">Tanggal</th>
+                <th scope="col" class="list">Type GPS*</th>
                 <th scope="col" class="list">GPS</th>
                 <th scope="col" class="list">Sensor</th>
                 <th scope="col" class="list">GSM</th>
+                <th scope="col" class="list">Ketersediaan Kendaraan</th>
+                <th scope="col" class="list">Keterangan</th>
+                <th scope="col" class="list">Hasil*</th>
+                <th scope="col" class="list">Biaya Transportasi*</th>
+                <th scope="col" class="list">Teknisi*</th>
+                <th scope="col" class="list">Req By</th>
+                <th scope="col" class="list">Note</th>
+                <th scope="col" class="list">Status*</th>
+                <th scope="col" class="action sticky-col first-col">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-          </form>
         </div>
       </div>
     </div>
@@ -89,6 +86,8 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             });
         $('#table_id').DataTable().draw();
@@ -285,8 +284,12 @@
         var note_maintenance = $("#note_maintenance").val();
         var status = $("#status").val();
         var id = id;
+        if(type_gps_id == "" || hasil == "" || biaya_transportasi =="" || teknisi_maintenance =="" || status ==""  ){
+        // alert('sama');
 
-        $.ajax({
+        }else{
+            // alert('tidak sama');
+            $.ajax({
             type: "get",
             url: "{{ url('update_maintenanceGps') }}/"+id,
             data: {
@@ -317,6 +320,9 @@
                 read();
             }
         });
+        }
+
+
     }
 
     // checkbox all
@@ -513,4 +519,6 @@
     }
 
 </script>
+            </form>
+
   @endsection

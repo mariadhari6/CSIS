@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TamplateSensor;
+use App\Imports\SensorImport;
 use App\Models\MerkSensor;
 use App\Models\Sensor;
+use App\Models\SensorName;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -18,11 +22,11 @@ class SensorController extends Controller
     public function add_form()
     {
         $sensor = Sensor::orderBy('sensor_name', 'DESC')->get();
-        $merk_sensor = MerkSensor::orderBy('id', 'DESC')->get();
+        $sensorName = SensorName::orderBy('id', 'DESC')->get();
         return view('MasterData.sensor.add_form')->with([
 
             'sensor' => $sensor,
-            'merk_sensor' => $merk_sensor
+            'sensorName' => $sensorName
         ]);
     }
 
@@ -33,6 +37,35 @@ class SensorController extends Controller
             'sensor' => $sensor
         ]);
     }
+
+    public function save_import(Request $request)
+    {
+        $dataRequest = json_decode($request->data);
+        foreach ($dataRequest as $key => $value) {
+            $serialNumber = $value->serial_number;
+            $checkSerial = Sensor::where('serial_number', '=', $serialNumber)->first();
+            if ($checkSerial === null) {
+                try {
+                    $data = array(
+                        'sensor_name'        => $value->sensor_name,
+                        'merk_sensor'        => $value->merk_sensor,
+                        'serial_number'      =>  $value->serial_number,
+                        'rab_number'         =>  $value->rab_number,
+                        'waranty'            =>  $value->waranty,
+                        'status'             =>  $value->status,
+
+                    );
+                    Sensor::insert($data);
+                    // return 'success';
+                } catch (\Throwable $th) {
+                    return 'fail';
+                }
+            } else {
+                return 'fail';
+            }
+        }
+    }
+
 
     public function store(Request $request)
     {
@@ -49,11 +82,12 @@ class SensorController extends Controller
 
     public function edit_form($id)
     {
-        $merk_sensor = MerkSensor::orderBy('id', 'DESC')->get();
+        $sensorName = SensorName::orderBy('id', 'DESC')->get();
+
         $sensor = Sensor::findOrfail($id);
         return view('MasterData.sensor.edit_form')->with([
             'sensor' => $sensor,
-            'merk_sensor' => $merk_sensor
+            'sensorName' => $sensorName
 
 
         ]);
@@ -116,5 +150,20 @@ class SensorController extends Controller
     {
         Sensor::where('item_type_id', '=', 1)
             ->update(['colour' => 'black']);
+    }
+
+    public function importExcel(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('DataSensor', $nameFile);
+
+        Excel::import(new SensorImport, public_path('/DataSensor/' . $nameFile));
+        // return redirect('/GsmMaster');
+    }
+
+    public function export()
+    {
+        return Excel::download(new TamplateSensor, 'template-sensor.xlsx');
     }
 }

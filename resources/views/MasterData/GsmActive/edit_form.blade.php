@@ -12,7 +12,7 @@
         <div class="input-div"><input type="text" class="input gsm_number-{{$GsmActive->id}}" id="gsm_number" placeholder="Gsm Number" value="{{ $GsmActive->gsm_number}}" required></div>
     </td>
     <td>
-        <select class="form-control company_id-{{$GsmActive->id}}" id="company_id" name="company_id" required>
+        <select class="select company_id-{{$GsmActive->id}}" id="company_id" name="company_id" required>
             @foreach ($company as $item)
             <option value="{{ $item->id }}" {{ $item->id == $GsmActive->company_id ? 'selected' : '' }}>{{ $item->company_name }}</option>
             @endforeach

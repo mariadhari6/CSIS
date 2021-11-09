@@ -13,7 +13,7 @@
     </td>
     <td>
 
-        <select class="form-control company_id-{{$GsmTerminate->id}}" id="company_id" name="company_id" required>
+        <select class="select company_id-{{$GsmTerminate->id}}" id="company_id" name="company_id" required>
             @foreach ($company as $item)
             <option value="{{ $item->id }}" {{ $item->id == $GsmTerminate->company_id ? 'selected' : '' }}>{{ $item->company_name }}</option>
             @endforeach

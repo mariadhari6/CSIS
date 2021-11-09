@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MerkSensor extends Model
+class SensorName extends Model
 {
     use HasFactory;
-    protected $table = 'merk_sensors';
+    protected $table = 'sensor_names';
 
     public function sensor()
     {
-        return $this->hasMany(Sensor::class, 'merk_sensor', 'id');
+        return $this->hasMany(Sensor::class);
     }
 }

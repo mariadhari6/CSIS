@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMerkSensorsTable extends Migration
+class CreateSensorNamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateMerkSensorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('merk_sensors', function (Blueprint $table) {
+        Schema::create('sensor_names', function (Blueprint $table) {
             $table->id();
-            $table->string('merk_sensor');
+            $table->string('sensor_name');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateMerkSensorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('merk_sensors');
+        Schema::dropIfExists('sensor_names');
     }
 }

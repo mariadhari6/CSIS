@@ -40,12 +40,10 @@
         </select>
     </td>
     <td>
-        <select class="form-control status-{{$item->id}}" id="status" name="status">
-            <option selected value="{{$item->status}}">{{$item->status}}</option>
-            <option value="Contract">Contract</option>
-            <option value="Terminate">Terminate</option>
-            <option value="Trial">Trial</option>
-            <option value="Register">Register</option>
+        <select class="select status-{{$company->id}}" id="status" name="status" required>
+            <option selected value="{{$company->status}}">{{$company->status}}</option>
+             <option value="Active">Active</option>
+            <option value="In Active">In Active</option>
         </select>
     </td>
     <td>

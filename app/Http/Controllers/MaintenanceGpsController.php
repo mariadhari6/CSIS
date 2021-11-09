@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\DetailCustomer;
 use App\Models\Gps;
 use App\Models\Gsm;
 use App\Models\MaintenanceGps;
@@ -27,10 +28,12 @@ class MaintenanceGpsController extends Controller
 
     public function item_data()
     {
-        $maintenanceGps = RequestComplaint::with(['sensor'])->where('task', 4)->orWhere('task', 5)->get();
+        $maintenanceGps = RequestComplaint::where('task', 4)->orWhere('task', 5)->get();
+        // $maintenanceGps = RequestComplaint::orderBy('id', 'DESC')->whereIn('task', [4, 5])->where('company_id', $company->id)->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
         ]);
+
         // dd($maintenanceGps);
         // echo $maintenanceGps->requestComplaint->company->company_name;
     }
@@ -60,8 +63,11 @@ class MaintenanceGpsController extends Controller
 
     public function edit_form($id)
     {
+        $details = DetailCustomer::groupBy('company_id')
+            ->selectRaw('count(*) as jumlah, company_id')
+            ->get();
         $maintenanceGps = RequestComplaint::findOrfail($id);
-        $gps = Gps::orderBy('id', 'DESC')->get();
+        $gps = Gps::where('status', 'Ready')->get();
         $company = Company::orderBy('id', 'DESC')->get();
         $pic = Pic::orderBy('id', 'DESC')->get();
         $sensor = Sensor::orderBy('id', 'DESC')->get();
@@ -80,7 +86,9 @@ class MaintenanceGpsController extends Controller
             'task' => $task,
             'gsm_master' => $gsm_master,
             'company' => $company,
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
+            'details' => $details
+
 
         ]);
     }
@@ -110,6 +118,31 @@ class MaintenanceGpsController extends Controller
         $data->req_by = $request->req_by;
         $data->note_maintenance = $request->note_maintenance;
         $data->status = $request->status;
+        // $equipment_sensor_id     = $request->equipment_sensor_id;
+        // $gsm_id = $request->equipment_gsm;
+        // $gps_type = $request->type_gps_id;
+        // $gps_type_equipment = $request->type_gps_id;
+
+
+        // $a      = $batas[0] - 1;
+        // $x      = "not";
+
+
+        // if ($equipment_sensor_id != "") {
+
+        //     $arr            = explode(" ", $equipment_sensor_id);
+        //     $lengthArr      = count($arr) - 1;
+        //     for ($i = 0; $i <= $lengthArr; $i++) {
+        //         Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
+        //     }
+        //     $data->save();
+        // }
+        // Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active'));
+        // Gps::where('id', $gps_type)->update(array('status' => 'Used'));
+        // Gps::where('id', $gps_type_equipment)->update(array('status' => 'Used'));
+
+
+
 
         $data->save();
     }
@@ -136,6 +169,7 @@ class MaintenanceGpsController extends Controller
 
         echo $id;
     }
+
 
     // public function dependentCompany($id)
     // {
@@ -188,22 +222,31 @@ class MaintenanceGpsController extends Controller
         $data = $key->all();
         return $data;
     }
-    public function basedSensorName($id)
+    public function basedVehicle($id)
     {
 
 
 
-        $data = Sensor::where('sensor_name', $id)->get();
+        $data = DetailCustomer::where('company_id', $id)->get();
 
         return $data;
     }
-    public function basedSerialNumber($id)
-    {
+    // public function basedSensorName($id)
+    // {
 
 
 
-        $data = Sensor::where('serial_number', $id)->get();
+    //     $data = Sensor::where('sensor_name', $id)->get();
 
-        return $data;
-    }
+    //     return $data;
+    // }
+    // public function basedSerialNumber($id)
+    // {
+
+
+
+    //     $data = Sensor::where('serial_number', $id)->get();
+
+    //     return $data;
+    // }
 }

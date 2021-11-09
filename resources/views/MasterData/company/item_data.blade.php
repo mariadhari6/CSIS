@@ -1,4 +1,4 @@
-<?php $no=1; ?>
+z<?php $no=1; ?>
 @foreach ($company as $item)
     <tr id="edit-form-{{ $item->id }}">
         <td id="td-checkbox-{{ $item->id }}">
@@ -28,14 +28,10 @@
         <td id="item-status-{{ $item->id }}">
             {{-- {{ $item->status}} --}}
 
-            @if ($item->status == 'Contract')
+            @if ($item->status == 'Active')
                 <span class="badge badge-info">{{ $item->status }}</span>
-            @elseif ($item->status == 'Terminate')
+            @elseif ($item->status == 'In Active')
                 <span class="badge badge-danger">{{ $item->status }}</span>
-            @elseif($item->status == 'Trial')
-                <span class="badge badge-primary">{{ $item->status }}</span>
-            @elseif($item->status == 'Register')
-                <span class="badge badge-success">{{ $item->status }}</span>
             @endif
         </td>
          <td class="action sticky-col first-col" id="td-button-{{ $item->id }}">

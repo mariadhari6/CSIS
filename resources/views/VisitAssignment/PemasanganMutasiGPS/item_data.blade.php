@@ -15,7 +15,7 @@
 
 
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->companyRequest->company_name}}
+            {{ $item->companyRequest->company_name??''}}
         </td>
           <td id="item-task-{{ $item->id }}">
             {{ $item->taskRequest->task }}
@@ -25,7 +25,7 @@
         </td>
         @if ($item->vehicle != null)
              <td id="item-vehicle-{{ $item->id}}">
-                {{ $item->vehicleRequest->license_plate?? ''}}
+                {{ $item->detailCustomerVehicle->vehicle->license_plate?? ''}}
             </td>
         @elseif ($item->vehicle == null)
              <td id="item-vehicle-{{ $item->id}}">
@@ -55,15 +55,15 @@
         <td id="item-equipment_terpakai_sensor-{{ $item->id }}">
             {{$item->equipment_terpakai_sensor}}
         </td>
-        @elseif ($item->equipment_terpakai_sensor == null)
-        <td id="item-equipment_terpakai_sensor-{{ $item->id }}">
+        @elseif ($item->equipment_terpakai_gps == null)
+        <td id="item-equipment_terpakai_gps-{{ $item->id }}">
             -
         </td>
         @endif
+        @if ($item->equipment_terpakai_sensor_all_name != null)
+        <td id="item-equipment_terpakai_sensor-{{ $item->id }}">
+             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $item->equipment_terpakai_sensor_all_name }}" ></i>
 
-        @if ($item->equipment_terpakai_gps != null)
-        <td id="item-equipment_terpakai_gps-{{ $item->id }}">
-            {{$item->gpsPemasangan->typeGps->type_gps?? ''}}
         </td>
 
         <td id="item-equipment_terpakai_sensor-{{ $item->id }}">
@@ -108,4 +108,10 @@
             </div>
         </td>
     </tr>
+      <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
+
 @endforeach

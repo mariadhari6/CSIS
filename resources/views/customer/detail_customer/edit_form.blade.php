@@ -125,14 +125,182 @@
 <td><div class="input-div"><input type="date" class="input Waranty-{{ $details->id }}" id="Waranty" value="{{ $details->waranty }}"></div></td>
 <td>
     <select class="select StatusLayanan-{{ $details->id }}" id="StatusLayanan">
-        <option value="{{ $details->status_layanan }}" class="input StatusLayanan-{{ $details->id }}">{{ $details->status_layanan }}</option>
-        <option value="Active">Active</option>
-        <option value="In Active">In Active</option>
+        @foreach ($status_layanan as $item)
+            <option value="{{ $item->id }}" {{ $details->status_id == $item->id ? 'selected':'' }}>{{ $item->service_status_name }}</option>
+        @endforeach
     </select>
 </td>
 <td><div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div></td>
-<td><div class="input-div"><input type="date" class="input TanggalNonAktif-{{ $details->id }}" id="TanggalNonAktif" value="{{ $details->tanggal_non_aktif }}"></div></td>
-<td><div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}"></div></td>
 <td>
+    <div class="input-div"><input type="date" class="input TanggalNonAktif-{{ $details->id }}" id="TanggalNonAktif" value="{{ $details->tanggal_non_aktif }}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field"></div>
+</td>
+<td><div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div></td>
+<td class="action sticky-col first-col">
     <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
 </td>
+
+<script>
+
+    $(document).ready(function() {
+
+        $('select[name="SerialNumberSensor"]').on('change', function() {
+
+                var Id = $(this).val();
+                if(Id) {
+                    $.ajax({
+                        url: '/based_sensor/'+ Id,
+                        method: "GET",
+                        success:function(data) {
+                            $('select[name="SensorName').empty();
+                            $('select[name="MerkSensor').empty();
+                                $.each(data, function(key, value) {
+                                    $('select[name="SensorName').append('<option value="'+ key +'">'+ value.sensor_name +'</option>');
+                                    $('select[name="MerkSensor').append('<option value="'+ key +'">'+ value.merk_sensor +'</option>');
+                               });
+                        }
+                    });
+                }else{
+                    $('select[name="SensorName').empty();
+                    $('select[name="MerkSensor').empty();
+                }
+
+        });
+
+        $('select[name="LicencePlate"]').on('change', function() {
+
+                var Id = $(this).val();
+                if(Id) {
+                    $.ajax({
+                        url: '/based_license/'+ Id,
+                        method: "GET",
+                        success:function(data) {
+                            $('select[name="VihecleType').empty();
+                            $('select[name="PoolName').empty();
+                            $('select[name="PoolLocation').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="VihecleType').append('<option value="'+ key +'">'+ value.vehicle_id +'</option>');
+                                $('select[name="PoolName').append('<option value="'+ key +'">'+ value.pool_name +'</option>');
+                                $('select[name="PoolLocation').append('<option value="'+ key +'">'+ value.pool_location +'</option>');
+                            });
+                        }
+                    });
+                }
+                else{
+                    $('select[name="VihecleType').empty();
+                    $('select[name="PoolName').empty();
+                    $('select[name="PoolLocation').empty();
+                }
+        });
+
+            $('select[name="PoNumber"]').on('change', function() {
+                var Id = $(this).val();
+
+                if(Id) {
+                    $.ajax({
+                        url: '/based_ponumber/'+ Id,
+                        method: "GET",
+                        success:function(data) {
+                            $('select[name="HargaLayanan').empty();
+                            $('select[name="PoDate').empty();
+                            $('select[name="StatusPo').empty();
+
+                                $.each(data, function(key, value) {
+                                    $('select[name="HargaLayanan').append('<option value="'+ key +'">'+ value.harga_layanan +'</option>');
+                                    $('select[name="PoDate').append('<option value="'+ key +'">'+ value.po_date +'</option>');
+                                    $('select[name="StatusPo').append('<option value="'+ key +'">'+ value.status_po +'</option>');
+
+
+                               });
+                        }
+                    });
+                }
+                else{
+                    $('select[name="HargaLayanan').empty();
+                    $('select[name="PoDate').empty();
+                    $('select[name="StatusPo').empty();
+
+                }
+            });
+
+            $('select[name="Imei"]').on('change', function() {
+                var Id = $(this).val();
+                if(Id) {
+                    $.ajax({
+                        url: '/based_imei/'+ Id,
+                        method: "GET",
+                        success:function(data) {
+                            $('select[name="Merk').empty();
+                            $('select[name="Type').empty();
+                                $.each(data, function(key, value) {
+                                    $('select[name="Merk').append('<option value="'+ key +'">'+ value.merk +'</option>');
+                                    $('select[name="Type').append('<option value="'+ key +'">'+ value.type +'</option>');
+                               });
+                        }
+                    });
+                }else{
+                    $('select[name="Merk').empty();
+                    $('select[name="Type').empty();
+                }
+
+            });
+
+
+            $('select[name="GSM"]').on('change', function() {
+                var Id = $(this).val();
+                if(Id) {
+                    $.ajax({
+                        url: '/based_gsm/'+ Id,
+                        method: "GET",
+                        success:function(data) {
+                            $('select[name="Provider').empty();
+                                $.each(data, function(key, value) {
+                                    $('select[name="Provider').append('<option value="'+ key +'">'+ value.provider +'</option>');
+                               });
+                        }
+                    });
+                }else{
+                    $('select[name="Provider').empty();
+                }
+
+            });
+
+            $('#clear').click(function(){
+                var sensorterpilih =  document.getElementById("SensorTerpilih").value;
+                if (sensorterpilih == ""){
+                    alert("No sensor selected")
+                }else{
+                    $('#SensorTerpilih').empty();
+                }
+            })
+
+    });
+
+
+    function add(){
+        // var sensor = document.getElementById("SensorName").value;
+        var serialnumber = document.getElementById("SerialNumberSensor").value;
+        // var merksensor = document.getElementById("MerkSensor").value;
+        // var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
+        var data = serialnumber +" "
+        var hasil = document.getElementById("SensorTerpilih").value;
+        if (data == hasil) {
+                alert("ada data yang sama");
+        }else{
+            $("#SensorTerpilih").prepend(data);
+        }
+    }
+
+    function send(){
+
+        var sensorterpilih = document.getElementById("SensorTerpilih").value;
+        $('#sensor').empty();
+        $('#sensor').append(
+            '<option value="'+ sensorterpilih + '" id="SensorAll" data-toggle="modal" data-target="#exampleModal"> '+ sensorterpilih +'</option>'
+        );
+    }
+
+</script>
+
+
+
+

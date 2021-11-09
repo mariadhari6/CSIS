@@ -3,10 +3,10 @@
     <td></td>
     <td>
         <select class="select merk-{{$gps->id}}" id="merk" name="merk" required>
-            <option value="{{$gps->merkGps->id}}">{{$gps->merkGps->merk}}</option>
+            {{-- <option value=""></option> --}}
 
-            @foreach ($merk_gps as $item)
-            <option value="{{ $item->id }}" {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk}}</option>
+            @foreach ($merk as $item)
+            <option value="{{ $item->merk_gps }}" {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>
             @endforeach
 
         </select>
@@ -14,10 +14,10 @@
 
     <td>
         <select class="select type-{{$gps->id}}" id="type" name="type" required>
-            <option value="{{$gps->typeGps->id}}">{{$gps->typeGps->type}}</option>
+            {{-- <option value="{{$gps->type}}">{{$gps->type}}</option> --}}
 
-            @foreach ($type_gps as $item)
-            <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type}}</option>
+            @foreach ($merk as $item)
+            <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type_gps}}</option>
             @endforeach
 
         </select>
@@ -29,21 +29,21 @@
         <div class="input-div"><input type="text" class="input imei-{{$gps->id}}" id="imei" placeholder="IMEI" value="{{ $gps->imei}}" required></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input waranty-{{$gps->id}}" id="waranty" placeholder="Waranty" value="{{ $gps->waranty}}" required></i></div>
+        <div class="input-div"><input type="text" class="input waranty-{{$gps->id}}" id="waranty" placeholder="Waranty" value="{{ $gps->waranty}}" ></i></div>
     </td>
     <td>
         <div class="input-div"><input type="date" class="input po_date-{{$gps->id}}" id="po_date" placeholder="Po Date" value="{{ $gps->po_date}}" required></i></div>
     </td>
     <td>
-        <select class="select status-{{$gps->id}}" id="status" aria-label=".form-select-lg example" required>
+        <select class="select status-{{$gps->id}}" id="status" name="status" aria-label=".form-select-lg example" required>
             <option selected>{{$gps->status}}</option>
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>
         </select></i>
     </td>
-    <td>
-        <select class="select status_ownership-{{$gps->id}}" id="status_ownership" aria-label=".form-select-lg example">
+    <td  id="statusOwnership">
+        <select class="select status_ownership-{{$gps->id}}" id="status_ownership" name="status_ownership"aria-label=".form-select-lg example">
             <option selected>{{$gps->status_ownership}}</option>
             <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
@@ -58,6 +58,59 @@
         </button>
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
+
+<script>
+     $('select[name="status"]').on('change', function() {
+                var itemID = $(this).val();
+                // alert(itemID);
+
+                if(itemID == 'Ready') {
+                    $('#statusOwnership').empty();
+                   $('#statusOwnership').append(
+                       `<select class="select"  disable>
+                            <option value="">-</option>
+                        </select>`
+                       );
+                }else {
+                        $('#statusOwnership').empty();
+                        $('#statusOwnership').append(
+                            `<select class="select" id="status_ownership">
+                                    <option value="Sewa">Sewa</option>
+                                    <option value="Sewa Beli">Sewa Beli</option>
+                                    <option value="Trial">Trial</option>
+                                    <option value="Beli">Beli</option>
+                            </select>`
+                        );
+                }
+
+
+
+            });
+    $('select[name="merk"]').on('change', function() {
+                var itemID = $(this).val();
+                // alert(itemID);
+                if(itemID) {
+                    $.ajax({
+                        url: '/based_merksensor/'+ itemID,
+                        method: "GET",
+                        success:function(data) {
+                            // alert(data.length);
+                            $('select[name="type').empty();
+                            $('select[name="type').append('<option value=""> </option>');
+                                for(var i = 0 ; i < data.length ; i++) {
+                                    $('select[name="type').append('<option value="'+ data[i].type_gps + '"> '+ data[i].type_gps +'</option>');
+                                        // alert(data[i].serial_number)
+                                }
+                        }
+                    });
+                }
+                else{
+                    $('select[name="type"]').empty();
+
+                }
+
+            });
+</script>
 
 
 

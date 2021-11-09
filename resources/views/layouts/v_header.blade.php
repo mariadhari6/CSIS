@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>@yield('title')</title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -42,6 +43,11 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script src="https://www.chartjs.org/samples/2.9.4/utils.js"></script>
+          {{-- javascript Excel convert to table html --}}
+        <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+        {{-- boostrap-select --}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
 
 
