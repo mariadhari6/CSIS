@@ -5,13 +5,13 @@
 <?php $no=1;?>
 
   <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-4">
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">Company</div>
           </div>
           <select class="form-control" id="company">
-              <option value=""></option>
+              <option style="display: none"></option>
             @foreach ($company as $item)
               <option value="{{ $item->id }}"> {{ $item->company_name}}</option>
             @endforeach
@@ -30,8 +30,8 @@
   </div>
 
   <div class="row">
-      <div class="col-sm-5">
-        <div class="card" id="card-table" style="width: 40rem;">
+      <div>
+        <div class="card" style="width:30rem;">
           <div class="card-body">
               <div id="table-scroll" class="table-scroll">
                   <table class="table table-sm" id="table_summary">
@@ -52,8 +52,8 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-2">
-          <div class="card"  style="width: 55rem;">
+      <div class="col-sm-1">
+          <div class="card" style="width:38rem;">
               <div class="card-body" id="data-po">
                
               </div>
@@ -80,6 +80,8 @@
       var Month  = data.getMonth() + 1 ;
       var Year   = data.getFullYear();
 
+    
+
       $.ajax({
         url:"{{ url('/item_summary')}}",
         data:{
@@ -101,6 +103,10 @@
       var data   = new Date($('#bulan').val());
       var Month  = data.getMonth() + 1 ;
       var Year   = data.getFullYear();
+      var date   = new Date(Year, Month, 0);
+      var lastDay = date.getDate();
+      
+     
       
       $("#item_summary").empty();
       $("#data-po").empty();
@@ -109,7 +115,8 @@
         data:{
           Company : Company,
           Month   : Month,
-          Year    : Year
+          Year    : Year,
+          lastDay : lastDay
         }, 
         success: function(data){
 

@@ -3,14 +3,14 @@
      $rowspan = count($data);
 @endphp
 
-<table class="table table-hover" >
+<table class="table table-hover"  id="data_detail">
      <thead>
         <tr>
           {{-- <th scope="col">Company</th> --}}
-          <th scope="col">No Po</th>
+          <th scope="col" width="10px">No Po</th>
           <th scope="col">Jumlah Unit Po</th>
           <th scope="col">Harga Layanan</th>
-          <th scope="col">Revenue</th>
+          <th scope="col" width="100px">Revenue</th>
           <th scope="col">Status PO</th>
           <th scope="col">Jumlah GPS terpasang</th>
         </tr>
@@ -35,7 +35,7 @@
      <tfoot>
           <tr>
                <th colspan="3">TOTAL</th>
-               <th>Rp. {{number_format($total) }}</th>
+               <th style="text-align:center">Rp. {{number_format($total) }}</th>
           </tr>
      </tfoot>               
 </table>

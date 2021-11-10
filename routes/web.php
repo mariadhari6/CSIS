@@ -79,7 +79,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
     Route::get('/item_summary', [SummaryController::class, 'item_data'])->name('item_summary');
     Route::get('/add_summary', [DetailCustomerController::class, 'add_form'])->name('add_summary');
-
     Route::get('/apioslog', [UsernameController::class, 'getApi']);
     
     Route::get('/api', [UsernameController::class, 'Api']);

@@ -1,7 +1,7 @@
 <?php $no=1; ?>
 @foreach ($details as $detail )
-<tr id="edit-form-{{ $detail->id }}" height="50px">
-        <td id="td-checkbox-{{ $detail->id }}" width="100px">
+<tr id="edit-form-{{ $detail->id }}">
+        <td id="td-checkbox-{{ $detail->id }}">
             <div>
                 <label class="form-check-label">
                     <input class="form-check-input task-select" type="checkbox" id="{{$detail->id}}">

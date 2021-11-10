@@ -109,6 +109,9 @@
             $("#TanggalPasang[data-toggle='popover']").popover('show');
             return false; 
         }
+        else{
+            $("#TanggalPasang[data-toggle='popover']").popover('hide');
+        }
        
         $.ajax({
             type: "get",
@@ -253,11 +256,17 @@
                 $("#TanggalNonAktif[data-toggle='popover']").popover('show');
                 return false ;
             }
+            else{
+                $("#TanggalNonAktif[data-toggle='popover']").popover('hide');
+            }
         }else if(StatusLayanan == "1"){
             if(TanggalNonAktif != ""){
                 if (TanggalReaktivasi == "") {
                     $("#TanggalReaktivasi[data-toggle='popover']").popover('show');
                     return false;
+                }
+                else{
+                    $("#TanggalReaktivasi[data-toggle='popover']").popover('hide');
                 }
             }
         }

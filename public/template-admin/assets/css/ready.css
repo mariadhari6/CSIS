@@ -5890,9 +5890,9 @@ body {
 }
 .table td,
 .table th {
-    font-size: 14px;
+    font-size: 12px;
     border-color: #ebedf2 !important;
-    padding: 0.75rem !important;
+    padding: 0.2rem !important;
 }
 
 /* table full-width */
@@ -6040,7 +6040,7 @@ body {
 }
 
 .dropdown-item {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .navbar .navbar-nav .notification {

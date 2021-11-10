@@ -324,7 +324,6 @@
     font-family:verdana, Helvetica;
 }
 
-
 .fa-eye .popover{
     width:400px;
     height:100px;
@@ -346,7 +345,7 @@
 
 #table_summary{
     table-layout: auto;
-    width: 580px;     
+    width: 420px;
 }
 
 .table-scroll {
@@ -355,7 +354,7 @@
     z-index: 1;
     margin: auto;
     overflow: auto;
-    height: 589px;
+    height: 300px;
   }
 
 .table-wrap {
@@ -391,6 +390,11 @@
 #data-po table tbody td#key
 {
     text-align: left;
+}
+
+#data_detail{
+    table-layout: auto;
+    width: 1000px;
 }
 
 

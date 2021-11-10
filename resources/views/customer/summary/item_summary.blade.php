@@ -1,5 +1,5 @@
 <?php $no=1;?>
-@foreach ($data_complete as $item)
+@foreach ($data_finish as $item)
    <tr id="list-{{ $item->company_id }}">
       <td>{{ $no++ }}</td>  
       <td id ="key">{{ $item->company->company_name }}</td>

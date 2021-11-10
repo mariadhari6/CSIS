@@ -1,10 +1,9 @@
 @extends('layouts.v_main')
 @section('title','Detail Customer')
 @section('title-table', 'Detail Customer')
-
 @section('content')
 
-<div class="dropdown mb-3">
+<div class="dropdown mb-1">
     <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Company
     </button>
@@ -14,20 +13,6 @@
         @endforeach
     </div>
   </div>
-  
-    {{-- <div class="mb-3">
-        <div class="input-group mb-2 mr-sm-2">
-        <div class="input-group-prepend">
-            <div class="input-group-text">Company</div>
-        </div>
-        <select class="form-control" id="filter-company">
-            <option value=""></option>
-            @foreach ($data as $item)
-            <option value="{{ $item->id }}"> {{ $item->company_name}}</option>
-            @endforeach
-        </select>
-        </div>
-    </div> --}}
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Pilih Company</h5>
