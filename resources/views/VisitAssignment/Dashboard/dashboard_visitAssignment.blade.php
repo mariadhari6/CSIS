@@ -6,7 +6,16 @@
 @section('content')
 
 <div class="container-fluid">
-    <div class="row">
+    Bulan :
+    <select class="ml-2">
+        <option>Pilih</option>
+    </select>
+    Tahun :
+    <select class="ml-2">
+        <option>Pilih</option>
+    </select>
+    <button class="ml-2 btn btn-success btn-xs">Search</button>
+    <div class="mt-3 row">
         <div class="col-md-3 ">
             <div class="card card-stats card-grey cost">
                 <div class="card-body ">
@@ -173,7 +182,7 @@
     </div>
 </div>
 
-
+<br>
 <div class="table_id">
 
 </div>
@@ -477,6 +486,31 @@
         document.getElementById('visitSla'),
         configVisitSla
     );
+
+      // Table Click
+      $('.cost').click(function() {
+        $('.table_id').html(`
+            <div class="col-md-6">
+                <table class="table table-responsive" style="background-color:white;">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="list-company">Per-Company</th>
+                        <th scope="col" class="list">Vehicle</th>
+                        <th scope="col" class="list">Times</th>
+                        <th scope="col" class="list">Cost</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>12</td>
+                            <td>12</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `)
+    });
 
 </script>
 

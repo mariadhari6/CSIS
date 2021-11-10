@@ -20,16 +20,14 @@
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
                   </select>
                 </div>
-                <button type="button" class="btn btn-success btn-sm float-left mr-2" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()>
+                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
-                <button class="btn btn-success btn-sm  mr-2 edit_all"> 
-                  <i class="fas fa-pen"></i>
-                </button>
-                <button class="btn btn-danger btn-sm delete_all">
-                  <i class="fas fa-trash"></i>
-                </button>
+              <button class="btn btn-success edit_all">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
           <table class="table table-responsive data" class="table_id" id="table_id">
             <thead>

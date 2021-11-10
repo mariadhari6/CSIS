@@ -24,6 +24,16 @@ class GsmActiveController extends Controller
             'GsmActive' => $GsmActive
         ]);
     }
+    // ::whereIn('task', [1, 2, 3])->
+    public function item_data_MY(Request $request)
+    {
+        $year = $request->year;
+        $month = $request->month;
+        $GsmActive = Gsm::where('status_gsm', 'Active')->whereMonth('active_date',  $month)->whereYear('active_date', $year)->get();
+        return view('MasterData.GsmActive.item_data')->with([
+            'GsmActive' => $GsmActive
+        ]);
+    }
 
     public function edit_form($id)
     {

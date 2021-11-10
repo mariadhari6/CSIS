@@ -6,7 +6,7 @@
     </td>
     <td>
        <select class="select seller_id-{{$company->id}}"  id="{{$company->id}}" name="seller_id" required>
-        <option selected value="{{ $company->seller->id}}">
+        <option class="hidden" selected value="{{ $company->seller->id}}">
             {{ $company->seller->seller_name }}
         </option>
 
@@ -34,7 +34,7 @@
     </td>
     <td>
         <select class="select status-{{$company->id}}" id="status" name="status" required>
-            <option selected value="{{$company->status}}">{{$company->status}}</option>
+            <option selected class="hidden" value="{{$company->status}}">{{$company->status}}</option>
              <option value="Active">Active</option>
             <option value="In Active">In Active</option>
         </select>

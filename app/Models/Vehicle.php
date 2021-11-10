@@ -19,7 +19,7 @@ class Vehicle extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function vehicleType()
+    public function vehicle()
     {
         return $this->belongsTo(VehicleType::class, 'vehicle_id', 'id');
     }

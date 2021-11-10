@@ -1,19 +1,10 @@
 <tr id="add_form">
-
     <td></td>
     <td></td>
 
     <td>
         <select class="select" id="company_id" name="company_id" required>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <option class="hidden"> -- select an option -- </option>
-=======
-            <option class="hidden"> ---select company---</option>
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
-=======
             <option class="hidden"> --Pilih Company--</option>
->>>>>>> 2f96e8b79482d261a9710a502c6a67356e5c817a
 
             @foreach ($detail as $item )
             <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
@@ -37,7 +28,6 @@
 
             {{-- @foreach ($pic as $item)
                 <option value="{{ $item->id }}" {{ old('pic_id') == $item->id ? 'selected':'' }}>{{ $item->pic_name }}</option>
-
             @endforeach --}}
          </select></i>
       </td>
@@ -48,7 +38,6 @@
 
             {{-- @foreach ($detail as $item)
                 <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??'' }}</option>
-
             @endforeach --}}
          </select></i>
       </td>
@@ -156,13 +145,8 @@
             else{
                 $('select[name="pic_id"]').empty();
                 $('select[name="vehicle"]').empty();
-
             }
          });
-
-
-
-
          // status waktu solve
          $('select[name="status"]').on('change', function() {
             var itemID = $(this).val();
@@ -178,7 +162,29 @@
                 );
            }
         });
+        $('select[name="internal_eksternal"]').on('change', function() {
+                var request_complain = $(this).val();
+                // alert(itemID);
+                if(request_complain) {
+                    $.ajax({
+                        url: '/based_internal_eksternal',
+                        method: "GET",
+                        data  :{
+                            request_complain : request_complain
+                        },
+                        success:function(data) {
+                            $('select[name="task').empty();
+                            $('select[name="task').append('<option style="display:none"></option>');
+                                for(var i = 0 ; i < data.length ; i++) {
+                                    $('select[name="task').append('<option value="'+ data[i].id + '"> '+ data[i].task +'</option>');
+                                }
+                        }
+                    });
+                }
+                else{
+                    $('select[name="task"]').empty();
+                }
+            });
 </script>
 
 </tr>
-

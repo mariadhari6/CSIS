@@ -10,12 +10,20 @@
       <div class="card">
         <div class="card-body">
              <div class="text-right" id="selected">
-                <button class="btn btn-success edit_all">
+              <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                <div class="form-group">
+                    <input class="form-control" id="filter-date" type="month">
+                    <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
+                  </select>
+                </div>
+              </ul>
+              <button class="btn btn-success edit_all">
                 <i class="fas fa-edit"></i>
               </button>
-                <button class="btn btn-danger  delete_all">
-                  <i class="fas fa-trash"></i>
-                </button>
+              <button class="btn btn-danger  delete_all">
+                <i class="fas fa-trash"></i>
+              </button>
             </div>
             <div class="tscroll">
             <form>
@@ -61,6 +69,29 @@
 
     });
 
+    // filter bulan dan tahun
+    $('#check-btn').click(function() {
+    var date = new Date($('#filter-date').val());
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+      $.ajax({
+          type: "get",
+          url: "{{ url('item_data_MY_GsmActive') }}",
+          data: {
+            month: month,
+            year: year,
+          },
+          success: function(data) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable( {
+                "dom": '<"top"f>rt<"bottom"lp><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+          }
+      })
+    });
 
     // ------ Tampil Data ------
     function read(){

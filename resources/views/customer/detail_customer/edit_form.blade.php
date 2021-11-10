@@ -53,6 +53,7 @@
 </td>
 <td>
     <select class="select LicencePlate-{{ $details->id }}" id="LicencePlate" name="LicencePlate">
+        <option class="hidden" value="{{$details->licence_plate}}">{{$details->vehicle->license_plate}}</option>
         @foreach ($vehicle as $item)
             <option value="{{ $item->id }}" {{ $details->licence_plate  == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
         @endforeach
@@ -61,7 +62,7 @@
 <td>
     <select class="select VihecleType-{{ $details->id }}" id="VihecleType" name="VihecleType" disabled>
         @foreach ($vehicle as $item)
-            <option value="{{ $item->id }}" {{ $details->vehicle_id  == $item->id ? 'selected':'' }}>{{ $item->vehicle_id }}</option>
+            <option value="{{ $item->id }}" {{ $details->vehicle_id  == $item->id ? 'selected':'' }}>{{ $item->vehicle->name}}</option>
         @endforeach
     </select>
 
@@ -265,9 +266,9 @@
                             $('select[name="PoolName').empty();
                             $('select[name="PoolLocation').empty();
                             $.each(data, function(key, value) {
-                                $('select[name="VihecleType').append('<option value="'+ key +'">'+ value.vehicle_id +'</option>');
-                                $('select[name="PoolName').append('<option value="'+ key +'">'+ value.pool_name +'</option>');
-                                $('select[name="PoolLocation').append('<option value="'+ key +'">'+ value.pool_location +'</option>');
+                                $('select[name="VihecleType').append('<option value="'+ value.id +'">'+ value.vehicle_name +'</option>');
+                                $('select[name="PoolName').append('<option value="'+ value.id  +'">'+ value.pool_name +'</option>');
+                                $('select[name="PoolLocation').append('<option value="'+ value.id  +'">'+ value.pool_location +'</option>');
                             });
                         }
                     });
@@ -313,7 +314,7 @@
                 var Id = $(this).val();
                 if(Id) {
                     $.ajax({
-                        url: '/based_imeiDetail/'+ Id,
+                        url: '/based_imei/'+ Id,
                         method: "GET",
                         success:function(data) {
                             $('select[name="Merk').empty();
@@ -390,6 +391,7 @@
 
 
 
+<<<<<<< HEAD
 >>>>>>> 7f4cdae6e5cf51380266d0b1ad6cf4f8384823f7
 
        @endforeach
@@ -418,3 +420,5 @@
 <td>
     <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
 </td>
+=======
+>>>>>>> 5a99c6506f6410c9f7e3c4dc995040fa8c8c3b7d
