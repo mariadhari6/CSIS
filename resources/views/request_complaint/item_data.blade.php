@@ -21,7 +21,7 @@
           <td id="item-internal_eksternal-{{ $request_complains->id }}">
             {{ $request_complains->internal_eksternal }}
         </td>
-        <td id="item-pic-{{ $request_complains->id}}">
+        <td id="item-pic_id-{{ $request_complains->id}}">
                 {{ $request_complains->pic->pic_name?? ''}}
         </td>
           <td id="item-vehicle-{{ $request_complains->id }}">
@@ -58,14 +58,16 @@
          <td id="item-waktu_kesepakatan-{{ $request_complains->id }}">
             {{ $request_complains->waktu_kesepakatan}}
         </td>
-         <td id="item-waktu_solve-{{ $request_complains->id }}">
+          <td id="item-waktu_solve-{{ $request_complains->id }}">
             {{ $request_complains->waktu_solve}}
         </td>
         <td id="item-status-{{ $request_complains->id }}">
             {{ $request_complains->status }}
         </td>
         <td id="item-status_akhir-{{ $request_complains->id }}">
-            {{ $request_complains->status_akhir }}
+            <i class="fas fa-eye" data-toggle="popover" data-placement="bottom" data-content="{{$request_complains->status_akhir }}" ></i>
+
+            {{-- {{ $request_complains->status_akhir }} --}}
         </td>
          <td class="action sticky-col first-col" id="td-button-{{ $request_complains->id }}">
 

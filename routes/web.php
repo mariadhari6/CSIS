@@ -222,6 +222,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
     Route::get('/based_pic/{id}', [RequestComplaintController::class, 'basedPic']);
     Route::get('/based_request/{id}', [RequestComplaintController::class, 'basedRequest']);
+    Route::get('/based_internal_eksternal', [RequestComplaintController::class, 'basedInternalEksternal']);
     //detail customer
     Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
     Route::get('/item_detail/{id}', [DetailCustomerController::class, 'item_data'])->name('item_detail');
