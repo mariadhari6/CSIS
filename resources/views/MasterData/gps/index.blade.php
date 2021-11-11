@@ -82,7 +82,7 @@
       </div>
 		</div>
 	</div>
-  
+
   <script>
     $(document).ready(function() {
         $.ajaxSetup({
@@ -101,7 +101,7 @@
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "application/vnd.ms-excel",
             ].includes(event.target.files[0].type)
-        ) {
+        ) { 
             document.getElementById("excel_data").innerHTML =
             '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
             excel_file.value = "";
@@ -470,15 +470,35 @@
                 status_ownership:status_ownership
                 },
                 success: function(data) {
-                swal({
-                    type: 'success',
-                    title: ' Data Updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).catch(function(timeout) { });
-                read();
 
-                }
+                  if (data.terpasang == "terpasang") {
+                    swal({
+                      type: 'error',
+                      title: 'Sorry',
+                      text : 'GPS Installed in ' +" "+ data.company_name +" "+ 'with License Plate'  +" "+ data.nomor_license ,
+                      showCloseButton: true,
+                      showConfirmButton: false,
+                    });
+                      return false ;
+                  }
+                  else{
+                    swal({
+                        type: 'success',
+                        title: ' Data Updated',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).catch(function(timeout) { });
+                    read();
+                  }
+                // swal({
+                //     type: 'success',
+                //     title: ' Data Updated',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // }).catch(function(timeout) { });
+                // read();
+
+              }
             });
         }
         // checkbox all

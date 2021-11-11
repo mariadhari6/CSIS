@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Exports\TemplateGps;
 use App\Models\Gps;
+use App\Models\DetailCustomer;
+use App\Models\Vehicle;
 use App\Models\MerkGps;
 use App\Models\TypeGps;
 use Illuminate\Http\Request;
@@ -153,15 +155,63 @@ class GpsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = Gps::findOrfail($id);
-        $data->merk = $request->merk;
-        $data->type = $request->type;
-        $data->imei = $request->imei;
-        $data->waranty = $request->waranty;
-        $data->po_date = $request->po_date;
-        $data->status = $request->status;
-        $data->status_ownership = $request->status_ownership;
-        $data->save();
+        $status = $request->status;
+        $cek_status = DetailCustomer::where('imei', $id)->where('status_id', 1)->get();
+        $cek_detail = DetailCustomer::where('imei', $id)->first();
+        if ($cek_detail == null ) {
+            $data           = Gps::findOrfail($id);
+            $data->merk     = $request->merk;
+            $data->type     = $request->type;
+            $data->imei     = $request->imei;
+            $data->waranty  = $request->waranty;
+            $data->po_date  = $request->po_date;
+            $data->status   = $request->status;
+            $data->status_ownership = $request->status_ownership;
+            $data->save();
+        }
+        else{
+
+            if ($cek_status && $status != "Used" ) {
+                foreach ($cek_status as $item) {
+                    $company_id = $item->company_id;
+                    $licence_id = $item->licence_plate;
+                    $cari_company = Company::where('id', $company_id)->get();
+                    $cari_license = Vehicle::where('id', $licence_id)->get();
+                    $item['company_name']   = $cari_company[0]->company_name;
+                    $item['nomor_license']  = $cari_license[0]->license_plate;
+                    $item['terpasang'] = "terpasang";
+                    return $item ;
+                }
+            }
+            else {
+                $data           = Gps::findOrfail($id);
+                $data->merk     = $request->merk;
+                $data->type     = $request->type;
+                $data->imei     = $request->imei;
+                $data->waranty  = $request->waranty;
+                $data->po_date  = $request->po_date;
+                $data->status   = $request->status;
+                $data->status_ownership = $request->status_ownership;
+                $data->save();                
+            }
+        }
+
+
+        // if ($cek_detail) {
+        //     return $warning;
+        // }else {
+        //     $data           = Gps::findOrfail($id);
+        //     $data->merk     = $request->merk;
+        //     $data->type     = $request->type;
+        //     $data->imei     = $request->imei;
+        //     $data->waranty  = $request->waranty;
+        //     $data->po_date  = $request->po_date;
+        //     $data->status   = $request->status;
+        //     $data->status_ownership = $request->status_ownership;
+        //     $data->save();
+        // }
+
+        // $cek_detail = DetailCustomer::where('imei', $id)->where('status_id', 2)-get();
     }
 
     public function selected()

@@ -3,10 +3,9 @@
     <td></td>
     <td>
         <select class="select merk-{{$gps->id}}" id="merk" name="merk" required>
-            <option class="hidden" value="{{$gps->merk}}">{{$gps->merk}}</option>
-
+            <option style="display: none" value="{{$gps->merk}}">{{$gps->merk}}</option>
             @foreach ($merk as $item)
-            <option value="{{ $item->merk_gps }}">{{ $item->merk_gps}}</option>
+                <option value="{{ $item->merk_gps }}">{{ $item->merk_gps}}</option>
             @endforeach
 
         </select>
@@ -14,17 +13,12 @@
 
     <td>
         <select class="select type-{{$gps->id}}" id="type" name="type" required>
-            <option class="hidden" value="{{$gps->type}}">{{$gps->type}}</option>
-
+            <option style="display: none" value="{{$gps->type}}">{{$gps->type}}</option>
             @foreach ($merk as $item)
-            <option value="{{ $item->id }}">{{ $item->type_gps}}</option>
+                <option value="{{ $item->id }}">{{ $item->type_gps}}</option>
             @endforeach
-
         </select>
     </td>
-    {{-- <td>
-        <div class="input-div"><input type="text" class="input type-{{$gps->id}}" id="type" placeholder="Type" value="{{ $gps->type}}"></i></div>
-    </td> --}}
     <td>
         <div class="input-div"><input type="text" class="input imei-{{$gps->id}}" id="imei" placeholder="IMEI" value="{{ $gps->imei}}" required></i></div>
     </td>
@@ -108,7 +102,7 @@
                         success:function(data) {
                             // alert(data.length);
                             $('select[name="type').empty();
-                            $('select[name="type').append('<option class="hidden" value=""> </option>');
+                            $('select[name="type').append('<option style="display: none" value=""> </option>');
                                 for(var i = 0 ; i < data.length ; i++) {
                                     $('select[name="type').append('<option value="'+ data[i].type_gps + '"> '+ data[i].type_gps +'</option>');
                                         // alert(data[i].serial_number)
