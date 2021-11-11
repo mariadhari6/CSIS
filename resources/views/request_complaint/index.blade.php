@@ -181,26 +181,34 @@
         status==""
         ){
         }else {
-            $.ajax({
-            type: "get",
-            url: "{{ url('store_RequestComplain') }}",
-            data: {
-              company_id: company_id,
-              internal_eksternal:internal_eksternal,
-              pic_id: pic_id,
-              vehicle: vehicle,
-              waktu_info: waktu_info,
-             waktu_respond:waktu_respond,
-              task:task,
-              platform:platform,
-              detail_task:detail_task,
-              divisi:divisi,
-              respond:respond,
-              waktu_kesepakatan:waktu_kesepakatan,
-              waktu_solve:waktu_solve,
-              status:status,
-              status_akhir:status_akhir
-            },
+            if(waktu_kesepakatan <= waktu_solve){
+                swal({
+                    type: 'warning',
+                    text: 'Waktu Solve must be more than Waktu Kesepakatan',
+                    showCloseButton: true,
+                    showConfirmButton: false
+                }).catch(function(timeout) { });
+            } else {
+                $.ajax({
+                type: "get",
+                url: "{{ url('store_RequestComplain') }}",
+                data: {
+                company_id: company_id,
+                internal_eksternal:internal_eksternal,
+                pic_id: pic_id,
+                vehicle: vehicle,
+                waktu_info: waktu_info,
+                waktu_respond:waktu_respond,
+                task:task,
+                platform:platform,
+                detail_task:detail_task,
+                divisi:divisi,
+                respond:respond,
+                waktu_kesepakatan:waktu_kesepakatan,
+                waktu_solve:waktu_solve,
+                status:status,
+                status_akhir:status_akhir
+                },
             success: function(data) {
              swal({
                 type: 'success',
@@ -210,9 +218,10 @@
             }).catch(function(timeout) { });
               read();
             }
-        })
+        });
         }
     }
+}
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
