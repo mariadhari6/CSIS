@@ -3,7 +3,7 @@
     <td></td>
     <td>
         <select class="select" id="status_gsm" aria-label=".form-select-lg example">
-            <option value="-">-</option>
+            <option style="display: none"></option>
             <option value="Ready">Ready</option>
             <option value="Active">Active</option>
             <option value="Terminate">Terminate</option>
@@ -13,13 +13,11 @@
         <div class="input-div"><input type="text" class="input" id="gsm_number" placeholder="GSM Number">
     </td>
     <td>
-        <select class="select" id="company_id" name="company_id">
-         
-          <option value="-" >-</option>
-         @foreach ($company as $item)
-          <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
-         @endforeach
-  
+        <select class="select" id="company_id" name="company_id"> 
+            <option style="display: none"></option>
+            @foreach ($company as $item)
+            <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+            @endforeach
         </select>
      </td>
     <td> 
@@ -51,6 +49,7 @@
     </td>
     <td>
         <select class="select" id="provider">
+            <option style="display: none"></option>
             <option value="Telkomsel">Telkomsel</option>
             <option value="XL Axiata">XL Axiata</option>
             <option value="Tri">Tri</option>
@@ -58,7 +57,7 @@
             <option value="Smartfren">SmartFrend</option>
         </select>
     </td>
-    <td>
+    <td class="sticky-col first-col">
         <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 </tr>

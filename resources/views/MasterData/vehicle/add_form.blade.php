@@ -4,6 +4,7 @@
     
     <td>
         <select class="select" id="company_id">
+            <option style="display: none"></option>
             @foreach ($company as $item)
                 <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
             @endforeach
@@ -12,6 +13,7 @@
     <td><div class="input-div"><input type="text" class="input" id="license_plate"></td>
     <td>
         <select class="select" id="vehicle_id">
+            <option style="display: none"></option>
             @foreach ($vehicleType as $item)
                 <option value="{{ $item->id }}" {{ old('vehicle_id') == $item->id ? 'selected':'' }}>{{ $item->name }}</option>
             @endforeach

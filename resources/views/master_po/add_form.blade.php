@@ -22,6 +22,7 @@
     </td>
     <td> 
         <select class="select" id="status_po">
+            <option style="display: none"></option>
             <option value="Sewa">Sewa</option>
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
@@ -30,12 +31,13 @@
     </td>
     <td> 
         <select class="select" id="sales_id">
+            <option style="display: none"></option>
             @foreach ($sales as $item)
                 <option value="{{ $item->id }}" {{ old('sales_id') == $item->id ? 'selected':'' }}>{{ $item->name }}</option>
             @endforeach
         </select>  
     </td>
-    <td>
+    <td class="action sticky-col first-col">
         <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()">
     </td>
 </tr>

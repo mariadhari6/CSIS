@@ -7,14 +7,11 @@
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
                     <span class="form-check-sign"></span>
                 </label>
+            </div>
         </td>
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
-
-        {{-- <td id="item-company_id-{{ $sellers->id}}">
-                {{ $sellers->company->company_name}}
-        </td> --}}
         <td id="item-merk-{{ $item->id}}">
             {{ $item->merk}}
         </td>
@@ -44,4 +41,3 @@
         </td>
     </tr>
 @endforeach
-

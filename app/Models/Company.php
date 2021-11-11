@@ -40,12 +40,12 @@ class Company extends Model
     {
         return $this->hasMany(PemasanganMutasiGps::class);
     }
-    //---------------------//
+    
     public function requestComplaint()
     {
         return $this->hasMany(RequestComplaint::class);
     }
-
+    
     public function masterPo()
     {
         return $this->hasMany(MasterPo::class, 'company_id', 'id');
@@ -74,6 +74,7 @@ class Company extends Model
     }
 
     public function vehicle(){
+
         return $this->hasMany(Vehicle::class);
     }
 }

@@ -6,6 +6,7 @@
 
 
 @section('content')
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -21,17 +22,15 @@
               </button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
           </div>
-        
+          <form onsubmit="return false">
             <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
                 <th>
-                    <div>
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
+                  <label class="form-check-label">
+                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                    <span class="form-check-sign"></span>
+                  </label>
                 </th>
                 <th scope="col" class="action-no">No.</th>
                 <th scope="col" class="list" >Merk*</th>
@@ -42,12 +41,14 @@
                 <th scope="col" class="list" >Status*</th>
                 <th scope="col" class="list" >Status Ownership*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">
+              {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-         
+          </form>
         </div>
       </div>
     </div>
@@ -77,25 +78,22 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer-full-width  modal-footer">
-
-        </div>
-        </div>
-			</div>
+        <div class="modal-footer-full-width  modal-footer"></div>
+      </div>
 		</div>
 	</div>
+  
   <script>
-
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-      read();
+      read()
     });
-
     // -- excel export to html tabel---
+
     const excel_file = document.getElementById("excel_file");
     excel_file.addEventListener("change",(event)=>{
         if(
@@ -285,10 +283,10 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
-            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+              "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            // "lengthMenu": '[[10, 25, 50, -1], [10, 25, 50, "All"]]'
-        });
+            // "dom": '<lf<t>ip>'
+            });
         $('#table_id').DataTable().draw();
       });
     }
@@ -307,14 +305,16 @@
       });
     // ----- Proses Tambah data ------
     function store() {
-        var merk              = $("#merk").val();
-        var type              = $("#type").val();
-        var imei              = $("#imei").val();
-        var waranty           = $("#waranty").val();
-        var po_date           = $("#po_date").val();
-        var status            = $("#status").val();
-        var status_ownership  = $("#status_ownership").val();
-
+        var merk = $("#merk").val();
+        var type = $("#type").val();
+        var imei = $("#imei").val();
+        var waranty = $("#waranty").val();
+        var po_date = $("#po_date").val();
+        var status = $("#status").val();
+        var status_ownership = $("#status_ownership").val();
+        // alert(merk);
+        //
+            // break;
     $rowCount = $("#table_id tr").length;
       if ($rowCount == 2) {
         // alert('table empty')
@@ -353,6 +353,14 @@
             }).catch(function(timeout) { });
 
         }else if(imei.length == 15 && index == allimeiNum.length ) {
+         }else {
+              $success = true;
+        break;
+        }
+        }
+      }
+
+      if($success === true) {
 
         $.ajax({
             type: "get",
@@ -377,9 +385,7 @@
 
             }
         });
-        break;
-        }
-        }
+
       }
 
 
@@ -589,24 +595,24 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-                    var merk              = $(".merk-"+value).val();
-                    var type              = $(".type-"+value).val();
-                    var imei              = $(".imei-"+value).val();
-                    var waranty           = $(".waranty-"+value).val();
-                    var po_date           = $(".po_date-"+value).val();
-                    var status            = $(".status-"+value).val();
-                    var status_ownership  = $(".status_ownership-"+value).val();
+                    var merk = $(".merk-"+value).val();
+                    var type = $(".type-"+value).val();
+                    var imei = $(".imei-"+value).val();
+                    var waranty = $(".waranty-"+value).val();
+                    var po_date = $(".po_date-"+value).val();
+                    var status = $(".status-"+value).val();
+                    var status_ownership = $(".status_ownership-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_gps') }}/"+value,
                     data: {
-                          merk              : merk,
-                          type              : type,
-                          imei              : imei,
-                          waranty           : waranty,
-                          po_date           : po_date,
-                          status            : status,
-                          status_ownership  : status_ownership
+                     merk: merk,
+                    type:type,
+                    imei: imei,
+                    waranty: waranty,
+                    po_date: po_date,
+                    status:status,
+                    status_ownership:status_ownership
                     },
                     success: function(data) {
                             swal({
@@ -614,13 +620,18 @@
                                     title: 'The selected data has been updated',
                                     showConfirmButton: false,
                                     timer: 1500
-                                }).catch(function(timeout) { });
-                                  $(".add").show("fast");
-                                  $(".edit_all").show("fast");
-                                  $(".delete_all").show("fast");
-                                  $(".btn-round").hide("fast");
-                                  $(".btn-round").hide("fast");
-                                  read();
+
+                                // $(".save").hide();
+                                });
+                                read();
+
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
+
+
                             }
                          });
                     });
@@ -635,9 +646,13 @@
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
-        }   
+        }
+
+
+
+
   </script>
+{{-- //   <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
-@endsection
-
+   @endsection
 

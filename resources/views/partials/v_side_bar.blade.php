@@ -129,7 +129,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#edit">
+                                <a href="{{ route('dashboard_customer')}}">
                                     <span class="link-collapse">Dashboard Customer</span>
                                 </a>
                             </li>

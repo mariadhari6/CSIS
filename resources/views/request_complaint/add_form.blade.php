@@ -162,7 +162,7 @@
 
             $('select[name="status"]').on('change', function() {
                 var itemID = $(this).val();
-                alert(itemID);
+                // alert(itemID);
                 if(itemID == "On Progress"){
                     $('#td-solve').empty();
                     $('#td-solve').append(

@@ -5,14 +5,6 @@
 @section('GsmActive','active')
 
 @section('content')
-<<<<<<< HEAD
-
-<div class="title">
-    <strong>GSM Active</strong>
-</div>
-<br>
-=======
->>>>>>> 931300e66e6b242e64c71277293e48dba27a7aeb
   <div class="row">
     <div class="col-md-12">
       <div class="card">

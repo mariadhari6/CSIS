@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use App\Imports\GpsImport;
 use App\Models\Company;
+use App\Models\GpsTemp;
 use App\Models\GpsTemporary;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -20,13 +21,13 @@ class GpsController extends Controller
     {
         return view('MasterData.gps.index');
     }
+
     public function add_form()
     {
         $gps = Gps::orderBy('id', 'DESC')->get();
         $merk = MerkGps::groupBy('merk_gps')
-            ->selectRaw('count(*) as jumlah, merk_gps')
-            ->get();
-
+                        ->selectRaw('count(*) as jumlah, merk_gps')
+                        ->get();
         return view('MasterData.gps.add_form')->with([
             'gps' => $gps,
             'merk' => $merk,
@@ -41,13 +42,13 @@ class GpsController extends Controller
 
         ]);
     }
+    
     public function item_data_temporary()
     {
         $gps = GpsTemporary::orderBy('id', 'ASC')->get();
         return view('MasterData.gps.item_data_temporary')->with([
             'gps' => $gps
         ]);
-        // dd($gps);
     }
     public function deleteTemporary()
     {
@@ -57,27 +58,58 @@ class GpsController extends Controller
     public function save_import(Request $request)
     {
         $dataRequest = json_decode($request->data);
+        $data = [];
+        $fail = 0;
         foreach ($dataRequest as $key => $value) {
             $imeiNumber = $value->imei;
             $checkImei = Gps::where('imei', '=', $imeiNumber)->first();
             if ($checkImei === null) {
-                try {
-                    $data = array(
-                        'merk'        =>  $value->merk,
-                        'type'        =>  $value->type,
+                $data[$key] = array(
+                    'merk'        =>  (string) $value->merk,
+                    'type'        =>  (string) $value->type,
+                    'imei'        =>  $value->imei,
+                    'waranty'     =>  $value->waranty,
+                    'po_date'     =>  $value->po_date,
+                    'status'           =>  (string) $value->status,
+                    'status_ownership' =>  (string) $value->status_ownership,
+                );
+                // GpsTemporary::insert($data);
+
+                $imeiReq = $data[$key]['imei'];
+                $checkImei = GpsTemporary::where('imei', '=', $imeiReq)->first();
+
+                if ($checkImei === null ) {
+                    GpsTemporary::insert($data[$key]);
+                } else {
+                    $fail = 1;
+                }
+                // echo $data;
+            } else {
+                $fail = 1;
+            }
+        }
+
+        if( $fail === 1 ){
+            GpsTemporary::truncate();
+            return 'fail';
+        } else {
+            try {
+                $gpsTemporary = GpsTemporary::orderBy('id', 'DESC')->get();
+                foreach ($gpsTemporary as $key => $value){
+                    $data[$key] = array(
+                        'merk'        =>  (string) $value->merk,
+                        'type'        =>  (string) $value->type,
                         'imei'        =>  $value->imei,
                         'waranty'     =>  $value->waranty,
                         'po_date'     =>  $value->po_date,
-                        'status'           =>  $value->status,
-                        'status_ownership' =>  $value->status_ownership,
-
+                        'status'           =>  (string) $value->status,
+                        'status_ownership' =>  (string) $value->status_ownership,
                     );
-                    Gps::insert($data);
-                 
-                } catch (\Throwable $th) {
-                    return 'fail';
+                    Gps::insert($data[$key]);
+                    $dataDelete = GpsTemporary::findOrfail($value->id);
+                    $dataDelete->delete();
                 }
-            } else {
+            } catch (\Throwable $th) {
                 return 'fail';
             }
         }
@@ -85,6 +117,7 @@ class GpsController extends Controller
 
     public function store(Request $request)
     {
+      
         $data = array(
             'merk'              =>  $request->merk,
             'type'              =>  $request->type,
@@ -92,8 +125,9 @@ class GpsController extends Controller
             'waranty'           =>  $request->waranty,
             'po_date'           =>  $request->po_date,
             'status'            =>  $request->status,
-            'status_ownership'  => $request->status_ownership
+            'status_ownership'  =>  $request->status_ownership
         );
+
         Gps::insert($data);
     }
 
@@ -104,8 +138,9 @@ class GpsController extends Controller
             ->get();
         $gps = Gps::findOrfail($id);
         return view('MasterData.gps.edit_form')->with([
-            'gps'   => $gps,
-            'merk'  => $merk,
+            'gps' => $gps,
+            'merk' => $merk,
+           
 
         ]);
     }
@@ -133,12 +168,10 @@ class GpsController extends Controller
     {
         $gps = Gps::all();
         $merk_gps = MerkGps::all();
-        // $type_gps = TypeGps::all();
 
         return view('MasterData.gps.selected')->with([
             'gps' => $gps,
             'merk_gps' => $merk_gps,
-            // 'type_gps' => $type_gps
         ]);
     }
 
@@ -184,7 +217,6 @@ class GpsController extends Controller
         $file->move('MasterGps', $nameFile);
 
         Excel::import(new GpsImport, public_path('/MasterGps/' . $nameFile));
-        // return redirect('/GsmMaster');
     }
     public function export()
     {
@@ -193,18 +225,12 @@ class GpsController extends Controller
 
     public function try()
     {
-
         $input = MerkGps::where('merk', 'Ruptela')->firstOrFail()->id;
-        // $input = TypeGps::where('type_gps', 'FM Pro 4')->firstOrFail()->id;
         return $input;
     }
     public function basedType($id)
     {
-
-
-
         $data = MerkGps::where('merk_gps', $id)->get();
-
         return $data;
     }
 }

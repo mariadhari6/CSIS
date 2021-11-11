@@ -123,7 +123,7 @@ class DetailCustomerController extends Controller
             }
         }
         Vehicle::where('id', $license_id)->update(array('status' => 'Used'));
-        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Used', 'company_id' => $company ));
+        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active', 'company_id' => $company ));
         Gps::where('id', $gps_id)->update(array('status' => 'Used'));
         DetailCustomer::insert($data);
     }
@@ -314,4 +314,3 @@ class DetailCustomerController extends Controller
 
 
 }
-

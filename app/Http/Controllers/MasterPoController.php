@@ -187,7 +187,6 @@ class MasterPoController extends Controller
 
     }
 
-
     public function importExcel(Request $request) {
 
         $file = $request->file('file');
@@ -204,7 +203,82 @@ class MasterPoController extends Controller
     }
 
     public function check() {
-  
+        // $vehicle = 122;
+        // $imei = DetailCustomer::where('vehicle_id', $vehicle)->pluck('imei');
+        // $gsm = DetailCustomer::where('vehicle_id', $vehicle)->pluck('gsm_id');
+        // $type = DetailCustomer::where('vehicle_id', $vehicle)->pluck('type');
+        // return $type[0];
+
+
+        $now            = Carbon::now();
+        $month          = $now->month;
+        $year           = $now->year;
+        $filter_lastDay = $now->endOfMonth()->toDateString();
+
+        $data = DetailCustomer::groupBy('company_id')->select('company_id')->get();
+        
+        for ($i=0; $i < count($data) ; $i++) { 
+
+            $company_id = $data[$i]->company_id;
+            $cari_tanggal_awal_pasang_per_company = DetailCustomer::where('company_id', $company_id)
+            ->select('tanggal_pasang')->orderBy('tanggal_pasang', 'ASC')->get();
+
+            $data[$i]['tanggal_pasang_awal'] =  $cari_tanggal_awal_pasang_per_company[0]->tanggal_pasang;
+        }
+
+        for ($i=0; $i < count($data) ; $i++) {  
+
+            $company_id = $data[$i]->company_id;
+            $tanggal_pasang_awal = $data[$i]->tanggal_pasang_awal;
+            $cari_total_gps = DetailCustomer::where('company_id', $company_id)->whereBetween('tanggal_pasang', [$tanggal_pasang_awal, $filter_lastDay])
+            ->select(DB::raw('count(gps_id) as total_gps'))->get();
+
+            $data[$i]['total_gps'] = $cari_total_gps[0]->total_gps;
+        }
+
+        for ($i=0; $i < count($data) ; $i++) { 
+
+            $company_id = $data[$i]->company_id;
+       
+            $data_pasang = DetailCustomer::where('company_id', $company_id)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
+            ->select(DB::raw('count(tanggal_pasang) as penambahan_layanan '))->get();
+
+            $data[$i]['penambahan'] = $data_pasang[0]->penambahan_layanan; 
+                
+        }
+
+        for ($i=0; $i < count($data) ; $i++) { 
+
+            $company_id = $data[$i]->company_id;
+       
+            $data_terminate = DetailCustomer::where('company_id', $company_id)->whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)
+            ->select(DB::raw('count(tanggal_non_aktif) as terminate')
+            )->get();
+
+            $data[$i]['terminate'] = $data_terminate[0]->terminate;  
+           
+            $data[$i]->total_gps = $data[$i]->total_gps - $data[$i]->terminate;
+                
+            
+        }
+
+        for ($i=0; $i < count($data) ; $i++) {
+
+            $company_id = $data[$i]->company_id;
+       
+            $data_reaktivasi = DetailCustomer::where('company_id', $company_id)->whereMonth('tgl_reaktivasi_gps', $month)->whereYear('tgl_reaktivasi_gps', $year)
+            ->select(DB::raw('count(tgl_reaktivasi_gps) as reaktivasi')
+            )->get();
+
+            $data[$i]['reaktivasi'] = $data_reaktivasi[0]->reaktivasi;  
+           
+            $data[$i]->total_gps    = $data[$i]->total_gps  + $data[$i]->reaktivasi;
+            $data[$i]->penambahan   = $data[$i]->penambahan + $data[$i]->reaktivasi;
+                
+            
+        }
+
+        return $data;
 
     }
 

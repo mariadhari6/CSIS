@@ -197,6 +197,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_merksensor/{id}', [GpsController::class, 'basedType']);
 
 
+
     //gsm Master
     Route::get('/GsmMaster', [GsmMasterController::class, 'index'])->name('GsmMaster');
     Route::get('/item_data_GsmMaster', [GsmMasterController::class, 'item_data']);

@@ -32,18 +32,19 @@
     </td>
     <td>
         <select class="select sales_id-{{ $master_po->id }}" id="sales_id">    
-            <option value="{{ $master_po->sales_id }}" class="input sales_id-{{ $master_po->id }}">
             @if ($master_po->sales_id == "-")
-                -
+                    <option value="-" style="display: none">{{$master_po->sales_id}}</option>
+                @foreach ($sales as $item)
+                    <option value="{{ $item->id }}" {{ $master_po->id == $item->id ? 'selected':''}}>{{ $item->name }}</option>
+                @endforeach
             @else
-                {{ $master_po->sales->name }}
-            @endif    
-            </option>
-            @foreach ($sales as $item)
-                <option value="{{ $item->id }}" {{ old('sales_id') == $item->id ? 'selected':''}}>{{ $item->name }}</option>
-            @endforeach
+                @foreach ($sales as $item)
+                    <option value="{{ $item->id }}" {{ $master_po->id == $item->id ? 'selected':''}}>{{ $item->name }}</option>
+                @endforeach
+            @endif
         </select>
     </td>
-    <td>
+    <td class="action sticky-col first-col">
         <i class="fas fa-check add" id="edit" onclick="update({{ $master_po->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
+

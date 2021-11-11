@@ -13,10 +13,15 @@ class SummaryController extends Controller{
 
     public function index(){
 
+        $now            = Carbon::now();
+        $month          = $now->month;
+        $year           = $now->year;
         $company = Company::orderBy('company_name', 'DESC')->get();
 
         return view('customer.summary.index')->with([
             'company' => $company,
+            'month'   => $month,
+            'year'    => $year
         ]);
 
     }
@@ -78,6 +83,22 @@ class SummaryController extends Controller{
                 
             }
 
+            for ($i=0; $i < count($data) ; $i++) {
+
+                $company_id = $data[$i]->company_id;
+           
+                $data_reaktivasi = DetailCustomer::where('company_id', $company_id)->whereMonth('tgl_reaktivasi_gps', $month)->whereYear('tgl_reaktivasi_gps', $year)
+                ->select(DB::raw('count(tgl_reaktivasi_gps) as reaktivasi')
+                )->get();
+    
+                $data[$i]['reaktivasi'] = $data_reaktivasi[0]->reaktivasi;  
+               
+                $data[$i]->total_gps    = $data[$i]->total_gps  + $data[$i]->reaktivasi;
+                $data[$i]->penambahan   = $data[$i]->penambahan + $data[$i]->reaktivasi;
+                               
+            }
+    
+
             $data_finish = $data->sortByDesc('total_gps');
 
             return view('customer.summary.item_summary')->with([
@@ -134,6 +155,22 @@ class SummaryController extends Controller{
             
                 $data[$i]->total_gps = $data[$i]->total_gps - $data[$i]->terminate;   
             }
+
+            for ($i=0; $i < count($data) ; $i++) {
+
+                $company_id = $data[$i]->company_id;
+           
+                $data_reaktivasi = DetailCustomer::where('company_id', $company_id)->whereMonth('tgl_reaktivasi_gps', $month)->whereYear('tgl_reaktivasi_gps', $year)
+                ->select(DB::raw('count(tgl_reaktivasi_gps) as reaktivasi')
+                )->get();
+    
+                $data[$i]['reaktivasi'] = $data_reaktivasi[0]->reaktivasi;  
+               
+                $data[$i]->total_gps    = $data[$i]->total_gps  + $data[$i]->reaktivasi;
+                $data[$i]->penambahan   = $data[$i]->penambahan + $data[$i]->reaktivasi;
+                                    
+            }
+    
            
             $data_finish = $data->sortByDesc('total_gps');
 
@@ -214,6 +251,22 @@ class SummaryController extends Controller{
             $data[$i]['terminate'] = $data_terminate[0]->terminate;  
            
             $data[$i]->total_gps = $data[$i]->total_gps - $data[$i]->terminate;
+                
+            
+        }
+
+        for ($i=0; $i < count($data) ; $i++) {
+
+            $company_id = $data[$i]->company_id;
+       
+            $data_reaktivasi = DetailCustomer::where('company_id', $company_id)->whereMonth('tgl_reaktivasi_gps', $month)->whereYear('tgl_reaktivasi_gps', $year)
+            ->select(DB::raw('count(tgl_reaktivasi_gps) as reaktivasi')
+            )->get();
+
+            $data[$i]['reaktivasi'] = $data_reaktivasi[0]->reaktivasi;  
+           
+            $data[$i]->total_gps    = $data[$i]->total_gps  + $data[$i]->reaktivasi;
+            $data[$i]->penambahan   = $data[$i]->penambahan + $data[$i]->reaktivasi;
                 
             
         }

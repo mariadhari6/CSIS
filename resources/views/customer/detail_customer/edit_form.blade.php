@@ -75,7 +75,7 @@
 <td>
     <select class="select GSM-{{ $details->id }}" id="GSM" name="GSM">    
         @foreach ($gsm as $item)
-        <option value="{{ $item->id }}" {{ $details->gsm_number  == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
+        <option value="{{ $item->id }}" {{ $details->gsm_id  == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
         @endforeach
     </select>
 </td>

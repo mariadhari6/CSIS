@@ -33,8 +33,7 @@
                 {{ $pemasangan_mutasi_GPS->detailCustomerVehicle->vehicle->license_plate??'' }}
             </option>
             @foreach ($details as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate }}</option>
-
+                <option value="{{ $item->id }}" {{ $pemasangan_mutasi_GPS->id == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate }}</option>
             @endforeach
          </select></i>
     </td>

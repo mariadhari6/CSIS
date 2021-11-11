@@ -54,7 +54,7 @@
             <option value="Smartfren">SmartFrend</option>
     </select>
 </td>
-<td>
+<td class="sticky-col first-col">
     <i class="fas fa-check add" id="edit" onclick="update({{ $GsmMaster->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
 </td>
 

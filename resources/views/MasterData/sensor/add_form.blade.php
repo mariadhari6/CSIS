@@ -7,7 +7,6 @@
             @foreach ($sensorName as $item)
             <option value="{{ $item->sensor_name }}" {{ old('sensor_name') == $item->id ? 'selected':'' }}>{{ $item->sensor_name}}</option>
             @endforeach
-
         </select>
     </td>
     <td>

@@ -20,8 +20,8 @@ class VehicleController extends Controller
     }
     public function add_form()
     {
-        $company = Company::orderBy('company_name', 'DESC')->get();
-        $vehicleType = VehicleType::orderBy('name', 'DESC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
+        $vehicleType = VehicleType::orderBy('name', 'ASC')->get();
         return view('MasterData.vehicle.add_form')->with([
             'company' => $company,
             'vehicleType' => $vehicleType

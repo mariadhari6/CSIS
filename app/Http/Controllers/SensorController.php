@@ -22,7 +22,7 @@ class SensorController extends Controller
     public function add_form()
     {
         $sensor = Sensor::orderBy('sensor_name', 'DESC')->get();
-        $sensorName = SensorName::orderBy('id', 'DESC')->get();
+        $sensorName = SensorName::orderBy('sensor_name', 'ASC')->get();
         return view('MasterData.sensor.add_form')->with([
             'sensor' => $sensor,
             'sensorName' => $sensorName

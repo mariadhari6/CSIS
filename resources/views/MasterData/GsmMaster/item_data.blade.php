@@ -54,7 +54,7 @@
         <td id="item-provider-{{ $item->id }}">
           {{ $item->provider }}
       </td>
-        <td id="td-button-{{ $item->id }}">
+        <td id="td-button-{{ $item->id }}" class="sticky-col first-col">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
                 <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
