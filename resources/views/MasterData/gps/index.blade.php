@@ -470,7 +470,6 @@
                 status_ownership:status_ownership
                 },
                 success: function(data) {
-
                   if (data.terpasang == "terpasang") {
                     swal({
                       type: 'error',
@@ -490,15 +489,7 @@
                     }).catch(function(timeout) { });
                     read();
                   }
-                // swal({
-                //     type: 'success',
-                //     title: ' Data Updated',
-                //     showConfirmButton: false,
-                //     timer: 1500
-                // }).catch(function(timeout) { });
-                // read();
-
-              }
+                }
             });
         }
         // checkbox all
@@ -635,24 +626,55 @@
                     status_ownership:status_ownership
                     },
                     success: function(data) {
-                            swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
+                      if (data.terpasang == "terpasang") {
+                          $(".add").show("fast");
+                          $(".edit_all").show("fast");
+                          $(".delete_all").show("fast");
+                          $(".btn-round").hide("fast");
+                          $(".btn-round").hide("fast");
+                        swal({
+                          type: 'error',
+                          title: 'Sorry',
+                          text : 'GPS Installed in ' +" "+ data.company_name +" "+ 'with License Plate'  +" "+ data.nomor_license ,
+                          showCloseButton: true,
+                          showConfirmButton: false,
+                        });
+                          return false ;
+                          
 
-                                // $(".save").hide();
-                                });
-                                read();
+                      }
+                      else{
+                        swal({
+                            type: 'success',
+                            title: ' Data Updated',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).catch(function(timeout) { });
+                        read();
+                        $(".add").show("fast");
+                        $(".edit_all").show("fast");
+                        $(".delete_all").show("fast");
+                        $(".btn-round").hide("fast");
+                        $(".btn-round").hide("fast");
+                      }
+                            // swal({
+                            //         type: 'success',
+                            //         title: 'The selected data has been updated',
+                            //         showConfirmButton: false,
+                            //         timer: 1500
 
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
+                            //     // $(".save").hide();
+                            //     });
+                            //     read();
+
+                            //     $(".add").show("fast");
+                            //     $(".edit_all").show("fast");
+                            //     $(".delete_all").show("fast");
+                            //     $(".btn-round").hide("fast");
+                            //     $(".btn-round").hide("fast");
 
 
-                            }
+                          }
                          });
                     });
                 });
