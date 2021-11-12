@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-newspaper-o"></i>
+                                <i class="fas fa-rss"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
@@ -66,13 +66,14 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-3">
-            <div class="card card-stats card-primary-soft">
-                <div class="card-body ">
+            <div class="card card-stats card-info">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-check-circle"></i>
+                                <i class="fas fa-sim-card"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
@@ -85,6 +86,25 @@
                 </div>
             </div>
         </div>
+        {{-- <div class="col-md-3">
+            <div class="card card-stats card-primary-soft">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="fas fa-rss"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 d-flex align-items-center">
+                            <div class="numbers">
+                                <p class="card-category">GSM</p>
+                                <h4 class="card-title">{{ $gsm->count() }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
         {{-- <div class="col-md-6">
             <div class="card">
                 <div id="columnchart_values" style="width: 900px; height: 300px;">

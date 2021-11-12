@@ -2,7 +2,7 @@
 @section('title','Summary')
 @section('title-table', 'Summary Customer')
 @section('content')
-<?php $no=1;?>
+  <?php $no=1;?>
 
   <div class="row">
     <div class="col-sm-4">
@@ -18,12 +18,12 @@
           </select>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <div class="input-group mb-2 mr-sm-2">
         <div class="input-group-prepend">
           <div class="input-group-text">Month</div>
         </div>
-        <input type="month" class="form-control" id="bulan">
+        <input type="month" class="form-control" id="bulan" value="{{ "$year-$month" }}">
       </div>
     </div>
     <button class="btn btn-primary mb-2" onclick="filter()">Filter</button>
@@ -38,11 +38,11 @@
                       <thead class="fixedheader">
                         <tr>
                             <th width="10px">No</th>
-                            <th width="230px">Company</th>
+                            <th id="th-company">Company</th>
                             <th width="50px">Total GPS</th>
                             <th width="50px">Terminate Layanan</th>
                             <th width="50px">Penambahan Layanan</th>
-                            <th>Action</th>
+                            <th>Act</th>
                         </tr>
                       </thead>
                       <tbody id="item_summary">
@@ -54,50 +54,37 @@
       </div>
       <div class="col-sm-1">
           <div class="card" style="width:38rem;">
-              <div class="card-body" id="data-po">
-
-              </div>
+              <div class="card-body" id="data-po"></div>
           </div>
       </div>
   </div>
-
-
 
   <script>
 
     $(document).ready(function() {
       read();
-
-
-
-
-
     });
 
-    function read(){
+    function read() {
       var Company = $('#company').val();
       var data   = new Date($('#bulan').val());
       var Month  = data.getMonth() + 1 ;
       var Year   = data.getFullYear();
 
-
-
-      $.ajax({
-        url:"{{ url('/item_summary')}}",
-        data:{
-          Company : Company,
-          Month   : Month,
-          Year    : Year
-        },
-        success: function(data, status){
-          $('#table_summary').find("#item_summary").html(data);
-        }
+      $.ajax ({
+          url:"{{ url('/item_summary')}}",
+          data:{
+            Company : Company,
+            Month   : Month,
+            Year    : Year
+          },
+          success: function(data, status) {
+            $('#table_summary').find("#item_summary").html(data);
+          }
       });
-
     }
 
-
-    function filter(){
+    function filter() {
 
       var Company = $('#company').val();
       var data   = new Date($('#bulan').val());
@@ -105,8 +92,6 @@
       var Year   = data.getFullYear();
       var date   = new Date(Year, Month, 0);
       var lastDay = date.getDate();
-
-
 
       $("#item_summary").empty();
       $("#data-po").empty();
@@ -119,7 +104,6 @@
           lastDay : lastDay
         },
         success: function(data){
-
           $('#table_summary').find("#item_summary").html(data);
         }
 
@@ -135,10 +119,8 @@
       var year    = year;
 
       $("#list-" + company).addClass('highlighted').siblings().removeClass("highlighted");
-
       $("#data-po").empty();
-
-      $.ajax({
+      $.ajax ({
           url:"{{ url('/data-po')}}",
           data:{
           company : company,
@@ -147,14 +129,13 @@
           },
           success: function(html){
               $("#data-po").empty().append(html);
-
           }
       });
-      return true;
-
+        return true;
     }
+
   </script>
 
-  @endsection
+@endsection
 
 

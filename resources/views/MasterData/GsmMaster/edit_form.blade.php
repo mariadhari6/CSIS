@@ -54,3 +54,38 @@
         </button>
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
+
+
+<script>
+     // Status ready tidak bisa pilih company
+         $('select[name="status"]').on('change', function() {
+            var itemID = $(this).val();
+           if(itemID == "Ready"){
+               $('#td-company').empty();
+               $('#td-company').append(
+                 `<select class="select" id="" disable>
+                     <option value="">-</option>
+                </select>`
+               );
+               document.getElementById("terminate_date").disabled = true;
+               document.getElementById("active_date").disabled = true;
+           }else if(itemID == "Active" || "Terminate"){
+                $('#td-company').empty();
+                $('#td-company').append(
+                `<select class="select" id="company_id" disable>
+                <option value="" class="hidden">--Pilih Company--</option>
+                        @foreach ($company as $item)
+                        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+                        @endforeach
+                </select>`
+                );
+                if(itemID == "Active"){
+                    document.getElementById("terminate_date").disabled = true;
+                    document.getElementById("active_date").disabled = false;
+                }else if(itemID == "Terminate"){
+                    document.getElementById("terminate_date").disabled = false;
+                    document.getElementById("active_date").disabled = true;
+                }
+           }
+        });
+</script>

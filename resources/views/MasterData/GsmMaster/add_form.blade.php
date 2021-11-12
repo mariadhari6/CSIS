@@ -72,10 +72,10 @@
                $('#td-company').append(
                  `<select class="select" id="" disable>
                      <option value="">-</option>
-
-
                 </select>`
                );
+               document.getElementById("terminate_date").disabled = true;
+               document.getElementById("active_date").disabled = true;
            }else if(itemID == "Active" || "Terminate"){
                 $('#td-company').empty();
                 $('#td-company').append(
@@ -84,10 +84,15 @@
                         @foreach ($company as $item)
                         <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
                         @endforeach
-
-
                 </select>`
                 );
+                if(itemID == "Active"){
+                    document.getElementById("terminate_date").disabled = true;
+                    document.getElementById("active_date").disabled = false;
+                }else if(itemID == "Terminate"){
+                    document.getElementById("terminate_date").disabled = false;
+                    document.getElementById("active_date").disabled = true;
+                }
            }
         });
 </script>

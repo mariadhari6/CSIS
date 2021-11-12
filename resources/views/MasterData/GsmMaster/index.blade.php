@@ -1,5 +1,7 @@
 @extends('layouts.v_main')
-@section('title','CSIS | Gsm Pre Active')
+@section('title','CSIS | Master GSM')
+@section('title-table',' Master GSM')
+
 
 @section('content')
 <form onsubmit="return false">

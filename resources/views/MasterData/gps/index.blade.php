@@ -465,6 +465,7 @@
         });
     }
     // ------ Proses Update Data ------
+      // ------ Proses Update Data ------
         function update(id) {
             var merk = $("#merk").val();
             var type = $("#type").val();
@@ -487,18 +488,30 @@
                 po_date: po_date,
                 status:status,
                 status_ownership:status_ownership,
-                company_id:company_id,
+                company_id:company_id
+
 
                 },
                 success: function(data) {
-                swal({
-                    type: 'success',
-                    title: ' Data Updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).catch(function(timeout) { });
-                read();
-
+                  if (data.terpasang == "terpasang") {
+                    swal({
+                      type: 'error',
+                      title: 'Sorry',
+                      text : 'GPS Installed in ' +" "+ data.company_name +" "+ 'with License Plate'  +" "+ data.nomor_license ,
+                      showCloseButton: true,
+                      showConfirmButton: false,
+                    });
+                      return false ;
+                  }
+                  else{
+                    swal({
+                        type: 'success',
+                        title: ' Data Updated',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).catch(function(timeout) { });
+                    read();
+                  }
                 }
             });
         }

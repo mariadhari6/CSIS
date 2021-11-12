@@ -44,7 +44,7 @@
     <td>
         <select class="select type_gps_id-{{$maintenanceGps->id}}" id="type_gps_id" name="type_gps_id" required>
             <option selected class="hidden" value="{{$maintenanceGps->type_gps_id}}">
-                {{ $maintenanceGps->detailCustomerGps->type??'' }}
+                {{ $maintenanceGps->gpsMaintenance->type??''}}
             </option>
 
             @foreach ($details as $item)

@@ -344,6 +344,32 @@
         );
     }
 
+            $('select[name="status_layanan"]').on('change', function(){
+                var Id = $(this).val();
+                alert(Id);
+                if(Id == 1) {
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
+                    );
+                }
+                else{
+                    $('#tanggal_aktif').empty();
+                    $('#tanggal_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalAktif" disabled></div>`
+                    );
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
+                    );
+                    $('#tanggal_reaktivasi').empty();
+                    $('#tanggal_reaktivasi').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
+                    );
+                }
+            });
+        });
+
 </script>
 
 
