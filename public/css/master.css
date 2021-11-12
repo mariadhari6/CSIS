@@ -110,8 +110,8 @@
 }
 .list {
     position: relative;
-    min-width: 140px;
-    font-size: 15px;
+    min-width: 170px;
+    font-size: 12px;
     text-align: center;
 }
 
@@ -130,7 +130,7 @@
 .list-company {
     position: relative;
     min-width: 270px;
-    font-size: 13px;
+    font-size: 12px;
     text-align: center;
 }
 
@@ -147,17 +147,17 @@
     text-align: center;
 }
 .list-agreement {
-    min-width: 180px;
+    min-width: 200px;
     font-size: 15px;
     text-align: center;
 }
 .list-seller {
-    min-width: 180px;
+    min-width: 190px;
     font-size: 15px;
     text-align: center;
 }
 .list-sellerName {
-    min-width: 270px;
+    min-width: 400px;
     font-size: 15px;
     text-align: center;
 }
@@ -168,7 +168,7 @@
 }
 .dataTables_filter {
     position: relative;
-    right: 150px;
+    right: 180px;
     bottom: 35px;
 }
 
@@ -318,6 +318,12 @@ font-family:verdana, Helvetica;
 }
 
 
+.hidden{
+    display: none;
+
+}
+
+
 .fa-eye .popover{
     width:400px;
     height:100px;
@@ -327,10 +333,72 @@ font-family:verdana, Helvetica;
     background-color: deepskyblue;
 }
 
-.hidden{
-    display: none;
+.highlighted{
+    background: #b3ccff;
+}
+
+#key{
+    text-align: left;
+
 
 }
+
+#table_summary{
+    table-layout: auto;
+    width: 580px;
+}
+
+.table-scroll {
+    position: relative;
+    width:100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    height: 589px;
+  }
+
+.table-wrap {
+    position: relative;
+  }
+
+.table-scroll th,
+.table-scroll td {
+  padding: 5px 10px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.table-scroll thead th {
+    background-color: #f2f2f2;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#data-po table thead th,
+#data-po table tbody td
+{
+    text-align: center;
+}
+
+#data-po table thead th
+{
+    background-color: #f2f2f2;
+}
+
+
+#data-po table tbody td#key
+{
+    text-align: left;
+}
+
+#data_detail{
+    table-layout: auto;
+    width: 1000px;
+}
+
+
+
 
 
 

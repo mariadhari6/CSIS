@@ -149,8 +149,11 @@ class PemasanganMutasiGpsController extends Controller
                 Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
             }
             $data->save();
+
             // Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active'));
             // Gps::where('id', $gps_terpakai)->update(array('status' => 'Used'));
+        } else {
+            $data->save();
         }
     }
 

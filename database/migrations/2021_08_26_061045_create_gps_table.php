@@ -22,6 +22,7 @@ class CreateGpsTable extends Migration
             $table->date('po_date');
             $table->string('status');
             $table->string('status_ownership');
+            $table->foreignId('company_id')->nullable();
             $table->timestamps();
         });
     }

@@ -14,6 +14,6 @@ class Sales extends Model
 
     public function Po()
     {
-        return $this->hasMany(MasterPo::class, 'sales_id', 'id');
+        return $this->hasMany(MasterPo::class);
     }
 }

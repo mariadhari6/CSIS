@@ -5,13 +5,13 @@
 <?php $no=1;?>
 
   <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-4">
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">Company</div>
           </div>
           <select class="form-control" id="company">
-              <option value=""></option>
+              <option style="display: none"></option>
             @foreach ($company as $item)
               <option value="{{ $item->id }}"> {{ $item->company_name}}</option>
             @endforeach
@@ -30,29 +30,30 @@
   </div>
 
   <div class="row">
-      <div class="col-sm-4">
-        <div class="card" id="card-table">
+      <div>
+        <div class="card" style="width:30rem;">
           <div class="card-body">
-            <table class="table" id="table_id">
-                <thead>
-                  <tr>
-                      <th>No</th>
-                      <th>Company</th>
-                      <th>Total GPS</th>
-                      <th>Terminate Layanan</th>
-                      <th>Penambahan Layanan</th>
-                      <th>Act</th>
-                  </tr>
-                </thead>
-                <tbody id="item_data">
-                </tbody>
-
-            </table>
+              <div id="table-scroll" class="table-scroll">
+                  <table class="table table-sm" id="table_summary">
+                      <thead class="fixedheader">
+                        <tr>
+                            <th width="10px">No</th>
+                            <th width="230px">Company</th>
+                            <th width="50px">Total GPS</th>
+                            <th width="50px">Terminate Layanan</th>
+                            <th width="50px">Penambahan Layanan</th>
+                            <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="item_summary">
+                      </tbody>
+                  </table>
+              </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-8">
-          <div class="card">
+      <div class="col-sm-1">
+          <div class="card" style="width:38rem;">
               <div class="card-body" id="data-po">
 
               </div>
@@ -67,6 +68,10 @@
     $(document).ready(function() {
       read();
 
+
+
+
+
     });
 
     function read(){
@@ -74,6 +79,8 @@
       var data   = new Date($('#bulan').val());
       var Month  = data.getMonth() + 1 ;
       var Year   = data.getFullYear();
+
+
 
       $.ajax({
         url:"{{ url('/item_summary')}}",
@@ -83,7 +90,7 @@
           Year    : Year
         },
         success: function(data, status){
-          $('#table_id').find("#item_data").html(data);
+          $('#table_summary').find("#item_summary").html(data);
         }
       });
 
@@ -96,19 +103,24 @@
       var data   = new Date($('#bulan').val());
       var Month  = data.getMonth() + 1 ;
       var Year   = data.getFullYear();
+      var date   = new Date(Year, Month, 0);
+      var lastDay = date.getDate();
 
-      $("#item_data").empty();
+
+
+      $("#item_summary").empty();
       $("#data-po").empty();
       $.ajax({
         url:"{{ url('/filter')}}",
         data:{
           Company : Company,
           Month   : Month,
-          Year    : Year
+          Year    : Year,
+          lastDay : lastDay
         },
         success: function(data){
 
-          $('#table_id').find("#item_data").html(data);
+          $('#table_summary').find("#item_summary").html(data);
         }
 
       });
@@ -116,10 +128,14 @@
     }
 
 
-    function detail(company,month,year){
+    function detail(company,month,year) {
+
       var company = company;
       var month   = month;
       var year    = year;
+
+      $("#list-" + company).addClass('highlighted').siblings().removeClass("highlighted");
+
       $("#data-po").empty();
 
       $.ajax({
@@ -135,23 +151,8 @@
           }
       });
       return true;
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </script>
 
   @endsection

@@ -45,7 +45,7 @@
 
         @if ($item->imei != null)
         <td id="item-imei-{{ $item->id }}">
-            {{ $item->detailCustomerImei->gps->imei?? ''}}
+            {{ $item->detailCustomerImei->imei?? ''}}
         </td>
         @elseif ($item->imei == null)
           <td id="item-imei-{{ $item->id }}">
@@ -55,7 +55,7 @@
 
         @if ($item->gsm_pemasangan != null)
           <td id="item-gsm_pemasangan-{{ $item->id }}">
-            {{ $item->detailCustomerGsm->gsm->gsm_number?? ''}}
+            {{ $item->detailCustomerGsm->gsm_number?? ''}}
           </td>
         @elseif ($item->gsm_pemasangan == null)
            <td id="item-gsm_pemasangan-{{ $item->id }}">
@@ -64,7 +64,7 @@
         @endif
           @if ($item->equipment_terpakai_gps != null)
         <td id="item-equipment_terpakai_gps-{{ $item->id }}">
-            {{$item->detailCustomerGps->gps->type?? ''}}
+            {{$item->detailCustomerGps->type?? ''}}
         </td>
         @elseif ($item->equipment_terpakai_gps == null)
         <td id="item-equipment_terpakai_gps-{{ $item->id }}">

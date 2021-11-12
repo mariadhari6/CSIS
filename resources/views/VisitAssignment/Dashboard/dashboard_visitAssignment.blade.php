@@ -1,11 +1,21 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Dashboard Visit Assignment')
+@section('title-table','Dashboard Visit Assignment')
+
 
 @section('content')
 
 <div class="container-fluid">
-    <h4 class="page-title">Dashboard Visit Assignment</h4>
-    <div class="row">
+    Bulan :
+    <select class="ml-2">
+        <option>Pilih</option>
+    </select>
+    Tahun :
+    <select class="ml-2">
+        <option>Pilih</option>
+    </select>
+    <button class="ml-2 btn btn-success btn-xs">Search</button>
+    <div class="mt-3 row">
         <div class="col-md-3 ">
             <div class="card card-stats card-grey cost">
                 <div class="card-body ">
@@ -38,7 +48,6 @@
             <div class="card card-stats card-primary-tua typeGps">
                 <div class="card-body">
                     <div class="row">
-
                         <div class="col-12 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Perbaikan Pertipe GPS</p>
@@ -110,97 +119,97 @@
             </div>
         </div>
 
-         <div class="col-md-6">
+        <div class="col-md-6">
             <div class="card">
-                {{-- <div id="columnchart_values" style="width: 900px; height: 300px;">
-                </div> --}}
                 <div>
-                    <canvas id="myChart"></canvas>
+                    <canvas id="costPercompany"></canvas>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <br>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div>
+                    <canvas id="detailCostPercompany"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div>
+                    <canvas id="perbaikanTipeGps"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div>
+                    <canvas id="tugasPerTeknisi"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div>
+                    <canvas id="equipmentTerpakai"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div>
+                    <canvas id="visitBerbayar"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+            <div class="card-header">
+                <b><p style="text-align: center">Visit SLA</p></b>
+            </div>
+                <div>
+                    <canvas id="visitSla"></canvas>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
-
+<br>
 <div class="table_id">
 
 </div>
-{{-- <div class="table_idMaintenance">
-
-</div> --}}
-
 
 <script>
-    $('.cost').click(function() {
-        $.get("{{ url('item_data_DashboardVisitAssignment') }}", {}, function(data, status) {
-            $('.table_id').html(data)
-            // $('.table_idMaintenance').html(data)
-
-
-        });
-    });
-
-    $('.detail').click(function() {
-        $("#table-cost").slideUp("fast");
-        $.get("{{ url('/item_data_DetailCostPercompany') }}", {}, function(data, status) {
-            $('.table_id').html(data)
-
-        });
-    });
-    $('.typeGps').click(function() {
-        $("#table-cost").slideUp("fast");
-        $("#table-detail").slideUp("fast");
-        $.get("{{ url('/item_data_TypeGps') }}", {}, function(data, status) {
-            $('.table_id').html(data)
-
-        });
-    });
-
-     $('.teknisi').click(function() {
-        $("#table-cost").slideUp("fast");
-        $("#table-detail").slideUp("fast");
-        $("#table-typeGps").slideUp("fast");
-        $.get("{{ url('/item_data_teknisi') }}", {}, function(data, status) {
-            $('.table_id').html(data)
-
-        });
-    });
-</script>
-
-
-@endsection
-
-</div>
-
-<script>
-    // const DATA_COUNT = 7;
-    // const NUMBER_CFG =  {count: DATA_COUNT, min: -100, max: 100};
-
-    var cData = JSON.parse(`<?php echo $chart_company; ?>`);
-    const labels = [...new Set(cData.company)];
-
-    const data = {
-    labels: labels,
+    // Cost Percompany
+    const companyCostPercompany = [ 'Linc', 'Dipta', 'Primajaya Logistic', 'Adib', 'Wira' ];
+    const dataCostPercompany = {
+    labels: companyCostPercompany,
     datasets: [
         {
         label: 'Vehicle',
-        data: [1,2],
+        data: [10,2,3,4,2],
         borderColor: '#3366cc',
         backgroundColor: '#3366cc',
         },
 
         {
         label: 'Times',
-        data: [1,2],
+        data: [3,6,7,8,3],
         borderColor: '#b35900',
         backgroundColor: '#b35900',
         },
 
         {
         label: 'Cost',
-        data: [1,2],
+        data: [2,10,12,11,12],
         borderColor: '#737373',
         backgroundColor: '#737373',
         }
@@ -208,9 +217,9 @@
 
     };
 
-    const config = {
+    const configCostPercompany = {
     type: 'bar',
-    data: data,
+    data: dataCostPercompany,
     options: {
         responsive: true,
         plugins: {
@@ -219,16 +228,289 @@
         },
         title: {
             display: true,
-            text: 'Chart.js Bar Chart'
+            text: 'Cost Per-Company'
         }
         }
     },
     };
 
-    var myChart = new Chart(
-        document.getElementById('myChart'),
-        config
+    var costPercompany = new Chart(
+        document.getElementById('costPercompany'),
+        configCostPercompany
     );
+
+    // Detail Cost Percompany
+    const companyDetailCostPercompany = [ 'Linc', 'Dipta', 'Primajaya Logistic', 'Adib', 'Wira' ];
+    const dataDetailCostPercompany = {
+    labels: companyDetailCostPercompany,
+    datasets: [
+        {
+        label: 'Pemasangan GPS',
+        data: [10,2,3,4,2],
+        borderColor: '#3456ed',
+        backgroundColor: '#3456ed',
+        },
+
+        {
+        label: 'Maintenance GPS',
+        data: [3,6,7,8,3],
+        borderColor: '#ff5500',
+        backgroundColor: '#ff5500',
+        },
+
+        {
+        label: 'Maintenance Sensor dan Suhu',
+        data: [2,10,12,11,12],
+        borderColor: '#737373',
+        backgroundColor: '#737373',
+        },
+
+        {
+        label: 'Mutasi Pemasangan GPS',
+        data: [2,10,12,11,12],
+        borderColor: '#f6ff00',
+        backgroundColor: '#f6ff00',
+        },
+
+        {
+        label: 'Pelepasan GPS',
+        data: [2,10,12,11,12],
+        borderColor: '#3456ed',
+        backgroundColor: '#3456ed',
+        }
+    ]
+
+    };
+
+    const configDetailCostPercompany = {
+    type: 'bar',
+    data: dataDetailCostPercompany,
+    options: {
+        responsive: true,
+        plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Detail Cost Per-Company'
+        }
+        }
+    },
+    };
+
+    var detailCostPercompany = new Chart(
+        document.getElementById('detailCostPercompany'),
+        configDetailCostPercompany
+    );
+
+    // Perbaikan Tipe GPS
+    const typeGps = [ 'Ruptela Pro 3', 'Ruptela Pro 3', 'Ruptela Eco 4+' ];
+    const dataPerbaikanTypeGps = {
+    labels: typeGps,
+    datasets: [
+        {
+        label: ' ',
+        data: [10,2,3,4,2],
+        borderColor: '#3456ed',
+        backgroundColor: '#3456ed',
+        }
+    ]
+
+    };
+
+    const configPerbaikanTypeGps = {
+    type: 'bar',
+    data: dataPerbaikanTypeGps,
+    options: {
+        responsive: true,
+        plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Perbaikan Per Tipe GPS'
+        }
+        }
+    },
+    };
+
+    var PerbaikanTypeGps = new Chart(
+        document.getElementById('perbaikanTipeGps'),
+        configPerbaikanTypeGps
+    );
+
+    // Tugas Perteknisi
+    const teknisi = [ 'Rifai', 'Syarif', 'Edi', 'Katamsi', 'Mukti', 'Gede Cakra' ];
+    const dataTugasPerTeknisi = {
+    labels: teknisi,
+    datasets: [
+        {
+        label: ' ',
+        data: [6,2,3,4,2,0],
+        borderColor: '#2bff00',
+        backgroundColor: '#2bff00',
+        }
+    ]
+
+    };
+
+    const configTugasPerTeknisi = {
+    type: 'bar',
+    data: dataTugasPerTeknisi,
+    options: {
+        responsive: true,
+        plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Tugas Per-Teknisi'
+        }
+        }
+    },
+    };
+
+    var TugasPerTeknisi = new Chart(
+        document.getElementById('tugasPerTeknisi'),
+        configTugasPerTeknisi
+    );
+
+    // Equipment Terpakai
+    const equipment = [ 'GPS', 'GSM', 'Immobilizer' ];
+    const dataEquipmentTerpakai = {
+    labels: equipment,
+    datasets: [
+        {
+        label: ' ',
+        data: [5,6,3],
+        borderColor: '#2b00ff',
+        backgroundColor: '#2b00ff',
+        }
+    ]
+
+    };
+
+    const configEquipmentTerpakai = {
+    type: 'bar',
+    data: dataEquipmentTerpakai,
+    options: {
+        responsive: true,
+        plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Equipment Terpakai'
+        }
+        }
+    },
+    };
+
+    var equipmentTerpakai = new Chart(
+        document.getElementById('equipmentTerpakai'),
+        configEquipmentTerpakai
+    );
+
+    // Visit Berbayar
+    const visit = [ 'Pemasangan Gps', 'Mutasi Pemasangan Gps' ];
+    const dataVisitBerbayar = {
+    labels: visit,
+    datasets: [
+        {
+        label: ' ',
+        data: [5,6,3],
+        borderColor: '#ff0011',
+        backgroundColor: '#ff0011',
+        }
+    ]
+    };
+
+    const configVisitBerbayar = {
+    type: 'bar',
+    data: dataVisitBerbayar,
+    options: {
+        responsive: true,
+        plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Visit (Berbayar)'
+        }
+        }
+    },
+    };
+
+    var VisitBerbayar = new Chart(
+        document.getElementById('visitBerbayar'),
+        configVisitBerbayar
+    );
+
+    // Visit SLA
+    const dataVisitSla = {
+    labels: [
+        'Maintenancae GPS',
+        'Maintenance Sensor Suhu',
+        'Pelepasan GPS'
+    ],
+
+    datasets: [{
+    label: 'My First Dataset',
+    data: [300, 80, 20],
+    backgroundColor: [
+        '#004cff',
+        '#ff8000',
+        '#7a7168'
+    ],
+        hoverOffset: 2
+    }],
+
+
+
+    };
+
+    const configVisitSla = {
+        type: 'pie',
+        data: dataVisitSla,
+        options: {
+                    maintainAspectRatio: false,
+                }
+    };
+
+    var VisitSla = new Chart(
+        document.getElementById('visitSla'),
+        configVisitSla
+    );
+
+      // Table Click
+      $('.cost').click(function() {
+        $('.table_id').html(`
+            <div class="col-md-6">
+                <table class="table table-responsive" style="background-color:white;">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="list-company">Per-Company</th>
+                        <th scope="col" class="list">Vehicle</th>
+                        <th scope="col" class="list">Times</th>
+                        <th scope="col" class="list">Cost</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>12</td>
+                            <td>12</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `)
+    });
 
 </script>
 

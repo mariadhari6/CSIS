@@ -15,7 +15,7 @@
 
           <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
@@ -44,6 +44,7 @@
                 <th scope="col" class="list" >Po Date*</th>
                 <th scope="col" class="list" >Status*</th>
                 <th scope="col" class="list" >Status Ownership*</th>
+                <th scope="col" class="list-company" >Company*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
               </tr>
@@ -172,6 +173,8 @@
 
 
 
+
+
          // change Waranty format
         warantyDate = document.querySelectorAll("#table-data-3");
         for (i = 0; i < warantyDate.length; i++) {
@@ -280,6 +283,7 @@
     $('#close-modal').click(function() {
         // deleteTemporary();
         // read_temporary()
+        read();
         $('#importData').modal('hide');
     });
 
@@ -319,6 +323,8 @@
         var po_date = $("#po_date").val();
         var status = $("#status").val();
         var status_ownership = $("#status_ownership").val();
+        var company_id = $("#company_id").val();
+
         // alert(merk);
         //
             // break;
@@ -379,7 +385,9 @@
               waranty: waranty,
               po_date: po_date,
               status: status,
-              status_ownership: status_ownership
+              status_ownership: status_ownership,
+              company_id: company_id,
+
             },
             success: function(data) {
               swal({
@@ -450,6 +458,8 @@
         $("#item-po_date-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
         $("#item-status_ownership-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
+
         $.get("{{ url('show_gps') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -463,6 +473,8 @@
             var po_date = $("#po_date").val();
             var status = $("#status").val();
             var status_ownership = $("#status_ownership").val();
+            var company_id = $("#company_id").val();
+
             var id = id;
             $.ajax({
                 type: "get",
@@ -474,7 +486,9 @@
                 waranty: waranty,
                 po_date: po_date,
                 status:status,
-                status_ownership:status_ownership
+                status_ownership:status_ownership,
+                company_id:company_id,
+
                 },
                 success: function(data) {
                 swal({
@@ -572,6 +586,8 @@
                     $("#item-po_date-"+value).hide("fast");
                     $("#item-status-"+value).hide("fast");
                     $("#item-status_ownership-"+value).hide("fast");
+                    $("#item-company_id-"+value).hide("fast");
+
                     $(".add").hide("fast");
                     $.get("{{ url('show_gps') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
@@ -609,6 +625,8 @@
                     var po_date = $(".po_date-"+value).val();
                     var status = $(".status-"+value).val();
                     var status_ownership = $(".status_ownership-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
+
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_gps') }}/"+value,
@@ -619,7 +637,9 @@
                     waranty: waranty,
                     po_date: po_date,
                     status:status,
-                    status_ownership:status_ownership
+                    status_ownership:status_ownership,
+                    company_id:company_id,
+
                     },
                     success: function(data) {
                             swal({
@@ -653,6 +673,11 @@
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
+        }
+
+         // destro datatable
+        function dataLengthAll() {
+          $('#table_id').DataTable().destroy();
         }
 
 

@@ -140,6 +140,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // GSM Aktiv
     Route::get('/GsmActive', [GsmActiveController::class, 'index'])->name('GsmActive');
     Route::get('/item_data_GsmActive', [GsmActiveController::class, 'item_data']);
+    Route::get('/item_data_MY_GsmActive', [GsmActiveController::class, 'item_data_MY']);
     Route::get('/add_form_GsmActive', [GsmActiveController::class, 'add_form']);
     Route::get('/store_GsmActive', [GsmActiveController::class, 'store']);
     Route::get('/destroy_GsmActive/{id}', [GsmActiveController::class, 'destroy']);
@@ -152,6 +153,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     //Gsm Terminate
     Route::get('/GsmTerminate', [GsmTerminateController::class, 'index'])->name('GsmTerminate');
     Route::get('/item_data_GsmTerminate', [GsmTerminateController::class, 'item_data']);
+    Route::get('/item_data_MY_GsmTerminate', [GsmTerminateController::class, 'item_data_MY']);
     Route::get('/add_form_GsmTerminate', [GsmTerminateController::class, 'add_form']);
     Route::get('/store_GsmTerminate', [GsmTerminateController::class, 'store']);
     Route::get('/destroy_GsmTerminate/{id}', [GsmTerminateController::class, 'destroy']);
@@ -177,6 +179,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/save_import_sensor', [SensorController::class, 'save_import']);
     Route::post('/importExcel_sensor', [SensorController::class, 'importExcel'])->name('importExcel_sensor');
     Route::get('/download_template_sensor', [SensorController::class, 'export']);
+    Route::get('/export_sensor', [SensorController::class, 'export_sensor']);
+
 
     //Gps
     Route::get('/gps', [GpsController::class, 'index'])->name('gps');
@@ -303,14 +307,17 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_pic/{id}', [RequestComplaintController::class, 'basedPic']);
     Route::get('/based_vehicleRequest/{id}', [RequestComplaintController::class, 'basedVehicle']);
     Route::get('/based_internal_eksternal', [RequestComplaintController::class, 'basedInternalEksternal']);
+    Route::get('/based_pemasangan/{id}', [RequestComplaintController::class, 'basedPemasangan']);
+    Route::get('/Dashboard_RequestComplain', [RequestComplaintController::class, 'dashboard']);
+
 
 
     //Dashboar Visit Assignment
     Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
-    Route::get('/item_data_DashboardVisitAssignment', [DashboardVisitAssignmentController::class, 'item_data']);
-    Route::get('/item_data_DetailCostPercompany', [DashboardVisitAssignmentController::class, 'detailPercompany']);
-    Route::get('/item_data_TypeGps', [DashboardVisitAssignmentController::class, 'perTypeGps']);
-    Route::get('/item_data_teknisi', [DashboardVisitAssignmentController::class, 'tugasPerTeknisi']);
+    // Route::get('/item_data_DashboardVisitAssignment', [DashboardVisitAssignmentController::class, 'item_data']);
+    // Route::get('/item_data_DetailCostPercompany', [DashboardVisitAssignmentController::class, 'detailPercompany']);
+    // Route::get('/item_data_TypeGps', [DashboardVisitAssignmentController::class, 'perTypeGps']);
+    // Route::get('/item_data_teknisi', [DashboardVisitAssignmentController::class, 'tugasPerTeknisi']);
 
 
     // Maintenance GPS
@@ -359,6 +366,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/save_import_masterPo', [MasterPoController::class, 'save_import']);
     Route::post('/importExcel_masterPo', [MasterPoController::class, 'importExcel'])->name('importExcel_masterPo');
     Route::get('/download_template_masterPo', [MasterPoController::class, 'export']);
+    Route::get('/export_MasterPO', [MasterPoController::class, 'export_masterPO']);
+
 
 
 

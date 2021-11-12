@@ -90,7 +90,7 @@
 
                                     <li class="nav-item {{ request()->is('GsmMaster') ? ' active' : ''}}">
                                         <a class="collapse-item @yield('GsmMaster')" href="{{url('/GsmMaster')}}">
-                                            <span class="link-collapse">Master Gsm</span>
+                                            <span class="link-collapse">Master GSM</span>
                                         </a>
                                     </li>
                                     <li class="nav-item {{ request()->is('Active') ? ' active' : ''}}">
@@ -156,8 +156,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#edit">
-                                <span class="link-collapse">Summary </span>
+                            <a class="collapse-item @yield('RequestComplainDashboard')" href="{{url('/Dashboard_RequestComplain')}}">
+                                <span class="link-collapse">Dashboard </span>
                             </a>
                         </li>
                     </ul>

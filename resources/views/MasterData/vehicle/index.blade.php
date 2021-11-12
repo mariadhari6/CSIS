@@ -19,7 +19,7 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-edit"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-
+        <form onsubmit="return false">
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -45,7 +45,7 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-
+          </form>
         </div>
       </div>
     </div>
@@ -264,12 +264,54 @@
         });
     });
     function store() {
-
+        $success = false;
         var company_id      = $("#company_id").val();
         var license_plate   = $("#license_plate").val();
         var vehicle_id      = $("#vehicle_id").val();
         var pool_name       = $("#pool_name").val();
         var pool_location   = $("#pool_location").val();
+        // var license_plateNum = $("#table_id").find("tbody>tr:eq(1)>td:eq(3)").attr("name");
+        //  alert(license_plateNum);
+
+
+    $rowCount = $("#table_id tr").length;
+      if ($rowCount == 2) {
+        // alert('table empty')
+      } else {
+        $rowResult = $rowCount - 2;
+        var alllicense_plateNum = [];
+        // var allSerNum = [];
+        for($i = 1; $i <= $rowResult; $i++)
+            {
+              $numArr = $i-1;
+                $license_plateNum = $("#table_id").find("tbody>tr:eq(1)>td:eq(3)").attr("name");
+
+            //   $serNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(5)").attr("name");
+              alllicense_plateNum[$numArr] = $license_plateNum;
+            //   allSerNum[$numArr] = $serNum;
+            }
+            // alert(alllicense_plateNum[0]);
+        for (let index = 0; index < alllicense_plateNum.length; index++) {
+          if( license_plate == alllicense_plateNum[index] ){
+            // alert('already exists');
+              swal({
+                type: 'warning',
+                text: 'license_plate Number already exists',
+                showConfirmButton: false,
+                timer: 1500
+              }).catch(function(timeout) { });
+              // alert('GSM Number already exists');
+              break;
+
+        // }else if(index == alllicense_plateNum.length ) {
+         }else {
+              $success = true;
+        break;
+        }
+        }
+      }
+
+      if($success === true) {
         $.ajax({
             type: "get",
             url: "{{ url('store_vehicle') }}",
@@ -289,7 +331,8 @@
                 }).catch(function(timeout) { });
                 read();
             }
-        })
+        });
+      }
     }
     function destroy(id) {
         var id = id;
@@ -328,6 +371,7 @@
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).slideUp("fast");
+        $("#td-no-"+id).slideUp("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-license_plate-"+id).slideUp("fast");
         $("#item-vehicle_id-"+id).slideUp("fast");
@@ -435,6 +479,7 @@
             $.each(allVals, function(index, value){
                 $("#td-checkbox-"+value).hide("fast");
                 $("#td-button-"+value).hide("fast");
+                $("#td-no-"+value).hide("fast");
                 $("#item-company_id-"+value).slideUp("fast");
                 $("#item-license_plate-"+value).slideUp("fast");
                 $("#item-vehicle_id-"+value).slideUp("fast");

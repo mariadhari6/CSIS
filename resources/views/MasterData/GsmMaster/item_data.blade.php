@@ -19,7 +19,7 @@
             {{ $item->gsm_number }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company->company_name??'' }}
+            {{ $item->company->company_name??''}}
         </td>
         <td id="item-serial_number-{{ $item->id }}" class="item-serial_number-{{ $item->id }}" name="{{ $item->serial_number }}">
             {{ $item->serial_number }}

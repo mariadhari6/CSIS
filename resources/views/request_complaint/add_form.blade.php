@@ -112,6 +112,13 @@
         </button>
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     <td>
+        {{-- input untuk pemasangan dan maintenance --}}
+        <input type="hidden" id="imei">
+        <input type="hidden" id="gsm_pemasangan">
+        <input type="hidden" id="equipment_terpakai_gps">
+        <input type="hidden" id="type_gps_id">
+
+
 
     <script>
     $('select[name="company_id"]').on('change', function() {
@@ -195,6 +202,32 @@
 
                 }
             });
+
+            //  $('select[name="task"]').on('change', function(){
+            //     var Id = $('#vehicle').val();
+            //     var task = $('#task option:selected').text();
+            //     // alert(task);
+            //     // if(Id){
+            //     if(task == "Pemasangan GPS" || task == "Pelepasan GPS" || task == "Mutasi") {
+            //         alert(task);
+            //         // $.ajax({
+            //         //     url: '/based_pemasangan/'+ Id,
+            //         //     method: "GET",
+            //         //     success:function(data) {
+
+            //         //         $.each(data, function(key, value) {
+            //         //             alert(key);
+            //         //             // $('#imei').val(key);
+            //         //             // $('#gsm_pemasangan').val(key);
+            //         //             // $('#equipment_terpakai_gps').val(key);
+            //         //         });
+            //         //     }
+            //         // });
+            //     }
+
+
+
+            //  });
 </script>
 
 </tr>

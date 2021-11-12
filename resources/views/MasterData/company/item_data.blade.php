@@ -24,7 +24,8 @@
         </td>
 
         <td id="item-no_agreement_letter_id-{{ $item->id}}">
-                {{ $item->seller->no_agreement_letter?? ''}}
+
+                {{ $item->seller->no_agreement_letter??''}}
         </td>
         <td id="item-status-{{ $item->id }}">
                 {{-- {{ $item->status}} --}}

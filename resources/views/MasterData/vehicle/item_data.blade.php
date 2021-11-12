@@ -16,11 +16,11 @@
         <td id="item-company_id-{{ $item->id}}">
             {{ $item->company->company_name?? '' }}
         </td>
-        <td id="item-license_plate-{{ $item->id}}">
+        <td id="item-license_plate-{{ $item->id }}" name="{{$item->license_plate}}" class="item-license_plate-{{$item->id}}">
                 {{ $item->license_plate }}
         </td>
         <td id="item-vehicle_id-{{ $item->id }}">
-            {{ $item->vehicleType->name??'' }}
+            {{ $item->vehicle->name??'' }}
         </td>
         <td id="item-pool_name-{{ $item->id}}">
                 {{ $item->pool_name }}

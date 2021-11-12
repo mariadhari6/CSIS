@@ -8,8 +8,10 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-
+                <button type="button" class="btn btn-primary btn-sm float-left mr-2 add add-button">
+                  <b>Add</b>
+                  <i class="fas fa-plus ml-2" id="add"></i>
+                </button>
                 <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
                     <option value="{{ url('item_data_all_GsmMaster') }}">All</option>
@@ -18,7 +20,7 @@
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
                   </select>
                 </div>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>

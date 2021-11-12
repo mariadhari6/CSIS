@@ -146,12 +146,12 @@ class DetailCustomerController extends Controller
         $data = $request->company;
         $details        = DetailCustomer::findOrfail($id);
         $company        = Company::where('id', $data)->get();
-        $imei           = Gps::orderBy('imei', 'DESC')->where('status', 'Ready')->get();
+        $imei           = Gps::orderBy('imei', 'DESC')->get();
 
-        $gsm            = Gsm::orderBy('gsm_number', 'DESC')->where('status_gsm', 'Ready')->get();
-        $sensor         = Sensor::orderBy('serial_number', 'DESC')->where('status', 'Ready')->get();
-        $vehicle        = Vehicle::orderBy('license_plate', 'DESC')->where('company_id', $data)->where('status', 'Ready')->get();
-        $po             = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $data)->where('count', '!=', 0)->get();
+        $gsm            = Gsm::orderBy('gsm_number', 'DESC')->get();
+        $sensor         = Sensor::orderBy('serial_number', 'DESC')->get();
+        $vehicle        = Vehicle::orderBy('license_plate', 'DESC')->get();
+        $po             = MasterPo::orderBy('po_number', 'DESC')->get();
         $status_layanan = ServiceStatus::orderBy('service_status_name', 'ASC')->get();
 
 

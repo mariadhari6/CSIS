@@ -22,7 +22,7 @@
         <div class="input-div">
             <input type="text" class="input" id="no_agreement_letter" placeholder="No. Agreement Letter" required>
         </div>
-        <code id="required-no_agreement_letter" style="color: red"></code>
+        {{-- <code id="required-no_agreement_letter" style="color: red"></code> --}}
     </td>
     <td>
         <select class="select" id="status" aria-label=".form-select-lg example" required>
@@ -39,5 +39,9 @@
     </td>
 
 </tr>
+<script>
 
+
+
+</script>
 

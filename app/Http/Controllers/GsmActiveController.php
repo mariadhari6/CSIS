@@ -25,9 +25,19 @@ class GsmActiveController extends Controller
         ]);
     }
 
+    public function item_data_MY(Request $request)
+    {
+        $year = $request->year;
+        $month = $request->month;
+        $GsmActive = Gsm::where('status_gsm', 'Active')->whereMonth('active_date',  $month)->whereYear('active_date', $year)->get();
+        return view('MasterData.GsmActive.item_data')->with([
+            'GsmActive' => $GsmActive
+        ]);
+    }
+
     public function edit_form($id)
     {
-        $company = Company::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
         $GsmActive     = Gsm::findOrfail($id);
         return view('MasterData.GsmActive.edit_form')->with([
             'company' => $company,

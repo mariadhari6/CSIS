@@ -17,7 +17,7 @@
             <option class="hidden" value="{{$gps->type}}">{{$gps->type}}</option>
 
             @foreach ($merk as $item)
-            <option value="{{ $item->id }}">{{ $item->type_gps}}</option>
+            <option value="{{ $item->type_gps }}">{{ $item->type_gps}}</option>
             @endforeach
 
         </select>
@@ -51,6 +51,17 @@
             <option value="Beli">Beli</option> --}}
         </select></i>
     </td>
+     <td id="td-company">
+        <select class="select company_id-{{$gps->id}}" id="company_id" name="company_id" required>
+            <option class="hidden" value="{{$gps->company_id}}">{{$gps->company->company_name}}</option>
+
+            @foreach ($company as $item)
+            <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name}}</option>
+            @endforeach
+
+        </select>
+
+    </td>
 
     <td class="action sticky-col first-col">
         <button class="unstyled-button" type="submit">
@@ -67,10 +78,17 @@
                 if(itemID == 'Ready') {
                     $('#statusOwnership').empty();
                    $('#statusOwnership').append(
-                       `<select class="select" id="status_ownership">
+                       `<select class="select" id="status_ownership"  disable>
                             <option value="-">-</option>
                         </select>`
                        );
+                     $('#td-company').empty();
+                   $('#td-company').append(
+                       `<select class="select" id="company_id" disable>
+                     <option value="">-</option>
+                     </select>`
+                   );
+
                 }else if(itemID == 'Error'){
                     $('#statusOwnership').empty();
                         $('#statusOwnership').append(
@@ -81,9 +99,18 @@
 
                             </select>`
                         );
+                    $('#td-company').empty();
+                   $('#td-company').append(
+                        `<select class="select" id="company_id" disable>
+                        <option value="" class="hidden">--Pilih Company--</option>
+                        @foreach ($company as $item)
+                        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+                        @endforeach
+                        </select>`
+                   );
 
 
-                }else if(itemID == 'Used') {
+                }else {
                         $('#statusOwnership').empty();
                         $('#statusOwnership').append(
                             `<select class="select" id="status_ownership">
@@ -93,6 +120,15 @@
                                     <option value="Beli">Beli</option>
                             </select>`
                         );
+                        $('#td-company').empty();
+                         $('#td-company').append(
+                        `<select class="select" id="company_id" disable>
+                        <option value="" class="hidden">--Pilih Company--</option>
+                        @foreach ($company as $item)
+                        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+                        @endforeach
+                        </select>`
+                   );
                 }
 
 

@@ -16,7 +16,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Company</p>
-                            <h4 class="card-title">1,294</h4>
+                            <h4 class="card-title">{{ $company->count() }}</h4>
                         </div>
                     </div>
                 </div>

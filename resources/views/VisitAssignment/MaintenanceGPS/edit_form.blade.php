@@ -3,7 +3,7 @@
 
     <td>
         <select class="select company_id-{{$maintenanceGps->id}}"  id="{{$maintenanceGps->id}}" name="company_id">
-            <option selected value="{{ $maintenanceGps->company_id}}">
+            <option class="hidden" selected value="{{ $maintenanceGps->company_id}}">
                 {{ $maintenanceGps->companyRequest->company_name??''}}
             </option>
 
@@ -15,7 +15,7 @@
     </td>
      <td>
         <select class="select task-{{$maintenanceGps->id}}" id="task" name="task-{{$maintenanceGps->id}}">
-            <option selected value="{{ $maintenanceGps->task}}">
+            <option class="hidden" selected value="{{ $maintenanceGps->task}}">
                 {{ $maintenanceGps->taskRequest->task }}
             </option>
 
@@ -43,9 +43,9 @@
     </td>
     <td>
         <select class="select type_gps_id-{{$maintenanceGps->id}}" id="type_gps_id" name="type_gps_id" required>
-            {{-- <option selected value="">
-                {{ $maintenanceGps->gpsType->type??'' }}
-            </option> --}}
+            <option selected class="hidden" value="{{$maintenanceGps->type_gps_id}}">
+                {{ $maintenanceGps->detailCustomerGps->type??'' }}
+            </option>
 
             @foreach ($details as $item)
             <option value="{{ $item->id }}" >
@@ -68,7 +68,7 @@
 
 
      <td><select class="select equipment_gsm-{{$maintenanceGps->id}}" id="equipment_gsm" name="equipment_gsm">
-        <option value="{{$maintenanceGps->equipment_gsm}}"> {{$maintenanceGps->gsm->gsm_number?? ''}} </option>
+        <option class="hidden" value="{{$maintenanceGps->equipment_gsm}}"> {{$maintenanceGps->gsm->gsm_number?? ''}} </option>
         @foreach ($gsm_master as $item)
         <option value="{{ $item->id }}">
         {{$item->gsm_number}}
@@ -78,7 +78,7 @@
     </select></i></td>
 
  <td><select class="select ketersediaan_kendaraan-{{$maintenanceGps->id}}" id="ketersediaan_kendaraan" name="ketersediaan_kendaraan" aria-label=".form-select-lg example">
-    <option value=" {{$maintenanceGps->ketersediaan_kendaraan}}"> {{$maintenanceGps->ketersediaan_kendaraan}} </option>
+    <option class="hidden" value=" {{$maintenanceGps->ketersediaan_kendaraan}}"> {{$maintenanceGps->ketersediaan_kendaraan}} </option>
     <option value="Tersedia">Tersedia</option>
     <option value="Tidak tersedia">Tidak tersedia</option>
     </select></i></td>
@@ -87,16 +87,16 @@
         </div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input hasil-{{$maintenanceGps->id}}" id="hasil" value="" required></i>
+        <div class="input-div"><input type="text" class="input hasil-{{$maintenanceGps->id}}" id="hasil" value="{{$maintenanceGps->hasil}}" required></i>
         </div>
     </td>
     <td>
-        <div class="input-div"><input type="number" class="input biaya_transportasi-{{$maintenanceGps->id}}" id="biaya_transportasi" value="" required></i>
+        <div class="input-div"><input type="number" class="input biaya_transportasi-{{$maintenanceGps->id}}" id="biaya_transportasi" value="{{$maintenanceGps->biaya_transportasi}}" required></i>
         </div>
     </td>
    <td>
         <select class="select teknisi_maintenance-{{$maintenanceGps->id}}" id="teknisi_maintenance" name="teknisi_maintenance" required>
-            <option selected value="">{{$maintenanceGps->teknisiMaintenance->teknisi_name?? ''}}</option>
+            <option class="hidden" selected value="{{$maintenanceGps->teknisi_maintenance}}">{{$maintenanceGps->teknisiMaintenance->teknisi_name?? ''}}</option>
             @foreach ($teknisi_maintenance as $item)
                 <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
             @endforeach
@@ -117,7 +117,7 @@
         </div>
     </td>
     <td><select class="select status-{{$maintenanceGps->id}}" id="status" name="status" aria-label=".form-select-lg example" required>
-    <option value=""> {{$maintenanceGps->status}} </option>
+    <option class="hidden" value="{{$maintenanceGps->status}}"> {{$maintenanceGps->status}} </option>
     <option value="Done">Done</option>
     <option value="On Progress">On Progress</option>
     </select></i></td>

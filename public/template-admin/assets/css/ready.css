@@ -5503,7 +5503,7 @@ body {
     background: #5AA8D3;
 }
 .card-primary-soft {
-    background: #7EA3D9;
+    background: #a0e1f5;
 }
 
 .card-info {
@@ -5878,21 +5878,21 @@ body {
 }
 .table > tbody > tr > td,
 .table > tbody > tr > th {
-    padding: 8px;
+    padding: 3px;
 }
 .table > tfoot > tr > td,
 .table > tfoot > tr > th {
-    padding: 8px;
+    padding: 3px;
 }
 .table thead th {
     color: #554;
-    border-bottom-width: 2px;
+    border-bottom-width: 1px;
 }
 .table td,
 .table th {
-    font-size: 14px;
+    font-size: 12px;
     border-color: #ebedf2 !important;
-    padding: 0.75rem !important;
+    padding: 0.2rem !important;
 
 }
 
@@ -6025,7 +6025,7 @@ body {
     letter-spacing: 0.04em;
     padding: 0 20px 0 0;
     position: relative;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     text-align: center;
 }
@@ -6041,7 +6041,7 @@ body {
 }
 
 .dropdown-item {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .navbar .navbar-nav .notification {

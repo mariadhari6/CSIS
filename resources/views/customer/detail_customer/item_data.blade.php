@@ -22,11 +22,13 @@
         <td id="item-VihecleType-{{ $detail->id }}">
             {{ $detail->vehicle->vehicle->name }}
         </td>
+
         <td id="item-PoNumber-{{ $detail->id }}">
-            {{ $detail->po->po_number }}
+           {{ $detail->po->po_number }}
         </td>
         <td id="item-HargaLayanan-{{ $detail->id }}">
-            {{ $detail->po->harga_layanan }}
+        <span>Rp. </span>{{ number_format($detail->po->harga_layanan )}}
+
         </td>
         <td id="item-PoDate-{{ $detail->id }}">
             {{ date('d-M-Y', strtotime($detail->po->po_date))}}

@@ -26,9 +26,20 @@ class GsmTerminateController extends Controller
         ]);
     }
 
+    public function item_data_MY(Request $request)
+    {
+        $year = $request->year;
+        $month = $request->month;
+        $GsmTerminate = Gsm::where('status_gsm', 'Terminate')->whereMonth('terminate_date',  $month)->whereYear('terminate_date', $year)->get();
+        return view('MasterData.GsmTerminate.item_data')->with([
+            'GsmTerminate' => $GsmTerminate
+        ]);
+    }
+
+
     public function edit_form($id)
     {
-        $company = Company::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
         $GsmTerminate = Gsm::findOrfail($id);
         return view('MasterData.GsmTerminate.edit_form')->with([
             'company' => $company,
