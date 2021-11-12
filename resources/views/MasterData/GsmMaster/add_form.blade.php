@@ -76,6 +76,8 @@
 
                 </select>`
                );
+               document.getElementById("terminate_date").disabled = true;
+               document.getElementById("active_date").disabled = true;
            }else if(itemID == "Active" || "Terminate"){
                 $('#td-company').empty();
                 $('#td-company').append(
@@ -88,6 +90,13 @@
 
                 </select>`
                 );
+                if(itemID == "Active"){
+                    document.getElementById("terminate_date").disabled = true;
+                    document.getElementById("active_date").disabled = false;
+                }else if(itemID == "Terminate"){
+                    document.getElementById("terminate_date").disabled = false;
+                    document.getElementById("active_date").disabled = true;
+                }
            }
         });
 </script>

@@ -47,7 +47,7 @@ class RequestComplaintController extends Controller
 
         ]);
     }
-    
+
     public function item_data_MY(Request $request)
     {
         $year = $request->year;
@@ -255,5 +255,11 @@ class RequestComplaintController extends Controller
         }
 
         return $data;
+    }
+
+    public function dashboard()
+    {
+            return view('request_complaint.Dashboard.dashboard');
+            // return view('VisitAssignment.Dashboard.dashboard_visitAssignment', $company);
     }
 }
