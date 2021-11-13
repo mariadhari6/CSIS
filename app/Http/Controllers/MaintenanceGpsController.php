@@ -24,8 +24,6 @@ class MaintenanceGpsController extends Controller
         return view('VisitAssignment.MaintenanceGPS.index');
     }
 
-
-
     public function item_data()
     {
         $maintenanceGps = RequestComplaint::where('task', 4)->orWhere('task', 5)->get();
@@ -63,31 +61,29 @@ class MaintenanceGpsController extends Controller
 
     public function edit_form($id)
     {
-        $details = DetailCustomer::groupBy('company_id')
-            ->selectRaw('count(*) as jumlah, company_id')
-            ->get();
-        $maintenanceGps = RequestComplaint::findOrfail($id);
-        $gps = Gps::where('status', 'Ready')->get();
-        $company = Company::orderBy('id', 'DESC')->get();
-        $pic = Pic::orderBy('id', 'DESC')->get();
-        $sensor = Sensor::orderBy('id', 'DESC')->get();
-        $teknisi_maintenance = Teknisi::orderBy('id', 'DESC')->get();
-        $task = Task::where('task', 'Maintenance Sensor')->orWhere('task', 'Maintenance GPS')->get();
-        $gsm_master = Gsm::where('status_gsm', 'Ready')->get();
-        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
+        $details                = DetailCustomer::groupBy('company_id')->selectRaw('count(*) as jumlah, company_id')->get();
+        $maintenanceGps         = RequestComplaint::findOrfail($id);
+        $gps                    = Gps::where('status', 'Ready')->get();
+        $company                = Company::orderBy('id', 'DESC')->get();
+        $pic                    = Pic::orderBy('id', 'DESC')->get();
+        $sensor                 = Sensor::orderBy('id', 'DESC')->get();
+        $teknisi_maintenance    = Teknisi::orderBy('id', 'DESC')->get();
+        $task                   = Task::where('task', 'Maintenance Sensor')->orWhere('task', 'Maintenance GPS')->get();
+        $gsm_master             = Gsm::where('status_gsm', 'Ready')->get();
+        $vehicle                = Vehicle::orderBy('id', 'DESC')->get();
 
 
         return view('VisitAssignment.MaintenanceGPS.edit_form')->with([
-            'maintenanceGps' => $maintenanceGps,
-            'gps' => $gps,
-            'pic' => $pic,
-            'sensor' => $sensor,
-            'teknisi_maintenance' => $teknisi_maintenance,
-            'task' => $task,
-            'gsm_master' => $gsm_master,
-            'company' => $company,
-            'vehicle' => $vehicle,
-            'details' => $details
+            'maintenanceGps'        => $maintenanceGps,
+            'gps'                   => $gps,
+            'pic'                   => $pic,
+            'sensor'                => $sensor,
+            'teknisi_maintenance'   => $teknisi_maintenance,
+            'task'                  => $task,
+            'gsm_master'            => $gsm_master,
+            'company'               => $company,
+            'vehicle'               => $vehicle,
+            'details'               => $details
 
 
         ]);

@@ -88,29 +88,26 @@ class PemasanganMutasiGpsController extends Controller
     public function edit_form($id)
     {
 
-        $company = Company::orderBy('id', 'DESC')->get();
-        $details = DetailCustomer::groupBy('company_id')
-            ->selectRaw('count(*) as jumlah, company_id')
-            ->get();
-        $pemasangan_mutasi_GPS = RequestComplaint::findOrfail($id);
-        $sensor = Sensor::orderBy('id', 'ASC')
-            ->get();
-        $gps = Gps::where('status', 'Ready')->get();
-        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
-        $teknisi = Teknisi::orderBy('id', 'DESC')->get();
-        $task = Task::where('task', 'Pemasangan GPS')->orWhere('task', 'Pelepasan GPS')->orWhere('task', 'Mutasi')->get();
-        $gsm_master = Gsm::where('status_gsm', 'Ready')->get();
+        $company                = Company::orderBy('id', 'DESC')->get();
+        $details                = DetailCustomer::groupBy('company_id')->selectRaw('count(*) as jumlah, company_id')->get();
+        $pemasangan_mutasi_GPS  = RequestComplaint::findOrfail($id);
+        $sensor                 = Sensor::orderBy('id', 'ASC')->get();
+        $gps                    = Gps::where('status', 'Ready')->get();
+        $vehicle                = Vehicle::orderBy('id', 'DESC')->get();
+        $teknisi                = Teknisi::orderBy('id', 'DESC')->get();
+        $task                   = Task::where('task', 'Pemasangan GPS')->orWhere('task', 'Pelepasan GPS')->orWhere('task', 'Mutasi')->get();
+        $gsm_master             = Gsm::where('status_gsm', 'Ready')->get();
 
         return view('VisitAssignment.PemasanganMutasiGPS.edit_form')->with([
             'pemasangan_mutasi_GPS' => $pemasangan_mutasi_GPS,
-            'company' => $company,
-            'details' => $details,
-            'sensor' => $sensor,
-            'gps' => $gps,
-            'teknisi' => $teknisi,
-            'task' => $task,
-            'gsm_master' => $gsm_master,
-            'vehicle' => $vehicle
+            'company'               => $company,
+            'details'               => $details,
+            'sensor'                => $sensor,
+            'gps'                   => $gps,
+            'teknisi'               => $teknisi,
+            'task'                  => $task,
+            'gsm_master'            => $gsm_master,
+            'vehicle'               => $vehicle
         ]);
     }
 

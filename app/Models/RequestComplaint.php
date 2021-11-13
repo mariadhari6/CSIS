@@ -65,7 +65,7 @@ class RequestComplaint extends Model
     }
     public function detailCustomerGsm()
     {
-        return $this->belongsTo(DetailCustomer::class, 'gsm_pemasangan', 'id'); // GSM apa gps?
+        return $this->belongsTo(Gsm::class, 'gsm_pemasangan', 'id'); // GSM apa gps?
     }
 
     public function gsm()
@@ -86,7 +86,7 @@ class RequestComplaint extends Model
     }
     public function gpsMaintenance()
     {
-        return $this->belongsTo(Gps::class, 'equipment_gps_id', 'id');
+        return $this->belongsTo(Gps::class, 'type_gps_id', 'id');
     }
     // public function gpsType()
     // {

@@ -331,21 +331,26 @@ class MasterPoController extends Controller
         //     // $data[$i]['tanggal_pasang_awal'] =  $cari_tanggal_awal_pasang_per_company[0]->tanggal_pasang;
         // }
 
-        $time = '2021-11-13 09:00:00';
-        $a = Carbon::parse($time);
+        // $time = '2021-11-13 09:00:00';
+        // $a = Carbon::parse($time);
 
-        $satu_jam = $a->addHours(1);
-        // $t = date("H:i",strtotime($time));
+        // $satu_jam = $a->addHours(1);
+        // // $t = date("H:i",strtotime($time));
 
-        $enter ='2021-11-13 10:01:00';;
-        if ( $enter <= $satu_jam) {
-            echo 'tidak telat';
-        }
-        else {
-            echo 'telat';
-        }
+        // $enter ='2021-11-13 10:01:00';;
+        // if ( $enter <= $satu_jam) {
+        //     echo 'tidak telat';
+        // }
+        // else {
+        //     echo 'telat';
+        // }
 
         // return $satu_jam;
+        $vehicle = 156;
+        $sensor     = DetailCustomer::where('vehicle_id', $vehicle)->pluck('sensor_all');
+        $explode_sensor    = explode(' ', $sensor[0]);
+        
+        return count($h);
 
      
 

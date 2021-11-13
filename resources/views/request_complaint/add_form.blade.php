@@ -124,6 +124,7 @@
                             $('select[name="vehicle').append('<option style="display:none"> </option>');
                                 for(var i = 0 ; i < data.length ; i++) {
                                     $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_license_plate +'</option>');
+                                    // alert( data[i].id);
                                 }
                         }
                     });

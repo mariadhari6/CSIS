@@ -49,8 +49,8 @@
                 <th scope="col" class="list">Vehicle</th>
                 <th scope="col" class="list">Tanggal</th>
                 <th scope="col" class="list">Type GPS*</th>
-                <th scope="col" class="list">GPS</th>
-                <th scope="col" class="list">Sensor</th>
+                <th scope="col" class="list">GPS terpasang</th>
+                <th scope="col" class="list">Sensor terpasang</th>
                 <th scope="col" class="list">GSM</th>
                 <th scope="col" class="list">Ketersediaan Kendaraan</th>
                 <th scope="col" class="list">Keterangan</th>
