@@ -77,4 +77,10 @@ class Company extends Model
 
         return $this->hasMany(Vehicle::class);
     }
+    
+    public function gps()
+    {
+        return $this->hasMany(Gps::class);
+    }
+
 }

@@ -10,6 +10,7 @@ use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class RequestComplaintController extends Controller
 {
@@ -86,8 +87,18 @@ class RequestComplaintController extends Controller
 
     public function store(Request $request) {
 
-        $task       = $request->task;
-        $vehicle    = $request->vehicle;
+        $task               = $request->task;
+        $vehicle            = $request->vehicle;
+        $waktu_info         = Carbon::parse( $request->waktu_info );
+        $waktu_respon       = Carbon::parse( $request->waktu_respond );
+        $satu_jam           = $waktu_info->addHours(1);
+
+        if ( $waktu_respon <= $satu_jam) {
+            $status_waktu_respon = "tidak telat" ;
+        }else {
+            $status_waktu_respon = "telat" ;
+        }
+        
         $imei       = DetailCustomer::where('vehicle_id', $vehicle)->pluck('imei');
         $gsm        = DetailCustomer::where('vehicle_id', $vehicle)->pluck('gsm_id');
         $type       = DetailCustomer::where('vehicle_id', $vehicle)->pluck('type');
@@ -112,7 +123,8 @@ class RequestComplaintController extends Controller
                 'status_akhir'              =>  $request->status_akhir,
                 'imei'                      =>  $imei[0],
                 'gsm_pemasangan'            =>  $gsm[0],
-                'equipment_terpakai_gps'    =>  $type[0]
+                'equipment_terpakai_gps'    =>  $type[0],
+                'status_waktu_respon'       =>  $status_waktu_respon
 
             );
         }
@@ -134,7 +146,8 @@ class RequestComplaintController extends Controller
                 'waktu_solve'               =>  $request->waktu_solve,
                 'status'                    =>  $request->status,
                 'status_akhir'              =>  $request->status_akhir,
-                'type_gps_id'               =>  $type[0]
+                'type_gps_id'               =>  $type[0],
+                'status_waktu_respon'       =>  $status_waktu_respon
 
             );
 
@@ -158,6 +171,7 @@ class RequestComplaintController extends Controller
                 'waktu_solve'               =>  $request->waktu_solve,
                 'status'                    =>  $request->status,
                 'status_akhir'              =>  $request->status_akhir,
+                'status_waktu_respon'       =>  $status_waktu_respon
             );
             
         }
@@ -167,6 +181,7 @@ class RequestComplaintController extends Controller
     }
 
     public function edit_form($id) {
+        
 
         $pic = Pic::orderBy('id', 'DESC')->get();
         $detail = DetailCustomer::groupBy('company_id')->selectRaw('count(*) as jumlah, company_id')->get();
@@ -193,23 +208,45 @@ class RequestComplaintController extends Controller
     }
 
     public function update(Request $request, $id) {
+
+        $waktu_kesepakatan  = Carbon::parse( $request->waktu_kesepakatan );
+        $waktu_solve        = Carbon::parse( $request->waktu_solve );
+        $dua_hari           = $waktu_kesepakatan->addHours(48);
+        
+        if ( $waktu_solve <= $dua_hari) {
+            $status_waktu_solve = "tidak telat" ;
+        }else {
+            $status_waktu_solve = "telat" ;
+        }
+
+        $waktu_info         = Carbon::parse( $request->waktu_info );
+        $waktu_respon       = Carbon::parse( $request->waktu_respond );
+        $satu_jam           = $waktu_info->addHours(1);
+        
+        if ( $waktu_respon <= $satu_jam) {
+            $status_waktu_respon = "tidak telat" ;
+        }else {
+            $status_waktu_respon = "telat" ;
+        }
     
         $data = RequestComplaint::findOrfail($id);
-        $data->company_id = $request->company_id;
-        $data->internal_eksternal = $request->internal_eksternal;
-        $data->pic_id = $request->pic_id;
-        $data->vehicle = $request->vehicle;
-        $data->waktu_info = $request->waktu_info;
-        $data->waktu_respond = $request->waktu_respond;
-        $data->task = $request->task;
-        $data->platform = $request->platform;
-        $data->detail_task = $request->detail_task;
-        $data->divisi = $request->divisi;
-        $data->respond = $request->respond;
-        $data->waktu_kesepakatan = $request->waktu_kesepakatan;
-        $data->waktu_solve = $request->waktu_solve;
-        $data->status = $request->status;
-        $data->status_akhir = $request->status_akhir;
+        $data->company_id           = $request->company_id;
+        $data->internal_eksternal   = $request->internal_eksternal;
+        $data->pic_id               = $request->pic_id;
+        $data->vehicle              = $request->vehicle;
+        $data->waktu_info           = $request->waktu_info;
+        $data->waktu_respond        = $request->waktu_respond;
+        $data->task                 = $request->task;
+        $data->platform             = $request->platform;
+        $data->detail_task          = $request->detail_task;
+        $data->divisi               = $request->divisi;
+        $data->respond              = $request->respond;
+        $data->waktu_kesepakatan    = $request->waktu_kesepakatan;
+        $data->waktu_solve          = $request->waktu_solve;
+        $data->status               = $request->status;
+        $data->status_akhir         = $request->status_akhir;
+        $data->status_waktu_respon  = $status_waktu_respon;
+        $data->status_waktu_solve   = $status_waktu_solve;
 
         $data->save();
     }

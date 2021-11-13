@@ -34,7 +34,7 @@
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
         {{-- <form > --}}
-          <table class="table table-responsive data " class="table_id" id="table_id" >
+          <table class="table table-responsive" id="table_id" >
             <thead>
               <tr>
                 <th>
@@ -61,9 +61,7 @@
                 <th scope="col" class="list">Status*</th>
                 <th scope="col" class="list">waktu Solve*</th>
                 <th scope="col" class="list">Status Akhir</th>
-                 <th scope="col" class="action sticky-col first-col">Action</th>
-
-
+                <th scope="col" class="action sticky-col first-col">Action</th>
               </tr>
             </thead>
             <tbody  id="item_data">

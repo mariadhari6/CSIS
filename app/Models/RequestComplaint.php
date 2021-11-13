@@ -14,7 +14,8 @@ class RequestComplaint extends Model
     protected $fillable = [
         'company_id', 'internal_eksternal', 'pic_id', 'vehicle', 'waktu_info', 'task', 'platform', 'detail_task', 'divisi', 'waktu_respond', 'respond', 'waktu_kesepakatan', 'waktu_solve', 'status', 'status_akhir',
         'imei_id', 'gsm_pemasangan', 'equipment_terpakai_gps', 'equipment_terpakai_sensor', 'teknisi_pemasangan', 'uang_transportasi', 'type_visit', 'note_pemasangan', 'kendaraan_pasang',
-        'type_gps_id', 'equipment_gps_id', 'equipment_sensor_id', 'equipment_gsm', 'ketersediaan_kendaraan', 'keterangan', 'hasil', 'biaya_transportasi', 'teknisi_maintenance', 'req_by', 'note_maintenance'
+        'type_gps_id', 'equipment_gps_id', 'equipment_sensor_id', 'equipment_gsm', 'ketersediaan_kendaraan', 'keterangan', 'hasil', 'biaya_transportasi', 'teknisi_maintenance', 'req_by', 'note_maintenance', 'status_waktu_respon',
+        'status_waktu_solve'
     ];
 
     public function companyRequest()
@@ -87,10 +88,10 @@ class RequestComplaint extends Model
     {
         return $this->belongsTo(Gps::class, 'equipment_gps_id', 'id');
     }
-    public function gpsType()
-    {
-        return $this->belongsTo(Gps::class, 'type_gps_id', 'id');
-    }
+    // public function gpsType()
+    // {
+    //     return $this->belongsTo(Gps::class, 'type_gps_id', 'id');
+    // }
     public function vehicleRequest()
     {
         return $this->belongsTo(Vehicle::class, 'vehicle', 'id');

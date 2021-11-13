@@ -35,6 +35,13 @@
                       </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            @foreach ($company as $item)
+                            <td>{{ $item->company->company_name }}</td>
+                            <td> {{ $item->pic }}
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

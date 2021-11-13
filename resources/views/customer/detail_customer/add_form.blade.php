@@ -185,7 +185,7 @@
         @endforeach
         </select>
     </td>
-    <td id="tanggal_aktif">
+    <td id="tanggal_pasang">
         <div class="input-div"><input type="date" class="input" id="TanggalPasang" name="tanggal_pasang" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div>
     </td>
     <td id="tanggal_non_aktif">
@@ -417,7 +417,7 @@
 
             $('select[name="status_layanan"]').on('change', function(){
                 var Id = $(this).val();
-                alert(Id);
+                // alert(Id);
                 if(Id == 1) {
                     $('#tanggal_non_aktif').empty();
                     $('#tanggal_non_aktif').append(
@@ -425,9 +425,9 @@
                     );
                 }
                 else{
-                    $('#tanggal_aktif').empty();
-                    $('#tanggal_aktif').append(
-                        `<div class="input-div"><input type="date" class="input" id="TanggalAktif" disabled></div>`
+                    $('#tanggal_pasang').empty();
+                    $('#tanggal_pasang').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalPasang" disabled></div>`
                     );
                     $('#tanggal_non_aktif').empty();
                     $('#tanggal_non_aktif').append(

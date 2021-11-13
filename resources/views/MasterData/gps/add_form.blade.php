@@ -45,6 +45,14 @@
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
     </td>
+    <td id="td-company">
+        <select class="select" id="company_id" name="company_id" required>
+            <option style="display: none"></option>
+            @foreach ($company as $item)
+            <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name}}</option>
+            @endforeach
+        </select>
+    </td>
     <td class="action sticky-col first-col">
         <button class="unstyled-button" type="submit">
            <i class="fas fa-check add" id="add" onclick="store()"></i>
@@ -110,7 +118,6 @@
             $('select[name="type"]').empty();
         }
     });
-
 
 </script>
 

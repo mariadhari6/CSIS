@@ -33,6 +33,9 @@
           <td id="item-status_ownership-{{ $item->id }}">
             {{ $item->status_ownership }}
           </td>
+          <td id="item-company_id-{{ $item->id }}">
+            {{ $item->company->company_name??'' }}
+          </td>
           <td class="sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>

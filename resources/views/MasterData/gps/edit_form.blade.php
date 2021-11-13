@@ -45,6 +45,18 @@
             <option value="Beli">Beli</option> --}}
         </select></i>
     </td>
+    <td id="td-company">
+        <select class="select company_id-{{$gps->id}}" id="company_id" name="company_id" required>
+            <option class="hidden" value="{{$gps->company_id}}">{{$gps->company->company_name ??''}} </option>
+
+            @foreach ($company as $item)
+            <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name}}</option>
+            @endforeach
+
+        </select>
+
+    </td>
+
 
     <td class="action sticky-col first-col">
         <button class="unstyled-button" type="submit">

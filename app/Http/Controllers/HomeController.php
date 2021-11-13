@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Company;
+use App\Models\Gps;
+use App\Models\Sensor;
+use App\Models\Vehicle;
 
 use Illuminate\Http\Request;
 
@@ -23,6 +27,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $company = Company::all();
+        $gps = Gps::all();
+        $vehicle = Vehicle::all();
+        $sensor = Sensor::all();
+
+
+
+        return view('tes')->with([
+            'company' => $company,
+            'gps' => $gps,
+            'vehicle' => $vehicle,
+            'sensor' => $sensor,
+        ]);
     }
 }

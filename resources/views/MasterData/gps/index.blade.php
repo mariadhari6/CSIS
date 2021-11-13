@@ -40,6 +40,7 @@
                 <th scope="col" class="list" >Po Date*</th>
                 <th scope="col" class="list" >Status*</th>
                 <th scope="col" class="list" >Status Ownership*</th>
+                <th scope="col" class="list-company" >Company*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
               </tr>

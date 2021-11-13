@@ -27,8 +27,7 @@ class DetailCustomerController extends Controller
     public function item_data($id) {
 
         $company = Company::findOrFail($id);
-        $details = DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company->id)
-            ->get();
+        $details = DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company->id)->get();
 
         for ($i = 0; $i <= count($details) - 1; $i++) {
 
@@ -124,7 +123,7 @@ class DetailCustomerController extends Controller
         }
         Vehicle::where('id', $license_id)->update(array('status' => 'Used'));
         Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active', 'company_id' => $company ));
-        Gps::where('id', $gps_id)->update(array('status' => 'Used'));
+        Gps::where('id', $gps_id)->update(array('status' => 'Used', 'company_id' => $company));
         DetailCustomer::insert($data);
     }
 

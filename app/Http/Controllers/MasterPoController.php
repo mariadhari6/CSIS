@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\MasterPo;
+use App\Models\Pic;
 use App\Models\Sales;
 use App\Models\Company;
 use App\Models\DetailCustomer;
@@ -279,18 +280,18 @@ class MasterPoController extends Controller
         // }
 
         // return $data;
-        $warning = array();
-        $id = 454;
-        $cek_detail = DetailCustomer::where('imei', $id)->first();
+        // $warning = array();
+        // $id = 454;
+        // $cek_detail = DetailCustomer::where('imei', $id)->first();
         
 
-        $cek_status = DetailCustomer::where('imei', $id)->where('status_id', 1)->get();
-        $cari_company    = DetailCustomer::where('imei', $id)->where('status_id', 1)->first();
-        $license    = DetailCustomer::where('imei', $id)->where('status_id', 1)->pluck('licence_plate')->first();
-        $company['company_id'] = $cari_company;
-        for ($i=0; $i <count($cek_status) ; $i++) { 
-            $cek_status[$i]['terpasang'] = "terpasang";
-        }
+        // $cek_status = DetailCustomer::where('imei', $id)->where('status_id', 1)->get();
+        // $cari_company    = DetailCustomer::where('imei', $id)->where('status_id', 1)->first();
+        // $license    = DetailCustomer::where('imei', $id)->where('status_id', 1)->pluck('licence_plate')->first();
+        // $company['company_id'] = $cari_company;
+        // for ($i=0; $i <count($cek_status) ; $i++) { 
+        //     $cek_status[$i]['terpasang'] = "terpasang";
+        // }
 
         // return $cek_status;
 
@@ -303,7 +304,56 @@ class MasterPoController extends Controller
 
         // return $h[0]->id;
 
-        return $license;
+        // return $license;
+    
+
+        // $company = DetailCustomer::groupBy('company_id')->select('company_id')->get();
+
+        // for ($i=0; $i < count($company) ; $i++) { 
+        //     $a = $company[$i]->company_id;
+        //     $cari_pic            = Pic::where('company_id', $a)->get();
+        //     $total_gps_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(gps_id) as total_gps_installed'))->get();
+        //     $company[$i]["pic"]  = $cari_pic;
+        //     $company[$i]["total_gps_installed"] = $total_gps_installed;
+            
+        // }
+
+        // return $company;
+          
+        // $data = DetailCustomer::groupBy('company_id')->select('company_id')->get();
+        // for ($i=0; $i < count($data) ; $i++) { 
+
+        //     $company_id = $data[$i]->company_id;
+        //     $cari_tanggal_awal_pasang_per_company = DetailCustomer::where('company_id', $company_id)
+        //     ->select('tanggal_pasang')->orderBy('tanggal_pasang', 'ASC')->get();
+
+        //     print($cari_tanggal_awal_pasang_per_company);
+        //     // $data[$i]['tanggal_pasang_awal'] =  $cari_tanggal_awal_pasang_per_company[0]->tanggal_pasang;
+        // }
+
+        $time = '2021-11-13 09:00:00';
+        $a = Carbon::parse($time);
+
+        $satu_jam = $a->addHours(1);
+        // $t = date("H:i",strtotime($time));
+
+        $enter ='2021-11-13 10:01:00';;
+        if ( $enter <= $satu_jam) {
+            echo 'tidak telat';
+        }
+        else {
+            echo 'telat';
+        }
+
+        // return $satu_jam;
+
+     
+
+      
+
+
+
+
 
         
 

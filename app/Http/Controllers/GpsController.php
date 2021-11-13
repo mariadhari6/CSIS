@@ -27,12 +27,14 @@ class GpsController extends Controller
     public function add_form()
     {
         $gps = Gps::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('id', 'ASC')->get();
         $merk = MerkGps::groupBy('merk_gps')
                         ->selectRaw('count(*) as jumlah, merk_gps')
                         ->get();
         return view('MasterData.gps.add_form')->with([
-            'gps' => $gps,
-            'merk' => $merk,
+            'gps'       => $gps,
+            'merk'      => $merk,
+            'company'   => $company
         ]);
     }
 
@@ -127,7 +129,8 @@ class GpsController extends Controller
             'waranty'           =>  $request->waranty,
             'po_date'           =>  $request->po_date,
             'status'            =>  $request->status,
-            'status_ownership'  =>  $request->status_ownership
+            'status_ownership'  =>  $request->status_ownership,
+            'company_id'        =>  $request->company_id
         );
 
         Gps::insert($data);
@@ -139,9 +142,12 @@ class GpsController extends Controller
             ->selectRaw('count(*) as jumlah, merk_gps')
             ->get();
         $gps = Gps::findOrfail($id);
+        $company = Company::orderBy('id', 'ASC')->get();
+
         return view('MasterData.gps.edit_form')->with([
             'gps' => $gps,
             'merk' => $merk,
+            'company' => $company
            
 
         ]);
@@ -167,6 +173,7 @@ class GpsController extends Controller
             $data->po_date  = $request->po_date;
             $data->status   = $request->status;
             $data->status_ownership = $request->status_ownership;
+            $data->company_id = $request->company_id;
             $data->save();
         }
         else{
@@ -192,6 +199,7 @@ class GpsController extends Controller
                 $data->po_date  = $request->po_date;
                 $data->status   = $request->status;
                 $data->status_ownership = $request->status_ownership;
+                $data->company_id = $request->company_id;
                 $data->save();                
             }
         }
@@ -235,6 +243,7 @@ class GpsController extends Controller
         $data->po_date = $request->po_date;
         $data->status = $request->status;
         $data->status_ownership = $request->status_ownership;
+        $data->company_id = $request->company_id;
         echo $id;
     }
 

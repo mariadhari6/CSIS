@@ -11,7 +11,7 @@ class Gps extends Model
     protected $table = 'gps';
 
     protected $fillable = [
-        'merk', 'type', 'imei', 'waranty', 'po_date', 'status', 'status_ownership'
+        'merk', 'type', 'imei', 'waranty', 'po_date', 'status', 'status_ownership', 'company_id'
     ];
 
     public function pemasanganMutasiGps()
@@ -49,4 +49,10 @@ class Gps extends Model
     {
         return $this->hasMany(RequestComplaint::class, 'equipment_terpakai_gps', 'id');
     }
+    
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
 }
