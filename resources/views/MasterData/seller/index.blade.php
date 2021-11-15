@@ -205,7 +205,7 @@
         data = {};
         data = jsonTable;
 
-        var thLength = $('#importTable th').length;
+      var thLength = $('#importTable th').length;
       var trLength = $("#importTable td").closest("tr").length;
       var item = document.querySelectorAll("#table-data-8");
       var tes = $("#importTable").find("tbody>tr:eq(1)>td:eq(1)").attr("style");
