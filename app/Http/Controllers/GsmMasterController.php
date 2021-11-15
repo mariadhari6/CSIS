@@ -11,13 +11,18 @@ use App\Models\RequestComplaint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpParser\Node\Stmt\TryCatch;
+use App\Models\DetailCustomer;
 
 
 class GsmMasterController extends Controller
 {
     public function index()
     {
-        return view('MasterData.GsmMaster.index');
+        $details = DetailCustomer::orderBy('id', 'DESC')->get();
+        return view('MasterData.GsmMaster.index')->with([
+            'details' => $details
+        ]);
     }
 
     public function add_form()
@@ -95,7 +100,6 @@ class GsmMasterController extends Controller
                     'note'              =>  $value->note,
                     'provider'          =>  $value->provider
                 );
-
                 $gsmNumberReq = $data[$key]['gsm_number'];
                 $serialNumberReq = $data[$key]['serial_number'];
                 $checkGsm2 = GsmTemporary::where('gsm_number', '=', $gsmNumberReq)->first();
@@ -203,6 +207,9 @@ class GsmMasterController extends Controller
         $data->terminate_date = $request->terminate_date;
         $data->note = $request->note;
         $data->provider = $request->provider;
+        if ($request->status_gsm === 'Ready' || $request->status_gsm === 'Terminate') {
+            $data->was_maintenance = '0';
+        }
         $data->save();
     }
 

@@ -19,7 +19,7 @@ class CompanyController extends Controller
     }
     public function add_form()
     {
-        $seller = Seller::orderBy('seller_name', 'DESC')->get();
+        $seller = Seller::orderBy('seller_name', 'ASC')->get();
         return view('MasterData.company.add_form')->with([
             'seller' => $seller,
         ]);

@@ -179,6 +179,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/save_import_sensor', [SensorController::class, 'save_import']);
     Route::post('/importExcel_sensor', [SensorController::class, 'importExcel'])->name('importExcel_sensor');
     Route::get('/download_template_sensor', [SensorController::class, 'export']);
+    Route::get('/export_sensor', [SensorController::class, 'export_sensor']);
+
 
     //Gps
     Route::get('/gps', [GpsController::class, 'index'])->name('gps');
@@ -300,7 +302,9 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_pic/{id}', [RequestComplaintController::class, 'basedPic']);
     Route::get('/based_vehicleRequest/{id}', [RequestComplaintController::class, 'basedVehicle']);
     Route::get('/based_internal_eksternal', [RequestComplaintController::class, 'basedInternalEksternal']);
+    Route::get('/based_pemasangan/{id}', [RequestComplaintController::class, 'basedPemasangan']);
     Route::get('/Dashboard_RequestComplain', [RequestComplaintController::class, 'dashboard']);
+
 
 
     //Dashboar Visit Assignment
@@ -363,6 +367,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/save_import_masterPo', [MasterPoController::class, 'save_import']);
     Route::post('/importExcel_masterPo', [MasterPoController::class, 'importExcel'])->name('importExcel_masterPo');
     Route::get('/download_template_masterPo', [MasterPoController::class, 'export']);
+    Route::get('/export_MasterPO', [MasterPoController::class, 'export_masterPO']);
+
 
     // Vehicle
     Route::get('/Vehicle', [VehicleController::class, 'index'])->name('vehicle');

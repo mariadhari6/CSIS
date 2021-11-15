@@ -37,7 +37,7 @@ class GsmActiveController extends Controller
 
     public function edit_form($id)
     {
-        $company = Company::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
         $GsmActive     = Gsm::findOrfail($id);
         return view('MasterData.GsmActive.edit_form')->with([
             'company' => $company,

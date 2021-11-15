@@ -10,12 +10,18 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardVisitAssignmentController extends Controller
 {
+
     public function dashboard()
     {
-            return view('VisitAssignment.Dashboard.dashboard_visitAssignment');
-            // return view('VisitAssignment.Dashboard.dashboard_visitAssignment', $company);
+        return view('VisitAssignment.Dashboard.dashboard_visitAssignment');
+        // return view('VisitAssignment.Dashboard.dashboard_visitAssignment', $company);
     }
+    // public function dashboard()
+    // {
+    //     $pemasangan_mutasi_GPS = PemasanganMutasiGps::all();
 
+    //     return view('VisitAssignment.Dashboard.dashboard_visitAssignment', compact('pemasangan_mutasi_GPS'));
+    // }
     // public function item_data()
     // {
 
@@ -82,6 +88,7 @@ class DashboardVisitAssignmentController extends Controller
     // }
     // public function index()
     // {
+<<<<<<< HEAD
     //     $data = PemasanganMutasiGpsController::orderBy('id', 'DESC')->get();
     //     $maintenanceGps = MaintenanceGps::orderBy('id', 'DESC')->get();
     //     $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
@@ -107,5 +114,22 @@ class DashboardVisitAssignmentController extends Controller
 
     //     return view('VisitAssignment.Dashboard.dashboard_visitAssignment', $company, $vehicle);
     //     // return view('VisitAssignment.Dashboard.dashboard_visitAssignment', $company);
+=======
+    //     $data = PemasanganMutasiGps::orderBy('id', 'DESC')->get();
+    //     $maintenanceGps = MaintenanceGps::orderBy('id', 'DESC')->get();
+    //     $company = [];
+
+    //     foreach ($maintenanceGps as $item) {
+    //         $company['company'][] = $item->requestComplaint->company->company_name;
+    //     }
+
+    //     foreach ($data as $item) {
+    //         $company['company'][] = $item->requestComplain->company->company_name;
+    //     }
+
+    //     $company['chart_company'] = json_encode($company);
+
+    //     return view('VisitAssignment.Dashboard.dashboard_visitAssignment', $company);
+>>>>>>> 04cd19d523e323d8c4d773a502e480197c26384a
     // }
 }

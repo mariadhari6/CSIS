@@ -28,7 +28,7 @@ class MaintenanceGpsController extends Controller
 
     public function item_data()
     {
-        $maintenanceGps = RequestComplaint::where('task', 4)->orWhere('task', 5)->get();
+        $maintenanceGps = RequestComplaint::orderBy('id', 'DESC')->where('task', 4)->orWhere('task', 5)->get();
         // $maintenanceGps = RequestComplaint::orderBy('id', 'DESC')->whereIn('task', [4, 5])->where('company_id', $company->id)->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
@@ -101,6 +101,7 @@ class MaintenanceGpsController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $data = RequestComplaint::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->vehicle = $request->vehicle;
@@ -119,7 +120,12 @@ class MaintenanceGpsController extends Controller
         $data->note_maintenance = $request->note_maintenance;
         $data->status = $request->status;
         // $equipment_sensor_id     = $request->equipment_sensor_id;
-        // $gsm_id = $request->equipment_gsm;
+        $gsm_id = $request->equipment_gsm;
+        $company = $request->company_id;
+        $vehicle = $request->vehicle;
+        $hidden_gsm = $request->hidden_gsm;
+
+
         // $gps_type = $request->type_gps_id;
         // $gps_type_equipment = $request->type_gps_id;
 
@@ -137,7 +143,12 @@ class MaintenanceGpsController extends Controller
         //     }
         //     $data->save();
         // }
-        // Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active'));
+        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active', 'company_id' => $company));
+        // news code
+        Gsm::where('id',$hidden_gsm)->update(array('was_maintenance' => '1'));
+
+        DetailCustomer::where('id', $vehicle)->update(array('gsm_id' => $gsm_id));
+
         // Gps::where('id', $gps_type)->update(array('status' => 'Used'));
         // Gps::where('id', $gps_type_equipment)->update(array('status' => 'Used'));
 

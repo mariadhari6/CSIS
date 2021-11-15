@@ -37,6 +37,9 @@
                   <option value="{{ url('item_data_trial_master_po') }}">Trial</option>
                 </select>
             </div>
+                <a href="/export_MasterPO" class="btn btn-success  mr-2">
+                <i class="fas fa-file-export"></i>
+                </a>
                 <button class="btn btn-success edit_all">
                 <i class="fas fa-edit"></i>
                 </button>
@@ -63,7 +66,7 @@
                 <th scope="col" class="list">Harga Layanan*</th>
                 <th scope="col" class="list">Jumlah Unit Po*</th>
                 <th scope="col" class="list">Status Po</th>
-                <th scope="col" class="list">Salles</th>
+                <th scope="col" class="list">Sales</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
               </tr>

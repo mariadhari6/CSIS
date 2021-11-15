@@ -10,7 +10,7 @@
     </td>
     <td>
         <select class="select" id="LicencePlate" name="LicencePlate">
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('license_plate') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
             @endforeach
@@ -18,7 +18,7 @@
     </td>
     <td>
         <select class="select" id="VihecleType" name="VihecleType" disabled>
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('vehicle_id') == $item->id ? 'selected':'' }}>{{ $item->vehicle->name }}</option>
             @endforeach
@@ -26,7 +26,7 @@
     </td>
     <td>
         <select class="select" id="PoNumber" name="PoNumber">
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ old('po_number') == $item->id ? 'selected':'' }}>{{ $item->po_number}}</option>
             @endforeach
@@ -34,7 +34,7 @@
     </td>
     <td>
         <select class="select" id="HargaLayanan" name="HargaLayanan" disabled>
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($po as $item)
                 <option value="{{ $item->id }}" {{ old('harga_layanan') == $item->id ? 'selected':'' }}>{{ $item->harga_layanan}}</option>
             @endforeach
@@ -42,7 +42,7 @@
     </td>
      <td>
         <select class="select" id="PoDate" name="PoDate" disabled>
-        <option value=""></option>
+        <option class="hidden" value=""></option>
         @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ old('po_date') == $item->id ? 'selected':'' }}>{{ $item->po_date}}</option>
         @endforeach
@@ -50,7 +50,7 @@
 
     <td>
         <select class="select" id="StatusPo" name="StatusPo" disabled>
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ old('status_po') == $item->id ? 'selected':'' }}>{{ $item->status_po}}</option>
         @endforeach
@@ -58,7 +58,7 @@
     </td>
     <td>
         <select class="select" id="Imei" name="Imei">
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($imei as $item)
                 <option value="{{ $item->id }}" {{ old('imei') == $item->id ? 'selected':''}}>{{ $item->imei }}</option>
             @endforeach
@@ -66,7 +66,7 @@
     </td>
     <td>
         <select class="select" id="Merk" name="Merk" disabled>
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($imei as $item)
                 <option value="{{ $item->id }}" {{ old('merk') == $item->id ? 'selected':''}}>{{ $item->merk }}</option>
             @endforeach
@@ -74,7 +74,7 @@
     </td>
     <td>
         <select class="select" id="Type" name="Type" disabled>
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($imei as $item)
                 <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':''}}>{{ $item->type }}</option>
             @endforeach
@@ -82,7 +82,7 @@
     </td>
     <td>
         <select class="select" id="GSM" name="GSM">
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($gsm as $item)
                 <option value="{{ $item->id }}" {{ old('gsm_id') == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
             @endforeach
@@ -90,7 +90,7 @@
     </td>
     <td>
         <select class="select" id="Provider" name="Provider" disabled>
-            <option value=""></option>
+            <option class="hidden" value=""></option>
                 @foreach ($gsm as $item)
                 <option value="{{ $item->id }}" {{ old('provider') == $item->id ? 'selected':''}}>{{ $item->provider }}</option>
             @endforeach
@@ -162,7 +162,7 @@
     </td>
     <td>
         <select class="select" id="PoolName" name="PoolName" disabled>
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('pool_name') == $item->id ? 'selected':'' }}>{{ $item->pool_name}}</option>
             @endforeach
@@ -170,7 +170,7 @@
     </td>
     <td>
         <select class="select" id="PoolLocation" name="PoolLocation" disabled>
-            <option value=""></option>
+            <option class="hidden" value=""></option>
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('pool_location') == $item->id ? 'selected':'' }}>{{ $item->pool_location}}</option>
             @endforeach
@@ -178,17 +178,21 @@
     </td>
     <td><div class="input-div"><input type= "date" class="input" id="Waranty" placeholder="Waranty"></div></td>
     <td>
-        <select class="select" id="StatusLayanan">
+        <select class="select" name="status_layanan" id="StatusLayanan">
             @foreach ($status_layanan as $item)
             <option value="{{ $item->id }}" {{ old('status_layanan') == $item->id ? 'selected':'' }}>{{ $item->service_status_name }}</option>
         @endforeach
         </select>
     </td>
-    <td>
+    <td id="tanggal_aktif">
         <div class="input-div"><input type="date" class="input" id="TanggalPasang" name="tanggal_pasang" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div>
     </td>
-    <td><div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div></td>
-    <td><div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div></td>
+    <td id="tanggal_non_aktif">
+        <div class="input-div"><input type="date" class="input" id="TanggalNonAktif" ></div>
+    </td>
+    <td id="tanggal_reaktivasi">
+        <div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div>
+    </td>
     <td class="action sticky-col first-col">
         <button type="submit" class="unstyled-button">
             <i class="fas fa-check add" id="add" onclick="store()"></i>
@@ -438,6 +442,33 @@
                 $('#modal').append('<option value="'+ sensorterpilih + '" id="SensorAll"  data-toggle="modal" data-target="#exampleModal" > '+ sensorterpilih +'</option>');
             }
          }
+
+
+            $('select[name="status_layanan"]').on('change', function(){
+                var Id = $(this).val();
+                // alert(Id);
+                if(Id == 1) {
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
+                    );
+                }
+                else{
+                    $('#tanggal_aktif').empty();
+                    $('#tanggal_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalAktif" disabled></div>`
+                    );
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
+                    );
+                    $('#tanggal_reaktivasi').empty();
+                    $('#tanggal_reaktivasi').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
+                    );
+                }
+            });
+
 
 
     </script>

@@ -1,6 +1,6 @@
 <?php $no=1; ?>
 @foreach ($GsmMaster as $item)
-    <tr id="edit-form-{{ $item->id }}">
+    <tr id="edit-form-{{ $item->id }}" {{ $item->was_maintenance === "1" ? 'style=background-color:#e8837d' : ""  }}>
         <td id="td-checkbox-{{ $item->id }}" class="{{ $item->id }}">
             <div>
                 <label class="form-check-label">
@@ -12,16 +12,16 @@
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
-        <td id="item-status_gsm-{{ $item->id}}">
+        <td id="item-status_gsm-{{ $item->id}}" class="status" name="{{ $item->status_gsm }}">
             {{ $item->status_gsm }}
         </td>
-        <td id="item-gsm_number-{{ $item->id}}" name="{{ $item->gsm_number }}">
+        <td id="item-gsm_number-{{ $item->id}}" class="gsm-number" name="{{ $item->gsm_number }}">
             {{ $item->gsm_number }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company->company_name??'' }}
+            {{ $item->company->company_name??''}}
         </td>
-        <td id="item-serial_number-{{ $item->id }}" class="item-serial_number-{{ $item->id }}" name="{{ $item->serial_number }}">
+        <td id="item-serial_number-{{ $item->id }}" class="item-serial_number-{{ $item->id }} red" name="{{ $item->serial_number }}">
             {{ $item->serial_number }}
         </td>
           <td id="item-icc_id-{{ $item->id }}">

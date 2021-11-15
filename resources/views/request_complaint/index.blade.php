@@ -33,7 +33,7 @@
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-edit"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>
-        <form >
+        <form onsubmit="return false">
 
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
@@ -51,7 +51,7 @@
                 <th scope="col" class="list">Internal/External*</th>
                 <th scope="col" class="list">PIC*</th>
                 <th scope="col" class="list">Vehicle*</th>
-                <th scope="col" class="list">Waktu Info</th>
+                <th scope="col" class="list">Waktu Info*</th>
                 <th scope="col" class="list">Waktu Respond*</th>
                 <th scope="col" class="list">Task*</th>
                 <th scope="col" class="list">Platform*</th>
@@ -175,10 +175,12 @@
         var waktu_solve = $("#waktu_solve").val();
         var status = $("#status").val();
         var status_akhir = $("#status_akhir").val();
+        // var imei = $('#imei').val();
+        // var gsm_pemasangan = $('#gsm_pemasangan').val();
+        // var equipment_terpakai_gps = $('#equipment_terpakai_gps').val();
+        // alert(imei);
 
-        
-
-        if(company_id =="" || internal_eksternal=="" || pic_id=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status==""){
+        if(company_id =="" || internal_eksternal=="" || pic_id=="" || waktu_info=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status=="" ){
 
         }else {
           if(waktu_kesepakatan <= waktu_solve){

@@ -27,7 +27,7 @@
 
         @if ($item->type_gps_id !=null)
             <td id="item-type_gps_id-{{ $item->id }}">
-            {{$item->gpsMaintenance->gps->type}}
+            {{$item->gpsMaintenance->type}}
             </td>
         @elseif ($item->type_gps_id ==null)
             <td id="item-type_gps_id-{{ $item->id }}">

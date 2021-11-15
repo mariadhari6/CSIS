@@ -32,7 +32,7 @@
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
-            <form>
+            <form onsubmit="return false">
           <table class="table table-responsive data " class="table_id" id="table_id" >
             <thead>
               <tr>

@@ -66,7 +66,9 @@
             {{ $request_complains->waktu_solve}}
         </td>
         <td id="item-status_akhir-{{ $request_complains->id }}">
-            {{ $request_complains->status_akhir }}
+
+             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $request_complains->status_akhir }}" ></i>
+
         </td>
          <td class="action sticky-col first-col" id="td-button-{{ $request_complains->id }}">
 

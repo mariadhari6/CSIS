@@ -72,8 +72,6 @@
                $('#td-company').append(
                  `<select class="select" id="" disable>
                      <option value="">-</option>
-
-
                 </select>`
                );
                document.getElementById("terminate_date").disabled = true;
@@ -86,8 +84,6 @@
                         @foreach ($company as $item)
                         <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
                         @endforeach
-
-
                 </select>`
                 );
                 if(itemID == "Active"){

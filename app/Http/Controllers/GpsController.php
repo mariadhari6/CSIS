@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use App\Imports\GpsImport;
 use App\Models\Company;
-use App\Models\GpsTemp;
+use App\Models\DetailCustomer;
 use App\Models\GpsTemporary;
+use App\Models\Vehicle;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GpsController extends Controller
@@ -25,6 +26,8 @@ class GpsController extends Controller
     public function add_form()
     {
         $gps = Gps::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('id', 'ASC')->get();
+
         $merk = MerkGps::groupBy('merk_gps')
                         ->selectRaw('count(*) as jumlah, merk_gps')
                         ->get();
@@ -33,7 +36,9 @@ class GpsController extends Controller
         return view('MasterData.gps.add_form')->with([
             'gps' => $gps,
             'merk' => $merk,
-            // 'type' => $type
+            'company' => $company,
+
+
         ]);
     }
 
@@ -82,7 +87,7 @@ class GpsController extends Controller
                 $imeiReq = $data[$key]['imei'];
                 $checkImei = GpsTemporary::where('imei', '=', $imeiReq)->first();
 
-                if ($checkImei === null ) {
+                if ($checkImei === null) {
                     GpsTemporary::insert($data[$key]);
                 } else {
                     $fail = 1;
@@ -90,31 +95,6 @@ class GpsController extends Controller
                 // echo $data;
             } else {
                 $fail = 1;
-            }
-        }
-
-        if( $fail === 1 ){
-            GpsTemporary::truncate();
-            return 'fail';
-        } else {
-            try {
-                $gpsTemporary = GpsTemporary::orderBy('id', 'DESC')->get();
-                foreach ($gpsTemporary as $key => $value){
-                    $data[$key] = array(
-                        'merk'        =>  (string) $value->merk,
-                        'type'        =>  (string) $value->type,
-                        'imei'        =>  $value->imei,
-                        'waranty'     =>  $value->waranty,
-                        'po_date'     =>  $value->po_date,
-                        'status'           =>  (string) $value->status,
-                        'status_ownership' =>  (string) $value->status_ownership,
-                    );
-                    Gps::insert($data[$key]);
-                    $dataDelete = GpsTemporary::findOrfail($value->id);
-                    $dataDelete->delete();
-                }
-            } catch (\Throwable $th) {
-                return 'fail';
             }
         }
     }
@@ -131,7 +111,9 @@ class GpsController extends Controller
             'waranty'     =>  $request->waranty,
             'po_date'     =>  $request->po_date,
             'status'     =>  $request->status,
-            'status_ownership' => $request->status_ownership
+            'status_ownership' => $request->status_ownership,
+            'company_id' => $request->company_id
+
         );
         Gps::insert($data);
     }
@@ -141,12 +123,16 @@ class GpsController extends Controller
         $merk = MerkGps::groupBy('merk_gps')
             ->selectRaw('count(*) as jumlah, merk_gps')
             ->get();
+        $company = Company::orderBy('id', 'ASC')->get();
+
         // $merk_gps = MerkGps::orderBy('id', 'DESC')->get();
         // $type_gps = TypeGps::orderBy('id', 'DESC')->get();
         $gps = Gps::findOrfail($id);
         return view('MasterData.gps.edit_form')->with([
             'gps' => $gps,
             'merk' => $merk,
+            'company' => $company,
+
             // 'type_gps' => $type_gps
 
         ]);
@@ -160,15 +146,48 @@ class GpsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = Gps::findOrfail($id);
-        $data->merk = $request->merk;
-        $data->type = $request->type;
-        $data->imei = $request->imei;
-        $data->waranty = $request->waranty;
-        $data->po_date = $request->po_date;
-        $data->status = $request->status;
-        $data->status_ownership = $request->status_ownership;
-        $data->save();
+        $status = $request->status;
+        $cek_status = DetailCustomer::where('imei', $id)->where('status_id', 1)->get();
+        $cek_detail = DetailCustomer::where('imei', $id)->first();
+        if ($cek_detail == null) {
+            $data           = Gps::findOrfail($id);
+            $data->merk     = $request->merk;
+            $data->type     = $request->type;
+            $data->imei     = $request->imei;
+            $data->waranty  = $request->waranty;
+            $data->po_date  = $request->po_date;
+            $data->status   = $request->status;
+            $data->status_ownership = $request->status_ownership;
+            $data->company_id = $request->company_id;
+
+            $data->save();
+        } else {
+
+            if ($cek_status && $status != "Used") {
+                foreach ($cek_status as $item) {
+                    $company_id = $item->company_id;
+                    $licence_id = $item->licence_plate;
+                    $cari_company = Company::where('id', $company_id)->get();
+                    $cari_license = Vehicle::where('id', $licence_id)->get();
+                    $item['company_name']   = $cari_company[0]->company_name;
+                    $item['nomor_license']  = $cari_license[0]->license_plate;
+                    $item['terpasang'] = "terpasang";
+                    return $item;
+                }
+            } else {
+                $data           = Gps::findOrfail($id);
+                $data->merk     = $request->merk;
+                $data->type     = $request->type;
+                $data->imei     = $request->imei;
+                $data->waranty  = $request->waranty;
+                $data->po_date  = $request->po_date;
+                $data->status   = $request->status;
+                $data->status_ownership = $request->status_ownership;
+                $data->company_id = $request->company_id;
+
+                $data->save();
+            }
+        }
     }
 
     public function selected()
@@ -194,6 +213,8 @@ class GpsController extends Controller
         $data->po_date = $request->po_date;
         $data->status = $request->status;
         $data->status_ownership = $request->status_ownership;
+        $data->company_id = $request->company_id;
+
         echo $id;
     }
 

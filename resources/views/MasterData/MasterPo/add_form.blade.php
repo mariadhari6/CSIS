@@ -14,7 +14,7 @@
         <div class="input-div"><input type="text" class="input" id="po_number" placeholder="Po Number" required></div>
     </td>
     <td>
-        <div class="input-div"><input type="datetime-local" class="input" id="po_date" placeholder="Po Date" required></div>
+        <div class="input-div"><input type="date" class="input" id="po_date" placeholder="Po Date" required></div>
     </td>
     <td>
         <div class="input-div"><input type="number" class="input" id="harga_layanan" placeholder="Harga Layanan" required></div>

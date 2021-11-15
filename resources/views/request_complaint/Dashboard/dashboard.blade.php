@@ -1,6 +1,11 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Dashboard Request Complaint')
 @section('title-table','Dashboard Request Complaint')
+<<<<<<< HEAD
+=======
+@section('requestComplain','show')
+@section('RequestComplainDashboard','active')
+>>>>>>> 04cd19d523e323d8c4d773a502e480197c26384a
 
 
 @section('content')
@@ -64,7 +69,11 @@
                     <canvas id="reqComp"></canvas>
                 </div>
             </div>
+<<<<<<< HEAD
         </div> 
+=======
+        </div>
+>>>>>>> 04cd19d523e323d8c4d773a502e480197c26384a
 
         <div class="col-md-6">
             <div class="card">
@@ -72,7 +81,11 @@
                     <canvas id="request"></canvas>
                 </div>
             </div>
+<<<<<<< HEAD
         </div> 
+=======
+        </div>
+>>>>>>> 04cd19d523e323d8c4d773a502e480197c26384a
 
         <div class="col-md-6">
             <div class="card">

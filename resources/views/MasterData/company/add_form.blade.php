@@ -46,8 +46,9 @@
         $('select[name="seller_id"]').on('change', function() {
             var itemID = $(this).val();
             if(itemID) {
+                // alert(itemID);
                 $.ajax({
-                    url: '/dependent_company/'+itemID,
+                    url: '/dependent_company/'+ itemID,
                     method: "GET",
                     dataType: "json",
                     success:function(data) {
@@ -60,10 +61,16 @@
                 });
 
             }else{
-                $('select[name="no_agreement_letter_id"]').empty();
+                // alert(itemID);
+                        $('select[name="no_agreement_letter_id').empty();
+
+            //     $('#td-no_agreement_letter').empty();
+            //    $('#td-no_agreement_letter').append(
+            //     `<div class="input-div"><input type="text" class="input" id="no_agreement_letter_id" placeholder="No Agreement Letter"></div>`);
             }
         });
     });
+
 </script>
 
 </tr>

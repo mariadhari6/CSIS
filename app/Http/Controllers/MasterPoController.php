@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MasterPoExport;
 use App\Exports\TamplateMasterPo;
 use App\Imports\MasterPoImport;
 use App\Models\Company;
@@ -16,7 +17,7 @@ class MasterPoController extends Controller
 {
     public function index()
     {
-        $company = Company::orderBy('company_name', 'DESC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
         return view('MasterData.MasterPo.index')->with([
             'company'          => $company
         ]);
@@ -24,7 +25,7 @@ class MasterPoController extends Controller
     public function add_form()
     {
         $sales = Sales::orderBy('id', 'ASC')->get();
-        $company = Company::orderBy('id', 'ASC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
         $master_po = MasterPo::orderBy('po_number', 'ASC')->get();
         return view('MasterData.MasterPo.add_form')->with([
             'master_po'        => $master_po,
@@ -139,7 +140,7 @@ class MasterPoController extends Controller
     public function edit_form($id)
     {
         $sales = Sales::orderBy('id', 'ASC')->get();
-        $company = Company::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
         $master_po = MasterPo::findOrfail($id);
         return view('MasterData.MasterPo.edit_form')->with([
             'master_po'        => $master_po,
@@ -226,5 +227,9 @@ class MasterPoController extends Controller
     public function export()
     {
         return Excel::download(new TamplateMasterPo, 'template-MasterPo.xlsx');
+    }
+    public function export_masterPO()
+    {
+        return Excel::download(new MasterPoExport, 'MasterPo.xlsx');
     }
 }

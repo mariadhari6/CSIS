@@ -44,6 +44,7 @@
                 <th scope="col" class="list" >Po Date*</th>
                 <th scope="col" class="list" >Status*</th>
                 <th scope="col" class="list" >Status Ownership*</th>
+                <th scope="col" class="list-company" >Company*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
               </tr>
@@ -132,6 +133,7 @@
                             for (var cell = 0; cell < sheet_data[row].length; cell++){
                                 if (row == 0) {
                                     table_output += "<th>" + sheet_data[row][cell] + "</th>";
+
                                 } else {
                                     table_output += '<td contenteditable id="table-data-' + cell +'" >' + sheet_data[row][cell] + "</td>";
                                 }
@@ -143,32 +145,32 @@
                         document.getElementById("excel_data").innerHTML = table_output;
 
                         //check duplicate data
-                        console.log('tes');
                         imeiNumber = document.querySelectorAll("#table-data-2");
                         for(indexA = 0; indexA < imeiNumber.length; indexA++){
                         var imeiValue = imeiNumber[indexA].innerText;
                         $rowCount = $("#table_id tr").length;
-                        // console.log(imeiValue);
 
                         if ($rowCount==1){
 
                         } else {
-                          $rowResult = $rowCount -1;
-                          var allImei = [];
-                          for($i = 0; $i < $rowResult; $i++)
-                          {
+                            $rowResult = $rowCount -1;
+                            var allImei = [];
+                            for($i = 0; $i < $rowResult; $i++)
+                            {
                             $imeiNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
                             allImei[$i] = $imeiNum;
-                          }
-                          for (let index = 0; index < allImei.length; index++) {
-                            if( imeiValue == allImei[index] ){
-                              imeiNumber[indexA].style.backgroundColor = "#e8837d";
-                            } else if ( index == allImei.length){
-
                             }
-                          }
-                        }
-                        }
+                    for (let index = 0; index < allImei.length; index++) {
+                        if( imeiValue == allImei[index] ){
+                            imeiNumber[indexA].style.backgroundColor = "#e8837d";
+                    } else if ( index == allImei.length){
+
+                    }
+                }
+            }
+        }
+
+
 
 
 
@@ -222,7 +224,9 @@
                 po_date             : $td.eq(4).text(),
                 status              : $td.eq(5).text(),
                 status_ownership    : $td.eq(6).text(),
+
             }
+
         }).get();
       $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
         data = {};
@@ -277,9 +281,10 @@
 
      // ---- Close Modal -------
     $('#close-modal').click(function() {
+        // deleteTemporary();
+        // read_temporary()
         read();
         $('#importData').modal('hide');
-        // alert('close')
     });
 
 
@@ -289,7 +294,7 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
-              "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
@@ -318,6 +323,8 @@
         var po_date = $("#po_date").val();
         var status = $("#status").val();
         var status_ownership = $("#status_ownership").val();
+        var company_id = $("#company_id").val();
+
         // alert(merk);
         //
             // break;
@@ -358,15 +365,16 @@
                 timer: 1500
             }).catch(function(timeout) { });
 
-        } else {
-
-          $success = true;
+        }else if(imei.length == 15 && index == allimeiNum.length ) {
+         }else {
+              $success = true;
         break;
         }
         }
       }
 
       if($success === true) {
+
         $.ajax({
             type: "get",
             url: "{{ url('store_gps') }}",
@@ -377,7 +385,9 @@
               waranty: waranty,
               po_date: po_date,
               status: status,
-              status_ownership: status_ownership
+              status_ownership: status_ownership,
+              company_id: company_id,
+
             },
             success: function(data) {
               swal({
@@ -390,10 +400,7 @@
 
             }
         });
-<<<<<<< HEAD
-=======
 
->>>>>>> 5a99c6506f6410c9f7e3c4dc995040fa8c8c3b7d
       }
 
 
@@ -451,11 +458,14 @@
         $("#item-po_date-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
         $("#item-status_ownership-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
+
         $.get("{{ url('show_gps') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
     // ------ Proses Update Data ------
+      // ------ Proses Update Data ------
         function update(id) {
             var merk = $("#merk").val();
             var type = $("#type").val();
@@ -464,6 +474,8 @@
             var po_date = $("#po_date").val();
             var status = $("#status").val();
             var status_ownership = $("#status_ownership").val();
+            var company_id = $("#company_id").val();
+
             var id = id;
             $.ajax({
                 type: "get",
@@ -475,21 +487,34 @@
                 waranty: waranty,
                 po_date: po_date,
                 status:status,
-                status_ownership:status_ownership
+                status_ownership:status_ownership,
+                company_id:company_id
+
+
                 },
                 success: function(data) {
-                swal({
-                    type: 'success',
-                    title: ' Data Updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).catch(function(timeout) { });
-                read();
-
+                  if (data.terpasang == "terpasang") {
+                    swal({
+                      type: 'error',
+                      title: 'Sorry',
+                      text : 'GPS Installed in ' +" "+ data.company_name +" "+ 'with License Plate'  +" "+ data.nomor_license ,
+                      showCloseButton: true,
+                      showConfirmButton: false,
+                    });
+                      return false ;
+                  }
+                  else{
+                    swal({
+                        type: 'success',
+                        title: ' Data Updated',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).catch(function(timeout) { });
+                    read();
+                  }
                 }
             });
         }
-        
         // checkbox all
         $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
@@ -574,6 +599,8 @@
                     $("#item-po_date-"+value).hide("fast");
                     $("#item-status-"+value).hide("fast");
                     $("#item-status_ownership-"+value).hide("fast");
+                    $("#item-company_id-"+value).hide("fast");
+
                     $(".add").hide("fast");
                     $.get("{{ url('show_gps') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
@@ -611,6 +638,8 @@
                     var po_date = $(".po_date-"+value).val();
                     var status = $(".status-"+value).val();
                     var status_ownership = $(".status_ownership-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
+
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_gps') }}/"+value,
@@ -621,7 +650,9 @@
                     waranty: waranty,
                     po_date: po_date,
                     status:status,
-                    status_ownership:status_ownership
+                    status_ownership:status_ownership,
+                    company_id:company_id,
+
                     },
                     success: function(data) {
                             swal({
@@ -657,17 +688,16 @@
             read();
         }
 
-        // destro datatable
+         // destro datatable
         function dataLengthAll() {
           $('#table_id').DataTable().destroy();
         }
-        
 
 
 
 
   </script>
+{{-- //   <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
    @endsection
-
 

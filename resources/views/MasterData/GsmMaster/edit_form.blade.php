@@ -1,31 +1,27 @@
-<tr id="add_form">
 
     <td></td>
     <td></td>
     <td>
-        <select class="select" id="status_gsm" name="status" aria-label=".form-select-lg example" required>
-            <option value="" class="hidden">--Pilih Status--</option>
-            {{-- <option value="">-</option> --}}
-            <option value="Ready">Ready</option>
-            <option value="Active">Active</option>
-            <option value="Terminate">Terminate</option>
+        <select class="select status_gsm-{{$GsmMaster->id}}" id="status_gsm" name="status_gsm" required>
+            <option value="Ready" {{ $GsmMaster->status_gsm == 'Ready' ? 'selected' : ''  }}>Ready</option>
+            <option value="Active" {{ $GsmMaster->status_gsm == 'Active' ? 'selected' : ''  }}>Active</option>
+            <option value="Terminate" {{ $GsmMaster->status_gsm == 'Terminate' ? 'selected' : ''  }}>Terminate</option>
+        </select>
+    </td>
+    <td>
+        <div class="input-div"><input type="text" class="input gsm_number-{{$GsmMaster->id}}" id="gsm_number" placeholder="Gsm Number" value="{{ $GsmMaster->gsm_number}}" required></div>
+    </td>
+    <td>
+        <select class="select company_id-{{$GsmMaster->id}}" id="company_id" name="company_id" required>
+            @foreach ($company as $item)
+            <option value="{{ $item->id }}" {{ $item->id == $GsmMaster->company_id ? 'selected' : '' }}>{{ $item->company_name }}</option>
+            @endforeach
         </select></i>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="gsm_number" placeholder="GSM Number" required>
+        <div class="input-div"><input type="text" class="input serial_number-{{$GsmMaster->id}}" id="serial_number" placeholder="Serial Number" value="{{ $GsmMaster->serial_number}}" required></div>
     </td>
-    <td id="td-company">
-        <select class="select" id="company_id" name="company_id" required>
-
-          <option value="" class="hidden">--Pilih Company--</option>
-         @foreach ($company as $item)
-          <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
-         @endforeach
-
-        </select>
-     </td>
     <td>
-<<<<<<< HEAD
         <div class="input-div"><input type="text" class="input icc_id-{{$GsmMaster->id}}" id="icc_id" placeholder="ICC_ID" value="{{ $GsmMaster->icc_id}}"></div>
     </td>
     <td>
@@ -39,49 +35,26 @@
     </td>
     <td>
         <div class="input-div"><input type="date" class="input expired_date-{{$GsmMaster->id}}" id="expired_date" placeholder="Expired Date" value="{{ $GsmMaster->expired_date}}"></div>
-=======
-        <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number" required>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="icc_id" placeholder="ICC ID">
+        <div class="input-div"><input type="date" class="input active_date-{{$GsmMaster->id}}" id="active_date" placeholder="Active Date" value="{{ $GsmMaster->active_date}}" ></div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="imsi" placeholder="IMSI">
+        <div class="input-div"><input type="date" class="input terminate_date-{{$GsmMaster->id}}" id="terminate_date" placeholder="Terminate Date" value="{{ $GsmMaster->terminate_date}}" ></div>
     </td>
     <td>
-        <div class="input-div"><input type="text" class="input" id="res_id" placeholder="Res ID">
-    </td>
-    <td>
-        <div class="input-div"><input type="date" class="input" id="request_date" placeholder="Request Date">
->>>>>>> 5a99c6506f6410c9f7e3c4dc995040fa8c8c3b7d
-    </td>
-    <td>
-        <div class="input-div"><input type="date" class="input" id="expired_date" placeholder="Expired Date">
-    </td>
-    <td>
-        <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active Date">
-    </td>
-    <td>
-<<<<<<< HEAD
         <textarea class="form-control note-{{$GsmMaster->id}}" id="note" name="note" >{{$GsmMaster->note}}</textarea>
-=======
-        <div class="input-div"><input type="date" class="input" id="terminate_date" placeholder="Terminate Date">
->>>>>>> 5a99c6506f6410c9f7e3c4dc995040fa8c8c3b7d
     </td>
     <td>
-        <textarea class="form-control" id="note" name="note"></textarea>
+        <div class="input-div"><input type="text" class="input provider-{{$GsmMaster->id}}" id="provider" placeholder="Provider" value="{{ $GsmMaster->provider}}" ></div>
     </td>
-     <td>
-        <div class="input-div"><input type="text" class="input" id="provider" placeholder="Provider">
+        <td class="action sticky-col first-col">
+         <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="edit" onclick="update({{ $GsmMaster->id}})"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
 
-    <td class="action sticky-col first-col">
-         <button class="unstyled-button" type="submit">
-            <i class="fas fa-check add" id="add" onclick="store()"></i>
-        </button>
-        <i class="fas fa-times cancel" onclick="cancel()"></i>
-    <td>
-</tr>
 
 <script>
      // Status ready tidak bisa pilih company
@@ -92,10 +65,10 @@
                $('#td-company').append(
                  `<select class="select" id="" disable>
                      <option value="">-</option>
-
-
                 </select>`
                );
+               document.getElementById("terminate_date").disabled = true;
+               document.getElementById("active_date").disabled = true;
            }else if(itemID == "Active" || "Terminate"){
                 $('#td-company').empty();
                 $('#td-company').append(
@@ -104,10 +77,15 @@
                         @foreach ($company as $item)
                         <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
                         @endforeach
-
-
                 </select>`
                 );
+                if(itemID == "Active"){
+                    document.getElementById("terminate_date").disabled = true;
+                    document.getElementById("active_date").disabled = false;
+                }else if(itemID == "Terminate"){
+                    document.getElementById("terminate_date").disabled = false;
+                    document.getElementById("active_date").disabled = true;
+                }
            }
         });
 </script>

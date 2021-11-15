@@ -283,6 +283,7 @@
         var req_by = $("#req_by").val();
         var note_maintenance = $("#note_maintenance").val();
         var status = $("#status").val();
+        var hidden_gsm = $("#hidden_gsm").val();
         var id = id;
         if(type_gps_id == "" || hasil == "" || biaya_transportasi =="" || teknisi_maintenance =="" || status ==""  ){
         // alert('sama');
@@ -308,7 +309,8 @@
               teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
               note_maintenance: note_maintenance,
-             status:status
+              hidden_gsm: hidden_gsm,
+              status:status
             },
             success: function(data) {
               swal({

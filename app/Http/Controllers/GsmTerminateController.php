@@ -38,7 +38,7 @@ class GsmTerminateController extends Controller
 
     public function edit_form($id)
     {
-        $company = Company::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
         $GsmTerminate = Gsm::findOrfail($id);
         return view('MasterData.GsmTerminate.edit_form')->with([
             'company' => $company,

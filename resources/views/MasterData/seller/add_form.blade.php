@@ -18,7 +18,7 @@
         <div class="input-div">
             <input type="text" class="input" id="no_agreement_letter" placeholder="No. Agreement Letter" required>
         </div>
-        <code id="required-no_agreement_letter" style="color: red"></code>
+        {{-- <code id="required-no_agreement_letter" style="color: red"></code> --}}
     </td>
     <td>
         <select class="select" id="status" aria-label=".form-select-lg example" required>
@@ -34,4 +34,12 @@
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     </td>
 </tr>
+<script>
 
+<<<<<<< HEAD
+=======
+
+
+</script>
+
+>>>>>>> 04cd19d523e323d8c4d773a502e480197c26384a

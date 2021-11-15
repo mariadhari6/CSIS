@@ -11,13 +11,22 @@ class Gps extends Model
     protected $table = 'gps';
 
     protected $fillable = [
-        'merk', 'type', 'imei', 'waranty', 'po_date', 'status', 'status_ownership'
+        'merk', 'type', 'imei', 'waranty', 'po_date', 'status', 'status_ownership', 'company_id'
     ];
 
 
     public function detailCustomer()
     {
         return $this->hasMany(DetailCustomer::class);
+    }
+    public function gpsType()
+    {
+        return $this->belongsTo(MerkGps::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
     public function requestComplaintMaintenanceType()

@@ -10,7 +10,11 @@
       <div class="card">
         <div class="card-body">
           <div class="text-right" id="selected">
+<<<<<<< HEAD
             <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+=======
+              <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+>>>>>>> 04cd19d523e323d8c4d773a502e480197c26384a
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                 <div class="form-group">
                     <input class="form-control" id="filter-date" type="month">
@@ -91,6 +95,10 @@
           }
       })
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 04cd19d523e323d8c4d773a502e480197c26384a
 
     // ------ Tampil Data ------
     function read(){

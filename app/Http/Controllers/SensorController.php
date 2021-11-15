@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SensorExport;
 use App\Exports\TamplateSensor;
 use App\Imports\SensorImport;
 use App\Models\MerkSensor;
@@ -165,5 +166,9 @@ class SensorController extends Controller
     public function export()
     {
         return Excel::download(new TamplateSensor, 'template-sensor.xlsx');
+    }
+    public function export_sensor()
+    {
+        return Excel::download(new SensorExport, 'Sensor.xlsx');
     }
 }

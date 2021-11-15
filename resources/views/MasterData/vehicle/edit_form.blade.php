@@ -13,7 +13,7 @@
     </td>
     <td>
         <select class="select vehicle_id-{{$vehicle->id}}" id="vehicle_id" name="vehicle_id" required>
-            <option class="hidden" value="{{$vehicle->vehicle_id}}">{{$vehicle->vehicleType->name}}</option>
+            <option class="hidden" value="{{$vehicle->vehicle_id}}">{{$vehicle->vehicle->name}}</option>
             @foreach ($vehicleType as $item)
                 <option value="{{ $item->id }}" {{ $item->id == $vehicle->vehicle_id ? 'selected' : '' }}>{{ $item->name }}</option>
             @endforeach

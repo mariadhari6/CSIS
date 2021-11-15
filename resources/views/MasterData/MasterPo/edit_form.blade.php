@@ -12,7 +12,7 @@
         <div class="input-div"><input type="text" class="input po_number-{{$master_po->id}}" id="po_number" placeholder="Po Number" value="{{ $master_po->po_number}}" required></i></div>
     </td>
     <td>
-        <div class="input-div"><input type="datetime-local" class="input po_date-{{$master_po->id}}" id="po_date" placeholder="Po Date" value="{{ str_replace(" ", "T", $master_po->po_date) }}" required></i></div>
+        <div class="input-div"><input type="date" class="input po_date-{{$master_po->id}}" id="po_date" placeholder="Po Date" value="{{ str_replace(" ", "T", $master_po->po_date) }}" required></i></div>
     </td>
     <td>
         <div class="input-div"><input type="text" class="input harga_layanan-{{$master_po->id}}" id="harga_layanan" placeholder="Harga Layanan" value="{{ $master_po->harga_layanan}}" required></i></div>

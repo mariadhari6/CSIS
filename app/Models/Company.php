@@ -45,6 +45,10 @@ class Company extends Model
     {
         return $this->hasMany(RequestComplaint::class);
     }
+    public function gps()
+    {
+        return $this->hasMany(Gps::class);
+    }
 
     public function masterPo()
     {

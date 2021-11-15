@@ -97,24 +97,97 @@ class RequestComplaintController extends Controller
     public function store(Request $request)
     {
 
-        $data = array(
-            'company_id'     =>  $request->company_id,
-            'internal_eksternal'    =>  $request->internal_eksternal,
-            'pic_id'     =>  $request->pic_id,
-            'vehicle'     =>  $request->vehicle,
-            'waktu_info'     =>  $request->waktu_info,
-            'waktu_respond'     =>  $request->waktu_respond,
-            'task' => $request->task,
-            'platform'     =>  $request->platform,
-            'detail_task'     =>  $request->detail_task,
-            'divisi'     =>  $request->divisi,
-            'respond'     =>  $request->respond,
-            'waktu_kesepakatan'     =>  $request->waktu_kesepakatan,
-            'waktu_solve'     =>  $request->waktu_solve,
-            'status'     =>  $request->status,
-            'status_akhir'     =>  $request->status_akhir,
-        );
+        $task       = $request->task;
+        $vehicle    = $request->vehicle;
+        $imei       = DetailCustomer::where('vehicle_id', $vehicle)->pluck('imei');
+        $gsm        = DetailCustomer::where('vehicle_id', $vehicle)->pluck('gsm_id');
+        $type       = DetailCustomer::where('vehicle_id', $vehicle)->pluck('type');
+
+        if ($task == 1 || $task == 2 || $task == 3) {
+
+            $data = array(
+                'company_id'                =>  $request->company_id,
+                'internal_eksternal'        =>  $request->internal_eksternal,
+                'pic_id'                    =>  $request->pic_id,
+                'vehicle'                   =>  $request->vehicle,
+                'waktu_info'                =>  $request->waktu_info,
+                'waktu_respond'             =>  $request->waktu_respond,
+                'task'                      =>  $request->task,
+                'platform'                  =>  $request->platform,
+                'detail_task'               =>  $request->detail_task,
+                'divisi'                    =>  $request->divisi,
+                'respond'                   =>  $request->respond,
+                'waktu_kesepakatan'         =>  $request->waktu_kesepakatan,
+                'waktu_solve'               =>  $request->waktu_solve,
+                'status'                    =>  $request->status,
+                'status_akhir'              =>  $request->status_akhir,
+                'imei'                      =>  $imei[0],
+                'gsm_pemasangan'            =>  $gsm[0],
+                'equipment_terpakai_gps'    =>  $type[0]
+
+            );
+        } elseif ($task == 4 || $task == 5) {
+
+            $data = array(
+                'company_id'                =>  $request->company_id,
+                'internal_eksternal'        =>  $request->internal_eksternal,
+                'pic_id'                    =>  $request->pic_id,
+                'vehicle'                   =>  $request->vehicle,
+                'waktu_info'                =>  $request->waktu_info,
+                'waktu_respond'             =>  $request->waktu_respond,
+                'task'                      =>  $request->task,
+                'platform'                  =>  $request->platform,
+                'detail_task'               =>  $request->detail_task,
+                'divisi'                    =>  $request->divisi,
+                'respond'                   =>  $request->respond,
+                'waktu_kesepakatan'         =>  $request->waktu_kesepakatan,
+                'waktu_solve'               =>  $request->waktu_solve,
+                'status'                    =>  $request->status,
+                'status_akhir'              =>  $request->status_akhir,
+                'type_gps_id'               =>  $type[0]
+
+            );
+        } else {
+
+            $data = array(
+                'company_id'                =>  $request->company_id,
+                'internal_eksternal'        =>  $request->internal_eksternal,
+                'pic_id'                    =>  $request->pic_id,
+                'vehicle'                   =>  $request->vehicle,
+                'waktu_info'                =>  $request->waktu_info,
+                'waktu_respond'             =>  $request->waktu_respond,
+                'task'                      =>  $request->task,
+                'platform'                  =>  $request->platform,
+                'detail_task'               =>  $request->detail_task,
+                'divisi'                    =>  $request->divisi,
+                'respond'                   =>  $request->respond,
+                'waktu_kesepakatan'         =>  $request->waktu_kesepakatan,
+                'waktu_solve'               =>  $request->waktu_solve,
+                'status'                    =>  $request->status,
+                'status_akhir'              =>  $request->status_akhir,
+            );
+        }
+
+
         RequestComplaint::insert($data);
+        // $data = array(
+        //     'company_id'     =>  $request->company_id,
+        //     'internal_eksternal'    =>  $request->internal_eksternal,
+        //     'pic_id'     =>  $request->pic_id,
+        //     'vehicle'     =>  $request->vehicle,
+        //     'waktu_info'     =>  $request->waktu_info,
+        //     'waktu_respond'     =>  $request->waktu_respond,
+        //     'task' => $request->task,
+        //     'platform'     =>  $request->platform,
+        //     'detail_task'     =>  $request->detail_task,
+        //     'divisi'     =>  $request->divisi,
+        //     'respond'     =>  $request->respond,
+        //     'waktu_kesepakatan'     =>  $request->waktu_kesepakatan,
+        //     'waktu_solve'     =>  $request->waktu_solve,
+        //     'status'     =>  $request->status,
+        //     'status_akhir'     =>  $request->status_akhir,
+        // );
+        // RequestComplaint::insert($data);
     }
 
     public function edit_form($id)
@@ -256,10 +329,42 @@ class RequestComplaintController extends Controller
 
         return $data;
     }
-
     public function dashboard()
     {
-            return view('request_complaint.Dashboard.dashboard');
-            // return view('VisitAssignment.Dashboard.dashboard_visitAssignment', $company);
+        return view('request_complaint.Dashboard.dashboard');
     }
+
+    // public function basedPemasangan($id)
+    // {
+    //     $key = DetailCustomer::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
+    //         return [
+    //             $item['id'] => $item->only(['gsm_id', 'type', 'imei'])
+    //         ];
+    //     });
+    //     $data = $key->all();
+    //     $complete = array();
+
+    //     // foreach ($data as $a) {
+
+    //     //     // $i = $a['gsm_id'];
+    //     //     // $j = $a['type'];
+    //     //     // $j = $a['imei'];
+
+
+    //     //     // $cari_Gsm = Gsm::where('id', $i)->get();
+    //     //     $a['number_gsm'] = $a['gsm_id'];
+    //     //     $a['type_gps'] = $a['type'];
+    //     //     $a['imei_gps'] = $a['imei'];
+
+
+
+
+    //     //     $a['id'] = $id;
+
+
+    //     //     array_push($complete, $a);
+    //     // }
+
+    //     return $data;
+    // }
 }
