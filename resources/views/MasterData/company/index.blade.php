@@ -16,6 +16,9 @@
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
+                <a href="/export_Company" class="btn btn-success  mr-2">
+                    <i class="fas fa-file-export"></i>
+                    </a>
               <button class="btn btn-success edit_all">
                 <i class="fas fa-edit"></i>
               </button>

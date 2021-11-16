@@ -48,7 +48,7 @@
 
         @if ($item->gsm_pemasangan != null)
           <td id="item-gsm_pemasangan-{{ $item->id }}">
-            {{ $item->detailCustomer->gsm}}
+            {{ $item->detailCustomer->gsm ??''}}
         </td>
 
         @if ($item->equipment_terpakai_sensor != null)

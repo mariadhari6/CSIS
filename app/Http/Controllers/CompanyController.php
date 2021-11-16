@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CompanyExport;
 use App\Exports\TamplateCompany;
 use App\Imports\CompanyImport;
 use App\Models\Company;
@@ -162,6 +163,10 @@ class CompanyController extends Controller
     public function export()
     {
         return Excel::download(new TamplateCompany, 'template-company.xlsx');
+    }
+    public function export_company()
+    {
+        return Excel::download(new CompanyExport, 'Company.xlsx');
     }
 
 }

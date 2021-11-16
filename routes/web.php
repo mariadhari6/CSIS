@@ -74,17 +74,6 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
     Route::get('export', [UsernameController::class, 'export'])->name('export');
 
-    // Route::get('/detail_customer', [DetailCustomerController::class, 'index'])->name('detail_customer');
-    // Route::get('/item_detail', [DetailCustomerController::class, 'itemDetail'])->name('item_detail');
-    // Route::get('/item_detail', [DetailCustomerController::class, 'item_data'])->name('item_detail');
-    // Route::get('/add_detail', [DetailCustomerController::class, 'add_form'])->name('add_detail');
-    // Route::get('/store_detail', [DetailCustomerController::class, 'store'])->name('save_detail');
-    // Route::get('/delete_detail/{id}', [DetailCustomerController::class, 'destroy']);
-    // Route::get('/show_detail/{id}', [DetailCustomerController::class, 'show']);
-    // Route::get('/update_detail/{id}', [DetailCustomerController::class, 'update']);
-    // Route::get('/delete_all', [DetailCustomerController::class, 'deleteAll'])->name('deleteAll_detail');
-    // Route::get('/selected_detail', [DetailCustomerController::class, 'selected']);
-
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
     Route::get('/item_data_company', [CompanyController::class, 'item_data']);
@@ -96,6 +85,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_company', [CompanyController::class, 'deleteAll']);
     Route::get('/selected', [CompanyController::class, 'selected']);
     Route::get('/update_all/{id}', [CompanyController::class, 'updateall']);
+    Route::get('/export_Company', [CompanyController::class, 'export_company']);
     // pic
     Route::get('/pic', [PicController::class, 'index'])->name('pic');
     Route::get('/item_data_pic', [PicController::class, 'item_data']);
@@ -107,6 +97,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_pic', [PicController::class, 'deleteAll']);
     Route::get('/selected', [PicController::class, 'selected']);
     Route::get('/update_all/{id}', [PicController::class, 'updateall']);
+    Route::get('/export_Pic', [PicController::class, 'export_pic']);
     // seller
     Route::get('/seller', [SellerController::class, 'index'])->name('seller');
     Route::get('/item_data_seller', [SellerController::class, 'item_data']);
@@ -128,6 +119,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_GsmActive', [GsmActiveController::class, 'deleteAll']);
     Route::get('/selected', [GsmActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmActiveController::class, 'updateall']);
+    Route::get('/export_Seller', [SellerController::class, 'export_seller']);
     //Gsm Terminate
     Route::get('/GsmTerminate', [GsmTerminateController::class, 'index'])->name('GsmTerminate');
     Route::get('/item_data_GsmTerminate', [GsmTerminateController::class, 'item_data']);
@@ -164,6 +156,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/selectedDelete_gps', [GpsController::class, 'deleteAll']);
     Route::get('/selected', [GpsController::class, 'selected']);
     Route::get('/update_all/{id}', [GpsController::class, 'updateall']);
+    Route::get('/export_Gps', [GpsController::class, 'export_gps']);
     // Route::put('/import_gps', [GpsController::class, 'ImportGps']);
     Route::post('/importExcel_gps', [GpsController::class, 'importExcel'])->name('importExcel_gps');
     Route::get('/item_data_temporary_GpsMaster', [GpsController::class, 'item_data_temporary']);

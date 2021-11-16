@@ -1,11 +1,12 @@
 @extends('layouts.v_main')
 @section('title','CSIS | Seller')
+@section('title', 'Seller')
+
 @section('content')
-    <div class="row">
-    <div class="col-md-12">
+<form>
     <div class="card">
         <div class="card-body">
-            <div class="text-right mt-3" id="selected">
+            <div class="text-right" id="selected">
             <button type="button" class="btn btn-primary float-left mr-2 add" id="add" >
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" ></i>
@@ -14,6 +15,9 @@
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
+                <a href="/export_Seller" class="btn btn-success  mr-2">
+                    <i class="fas fa-file-export"></i>
+                    </a>
                 <button class="btn btn-success  mr-2 edit_all">
                   <i class="fas fa-edit"></i>
                 </button>
@@ -21,12 +25,9 @@
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
-              <form>
-
-          <table class="table table-responsive data" class="table_id" id="table_id" >
+                <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -41,16 +42,13 @@
                 <th scope="col" class="list-seller">No Agreement Letter*</th>
                 <th scope="col" class="list-seller">Status*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
-
               </tr>
             </thead>
             <tbody  id="item_data">
             {{-- {{ csrf_field() }} --}}
             </tbody>
-
           </table>
            </form>
-
         </div>
       </div>
        <!-- Modal Import -->
@@ -546,5 +544,6 @@
 
   </script>
 
-
+</script>
+</form>
 @endsection

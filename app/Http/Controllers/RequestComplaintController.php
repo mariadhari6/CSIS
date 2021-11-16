@@ -38,6 +38,7 @@ class RequestComplaintController extends Controller
             // 'details'              => $details
         ]);
     }
+
     public function item_data_MY(Request $request)
     {
         $year = $request->year;
@@ -212,9 +213,9 @@ class RequestComplaintController extends Controller
         $id = $request->request_complain;
 
         if ($id == "Request Internal" || $id == "Request Eksternal") {
-            $data = Task::where('jenis', '=', 'Request')->get();
+            $data = Task::where('jenis', '=', 'request')->get();
         } else {
-            $data = Task::where('jenis', '=', 'Complain')->get();
+            $data = Task::where('jenis', '=', 'complain')->get();
         }
 
         return $data;

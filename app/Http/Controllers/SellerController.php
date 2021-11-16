@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SellerExport;
 use App\Exports\TamplateSeller;
 use App\Imports\SellerImport;
 use App\Models\Seller;
@@ -147,5 +148,9 @@ class SellerController extends Controller
     public function export()
     {
         return Excel::download(new TamplateSeller, 'template-seller.xlsx');
+    }
+    public function export_seller()
+    {
+        return Excel::download(new SellerExport, 'Seller.xlsx');
     }
 }

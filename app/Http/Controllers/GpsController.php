@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\GpsExport;
 use App\Exports\TemplateGps;
 use App\Models\Gps;
 use App\Models\MerkGps;
@@ -220,4 +221,10 @@ class GpsController extends Controller
 
         return $data;
     }
+
+    public function export_gps()
+    {
+        return Excel::download(new GpsExport, 'Gps.xlsx');
+    }
+
 }
