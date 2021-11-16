@@ -87,6 +87,7 @@
 			</div>
 		</div>
 	</div>
+
   <script>
 
     $(document).ready(function() {
@@ -284,6 +285,7 @@
           $('#table_id tbody').prepend(data);
         });
       });
+
     // ----- Proses Tambah data ------
     function store() {
       var seller_name = $("#seller_name").val();
@@ -347,6 +349,7 @@
             allowOutsideClick: false
       });
     }
+    
     // ------ Edit Form Data ------
     function edit(id){
         var id = id;

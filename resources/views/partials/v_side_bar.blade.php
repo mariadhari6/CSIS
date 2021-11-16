@@ -43,6 +43,11 @@
                 <div class="collapse @yield('master')" id="masterData" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
+                            <a class="collapse-item @yield('user')" href="{{url('/user')}}">
+                                <span class="link-collapse">Master User</span>
+                            </a>
+                        </li>
+                        <li>
                             <a class="collapse-item @yield('seller')" href="{{url('/seller')}}">
                                 <span class="link-collapse">Master Seller</span>
                             </a>
