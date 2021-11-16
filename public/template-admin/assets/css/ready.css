@@ -5356,7 +5356,7 @@ body {
     border-radius: 4px;
 }
 .card .card-category {
-    margin-top: 5px;
+    margin-top: 2px;
     font-size: 17px;
     font-weight: 400;
     color: #ffffff;
@@ -5369,7 +5369,7 @@ body {
     margin-bottom: 0px;
 }
 .card .card-body {
-    padding: 15px 15px 10px 15px;
+    padding: 12px 12px 10px 12px;
 }
 .card .card-footer {
     background-color: transparent;

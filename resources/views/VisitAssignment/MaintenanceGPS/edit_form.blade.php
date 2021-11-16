@@ -66,16 +66,17 @@
         </div>
     </td>
 
-
-     <td><select class="select equipment_gsm-{{$maintenanceGps->id}}" id="equipment_gsm" name="equipment_gsm">
-        <option class="hidden" value="{{$maintenanceGps->equipment_gsm}}"> {{$maintenanceGps->gsm->gsm_number?? ''}} </option>
-        @foreach ($gsm_master as $item)
-        <option value="{{ $item->id }}">
-        {{$item->gsm_number}}
-        </option>
-
-       @endforeach
-    </select></i></td>
+ <td>
+        <input type="hidden" value="{{$maintenanceGps->equipment_gsm}}" id="hidden_gsm">
+        <select class="select equipment_gsm-{{$maintenanceGps->id}}" id="equipment_gsm" name="equipment_gsm">
+            <option class="hidden" value="{{$maintenanceGps->equipment_gsm}}"> {{$maintenanceGps->gsm->gsm_number?? ''}} </option>
+            @foreach ($gsm_master as $item)
+            <option value="{{ $item->id }}">
+            {{$item->gsm_number}}
+            </option>
+        @endforeach
+        </select></i>
+    </td>
 
  <td><select class="select ketersediaan_kendaraan-{{$maintenanceGps->id}}" id="ketersediaan_kendaraan" name="ketersediaan_kendaraan" aria-label=".form-select-lg example">
     <option class="hidden" value=" {{$maintenanceGps->ketersediaan_kendaraan}}"> {{$maintenanceGps->ketersediaan_kendaraan}} </option>

@@ -1,6 +1,6 @@
 @extends('layouts.v_main')
 @section('title','Customer Service')
-@section('title-table','Wellcome to Custommer service')
+@section('title-table','Welcome to Customer service')
 
 
 @section('content')
@@ -9,7 +9,7 @@
     {{-- <h4 class="page-title">Wellcome to Custommer service </h4> --}}
     <div class="row">
         <div class="col-md-3">
-            <div class="card card-stats card-warning">
+            <div class="card card-stats card-warning company">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5">
@@ -29,12 +29,12 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card card-stats card-success">
+            <div class="card card-stats card-success gps">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="fas fa-map"></i>
+                                <i class="fas fa-map-marker-alt"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card card-stats card-danger">
+            <div class="card card-stats card-danger sensor">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-5">
@@ -68,7 +68,7 @@
         </div>
 
         <div class="col-md-3">
-            <div class="card card-stats card-info">
+            <div class="card card-stats card-info gsm">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-5">
@@ -86,105 +86,53 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-md-3">
-            <div class="card card-stats card-primary-soft">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-rss"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">GSM</p>
-                                <h4 class="card-title">{{ $gsm->count() }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        {{-- <div class="col-md-6">
-            <div class="card">
-                <div id="columnchart_values" style="width: 900px; height: 300px;">
-                </div>
-                <div>
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-        </div> --}}
+       <div class="table_id">
+
+        </div>
         <br>
     </div>
 </div>
 
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
-        ["FirsName", {{ $username }}, "#b87333"],
-    ]);
-
-    var view = new google.visualization.DataView(data);
-    view.setColumns([0, 1,
-                        { calc: "stringify",
-                        sourceColumn: 1,
-                        type: "string",
-                        role: "annotation" },
-                        2]);
-
-    var options = {
-        title: "Username",
-        width: 500,
-        height: 300,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-        vAxis: {
-            minValue: 0,
-            maxValue: 100,
-            format: '#\'%\''
-        }
-    };
-    var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-    chart.draw(view, options);
-}
-</script>
-
 <script>
+    $('.company').click(function() {
+        // $("#table-company").slideUp("fast");
+        $.get("{{ url('/item_data_Homecompany') }}", {}, function(data, status) {
+            $('.table_id').html(data)
 
-    const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    ];
-    const data = {
-    labels: labels,
-    datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-    }]
-    };
+        });
+    });
 
-    const config = {
-        type: 'line',
-        data: data,
-        options: {}
-    };
+     $('.gps').click(function() {
+        $("#table-company").slideUp("fast");
+        $.get("{{ url('/item_data_Homegps') }}", {}, function(data, status) {
+            $('.table_id').html(data)
 
-    var myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
+        });
+    });
+
+     $('.sensor').click(function() {
+        $("#table-company").slideUp("fast");
+        $("#table-gps").slideUp("fast");
+        $.get("{{ url('/item_data_HomeSensor') }}", {}, function(data, status) {
+            $('.table_id').html(data)
+
+        });
+    });
+
+    $('.gsm').click(function() {
+        $("#table-company").slideUp("fast");
+        $("#table-gps").slideUp("fast");
+        $("#table-sensor").slideUp("fast");
+
+        $.get("{{ url('/item_data_HomeGsm') }}", {}, function(data, status) {
+            $('.table_id').html(data)
+
+        });
+    });
 </script>
+
 
 
 @endsection

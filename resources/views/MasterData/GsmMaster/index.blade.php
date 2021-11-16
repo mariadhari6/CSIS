@@ -26,6 +26,9 @@
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
+                <a href="/export_gsm_master" class="btn btn-success  mr-2">
+                <i class="fas fa-file-export"></i>
+                </a>
               <button class="btn btn-success edit_all">
                 <i class="fas fa-edit"></i>
               </button>
@@ -211,13 +214,17 @@
             var excelDate = requestDate[i].innerText;
             var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
             try {
-                  var converted_date = date.toISOString().split('T')[0];
+                  var converted_requestDate = date.toISOString().split('T')[0];
                 }
                 catch(err) {
                   // var converted_date = 'wrong date format';
                   requestDate[i].style.backgroundColor = "#e8837d";
                 }
-            requestDate[i].innerHTML = converted_date;
+            if(converted_requestDate === undefined) {
+              requestDate[i].innerHTML = "";
+            } else {
+              requestDate[i].innerHTML = converted_requestDate;
+            }
           }
 
         // change format expiredDate
@@ -226,13 +233,18 @@
           var excelDate = expiredDate[i].innerText;
           var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
           try {
-                var converted_date = date.toISOString().split('T')[0];
+                var converted_expiredDate = date.toISOString().split('T')[0];
               }
               catch(err) {
                 // var converted_date = 'wrong date format';
                 expiredDate[i].style.backgroundColor = "#e8837d";
               }
-            expiredDate[i].innerHTML = converted_date;
+            if(converted_expiredDate === undefined) {
+              expiredDate[i].innerHTML = "";
+              expiredDate[i].style.backgroundColor = "#fff";
+            } else {
+              expiredDate[i].innerHTML = converted_expiredDate;
+            }
         }
 
         // change format activeDate
@@ -241,13 +253,18 @@
           var excelDate = activeDate[i].innerText;
           var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
           try {
-                var converted_date = date.toISOString().split('T')[0];
+                var converted_activeDate = date.toISOString().split('T')[0];
               }
               catch(err) {
                 // var converted_date = 'wrong date format';
                 activeDate[i].style.backgroundColor = "#e8837d";
               }
-            activeDate[i].innerHTML = converted_date;
+            if(converted_activeDate === undefined) {
+              activeDate[i].innerHTML = "";
+              activeDate[i].style.backgroundColor = "#fff";
+            } else {
+              activeDate[i].innerHTML = converted_activeDate;
+            }
         }
 
         // change format terminatedDate
@@ -256,13 +273,18 @@
           var excelDate = terminatedDate[i].innerText;
           var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
           try {
-                var converted_date = date.toISOString().split('T')[0];
+                var converted_terminatedDate = date.toISOString().split('T')[0];
               }
               catch(err) {
                 // var converted_date = 'wrong date format';
                 terminatedDate[i].style.backgroundColor = "#e8837d";
               }
-            terminatedDate[i].innerHTML = converted_date;
+            if(converted_terminatedDate === undefined) {
+              terminatedDate[i].innerHTML = "";
+              terminatedDate[i].style.backgroundColor = "#fff";
+            } else {
+              terminatedDate[i].innerHTML = converted_terminatedDate;
+            }
         }
 
         }
@@ -528,6 +550,7 @@
             }
         });
       }
+
     }
 
     // -----Proses Delete Data ------

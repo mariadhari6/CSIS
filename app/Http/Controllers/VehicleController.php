@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TamplateMasterVehicle;
+use App\Exports\VehicleExport;
 use App\Imports\VehicleImport;
 use App\Models\Company;
 use App\Models\Vehicle;
@@ -182,5 +183,10 @@ class VehicleController extends Controller
     public function export()
     {
         return Excel::download(new TamplateMasterVehicle, 'template-vehicle.xlsx');
+    }
+
+    public function export_vehicle()
+    {
+        return Excel::download(new VehicleExport, 'Vehicle.xlsx');
     }
 }

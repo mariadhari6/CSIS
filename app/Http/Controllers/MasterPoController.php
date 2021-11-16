@@ -39,23 +39,23 @@ class MasterPoController extends Controller
         $dataRequest = json_decode($request->data);
         foreach ($dataRequest as $key => $value) {
 
-            try {
-                $data = array(
-                    'company_id'        => Company::where('company_name', $value->company_id)->firstOrFail()->id,
-                    'po_number'         =>  $value->po_number,
-                    'po_date'           => $value->po_date,
-                    'harga_layanan'     =>  $value->harga_layanan,
-                    'jumlah_unit_po'    =>  $value->jumlah_unit_po,
-                    'status_po'         => $value->status_po,
-                    'sales_id'            =>  $value->sales_id,
-                    'count'             => $value->jumlah_unit_po,
+            // try {
+            $data = array(
+                'company_id'        => Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                'po_number'         =>  $value->po_number,
+                'po_date'           => $value->po_date,
+                'harga_layanan'     =>  $value->harga_layanan,
+                'jumlah_unit_po'    =>  $value->jumlah_unit_po,
+                'status_po'         => $value->status_po,
+                'sales_id'            =>  $value->sales_id,
+                'count'             => $value->jumlah_unit_po,
 
-                );
-                MasterPo::insert($data);
-                // return 'success';
-            } catch (\Throwable $th) {
-                return 'fail';
-            }
+            );
+            MasterPo::insert($data);
+            // return 'success';
+            // } catch (\Throwable $th) {
+            //     return 'fail';
+            // }
         }
     }
     public function item_data()

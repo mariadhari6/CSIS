@@ -21,7 +21,9 @@ class CreateMasterPosTable extends Migration
             $table->string('harga_layanan');
             $table->string('jumlah_unit_po');
             $table->string('status_po');
-            $table->string('selles');
+            $table->string('sales_id');
+            $table->string('count');
+
             $table->timestamps();
         });
     }

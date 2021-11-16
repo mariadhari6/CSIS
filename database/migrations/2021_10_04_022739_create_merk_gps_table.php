@@ -15,8 +15,8 @@ class CreateMerkGpsTable extends Migration
     {
         Schema::create('merk_gps', function (Blueprint $table) {
             $table->id();
-            $table->string('merk');
-            $table->string('type');
+            $table->string('merk_gps');
+            $table->string('type_gps');
             $table->timestamps();
         });
     }

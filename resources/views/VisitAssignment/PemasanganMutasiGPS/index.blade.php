@@ -26,6 +26,9 @@
                     </select>
                   </div>
                 </ul>
+                <a href="/export_pemasangan_mutasi_GPS" class="btn btn-success  mr-2">
+                <i class="fas fa-file-export"></i>
+                </a>
                 <button class="btn btn-success  mr-2 edit_all">
                     <i class="fas fa-edit"></i>
                 </button>

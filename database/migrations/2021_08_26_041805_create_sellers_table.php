@@ -20,7 +20,6 @@ class CreateSellersTable extends Migration
             $table->string('no_agreement_letter');
             $table->string('status');
             $table->timestamps();
-
         });
     }
 

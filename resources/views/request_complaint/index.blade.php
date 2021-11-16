@@ -30,6 +30,9 @@
                         <option value="{{ url('item_data_Complain_Eksternal_RequestComplain') }}">Complain Eksternal</option>
                     </select>
                 </div>
+                <a href="/export_request_complaint" class="btn btn-success  mr-2">
+                <i class="fas fa-file-export"></i>
+                </a>
                 <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-edit"></i></button>
                 <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
             </div>

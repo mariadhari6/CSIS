@@ -169,17 +169,17 @@
 </td>
 <td><div class="input-div"><input type="date" class="input Waranty-{{ $details->id }}" id="Waranty" value="{{ $details->waranty }}"></div></td>
 <td>
-    <select class="select StatusLayanan-{{ $details->id }}" id="StatusLayanan">
+    <select class="select StatusLayanan-{{ $details->id }}" id="StatusLayanan" name="status_layanan">
         @foreach ($status_layanan as $item)
             <option value="{{ $item->id }}" {{ $details->status_id == $item->id ? 'selected':'' }}>{{ $item->service_status_name }}</option>
         @endforeach
     </select>
 </td>
-<td><div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div></td>
-<td>
+<td id="tanggal_aktif"><div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div></td>
+<td id="tanggal_non_aktif">
     <div class="input-div"><input type="date" class="input TanggalNonAktif-{{ $details->id }}" id="TanggalNonAktif" value="{{ $details->tanggal_non_aktif }}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field"></div>
 </td>
-<td><div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div></td>
+<td id="tanggal_reaktivasi"><div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div></td>
 <td class="action sticky-col first-col">
     <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
 </td>
@@ -344,31 +344,40 @@
         );
     }
 
-            $('select[name="status_layanan"]').on('change', function(){
-                var Id = $(this).val();
-                alert(Id);
-                if(Id == 1) {
-                    $('#tanggal_non_aktif').empty();
-                    $('#tanggal_non_aktif').append(
-                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
-                    );
-                }
-                else{
-                    $('#tanggal_aktif').empty();
-                    $('#tanggal_aktif').append(
-                        `<div class="input-div"><input type="date" class="input" id="TanggalAktif" disabled></div>`
-                    );
-                    $('#tanggal_non_aktif').empty();
-                    $('#tanggal_non_aktif').append(
-                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
-                    );
-                    $('#tanggal_reaktivasi').empty();
-                    $('#tanggal_reaktivasi').append(
-                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
-                    );
-                }
-            });
-        });
+            //  $('select[name="status_layanan"]').on('change', function(){
+            //     var Id = $(this).val();
+            //     // alert(Id);
+            //     if(Id == 1) {
+            //         $('#tanggal_non_aktif').empty();
+            //         $('#tanggal_non_aktif').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
+            //         );
+            //          $('#tanggal_aktif').empty();
+            //         $('#tanggal_aktif').append(
+            //             `<div class="input-div"><input type="date" class="input" value="{{ $details->tanggal_pasang }} id="TanggalPasang"></div>`
+            //         );
+            //          $('#tanggal_reaktivasi').empty();
+            //         $('#tanggal_reaktivasi').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div>`
+            //         );
+            //     }
+            //     else{
+            //         $('#tanggal_aktif').empty();
+            //         $('#tanggal_aktif').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalPasang" value="{{ $details->tanggal_pasang }} disabled></div>`
+            //         );
+            //         $('#tanggal_non_aktif').empty();
+            //         $('#tanggal_non_aktif').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
+            //         );
+            //         $('#tanggal_reaktivasi').empty();
+            //         $('#tanggal_reaktivasi').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
+            //         );
+            //     }
+            // });
+
+
 
 </script>
 

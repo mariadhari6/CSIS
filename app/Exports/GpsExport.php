@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Sensor;
+use App\Models\Gps;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -10,48 +10,43 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\Exportable;
 
-
-
-class SensorExport implements FromCollection, WithMapping, WithHeadings, WithEvents
+class GpsExport implements FromCollection, WithEvents, WithMapping, WithHeadings
 {
-    use Exportable;
-
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return Sensor::all();
+        return Gps::with('company')->get();
     }
 
-    public function map($sensor): array
+    public function map($gps): array
     {
         return [
-            $sensor->sensor_name,
-            $sensor->merk_sensor,
-            $sensor->serial_number,
-            $sensor->rab_number,
-            Carbon::parse($sensor->waranty)->toFormattedDateString(),
-            $sensor->status
-
-
+            $gps->merk,
+            $gps->type,
+            $gps->imei,
+            Carbon::parse($gps->waranty)->toFormattedDateString(),
+            Carbon::parse($gps->po_date)->toFormattedDateString(),
+            $gps->status,
+            $gps->status_ownership,
+            $gps->company->company_name ?? ''
         ];
-        // $sensor->setAllBorders('thin');
     }
 
     public function headings(): array
     {
         return [
             // '#',
-            'Sensor Name',
-            'Merk Sensor',
-            'Serial Number',
-            'RAB Number',
+            'Merk Gps',
+            'Type Gps',
+            'IMEI',
             'Waranty',
-            'Status'
-
+            'Po Date',
+            'Status',
+            'Status Ownership',
+            'Company Name'
         ];
     }
 
@@ -60,7 +55,7 @@ class SensorExport implements FromCollection, WithMapping, WithHeadings, WithEve
 
         return [
             AfterSheet::class    => function (AfterSheet $event) {
-                $cellRange = 'A1:F1'; // All headers
+                $cellRange = 'A1:H1'; // All headers
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(12);
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setBold(true);
             },

@@ -103,6 +103,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/save_import_Company', [CompanyController::class, 'save_import']);
     Route::post('/importExcel_Company', [CompanyController::class, 'importExcel'])->name('importExcel_Company');
     Route::get('/download_template_Company', [CompanyController::class, 'export']);
+    Route::get('/export_company', [CompanyController::class, 'export_company']);
+
 
 
 
@@ -120,6 +122,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/save_import_pic', [PicController::class, 'save_import']);
     Route::post('/importExcel_pic', [PicController::class, 'importExcel'])->name('importExcel_pic');
     Route::get('/download_template_pic', [PicController::class, 'export']);
+    Route::get('/export_Pic', [PicController::class, 'export_pic']);
+
 
     // seller
     Route::get('/seller', [SellerController::class, 'index'])->name('seller');
@@ -135,6 +139,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/save_import_seller', [SellerController::class, 'save_import']);
     Route::post('/importExcel_seller', [SellerController::class, 'importExcel'])->name('importExcel_seller');
     Route::get('/download_template_seller', [SellerController::class, 'export']);
+    Route::get('/export_seller', [SellerController::class, 'export_seller']);
+
 
 
     // GSM Aktiv
@@ -179,7 +185,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/save_import_sensor', [SensorController::class, 'save_import']);
     Route::post('/importExcel_sensor', [SensorController::class, 'importExcel'])->name('importExcel_sensor');
     Route::get('/download_template_sensor', [SensorController::class, 'export']);
-    Route::get('/export_sensor', [SensorController::class, 'export_sensor']);
+
 
 
     //Gps
@@ -201,6 +207,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // Route::get('/try', [GpsController::class, 'try']);
     Route::post('/save_import_gps', [GpsController::class, 'save_import']);
     Route::get('/based_merksensor/{id}', [GpsController::class, 'basedType']);
+    Route::get('/export_gps', [GpsController::class, 'export_gps']);
+
 
 
 
@@ -226,6 +234,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/importExcel_GsmMaster', [GsmMasterController::class, 'importExcel'])->name('importExcel_GsmMaster');
     Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
     Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
+    Route::get('/export_gsm_master', [GsmMasterController::class, 'export_gsm']);
+
     // try
     Route::get('/try', [GsmMasterController::class, 'try']);
 
@@ -255,6 +265,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [DetailCustomerController::class, 'basedSerialNumber']);
     Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
+    Route::get('/export_detail_customer', [DetailCustomerController::class, 'export_detail']);
+
 
 
     // Pemasangan Mutasi GPS
@@ -278,6 +290,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_vehiclePemasangan/{id}', [PemasanganMutasiGpsController::class, 'basedVehicle']);
     Route::get('/based_imei/{id}', [PemasanganMutasiGpsController::class, 'basedImei']);
     Route::get('/based_kendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'basedKendaraanPasang']);
+    Route::get('/export_pemasangan_mutasi_GPS', [PemasanganMutasiGpsController::class, 'export_pemasangan']);
+
 
 
     // Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
@@ -309,6 +323,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_internal_eksternal', [RequestComplaintController::class, 'basedInternalEksternal']);
     Route::get('/based_pemasangan/{id}', [RequestComplaintController::class, 'basedPemasangan']);
     Route::get('/Dashboard_RequestComplain', [RequestComplaintController::class, 'dashboard']);
+    Route::get('/export_request_complaint', [RequestComplaintController::class, 'export_request']);
+
 
 
 
@@ -343,6 +359,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     // Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
     Route::get('/based_vehicleMaintenance/{id}', [MaintenanceGpsController::class, 'basedVehicle']);
     Route::get('/based_typegps/{id}', [MaintenanceGpsController::class, 'basedGps']);
+    Route::get('/export_maintenance', [MaintenanceGpsController::class, 'export_maintenance']);
 
 
     // Master PO
@@ -390,6 +407,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::post('/save_import_MasterVehicle', [VehicleController::class, 'save_import']);
     Route::post('/importExcel_MasterVehicle', [VehicleController::class, 'importExcel'])->name('importExcel_MasterVehicle');
     Route::get('/download_template_MasterVehicle', [VehicleController::class, 'export']);
+    Route::get('/export_vehicle', [VehicleController::class, 'export_vehicle']);
+
 
     Route::get('/cek', [MasterPoController::class, 'check']);
 
@@ -401,6 +420,12 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
     Route::get('/item_summary', [SummaryController::class, 'item_summary'])->name('item_summary');
     Route::get('/add_summary', [DetailCustomerController::class, 'add_form'])->name('add_summary');
+
+    // dashboard home
+    Route::get('/item_data_Homecompany', [CustomerServiceController::class, 'company_home']);
+    Route::get('/item_data_Homegps', [CustomerServiceController::class, 'gps_home']);
+    Route::get('/item_data_HomeSensor', [CustomerServiceController::class, 'sensor_home']);
+    Route::get('/item_data_HomeGsm', [CustomerServiceController::class, 'gsm_home']);
 });
 
 

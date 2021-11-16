@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CompanyExport;
 use App\Exports\TamplateCompany;
 use App\Imports\CompanyImport;
 use App\Models\Company;
@@ -39,9 +40,9 @@ class CompanyController extends Controller
             try {
                 $data = array(
                     'company_name'        => $value->company_name,
-                    'seller_id'        =>  Seller::where('seller_name', $value->seller_id)->firstOrFail()->id,
+                    'seller_id'        => $value->seller_id,
                     'customer_code'        =>  $value->customer_code,
-                    'no_agreement_letter_id'     => Seller::where('no_agreement_letter', $value->no_agreement_letter_id)->firstOrFail()->id,
+                    'no_agreement_letter_id'     => $value->no_agreement_letter_id,
                     'status'     =>  $value->status,
 
 
@@ -146,10 +147,9 @@ class CompanyController extends Controller
 
     public function dependentCompany($id)
     {
-        $data = DB::table("sellers")
-            ->where("id", $id)
-            ->pluck('no_agreement_letter', 'id');
-        return json_encode($data);
+        $data = Seller::where('seller_name', $id)->get();
+
+        return $data;
     }
     public function importExcel(Request $request)
     {
@@ -163,6 +163,10 @@ class CompanyController extends Controller
     public function export()
     {
         return Excel::download(new TamplateCompany, 'template-company.xlsx');
+    }
+    public function export_company()
+    {
+        return Excel::download(new CompanyExport, 'company.xlsx');
     }
 
     // public function showAgreement($id)

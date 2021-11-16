@@ -452,11 +452,19 @@
                     $('#tanggal_non_aktif').append(
                         `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
                     );
+                     $('#tanggal_aktif').empty();
+                    $('#tanggal_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalPasang"></div>`
+                    );
+                     $('#tanggal_reaktivasi').empty();
+                    $('#tanggal_reaktivasi').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div>`
+                    );
                 }
                 else{
                     $('#tanggal_aktif').empty();
                     $('#tanggal_aktif').append(
-                        `<div class="input-div"><input type="date" class="input" id="TanggalAktif" disabled></div>`
+                        `<div class="input-div"><input type="date" class="input" id="TanggalPasang" disabled></div>`
                     );
                     $('#tanggal_non_aktif').empty();
                     $('#tanggal_non_aktif').append(

@@ -35,7 +35,7 @@
       </td>
 
       <td>
-          <select class="select" id="vehicle" name="vehicle" required>
+          <select class="select" id="vehicle" name="vehicle">
             <option class="hidden">--Pilih Vehicle--</option>
 
             {{-- @foreach ($detail as $item)
@@ -144,7 +144,7 @@
                     success:function(data) {
                         //alert(data.length);
                         $('select[name="vehicle').empty();
-                        $('select[name="vehicle').append('<option class="hidden" value=""> </option>');
+                        $('select[name="vehicle').append('<option class="hidden" value=""></option>');
                             for(var i = 0 ; i < data.length ; i++) {
                                 $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_license_plate +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\GpsExport;
 use App\Exports\TemplateGps;
 use App\Models\Gps;
 use App\Models\MerkGps;
@@ -95,6 +96,18 @@ class GpsController extends Controller
                 // echo $data;
             } else {
                 $fail = 1;
+            }
+        }
+        GpsTemporary::truncate();
+        if ($fail === true) {
+            return 'fail';
+        } else {
+            for ($i = 0; $i < count($data); $i++) {
+                try {
+                    Gps::insert($data[$i]);
+                } catch (\Throwable $th) {
+                    $fail = true;
+                }
             }
         }
     }
@@ -254,6 +267,11 @@ class GpsController extends Controller
     public function export()
     {
         return Excel::download(new TemplateGps, 'template-gps.xlsx');
+    }
+
+    public function export_gps()
+    {
+        return Excel::download(new GpsExport, 'Gps.xlsx');
     }
 
     public function try()

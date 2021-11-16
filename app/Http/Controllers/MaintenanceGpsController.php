@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MaintenanceExport;
+use App\Exports\PemasanganMutasiGpsExport;
 use App\Models\Company;
 use App\Models\DetailCustomer;
 use App\Models\Gps;
@@ -16,6 +18,7 @@ use App\Models\Task;
 use App\Models\Teknisi;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MaintenanceGpsController extends Controller
 {
@@ -101,6 +104,7 @@ class MaintenanceGpsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $was_maintenance = '0';
         $data = RequestComplaint::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->vehicle = $request->vehicle;
@@ -122,6 +126,13 @@ class MaintenanceGpsController extends Controller
         $gsm_id = $request->equipment_gsm;
         $company = $request->company_id;
         $vehicle = $request->vehicle;
+        if ($request->hidden_gsm == $request->equipment_gsm) {
+            $was_maintenance = '0';
+        } else {
+            $was_maintenance = '1';
+        }
+        $hidden_gsm = $request->hidden_gsm;
+
 
 
         // $gps_type = $request->type_gps_id;
@@ -142,8 +153,9 @@ class MaintenanceGpsController extends Controller
         //     $data->save();
         // }
         Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active', 'company_id' => $company));
-
+        Gsm::where('id', $hidden_gsm)->update(array('was_maintenance' => $was_maintenance));
         DetailCustomer::where('id', $vehicle)->update(array('gsm_id' => $gsm_id));
+
 
         // Gps::where('id', $gps_type)->update(array('status' => 'Used'));
         // Gps::where('id', $gps_type_equipment)->update(array('status' => 'Used'));
@@ -275,6 +287,11 @@ class MaintenanceGpsController extends Controller
         }
 
         return $complete;
+    }
+
+    public function export_maintenance()
+    {
+        return Excel::download(new MaintenanceExport, 'Maintenance.xlsx');
     }
     // public function basedSensorName($id)
     // {

@@ -30,7 +30,7 @@
        @endforeach --}}
     <td>
           <select class="select vehicle-{{$request_complain->id}}" id="vehicle" name="vehicle" required>
-            <option value="{{$request_complain->vehicle}}">{{$request_complain->detailCustomerVehicleRequest->vehicle->license_plate??''}}</option>
+            <option value="{{$request_complain->vehicle}}">{{$request_complain->vehicleRequest->license_plate??''}}</option>
 
             {{-- @foreach ($detail as $item)
                 <option value="{{ $item->id }}">{{ $item->vehicle->license_plate??'' }}</option>

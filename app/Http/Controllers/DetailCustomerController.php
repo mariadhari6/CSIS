@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DetailCustomerExport;
 use App\Models\Company;
 use App\Models\DetailCustomer;
 use App\Models\Gps;
@@ -14,7 +15,7 @@ use App\Models\VehicleType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class DetailCustomerController extends Controller
 {
@@ -81,6 +82,49 @@ class DetailCustomerController extends Controller
             'status_layanan'    => $status_layanan
         ]);
     }
+    // public function save_import(Request $request)
+    // {
+    //     $dataRequest = json_decode($request->data);
+    //     foreach ($dataRequest as $key => $value) {
+
+    //         // try {
+    //         $data = array(
+    //             'company_id'        => Company::where('company_name', $value->company_id)->firstOrFail()->id,
+    //             'licence_plate'     => Vehicle::where('license_plate', $value->licence_plate)->firstOrFail()->id,
+    //             'vehicle_id'        => VehicleType::where('name', $value->vehicle_id)->firstOrFail()->id,
+    //             'po_id'             => MasterPo::where('po_number', $value->po_id)->firstOrFail()->id,
+    //             'harga_layanan'     => MasterPo::where('harga_layanan', $value->harga_layanan)->firstOrFail()->id,
+    //             'status_po'         => MasterPo::where('status_po', $value->status_po)->firstOrFail()->id,
+    //             'imei'              => Gps::where('imei', $value->imei)->firstOrFail()->id,
+    //             'gps_id'            => Gps::where('merk', $value->gps_id)->firstOrFail()->id,
+    //             'type'            => Gps::where('type', $value->type)->firstOrFail()->id,
+    //             'gsm_id'            => Gsm::where('gsm_number', $value->gsm_id)->firstOrFail()->id,
+    //             'provider'            => Gsm::where('provider', $value->provider)->firstOrFail()->id,
+    //             'sensor_all'           => $value->sensor_all,
+    //             'pool_name'     => Vehicle::where('pool_name', $value->pool_name)->firstOrFail()->id,
+    //             'pool_location'     => Vehicle::where('pool_location', $value->pool_location)->firstOrFail()->id,
+    //             'waranty'           => $value->waranty,
+    //             'tanggal_pasang'           => $value->tanggal_pasang,
+    //             'tanggal_non_aktif'           => $value->tanggal_non_acktif,
+
+
+
+
+
+
+
+
+
+
+
+    //         );
+    //         MasterPo::insert($data);
+    //         // return 'success';
+    //         // } catch (\Throwable $th) {
+    //         //     return 'fail';
+    //         // }
+    //     }
+    // }
 
     public function store(Request $request)
     {
@@ -128,8 +172,8 @@ class DetailCustomerController extends Controller
             }
         }
         Vehicle::where('id', $license_id)->update(array('status' => 'Used'));
-        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Used', 'company_id' => $company));
-        Gps::where('id', $gps_id)->update(array('status' => 'Used'));
+        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active', 'company_id' => $company));
+        Gps::where('id', $gps_id)->update(array('status' => 'Used', 'company_id' => $company));
         DetailCustomer::insert($data);
     }
 
@@ -291,6 +335,10 @@ class DetailCustomerController extends Controller
         });
         $data = $key->all();
         return $data;
+    }
+    public function export_detail()
+    {
+        return Excel::download(new DetailCustomerExport, 'DetailCustomer.xlsx');
     }
 
     // public function basedPO($id){

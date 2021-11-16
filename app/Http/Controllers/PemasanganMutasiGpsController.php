@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PemasanganMutasiGpsExport;
 use App\Models\Company;
 use App\Models\DetailCustomer;
 use App\Models\Gps;
@@ -16,6 +17,7 @@ use App\Models\Teknisi;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class PemasanganMutasiGpsController extends Controller
@@ -274,6 +276,11 @@ class PemasanganMutasiGpsController extends Controller
         $data = Vehicle::where('company_id', $id)->get();
 
         return $data;
+    }
+
+    public function export_pemasangan()
+    {
+        return Excel::download(new PemasanganMutasiGpsExport, 'Pemasangan_Mutasi_GPS.xlsx');
     }
 
     // public function basedSensorName($id)

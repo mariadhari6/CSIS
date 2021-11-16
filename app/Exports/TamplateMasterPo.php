@@ -15,7 +15,7 @@ class TamplateMasterPo implements FromCollection
     {
         return new EloquentCollection([
             [
-                'company_id*', 'po_number*', 'po_date*', 'harga_layanan*', 'jumlah_unit_po*', 'status_po', 'selles'
+                'company_id*', 'po_number*', 'po_date*', 'harga_layanan*', 'jumlah_unit_po*', 'status_po', 'sales_id'
             ]
         ]);
     }

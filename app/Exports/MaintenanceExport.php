@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\MasterPo;
+use App\Models\RequestComplaint;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -11,45 +11,58 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-use Maatwebsite\Excel\Concerns\Exportable;
-
-class MasterPoExport implements FromCollection, WithHeadings, WithMapping, WithEvents, ShouldAutoSize
+class MaintenanceExport implements FromCollection, WithHeadings, WithMapping, WithEvents
 {
-    use Exportable;
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return MasterPo::with('sales', 'company')->get();
+        return RequestComplaint::with('companyRequest', 'taskRequest', 'teknisiMaintenance', 'gpsMaintenance', 'detailCustomerVehicleRequest', 'gsm')->whereIn('task', [4, 5])->get();
     }
-    public function map($po): array
+
+    public function map($maintenance): array
     {
         return [
-            $po->company->company_name,
-            $po->po_number,
-            Carbon::parse($po->po_date)->toFormattedDateString(),
-            $po->harga_layanan,
-            $po->jumlah_unit_po,
-            $po->status_po,
-            $po->sales->name ?? ''
-
+            $maintenance->companyRequest->company_name,
+            $maintenance->taskRequest->task,
+            $maintenance->detailCustomerVehicleRequest->vehicle->license_plate ?? '',
+            Carbon::parse($maintenance->waktu_kesepakatan)->toFormattedDateString(),
+            $maintenance->gpsMaintenance->type ?? '',
+            $maintenance->equipment_gps_id,
+            $maintenance->equipment_sensor_id,
+            $maintenance->gsm->gsm_number ?? '',
+            $maintenance->ketersediaan_kendaraan,
+            $maintenance->keterangan,
+            $maintenance->hasil,
+            $maintenance->biaya_transportasi,
+            $maintenance->teknisiMaintenance->teknisi_name ?? '',
+            $maintenance->req_by,
+            $maintenance->note_maintenance,
+            $maintenance->status,
 
         ];
     }
-
     public function headings(): array
     {
         return [
             // '#',
             'Company Name',
-            'Po Number',
-            'Po Date',
-            'Harga Layanan',
-            'Jumlah Unit PO',
-            'Status PO',
-            'Sales'
-
+            'Permasalahan',
+            'Vehicle',
+            'Tanggal',
+            'Type GPS',
+            'GPS Terpakai',
+            'Sensor Terpakai',
+            'GSM',
+            'Ketersediaan Kendaraan',
+            'Keterangan',
+            'Hasil',
+            'Biaya Transportasi',
+            'Teknisi',
+            'Req By',
+            'Note',
+            'Status'
         ];
     }
 
@@ -59,7 +72,7 @@ class MasterPoExport implements FromCollection, WithHeadings, WithMapping, WithE
         return [
 
             AfterSheet::class    => function (AfterSheet $event) {
-                $cellRange = 'A1:G1'; // All headers
+                $cellRange = 'A1:P1'; // All headers
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(12);
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setBold(true);
             },

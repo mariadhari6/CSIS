@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Sensor;
+use App\Models\Pic;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -10,47 +10,40 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\Exportable;
 
-
-
-class SensorExport implements FromCollection, WithMapping, WithHeadings, WithEvents
+class PicExport implements FromCollection, WithEvents, WithMapping, WithHeadings
 {
-    use Exportable;
-
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return Sensor::all();
+        return Pic::with('company')->get();
     }
 
-    public function map($sensor): array
+    public function map($pic): array
     {
         return [
-            $sensor->sensor_name,
-            $sensor->merk_sensor,
-            $sensor->serial_number,
-            $sensor->rab_number,
-            Carbon::parse($sensor->waranty)->toFormattedDateString(),
-            $sensor->status
-
-
+            $pic->company->company_name,
+            $pic->pic_name,
+            $pic->phone,
+            $pic->email,
+            $pic->position,
+            Carbon::parse($pic->date_of_birth)->toFormattedDateString(),
         ];
-        // $sensor->setAllBorders('thin');
     }
 
     public function headings(): array
     {
         return [
             // '#',
-            'Sensor Name',
-            'Merk Sensor',
-            'Serial Number',
-            'RAB Number',
-            'Waranty',
-            'Status'
+            'Company Name',
+            'Pic Name',
+            'Phone',
+            'Email',
+            'Position',
+            'Date Of Birth'
+
 
         ];
     }
@@ -64,7 +57,6 @@ class SensorExport implements FromCollection, WithMapping, WithHeadings, WithEve
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(12);
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setBold(true);
             },
-
 
         ];
     }

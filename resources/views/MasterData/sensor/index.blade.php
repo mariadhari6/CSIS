@@ -229,7 +229,7 @@
             // alert("save failed");
             swal({
                 type: 'warning',
-                text: 'Duplicate data or error format, Imei must 15 character',
+                text: 'data error',
                 showCloseButton: true,
                 showConfirmButton: false
               }).catch(function(timeout) { });
