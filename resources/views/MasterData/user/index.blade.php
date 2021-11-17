@@ -5,6 +5,7 @@
 @section('user','active')
 
 @section('content')
+<form onsubmit="return false">
     <div class="row">
     <div class="col-md-12">
     <div class="card">
@@ -14,26 +15,10 @@
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" ></i>
                 </button>
-                <button class="btn btn-success  mr-2 edit_all">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn btn-danger  delete_all">
-                  <i class="fas fa-trash"></i>
-                </button>
             </div>
-              <form onsubmit="return false">
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-
-                <th>
-                    <div>
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-                </th>
                 <th scope="col" class="action-no">No.</th>
                 <th scope="col" class="list-sellerName">Name*</th>
                 <th scope="col" class="list-sellerCode">Email*</th>
@@ -47,10 +32,10 @@
             </tbody>
 
           </table>
-          </form>
-
         </div>
       </div>
+    </form>
+
   <script>
 
     $(document).ready(function() {
@@ -59,6 +44,7 @@
 
       //  ----- freeze table -------
        jQuery(".main-table").clone(true).appendTo('#table-scroll').addClass('clone');   
+       
     
     });
 
@@ -102,9 +88,8 @@
               showCloseButton: true,
               showConfirmButton: false
             }).catch(function(timeout) { });
-        }
-
-           $.ajax({
+        } else {
+          $.ajax({
             type: "get",
             url: "{{ url('store_user') }}",
             data: {
@@ -124,6 +109,7 @@
             }
         });
 
+        }
     }
 
         // -----Proses Delete Data ------
@@ -163,7 +149,6 @@
        // ------ Edit Form Data ------
     function edit(id){
         var id = id;
-        $("#td-checkbox-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
@@ -185,51 +170,66 @@
       var password3 = $("#password3").val();
       var role = $("#role").val();
       var id = id;
-      $.ajax({
-          type: "get",
-          url: "{{ url('update_user') }}/"+id,
-          data: {
-            name: name,
-            email: email,
-            password: password,
-            password2: password3,
-            role:role,
-            id: id
-          },
-          success: function(data) {
-          //  alert(data)
-            if (data == 'fail email') {
-            swal({
+
+      if( 
+          name == "" || 
+          email == "" || 
+          password == "" || 
+          password2 == "" || 
+          password3 == "" || 
+          id == "" ){
+        
+      } else {
+      if (password2 != password3) {
+        swal({
               type: 'warning',
-              text: 'Email already exist',
+              text: 'Wrong Password Confirmation',
               showCloseButton: true,
               showConfirmButton: false
-              }).catch(function(timeout) { });
-            } else if (data == 'fail password') {
-            swal({
-              type: 'warning',
-              text: 'Current password does not match! ',
-              showCloseButton: true,
-              showConfirmButton: false
-              }).catch(function(timeout) { });
-            } else {
-            swal({
-              type: 'success',
-              title: ' Data Updated',
-              showConfirmButton: false,
-              timer: 1500
-              }).catch(function(timeout) { });
-                // read();
-            }
-          //   swal({
-          //     type: 'success',
-          //     title: ' Data Updated',
-          //     showConfirmButton: false,
-          //     timer: 1500
-          // }).catch(function(timeout) { });
-          // alert('Success');
-          }
-      });
+            }).catch(function(timeout) { });
+        } else {
+          $.ajax({
+              type: "get",
+              url: "{{ url('update_user') }}/"+id,
+              data: {
+                name: name,
+                email: email,
+                password: password,
+                password2: password3,
+                role:role,
+                id: id
+              },
+              success: function(data) {
+              //  alert(data)
+                if (data == 'fail email') {
+                  swal({
+                    type: 'warning',
+                    text: 'Email already exist',
+                    showCloseButton: true,
+                    showConfirmButton: false
+                  }).catch(function(timeout) { });
+                } else if (data == 'fail password') {
+                  swal({
+                    type: 'warning',
+                    text: 'Current password does not match! ',
+                    showCloseButton: true,
+                  showConfirmButton: false
+                  }).catch(function(timeout) { });
+                } else if(data == 'success') {
+                  swal({
+                    type: 'success',
+                    title: ' Data Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                  }).catch(function(timeout) { });
+                  read();
+                } else {
+                  console.log(data)
+                }
+              }
+          });
+        }
+      }
     }
 
 

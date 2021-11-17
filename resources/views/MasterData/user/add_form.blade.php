@@ -1,7 +1,6 @@
 
 <tr id="add_form">
     <td></td>
-    <td></td>
     <td>
         <div class="input-div">
             <input type="text" class="input" id="name" placeholder="Name" required>

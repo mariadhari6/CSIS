@@ -2,7 +2,13 @@
     <strong> {{ $company->company_name }}</strong>
 </div>
     <div class="text-right mt-3" id="selected">
-        <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+        <button type="button" class="btn btn-primary float-left mr-2 add add-button">
+            <b>Add</b>
+            <i class="fas fa-plus ml-2" id="add"></i>
+        </button>
+        <a href="/export_detail_cust_company/{{ $company->id }}" class="btn btn-success  mr-2">
+            <i class="fas fa-file-export"></i>
+        </a>
         <button class="btn btn-success  mr-2 edit_all">
             <i class="fas fa-edit"></i>
         </button>

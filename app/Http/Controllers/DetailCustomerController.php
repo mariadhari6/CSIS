@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DetailCustCompany;
 use App\Models\Company;
 use App\Models\DetailCustomer;
 use App\Models\Gps;
@@ -14,7 +15,7 @@ use App\Models\VehicleType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class DetailCustomerController extends Controller
 {
@@ -291,6 +292,12 @@ class DetailCustomerController extends Controller
         });
         $data = $key->all();
         return $data;
+    }
+
+    // Eksport Per Company
+    public function export(Request $request)
+    {
+        return Excel::download(new DetailCustCompany($request->id), 'Detail Customer.xlsx');
     }
 
     // public function basedPO($id){

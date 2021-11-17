@@ -273,7 +273,7 @@ Route::group(['middleware' => ['role:superAdmin']], function () {
     // Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [DetailCustomerController::class, 'basedSerialNumber']);
     Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
-
+    Route::get('/export_detail_cust_company/{id}', [DetailCustomerController::class, 'export']);
 
     // Pemasangan Mutasi GPS
     Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');

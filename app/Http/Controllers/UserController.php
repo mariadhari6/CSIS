@@ -11,6 +11,12 @@ class UserController extends Controller
 {
     public function index()
     {
+        // $user = User::orderBy('id', 'DESC')->get(); 
+        // // echo $user->roles->pluck('name');
+        // foreach ($user as $key => $value) {
+        //     // dd($value);
+        //     echo $value->roles->pluck('name') . '/n';
+        // }
         return view('MasterData.user.index');
     }
 
@@ -22,7 +28,9 @@ class UserController extends Controller
 
     public function item_data()
     {
-        $user = User::orderBy('id', 'DESC')->with('roles')->get(); 
+        $user = User::orderBy('id', 'DESC')->get(); 
+        // DB::table('roles')->where('model_id',$id)->delete();
+
         // dd($user->roles);
         // echo $user->roles[0]['name'];
         // $roles = DB::table('model_has_roles')->orderBy('role_id', 'DESC')->get();
@@ -61,21 +69,34 @@ class UserController extends Controller
     {
         // $user = Auth::user()();
         $data = User::findOrfail($id);
+        $success = '';
         $checkEmail = User::where('email', '=', $request->email)->first();
 
         if ($checkEmail != "") {
-            return 'fail email';
-        } else if (!Hash::check($request->password, $data->password)) {
-            return 'fail password';
+            if ($request->email != $data->email) {
+                $success = 'fail email';
+            } else {
+                $success = 'success';
+            }
         } 
+        
+        if (!Hash::check($request->password, $data->password)) {
+            $success = 'fail password';
+        } 
+        
+        if ($success == 'success') {
+            $data->name = $request->name;
+            if ($request->email != $data->email) {
+                $data->email = $request->email;
+            }
+            $data->password = Hash::make($request->password);
+            $data->save();
+            DB::table('model_has_roles')->where('model_id',$id)->delete();
+            $data->assignRole($request->role);
 
-        // Hash::make($request->password);
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->password = Hash::make($request->password);
-        // $data->status = $request->status;
-        // $data->assignRole($request->role);
-        // $data->save();
-        // $data->save();
+            return $success;    
+        } else {
+            return $success;
+        }
     }
 }

@@ -167,6 +167,7 @@ class SensorController extends Controller
     {
         return Excel::download(new TamplateSensor, 'template-sensor.xlsx');
     }
+    
     public function export_sensor()
     {
         return Excel::download(new SensorExport, 'Sensor.xlsx');
