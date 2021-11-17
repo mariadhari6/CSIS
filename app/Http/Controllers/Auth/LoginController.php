@@ -74,8 +74,8 @@ class LoginController extends Controller
         } else if ($user->hasRole('cs')) {
             return redirect()->route('cs.homepage');
         } else if ($user->hasRole('teknisi')) {
-            return redirect()->route('dashboard.visit');
-            dd($user);
+            return redirect()->route('cs.homepage');
+            // dd($user);
         } 
 
         return redirect()->route('login')->with('error', 'email and password are wrong');

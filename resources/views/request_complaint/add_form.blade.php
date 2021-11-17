@@ -3,9 +3,9 @@
     <td></td>
 
     <td>
-        <select class="select" id="company_id" name="company_id" required>
-            <option class="hidden"> --Pilih Company--</option>
-
+        <select class="select-search" id="company_id" placeholder="Select a Company..." name="company_id" required>
+            {{-- <option class="hidden" placeholder="Search Company"></option> --}}
+            <option value="">Select a Company...</option>
             @foreach ($detail as $item )
             <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
 
@@ -118,6 +118,16 @@
 
 
     <script>
+     $(document).ready(function() {
+        new TomSelect(".select-search",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+        });
+    });
+
     $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();
             // alert(itemID);
