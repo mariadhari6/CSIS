@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -59,7 +60,8 @@ class UserController extends Controller
 
     public function edit_form($id)
     {
-        $user = User::orderBy('id', 'DESC')->with('roles')->first(); 
+        $user = User::findOrfail($id);
+        // $user = User::orderBy('id', 'DESC')->with('roles')->first(); 
         return view('MasterData.user.edit_form')->with([
             'user' => $user
         ]);
@@ -98,5 +100,11 @@ class UserController extends Controller
         } else {
             return $success;
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout(); // menghapus session yang aktif
+        return redirect()->route('login');
     }
 }

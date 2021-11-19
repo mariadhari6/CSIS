@@ -20,6 +20,7 @@
 
         {{-- CSS  --}}
         <link rel="stylesheet" href="{{asset('css/master.css')}}">
+        {{-- <link rel="stylesheet" href="{{asset('css/home.css')}}"> --}}
 
         {{-- FontAwesome --}}
         <script src="https://kit.fontawesome.com/3288de5ebf.js" crossorigin="anonymous"></script>

@@ -14,12 +14,12 @@
             {{ $item->password }}
         </td>
         <td id="item-role-{{ $item->id }}">
-            {{-- {{ $item->roles->pluck('name')  == 'superAdmin' ? 'Super Admin' : null }}
-            {{ $item->roles->pluck('name')  == 'cs' ? 'CS' : null }}
-            {{ $item->roles->pluck('name')  == 'teknisi' ? 'Teknisi' : null }} --}}
+            {{  $item->getRoleNames()->first()  == 'superAdmin' ? 'Super Admin' : null }}
+            {{  $item->getRoleNames()->first()  == 'cs' ? 'CS' : null }}
+            {{  $item->getRoleNames()->first()  == 'teknisi' ? 'Teknisi' : null }}
 
             {{-- {{   preg_replace("/<!--.*?-->/", "", $item->roles->pluck('name')); }} --}}
-            {{  $item->roles->pluck('name') }}
+            {{-- {{  $item->getRoleNames()->first() }} --}}
         </td>
         <td class="action sticky-col first-col" id="td-button-{{ $item->id }}">
         <div id="button-{{ $item->id }}">

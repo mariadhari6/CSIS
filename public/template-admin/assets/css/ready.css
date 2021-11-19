@@ -2260,11 +2260,12 @@ body {
 
 .main-header {
     min-height: 55px;
-    width: 100%;
-    background: #5aa8d3;
+    width: 97%;
+    background: rgba(75, 133, 227, 0.771);
     position: fixed;
     z-index: 1001;
     border-bottom: 1px solid #eee;
+    margin-left: 50px;
 }
 .main-header .logo-header {
     float: left;
@@ -2281,6 +2282,17 @@ body {
     z-index: 1001;
     display: inline-block;
 }
+
+.main-header .dor{
+    min-height: 55px;
+    width: 98%;
+    background: rgba(75, 133, 227, 0.771);
+    position: fixed;
+    z-index: 1001;
+    border-bottom: 1px solid #eee;
+    /* margin-left: 50px; */
+}
+
 .main-header .logo-header a.logo {
     color: #575962;
 }
@@ -2466,7 +2478,7 @@ body {
 
 .main-panel {
     position: relative;
-    width: calc(100% - 260px);
+    width: calc(100% - 50px);
     min-height: 100%;
     float: right;
     background: #f2f8f9;
@@ -5400,7 +5412,7 @@ body {
     min-height: 64px;
 }
 .numbers{
-     font-size: 3em;
+    font-size: 3em;
     min-height: 64px;
 }
 

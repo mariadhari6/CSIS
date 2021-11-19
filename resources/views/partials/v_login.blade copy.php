@@ -16,43 +16,25 @@
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-lg-5">
-                    <img src="{{ asset('images/login-img.jpeg')}}" alt="" class="img-fluid">
+                    <img src="{{ asset('images/WHITE_ODM_full.png')}}" alt="" class="img-fluid">
                 </div>
-                <div class="login-form col-lg-7 px-5 pt-5">
-                    <h1 class="font-weight-bold py-3" style="color: white">Login</h1>
-                     <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
+                <div class="col-lg-7 px-5 pt-5">
+                    {{-- <h1 class="font-weight-bold py-3">Login</h1> --}}
+                    <form>
                         <div class="form-row">
-                         <div class="col-md-7">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Masukan e-mail">
+                            <div class="col-lg-7">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-row">
-                            <div class="col-md-7">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Masukan password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                @if (session('error'))
-                                    {{session('error')}}
-                                 @endif
+                                <input type="email" placeholder="Email Address" class="form-control my-3 p-4" >
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-7">
-
-                                <button type="submit" style="background-color: #75b6ee" class="btn1 mt-3 mb-5"> {{ __('Login') }} </button>
+                                <input type="password" placeholder="**********" class="form-control my-3 p-4">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <button type="button" class="btn1 mt-3 mb-5">Login</button>
                             </div>
                         </div>
 

@@ -392,3 +392,414 @@
     table-layout: auto;
     width: 1000px;
 }
+
+/* Tittle Table */
+.title-table {
+    display: inline-block;
+    position: relative;
+    left: 390px;
+    top: 4px;
+}
+
+/* logo teks */
+.logo-teks {
+    display: inline-block;
+}
+
+/* Side bar */
+.sidebar-new {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 60px;
+    z-index: 1;
+    color: #ffffff;
+    font-weight: 200;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+    -webkit-transition: width 0.05s linear;
+    transition: width 0.05s linear;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    z-index: 1001;
+    background: #ffffff;
+    border-right: 1px solid #eee;
+    box-shadow: 6px 1px 20px rgba(69, 65, 78, 0.1);
+}
+.sidebar-new:hover,
+nav.sidebar-new.expanded {
+    width: 270px;
+    overflow: visible;
+}
+
+.sidebar-new > ul {
+    margin: 7px 0;
+}
+
+.sidebar-new li {
+    position: relative;
+    display: block;
+    width: 250px;
+    margin-bottom: 15px;
+}
+
+.sidebar-new li > a {
+    position: relative;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left: 2px;
+    color: #83848a;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+
+.sidebar-new .nav-icon {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+.sidebar-new .nav-text {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 190px;
+    font-family: "Titillium Web", sans-serif;
+}
+
+.sidebar-new .nav-list {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 190px;
+    font-family: "Titillium Web", sans-serif;
+    margin-left: 20px;
+}
+
+.no-touch .scrollable.hover {
+    overflow-y: hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+    overflow-y: auto;
+    overflow: visible;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+nav {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+nav ul,
+nav li {
+    outline: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-new li:hover > a,
+nav.sidebar-new li.active > a,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
+.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
+.dashboard-page nav.dashboard-menu ul li.active a {
+    color: #5fa2db;
+    /* background-color: #5fa2db; */
+}
+
+.csis {
+    margin-left: 50px;
+    margin-top: 5px;
+    z-index: 1001;
+}
+
+.integrasi {
+    margin-right: 20px;
+    margin-top: 8px;
+    z-index: 1001;
+}
+
+.drop {
+    margin-left: 60px;
+}
+
+.logo-sidebar {
+    min-height: 55px;
+    background-color: rgba(84, 138, 228, 255);
+    z-index: 1001;
+}
+
+.fa-2x {
+    font-size: 2em;
+}
+
+.icon-sidebar {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    color: #c3c5ca;
+    margin-top: 6px;
+}
+
+/* Home */
+.d_company {
+    background-color: #ff1e32;
+    width: 300px;
+    height: 400px;
+}
+
+.d_company:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_company-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 100px;
+    top: 100px;
+}
+
+.d_company-teks {
+    position: relative;
+    left: 110px;
+    top: 110px;
+}
+
+.d_company-number {
+    position: relative;
+    left: 110px;
+    top: 110px;
+    font-weight: bold;
+}
+
+.d_gps {
+    background-color: #0186ff;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    right: 20px;
+}
+
+.d_gps:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_gps-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 80px;
+    top: 80px;
+}
+
+.d_gps-teks {
+    position: relative;
+    left: 80px;
+    top: 30px;
+}
+
+.d_gps-number {
+    position: relative;
+    left: 80px;
+    top: 26px;
+    font-weight: bold;
+}
+
+.d_sensor {
+    background-color: #0ff861;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    right: 140px;
+}
+
+.d_sensor:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_sensor-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 80px;
+    top: 80px;
+}
+
+.d_sensor-teks {
+    position: relative;
+    left: 72px;
+    top: 30px;
+}
+
+.d_sensor-number {
+    position: relative;
+    left: 80px;
+    top: 26px;
+    font-weight: bold;
+}
+
+.d_vehicle {
+    background-color: #ff2267;
+    width: 415px;
+    height: 185px;
+    position: relative;
+    top: 215px;
+    right: 690px;
+}
+
+.d_vehicle:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_vehicle-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 140px;
+    top: 60px;
+}
+
+.d_vehicle-teks {
+    position: relative;
+    left: 210px;
+    top: -15px;
+}
+
+.d_vehicle-number {
+    position: relative;
+    left: 212px;
+    top: -12px;
+    font-weight: bold;
+}
+
+.d_gsm {
+    background-color: #ffbb02;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    left: 750px;
+    bottom: 430px;
+}
+
+.d_gsm:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_gsm-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 100px;
+    top: 100px;
+}
+
+.d_gsm-teks {
+    position: relative;
+    left: 125px;
+    top: 108px;
+}
+
+.d_gsm-number {
+    position: relative;
+    left: 125px;
+    top: 107px;
+    font-weight: bold;
+}
+
+.d_RequstComp {
+    background-color: #798aa6;
+    width: 258px;
+    height: 200px;
+    position: relative;
+    /* top: 215px; */
+    left: 734px;
+    bottom: 430px;
+}
+
+.d_RequstComp:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_RequstComp-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 100px;
+    top: 40px;
+}
+
+.d_RequstComp-teks {
+    position: relative;
+    left: 60px;
+    top: 20px;
+}
+
+.d_RequstComp-number {
+    position: relative;
+    left: 119px;
+    top: 20px;
+    font-weight: bold;
+}
+
+.d_visitAs {
+    background-color: #00c3ff;
+    width: 258px;
+    height: 185px;
+    position: relative;
+    /* top: 215px; */
+    left: 398px;
+    bottom: 215px;
+}
+
+.d_visitAs:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_visitAs-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 100px;
+    top: 40px;
+}
+
+.d_visitAs-teks {
+    position: relative;
+    left: 68px;
+    top: 20px;
+}
+
+.d_visitAs-number {
+    position: relative;
+    left: 119px;
+    top: 20px;
+    font-weight: bold;
+}

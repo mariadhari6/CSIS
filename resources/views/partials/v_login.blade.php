@@ -1,54 +1,29 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/login.css')}}">
-
-    <title>CSIS Login</title>
-  </head>
-  <body>
-    <section class="form my-4 mx-5">
-        <div class="container">
-            <div class="row no-gutters">
-                <div class="col-lg-5">
-                    <img src="{{ asset('images/csis.png')}}" alt="" class="img-fluid">
-                </div>
-                <div class="col-lg-7 px-5 pt-5">
-                    {{-- <h1 class="font-weight-bold py-3">Login</h1> --}}
-                    <form>
-                        <div class="form-row">
-                            <div class="col-lg-7">
-
-                                <input type="email" placeholder="Email Address" class="form-control my-3 p-4" >
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-7">
-                                <input type="password" placeholder="**********" class="form-control my-3 p-4">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-7">
-                                <button type="button" class="btn1 mt-3 mb-5">Login</button>
-                            </div>
-                        </div>
-
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-
-  </body>
-</html>
+.screen-1
+	svg.logo(xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' width='300' height='300' viewbox='0 0 640 480' xml:space='preserve')
+		g(transform='matrix(3.31 0 0 3.31 320.4 240.4)')
+			circle(style='stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,71,133); fill-rule: nonzero; opacity: 1;' cx='0' cy='0' r='40')
+		g(transform='matrix(0.98 0 0 0.98 268.7 213.7)')
+			circle(style='stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;' cx='0' cy='0' r='40')
+		g(transform='matrix(1.01 0 0 1.01 362.9 210.9)')
+			circle(style='stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;' cx='0' cy='0' r='40')
+		g(transform='matrix(0.92 0 0 0.92 318.5 286.5)')
+			circle(style='stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;' cx='0' cy='0' r='40')
+		g(transform='matrix(0.16 -0.12 0.49 0.66 290.57 243.57)')
+			polygon(style='stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;' points='-50,-50 -50,50 50,50 50,-50 ')
+		g(transform='matrix(0.16 0.1 -0.44 0.69 342.03 248.34)')
+			polygon(style='stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;' vector-effect='non-scaling-stroke' points='-50,-50 -50,50 50,50 50,-50 ')
+	.email
+		label(for="email") Email Address
+		.sec-2
+			ion-icon(name="mail-outline")
+			input(type="email" name="email" placeholder="Username@gmail.com")
+	.password
+		label(for="password") Password
+		.sec-2
+			ion-icon(name="lock-closed-outline")
+			input.pas(type="password" name="password" placeholder="············")
+			ion-icon.show-hide(name="eye-outline")
+	button.login Login 
+	.footer
+		span Sign up
+		span Forgot Password?

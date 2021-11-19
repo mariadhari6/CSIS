@@ -22,10 +22,10 @@
     </td>
     <td>
         <select class="select" id="role" aria-label=".form-select-lg example" required>
-            <option value="{{ $user->roles[0]['name'] }}">
-                {{ $user->roles[0]['name'] == 'superAdmin' ? 'Super Admin' : null }}
-                {{ $user->roles[0]['name'] == 'cs' ? 'CS' : null }}
-                {{ $user->roles[0]['name'] == 'teknisi' ? 'Teknisi' : null }}
+            <option value="{{ $user->getRoleNames()->first() }}">
+                {{  $user->getRoleNames()->first() == 'superAdmin' ? 'Super Admin' : null }}
+                {{  $user->getRoleNames()->first() == 'cs' ? 'CS' : null }}
+                {{  $user->getRoleNames()->first() == 'teknisi' ? 'Teknisi' : null }}
             </option>
             <option value="superAdmin">Super Admin</option>
             <option value="cs">CS</option>

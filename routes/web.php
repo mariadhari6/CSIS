@@ -59,7 +59,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('login');
 
 Route::get('/register', function () {
     return view('auth.register');
@@ -84,6 +84,9 @@ Auth::routes();
 // });
 
 Route::group(['middleware' => ['role:superAdmin']], function () {
+    // Logout
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+    
     // Edit Password
     Route::get('change-password', [ChangePasswordController::class, 'index']);
     Route::post('change-password', [ChangePasswordController::class, 'store'])->name('change.password');
