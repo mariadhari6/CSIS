@@ -15,7 +15,7 @@ use PhpParser\Node\Stmt\TryCatch;
 use App\Models\DetailCustomer;
 
 
-class GsmMasterController extends Controller
+class GsmActiveController extends Controller
 {
     public function index()
     {

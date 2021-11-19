@@ -22,6 +22,7 @@ use App\Http\Controllers\MasterPoController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\MaintenanceGpsController;
 use App\Http\Controllers\SummaryController;
+use App\Http\Controllers\TeknisiController;
 use App\Models\DetailCustomer;
 use App\Models\PemasanganMutasiGps;
 use App\Models\Username;
@@ -41,6 +42,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// Route::get('/dashboard-cs', function () {
+//     return 'Cs Login';
+// })->name('dashboard_cs');
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -59,33 +64,21 @@ Route::get('/register', function () {
 // Route::post('/selected-username', [UsernameController::class, 'deleteall'])->name('livetable.delete_all');
 // Route::get('/selectedDelete', 'UsernameController@deleteAll')->name('livetable.delete_all');
 
-Auth::routes();
+// Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin', 'auth'], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.homepage');
+Route::get('/', function () {
+    return view('auth.login');
 });
+// Route::group(['middleware' => ['role:superAdmin']], function () {
+//     // Route::get('/admin', [AdminController::class, 'index'])->name('admin.homepage');
 
-Route::group(['middleware' => 'isCs', 'auth'], function () {
-    Route::get('/customer_service', [CustomerServiceController::class, 'index'])->name('cs.homepage');
-    Route::get('/livetable', [UsernameController::class, 'index']);
-    // Route::get('/livetable/fetch_data', [UsernameController::class, 'fetch_data']);
-    // Route::post('/livetable/add_data', [UsernameController::class, 'add_data'])->name('livetable.add_data');
-    // Route::post('/livetable/update_data', [UsernameController::class, 'update_data'])->name('livetable.update_data');
-    // Route::post('/livetable/delete_data', [UsernameController::class, 'delete_data'])->name('livetable.delete_data');
-    // Route::post('/livetable/detail_data', [UsernameController::class, 'detail_data'])->name('livetable.detail_data');
-    //
-    Route::get('/selectedDelete', [UsernameController::class, 'deleteAll'])->name('livetable.delete_all');
-    Route::get('/item_data', [UsernameController::class, 'item_data']);
-    Route::get('/add_form', [UsernameController::class, 'add_form']);
-    Route::get('/store', [UsernameController::class, 'store']);
-    Route::get('/destroy/{id}', [UsernameController::class, 'destroy']);
-    Route::get('/show/{id}', [UsernameController::class, 'show']);
-    Route::get('/update/{id}', [UsernameController::class, 'update']);
-    Route::get('/selected', [UsernameController::class, 'selected']);
-    Route::get('/update_all/{id}', [UsernameController::class, 'updateall']);
-    Route::get('export', [UsernameController::class, 'export'])->name('export');
+//     Route::get('/test', function () {
+//         return 'login super admin';
+//     });
+// });
+
+Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
 
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
@@ -266,6 +259,7 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/based_serialnumber/{id}', [DetailCustomerController::class, 'basedSerialNumber']);
     Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
     Route::get('/export_detail_customer', [DetailCustomerController::class, 'export_detail']);
+    Route::get('/export_detail_cust_company/{id}', [DetailCustomerController::class, 'export']);
 
 
 
@@ -328,13 +322,8 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
 
 
 
-    //Dashboar Visit Assignment
-    Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
-    // Route::get('/item_data_DashboardVisitAssignment', [DashboardVisitAssignmentController::class, 'item_data']);
-    // Route::get('/item_data_DetailCostPercompany', [DashboardVisitAssignmentController::class, 'detailPercompany']);
-    // Route::get('/item_data_TypeGps', [DashboardVisitAssignmentController::class, 'perTypeGps']);
-    // Route::get('/item_data_teknisi', [DashboardVisitAssignmentController::class, 'tugasPerTeknisi']);
 
+    Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
 
     // Maintenance GPS
     Route::get('/MaintenanceGps', [MaintenanceGpsController::class, 'index']);
@@ -421,11 +410,90 @@ Route::group(['middleware' => 'isCs', 'auth'], function () {
     Route::get('/item_summary', [SummaryController::class, 'item_summary'])->name('item_summary');
     Route::get('/add_summary', [DetailCustomerController::class, 'add_form'])->name('add_summary');
 
-    // dashboard home
+    // // dashboard home
     Route::get('/item_data_Homecompany', [CustomerServiceController::class, 'company_home']);
     Route::get('/item_data_Homegps', [CustomerServiceController::class, 'gps_home']);
     Route::get('/item_data_HomeSensor', [CustomerServiceController::class, 'sensor_home']);
     Route::get('/item_data_HomeGsm', [CustomerServiceController::class, 'gsm_home']);
+    Route::get('/item_data_HomeRequest', [CustomerServiceController::class, 'request_home']);
+    Route::get('/item_data_HomeVehicle', [CustomerServiceController::class, 'vehicle_home']);
+    Route::get('/item_data_HomeVisit', [CustomerServiceController::class, 'visit_home']);
+
+
+
+
+    Route::get('/super_admin', [AdminController::class, 'index'])->name('admin.homepage');
+    //
+
+    // Pemasangan Mutasi GPS
+    Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
+    Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
+    Route::get('/item_data_MY_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data_MY']);
+    Route::get('/add_form_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'add_form']);
+    Route::get('/store_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'store']);
+    Route::get('/destroy_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'destroy']);
+    Route::get('/show_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'edit_form']);
+    Route::get('/update_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'update']);
+    Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
+    Route::get('/selected_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'selected']);
+    Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
+    Route::get('/item_data_onProgress_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_onProgress'])->name('item_data_onprogress');
+    Route::get('/item_data_done_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_done'])->name('item_data_done');
+    Route::get('/item_data_all_pemasangan', [PemasanganMutasiGpsController::class, 'item_data']);
+    Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
+    Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
+    Route::get('/based_vehiclePemasangan/{id}', [PemasanganMutasiGpsController::class, 'basedVehicle']);
+    Route::get('/based_imei/{id}', [PemasanganMutasiGpsController::class, 'basedImei']);
+    Route::get('/based_kendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'basedKendaraanPasang']);
+    Route::get('/export_pemasangan_mutasi_GPS', [PemasanganMutasiGpsController::class, 'export_pemasangan']);
+
+
+
+
+
+
+
+
+    //dashboard
+
+    Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
+
+    // Maintenance GPS
+    Route::get('/MaintenanceGps', [MaintenanceGpsController::class, 'index']);
+    Route::get('/item_data_maintenanace_gps', [MaintenanceGpsController::class, 'item_data']);
+    Route::get('/item_data_MY_Maintennace', [MaintenanceGpsController::class, 'item_data_MY']);
+    Route::get('/add_form_maintenanace_gps', [MaintenanceGpsController::class, 'add_form']);
+    Route::get('/store_maintenanceGps', [MaintenanceGpsController::class, 'store']);
+    Route::get('/destroy_maintenanceGps/{id}', [MaintenanceGpsController::class, 'destroy']);
+    Route::get('/edit_form_maintenanceGps/{id}', [MaintenanceGpsController::class, 'edit_form']);
+    Route::get('/dependentMaintenanceGpsCompany/{id}', [MaintenanceGpsController::class, 'dependentCompany']);
+    Route::get('/dependentMaintenanceGpsTanggal/{id}', [MaintenanceGpsController::class, 'dependentTanggal']);
+    Route::get('/dependentMaintenanceGpsPermasalahan/{id}', [MaintenanceGpsController::class, 'dependentPermasalahan']);
+    Route::get('/dependentMaintenanceGpsEquipmentGps/{id}', [MaintenanceGpsController::class, 'dependentEquipmentGps']);
+    Route::get('/update_maintenanceGps/{id}', [MaintenanceGpsController::class, 'update']);
+    Route::get('/selectedDelete_maintenanceGps', [MaintenanceGpsController::class, 'deleteAll']);
+    Route::get('/selected_maintenanceGps', [MaintenanceGpsController::class, 'selected']);
+    Route::get('/item_data_onProgress_maintenance', [MaintenanceGpsController::class, 'item_data_onProgress']);
+    Route::get('/item_data_done_maintenance', [MaintenanceGpsController::class, 'item_data_done']);
+    Route::get('/item_data_all_maintenance', [MaintenanceGpsController::class, 'item_data']);
+
+    Route::get('/based_vehicleMaintenance/{id}', [MaintenanceGpsController::class, 'basedVehicle']);
+    Route::get('/based_typegps/{id}', [MaintenanceGpsController::class, 'basedGps']);
+    Route::get('/export_maintenance', [MaintenanceGpsController::class, 'export_maintenance']);
+});
+
+
+Route::group(['middleware' => ['role:cs']], function () {
+    Route::get('/customer_service', [CustomerServiceController::class, 'index'])->name('cs.homepage');
+
+    // dashboard home
+
+});
+
+Route::group(['middleware' => ['role:teknisi']], function () {
+
+
+    Route::get('/teknisi', [TeknisiController::class, 'index'])->name('teknisi.homepage');
 });
 
 

@@ -20,13 +20,13 @@
         {{ $request_complains->pic->pic_name?? ''}}
     </td>
     <td id="item-vehicle-{{ $request_complains->id }}">
-        {{$request_complains->vehicleRequest->license_plate}}
+        {{$request_complains->vehicleRequest->license_plate??''}}
     </td>
     <td id="item-waktu_info-{{ $request_complains->id }}">
         {{ $request_complains->waktu_info}}
     </td>
     @if ($request_complains->status_waktu_respon == "telat")
-        <td id="item-waktu_respond-{{ $request_complains->id }}" style="background-color:#FF0000; color: white">
+        <td id="item-waktu_respond-{{ $request_complains->id }}" style="color:#FF0000; ">
             {{ $request_complains->waktu_respond}}
         </td>
     @else
@@ -56,11 +56,11 @@
         {{ $request_complains->status }}
     </td>
     @if ($request_complains->status_waktu_solve == "telat")
-        <td id="item-waktu_respond-{{ $request_complains->id }}" style="background-color:#FF0000; color: white">
+        <td id="item-waktu_respond-{{ $request_complains->id }}" style="color:#FF0000;">
             {{ $request_complains->waktu_solve}}
         </td>
     @elseif($request_complains->waktu_solve == null && $request_complains->status == "Done")
-        <td id="item-waktu_respond-{{ $request_complains->id }}" style="background-color:#FF0000; color: white">
+        <td id="item-waktu_respond-{{ $request_complains->id }}" style="background-color:#ff8383; color: white">
             {{ $request_complains->waktu_solve}}
         </td>
     @else

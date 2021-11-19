@@ -3,10 +3,10 @@
     <td></td>
     <td></td>
 
-    <td>
-        <select class="select" id="company_id" name="company_id" required>
-            <option class="hidden"> --Pilih Company--</option>
-
+     <td>
+        <select class="select-search" id="company_id" placeholder="Select a Company..." name="company_id" required>
+            {{-- <option class="hidden" placeholder="Search Company"></option> --}}
+            <option value="">Select a Company...</option>
             @foreach ($detail as $item )
             <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
 
@@ -36,7 +36,9 @@
 
       <td>
           <select class="select" id="vehicle" name="vehicle">
-            <option class="hidden">--Pilih Vehicle--</option>
+            <option value="" class="hidden">--Pilih Vehicle--</option>
+            {{-- <option value="" class="hidden"></option> --}}
+
 
             {{-- @foreach ($detail as $item)
                 <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??'' }}</option>
@@ -121,6 +123,16 @@
 
 
     <script>
+
+    $(document).ready(function() {
+    new TomSelect(".select-search",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
     $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();
             // alert(itemID);
@@ -144,7 +156,7 @@
                     success:function(data) {
                         //alert(data.length);
                         $('select[name="vehicle').empty();
-                        $('select[name="vehicle').append('<option class="hidden" value=""></option>');
+                        $('select[name="vehicle').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
                                 $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_license_plate +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)
@@ -202,6 +214,14 @@
 
                 }
             });
+
+            //   $('select[name="vehicle"]').on('change', function() {
+            //         var vehicle = $(this).val();
+
+            //         alert(vehicle);
+            //     });
+
+
 
             //  $('select[name="task"]').on('change', function(){
             //     var Id = $('#vehicle').val();

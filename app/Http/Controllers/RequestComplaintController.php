@@ -365,4 +365,9 @@ class RequestComplaintController extends Controller
     {
         return Excel::download(new RequestComplaintExport, 'Request_Complaint.xlsx');
     }
+
+    public function dashboard()
+    {
+        return view('request_complaint.Dashboard.dashboard');
+    }
 }

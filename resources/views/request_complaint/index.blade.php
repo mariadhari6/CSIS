@@ -181,8 +181,10 @@
         // var imei = $('#imei').val();
         // var gsm_pemasangan = $('#gsm_pemasangan').val();
         // var equipment_terpakai_gps = $('#equipment_terpakai_gps').val();
-        // alert(imei);
-
+        // alert(vehicle);
+        // if(vehicle == ""){
+        //     vehicle =0;
+        // }
         if(company_id =="" || internal_eksternal=="" || pic_id=="" || waktu_info=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status=="" ){
 
         }else {

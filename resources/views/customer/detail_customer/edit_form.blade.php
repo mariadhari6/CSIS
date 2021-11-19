@@ -344,6 +344,44 @@
         );
     }
 
+    $('select[name="status_layanan"]').on('change', function(){
+
+                var Id = $(this).val();
+                // alert(Id);
+                if(Id == 2) {
+
+                    $('#tanggal_pasang').empty();
+                    $('#tanggal_pasang').append(
+                        `<div class="input-div"><input type="date" class="input  TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}" disabled></div>`
+                    );
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
+                    );
+                    $('#tanggal_reaktivasi').empty();
+                    $('#tanggal_reaktivasi').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
+                    );
+                }
+                else{
+
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
+                    );
+
+                    $('#tanggal_pasang').empty();
+                    $('#tanggal_pasang').append(
+                        `<div class="input-div"><input type="date" class="input  TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div>`
+                    );
+
+                    $('#tanggal_reaktivasi').empty();
+                    $('#tanggal_reaktivasi').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" ></div>`
+                    );
+                }
+            });
+
             //  $('select[name="status_layanan"]').on('change', function(){
             //     var Id = $(this).val();
             //     // alert(Id);

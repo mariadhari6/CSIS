@@ -5357,7 +5357,14 @@ body {
 }
 .card .card-category {
     margin-top: 2px;
-    font-size: 17px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 0px;
+}
+.card .card-category-request {
+    margin-top: 2px;
+    font-size: 12px;
     font-weight: 400;
     color: #ffffff;
     margin-bottom: 0px;
@@ -5441,7 +5448,10 @@ body {
 .card-info,
 .card-success,
 .card-warning,
-.card-danger {
+.card-danger,
+.card-ungu,
+.card-pink_ungu,
+.card-lemon {
     color: #ffffff;
     border: 0px;
 }
@@ -5482,7 +5492,10 @@ body {
 .card-info .icon-big > i,
 .card-success .icon-big > i,
 .card-warning .icon-big > i,
-.card-danger .icon-big > i {
+.card-danger .icon-big > i,
+.card-ungu .icon-big > i,
+.card-pink_ungu.icon-big > i,
+.card-lemon.icon-big > i {
     color: #ffffff !important;
 }
 
@@ -5513,6 +5526,17 @@ body {
     background: #FF6565;
 }
 
+
+.card-ungu {
+    background: #ba70ff;
+}
+
+.card-pink_ungu {
+    background: #ff66ad;
+}
+.card-lemon {
+    background: #e00038;
+}
 
 
 .card-success {

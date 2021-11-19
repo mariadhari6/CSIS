@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DetailCustCompany;
 use App\Exports\DetailCustomerExport;
 use App\Models\Company;
 use App\Models\DetailCustomer;
@@ -339,6 +340,10 @@ class DetailCustomerController extends Controller
     public function export_detail()
     {
         return Excel::download(new DetailCustomerExport, 'DetailCustomer.xlsx');
+    }
+    public function export(Request $request)
+    {
+        return Excel::download(new DetailCustCompany($request->id), 'Detail_Customer_Company.xlsx');
     }
 
     // public function basedPO($id){
