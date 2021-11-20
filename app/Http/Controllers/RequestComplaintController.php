@@ -171,12 +171,12 @@ class RequestComplaintController extends Controller
 
             );
         } else {
-
+            $vehicle_id = "halo";
             $data = array(
                 'company_id'                =>  $request->company_id,
                 'internal_eksternal'        =>  $request->internal_eksternal,
                 'pic_id'                    =>  $request->pic_id,
-                'vehicle'                   =>  $request->vehicle,
+                'vehicle'                   =>  $vehicle_id,
                 'waktu_info'                =>  $request->waktu_info,
                 'waktu_respond'             =>  $request->waktu_respond,
                 'task'                      =>  $request->task,

@@ -2260,11 +2260,12 @@ body {
 
 .main-header {
     min-height: 55px;
-    width: 100%;
-    background: #5aa8d3;
+    width: 97%;
+    background: rgba(75, 133, 227, 0.771);
     position: fixed;
     z-index: 1001;
     border-bottom: 1px solid #eee;
+    margin-left: 50px;
 }
 .main-header .logo-header {
     float: left;
@@ -2281,6 +2282,17 @@ body {
     z-index: 1001;
     display: inline-block;
 }
+
+.main-header .dor{
+    min-height: 55px;
+    width: 98%;
+    background: rgba(75, 133, 227, 0.771);
+    position: fixed;
+    z-index: 1001;
+    border-bottom: 1px solid #eee;
+    /* margin-left: 50px; */
+}
+
 .main-header .logo-header a.logo {
     color: #575962;
 }
@@ -2466,7 +2478,7 @@ body {
 
 .main-panel {
     position: relative;
-    width: calc(100% - 260px);
+    width: calc(100% - 50px);
     min-height: 100%;
     float: right;
     background: #f2f8f9;
@@ -5356,15 +5368,8 @@ body {
     border-radius: 4px;
 }
 .card .card-category {
-    margin-top: 2px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #ffffff;
-    margin-bottom: 0px;
-}
-.card .card-category-request {
-    margin-top: 2px;
-    font-size: 12px;
+    margin-top: 5px;
+    font-size: 17px;
     font-weight: 400;
     color: #ffffff;
     margin-bottom: 0px;
@@ -5376,7 +5381,7 @@ body {
     margin-bottom: 0px;
 }
 .card .card-body {
-    padding: 12px 12px 10px 12px;
+    padding: 15px 15px 10px 15px;
 }
 .card .card-footer {
     background-color: transparent;
@@ -5407,7 +5412,7 @@ body {
     min-height: 64px;
 }
 .numbers{
-     font-size: 3em;
+    font-size: 3em;
     min-height: 64px;
 }
 
@@ -5448,10 +5453,7 @@ body {
 .card-info,
 .card-success,
 .card-warning,
-.card-danger,
-.card-ungu,
-.card-pink_ungu,
-.card-lemon {
+.card-danger {
     color: #ffffff;
     border: 0px;
 }
@@ -5492,10 +5494,7 @@ body {
 .card-info .icon-big > i,
 .card-success .icon-big > i,
 .card-warning .icon-big > i,
-.card-danger .icon-big > i,
-.card-ungu .icon-big > i,
-.card-pink_ungu.icon-big > i,
-.card-lemon.icon-big > i {
+.card-danger .icon-big > i {
     color: #ffffff !important;
 }
 
@@ -5526,17 +5525,6 @@ body {
     background: #FF6565;
 }
 
-
-.card-ungu {
-    background: #ba70ff;
-}
-
-.card-pink_ungu {
-    background: #ff66ad;
-}
-.card-lemon {
-    background: #e00038;
-}
 
 
 .card-success {
@@ -5916,6 +5904,14 @@ body {
 .table th {
     font-size: 12px;
     border-color: #ebedf2 !important;
+
+    /* border: 0px; */
+    /* padding: 0;
+    margin: 0;
+    border-collapse: collapse; */
+
+    padding: 0.75rem !important;
+
     padding: 0.2rem !important;
 
 }

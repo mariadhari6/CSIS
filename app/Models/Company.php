@@ -11,7 +11,7 @@ class Company extends Model
     protected $table = 'companies';
 
     protected $fillable = [
-        'company_name', 'seller_id', 'customer_code', 'no_agreement_letter_id', 'status',
+        'company_name', 'seller_id', 'customer_code', 'no_agreement_letter_id', 'status', 'fitur_yang_digunakan', 'business_type', 'description_business_type', 'address', 'coordinate_address', 'customer'
     ];
 
     public function seller()

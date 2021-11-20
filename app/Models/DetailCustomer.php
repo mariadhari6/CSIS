@@ -34,7 +34,8 @@ class DetailCustomer extends Model
         'status_id',
         'tanggal_pasang',
         'tanggal_non_aktif',
-        'tgl_reaktivasi_gps'
+        'tgl_reaktivasi_gps',
+        'jumlah_sensor'
     ];
 
 

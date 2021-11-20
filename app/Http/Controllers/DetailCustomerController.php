@@ -129,7 +129,13 @@ class DetailCustomerController extends Controller
 
     public function store(Request $request)
     {
-
+        $sensor_all     = $request->SensorAll;
+        if ($sensor_all != "") {
+            $arr            = explode(" ", $sensor_all);
+            $jumlah_sensor  = count($arr);
+        } else {
+            $jumlah_sensor = 0;
+        }
         $data = array(
             "company_id"            => $request->CompanyId,
             "licence_plate"         => $request->LicencePlate,
@@ -150,7 +156,8 @@ class DetailCustomerController extends Controller
             "status_id"             => $request->StatusLayanan,
             "tanggal_pasang"        => $request->TanggalPasang,
             "tanggal_non_aktif"     => $request->TanggalNonAktif,
-            "tgl_reaktivasi_gps"    => $request->TanggalReaktivasi
+            "tgl_reaktivasi_gps"    => $request->TanggalReaktivasi,
+            'jumlah_sensor'         => $jumlah_sensor
         );
 
         $license_id     = $request->LicencePlate;
@@ -214,6 +221,13 @@ class DetailCustomerController extends Controller
 
     public function update(Request $request, $id)
     {
+        $sensor_all     = $request->SensorAll;
+        if ($sensor_all != "") {
+            $arr            = explode(" ", $sensor_all);
+            $jumlah_sensor  = count($arr);
+        } else {
+            $jumlah_sensor = 0;
+        }
 
         $data = DetailCustomer::findOrfail($id);
         $data->company_id            = $request->CompanyId;
@@ -236,6 +250,9 @@ class DetailCustomerController extends Controller
         $data->tanggal_pasang        = $request->TanggalPasang;
         $data->tanggal_non_aktif     = $request->TanggalNonAktif;
         $data->tgl_reaktivasi_gps    = $request->TanggalReaktivasi;
+        $data->jumlah_sensor          = $jumlah_sensor;
+
+
 
         $data->save();
     }

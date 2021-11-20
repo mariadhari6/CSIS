@@ -20,6 +20,12 @@ class CreateCompaniesTable extends Migration
             $table->string('customer_code');
             $table->string('no_agreement_letter_id');
             $table->string('status');
+            $table->string('fitur_yang_digunakan')->nullable();
+            $table->string('business_type')->nullable();
+            $table->string('description_business_type')->nullable();
+            $table->string('address')->nullable();
+            $table->string('coordinate_address')->nullable();
+            $table->string('customer')->nullable();
             $table->timestamps();
         });
     }

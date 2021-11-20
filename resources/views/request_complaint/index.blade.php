@@ -178,15 +178,26 @@
         var waktu_solve = $("#waktu_solve").val();
         var status = $("#status").val();
         var status_akhir = $("#status_akhir").val();
+
+        // alert(vehicle);
+        // if (vehicle = "") {
+        //     var  vehicle_id = "haloo" ;
+        // }
+
+
+        // if()
         // var imei = $('#imei').val();
         // var gsm_pemasangan = $('#gsm_pemasangan').val();
         // var equipment_terpakai_gps = $('#equipment_terpakai_gps').val();
         // alert(vehicle);
-        // if(vehicle == ""){
-        //     vehicle =0;
-        // }
-        if(company_id =="" || internal_eksternal=="" || pic_id=="" || waktu_info=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status=="" ){
 
+
+
+        if(company_id =="" || internal_eksternal=="" || pic_id=="" || waktu_info=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status=="" ){
+            //   if(task != 1 || 2 || 3 || 4 || 5)
+            //     {
+            //         vehicle = "halllo";
+            //     }
         }else {
             $.ajax({
             type: "get",
@@ -208,6 +219,7 @@
               status:status,
               status_akhir:status_akhir
             },
+            alert(vehicle);
             success: function(data) {
              swal({
                 type: 'success',

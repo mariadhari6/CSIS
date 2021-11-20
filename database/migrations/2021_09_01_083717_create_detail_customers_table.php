@@ -38,6 +38,7 @@ class CreateDetailCustomersTable extends Migration
             $table->date('tanggal_pasang');
             $table->date('tanggal_non_aktif')->nullable();
             $table->date('tgl_reaktivasi_gps')->nullable();
+            $table->string('jumlah_sensor')->nullable();
             $table->timestamps();
         });
     }

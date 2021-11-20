@@ -1,167 +1,75 @@
+
 @extends('layouts.v_main')
 @section('title','Customer Service')
-@section('title-table','Welcome to Customer service')
+@section('title-table','Wellcome to Custommer service')
 
 
 @section('content')
 
 <div class="container-fluid">
-    {{-- <h4 class="page-title">Wellcome to Custommer service </h4> --}}
     <div class="row">
-        <div class="col-md-2">
-            <div class="card card-stats card-warning company">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-building"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">Company</p>
-                                <h4 class="card-title">{{ $company->count() }}</h4>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card card-stats card-success gps">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">GPS</p>
-                                <h4 class="card-title">{{ $gps->count() }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card card-stats card-danger sensor">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-rss"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">Sensor</p>
-                                <h4 class="card-title">{{ $sensor->count() }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-md-3">
+            <div class="card card-stats card-success d_company company">
+                <i class="fas fa-building fa-7x d_company-icon"></i>
+                <p class="card-category d_company-teks">Company</p>
+                <p class="d_company-number">{{ $company->count() }}</p>
             </div>
         </div>
 
-        <div class="col-md-2">
-            <div class="card card-stats card-info vehicle">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                            <i class="fas fa-truck"></i>
-
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">Vehicle</p>
-                                <h4 class="card-title">{{ $vehicle->count() }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <div class="col-md-2">
-            <div class="card card-stats card-ungu gsm ">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-sim-card"></i>
-
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">GSM</p>
-                                <h4 class="card-title">{{ $gsm->count() }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-md-3">
+            <div class="card card-stats card-danger d_gps gps">
+                <i class="fas fa-map-marker-alt fa-3x d_gps-icon"></i>
+                <p class="card-category d_gps-teks">GPS</p>
+                <p class="d_gps-number">{{ $gps->count() }}</p>
             </div>
         </div>
 
-         <div class="col-md-2">
-            <div class="card card-stats card-pink_ungu request">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-comments"></i>
-
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category-request">Request <br> Compalin</p>
-
-
-                                <h4 class="card-title">{{ $request->count() }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-md-3">
+            <div class="card card-stats card-warning d_sensor sensor">
+                <i class="fas fa-rss fa-3x d_sensor-icon"></i>
+                <p class="card-category d_sensor-teks">Sensor</p>
+                <p class="d_sensor-number">{{ $sensor->count() }}</p>
             </div>
         </div>
 
-          <div class="col-md-2">
-            <div class="card card-stats card-lemon visit">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-users-cog"></i>
-
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category-request">Visit <br> Assignment</p>
-
-
-                                <h4 class="card-title">{{ $visit->count() }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-md-3">
+            <div class="card card-stats card-success d_vehicle vehicle">
+                <i class="fas fa-truck fa-5x d_vehicle-icon"></i>
+                <p class="card-category d_vehicle-teks">Vehicle</p>
+                <p class="d_vehicle-number">{{ $vehicle->count() }}</p>
             </div>
         </div>
-       <div class="table_id">
+
+        <div class="col-md-3">
+            <div class="card card-stats card-success d_gsm gsm">
+                <i class="fas fa-sim-card fa-3x d_gsm-icon"></i>
+                <p class="card-category d_gsm-teks">GSM</p>
+                <p class="d_gsm-number">{{ $gsm->count() }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card card-stats card-success d_RequstComp request">
+                <i class="fas fa-comments fa-5x d_RequstComp-icon"></i>
+                <p class="card-category d_RequstComp-teks">Request Complaint</p>
+                <p class="d_RequstComp-number">{{ $request->count() }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card card-stats card-success d_visitAs visit">
+                <i class="fas fa-users-cog fa-5x d_visitAs-icon"></i>
+                <p class="card-category d_visitAs-teks">Visit Assignment</p>
+                <p class="d_visitAs-number">{{ $visit->count() }}</p>
+            </div>
+        </div>
+
+        <div class="table-home table_id">
 
         </div>
         <br>
     </div>
 </div>
-
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     $('.company').click(function() {
         // $("#table-company").slideUp("fast");
@@ -261,7 +169,5 @@
         });
     });
 </script>
-
-
 
 @endsection

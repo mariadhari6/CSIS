@@ -5,6 +5,7 @@ use App\Http\Controllers\UsernameController;
 use App\Http\Controllers\DetailCustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GpsController;
 use App\Http\Controllers\GsmActiveController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\PicController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\CustomerServiceController;
+use App\Http\Controllers\DashboardCustomerController;
 use App\Http\Controllers\DashboardVisitAssignmentController;
 
 use App\Http\Controllers\RequestComplaintController;
@@ -23,6 +25,8 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\MaintenanceGpsController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TeknisiController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Models\DetailCustomer;
 use App\Models\PemasanganMutasiGps;
 use App\Models\Username;
@@ -77,8 +81,31 @@ Route::get('/', function () {
 //         return 'login super admin';
 //     });
 // });
+Route::group(
+    ['middleware' => ['role:superAdmin']],
+    function () {
+        Route::get('/super_admin', [AdminController::class, 'index'])->name('admin.homepage');
 
+        // Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+        // Edit Password
+
+        // User
+        Route::get('/user', [UserController::class, 'index'])->name('user');
+        Route::get('/item_data_user', [UserController::class, 'item_data']);
+        Route::get('/add_form_user', [UserController::class, 'add_form']);
+        Route::get('/store_user', [UserController::class, 'store']);
+        Route::get('/destroy_user/{id}', [UserController::class, 'destroy']);
+        Route::get('/edit_form_user/{id}', [UserController::class, 'edit_form']);
+        Route::get('/update_user/{id}', [UserController::class, 'update']);
+    }
+);
 Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
+    Route::get('change-password', [ChangePasswordController::class, 'index']);
+    Route::post('change-password', [ChangePasswordController::class, 'store'])->name('change.password');
+    // Edit Profile
+    Route::get('profile',  [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
@@ -419,10 +446,16 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/item_data_HomeVehicle', [CustomerServiceController::class, 'vehicle_home']);
     Route::get('/item_data_HomeVisit', [CustomerServiceController::class, 'visit_home']);
 
+    // Dashboard detail customer
+    Route::get('/dashboard_customer', [DashboardCustomerController::class, 'index'])->name('dashboard_customer');
+    Route::get('/item_data_dashboard_customer', [DashboardCustomerController::class, 'item_data']);
+    Route::get('/action_dashboard_customer/{id}', [DashboardCustomerController::class, 'action']);
+    Route::get('/update_dashboard_customer/{id}', [DashboardCustomerController::class, 'update']);
+    Route::get('/edit_dashboard_customer/{id}', [DashboardCustomerController::class, 'edit']);
 
 
 
-    Route::get('/super_admin', [AdminController::class, 'index'])->name('admin.homepage');
+
     //
 
     // Pemasangan Mutasi GPS

@@ -12,15 +12,15 @@
         <div class="card-body">
              <div class="text-right" id="selected">
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
-                <a href="/export_vehicle" class="btn btn-success  mr-2">
+                <a href="/export_vehicle" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export Data">
                 <i class="fas fa-file-export"></i>
                 </a>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-edit"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected"> <i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
             </div>
         <form onsubmit="return false">
           <table class="table table-responsive data" class="table_id" id="table_id" >
@@ -247,6 +247,8 @@
 
      // ------ Tampil Data ------
     function read(){
+        enableButton();
+
       $.get("{{ url('item_data_vehicle') }}", {}, function(data, status) {
          $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -262,6 +264,8 @@
       read();
     }
     $('.add').click(function() {
+         disableButton();
+
         $.get("{{ url('add_form_vehicle') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -370,11 +374,12 @@
       });
     }
     function edit(id){
+        disableButton();
 
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).slideUp("fast");
-        $("#td-no-"+id).slideUp("fast");
+        $("#item-no-"+id).slideUp("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-license_plate-"+id).slideUp("fast");
         $("#item-vehicle_id-"+id).slideUp("fast");
@@ -466,7 +471,10 @@
               alert('Select the row you want to delete')
           }
     });
+    //form edit all
     $('.edit_all').on('click', function(e){
+        disableButton();
+        $('[data-toggle="tooltip"]').tooltip("hide");
         var allVals = [];
         var _token = $('input[name="_token"]').val();
         $(".task-select:checked").each(function() {
@@ -482,7 +490,7 @@
             $.each(allVals, function(index, value){
                 $("#td-checkbox-"+value).hide("fast");
                 $("#td-button-"+value).hide("fast");
-                $("#td-no-"+value).hide("fast");
+                $("#item-no-"+value).hide("fast");
                 $("#item-company_id-"+value).slideUp("fast");
                 $("#item-license_plate-"+value).slideUp("fast");
                 $("#item-vehicle_id-"+value).slideUp("fast");
@@ -492,6 +500,10 @@
                 $.get("{{ url('show_vehicle') }}/" + value, {}, function(data, status) {
                     $("#edit-form-"+value).prepend(data)
                     $("#master").prop('checked', false);
+                    $(".add").hide();
+                    $(".cancel").hide();
+                    $(".import").hide();
+                    $(".export").hide();
                 });
             });
         }else{
@@ -532,29 +544,60 @@
                 },
                 success: function(data) {
                 swal({
-                    type: 'success',
-                    title: 'The selected data has been updated',
-                    showConfirmButton: false,
-                    timer: 1500
-                    }).catch(function(timeout) { });
-                        $(".save").hide("fast");
-                        $(".cancel").hide("fast");
-                        $(".add").show("fast");
-                        $(".edit_all").show("fast");
-                        $(".delete_all").show("fast");
-                        read();
-                }
+                        type: 'success',
+                        title: 'The selected data has been updated',
+                        showConfirmButton: false,
+                        timer: 1500
+
+                    // $(".save").hide();
+                    });
+                    read();
+
+                    $(".add").show("fast");
+                    $(".edit_all").show("fast");
+                    $(".delete_all").show("fast");
+                    $(".import").show("fast");
+                    $(".export").show("fast");
+                    $(".btn-round").hide("fast");
+                    $(".btn-round").hide("fast");
+
+                    }
             });
             });
         });
     }
-    function batal(){
-        $(".save").hide("fast");
-        $(".cancel").hide("fast");
-        $(".add").show("fast");
-        $(".edit_all").show("fast");
-        $(".delete_all").show("fast");
-        read();
-    }
+    //--------Proses Batal--------
+         function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            read();
+        }
+
+     function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
 </script>
 @endsection
