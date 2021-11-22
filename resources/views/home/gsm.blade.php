@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-5">
                              <button type="button" class="btn btn-danger float-left mr-2" data-toggle="modal" data-target="#importData"">
-                            <b>GSM no Assign</b>
+                            <b>GSM no assign</b>
                             </button>
                         </div>
                         <div class="col-7 d-flex align-items-center">

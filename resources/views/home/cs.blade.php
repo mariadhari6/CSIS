@@ -2,6 +2,7 @@
 @extends('layouts.v_main')
 @section('title','Customer Service')
 @section('title-table','Wellcome to Custommer service')
+@section('customer_service','active')
 
 
 @section('content')
@@ -58,7 +59,7 @@
 
         <div class="col-md-3">
             <div class="card card-stats card-success d_visitAs visit">
-                <i class="fas fa-users-cog fa-5x d_visitAs-icon"></i>
+                <i class="fas fa-users-cog fa-4x d_visitAs-icon"></i>
                 <p class="card-category d_visitAs-teks">Visit Assignment</p>
                 <p class="d_visitAs-number">{{ $visit->count() }}</p>
             </div>

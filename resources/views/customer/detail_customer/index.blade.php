@@ -1,9 +1,14 @@
-<div class="title">
-    <strong> {{ $company->company_name }}</strong>
-</div>
+
     <div class="text-right mt-3" id="selected">
         <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-        <a href="/export_detail_cust_company/{{ $company->id }}" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Edit Selected">
+        <div class="float-left mr-2">
+            <select class="form-control input-fixed" id="filter">
+                <option value="{{ url('item_data_all_status') }}">All Status Layanan</option>
+                <option value="{{ url('item_data_active') }}">Active</option>
+                <option value="{{ url('item_data_inactive') }}">In Active</option>
+            </select>
+        </div>
+        <a href="/export_detail_cust_company/{{ $company->id }}" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
             <i class="fas fa-file-export"></i>
         </a>
         <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
@@ -12,7 +17,7 @@
         <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
     </div>
 
-    <table class="table table-responsive" id="table_id">
+    <table class="table table-responsive" id="table_detail_customer">
         <thead>
           <tr>
             <th>
@@ -22,26 +27,26 @@
                 </label>
             </th>
             <th scope="col">No</th>
-            <th scope="col" class="list">Company</th>
-            <th scope="col" class="list">License Plate</th>
-            <th scope="col" class="list">Vehicle Type</th>
-            <th scope="col" class="list">PO Number</th>
-            <th scope="col" class="list">Harga Layanan</th>
-            <th scope="col" class="list">PO Date</th>
-            <th scope="col" class="list">Status PO</th>
-            <th scope="col" class="list">IMEI</th>
-            <th scope="col" class="list">Merk</th>
-            <th scope="col" class="list">Type</th>
-            <th scope="col" class="list">GSM</th>
-            <th scope="col" class="list">Provider</th>
-            <th scope="col" class="list">Sensor</th>
-            <th scope="col" class="list">Pool Name</th>
-            <th scope="col" class="list">Pool Location</th>
-            <th scope="col" class="list">Waranty </th>
-            <th scope="col" class="list">Status Layanan</th>
-            <th scope="col" class="list">Tanggal Pasang*</th>
-            <th scope="col" class="list">Tanggal Non Active*</th>
-            <th scope="col" class="list">Tanggal Reaktivasi GPS*</th>
+            <th style="min-width: 300px;">Company</th>
+            <th style="min-width: 130px;">License Plate</th>
+            <th style="min-width: 100px;">Vehicle Type</th>
+            <th style="min-width: 250px;">PO Number</th>
+            <th style="min-width: 130px;">Harga Layanan</th>
+            <th style="min-width: 110px;">PO Date</th>
+            <th style="min-width: 80px;">Status PO</th>
+            <th style="min-width: 160px;">IMEI</th>
+            <th style="min-width: 100px;">Merk</th>
+            <th style="min-width: 160px;">Type</th>
+            <th style="min-width: 160px;">GSM</th>
+            <th style="min-width: 100px;">Provider</th>
+            <th style="min-width: 50px;">Sensor</th>
+            <th style="min-width: 150px;">Pool Name</th>
+            <th style="min-width: 160px;">Pool Location</th>
+            <th style="min-width: 100px;">Waranty </th>
+            <th style="min-width: 80px;">Status Layanan</th>
+            <th style="min-width: 100px;">Tanggal Pasang*</th>
+            <th style="min-width: 100px;">Tanggal Non Active*</th>
+            <th style="min-width: 100px;">Tanggal Reaktivasi GPS*</th>
             <th scope="col" class="action sticky-col first-col">Action</th>
           </tr>
         </thead>
@@ -58,15 +63,16 @@
 
     function read() {
         enableButton();
+
         var id = {{ $company->id }};
         $.get("{{ url('item_detail') }}/" + id , {}, function(data, status) {
-            $('#table_id').DataTable().destroy();
-            $('#table_id').find("#item_data").html(data);
-            $('#table_id').dataTable({
+            $('#table_detail_customer').DataTable().destroy();
+            $('#table_detail_customer').find("#item_data").html(data);
+            $('#table_detail_customer').dataTable({
                 "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
                 "dom": '<"top"f>rt<"bottom"lp><"clear">'
             });
-            $('#table_id').DataTable().draw();
+            $('#table_detail_customer').DataTable().draw();
         });
     }
 
@@ -78,7 +84,7 @@
          disableButton();
         var id = {{ $company->id }};
         $.get("{{ url('add_form_detail') }}/" + id , {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
+          $('#table_detail_customer tbody').prepend(data);
         });
     });
 
@@ -112,6 +118,9 @@
         if (TanggalPasang == "") {
             $("#TanggalPasang[data-toggle='popover']").popover('show');
             return false;
+        }
+        else{
+            $("#TanggalPasang[data-toggle='popover']").popover('hide');
         }
 
         $.ajax({
@@ -257,11 +266,17 @@
                 $("#TanggalNonAktif[data-toggle='popover']").popover('show');
                 return false ;
             }
+            else{
+                $("#TanggalNonAktif[data-toggle='popover']").popover('hide');
+            }
         }else if(StatusLayanan == "1"){
             if(TanggalNonAktif != ""){
                 if (TanggalReaktivasi == "") {
                     $("#TanggalReaktivasi[data-toggle='popover']").popover('show');
                     return false;
+                }
+                else{
+                    $("#TanggalReaktivasi[data-toggle='popover']").popover('hide');
                 }
             }
         }
@@ -419,7 +434,7 @@
                     },
                     success: function(data, status){
                         $("#edit-form-"+value).prepend(data)
-                        $(".add").hide();
+                         $(".add").hide();
                         $(".cancel").hide();
                         $(".export").hide();
                     }
@@ -501,12 +516,12 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             }).catch(function(timeout) {});
-                            $(".save").hide("fast");
-                            $(".cancel").hide("fast");
                             $(".add").show("fast");
-                            $(".export").show("fast");
                             $(".edit_all").show("fast");
                             $(".delete_all").show("fast");
+                            $(".export").show("fast");
+                            $(".btn-round").hide("fast");
+                            $(".btn-round").hide("fast");
                             read();
                         }
                     });
@@ -514,18 +529,17 @@
             });
     }
 
-    function batal() {
-        $(".save").hide("fast");
-        $(".cancel").hide("fast");
-        $(".add").show("fast");
-        $(".edit_all").show("fast");
-        $(".delete_all").show("fast");
-        $(".export").show("fast");
+     function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            $(".export").show("fast");
+            read();
+        }
 
-        read();
-    }
-
-    function disableButton() {
+         function disableButton() {
 
           $('.add').prop('disabled', true);
           $('.edit_all').prop('disabled', true);
@@ -550,4 +564,27 @@
         }
 
 
+    $("#filter").change(function(){
+            var id = {{ $company->id }};
+            var value = $(this).val();
+            var url  = value+"/"+id
+            // alert(value+"/"+id);
+            filter(url)
+
+    });
+
+    function filter(url){
+      var url = url;
+      $.get(url, {}, function(data, status) {
+        $('#table_detail_customer').DataTable().destroy();
+            $('#table_detail_customer').find("#item_data").html(data);
+            $('#table_detail_customer').dataTable({
+                "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+                "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            });
+            $('#table_detail_customer').DataTable().draw();
+        });
+    }
+
 </script>
+

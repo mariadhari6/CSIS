@@ -15,9 +15,16 @@
                     @foreach ($pemasangan as $item )
 
                     <tr>
+                        @if ($item->status == 'On Progress')
+                            <td style="color: red">
+                            {{$item->status}}
+                            </td>
+                        @else
                         <td>
                             {{$item->status}}
-                         </td>
+                        </td>
+                        @endif
+
 
 
                         <td>
@@ -52,10 +59,15 @@
                     @foreach ($mutasi as $item )
 
                     <tr>
+                         @if ($item->status == 'On Progress')
+                            <td style="color: red">
+                            {{$item->status}}
+                            </td>
+                        @else
                         <td>
                             {{$item->status}}
-                         </td>
-
+                        </td>
+                        @endif
 
                         <td>
                             {{$item->jumlah_status_mutasi}}
@@ -89,9 +101,15 @@
                     @foreach ($maintenance_gps as $item )
 
                     <tr>
+                        @if ($item->status == 'On Progress')
+                            <td style="color: red">
+                            {{$item->status}}
+                            </td>
+                        @else
                         <td>
                             {{$item->status}}
-                         </td>
+                        </td>
+                        @endif
 
 
                         <td>
@@ -127,10 +145,15 @@
                     @foreach ($maintenance_sensor as $item )
 
                     <tr>
+                         @if ($item->status == 'On Progress')
+                            <td style="color: red">
+                            {{$item->status}}
+                            </td>
+                        @else
                         <td>
                             {{$item->status}}
-                         </td>
-
+                        </td>
+                        @endif
 
                         <td>
                             {{$item->jumlah_status_maintenance_sensor}}

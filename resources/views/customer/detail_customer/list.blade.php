@@ -4,23 +4,34 @@
 
 @section('content')
 
-<div class="dropdown mb-3">
+<div class="col-sm-5">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend" >
+        <label class="input-group-text">Company</label>
+        </div>
+        <select class="form-control selectpicker" id="list-company" data-live-search="true">
+            <option style="display: none"></option>
+            @foreach ($data as $item)
+                <option value="{{ $item->id }}">{{ $item->company_name }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
+{{-- <div class="dropdown mb-3">
     <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Company
     </button>
     <a href="/export_detail_customer" class="btn btn-success  mr-2">
                 <i class="fas fa-file-export"></i>
     </a>
-     {{-- <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
-    Import
-    <i class="fas fa-file-excel ml-2"></i>
-    </button> --}}
+
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="list-company">
         @foreach ($data as $item)
             <a class="dropdown-item" href="#" id="{{ $item->id }}">{{ $item->company_name }}</a>
         @endforeach
     </div>
-  </div>
+  </div> --}}
 
     {{-- <div class="mb-3">
         <div class="input-group mb-2 mr-sm-2">
@@ -35,7 +46,7 @@
         </select>
         </div>
     </div> --}}
-    <div class="card">
+    <div class="card detail-content">
         <div class="card-body">
             <h5 class="card-title">Pilih Company</h5>
                 <p class="card-text" id="ajax-content"></p>
@@ -79,10 +90,10 @@
 
     $(document).ready(function() {
 
-        $('#list-company  a').click(function(){
+        $('#list-company').change(function(){
 
-        var Id = $(this).attr('id');
-
+        var Id = $(this).val();
+        $(".card").removeClass('detail-content');
         $("#ajax-content").empty();
         $("#list-company a").removeClass('current');
         $("h5").remove();

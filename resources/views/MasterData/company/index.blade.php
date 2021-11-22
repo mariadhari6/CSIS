@@ -13,8 +13,8 @@
                 <b>Add</b>
                 <i class="fas fa-plus ml-2" ></i>
               </button>
-              <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData">
-                  <b> Import</b>
+              <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
+                  <b> Import </b>
                   <i class="fas fa-file-excel ml-2 " ></i>
                 </button>
                 <a href="/export_company" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
@@ -557,7 +557,10 @@
           $("[data-toggle= modal]").prop('disabled', false);
 
         }
-
+// destro datatable
+        function dataLengthAll() {
+          $('#table_id').DataTable().destroy();
+        }
 
 
 

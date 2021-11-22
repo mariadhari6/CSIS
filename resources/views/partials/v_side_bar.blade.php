@@ -5,7 +5,7 @@
             <img class="ml-2 logo-teks" src="{{ asset('images/odm.png') }}" width="180px" height="44px" class="csis" >
         </li>
     </div>
-    <ul>
+    <ul class="scrollable-menu">
         <li class="nav-item {{ request()->is('detail_customer') ? ' active' : ''}}">
             <hr>
                 <a class="" data-toggle="collapse" href="#profile" aria-expanded="true">
@@ -30,21 +30,21 @@
                             </a>
                         </li>
                         <li class="mt-4">
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> {{ __('Logout') }}</a>
-                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                     <button type="submit">logout</button>
-                                </form>
+                             <a href="{{ route('logout_odm') }}">
+                                <span class="nav-list">Logout</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
             <hr>
         </li>
         @role('cs')
-        <li class="nav-item {{ request()->is('/customer_service') ? ' active' : ''}}">
+        <li class="nav-item {{ request()->is('customer_service') ? ' active' : ''}}">
             <a href="{{url('/customer_service')}}">
-                <i class="la la-home fa-2x icon-sidebar"></i>
+                <i class="la la-home fa-2x icon-sidebar"
+                {{ request()->is('customer_service')? 'style=color:#5fa2db' : ''}}
+
+                ></i>
                 <span class="nav-text">Home</span>
             </a>
         </li>
@@ -61,12 +61,26 @@
             {{ request()->is('Terminate') ? ' active' : ''}}
             ">
             <a class="" data-toggle="collapse" href="#masterData" aria-expanded="true">
-                <i class="la la-table fa-2x icon-sidebar"></i>
+                <i class="la la-table fa-2x icon-sidebar"
+                {{ request()->is('seller')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Company')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('pic')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('gps')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('sensor')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('master_po')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Vehicle')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('GsmMaster')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Active')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('GsmTerminate')? 'style=color:#5fa2db' : ''}}
+
+
+
+                ></i>
                 <span class="nav-text">Master Data</span>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="masterData" aria-expanded="true">
-                <ul class="drop">
+                <ul class="drop ">
                     <li class="mt-4 nav-item {{ request()->is('seller') ? ' active' : ''}}">
                         <a class="collapse-item" href="{{url('/seller')}}">
                             <span class="nav-list mt-2">Master Seller</span>
@@ -136,7 +150,14 @@
         </li>
         <li class="nav-item {{ request()->is('detail_customer') ? ' active' : ''}}">
             <a class="" data-toggle="collapse" href="#customer" aria-expanded="true">
-                <i class="la la-users fa-2x icon-sidebar"></i>
+                <i class="la la-users fa-2x icon-sidebar"
+
+                {{ request()->is('detail_customer')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('summary')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('dashboard_customer')? 'style=color:#5fa2db' : ''}}
+                >
+
+                </i>
                 <span  class="nav-text">Data Customer</span>
                 <span class="caret"></span>
             </a>
@@ -162,7 +183,10 @@
         </li>
         <li class="nav-item {{ request()->is('RequestComplain') ? ' active' : ''}}"">
             <a class="" data-toggle="collapse" href="#request&complain" aria-expanded="true">
-                <i class="la la-comments-o fa-2x icon-sidebar"></i>
+                <i class="la la-comments-o fa-2x icon-sidebar"
+                {{ request()->is('RequestComplain')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Dashboard_RequestComplain')? 'style=color:#5fa2db' : ''}}
+                ></i>
                 <span  class="nav-text">Request & Complain</span>
                 <span class="caret"></span>
             </a>
@@ -174,8 +198,8 @@
                         </a>
                     </li>
                     <li class="mt-4">
-                        <a href="#edit">
-                            <span class="nav-list">Summary </span>
+                        <a href="/Dashboard_RequestComplain">
+                            <span class="nav-list">Dashboard </span>
                         </a>
                     </li>
                 </ul>
@@ -188,7 +212,13 @@
                 {{ request()->is('dashboard_visit_assignment') ? ' active' : ''}}
             ">
             <a class="" data-toggle="collapse" href="#visit" aria-expanded="true">
-                <i class="la la-cogs fa-2x icon-sidebar"></i>
+                <i class="la la-cogs fa-2x icon-sidebar"
+                {{ request()->is('PemasanganMutasi')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('MaintenanceGps')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Dashboard_Visit_Assignment')? 'style=color:#5fa2db' : ''}}
+
+
+                ></i>
                 <span  class="nav-text">Visit Assignment</span>
                 <span class="caret"></span>
             </a>
@@ -217,7 +247,11 @@
         @role('superAdmin')
             <li class="nav-item {{ request()->is('/super_admin') ? ' active' : ''}}">
             <a href="{{url('/user')}}">
-                <i class="fas fa-users fa-2x icon-sidebar"></i>
+                <i class="fas fa-users fa-2x icon-sidebar"
+                {{ request()->is('super_admin')? 'style=color:#5fa2db' : ''}}
+
+
+                ></i>
                 {{-- <i class="la la-home fa-2x icon-sidebar"></i> --}}
                 <span class="nav-text">Manage User Access</span>
             </a>
@@ -240,7 +274,7 @@
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="masterData" aria-expanded="true">
-                <ul class="drop">
+                <ul class="drop ">
                     <li class="mt-4 nav-item {{ request()->is('seller') ? ' active' : ''}}">
                         <a class="collapse-item" href="{{url('/seller')}}">
                             <span class="nav-list mt-2">Master Seller</span>
@@ -284,7 +318,7 @@
                         </a>
 
                         <div class="collapse" id="gsm" aria-expanded="true" style="">
-                            <ul class="nav">
+                            <ul class="nav ">
 
                                 <li class="mt-4 nav-item {{ request()->is('GsmMaster') ? ' active' : ''}}">
                                     <a class="collapse-item @yield('GsmMaster')" href="{{url('/GsmMaster')}}">
@@ -348,8 +382,8 @@
                         </a>
                     </li>
                     <li class="mt-4">
-                        <a href="#edit">
-                            <span class="nav-list">Summary </span>
+                        <a href="/Dashboard_RequestComplain">
+                            <span class="nav-list">Dashboard </span>
                         </a>
                     </li>
                 </ul>

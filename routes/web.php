@@ -86,7 +86,6 @@ Route::group(
     function () {
         Route::get('/super_admin', [AdminController::class, 'index'])->name('admin.homepage');
 
-        // Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
         // Edit Password
 
@@ -101,6 +100,8 @@ Route::group(
     }
 );
 Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout_odm');
+
     Route::get('change-password', [ChangePasswordController::class, 'index']);
     Route::post('change-password', [ChangePasswordController::class, 'store'])->name('change.password');
     // Edit Profile
@@ -287,6 +288,9 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
     Route::get('/export_detail_customer', [DetailCustomerController::class, 'export_detail']);
     Route::get('/export_detail_cust_company/{id}', [DetailCustomerController::class, 'export']);
+    Route::get('/item_data_all_status/{id}', [DetailCustomerController::class, 'item_data']);
+    Route::get('/item_data_active/{id}', [DetailCustomerController::class, 'Active']);
+    Route::get('/item_data_inactive/{id}', [DetailCustomerController::class, 'InActive']);
 
 
 

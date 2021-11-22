@@ -221,38 +221,7 @@
 }
 
 
-/*  */
 
-/* .main-header .logo-header .navbar-toggler {
-    padding-left: 0px;
-    padding-right: 0px;
-    opacity: 0;
-}
-#detailcustomer tbody tr td {
-    text-align: center;
-}
-.list{
-    min-width: 250px;
-    font-size: 15px;
-    text-align: center;
-}
-.main-header .logo-header .navbar-toggler .navbar-toggler-icon {
-    background: url(../img/menu2.png);
-    background-size: cover;
-    height: 1em;
-    width: 1em;
-    opacity: 0.8;
-} */
-
-/* .delete_all{
-    display: none;
-}
-.edit_all{
-    display: none;
-}
-.add {
-    display: none;
-} */
 
 /* Modal */
 .modal-dialog-full-width {
@@ -341,6 +310,16 @@ font-family:verdana, Helvetica;
     text-align: left;
 
 
+}
+/* detail customer */
+.detail-content{
+    display: none;
+}
+
+#table_detail_customer tbody td,
+#table_detail_customer thead th
+{
+    text-align: center;
 }
 
 /* SUMMARY CUSTOMER */
@@ -774,6 +753,7 @@ nav.sidebar-new li.active > a,
     width: 100px;
     position: relative;
     left: 100px;
+    right: 100px;
     top: 40px;
 }
 
@@ -1038,6 +1018,12 @@ nav.sidebar-new li.active > a,
     transform-origin-x: 50%;
     transform-origin-y: 0px;
     transform-origin-z: initial
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 600px;
+    overflow-x: hidden;
 }
 
 

@@ -63,6 +63,9 @@ class DetailCustomerController extends Controller
         return view('customer.detail_customer.item_data', compact('details'));
     }
 
+
+
+
     public function add_form($id)
     {
 
@@ -398,5 +401,70 @@ class DetailCustomerController extends Controller
 
     // }
 
+    public function Active($id)
+    {
+        $company = Company::findOrFail($id);
+        $details = DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company->id)->where('status_id', '1')->get();
 
+        for ($i = 0; $i <= count($details) - 1; $i++) {
+
+            $loop_row   = $details[$i]->sensor_all;
+            if ($loop_row != "") {
+
+                $data_sensor_all = explode(" ", $loop_row);
+
+                $temp_sensor = "";
+                foreach ($data_sensor_all as $item) {
+                    $cari_sensor = Sensor::where('id', $item)->get();
+
+                    if ($temp_sensor == "") {
+                        $temp_sensor = $cari_sensor[0]->sensor_name . "(" . $cari_sensor[0]->serial_number . "," . $cari_sensor[0]->merk_sensor . ")";
+                    } else {
+                        $temp_sensor .= "; " . $cari_sensor[0]->sensor_name . "(" . $cari_sensor[0]->serial_number . "," . $cari_sensor[0]->merk_sensor . ")";
+                    }
+                }
+
+                $details[$i]["sensor_all_name"] = $temp_sensor;
+            } else {
+                $empty = "";
+                $details[$i]["sensor_all_name"] = $empty;
+            }
+        }
+
+        return view('customer.detail_customer.item_data', compact('details'));
+    }
+
+    public function InActive($id)
+    {
+
+        $company = Company::findOrFail($id);
+        $details = DetailCustomer::orderBy('id', 'DESC')->where('company_id', $company->id)->where('status_id', '2')->get();
+
+        for ($i = 0; $i <= count($details) - 1; $i++) {
+
+            $loop_row   = $details[$i]->sensor_all;
+            if ($loop_row != "") {
+
+                $data_sensor_all = explode(" ", $loop_row);
+
+                $temp_sensor = "";
+                foreach ($data_sensor_all as $item) {
+                    $cari_sensor = Sensor::where('id', $item)->get();
+
+                    if ($temp_sensor == "") {
+                        $temp_sensor = $cari_sensor[0]->sensor_name . "(" . $cari_sensor[0]->serial_number . "," . $cari_sensor[0]->merk_sensor . ")";
+                    } else {
+                        $temp_sensor .= "; " . $cari_sensor[0]->sensor_name . "(" . $cari_sensor[0]->serial_number . "," . $cari_sensor[0]->merk_sensor . ")";
+                    }
+                }
+
+                $details[$i]["sensor_all_name"] = $temp_sensor;
+            } else {
+                $empty = "";
+                $details[$i]["sensor_all_name"] = $empty;
+            }
+        }
+
+        return view('customer.detail_customer.item_data', compact('details'));
+    }
 }
