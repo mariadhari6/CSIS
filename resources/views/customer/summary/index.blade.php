@@ -30,19 +30,19 @@
   </div>
 
   <div class="row">
-      <div>
-        <div class="card" style="width:30rem;">
+      <div class="col-sm-1">
+        <div class="card" style="width:35rem;">
           <div class="card-body">
-              <div id="table-scroll" class="table-scroll">
+              <div class="table-scroll">
                   <table class="table table-sm" id="table_summary">
                       <thead class="fixedheader">
                         <tr>
                             <th width="10px">No</th>
-                            <th id="th-company">Company</th>
+                            <th width="80px">Company</th>
                             <th width="50px">Total GPS</th>
                             <th width="50px">Terminate Layanan</th>
                             <th width="50px">Penambahan Layanan</th>
-                            <th>Act</th>
+                            <th width="30px">Act</th>
                         </tr>
                       </thead>
                       <tbody id="item_summary">
@@ -52,8 +52,8 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-1">
-          <div class="card" style="width:38rem;">
+      <div class="col-sm-4">
+          <div class="card data-po">
               <div class="card-body" id="data-po"></div>
           </div>
       </div>
@@ -137,5 +137,3 @@
   </script>
 
 @endsection
-
-

@@ -12,6 +12,7 @@ use App\Models\RequestComplaint;
 use App\Models\Sensor;
 use App\Models\Username;
 use App\Models\Vehicle;
+use App\Models\VehicleType;
 use Illuminate\Support\Facades\DB;
 
 use function PHPSTORM_META\type;
@@ -150,16 +151,57 @@ class CustomerServiceController extends Controller
         for ($i = 0; $i < count($vehicle); $i++) {
             $a = $vehicle[$i]->company_id;
 
-            $cari_vehicle_type = Vehicle::groupBy('vehicle_id')->where('company_id', $a)->select('vehicle_id')->get();
-            // dd($cari_company);
+            // $cari_vehicle_type = Vehicle::groupBy('vehicle_id')->where('company_id', $a)->select('vehicle_id')->get();
             $total_vehicle_type_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_vehicletype'))->get();
             // $total_vehicleperType_installed = DetailCustomer::groupBy('')->where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_pervehicle_type,vehicle_id'))->get();
 
+            $cari_vehicle_type = DetailCustomer::where('company_id', $a)->pluck('vehicle_id');
+            // return $vehicle;
 
             $vehicle[$i]["vehicle_type"] = $cari_vehicle_type;
 
             $vehicle[$i]["total_vehicletype"] = $total_vehicle_type_installed;
         }
+
+        for ($i = 0; $i < count($vehicle); $i++) {
+            $vehicle_ = array();
+            foreach ($vehicle[$i]['vehicle_type'] as $value) {
+                array_push($vehicle_, $value);
+            }
+            // print_r($vehicle_);
+            // PROSES CARI VEHICLE TYPE
+            $vehicle[$i]["unique_vehicle"] = array_map(function ($vehicleId) {
+                $vehicle_id_type = Vehicle::where('id', $vehicleId)->pluck('vehicle_id');
+                return $vehicle_id_type[0];
+            }, $vehicle_);
+
+
+            $vehicle_type = array();
+            foreach ($vehicle[$i]['unique_vehicle'] as $value) {
+                array_push($vehicle_type, $value);
+            }
+
+            $vehicle[$i]["vehicle_name"] = array_map(function ($vehicleId) {
+                $vehicle_name = VehicleType::where('id', $vehicleId)->pluck('name');
+                return $vehicle_name[0];
+            }, $vehicle_type);
+
+
+            $name_vehicle = $vehicle[$i]["vehicle_name"];
+            $array_count_values = array_count_values($name_vehicle);
+            $vehicleFinal = array();
+
+            foreach ($array_count_values as $vehicleName => $vehicleTotal) {
+                array_push($vehicleFinal, array(
+                    "vehicle_name" => $vehicleName,
+                    "vehicle_total" => $vehicleTotal
+                ));
+            }
+
+            $vehicle[$i]['vehicle_type'] = $vehicleFinal;
+            unset($vehicle[$i]["vehicle_name"]);
+        }
+
         // return $vehicle;
         return view('home.vehicle', compact('vehicle'));
     }
@@ -167,28 +209,12 @@ class CustomerServiceController extends Controller
 
     public function visit_home()
     {
-        // $visit = RequestComplaint::groupBy('company_id')->select('company_id')->get();
-        // for ($i = 0; $i < count($visit); $i++) {
-        //     $a = $visit[$i]->company_id;
-
-        //     $cari_company = RequestComplaint::groupBy('status')->where('company_id', $a)->select('status',)->get();
-        //     return $cari_company;
-        //     $total_vehicle_type_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_vehicletype'))->get();
-        //     // $total_vehicleperType_installed = DetailCustomer::groupBy('')->where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_pervehicle_type,vehicle_id'))->get();
-
-
-        //     $visit[$i]["vehicle_type"] = $cari_company;
-
-        //     $visit[$i]["total_vehicletype"] = $total_vehicle_type_installed;
-        // }
-
         $pemasangan = RequestComplaint::groupBy('status')->where('task', 1)->selectRaw('count(task) as jumlah_status_pemasangan, status')->get();
         // return $pemasangan;
         $mutasi = RequestComplaint::groupBy('status')->where('task', 3)->selectRaw('count(task) as jumlah_status_mutasi, status')->get();
         // return $mutasi;
         $maintenance_gps = RequestComplaint::groupBy('status')->where('task', 4)->selectRaw('count(task) as jumlah_status_maintenance_gps, status')->get();
         $maintenance_sensor = RequestComplaint::groupBy('status')->where('task', 5)->selectRaw('count(task) as jumlah_status_maintenance_sensor, status')->get();
-
         // return $maintenance_sensor;
         return view('home.visit', compact('mutasi', 'pemasangan', 'maintenance_sensor', 'maintenance_gps'));
     }

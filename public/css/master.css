@@ -343,9 +343,20 @@ font-family:verdana, Helvetica;
 
 }
 
-#table_summary{
-    table-layout: auto;
-    width: 580px;
+/* SUMMARY CUSTOMER */
+
+.highlighted {
+    background: #b3ccff;
+}
+
+#table_summary tbody tr td#key {
+    min-width: 234px;
+    max-width: 500px;
+    text-align: left;
+}
+
+#table_summary thead tr th {
+    font-weight: bold;
 }
 
 .table-scroll {
@@ -354,12 +365,12 @@ font-family:verdana, Helvetica;
     z-index: 1;
     margin: auto;
     overflow: auto;
-    height: 589px;
+    height: 300px;
   }
 
 .table-wrap {
     position: relative;
-  }
+}
 
 .table-scroll th,
 .table-scroll td {
@@ -375,31 +386,33 @@ font-family:verdana, Helvetica;
     top: 0;
 }
 
+.data-po{
+    position: relative;
+    left: 460px;
+    width: 45rem;
+}
+
 #data-po table thead th,
-#data-po table tbody td
-{
+#data-po table tbody td {
+
     text-align: center;
 }
 
-#data-po table thead th
-{
+#data-po table thead th {
     background-color: #f2f2f2;
 }
-
 
 #data-po table tbody td#key
 {
     text-align: left;
 }
 
-#data_detail{
-    table-layout: auto;
-    width: 1000px;
+#data_detail thead tr th{
+   font-weight: bold;
 }
 
-.text-red {
-   color: red;
-}
+
+/*  */
 
 /* Tittle Table */
 .title-table {
@@ -887,5 +900,144 @@ nav.sidebar-new li.active > a,
 
 /*  */
 
+
+.faa-ring {
+    color: #ff2e38
+}
+
+@-webkit-keyframes ring {
+    0% {
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg)
+    }
+
+    2% {
+        -webkit-transform: rotate(15deg);
+        transform: rotate(15deg)
+    }
+
+    4% {
+        -webkit-transform: rotate(-18deg);
+        transform: rotate(-18deg)
+    }
+
+    6% {
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg)
+    }
+
+    8% {
+        -webkit-transform: rotate(-22deg);
+        transform: rotate(-22deg)
+    }
+
+    10% {
+        -webkit-transform: rotate(22deg);
+        transform: rotate(22deg)
+    }
+
+    12% {
+        -webkit-transform: rotate(-18deg);
+        transform: rotate(-18deg)
+    }
+
+    14% {
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg)
+    }
+
+    16% {
+        -webkit-transform: rotate(-12deg);
+        transform: rotate(-12deg)
+    }
+
+    18% {
+        -webkit-transform: rotate(12deg);
+        transform: rotate(12deg)
+    }
+
+    20% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+}
+
+@keyframes ring {
+    0% {
+        -webkit-transform: rotate(-15deg);
+        -ms-transform: rotate(-15deg);
+        transform: rotate(-15deg)
+    }
+
+    2% {
+        -webkit-transform: rotate(15deg);
+        -ms-transform: rotate(15deg);
+        transform: rotate(15deg)
+    }
+
+    4% {
+        -webkit-transform: rotate(-18deg);
+        -ms-transform: rotate(-18deg);
+        transform: rotate(-18deg)
+    }
+
+    6% {
+        -webkit-transform: rotate(18deg);
+        -ms-transform: rotate(18deg);
+        transform: rotate(18deg)
+    }
+
+    8% {
+        -webkit-transform: rotate(-22deg);
+        -ms-transform: rotate(-22deg);
+        transform: rotate(-22deg)
+    }
+
+    10% {
+        -webkit-transform: rotate(22deg);
+        -ms-transform: rotate(22deg);
+        transform: rotate(22deg)
+    }
+
+    12% {
+        -webkit-transform: rotate(-18deg);
+        -ms-transform: rotate(-18deg);
+        transform: rotate(-18deg)
+    }
+
+    14% {
+        -webkit-transform: rotate(18deg);
+        -ms-transform: rotate(18deg);
+        transform: rotate(18deg)
+    }
+
+    16% {
+        -webkit-transform: rotate(-12deg);
+        -ms-transform: rotate(-12deg);
+        transform: rotate(-12deg)
+    }
+
+    18% {
+        -webkit-transform: rotate(12deg);
+        -ms-transform: rotate(12deg);
+        transform: rotate(12deg)
+    }
+
+    20% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+}
+
+.faa-ring.animated,
+.faa-ring.animated-hover:hover,
+.faa-parent.animated-hover:hover>.faa-ring {
+    -webkit-animation: ring 2s ease infinite;
+    animation: ring 2s ease infinite;
+    transform-origin-x: 50%;
+    transform-origin-y: 0px;
+    transform-origin-z: initial
+}
 
 

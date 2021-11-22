@@ -35,7 +35,7 @@
 }
 
 .bg-danger {
-    background: #ff646d !important;
+    background: #ff2e38 !important;
 }
 
 *:focus {
@@ -154,7 +154,7 @@ h4.page-title {
 }
 
 .text-danger {
-    color: #ff646d !important;
+    color: #ff2e38 !important;
 }
 .text-danger:hover {
     color: #ff646d !important;
@@ -6546,8 +6546,8 @@ body {
 }
 
 .btn-danger {
-    background: #ff646d !important;
-    border-color: #ff646d !important;
+    background: #ff2e38 !important;
+    border-color: #ff2e38 !important;
 }
 .btn-danger:hover,
 .btn-danger:focus,

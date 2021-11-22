@@ -110,13 +110,23 @@ class RequestComplaintController extends Controller
             $status_waktu_respon = "telat";
         }
 
-        $imei               = DetailCustomer::where('vehicle_id', $vehicle)->pluck('imei');
-        $gsm                = DetailCustomer::where('vehicle_id', $vehicle)->pluck('gsm_id');
-        $type               = DetailCustomer::where('vehicle_id', $vehicle)->pluck('type');
-        $sensor             = DetailCustomer::where('vehicle_id', $vehicle)->pluck('sensor_all');
-        $equipment_gps_id   = count($imei);
-        $explode_sensor     = explode(' ', $sensor[0]);
-        $equipment_sensor_id = count($explode_sensor);
+        if ($vehicle == "") {
+            $imei               = null;
+            $gsm                = null;
+            $type               = null;
+            $sensor             = null;
+            $equipment_gps_id   = null;
+            $equipment_sensor_id = null;
+        } else {
+            $imei               = DetailCustomer::where('vehicle_id', $vehicle)->pluck('imei');
+            $gsm                = DetailCustomer::where('vehicle_id', $vehicle)->pluck('gsm_id');
+            $type               = DetailCustomer::where('vehicle_id', $vehicle)->pluck('type');
+            $sensor             = DetailCustomer::where('vehicle_id', $vehicle)->pluck('sensor_all');
+            $equipment_gps_id   = count($imei);
+            $explode_sensor     = explode(' ', $sensor[0]);
+            $equipment_sensor_id = count($explode_sensor);
+        }
+
 
         if ($task == 1 || $task == 2 || $task == 3) {
 
@@ -136,11 +146,11 @@ class RequestComplaintController extends Controller
                 'waktu_solve'               =>  $request->waktu_solve,
                 'status'                    =>  $request->status,
                 'status_akhir'              =>  $request->status_akhir,
-                'imei'                      =>  $imei[0],
-                'gsm_pemasangan'            =>  $gsm[0],
-                'equipment_terpakai_gps'    =>  $type[0],
+                'imei'                      =>  $imei == null ? null : $imei[0],
+                'gsm_pemasangan'            =>  $gsm == null ? null : $gsm[0],
+                'equipment_terpakai_gps'    =>  $type == null ? null : $type[0],
                 'status_waktu_respon'       =>  $status_waktu_respon,
-                'equipment_terpakai_sensor' =>  $sensor[0]
+                'equipment_terpakai_sensor' =>  $sensor == null ? null : $sensor[0]
 
 
             );
@@ -162,21 +172,21 @@ class RequestComplaintController extends Controller
                 'waktu_solve'               =>  $request->waktu_solve,
                 'status'                    =>  $request->status,
                 'status_akhir'              =>  $request->status_akhir,
-                'type_gps_id'               =>  $type[0],
-                'equipment_gsm'             =>  $gsm[0],
-                'equipment_gps_id'          =>  $equipment_gps_id,
-                'equipment_sensor_id'       =>  $equipment_sensor_id,
+                'type_gps_id'               =>  $type == null ? null : $type[0],
+                'equipment_gsm'             =>  $gsm == null ? null : $gsm[0],
+                'equipment_gps_id'          =>  $equipment_gps_id == null ? null : $equipment_gps_id,
+                'equipment_sensor_id'       =>  $equipment_sensor_id == null ? null : $equipment_sensor_id,
                 'status_waktu_respon'       =>  $status_waktu_respon,
-                'equipment_terpakai_sensor' =>  $sensor[0]
+                'equipment_terpakai_sensor' =>  $sensor == null ? null : $sensor[0]
 
             );
         } else {
-            $vehicle_id = "halo";
+            // $vehicle_id = "halo";
             $data = array(
                 'company_id'                =>  $request->company_id,
                 'internal_eksternal'        =>  $request->internal_eksternal,
                 'pic_id'                    =>  $request->pic_id,
-                'vehicle'                   =>  $vehicle_id,
+                'vehicle'                   =>  $request->vehicle,
                 'waktu_info'                =>  $request->waktu_info,
                 'waktu_respond'             =>  $request->waktu_respond,
                 'task'                      =>  $request->task,
@@ -188,8 +198,8 @@ class RequestComplaintController extends Controller
                 'waktu_solve'               =>  $request->waktu_solve,
                 'status'                    =>  $request->status,
                 'status_akhir'              =>  $request->status_akhir,
-                'status_waktu_respon'       =>  $status_waktu_respon,
-                'equipment_terpakai_sensor' =>  $sensor[0]
+                'status_waktu_respon'       =>  $status_waktu_respon == null ? null : $status_waktu_respon,
+                'equipment_terpakai_sensor' =>  $sensor == null ? null : $sensor[0]
             );
         }
 

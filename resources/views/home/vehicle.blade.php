@@ -25,14 +25,18 @@
                         @endforeach
                         </td>
                           <td>
-                            @foreach ($item->vehicle_type as $vehicle_types)
-                            {{$vehicle_types->vehicle->name}} <br>
+                            @foreach ($item->vehicle_type as $vehicle_name)
+                             {{ $vehicle_name['vehicle_name'] }}<br>
                             @endforeach
                         </td>
-                        {{-- <td>@foreach ($item->total_pervehicle_type as $total)
-                            {{$total->total_pervehicle_type}} <br>
+                        <td>
+                            @foreach ($item->vehicle_type as $vehicle_total)
+                            {{ $vehicle_total['vehicle_total'] }}<br>
                             @endforeach
-                        </td> --}}
+                        </td>
+                        {{-- @foreach ($item->vehicle as $vehicle_total)
+                            {{ $vehicle_total['vehicle_total'] }}<br>
+                        @endforeach --}}
 
                     </tr>
                      @endforeach

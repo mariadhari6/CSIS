@@ -2,8 +2,27 @@
 
 
 <div class="col-md-12">
-     <div class="col-md-12">
+<div class="col-md-12">
+        <div class="card card-stats ">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                                <i class='fas fa-exclamation-circle faa-ring animated fa-3x'><span class="badge badge-danger">{{$gsm_no_assign->count()}}</span></i>
+                        </div>
+                        <div class="col-5">
+                             <button type="button" class="btn btn-danger float-left mr-2" data-toggle="modal" data-target="#importData"">
+                            <b>GSM no Assign</b>
+                            </button>
+                        </div>
+                        <div class="col-7 d-flex align-items-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         <div class="card">
+
             <div class="card-body">
                 <h6>Status GSM</h6>
                 <table class="table table-hover data " class="table_id" id="table_id" >
@@ -36,27 +55,7 @@
             </div>
         </div>
     </div>
-     <div class="col-md-12">
-        <div class="card card-stats ">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <h5 style="color: red">{{$gsm_no_assign->count()}}</h5>
-                                <i class="fas fa-exclamation-circle text-red"></i>
-                            </div>
-                             <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData"">
-                            <b>View</b>
-                            {{-- <i class="fas fa-file-excel ml-2"></i> --}}
-                            </button>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
 </div>
 
   <!-- Modal Import -->
