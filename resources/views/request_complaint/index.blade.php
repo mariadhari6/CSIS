@@ -200,7 +200,7 @@
                   pic_id: pic_id,
                   vehicle: vehicle,
                   waktu_info: waktu_info,
-                waktu_respond:waktu_respond,
+                  waktu_respond:waktu_respond,
                   task:task,
                   platform:platform,
                   detail_task:detail_task,

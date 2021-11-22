@@ -33,8 +33,9 @@
       </td>
 
       <td>
-          <select class="select" id="vehicle" name="vehicle" required>
+          <select class="select" id="vehicle" name="vehicle">
             <option class="hidden">--Pilih Vehicle--</option>
+            {{-- <option value="">-</option> --}}
 
             {{-- @foreach ($detail as $item)
                 <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??'' }}</option>
@@ -117,18 +118,18 @@
 
 
 
-    <script>
-     $(document).ready(function() {
-        new TomSelect(".select-search",{
-        create: false,
-        sortField: {
-            field: "text",
-            direction: "asc"
-        }
-        });
+<script>
+    $(document).ready(function() {
+    new TomSelect(".select-search",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
     });
-
-    $('select[name="company_id"]').on('change', function() {
+    });
+    
+            $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();
             // alert(itemID);
             if(itemID) {
@@ -145,13 +146,13 @@
                             }
                     }
                 });
-                 $.ajax({
+                    $.ajax({
                     url: '/based_vehicleRequest/'+ itemID,
                     method: "GET",
                     success:function(data) {
                         //alert(data.length);
                         $('select[name="vehicle').empty();
-                        $('select[name="vehicle').append('<option class="hidden" value=""> </option>');
+                        $('select[name="vehicle').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
                                 $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_license_plate +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)
@@ -163,22 +164,25 @@
                 $('select[name="pic_id"]').empty();
                 $('select[name="vehicle"]').empty();
             }
-         });
-         // status waktu solve
-         $('select[name="status"]').on('change', function() {
+            });
+
+
+            // status waktu solve
+            $('select[name="status"]').on('change', function() {
             var itemID = $(this).val();
-           if(itemID == "On Progress"){
-               $('#td-solve').empty();
-               $('#td-solve').append(
-                `<div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="Waktu Solve" disabled></div>`
-               );
-           }else{
-                $('#td-solve').empty();
-                $('#td-solve').append(
-                `<div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="Waktu Solve"></div>`
-                );
-           }
-        });
+            if(itemID == "On Progress"){
+                    $('#td-solve').empty();
+                    $('#td-solve').append(
+                    `<div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="Waktu Solve" disabled></div>`
+                    );
+                }else{
+                    $('#td-solve').empty();
+                    $('#td-solve').append(
+                    `<div class="input-div"><input type="datetime-local" class="input" id="waktu_solve" placeholder="Waktu Solve"></div>`
+                    );
+                }
+            });
+
         $('select[name="internal_eksternal"]').on('change', function() {
                 var request_complain = $(this).val();
                 // alert(itemID);
@@ -202,7 +206,10 @@
                     $('select[name="task"]').empty();
                 }
             });
-
+            //   $('select[name="vehicle"]').on('change', function() {
+            //         var vehicle = $(this).val();
+            //         alert(vehicle);
+            //     });
             //  $('select[name="task"]').on('change', function(){
             //     var Id = $('#vehicle').val();
             //     var task = $('#task option:selected').text();
@@ -214,7 +221,6 @@
             //         //     url: '/based_pemasangan/'+ Id,
             //         //     method: "GET",
             //         //     success:function(data) {
-
             //         //         $.each(data, function(key, value) {
             //         //             alert(key);
             //         //             // $('#imei').val(key);
@@ -224,10 +230,8 @@
             //         //     }
             //         // });
             //     }
-
-
-
             //  });
 </script>
+        
 
 </tr>
