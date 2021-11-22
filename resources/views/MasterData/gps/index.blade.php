@@ -15,17 +15,17 @@
 
           <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
+                <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
-                <a href="/export_gps" class="btn btn-success  mr-2">
+                <a href="/export_gps" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
                 <i class="fas fa-file-export"></i>
                 </a>
-              <button class="btn btn-success edit_all">
+              <button class="btn btn-success edit_all edit_all"  data-toggle="tooltip" title="Edit Selected">
                 <i class="fas fa-edit"></i>
               </button>
-              <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+              <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
           </div>
           <form onsubmit="return false">
             <table class="table table-responsive data" class="table_id" id="table_id" >
@@ -293,6 +293,7 @@
 
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -313,6 +314,7 @@
 
      // ------ Tambah Form Input ------
      $('.add').click(function() {
+         disableButton();
         $.get("{{ url('add_form_gps') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -449,6 +451,7 @@
     }
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -576,7 +579,8 @@
 
         // Form Edit All
         $('.edit_all').on('click', function(e){
-
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
             var allVals = [];
             var _token = $('input[name="_token"]').val();
 
@@ -608,6 +612,10 @@
                     $.get("{{ url('show_gps') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                        $(".add").hide();
+                        $(".cancel").hide();
+                        $(".import").hide();
+                        $(".export").hide();
 
                     });
                 });
@@ -671,6 +679,8 @@
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
+                                $(".import").show("fast");
+                                $(".export").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
 
@@ -688,6 +698,8 @@
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
+            $(".import").show("fast");
+            $(".export").show("fast");
             read();
         }
 
@@ -695,6 +707,34 @@
         function dataLengthAll() {
           $('#table_id').DataTable().destroy();
         }
+
+        function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.import').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.import').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
+
+
 
 
 

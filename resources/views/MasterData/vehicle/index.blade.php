@@ -599,5 +599,6 @@
           $("[data-toggle= modal]").prop('disabled', false);
 
         }
+
 </script>
 @endsection

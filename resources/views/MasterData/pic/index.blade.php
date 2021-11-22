@@ -14,17 +14,17 @@
               <b>Add</b>
               <i class="fas fa-plus ml-2" id="add"></i>
             </button>
-            <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+            <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
             </button>
-            <a href="/export_Pic" class="btn btn-success  mr-2">
+            <a href="/export_Pic" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
                 <i class="fas fa-file-export"></i>
             </a>
-            <button class="btn btn-success  mr-2 edit_all">
+            <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="btn btn-danger  delete_all">
+            <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -240,6 +240,7 @@
     });
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_pic') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -262,6 +263,7 @@
 
      // ------ Tambah Form Input ------
      $('.add').click(function() {
+         disableButton();
         $.get("{{ url('add_form_pic') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -338,6 +340,7 @@
 
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
@@ -444,7 +447,11 @@
             }
         });
 
+        // edit form all
+
         $('.edit_all').on('click', function(e){
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
 
             var allVals = [];
             var _token = $('input[name="_token"]').val();
@@ -529,6 +536,8 @@
                       $(".add").show("fast");
                       $(".edit_all").show("fast");
                       $(".delete_all").show("fast");
+                      $(".import").show("fast");
+                      $(".export").show("fast");
                       $(".btn-round").hide("fast");
                       $(".btn-round").hide("fast");
                     }
@@ -544,11 +553,37 @@
       function cancelUpdateSelected(){
           $("#save-selected").hide("fast");
           $("#cancel-selected").hide("fast");
+          $(".import").show("fast");
+          $(".export").show("fast");
           $(".add").show("fast");
           $(".edit_all").show("fast");
           $(".delete_all").show("fast");
           read();
       }
+
+      function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
 
 
   </script>

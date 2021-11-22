@@ -18,7 +18,7 @@
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
-                <a href="/export_seller" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export Selected">
+                <a href="/export_seller" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
                 <i class="fas fa-file-export"></i>
                 </a>
                 <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
@@ -558,6 +558,8 @@
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
+            $(".import").show("fast");
+            $(".export").show("fast");
             read();
         }
 
@@ -585,9 +587,5 @@
 
         }
 
-
-
-
   </script>
-
 @endsection

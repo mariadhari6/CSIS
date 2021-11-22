@@ -3,13 +3,13 @@
 </div>
     <div class="text-right mt-3" id="selected">
         <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-        <a href="/export_detail_cust_company/{{ $company->id }}" class="btn btn-success  mr-2">
+        <a href="/export_detail_cust_company/{{ $company->id }}" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Edit Selected">
             <i class="fas fa-file-export"></i>
         </a>
-        <button class="btn btn-success  mr-2 edit_all">
+        <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
             <i class="fas fa-edit"></i>
         </button>
-        <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+        <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
     </div>
 
     <table class="table table-responsive" id="table_id">
@@ -57,6 +57,7 @@
     });
 
     function read() {
+        enableButton();
         var id = {{ $company->id }};
         $.get("{{ url('item_detail') }}/" + id , {}, function(data, status) {
             $('#table_id').DataTable().destroy();
@@ -74,7 +75,7 @@
     }
 
     $('.add').click(function() {
-
+         disableButton();
         var id = {{ $company->id }};
         $.get("{{ url('add_form_detail') }}/" + id , {}, function(data, status) {
           $('#table_id tbody').prepend(data);
@@ -187,7 +188,7 @@
     }
 
     function edit(id){
-
+        disableButton();
         var id = id;
         var company = {{ $company->id }}
 
@@ -366,7 +367,8 @@
 
 
     $('.edit_all').on('click', function(e){
-
+        disableButton();
+        $('[data-toggle="tooltip"]').tooltip("hide");
         var company = {{ $company->id }}
 
         var allVals = [];
@@ -417,6 +419,9 @@
                     },
                     success: function(data, status){
                         $("#edit-form-"+value).prepend(data)
+                        $(".add").hide();
+                        $(".cancel").hide();
+                        $(".export").hide();
                     }
                 });
             });
@@ -499,6 +504,7 @@
                             $(".save").hide("fast");
                             $(".cancel").hide("fast");
                             $(".add").show("fast");
+                            $(".export").show("fast");
                             $(".edit_all").show("fast");
                             $(".delete_all").show("fast");
                             read();
@@ -514,7 +520,34 @@
         $(".add").show("fast");
         $(".edit_all").show("fast");
         $(".delete_all").show("fast");
+        $(".export").show("fast");
+
         read();
     }
+
+    function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
+
 
 </script>

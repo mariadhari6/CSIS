@@ -26,13 +26,13 @@
                     </select>
                   </div>
                 </ul>
-                <a href="/export_pemasangan_mutasi_GPS" class="btn btn-success  mr-2">
+                <a href="/export_pemasangan_mutasi_GPS" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
                 <i class="fas fa-file-export"></i>
                 </a>
-                <button class="btn btn-success  mr-2 edit_all">
+                <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
                     <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn btn-danger  delete_all">
+                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
@@ -86,6 +86,7 @@
     });
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_PemasanganMutasi') }}", {}, function(data, status) {
          $('#table_id').DataTable().destroy();
          $('#table_id').find("#item_data").html(data);
@@ -236,6 +237,8 @@
     }
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
+
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -366,6 +369,8 @@
         });
         // Form Edit All
         $('.edit_all').on('click', function(e){
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
             var allVals = [];
             var _token = $('input[name="_token"]').val();
             $(".task-select:checked").each(function() {
@@ -400,6 +405,10 @@
                     $.get("{{ url('show_PemasanganMutasi') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                        $(".add").hide();
+                         $(".cancel").hide();
+                        $(".export").hide();
+                        $(".filter").hide();
                     });
                 });
             }else{
@@ -469,6 +478,8 @@
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
+                                 $(".export").show("fast");
+                                 $(".filter").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
                     }
@@ -483,8 +494,37 @@
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
+            $(".export").show("fast");
+            $(".filter").show("fast");
             read();
         }
+
+        function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.filter').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.filter').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
+
 
 
 

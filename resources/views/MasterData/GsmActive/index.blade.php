@@ -18,10 +18,10 @@
                         </select>
                         </div>
                     </ul>
-                <button class="btn btn-success edit_all">
+                <button class="btn btn-success edit_all" data-toggle="tooltip" title="Edit Selected">
                 <i class="fas fa-edit"></i>
               </button>
-                <button class="btn btn-danger  delete_all">
+                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
@@ -96,6 +96,8 @@
 
     // ------ Tampil Data ------
     function read(){
+        enableButton();
+
       $.get("{{ url('item_data_GsmActive') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -151,6 +153,7 @@
 
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
@@ -256,6 +259,8 @@
         });
         // Edit All
         $('.edit_all').on('click', function(e){
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
 
             var allVals = [];
             var _token = $('input[name="_token"]').val();
@@ -283,6 +288,8 @@
                     $.get("{{ url('show_GsmActive') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                        $(".add").hide();
+                        $(".cancel").hide();
 
                     });
                 });
@@ -361,6 +368,30 @@
       $(".delete_all").show("fast");
       read();
     }
+
+    function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
 
 
 
