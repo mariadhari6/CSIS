@@ -52,18 +52,98 @@ class CustomerServiceController extends Controller
 
     public function company_home()
     {
-        // $data = Company::groupBy('seller_id')->selectRaw('count(company_name) as jumlah_company, seller_id')->get();
-        $company = Company::groupBy('seller_id')->select('seller_id')->get();
+        // $company = Company::groupBy('seller_id')->select('seller_id')->get();
+
+        // for ($i = 0; $i < count($company); $i++) {
+        //     $a = $company[$i]->seller_id;
+        //     $cari_company = Company::where('seller_id', $a)->get();
+        //     // dd($cari_company);
+        //     $total_company_installed = Company::where('seller_id', $a)->select(DB::raw('count(company_name) as total_company'))->get();
+        //     // dd($total_company_installed);
+        //     $company[$i]["company"] = $cari_company;
+        //     $company[$i]["total_company"] = $total_company_installed;
+        // }
+
+        // $company = DetailCustomer::groupBy('company_id')->select('company_id')->get();
+        // for ($i = 0; $i < count($company); $i++) {
+        //     $a = $company[$i]->company_id;
+        //     $cari_seller = Company::groupBy('seller_id')->where('id', $a)->select('seller_id')->get();
+
+        //     // dd($cari_seller);
+        //     $total_company_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(company_id) as total_company'))->get();
+        //     // dd($total_company_installed);
+        //     // $gps     = DetailCustomer::where('company_id', $a)->pluck('type');
+        //     // $company[$i]["gps_type"] =   $gps;
+        //     $company[$i]["seller"] = $cari_seller;
+        //     $company[$i]["total_company"] = $total_company_installed;
+        // }
+
+        $company = DetailCustomer::groupBy('company_id')->select('company_id')->get();
+
 
         for ($i = 0; $i < count($company); $i++) {
-            $a = $company[$i]->seller_id;
-            $cari_company = Company::where('seller_id', $a)->get();
-            // dd($cari_company);
-            $total_company_installed = Company::where('seller_id', $a)->select(DB::raw('count(company_name) as total_company'))->get();
-            // dd($total_company_installed);
-            $company[$i]["company"] = $cari_company;
+            $a = $company[$i]->company_id;
+            $cari_seller = Company::groupBy('seller_id')->where('id', $a)->select('seller_id')->get();
+
+            // return $cari_seller;
+            // $cari_vehicle_type = Vehicle::groupBy('vehicle_id')->where('company_id', $a)->select('vehicle_id')->get();
+            $total_company_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(company_id) as total_company'))->get();
+            // $total_vehicleperType_installed = DetailCustomer::groupBy('')->where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_pervehicle_type,vehicle_id'))->get();
+
+            $cari_gps = DetailCustomer::where('company_id', $a)->pluck('type');
+            // return $company;
+            $company[$i]["seller"] = $cari_seller;
+
+            $company[$i]["gps"] = $cari_gps;
+
             $company[$i]["total_company"] = $total_company_installed;
         }
+
+        for ($j = 0; $j < count($company); $j++) {
+            $gps_ = array();
+            foreach ($company[$j]["gps"] as $value) {
+                if ($value != null) {
+                    if (str_contains($value, ' ')) {
+                        $exploded = explode(" ", $value);
+                        for ($i = 0; $i < count($exploded); $i++) {
+                            array_push($gps_, $exploded[$i]);
+                        }
+                    } else {
+                        array_push($gps_, $value);
+                    }
+                }
+            }
+
+            // PROSES MENCARI Gps name
+            $unique_gps = array_unique($gps_);
+
+            $company[$j]["unique_gps"] = array_map(function ($gpsId) {
+                $gps_name = Gps::where('id', $gpsId)->pluck('type');
+                return $gps_name[0];
+            }, $unique_gps);
+
+            $sens = $company[$j]["unique_gps"];
+
+            $array_count_values = array_count_values($sens);
+            $gpsFinal = array();
+
+            foreach ($array_count_values as $gpsName => $gpsTotal) {
+                array_push($gpsFinal, array(
+                    "type_gps" => $gpsName,
+                    "type_total" => $gpsTotal
+                ));
+            }
+
+            $company[$j]["gps"] = $gpsFinal;
+
+            unset($company[$j]["unique_gps"]);
+            //
+        }
+
+
+
+
+
 
         // return $company;
         return view('home.company', compact('company'));
@@ -136,11 +216,23 @@ class CustomerServiceController extends Controller
     }
     public function request_home()
     {
-        $request = RequestComplaint::groupBy('status')->where('internal_eksternal', 'Request Eksternal', 'Request Internal')->selectRaw('count(internal_eksternal) as jumlah_status_request, status')->get();
+        $request = RequestComplaint::groupBy('status')->where('internal_eksternal', 'Request Eksternal',  'Request Internal')->orWhere('internal_eksternal', 'Request Internal')->selectRaw('count(internal_eksternal) as jumlah_status_request , status')->get();
         // return $request;
         $complain = RequestComplaint::groupBy('status')->where('internal_eksternal', 'Complain Internal', 'Complain Internal')->selectRaw('count(internal_eksternal) as jumlah_status_complaint, status')->get();
         // return $complain;
-        return view('home.request', compact('complain', 'request'));
+
+        //request
+        $jumlah_done_request = RequestComplaint::whereIn('internal_eksternal', ['Request Internal', 'Request Eksternal'])->where('status', 'Done')->count();
+        $jumlah_total_request = RequestComplaint::whereIn('internal_eksternal', ['Request Internal', 'Request Eksternal'])->count();
+        $presentase_request = ($jumlah_done_request / $jumlah_total_request) * 100;
+        // return $presentase;
+
+        //complain
+        $jumlah_done_complain = RequestComplaint::whereIn('internal_eksternal', ['Complain Internal', 'Complain Eksternal'])->where('status', 'Done')->count();
+        $jumlah_total_complain = RequestComplaint::whereIn('internal_eksternal', ['Complain Internal', 'Complain Eksternal'])->count();
+        $presentase_complain = ($jumlah_done_complain / $jumlah_total_complain) * 100;
+
+        return view('home.request', compact('complain', 'request', 'presentase_request', 'presentase_complain'));
     }
 
     public function vehicle_home()

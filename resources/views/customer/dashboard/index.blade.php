@@ -9,8 +9,8 @@
                     <a class="btn btn-success export-dashboard" style="color: white"><i class="fas fa-file-excel"></i> Export</a>
                     <table class="table table-responsive" id="table_dashboard_customer">
                         <thead>
-                            <tr style="text-align: center" id="title-header">
-                                <td colspan="1" style="background-color: rgb(80, 103, 233); color: black; font-weight: bold">Company</td>
+                            <tr style="text-align: center" class="sticky-col company-col"" id="title-header">
+                                <td colspan="1" class="sticky-col company-col"" style="background-color: rgb(80, 103, 233); color: black; font-weight: bold">Company</td>
                                 <td colspan="4" style="background-color: rgb(236, 130, 130); color: black; font-weight: bold">PIC Company</td>
                                 <td colspan="2" style="background-color: rgb(55, 211, 238); color: black; font-weight: bold">Total Device</td>
                                 <td colspan="2" style="background-color: rgb(230, 233, 81); color: black; font-weight: bold">Sensor</td>
@@ -20,7 +20,7 @@
                                 <td colspan="6" style="background-color: rgb(233, 101, 13); color: rgb(0, 0, 0); font-weight: bold" class="sticky-col action-col">Action</td>
                             </tr>
                             <tr style="text-align: center">
-                                <th style="min-width:200px; border-right: 3px solid black; border-left: 3px solid black"">Company Name</th>
+                                <th class="sticky-col company-col"" style="min-width:200px; border-right: 3px solid black; border-left: 3px solid black"">Company Name</th>
                                 <th style="min-width:100px;">PIC Name</th>
                                 <th style="min-width:250px;" >Email</th>
                                 <th style="min-width:150px;" >Position</th>

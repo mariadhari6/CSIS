@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <h6>Vehicle Percompany</h6>
-                <table class="table table-responsive data " class="table_id" id="table_id" >
+                <table class="table table-responsive data " class="table_home" id="table_home" >
 
                 <tr>
                     <th scope="col" class="list">Company Name</th>

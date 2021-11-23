@@ -4,7 +4,7 @@
     <td></td>
 
      <td>
-        <select class="select-search" id="company_id" placeholder="Select a Company..." name="company_id" required>
+        <select class="select-search search_company" id="company_id" placeholder="Select a Company..." name="company_id" required>
             {{-- <option class="hidden" placeholder="Search Company"></option> --}}
             <option value="">Select a Company...</option>
             @foreach ($detail as $item )

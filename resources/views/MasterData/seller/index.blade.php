@@ -30,7 +30,7 @@
             </div>
               <form>
 
-          <table class="table table-hover data" class="table_id" id="table_id" >
+          <table class="table table-responsive data" class="table_seller" id="table_seller" >
             <thead>
               <tr>
 
@@ -155,7 +155,7 @@
                         for (indexA = 0; indexA < sellerCodeID.length; indexA++) {
                             var sellerCodeNumberValue = sellerCodeID[indexA].innerText;
                             var noAgreementLetterNumberValue = noAgrementLetterID[indexA].innerText;
-                            $rowCount = $("#table_id tr").length;
+                            $rowCount = $("#table_seller tr").length;
                             if($rowCount == 1){
 
                             }else{
@@ -164,8 +164,8 @@
                               var allNoAgreementLetterNum = [];
                               for($i = 0; $i < $rowResult; $i++)
                               {
-                                $sellerCodeNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
-                                $noAgreementLetterNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
+                                $sellerCodeNum = $("#table_seller").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
+                                $noAgreementLetterNum = $("#table_seller").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
                                 allSellerCodeNum = $sellerCodeNum;
                                 allNoAgreementLetterNum = $noAgreementLetterNum;
 
@@ -267,14 +267,14 @@
     function read(){
         enableButton();
       $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
+        $('#table_seller').DataTable().destroy();
+        $('#table_seller').find("#item_data").html(data);
+        $('#table_seller').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
         });
-        $('#table_id').DataTable().draw();
+        $('#table_seller').DataTable().draw();
       });
     }
 
@@ -287,7 +287,7 @@
      $('.add').click(function() {
          disableButton();
         $.get("{{ url('add_form_seller') }}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
+          $('#table_seller tbody').prepend(data);
         });
       });
     // ----- Proses Tambah data ------

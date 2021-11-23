@@ -3,12 +3,16 @@
         <div class="card">
             <div class="card-body">
                 {{-- <h6>Jumlah Company Per Seller</h6> --}}
-                <table class="table table-hover data " class="table_id" id="table_id" >
+                <table class="table table-hover data " class="table_home" id="table_home" >
 
                 <tr>
-                    <th scope="col" class="list" style="text-align: left">Seller Name</th>
-                    <th scope="col" class="list">Total Company</th>
                     <th scope="col" class="list" style="text-align: left">Company Name</th>
+                    <th scope="col" class="list">Total Company</th>
+                    <th scope="col" class="list" style="text-align: left">Seller Name</th>
+                    <th scope="col" class="list" style="text-align: left">Type GPS</th>
+                    <th scope="col" class="list" style="text-align: left">Total Type GPS</th>
+
+
 
 
 
@@ -18,15 +22,26 @@
                     @foreach ($company as $companys )
 
                     <tr>
-                    <td style="text-align: left">{{ $companys->seller_id}}</td>
+                    <td style="text-align: left">{{ $companys->company->company_name??''}}</td>
                     <td>@foreach ( $companys->total_company as $jumlah)
                             {{$jumlah->total_company}}
                     @endforeach
                     </td>
-                    <td style="text-align: left">@foreach ($companys->company as $company_name)
-                        {{$company_name->company_name}} <br>
-                    @endforeach
-                        </td>
+                    <td style="text-align: left">
+                        @foreach ($companys->seller as $seller)
+                        {{$seller->seller_id}} <br>
+                        @endforeach
+                    </td>
+                    <td style="text-align: left">
+                        @foreach ($companys->gps as $gps_types)
+                        {{$gps_types['type_gps']}} <br>
+                        @endforeach
+                    </td>
+                    <td style="text-align: left">
+                        @foreach ($companys->gps as $gps_types)
+                        {{$gps_types['type_total']}} <br>
+                        @endforeach
+                    </td>
 
                     {{-- <td>
                         {{ $item->time}}

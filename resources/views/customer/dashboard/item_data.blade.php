@@ -1,6 +1,6 @@
 @foreach ($company as $item)
 <tr>
-        <td style="text-align: center; border-right: 3px solid black; border-left: 3px solid black"">{{ $item->company->company_name }}</td>
+        <td class="sticky-col company-col"" style="text-align: center; border-right: 3px solid black; border-left: 3px solid black"">{{ $item->company->company_name }}</td>
         <td>
             @if (count($item->pic) > 0)
                 @foreach ($item->pic as $pic_name)

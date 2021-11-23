@@ -14,7 +14,7 @@
 
     <td><select class="select internal_eksternal-{{$request_complain->id}}" id="internal_eksternal" name="internal_eksternal" aria-label=".form-select-lg example" required>
     <option value="{{$request_complain->internal_eksternal}}"> {{$request_complain->internal_eksternal}} </option>
-    <option selected>{{$request_complain->internal_eksternal}}</option>
+    {{-- <option selected>{{$request_complain->internal_eksternal}}</option> --}}
    <option value="Request Internal">Request Internal</option>
     <option value="Complain Internal">Complain Internal</option>
     <option value="Request Eksternal">Request Eksternal</option>

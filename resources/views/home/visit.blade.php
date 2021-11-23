@@ -1,9 +1,9 @@
     <div class="row" id="table-request">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <div class="card">
             <div class="card-body">
                 <h6>Pemsangan GPS </h6>
-                <table class="table table-responsive data " class="table_id" id="table_id" >
+                <table class="table table-responsive data " class="table_home" id="table_home" >
 
                 <tr>
                     <th scope="col" class="list">Status</th>
@@ -26,10 +26,15 @@
                         @endif
 
 
-
+                        @if ($item->status == 'On Progress')
+                         <td style="color: red">
+                            {{$item->jumlah_status_pemasangan}}
+                         </td>
+                         @else
                         <td>
                             {{$item->jumlah_status_pemasangan}}
                          </td>
+                        @endif
 
 
                     </tr>
@@ -43,11 +48,11 @@
         </div>
     </div>
 
-     <div class="col-md-4">
+     <div class="col-md-5">
         <div class="card">
             <div class="card-body">
                 <h6>Mutasi</h6>
-                <table class="table table-responsive data " class="table_id" id="table_id" >
+                <table class="table table-responsive data " class="table_home" id="table_home" >
 
                 <tr>
                     <th scope="col" class="list">Status</th>
@@ -59,7 +64,7 @@
                     @foreach ($mutasi as $item )
 
                     <tr>
-                         @if ($item->status == 'On Progress')
+                        @if ($item->status == 'On Progress')
                             <td style="color: red">
                             {{$item->status}}
                             </td>
@@ -69,9 +74,16 @@
                         </td>
                         @endif
 
-                        <td>
-                            {{$item->jumlah_status_mutasi}}
+
+                        @if ($item->status == 'On Progress')
+                         <td style="color: red">
+                            {{$item->jumlah_status_pemasangan}}
                          </td>
+                         @else
+                        <td>
+                            {{$item->jumlah_status_pemasangan}}
+                         </td>
+                        @endif
 
 
                     </tr>
@@ -85,11 +97,11 @@
         </div>
     </div>
 
-     <div class="col-md-4">
+     <div class="col-md-5">
         <div class="card">
             <div class="card-body">
                 <h6>Maintenance GPS</h6>
-                <table class="table table-responsive data " class="table_id" id="table_id" >
+                <table class="table table-responsive data " class="table_home" id="table_home" >
 
                 <tr>
                     <th scope="col" class="list">Status</th>
@@ -112,9 +124,15 @@
                         @endif
 
 
-                        <td>
-                            {{$item->jumlah_status_maintenance_gps}}
+                        @if ($item->status == 'On Progress')
+                         <td style="color: red">
+                            {{$item->jumlah_status_pemasangan}}
                          </td>
+                         @else
+                        <td>
+                            {{$item->jumlah_status_pemasangan}}
+                         </td>
+                        @endif
 
 
                     </tr>
@@ -129,11 +147,11 @@
     </div>
 
 
-     <div class="col-md-4">
+     <div class="col-md-5">
         <div class="card">
             <div class="card-body">
                 <h6>Maintenance Sensor</h6>
-                <table class="table table-responsive data " class="table_id" id="table_id" >
+                <table class="table table-responsive data " class="table_home" id="table_home" >
 
                 <tr>
                     <th scope="col" class="list">Status</th>
@@ -145,7 +163,7 @@
                     @foreach ($maintenance_sensor as $item )
 
                     <tr>
-                         @if ($item->status == 'On Progress')
+                        @if ($item->status == 'On Progress')
                             <td style="color: red">
                             {{$item->status}}
                             </td>
@@ -155,9 +173,16 @@
                         </td>
                         @endif
 
-                        <td>
-                            {{$item->jumlah_status_maintenance_sensor}}
+
+                        @if ($item->status == 'On Progress')
+                         <td style="color: red">
+                            {{$item->jumlah_status_pemasangan}}
                          </td>
+                         @else
+                        <td>
+                            {{$item->jumlah_status_pemasangan}}
+                         </td>
+                        @endif
 
 
                     </tr>

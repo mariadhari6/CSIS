@@ -25,7 +25,7 @@
 
             <div class="card-body">
                 <h6>Status GSM</h6>
-                <table class="table table-hover data " class="table_id" id="table_id" >
+                <table class="table table-hover data " class="table_home" id="table_home" >
 
                 <tr>
                      <th scope="col" class="list">Status GSM</th>
@@ -76,7 +76,7 @@
             <div class="card-body">
                  <div class="card-body">
                 {{-- <h6>Sensor</h6> --}}
-                <table class="table table-responsive data " class="table_id" id="table_id" >
+                <table class="table table-responsive data " class="table_home" id="table_home" >
 
                 <tr>
                 <th scope="col" class="list">Status GSM*</th>
