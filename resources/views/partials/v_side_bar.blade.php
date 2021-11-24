@@ -248,8 +248,7 @@
             <li class="nav-item {{ request()->is('/super_admin') ? ' active' : ''}}">
             <a href="{{url('/user')}}">
                 <i class="fas fa-users fa-2x icon-sidebar"
-                {{ request()->is('super_admin')? 'style=color:#5fa2db' : ''}}
-
+                {{ request()->is('user')? 'style=color:#5fa2db' : ''}}
 
                 ></i>
                 {{-- <i class="la la-home fa-2x icon-sidebar"></i> --}}
@@ -257,10 +256,24 @@
             </a>
         </li>
         <li class="nav-item
-            {{ request()->is('seller') ? ' active' : ''}}
+                {{ request()->is('teknisi_data')? 'active' : ''}}
+                {{ request()->is('merk_gps')? 'active' : ''}}
+                {{ request()->is('task')? 'active' : ''}}
+                {{ request()->is('status_layanan')? 'active' : ''}}
+                {{ request()->is('sales')? 'active' : ''}}
+                {{ request()->is('sensor_name')? 'active' : ''}}
+                {{ request()->is('vehicle_type')? 'active' : ''}}
             ">
             <a class="" data-toggle="collapse" href="#masterSelect" aria-expanded="true">
-                <i class="fa fa-list-alt fa-2x icon-sidebar"></i>
+                <i class="fa fa-list-alt fa-2x icon-sidebar"
+                {{ request()->is('teknisi_data')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('merk_gps')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('task')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('status_layanan')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('sales')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('sensor_name')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('vehicle_type')? 'style=color:#5fa2db' : ''}}
+                ></i>
                 <span class="nav-text">Data Select</span>
                 <span class="caret"></span>
             </a>
@@ -320,7 +333,20 @@
             {{ request()->is('Terminate') ? ' active' : ''}}
             ">
             <a class="" data-toggle="collapse" href="#masterData" aria-expanded="true">
-                <i class="la la-table fa-2x icon-sidebar"></i>
+                <i class="la la-table fa-2x icon-sidebar"
+
+                {{ request()->is('seller')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Company')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('pic')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('gps')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('sensor')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('master_po')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Vehicle')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('GsmMaster')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Active')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('GsmTerminate')? 'style=color:#5fa2db' : ''}}
+
+                ></i>
                 <span class="nav-text">Master Data</span>
                 <span class="caret"></span>
             </a>
@@ -395,7 +421,12 @@
         </li>
         <li class="nav-item {{ request()->is('detail_customer') ? ' active' : ''}}">
             <a class="" data-toggle="collapse" href="#customer" aria-expanded="true">
-                <i class="la la-users fa-2x icon-sidebar"></i>
+                <i class="la la-users fa-2x icon-sidebar"
+                {{ request()->is('detail_customer')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('summary')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('dashboard_customer')? 'style=color:#5fa2db' : ''}}
+
+                ></i>
                 <span  class="nav-text">Data Customer</span>
                 <span class="caret"></span>
             </a>
@@ -421,7 +452,11 @@
         </li>
         <li class="nav-item {{ request()->is('RequestComplain') ? ' active' : ''}}"">
             <a class="" data-toggle="collapse" href="#request&complain" aria-expanded="true">
-                <i class="la la-comments-o fa-2x icon-sidebar"></i>
+                <i class="la la-comments-o fa-2x icon-sidebar"
+
+                {{ request()->is('RequestComplain')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Dashboard_RequestComplain')? 'style=color:#5fa2db' : ''}}
+                ></i>
                 <span  class="nav-text">Request & Complain</span>
                 <span class="caret"></span>
             </a>
@@ -447,7 +482,13 @@
                 {{ request()->is('dashboard_visit_assignment') ? ' active' : ''}}
             ">
             <a class="" data-toggle="collapse" href="#visit" aria-expanded="true">
-                <i class="la la-cogs fa-2x icon-sidebar"></i>
+                <i class="la la-cogs fa-2x icon-sidebar"
+
+                {{ request()->is('PemasanganMutasi')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('MaintenanceGps')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Dashboard_Visit_Assignment')? 'style=color:#5fa2db' : ''}}
+
+                ></i>
                 <span  class="nav-text">Visit Assignment</span>
                 <span class="caret"></span>
             </a>
@@ -481,7 +522,11 @@
                 {{ request()->is('dashboard_visit_assignment') ? ' active' : ''}}
             ">
             <a class="" data-toggle="collapse" href="#visit" aria-expanded="true">
-                <i class="la la-cogs fa-2x icon-sidebar"></i>
+                <i class="la la-cogs fa-2x icon-sidebar"
+                {{ request()->is('PemasanganMutasi')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('MaintenanceGps')? 'style=color:#5fa2db' : ''}}
+                {{ request()->is('Dashboard_Visit_Assignment')? 'style=color:#5fa2db' : ''}}
+                ></i>
                 <span  class="nav-text">Visit Assignment</span>
                 <span class="caret"></span>
             </a>
