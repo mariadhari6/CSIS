@@ -14,32 +14,60 @@
                 </tr>
 
 
-                     @foreach ($sensor as $item )
+
 
                     <tr>
-                        <td>{{ $item->status}}</td>
-                        <td>@foreach ( $item->total_status as $jumlah)
+                        <td>{{ $sensor[1]->status}}</td>
+                        <td>@foreach ( $sensor[1]->total_status as $jumlah)
                             {{$jumlah->total_status}}
                         @endforeach
                         </td>
                           <td>
-                            @foreach ($item->sensor_name as $sensor_name)
+                            @foreach ($sensor[1]->sensor_name as $sensor_name)
                             {{$sensor_name->sensor_name}} <br>
                             @endforeach
                         </td>
-                        <td>@foreach ($item->total_persensor_name as $total)
+                        <td>@foreach ($sensor[1]->total_persensor_name as $total)
                             {{$total->total_persensor_name}} <br>
                             @endforeach
                         </td>
-
-
-
-
-
-
-
                     </tr>
-                     @endforeach
+
+                    <tr>
+                        <td>{{ $sensor[2]->status}}</td>
+                        <td>@foreach ( $sensor[2]->total_status as $jumlah)
+                            {{$jumlah->total_status}}
+                        @endforeach
+                        </td>
+                          <td>
+                            @foreach ($sensor[2]->sensor_name as $sensor_name)
+                            {{$sensor_name->sensor_name}} <br>
+                            @endforeach
+                        </td>
+                        <td>@foreach ($sensor[2]->total_persensor_name as $total)
+                            {{$total->total_persensor_name}} <br>
+                            @endforeach
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="color: red">{{ $sensor[0]->status}}</td>
+                        <td style="color: red">@foreach ( $sensor[0]->total_status as $jumlah)
+                            {{$jumlah->total_status}}
+                        @endforeach
+                        </td>
+                          <td style="color: red">
+                            @foreach ($sensor[0]->sensor_name as $sensor_name)
+                            {{$sensor_name->sensor_name}} <br>
+                            @endforeach
+                        </td>
+                        <td style="color: red">@foreach ($sensor[0]->total_persensor_name as $total)
+                            {{$total->total_persensor_name}} <br>
+                            @endforeach
+                        </td>
+                    </tr>
+
+
 
                 </table>
             </div>

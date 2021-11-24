@@ -15,33 +15,62 @@
 
                 </tr>
 
-
-                    @foreach ($gps as $item )
-
                     <tr>
-                        <td>{{ $item->status}}</td>
-                        <td>@foreach ( $item->total_status as $jumlah)
+                        <td>{{ $gps[1]->status}}</td>
+                        <td>@foreach ( $gps[1]->total_status as $jumlah)
                             {{$jumlah->total_status}}
                         @endforeach
                         </td>
                           <td>
-                            @foreach ($item->type as $gps_type)
+                            @foreach ($gps[1]->type as $gps_type)
                             {{$gps_type->type}} <br>
                             @endforeach
                         </td>
-                        <td>@foreach ($item->total_pertype as $type)
+                        <td>@foreach ($gps[1]->total_pertype as $type)
                             {{$type->total_pertype}} <br>
                             @endforeach
                         </td>
 
-
-
-
-
-
+                    </tr>
+                    <tr>
+                        <td>{{ $gps[2]->status}}</td>
+                        <td>@foreach ( $gps[2]->total_status as $jumlah)
+                            {{$jumlah->total_status}}
+                        @endforeach
+                        </td>
+                          <td>
+                            @foreach ($gps[2]->type as $gps_type)
+                            {{$gps_type->type}} <br>
+                            @endforeach
+                        </td>
+                        <td>@foreach ($gps[2]->total_pertype as $type)
+                            {{$type->total_pertype}} <br>
+                            @endforeach
+                        </td>
 
                     </tr>
-                     @endforeach
+
+                    <tr>
+                        <td style="color:red">{{ $gps[0]->status}}</td>
+                        <td style="color:red">@foreach ( $gps[0]->total_status as $jumlah)
+                            {{$jumlah->total_status}}
+                        @endforeach
+                        </td>
+                          <td style="color:red">
+                            @foreach ($gps[0]->type as $gps_type)
+                            {{$gps_type->type}} <br>
+                            @endforeach
+                        </td>
+                        <td style="color:red;">@foreach ($gps[0]->total_pertype as $type)
+                            {{$type->total_pertype}} <br>
+                            @endforeach
+                        </td>
+
+                    </tr>
+
+
+
+
 
 
                 </table>

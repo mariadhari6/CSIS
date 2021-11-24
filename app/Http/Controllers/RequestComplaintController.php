@@ -174,8 +174,8 @@ class RequestComplaintController extends Controller
                 'status_akhir'              =>  $request->status_akhir,
                 'type_gps_id'               =>  $type == null ? null : $type[0],
                 'equipment_gsm'             =>  $gsm == null ? null : $gsm[0],
-                'equipment_gps_id'          =>  $equipment_gps_id == null ? null : $equipment_gps_id,
-                'equipment_sensor_id'       =>  $equipment_sensor_id == null ? null : $equipment_sensor_id,
+                'equipment_gps_id'          =>  $request->$equipment_gps_id,
+                'equipment_sensor_id'       =>  $request->$equipment_sensor_id,
                 'status_waktu_respon'       =>  $status_waktu_respon,
                 'equipment_terpakai_sensor' =>  $sensor == null ? null : $sensor[0]
 

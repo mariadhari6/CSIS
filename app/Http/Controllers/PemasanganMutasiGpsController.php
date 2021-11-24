@@ -97,6 +97,7 @@ class PemasanganMutasiGpsController extends Controller
             ->selectRaw('count(*) as jumlah, company_id')
             ->get();
         $pemasangan_mutasi_GPS = RequestComplaint::findOrfail($id);
+
         $sensor         = Sensor::orderBy('serial_number', 'DESC')->where('status', 'Ready')->get();
 
         $gps = Gps::where('status', 'Ready')->get();

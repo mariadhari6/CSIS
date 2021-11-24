@@ -1,8 +1,7 @@
 <div class="row" id="table-gsm">
 
 
-<div class="col-md-12">
-<div class="col-md-12">
+<div class="col-md-6">
         <div class="card card-stats ">
                 <div class="card-body ">
                     <div class="row">
@@ -19,45 +18,73 @@
                     </div>
                 </div>
             </div>
+    </div>
 
 
-        <div class="card">
+       <div class="col-md-6">
+        <div class="card card-stats ">
 
             <div class="card-body">
                 <h6>Status GSM</h6>
                 <table class="table table-hover data " class="table_home" id="table_home" >
 
                 <tr>
-                     <th scope="col" class="list">Status GSM</th>
-                    <th scope="col" class="list">Total Status GSM</th>
+                     <th scope="col" class="list" style="text-align: center">Status GSM</th>
+                    <th scope="col" class="list" style="text-align: center">Total Status GSM</th>
                 </tr>
 
 
-                    @foreach ($status as $item )
+
 
                     <tr>
-                             <td>
-                        {{ $item->status_gsm}}
+                             <td style="text-align: center">
+                        {{ $status[1]->status_gsm}}
 
                             </td>
 
-                         <td>
-                            {{$item->jumlah_status_gsm}}
+                         <td style="text-align: center">
+                            {{$status[1]->jumlah_status_gsm}}
                          </td>
 
 
 
                     </tr>
-                     @endforeach
+
+                    <tr>
+                             <td style="text-align: center">
+                        {{ $status[0]->status_gsm}}
+
+                            </td>
+
+                         <td style="text-align: center">
+                            {{$status[0]->jumlah_status_gsm}}
+                         </td>
+
+
+
+                    </tr>
+
+                    <tr>
+                             <td style="text-align: center; color:red" >
+                        {{ $status[2]->status_gsm}}
+
+                            </td>
+
+                         <td style="text-align: center; color:red">
+                            {{$status[2]->jumlah_status_gsm}}
+                         </td>
+
+
+
+                    </tr>
+
 
 
                 </table>
             </div>
         </div>
-    </div>
-
+       </div>
 </div>
-
   <!-- Modal Import -->
   <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
 		<div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role="document">

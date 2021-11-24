@@ -1141,3 +1141,56 @@ nav.sidebar-new li.active > a,
 
 
 }
+
+/* Table Company HDashboard Home */
+.table_company{
+    position: relative;
+    bottom: 150px;
+    left: 170px;
+}
+
+.table_visit{
+    position: relative;
+    bottom: 150px;
+    left: 120px;
+    text-align: center;
+
+}
+
+.table_vehicle{
+    position: relative;
+    bottom: 150px;
+    left: 270px;
+    text-align: center;
+
+}
+
+.table_gps{
+    position: relative;
+    bottom: 150px;
+    left: 270px;
+    text-align: center;
+
+}
+
+.table_gsm{
+    position: relative;
+    bottom: 150px;
+    left: 270px;
+    text-align: center;
+
+}
+.table_sensor{
+    position: relative;
+    bottom: 150px;
+    left: 270px;
+    text-align: center;
+}
+
+.table_request{
+    position: relative;
+    bottom: 150px;
+    left: 250px;
+    text-align: center;
+
+}

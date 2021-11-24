@@ -232,7 +232,7 @@ class CustomerServiceController extends Controller
         $jumlah_total_complain = RequestComplaint::whereIn('internal_eksternal', ['Complain Internal', 'Complain Eksternal'])->count();
         $presentase_complain = ($jumlah_done_complain / $jumlah_total_complain) * 100;
 
-        return view('home.request', compact('complain', 'request', 'presentase_request', 'presentase_complain'));
+        return view('home.request', compact('complain', 'request', 'presentase_request', 'presentase_complain', 'jumlah_total_request', 'jumlah_total_complain'));
     }
 
     public function vehicle_home()
@@ -308,6 +308,43 @@ class CustomerServiceController extends Controller
         $maintenance_gps = RequestComplaint::groupBy('status')->where('task', 4)->selectRaw('count(task) as jumlah_status_maintenance_gps, status')->get();
         $maintenance_sensor = RequestComplaint::groupBy('status')->where('task', 5)->selectRaw('count(task) as jumlah_status_maintenance_sensor, status')->get();
         // return $maintenance_sensor;
-        return view('home.visit', compact('mutasi', 'pemasangan', 'maintenance_sensor', 'maintenance_gps'));
+        // presentase pemasangan
+        $jumlah_done_pemasangan = RequestComplaint::where('task', 1)->where('status', 'Done')->count();
+        $jumlah_total_pemasangan = RequestComplaint::where('task', 1)->count();
+        $presentase_pemasangan = ($jumlah_done_pemasangan / $jumlah_total_pemasangan) * 100;
+
+        // presentase mutasi
+        $jumlah_done_mutasi = RequestComplaint::where('task', 3)->where('status', 'Done')->count();
+        $jumlah_total_mutasi = RequestComplaint::where('task', 3)->count();
+        $presentase_mutasi = ($jumlah_done_mutasi / $jumlah_total_mutasi) * 100;
+
+        // presentase maintenance gps
+        $jumlah_done_maintenance_gps = RequestComplaint::where('task', 4)->where('status', 'Done')->count();
+        $jumlah_total_maintenance_gps = RequestComplaint::where('task', 4)->count();
+        $presentase_maintenance_gps = ($jumlah_done_maintenance_gps / $jumlah_total_maintenance_gps) * 100;
+
+        // presentase maintenance gps
+        $jumlah_done_maintenance_sensor = RequestComplaint::where('task', 5)->where('status', 'Done')->count();
+        $jumlah_total_maintenance_sensor = RequestComplaint::where('task', 5)->count();
+        $presentase_maintenance_sensor = ($jumlah_done_maintenance_sensor / $jumlah_total_maintenance_sensor) * 100;
+
+
+
+
+        return view('home.visit', compact(
+            'mutasi',
+            'pemasangan',
+            'maintenance_sensor',
+            'maintenance_gps',
+            'presentase_pemasangan',
+            'presentase_mutasi',
+            'presentase_maintenance_sensor',
+            'presentase_maintenance_gps',
+            'jumlah_total_pemasangan',
+            'jumlah_total_mutasi',
+            'jumlah_total_maintenance_gps',
+            'jumlah_total_maintenance_sensor'
+
+        ));
     }
 }

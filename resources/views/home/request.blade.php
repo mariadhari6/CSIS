@@ -43,9 +43,16 @@
                      @endforeach
 
 
-
+                <tfoot>
+                    <tr>
+                        <th>TOTAL</th>
+                        <th style="text-align:center">{{$jumlah_total_complain}}</th>
+                    </tr>
+                </tfoot>
 
                 </table>
+
+
             </div>
         </div>
     </div>
@@ -55,7 +62,7 @@
             <div class="card-body">
                 <h6 style="float: left">Request</h6>
                 <h6 class="presentase-table" >{{round($presentase_request,1)}}%</h6>
-                <table class="table table-hover data " class="table_home" id="table_home" >
+                <table class="table table-hover data " class="table_home" id="table_request" >
 
                 <tr>
                     <th scope="col" class="list">Status</th>
@@ -88,8 +95,18 @@
                          @endif
 
 
+
+
+
                     </tr>
                      @endforeach
+                     <tfoot>
+                        <tr>
+                            <th>TOTAL</th>
+                            <th style="text-align:center">{{$jumlah_total_request}}</th>
+                        </tr>
+                    </tfoot>
+
 
 
 

@@ -128,7 +128,7 @@
 
                                 <li class="mt-4 nav-item {{ request()->is('GsmMaster') ? ' active' : ''}}">
                                     <a class="collapse-item @yield('GsmMaster')" href="{{url('/GsmMaster')}}">
-                                        <span class="nav-list">Master Gsm</span>
+                                        <span class="nav-list">Master GSM</span>
                                     </a>
                                 </li>
                                 <li class="mt-2 nav-item {{ request()->is('Active') ? ' active' : ''}}">

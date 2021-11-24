@@ -68,6 +68,32 @@
         <div class="table-home table_home">
 
         </div>
+
+        <div class="table_company">
+
+        </div>
+        <div class="table_gps">
+
+        </div>
+
+        <div class="table_request">
+
+        </div>
+
+        <div class="table_visit">
+
+        </div>
+        <div class="table_gsm">
+
+        </div>
+
+        <div class="table_sensor">
+
+        </div>
+
+        <div class="table_vehicle">
+
+        </div>
         <br>
     </div>
 </div>
@@ -79,9 +105,11 @@
         $("#table-sensor").slideUp("fast");
         $("#table-gsm").slideUp("fast");
         $("#table-request").slideUp("fast");
+        $("#table-visit").slideUp("fast");
+
 
         $.get("{{ url('/item_data_Homecompany') }}", {}, function(data, status) {
-            $('.table_home').html(data)
+            $('.table_company').html(data)
 
         });
     });
@@ -92,9 +120,11 @@
         $("#table-sensor").slideUp("fast");
         $("#table-gsm").slideUp("fast");
         $("#table-request").slideUp("fast");
+        $("#table-visit").slideUp("fast");
+
 
         $.get("{{ url('/item_data_Homegps') }}", {}, function(data, status) {
-            $('.table_home').html(data)
+            $('.table_gps').html(data)
 
         });
     });
@@ -105,9 +135,11 @@
         $("#table-vehicle").slideUp("fast");
         $("#table-gsm").slideUp("fast");
         $("#table-request").slideUp("fast");
+        $("#table-visit").slideUp("fast");
+
 
         $.get("{{ url('/item_data_HomeSensor') }}", {}, function(data, status) {
-            $('.table_home').html(data)
+            $('.table_sensor').html(data)
 
         });
     });
@@ -118,10 +150,12 @@
         $("#table-sensor").slideUp("fast");
         $("#table-vehicle").slideUp("fast");
         $("#table-request").slideUp("fast");
+        $("#table-visit").slideUp("fast");
+
 
 
         $.get("{{ url('/item_data_HomeGsm') }}", {}, function(data, status) {
-            $('.table_home').html(data)
+            $('.table_gsm').html(data)
 
         });
     });
@@ -132,12 +166,13 @@
         $("#table-sensor").slideUp("fast");
         $("#table-gsm").slideUp("fast");
         $("#table-vehicle").slideUp("fast");
+        $("#table-visit").slideUp("fast");
 
 
 
 
         $.get("{{ url('/item_data_HomeRequest') }}", {}, function(data, status) {
-            $('.table_home').html(data)
+            $('.table_request').html(data)
 
         });
     });
@@ -148,9 +183,11 @@
         $("#table-sensor").slideUp("fast");
         $("#table-gsm").slideUp("fast");
         $("#table-request").slideUp("fast");
+        $("#table-visit").slideUp("fast");
+
 
         $.get("{{ url('/item_data_HomeVehicle') }}", {}, function(data, status) {
-            $('.table_home').html(data)
+            $('.table_vehicle').html(data)
 
         });
     });
@@ -165,7 +202,7 @@
 
 
         $.get("{{ url('/item_data_HomeVisit') }}", {}, function(data, status) {
-            $('.table_home').html(data)
+            $('.table_visit').html(data)
 
         });
     });
