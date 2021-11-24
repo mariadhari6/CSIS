@@ -1046,7 +1046,7 @@ nav.sidebar-new li.active > a,
 
 /* Seller */
 
-#table_seller{
+#table_select{
     table-layout: auto;
     position: relative;
     bottom: 20px;
@@ -1056,7 +1056,7 @@ nav.sidebar-new li.active > a,
     height:450px;
 }
 
-#table_seller thead
+#table_select thead
 {
     background-color: #ffffff;
     position: -webkit-sticky;
@@ -1064,14 +1064,14 @@ nav.sidebar-new li.active > a,
     top: 0;
 }
 
-#table_seller thead:first-child
+#table_select thead:first-child
 {
     position: sticky;
     right: 0;
     z-index: 2;
 }
 
-#table_seller tbody td
+#table_select tbody td
 {
     position: sticky;
     right: 0;
@@ -1194,3 +1194,44 @@ nav.sidebar-new li.active > a,
     text-align: center;
 
 }
+
+
+/* Merk GPS */
+
+#table_select{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    z-index: 1;
+    overflow: auto;
+    height:450px;
+}
+
+#table_select thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_select thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+#table_select tbody td
+{
+    position: sticky;
+    right: 0;
+    background: #ffffff;
+    z-index: 1;
+    width: 1500px;
+    text-align: center;
+
+}
+
+

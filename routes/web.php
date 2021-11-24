@@ -23,10 +23,16 @@ use App\Http\Controllers\RequestComplaintController;
 use App\Http\Controllers\MasterPoController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\MaintenanceGpsController;
+use App\Http\Controllers\MerkGpsController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TeknisiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\SensorNameController;
+use App\Http\Controllers\StatusLayananController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VehicleTypeController;
 use App\Models\DetailCustomer;
 use App\Models\PemasanganMutasiGps;
 use App\Models\Username;
@@ -97,6 +103,71 @@ Route::group(
         Route::get('/destroy_user/{id}', [UserController::class, 'destroy']);
         Route::get('/edit_form_user/{id}', [UserController::class, 'edit_form']);
         Route::get('/update_user/{id}', [UserController::class, 'update']);
+
+        //merk gps
+
+        Route::get('/merk_gps', [MerkGpsController::class, 'index'])->name('merkgps');
+        Route::get('/item_data_merkGps', [MerkGpsController::class, 'item_data']);
+        Route::get('/add_form_merkGps', [MerkGpsController::class, 'add_form']);
+        Route::get('/store_merkGps', [MerkGpsController::class, 'store']);
+        Route::get('/destroy_merkGps/{id}', [MerkGpsController::class, 'destroy']);
+        Route::get('/edit_form_merkGps/{id}', [MerkGpsController::class, 'show']);
+        Route::get('/update_merkGps/{id}', [MerkGpsController::class, 'update']);
+
+        //merk gps
+
+        Route::get('/sales', [SalesController::class, 'index'])->name('sales');
+        Route::get('/item_data_sales', [SalesController::class, 'item_data']);
+        Route::get('/add_form_sales', [SalesController::class, 'add_form']);
+        Route::get('/store_sales', [SalesController::class, 'store']);
+        Route::get('/destroy_sales/{id}', [SalesController::class, 'destroy']);
+        Route::get('/edit_form_sales/{id}', [SalesController::class, 'show']);
+        Route::get('/update_sales/{id}', [SalesController::class, 'update']);
+        //merk gps
+
+        Route::get('/sensor_name', [SensorNameController::class, 'index'])->name('sensor_name');
+        Route::get('/item_data_sensor_name', [SensorNameController::class, 'item_data']);
+        Route::get('/add_form_sensor_name', [SensorNameController::class, 'add_form']);
+        Route::get('/store_sensor_name', [SensorNameController::class, 'store']);
+        Route::get('/destroy_sensor_name/{id}', [SensorNameController::class, 'destroy']);
+        Route::get('/edit_form_sensor_name/{id}', [SensorNameController::class, 'show']);
+        Route::get('/update_sensor_name/{id}', [SensorNameController::class, 'update']);
+
+        //Status Layanan
+
+        Route::get('/status_layanan', [StatusLayananController::class, 'index'])->name('status_layanan');
+        Route::get('/item_data_status_layanan', [StatusLayananController::class, 'item_data']);
+        Route::get('/add_form_status_layanan', [StatusLayananController::class, 'add_form']);
+        Route::get('/store_status_layanan', [StatusLayananController::class, 'store']);
+        Route::get('/destroy_status_layanan/{id}', [StatusLayananController::class, 'destroy']);
+        Route::get('/edit_form_status_layanan/{id}', [StatusLayananController::class, 'show']);
+        Route::get('/update_status_layanan/{id}', [StatusLayananController::class, 'update']);
+        //task
+        Route::get('/task', [TaskController::class, 'index'])->name('task');
+        Route::get('/item_data_task', [TaskController::class, 'item_data']);
+        Route::get('/add_form_task', [TaskController::class, 'add_form']);
+        Route::get('/store_task', [TaskController::class, 'store']);
+        Route::get('/destroy_task/{id}', [TaskController::class, 'destroy']);
+        Route::get('/edit_form_task/{id}', [TaskController::class, 'show']);
+        Route::get('/update_task/{id}', [TaskController::class, 'update']);
+
+        //teknisi
+        Route::get('/teknisi_data', [TeknisiController::class, 'index_data'])->name('teknisi');
+        Route::get('/item_data_teknisi', [TeknisiController::class, 'item_data']);
+        Route::get('/add_form_teknisi', [TeknisiController::class, 'add_form']);
+        Route::get('/store_teknisi', [TeknisiController::class, 'store']);
+        Route::get('/destroy_teknisi/{id}', [TeknisiController::class, 'destroy']);
+        Route::get('/edit_form_teknisi/{id}', [TeknisiController::class, 'show']);
+        Route::get('/update_teknisi/{id}', [TeknisiController::class, 'update']);
+
+        //vehicle_type
+        Route::get('/vehicle_type', [VehicleTypeController::class, 'index'])->name('vehicle_type');
+        Route::get('/item_data_vehicle_type', [VehicleTypeController::class, 'item_data']);
+        Route::get('/add_form_vehicle_type', [VehicleTypeController::class, 'add_form']);
+        Route::get('/store_vehicle_type', [VehicleTypeController::class, 'store']);
+        Route::get('/destroy_vehicle_type/{id}', [VehicleTypeController::class, 'destroy']);
+        Route::get('/edit_form_vehicle_type/{id}', [VehicleTypeController::class, 'show']);
+        Route::get('/update_vehicle_type/{id}', [VehicleTypeController::class, 'update']);
     }
 );
 Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {

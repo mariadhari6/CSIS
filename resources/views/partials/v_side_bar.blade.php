@@ -258,6 +258,57 @@
         </li>
         <li class="nav-item
             {{ request()->is('seller') ? ' active' : ''}}
+            ">
+            <a class="" data-toggle="collapse" href="#masterSelect" aria-expanded="true">
+                <i class="fa fa-list-alt fa-2x icon-sidebar"></i>
+                <span class="nav-text">Data Select</span>
+                <span class="caret"></span>
+            </a>
+            <div class="collapse" id="masterSelect" aria-expanded="true">
+                <ul class="drop ">
+                    <li class="mt-4 nav-item {{ request()->is('teknisi_data') ? ' active' : ''}}">
+                        <a class="collapse-item" href="{{url('/teknisi_data')}}">
+                            <span class="nav-list mt-2">Teknisi</span>
+                        </a>
+                    </li>
+                    <li class="mt-4 nav-item {{ request()->is('merk_gps') ? ' active' : ''}}">
+                        <a class="collapse-item" href="{{url('/merk_gps') }}">
+                            <span class="nav-list">Merk GPS</span>
+                        </a>
+                    </li>
+                    <li class="mt-4 nav-item {{ request()->is('task') ? ' active' : ''}}">
+                        <a class="collapse-item" href="{{url('/task') }}">
+                            <span class="nav-list">Task</span></span>
+                        </a>
+                    </li>
+
+                    <li class="mt-4 nav-item {{ request()->is('status_layanan') ? ' active' : ''}}">
+                        <a class="collapse-item" href="{{url('/status_layanan')}}">
+                            <span class="nav-list">Status Layanan</span>
+                        </a>
+                    </li>
+                    <li class="mt-4 nav-item {{ request()->is('sales') ? ' active' : ''}}">
+                        <a class="collapse-item" href="{{url('/sales')}}">
+                            <span class="nav-list">Sales</span>
+                        </a>
+                    </li>
+                    <li class="mt-4 nav-item {{ request()->is('sensor_name') ? ' active' : ''}}">
+                        <a class="collapse-item" href="{{url('/sensor_name')}}">
+                            <span class="nav-list">Sensor Name</span>
+                        </a>
+                    </li>
+                     <li  class="mt-4 nav-item {{ request()->is('vehicle_type') ? ' active' : ''}}">
+                        <a class="collapse-item" href="{{url('/vehicle_type')}}">
+                            <span class="nav-list">Vehicle Type</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </li>
+        <li class="nav-item
+            {{ request()->is('seller') ? ' active' : ''}}
             {{ request()->is('Company') ? ' active' : ''}}
             {{ request()->is('pic') ? ' active' : ''}}
             {{ request()->is('gps') ? ' active' : ''}}

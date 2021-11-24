@@ -303,7 +303,7 @@ class CustomerServiceController extends Controller
     {
         $pemasangan = RequestComplaint::groupBy('status')->where('task', 1)->selectRaw('count(task) as jumlah_status_pemasangan, status')->get();
         // return $pemasangan;
-        $mutasi = RequestComplaint::groupBy('status')->where('task', 3)->selectRaw('count(task) as jumlah_status_mutasi, status')->get();
+        $mutasi = RequestComplaint::groupBy('status')->where('task', 3, 2)->selectRaw('count(task) as jumlah_status_mutasi, status')->get();
         // return $mutasi;
         $maintenance_gps = RequestComplaint::groupBy('status')->where('task', 4)->selectRaw('count(task) as jumlah_status_maintenance_gps, status')->get();
         $maintenance_sensor = RequestComplaint::groupBy('status')->where('task', 5)->selectRaw('count(task) as jumlah_status_maintenance_sensor, status')->get();
@@ -314,8 +314,8 @@ class CustomerServiceController extends Controller
         $presentase_pemasangan = ($jumlah_done_pemasangan / $jumlah_total_pemasangan) * 100;
 
         // presentase mutasi
-        $jumlah_done_mutasi = RequestComplaint::where('task', 3)->where('status', 'Done')->count();
-        $jumlah_total_mutasi = RequestComplaint::where('task', 3)->count();
+        $jumlah_done_mutasi = RequestComplaint::where('task', 3, 2)->where('status', 'Done')->count();
+        $jumlah_total_mutasi = RequestComplaint::where('task', 3, 2)->count();
         $presentase_mutasi = ($jumlah_done_mutasi / $jumlah_total_mutasi) * 100;
 
         // presentase maintenance gps
