@@ -46,7 +46,7 @@
                 <th scope="col" class="list">Sensor Name*</th>
                 <th scope="col" class="list">Merk Sensor</th>
                 <th scope="col" class="list">Serial Number*</th>
-                <th scope="col" class="list">Rab Number*</th>
+                <th scope="col" class="list">RAB Number*</th>
                 <th scope="col" class="list">Waranty</th>
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>

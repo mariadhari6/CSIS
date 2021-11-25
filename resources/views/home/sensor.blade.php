@@ -15,57 +15,64 @@
 
 
 
-
-                    <tr>
-                        <td>{{ $sensor[1]->status}}</td>
-                        <td>@foreach ( $sensor[1]->total_status as $jumlah)
-                            {{$jumlah->total_status}}
+                    @foreach ($sensor_ready as $sensor )
+                        <tr>
+                        <td>{{ $sensor->status??''}}</td>
+                        <td>@foreach ( $sensor->total_status as $jumlah)
+                            {{$jumlah->total_status??''}}
                         @endforeach
                         </td>
                           <td>
-                            @foreach ($sensor[1]->sensor_name as $sensor_name)
-                            {{$sensor_name->sensor_name}} <br>
+                            @foreach ($sensor->sensor_name as $sensor_name)
+                            {{$sensor_name->sensor_name??''}} <br>
                             @endforeach
                         </td>
-                        <td>@foreach ($sensor[1]->total_persensor_name as $total)
-                            {{$total->total_persensor_name}} <br>
+                        <td>@foreach ($sensor->total_persensor_name as $total)
+                            {{$total->total_persensor_name??''}} <br>
                             @endforeach
                         </td>
                     </tr>
+                    @endforeach
+
+                    @foreach ($sensor_used as $sensor )
 
                     <tr>
-                        <td>{{ $sensor[2]->status}}</td>
-                        <td>@foreach ( $sensor[2]->total_status as $jumlah)
-                            {{$jumlah->total_status}}
+                        <td>{{ $sensor->status??''}}</td>
+                        <td>@foreach ( $sensor->total_status as $jumlah)
+                            {{$jumlah->total_status??''}}
                         @endforeach
                         </td>
                           <td>
-                            @foreach ($sensor[2]->sensor_name as $sensor_name)
-                            {{$sensor_name->sensor_name}} <br>
+                            @foreach ($sensor->sensor_name as $sensor_name)
+                            {{$sensor_name->sensor_name??''}} <br>
                             @endforeach
                         </td>
-                        <td>@foreach ($sensor[2]->total_persensor_name as $total)
-                            {{$total->total_persensor_name}} <br>
+                        <td>@foreach ($sensor->total_persensor_name as $total)
+                            {{$total->total_persensor_name??''}} <br>
                             @endforeach
                         </td>
                     </tr>
+                    @endforeach
+
+                    @foreach ($sensor_error as $sensor )
 
                     <tr>
-                        <td style="color: red">{{ $sensor[0]->status}}</td>
-                        <td style="color: red">@foreach ( $sensor[0]->total_status as $jumlah)
-                            {{$jumlah->total_status}}
+                        <td style="color: red">{{ $sensor->status??''}}</td>
+                        <td style="color: red">@foreach ( $sensor->total_status as $jumlah)
+                            {{$jumlah->total_status??''}}
                         @endforeach
                         </td>
                           <td style="color: red">
-                            @foreach ($sensor[0]->sensor_name as $sensor_name)
-                            {{$sensor_name->sensor_name}} <br>
+                            @foreach ($sensor->sensor_name as $sensor_name)
+                            {{$sensor_name->sensor_name??''}} <br>
                             @endforeach
                         </td>
-                        <td style="color: red">@foreach ($sensor[0]->total_persensor_name as $total)
-                            {{$total->total_persensor_name}} <br>
+                        <td style="color: red">@foreach ($sensor->total_persensor_name as $total)
+                            {{$total->total_persensor_name??''}} <br>
                             @endforeach
                         </td>
                     </tr>
+                    @endforeach
 
 
 

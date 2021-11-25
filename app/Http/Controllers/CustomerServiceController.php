@@ -23,13 +23,13 @@ class CustomerServiceController extends Controller
     public function index()
     {
 
-        $company = Company::all();
+        $company = DetailCustomer::all();
         $gps = Gps::all();
-        $vehicle = Vehicle::all();
+        $vehicle = DetailCustomer::all();
         $sensor = Sensor::all();
         $gsm = Gsm::all();
         $request = RequestComplaint::all();
-        $visit = RequestComplaint::whereIn('task', [1,  3, 4, 5])->get();
+        $visit = RequestComplaint::whereIn('task', ['Mutasi Pelepasan GPS', 'Pemasangan GPS', 'Mutasi Pemasangan GPS', 'Mutasi Pelepasan Pemasangan GPS', 'Maintenance Sensor', 'Maintenance GPS'])->get();
 
 
         $username = Username::where('id', 3)->count();
@@ -153,12 +153,10 @@ class CustomerServiceController extends Controller
         // $data_total_merk = Gps::groupBy('merk')->selectRaw('count(merk) as jumlah_merk, merk')->get();
         // $data_total_type = Gps::groupBy('type')->selectRaw('count(type) as jumlah_type, type')->get();
         // $data_total_status = Gps::groupBy('status')->selectRaw('count(status) as jumlah_status, status')->get();
-        $gps = Gps::groupBy('status')->select('status')->get();
-        // $gps = Gps::groupBy('type')->select('type')->get();
+        $gps_ready = Gps::groupBy('status')->where('status', 'Ready')->select('status')->get();
 
-
-        for ($i = 0; $i < count($gps); $i++) {
-            $a = $gps[$i]->status;
+        for ($i = 0; $i < count($gps_ready); $i++) {
+            $a = $gps_ready[$i]->status;
 
             $cari_type = Gps::groupBy('type')->where('status', $a)->select('type')->get();
             // dd($cari_company);
@@ -166,28 +164,64 @@ class CustomerServiceController extends Controller
             $total_type_installed = Gps::groupBy('type')->where('status', $a)->select(DB::raw('count(type) as total_pertype,type'))->get();
 
 
-            $gps[$i]["type"] = $cari_type;
-            // $gps[$i]["type"] = array_unique($gps[$i]["type"]);
-            $gps[$i]["total_pertype"] = $total_type_installed;
+            $gps_ready[$i]["type"] = $cari_type;
+            // $gps_ready[$i]["type"] = array_unique($gps_ready[$i]["type"]);
+            $gps_ready[$i]["total_pertype"] = $total_type_installed;
 
-            $gps[$i]["total_status"] = $total_status_installed;
+            $gps_ready[$i]["total_status"] = $total_status_installed;
         }
 
 
-        // return $gps;
+
+        $gps_used = Gps::groupBy('status')->where('status', 'Used')->select('status')->get();
+
+        for ($i = 0; $i < count($gps_used); $i++) {
+            $a = $gps_used[$i]->status;
+
+            $cari_type = Gps::groupBy('type')->where('status', $a)->select('type')->get();
+            // dd($cari_company);
+            $total_status_installed = Gps::where('status', $a)->select(DB::raw('count(status) as total_status'))->get();
+            $total_type_installed = Gps::groupBy('type')->where('status', $a)->select(DB::raw('count(type) as total_pertype,type'))->get();
 
 
-        return view('home.gps', compact('gps'));
+            $gps_used[$i]["type"] = $cari_type;
+            // $gps_used[$i]["type"] = array_unique($gps_used[$i]["type"]);
+            $gps_used[$i]["total_pertype"] = $total_type_installed;
+
+            $gps_used[$i]["total_status"] = $total_status_installed;
+        }
+
+        $gps_error = Gps::groupBy('status')->where('status', 'Error')->select('status')->get();
+
+        for ($i = 0; $i < count($gps_error); $i++) {
+            $a = $gps_error[$i]->status;
+
+            $cari_type = Gps::groupBy('type')->where('status', $a)->select('type')->get();
+            // dd($cari_company);
+            $total_status_installed = Gps::where('status', $a)->select(DB::raw('count(status) as total_status'))->get();
+            $total_type_installed = Gps::groupBy('type')->where('status', $a)->select(DB::raw('count(type) as total_pertype,type'))->get();
+
+
+            $gps_error[$i]["type"] = $cari_type;
+            // $gps_error[$i]["type"] = array_unique($gps_error[$i]["type"]);
+            $gps_error[$i]["total_pertype"] = $total_type_installed;
+
+            $gps_error[$i]["total_status"] = $total_status_installed;
+        }
+
+        // return $gps_error;
+
+
+        return view('home.gps', compact('gps_error', 'gps_ready', 'gps_used'));
     }
 
     public function sensor_home()
     {
-        $sensor = Gps::groupBy('status')->select('status')->get();
-        // $sensor = Gps::groupBy('type')->select('type')->get();
+        $sensor_ready = Gps::groupBy('status')->where('status', 'Ready')->select('status')->get();
 
 
-        for ($i = 0; $i < count($sensor); $i++) {
-            $a = $sensor[$i]->status;
+        for ($i = 0; $i < count($sensor_ready); $i++) {
+            $a = $sensor_ready[$i]->status;
 
             $cari_sensor_name = Sensor::groupBy('sensor_name')->where('status', $a)->select('sensor_name')->get();
             // dd($cari_company);
@@ -195,30 +229,69 @@ class CustomerServiceController extends Controller
             $total_sensor_name_installed = Sensor::groupBy('sensor_name')->where('status', $a)->select(DB::raw('count(sensor_name) as total_persensor_name,sensor_name'))->get();
 
 
-            $sensor[$i]["sensor_name"] = $cari_sensor_name;
+            $sensor_ready[$i]["sensor_name"] = $cari_sensor_name;
             // $gps[$i]["sensor_name"] = array_unique($gps[$i]["sensor_name"]);
-            $sensor[$i]["total_persensor_name"] = $total_sensor_name_installed;
-            $sensor[$i]["total_status"] = $total_status_installed;
+            $sensor_ready[$i]["total_persensor_name"] = $total_sensor_name_installed;
+            $sensor_ready[$i]["total_status"] = $total_status_installed;
         }
 
+        $sensor_used = Gps::groupBy('status')->where('status', 'Used')->select('status')->get();
 
-        return view('home.sensor', compact('sensor'));
+
+        for ($i = 0; $i < count($sensor_used); $i++) {
+            $a = $sensor_used[$i]->status;
+
+            $cari_sensor_name = Sensor::groupBy('sensor_name')->where('status', $a)->select('sensor_name')->get();
+            // dd($cari_company);
+            $total_status_installed = Sensor::where('status', $a)->select(DB::raw('count(status) as total_status'))->get();
+            $total_sensor_name_installed = Sensor::groupBy('sensor_name')->where('status', $a)->select(DB::raw('count(sensor_name) as total_persensor_name,sensor_name'))->get();
+
+
+            $sensor_used[$i]["sensor_name"] = $cari_sensor_name;
+            // $gps[$i]["sensor_name"] = array_unique($gps[$i]["sensor_name"]);
+            $sensor_used[$i]["total_persensor_name"] = $total_sensor_name_installed;
+            $sensor_used[$i]["total_status"] = $total_status_installed;
+        }
+
+        $sensor_error = Gps::groupBy('status')->where('status', 'Error')->select('status')->get();
+
+
+        for ($i = 0; $i < count($sensor_error); $i++) {
+            $a = $sensor_error[$i]->status;
+
+            $cari_sensor_name = Sensor::groupBy('sensor_name')->where('status', $a)->select('sensor_name')->get();
+            // dd($cari_company);
+            $total_status_installed = Sensor::where('status', $a)->select(DB::raw('count(status) as total_status'))->get();
+            $total_sensor_name_installed = Sensor::groupBy('sensor_name')->where('status', $a)->select(DB::raw('count(sensor_name) as total_persensor_name,sensor_name'))->get();
+
+
+            $sensor_error[$i]["sensor_name"] = $cari_sensor_name;
+            // $gps[$i]["sensor_name"] = array_unique($gps[$i]["sensor_name"]);
+            $sensor_error[$i]["total_persensor_name"] = $total_sensor_name_installed;
+            $sensor_error[$i]["total_status"] = $total_status_installed;
+        }
+
+        return view('home.sensor', compact('sensor_used', 'sensor_ready', 'sensor_error'));
     }
 
     public function gsm_home()
     {
-        // $data = Gsm::groupBy('company_id')->selectRaw('count(gsm_number) as jumlah_gsm, company_id')->get();
-        $status = Gsm::groupBy('status_gsm')->selectRaw('count(status_gsm) as jumlah_status_gsm, status_gsm')->get();
-        $gsm_no_assign = Gsm::where('was_maintenance', '1')->get();
 
+        // $data = Gsm::groupBy('company_id')->selectRaw('count(gsm_number) as jumlah_gsm, company_id')->get();
+        $terminate = Gsm::groupBy('status_gsm')->where('status_gsm', 'Terminate')->count('status_gsm');
+        $active = Gsm::groupBy('status_gsm')->where('status_gsm', 'Active')->count('status_gsm');
+        $ready = Gsm::groupBy('status_gsm')->where('status_gsm', 'Ready')->count('status_gsm');
+
+        // return $status;
+        $gsm_no_assign = Gsm::where('was_maintenance', '1')->get();
         $GsmMaster = Gsm::orderBy('id', 'DESC')->where('was_maintenance', '1')->get();
-        return view('home.gsm', compact('GsmMaster', 'status', 'gsm_no_assign'));
+        return view('home.gsm', compact('GsmMaster', 'active', 'terminate', 'ready', 'gsm_no_assign'));
     }
     public function request_home()
     {
-        $request = RequestComplaint::groupBy('status')->where('internal_eksternal', 'Request Eksternal',  'Request Internal')->orWhere('internal_eksternal', 'Request Internal')->selectRaw('count(internal_eksternal) as jumlah_status_request , status')->get();
+        $request = RequestComplaint::groupBy('status')->where('internal_eksternal', 'Request Eksternal')->orWhere('internal_eksternal', 'Request Internal')->selectRaw('count(internal_eksternal) as jumlah_status_request , status')->get();
         // return $request;
-        $complain = RequestComplaint::groupBy('status')->where('internal_eksternal', 'Complain Internal', 'Complain Internal')->selectRaw('count(internal_eksternal) as jumlah_status_complaint, status')->get();
+        $complain = RequestComplaint::groupBy('status')->where('internal_eksternal', 'Complain Eksternal')->orWhere('internal_eksternal', 'Complain Internal')->selectRaw('count(internal_eksternal) as jumlah_status_complaint, status')->get();
         // return $complain;
 
         //request
@@ -301,31 +374,31 @@ class CustomerServiceController extends Controller
 
     public function visit_home()
     {
-        $pemasangan = RequestComplaint::groupBy('status')->where('task', 1)->selectRaw('count(task) as jumlah_status_pemasangan, status')->get();
+        $pemasangan = RequestComplaint::groupBy('status')->where('task', 'Pemasangan GPS')->selectRaw('count(task) as jumlah_status_pemasangan, status')->get();
         // return $pemasangan;
-        $mutasi = RequestComplaint::groupBy('status')->where('task', 3, 2)->selectRaw('count(task) as jumlah_status_mutasi, status')->get();
+        $mutasi = RequestComplaint::groupBy('status')->whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->selectRaw('count(task) as jumlah_status_mutasi, status')->get();
         // return $mutasi;
-        $maintenance_gps = RequestComplaint::groupBy('status')->where('task', 4)->selectRaw('count(task) as jumlah_status_maintenance_gps, status')->get();
-        $maintenance_sensor = RequestComplaint::groupBy('status')->where('task', 5)->selectRaw('count(task) as jumlah_status_maintenance_sensor, status')->get();
+        $maintenance_gps = RequestComplaint::groupBy('status')->where('task', 'Maintenance GPS')->selectRaw('count(task) as jumlah_status_maintenance_gps, status')->get();
+        $maintenance_sensor = RequestComplaint::groupBy('status')->where('task', 'Maintenance Sensor')->selectRaw('count(task) as jumlah_status_maintenance_sensor, status')->get();
         // return $maintenance_sensor;
         // presentase pemasangan
-        $jumlah_done_pemasangan = RequestComplaint::where('task', 1)->where('status', 'Done')->count();
-        $jumlah_total_pemasangan = RequestComplaint::where('task', 1)->count();
+        $jumlah_done_pemasangan = RequestComplaint::where('task', 'Pemasangan GPS')->where('status', 'Done')->count();
+        $jumlah_total_pemasangan = RequestComplaint::where('task', 'Pemasangan GPS')->count();
         $presentase_pemasangan = ($jumlah_done_pemasangan / $jumlah_total_pemasangan) * 100;
 
         // presentase mutasi
-        $jumlah_done_mutasi = RequestComplaint::where('task', 3, 2)->where('status', 'Done')->count();
-        $jumlah_total_mutasi = RequestComplaint::where('task', 3, 2)->count();
+        $jumlah_done_mutasi = RequestComplaint::whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->where('status', 'Done')->count();
+        $jumlah_total_mutasi = RequestComplaint::whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->count();
         $presentase_mutasi = ($jumlah_done_mutasi / $jumlah_total_mutasi) * 100;
 
         // presentase maintenance gps
-        $jumlah_done_maintenance_gps = RequestComplaint::where('task', 4)->where('status', 'Done')->count();
-        $jumlah_total_maintenance_gps = RequestComplaint::where('task', 4)->count();
+        $jumlah_done_maintenance_gps = RequestComplaint::where('task', 'Maintenance GPS')->where('status', 'Done')->count();
+        $jumlah_total_maintenance_gps = RequestComplaint::where('task', 'Maintenance GPS')->count();
         $presentase_maintenance_gps = ($jumlah_done_maintenance_gps / $jumlah_total_maintenance_gps) * 100;
 
         // presentase maintenance gps
-        $jumlah_done_maintenance_sensor = RequestComplaint::where('task', 5)->where('status', 'Done')->count();
-        $jumlah_total_maintenance_sensor = RequestComplaint::where('task', 5)->count();
+        $jumlah_done_maintenance_sensor = RequestComplaint::where('task', 'Maintenance Sensor')->where('status', 'Done')->count();
+        $jumlah_total_maintenance_sensor = RequestComplaint::where('task', 'Maintenance Sensor')->count();
         $presentase_maintenance_sensor = ($jumlah_done_maintenance_sensor / $jumlah_total_maintenance_sensor) * 100;
 
 

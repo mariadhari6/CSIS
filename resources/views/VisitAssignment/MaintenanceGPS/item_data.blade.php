@@ -16,10 +16,10 @@
             {{ $item->companyRequest->company_name }}
         </td>
         <td id="item-task-{{ $item->id}}">
-            {{ $item->taskRequest->task }}
+            {{ $item->task }}
         </td>
         <td id="item-vehicle-{{ $item->id}}">
-            {{ $item->detailCustomerVehicleRequest->vehicle->license_plate??'' }}
+            {{ $item->vehicleRequest->license_plate??'' }}
         </td>
         <td id="item-waktu_kesepakatan-{{ $item->id }}">
             {{ $item->waktu_kesepakatan }}

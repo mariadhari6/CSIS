@@ -15,7 +15,11 @@
                 <option value="{{ $item->id }}">{{ $item->company_name }}</option>
             @endforeach
         </select>
+        <a href="/export_detail_customer" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
+            <i class="fas fa-file-export"></i>
+        </a>
     </div>
+
 </div>
 
 {{-- <div class="dropdown mb-3">

@@ -58,12 +58,12 @@
                 <th scope="col" class="list">Waktu Respond*</th>
                 <th scope="col" class="list">Task*</th>
                 <th scope="col" class="list">Platform*</th>
-                <th scope="col" class="list">Detail Taks*</th>
+                <th scope="col" class="list">Detail Task*</th>
                 <th scope="col" class="list">Divisi*</th>
                 <th scope="col" class="list">Respond*</th>
                 <th scope="col" class="list">Waktu Kesepakatan*</th>
                 <th scope="col" class="list">Status*</th>
-                <th scope="col" class="list">waktu Solve*</th>
+                <th scope="col" class="list">Waktu Solve*</th>
                 <th scope="col" class="list">Status Akhir</th>
                  <th scope="col" class="action sticky-col first-col">Action</th>
 

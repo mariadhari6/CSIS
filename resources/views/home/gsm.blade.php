@@ -35,50 +35,21 @@
 
 
 
+                   <tr>
+                        <td style="text-align: center">Ready</td>
 
-                    <tr>
-                             <td style="text-align: center">
-                        {{ $status[1]->status_gsm}}
-
-                            </td>
-
-                         <td style="text-align: center">
-                            {{$status[1]->jumlah_status_gsm}}
-                         </td>
-
-
-
+                         <td style="text-align: center">{{$ready}}</td>
                     </tr>
-
                     <tr>
-                             <td style="text-align: center">
-                        {{ $status[0]->status_gsm}}
+                          <td style="text-align: center">Active</td>
 
-                            </td>
-
-                         <td style="text-align: center">
-                            {{$status[0]->jumlah_status_gsm}}
-                         </td>
-
-
-
+                          <td style="text-align: center">{{$active}}</td>
                     </tr>
-
                     <tr>
-                             <td style="text-align: center; color:red" >
-                        {{ $status[2]->status_gsm}}
+                          <td style="text-align: center; color:red">Terminate</td>
 
-                            </td>
-
-                         <td style="text-align: center; color:red">
-                            {{$status[2]->jumlah_status_gsm}}
-                         </td>
-
-
-
+                         <td style="text-align: center; color:red">{{$terminate}}</td>
                     </tr>
-
-
 
                 </table>
             </div>

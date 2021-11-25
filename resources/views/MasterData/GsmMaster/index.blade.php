@@ -52,11 +52,11 @@
                 <th scope="col" class="list">Serial Number*</th>
                 <th scope="col" class="list">ICC ID</th>
                 <th scope="col" class="list">IMSI</th>
-                <th scope="col" class="list">Res ID</th>
+                <th scope="col" class="list">RES ID</th>
                 <th scope="col" class="list">Request Date</th>
                 <th scope="col" class="list">Expired Date</th>
                 <th scope="col" class="list">Active Date</th>
-                <th scope="col" class="list">Terminated Date</th>
+                <th scope="col" class="list">Terminate Date</th>
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="list">Provider</th>
                 <th scope="col" class="sticky-col first-col">Action</th>
@@ -388,7 +388,7 @@
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable( {
-
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
               "dom": '<"top"f>rt<"bottom"lp><"clear">'
               });
           $('#table_id').DataTable().draw();
@@ -402,7 +402,8 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
-            "pageLength": 50,
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });

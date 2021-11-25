@@ -1,6 +1,6 @@
 @extends('layouts.v_main')
-@section('title','CSIC | Maintenance GPS')
-@section('title-table','Maintenance GPS')
+@section('title','CSIC | Maintenance Device')
+@section('title-table','Maintenance Device')
 
 @section('content')
     <form onsubmit="return false">
@@ -55,7 +55,7 @@
                 <th scope="col" class="list">Type GPS*</th>
                 <th scope="col" class="list">GPS Terpakai</th>
                 <th scope="col" class="list">Sensor Terpakai</th>
-                <th scope="col" class="list">GSM</th>
+                <th scope="col" class="list">GSM Terpakai</th>
                 <th scope="col" class="list">Ketersediaan Kendaraan</th>
                 <th scope="col" class="list">Keterangan</th>
                 <th scope="col" class="list">Hasil*</th>

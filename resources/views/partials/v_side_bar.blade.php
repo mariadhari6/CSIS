@@ -138,7 +138,7 @@
                                 </li>
                                 <li class="mt-2 nav-item {{ request()->is('GsmTerminate') ? ' active' : ''}}">
                                     <a class="collapse-item @yield('Terminate')" href="{{url('/GsmTerminate') }}">
-                                        <span class="nav-list">Master Terminated</span>
+                                        <span class="nav-list">Master Terminate</span>
                                     </a>
                                 </li>
                             </ul>
@@ -409,7 +409,7 @@
                                 </li>
                                 <li class="mt-2 nav-item {{ request()->is('GsmTerminate') ? ' active' : ''}}">
                                     <a class="collapse-item @yield('Terminate')" href="{{url('/GsmTerminate') }}">
-                                        <span class="nav-list">Master Terminated</span>
+                                        <span class="nav-list">Master Terminate</span>
                                     </a>
                                 </li>
                             </ul>

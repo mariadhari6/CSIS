@@ -52,7 +52,7 @@
         <div class="col-md-3">
             <div class="card card-stats card-success d_RequstComp request">
                 <i class="fas fa-comments fa-5x d_RequstComp-icon"></i>
-                <p class="d_RequstComp-teks">Request Complaint</p>
+                <p class="d_RequstComp-teks">Request Complain</p>
                 <p class="d_RequstComp-number">{{ $request->count() }}</p>
             </div>
         </div>

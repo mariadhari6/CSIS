@@ -14,59 +14,102 @@
 
 
                 </tr>
-
+                    @foreach ($gps_ready as $gps )
                     <tr>
-                        <td>{{ $gps[1]->status}}</td>
-                        <td>@foreach ( $gps[1]->total_status as $jumlah)
-                            {{$jumlah->total_status}}
+                        <td>{{ $gps->status ??''}}</td>
+                        <td>@foreach ( $gps->total_status as $jumlah)
+                            {{$jumlah->total_status??''}}
                         @endforeach
                         </td>
                           <td>
-                            @foreach ($gps[1]->type as $gps_type)
-                            {{$gps_type->type}} <br>
+                            @foreach ($gps->type as $gps_type)
+                            {{$gps_type->type??''}} <br>
                             @endforeach
                         </td>
-                        <td>@foreach ($gps[1]->total_pertype as $type)
-                            {{$type->total_pertype}} <br>
+                        <td>@foreach ($gps->total_pertype as $type)
+                            {{$type->total_pertype??''}} <br>
                             @endforeach
                         </td>
 
                     </tr>
+                    @endforeach
+
+                    @foreach ($gps_used as $gps )
                     <tr>
-                        <td>{{ $gps[2]->status}}</td>
+                        <td>{{ $gps->status ??''}}</td>
+                        <td>@foreach ( $gps->total_status as $jumlah)
+                            {{$jumlah->total_status??''}}
+                        @endforeach
+                        </td>
+                          <td>
+                            @foreach ($gps->type as $gps_type)
+                            {{$gps_type->type??''}} <br>
+                            @endforeach
+                        </td>
+                        <td>@foreach ($gps->total_pertype as $type)
+                            {{$type->total_pertype??''}} <br>
+                            @endforeach
+                        </td>
+
+                    </tr>
+                    @endforeach
+
+
+                    @foreach ($gps_error as $gps )
+                    <tr>
+                        <td style="color: red" >{{ $gps->status ??''}}</td>
+                        <td style="color: red" >@foreach ( $gps->total_status as $jumlah)
+                            {{$jumlah->total_status??''}}
+                        @endforeach
+                        </td>
+                          <td style="color: red" >
+                            @foreach ($gps->type as $gps_type)
+                            {{$gps_type->type??''}} <br>
+                            @endforeach
+                        </td>
+                        <td style="color: red" >@foreach ($gps->total_pertype as $type)
+                            {{$type->total_pertype??''}} <br>
+                            @endforeach
+                        </td>
+
+                    </tr>
+                    @endforeach
+
+                    {{-- <tr>
+                        <td>{{ $gps[2]->status??''}}</td>
                         <td>@foreach ( $gps[2]->total_status as $jumlah)
-                            {{$jumlah->total_status}}
+                            {{$jumlah->total_status??''}}
                         @endforeach
                         </td>
                           <td>
                             @foreach ($gps[2]->type as $gps_type)
-                            {{$gps_type->type}} <br>
+                            {{$gps_type->type??''}} <br>
                             @endforeach
                         </td>
                         <td>@foreach ($gps[2]->total_pertype as $type)
-                            {{$type->total_pertype}} <br>
+                            {{$type->total_pertype??''}} <br>
                             @endforeach
                         </td>
 
                     </tr>
 
                     <tr>
-                        <td style="color:red">{{ $gps[0]->status}}</td>
+                        <td style="color:red">{{ $gps[0]->status??''}}</td>
                         <td style="color:red">@foreach ( $gps[0]->total_status as $jumlah)
-                            {{$jumlah->total_status}}
+                            {{$jumlah->total_status??''}}
                         @endforeach
                         </td>
                           <td style="color:red">
                             @foreach ($gps[0]->type as $gps_type)
-                            {{$gps_type->type}} <br>
+                            {{$gps_type->type??''}} <br>
                             @endforeach
                         </td>
                         <td style="color:red;">@foreach ($gps[0]->total_pertype as $type)
-                            {{$type->total_pertype}} <br>
+                            {{$type->total_pertype??''}} <br>
                             @endforeach
                         </td>
 
-                    </tr>
+                    </tr> --}}
 
 
 

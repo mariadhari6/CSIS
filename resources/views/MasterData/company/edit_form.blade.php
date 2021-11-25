@@ -27,7 +27,7 @@
     <td id="td-no_agreement">
         <select class="select no_agreement_letter_id-{{$company->id}}" id="no_agreement_letter_id" name="no_agreement_letter_id" required>
         @foreach ($seller as $item)
-        <option value="{{ $item->id }}" >
+        <option value="{{ $item->no_agreement_letter }}" >
             {{ $item->no_agreement_letter }}
         </option>
         @endforeach
@@ -45,12 +45,11 @@
         <i class="fas fa-check add" id="edit" onclick="update({{ $company->id}})"></i>
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
     </td>
-  <script type="text/javascript">
+<script type="text/javascript">
    $('select[name="seller_id"]').on('change', function(){
 
                 // var Id = $(this).val();
                 var Id = $('#seller_id option:selected').text();
-                // alert(Id);
                 if(Id != 'Integrasia Utama, PT' ){
                     $.ajax({
                         url: '/dependent_company/'+ Id,
@@ -60,13 +59,23 @@
                             $.each(data, function(key, value) {
                                 $('select[name="no_agreement_letter_id').append('<option value="'+ value.no_agreement_letter +'">'+ value.no_agreement_letter +'</option>');
                             });
+
+                            $('select[name="free"]').hide();
+                            $('#td-no_agreement').empty();
+                            $.each(data, function(key, value) {
+                                $('#td-no_agreement').append(
+                                    '<select class="select" id="no_agreement_letter_id" name="no_agreement_letter_id" required>'
+                                        +'<option value="'+ value.no_agreement_letter +'">'+ value.no_agreement_letter +'</option>'+
+                                    '</select>'
+                                );
+                            });
                         }
                     });
                 }else{
-                    $('select[name="no_agreement_letter_id').empty();
-                     $('#td-no_agreement').empty();
+                    $('select[name="no_agreement_letter_id"]').hide();
+                    $('#td-no_agreement').empty();
                     $('#td-no_agreement').append(
-                    `<div class="input-div"><input type="text" class="input" id="no_agreement_letter_id" placeholder="No Agreement Letter"></div>`
+                        `<div class="input-div" name="free"><input type="text" class="input" id="no_agreement_letter_id" placeholder="No Agreement Letter"></div>`
                     );
                 }
 

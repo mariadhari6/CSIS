@@ -45,11 +45,11 @@
                 </th>
                 <th scope="col" class="action-no">No.</th>
                 <th scope="col" class="list-company">Company*</th>
-                <th scope="col" class="list">Pic Name*</th>
+                <th scope="col" class="list">PIC Name*</th>
                 <th scope="col" class="list">Phone*</th>
                 <th scope="col" class="list">Email*</th>
                 <th scope="col" class="list-picPosition">Position*</th>
-                <th scope="col" class="list">Date of birth</th>
+                <th scope="col" class="list">Date of Birth</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
               </tr>

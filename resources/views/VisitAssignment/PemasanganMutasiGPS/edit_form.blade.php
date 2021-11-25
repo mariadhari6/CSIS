@@ -14,9 +14,9 @@
     </select></i>
 
     <td><select class="select task-{{$pemasangan_mutasi_GPS->id}}" id="task" name="task">
-        <option value="{{$pemasangan_mutasi_GPS->task}} "> {{$pemasangan_mutasi_GPS->taskRequest->task}} </option>
+        <option value="{{$pemasangan_mutasi_GPS->task}} "> {{$pemasangan_mutasi_GPS->task}} </option>
         @foreach ($task as $tasks)
-        <option value="{{ $tasks->id }}">
+        <option value="{{ $tasks->task }}">
             {{$tasks->task}}
         </option>
 
@@ -30,7 +30,7 @@
     <td>
           <select class="select vehicle-{{$pemasangan_mutasi_GPS->id}}" id="vehicle" name="vehicle">
             <option value="{{$pemasangan_mutasi_GPS->vehicle}}">
-                {{ $pemasangan_mutasi_GPS->detailCustomerVehicle->vehicle->license_plate??'' }}
+                {{ $pemasangan_mutasi_GPS->vehicleRequest->license_plate??'' }}
             </option>
             @foreach ($details as $item)
                 <option value="{{ $item->id }}">{{ $item->vehicle->license_plate??''}}</option>

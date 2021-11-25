@@ -2,7 +2,7 @@
     <div class="col-md-5">
         <div class="card">
             <div class="card-body">
-                <h6 style="float: left">Pemsangan GPS </h6>
+                <h6 style="float: left">Pemasangan GPS </h6>
                 <h6 class="presentase-table" >{{round($presentase_pemasangan,1)}}%</h6>
                 <table class="table table-hover data " class="table_home" id="table_home" >
 

@@ -4,7 +4,7 @@
 
 
 
-    <td><select class="select company_id-{{$request_complain->id}}" id="company_id" name="company_id" required>
+    <td><select class="select-search search_companycompany_id-{{$request_complain->id}}" id="company_id" name="company_id" required>
         <option value="{{$request_complain->company_id}}"> {{$request_complain->companyRequest->company_name??''}} </option>
         @foreach ($detail as $item )
             <option name="company" value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
@@ -47,9 +47,9 @@
 
     <td>
         <select class="select task-{{$request_complain->id}}" id="task" name="task" required>
-        <option value="{{$request_complain->task}}"> {{$request_complain->taskRequest->task??''}} </option>
+        <option value="{{$request_complain->task}}"> {{$request_complain->task??''}} </option>
        @foreach ($task_request as $item)
-        <option value="{{ $item->id }}" {{ old('task') == $item->id ? 'selected':'' }}>{{ $item->task }}</option>
+        <option value="{{ $item->task }}" {{ old('task') == $item->task ? 'selected':'' }}>{{ $item->task }}</option>
 
        @endforeach
     </select></i>
@@ -97,6 +97,20 @@
     </td>
 
     <script>
+
+           $(document).ready(function() {
+    new TomSelect(".select-search",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
+
+
+
+
         $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();
             // alert(itemID);
@@ -109,7 +123,7 @@
                         $('select[name="pic_id').empty();
                         // $('select[name="pic_id').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
-                                $('select[name="pic_id').append('<option value="'+ data[i].id + '"> '+ data[i].pic_name +'</option>');
+                                $('select[name="pic_id').append('<option value="'+ data[i].task + '"> '+ data[i].pic_name +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)
                             }
                     }
@@ -120,7 +134,7 @@
                     success:function(data) {
                         //alert(data.length);
                         $('select[name="vehicle').empty();
-                        // $('select[name="vehicle').append('<option value=""> </option>');
+                        $('select[name="vehicle').append('<option value=""> </option>');
                             for(var i = 0 ; i < data.length ; i++) {
                                 $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_license_plate +'</option>');
                                 // 16-Nov-2021   alert(data[i].serial_number)

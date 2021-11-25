@@ -1,6 +1,6 @@
 @extends('layouts.v_main')
-@section('title','CSIS | Gsm Active')
-@section('title-table','Gsm Active')
+@section('title','CSIS | GSM Active')
+@section('title-table','GSM Active')
 @section('master','show')
 @section('GsmActive','active')
 

@@ -61,11 +61,11 @@
                 </th>
                 <th scope="col" class="action-no">No.</th>
                 <th scope="col" class="list-company">Company*</th>
-                <th scope="col" class="list">Po Number*</th>
-                <th scope="col" class="list">Po Date*</th>
+                <th scope="col" class="list">PO Number*</th>
+                <th scope="col" class="list">PO Date*</th>
                 <th scope="col" class="list">Harga Layanan*</th>
-                <th scope="col" class="list">Jumlah Unit Po*</th>
-                <th scope="col" class="list">Status Po</th>
+                <th scope="col" class="list">Jumlah Unit PO*</th>
+                <th scope="col" class="list">Status PO</th>
                 <th scope="col" class="list">Sales</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 

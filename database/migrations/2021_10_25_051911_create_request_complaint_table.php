@@ -20,7 +20,7 @@ class CreateRequestComplaintTable extends Migration
             $table->foreignId('pic_id')->nullable(); // Master PIC
             $table->foreignId('vehicle')->nullable(); // Detail customer
             $table->dateTime('waktu_info')->nullable();
-            $table->foreignId('task')->nullable(); // master Task
+            $table->string('task')->nullable(); // master Task
             $table->string('platform')->nullable();
             $table->longText('detail_task')->nullable();
             $table->string('divisi')->nullable();

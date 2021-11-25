@@ -94,9 +94,9 @@ class GsmMasterController extends Controller
                     'imsi'              =>  $value->imsi,
                     'res_id'            =>  $value->res_id,
                     'request_date'      =>  $value->request_date,
-                    'expired_date'      =>  $value->expired_date,
-                    'active_date'       =>  $value->active_date,
-                    'terminate_date'    =>  $value->terminate_date,
+                    'expired_date'      =>  $value->expired_date == '' ? null :  $value->expired_date,
+                    'active_date'       =>  $value->active_date == '' ? null :  $value->active_date,
+                    'terminate_date'    =>  $value->terminate_date == '' ? null :  $value->terminate_date,
                     'note'              =>  $value->note,
                     'provider'          =>  $value->provider
                 );

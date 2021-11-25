@@ -31,7 +31,7 @@ class MaintenanceGpsController extends Controller
 
     public function item_data()
     {
-        $maintenanceGps = RequestComplaint::orderBy('id', 'DESC')->where('task', 4)->orWhere('task', 5)->get();
+        $maintenanceGps = RequestComplaint::orderBy('id', 'DESC')->where('task', 'Maintenance GPS')->orWhere('task', 'Maintenance Sensor')->get();
         // $maintenanceGps = RequestComplaint::orderBy('id', 'DESC')->whereIn('task', [4, 5])->where('company_id', $company->id)->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
@@ -42,7 +42,7 @@ class MaintenanceGpsController extends Controller
     }
     public function item_data_onProgress()
     {
-        $maintenanceGps = RequestComplaint::whereIn('task', [4, 5])->where('status', 'On Progress')->get();
+        $maintenanceGps = RequestComplaint::whereIn('task', ['Maintenance GPS', 'Maintenance Sensor'])->where('status', 'On Progress')->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
         ]);
@@ -50,7 +50,7 @@ class MaintenanceGpsController extends Controller
 
     public function item_data_done()
     {
-        $maintenanceGps = RequestComplaint::whereIn('task', [4, 5])->where('status', 'Done')->get();
+        $maintenanceGps = RequestComplaint::whereIn('task', ['Maintenance GPS', 'Maintenance Sensor'])->where('status', 'Done')->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
         ]);
@@ -59,7 +59,7 @@ class MaintenanceGpsController extends Controller
     {
         $year = $request->year;
         $month = $request->month;
-        $maintenanceGps = RequestComplaint::whereIn('task', [4, 5])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
+        $maintenanceGps = RequestComplaint::whereIn('task', ['Maintenance GPS', 'Maintenance Sensor'])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
         // dd($pemasangan_mutasi_GPS);
         return view('VisitAssignment.MaintenanceGPS.item_data', compact('maintenanceGps'));
     }

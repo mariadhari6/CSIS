@@ -33,10 +33,10 @@
                                 <th style="min-width:100px; border-right: 3px solid black"" >Jumlah Vehicle Type (satuan)</th>
                                 <th style="min-width:100px;" >Pool Name</th>
                                 <th style="min-width:200px;" >Pool Location</th>
-                                <th style="min-width:50px;" >Coordinat</th>
+                                <th style="min-width:50px;" >Coordinate</th>
                                 <th style="min-width:80px; border-right: 3px solid black"" >Jumlah Unit Per Pool </th>
                                 <th style="min-width:250px;" >Fitur yang Digunakan   </th>
-                                <th style="min-width:100px;" >Businnes Type</th>
+                                <th style="min-width:100px;" >Business Type</th>
                                 <th style="min-width:200px;" >Description Business Type</th>
                                 <th style="min-width:250px;" >Address</th>
                                 <th style="min-width:150px;" >Coordinate Address</th>

@@ -57,7 +57,7 @@
         <select class="select" id="task" name="task" required>
             <option selected disabled value="" class="hidden">--Pilih Task--</option>
        @foreach ($task_request as $item)
-        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->task }}</option>
+        <option value="{{ $item->task }}" {{ old('task') == $item->task ? 'selected':'' }}>{{ $item->task }}</option>
 
        @endforeach
     </select></i>
@@ -115,10 +115,7 @@
         <i class="fas fa-times cancel" onclick="cancel()"></i>
     <td>
         {{-- input untuk pemasangan dan maintenance --}}
-        <input type="hidden" id="imei">
-        <input type="hidden" id="gsm_pemasangan">
-        <input type="hidden" id="equipment_terpakai_gps">
-        <input type="hidden" id="type_gps_id">
+
 
 
 
@@ -133,6 +130,8 @@
     }
     });
     });
+
+
     $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();
             // alert(itemID);
@@ -204,7 +203,7 @@
                             $('select[name="task').empty();
                             $('select[name="task').append('<option style="display:none"></option>');
                                 for(var i = 0 ; i < data.length ; i++) {
-                                    $('select[name="task').append('<option value="'+ data[i].id + '"> '+ data[i].task +'</option>');
+                                    $('select[name="task').append('<option value="'+ data[i].task + '"> '+ data[i].task +'</option>');
                                 }
                         }
                     });

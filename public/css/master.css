@@ -1046,7 +1046,7 @@ nav.sidebar-new li.active > a,
 
 /* Seller */
 
-#table_select{
+#table_seller{
     table-layout: auto;
     position: relative;
     bottom: 20px;
@@ -1056,7 +1056,7 @@ nav.sidebar-new li.active > a,
     height:450px;
 }
 
-#table_select thead
+#table_seller thead
 {
     background-color: #ffffff;
     position: -webkit-sticky;
@@ -1064,14 +1064,14 @@ nav.sidebar-new li.active > a,
     top: 0;
 }
 
-#table_select thead:first-child
+#table_seller thead:first-child
 {
     position: sticky;
     right: 0;
     z-index: 2;
 }
 
-#table_select tbody td
+#table_seller tbody td
 {
     position: sticky;
     right: 0;

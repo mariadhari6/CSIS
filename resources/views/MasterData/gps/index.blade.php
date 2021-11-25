@@ -44,7 +44,7 @@
                 <th scope="col" class="list" >Type*</th>
                 <th scope="col" class="list" >IMEI*</th>
                 <th scope="col" class="list" >Waranty</th>
-                <th scope="col" class="list" >Po Date*</th>
+                <th scope="col" class="list" >PO Date*</th>
                 <th scope="col" class="list" >Status*</th>
                 <th scope="col" class="list" >Status Ownership*</th>
                 <th scope="col" class="list-company" >Company*</th>

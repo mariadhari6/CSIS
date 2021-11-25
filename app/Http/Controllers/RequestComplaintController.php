@@ -128,7 +128,7 @@ class RequestComplaintController extends Controller
         }
 
 
-        if ($task == 1 || $task == 2 || $task == 3) {
+        if ($task == "Pemasangan GPS" || $task == "Mutasi Pemasangan GPS" || $task == "Mutasi Pelepasan GPS" || $task == "Mutasi Pelepasan Pemasangan GPS") {
 
             $data = array(
                 'company_id'                =>  $request->company_id,
@@ -154,7 +154,7 @@ class RequestComplaintController extends Controller
 
 
             );
-        } elseif ($task == 4 || $task == 5) {
+        } elseif ($task == "Maintenance GPS" || $task == "Maintenance Sensor") {
 
             $data = array(
                 'company_id'                =>  $request->company_id,
