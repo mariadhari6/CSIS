@@ -27,6 +27,7 @@
       </div>
     </div>
     <button class="btn btn-primary mb-2" onclick="filter()">Filter</button>
+    <button class="btn btn-success mb-2 ml-2" id="export"><i class="fas fa-file-excel"></i> Export</button>
   </div>
 
   <div class="row">
@@ -42,7 +43,7 @@
                             <th width="50px">Total GPS</th>
                             <th width="50px">Terminate Layanan</th>
                             <th width="50px">Penambahan Layanan</th>
-                            <th width="30px">Act</th>
+                            <th width="30px" id="act">Act</th>
                         </tr>
                       </thead>
                       <tbody id="item_summary">
@@ -133,7 +134,27 @@
       });
         return true;
     }
+    $('#export').click(function(){
 
+      const monthNames = ["January", "February", "March", "April", "May", "June",
+                          "July", "August", "September", "October", "November", "December"
+                          ];
+
+      var data   = new Date($('#bulan').val());
+      var Month  = monthNames[data.getMonth()];
+      var Year   = data.getFullYear();
+      var format = 'Summary_Customer'+" "+ Month +" "+ Year +"."+'xls'
+      $('#act').empty();
+      $
+          $('#table_summary').table2excel({
+            exclude: ".excludeThisClass",
+            name: "Worksheet Name",
+            filename: format,
+            preserveColors: true
+        });
+        $('#act').append("Act");
+
+    });
   </script>
 
 @endsection
