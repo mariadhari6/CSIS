@@ -322,6 +322,59 @@ font-family:verdana, Helvetica;
     text-align: center;
 }
 
+#table_detail_customer{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    overflow: auto;
+    height:450px;
+}
+
+#table_detail_customer thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_detail_customer thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+/* TABEL PEMASANGAN DAN MUTASI */
+
+#table_pemasangan{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    overflow: auto;
+    height:450px;
+}
+
+#table_pemasangan thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_pemasangan thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+
+
+
 /* SUMMARY CUSTOMER */
 
 .highlighted {
@@ -1087,19 +1140,16 @@ nav.sidebar-new li.active > a,
     text-align: center;
 }
 
-
-
-
-/* table Sensor,vehicle,company dll */
+/* company  */
 
 #table_id{
-    table-layout:auto;
+    table-layout: auto;
     position: relative;
     bottom: 20px;
     width:100%;
-    /* z-index: 1; */
+    z-index: 1;
     overflow: auto;
-    height: 460px;
+    height:450px;
 }
 
 #table_id thead
@@ -1117,17 +1167,45 @@ nav.sidebar-new li.active > a,
     z-index: 2;
 }
 
-#table_id thead th
+#table_id tbody td
 {
-    text-align: center;
     position: sticky;
     right: 0;
     background: #ffffff;
     z-index: 1;
+    width: 1000px;
 }
 
+
+/* request */
+
+#table_request{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    overflow: auto;
+    height:450px;
+}
+
+#table_request thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_request thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+
 .search_company{
- z-index: 1001;
+ z-index: 2;
 }
 
 .modal fade{
@@ -1142,7 +1220,7 @@ nav.sidebar-new li.active > a,
 
 }
 
-/* Table Company HDashboard Home */
+/* Table Company Dashboard Home */
 .table_company{
     position: relative;
     bottom: 150px;

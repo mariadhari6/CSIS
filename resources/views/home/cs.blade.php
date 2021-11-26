@@ -13,7 +13,7 @@
             <div class="card card-stats card-success d_company company">
                 <i class="fas fa-building fa-7x d_company-icon"></i>
                 <p class=" d_company-teks">Company</p>
-                <p class="d_company-number">{{ $company->count() }}</p>
+                <p class="d_company-number">{{ $company->count()}}</p>
             </div>
         </div>
 

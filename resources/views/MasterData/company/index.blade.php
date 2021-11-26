@@ -225,6 +225,7 @@
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             });
         $('#table_id').DataTable().draw();

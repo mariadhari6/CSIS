@@ -38,7 +38,7 @@
             </div>
         <form onsubmit="return false">
 
-          <table class="table table-responsive data " class="table_id" id="table_id" >
+          <table class="table table-responsive data " class="table_request" id="table_request" >
             <thead>
               <tr>
                 <th>
@@ -101,13 +101,13 @@
               year: year,
             },
             success: function(data) {
-              $('#table_id').DataTable().destroy();
-              $('#table_id').find("#item_data").html(data);
-              $('#table_id').dataTable( {
+              $('#table_request').DataTable().destroy();
+              $('#table_request').find("#item_data").html(data);
+              $('#table_request').dataTable( {
                   "dom": '<"top"f>rt<"bottom"lp><"clear">'
                   // "dom": '<lf<t>ip>'
                   });
-              $('#table_id').DataTable().draw();
+              $('#table_request').DataTable().draw();
             }
         })
     });
@@ -123,12 +123,12 @@
   function filter(value){
   var value = value;
   $.get(value, {}, function(data, status) {
-      $('#table_id').DataTable().destroy();
-      $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
+      $('#table_request').DataTable().destroy();
+      $('#table_request').find("#item_data").html(data);
+        $('#table_request').dataTable( {
           "dom": '<"top"f>rt<"bottom"lp><"clear">'
           });
-      $('#table_id').DataTable().draw();
+      $('#table_request').DataTable().draw();
     });
   }
     // ---- stop dropdown -----
@@ -139,15 +139,15 @@
     function read(){
         enableButton();
       $.get("{{ url('item_data_RequestComplain') }}", {}, function(data, status) {
-         $('#table_id').DataTable().destroy();
-         $('#table_id').find("#item_data").html(data);
-         $('#table_id').dataTable( {
+         $('#table_request').DataTable().destroy();
+         $('#table_request').find("#item_data").html(data);
+         $('#table_request').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
-        $('#table_id').DataTable().draw();
+        $('#table_request').DataTable().draw();
 
       });
     }
@@ -160,7 +160,7 @@
      $('.add').click(function() {
          disableButton();
         $.get("{{ url('add_form_RequestComplain') }}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
+          $('#table_request tbody').prepend(data);
         });
       });
 

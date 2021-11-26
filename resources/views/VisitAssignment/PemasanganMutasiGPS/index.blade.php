@@ -37,7 +37,7 @@
                 </button>
             </div>
             <form onsubmit="return false">
-          <table class="table table-responsive data " class="table_id" id="table_id" >
+          <table class="table table-responsive data " id="table_pemasangan" >
             <thead>
               <tr>
                 <th>
@@ -88,15 +88,15 @@
     function read(){
         enableButton();
       $.get("{{ url('item_data_PemasanganMutasi') }}", {}, function(data, status) {
-         $('#table_id').DataTable().destroy();
-         $('#table_id').find("#item_data").html(data);
-         $('#table_id').dataTable( {
+         $('#table_pemasangan').DataTable().destroy();
+         $('#table_pemasangan').find("#item_data").html(data);
+         $('#table_pemasangan').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
-        $('#table_id').DataTable().draw();
+        $('#table_pemasangan').DataTable().draw();
       });
     }
         // filter bulan dan tahun
@@ -114,13 +114,13 @@
 
             },
             success: function(data) {
-              $('#table_id').DataTable().destroy();
-              $('#table_id').find("#item_data").html(data);
-              $('#table_id').dataTable( {
+              $('#table_pemasangan').DataTable().destroy();
+              $('#table_pemasangan').find("#item_data").html(data);
+              $('#table_pemasangan').dataTable( {
                   "dom": '<"top"f>rt<"bottom"lp><"clear">'
                   // "dom": '<lf<t>ip>'
                   });
-              $('#table_id').DataTable().draw();
+              $('#table_pemasangan').DataTable().draw();
             }
         })
     });
@@ -139,13 +139,13 @@
       function filter(value){
       var value = value;
       $.get(value, {}, function(data, status) {
-          $('#table_id').DataTable().destroy();
-          $('#table_id').find("#item_data").html(data);
-            $('#table_id').dataTable( {
+          $('#table_pemasangan').DataTable().destroy();
+          $('#table_pemasangan').find("#item_data").html(data);
+            $('#table_pemasangan').dataTable( {
 
               "dom": '<"top"f>rt<"bottom"lp><"clear">'
               });
-          $('#table_id').DataTable().draw();
+          $('#table_pemasangan').DataTable().draw();
         });
       }
     // ---- Tombol Cancel -----
@@ -155,7 +155,7 @@
     //  // ------ Tambah Form Input ------
     //  $('.add').click(function() {
     //     $.get("{{ url('add_form_PemasanganMutasi') }}", {}, function(data, status) {
-    //       $('#table_id tbody').prepend(data);
+    //       $('#table_pemasangan tbody').prepend(data);
     //     });
     //   });
     // ----- Proses Tambah data ------
