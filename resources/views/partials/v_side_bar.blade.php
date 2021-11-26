@@ -38,9 +38,9 @@
                 </div>
             <hr>
         </li>
-        <li class="nav-item {{ request()->is('/customer_service') ? ' active' : ''}}">
-            <a href="{{url('/customer_service')}}">
-                <i class="la la-home fa-2x icon-sidebar"></i>
+        <li class="nav-item {{ request()->is('customer_service') ? ' active' : ''}}">
+            <a class="href_side" href="{{url('/customer_service')}}">
+                <i class="la la-home fa-2x icon-sidebar" {{ request()->is('customer_service') ? 'style=color:#5fa2db' : ''}} ></i>
                 <span class="nav-text">Home</span>
             </a>
         </li>
