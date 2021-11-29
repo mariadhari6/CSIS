@@ -100,10 +100,16 @@ class GsmMasterController extends Controller
         } else if ($fail == 0 && $success == 1) {
             // $dataRequest = json_decode($request->data);
             foreach ($dataRequest as $key => $value) {
+                try {
+                    $company = Company::where('company_name', $value->company_id)->firstOrFail()->id;
+                } catch (\Throwable $th) {
+                    $company = null;
+                }
+              
                 $data[$key] = array(
                     'status_gsm'        =>  $value->status_gsm,
                     'gsm_number'        =>  $value->gsm_number,
-                    'company_id'        =>  Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                    'company_id'        =>  $company,
                     'serial_number'     =>  $value->serial_number,
                     'icc_id'            =>  $value->icc_id,
                     'imsi'              =>  $value->imsi,
