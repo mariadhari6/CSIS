@@ -1,6 +1,12 @@
 @extends('layouts.v_main')
+<<<<<<< HEAD
 @section('title','CSIC | Maintenance GPS')
 @section('title-table','Maintenance GPS')
+=======
+@section('title','CSIC | Maintenance Device')
+@section('title-table','Maintenance Device')
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 @section('content')
     <form onsubmit="return false">
 
@@ -25,10 +31,13 @@
                     </select>
                   </div>
                 </ul>
-              <button class="btn btn-success  mr-2 edit_all">
+                 <a href="/export_maintenance" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
+                <i class="fas fa-file-export"></i>
+                </a>
+              <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
                 <i class="fas fa-edit"></i>
               </button>
-              <button class="btn btn-danger delete_all">
+              <button class="btn btn-danger delete_all" data-toggle="tooltip" title="Edit Selected">
                 <i class="fas fa-trash"></i>
               </button>
             </div>
@@ -49,9 +58,15 @@
                 <th scope="col" class="list">Vehicle</th>
                 <th scope="col" class="list">Tanggal</th>
                 <th scope="col" class="list">Type GPS*</th>
+<<<<<<< HEAD
                 <th scope="col" class="list">GPS terpasang</th>
                 <th scope="col" class="list">Sensor terpasang</th>
                 <th scope="col" class="list">GSM</th>
+=======
+                <th scope="col" class="list">GPS Terpakai</th>
+                <th scope="col" class="list">Sensor Terpakai</th>
+                <th scope="col" class="list">GSM Terpakai</th>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 <th scope="col" class="list">Ketersediaan Kendaraan</th>
                 <th scope="col" class="list">Keterangan</th>
                 <th scope="col" class="list">Hasil*</th>
@@ -81,6 +96,7 @@
 
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_maintenanace_gps') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -120,6 +136,7 @@
 
     // ------- filter change ------
     $("#filter").change(function(){
+         disableButton();
         var value = $(this).val();
         filter(value);
     });
@@ -144,6 +161,8 @@
 
     // ------ Tambah Form Input ------
     $('.add').click(function() {
+         disableButton();
+
     $.get("{{ url('add_form_maintenanace_gps') }}", {}, function(data, status) {
         $('#table_id tbody').prepend(data);
     });
@@ -239,6 +258,7 @@
 
      // ------ Edit Form Data ------
      function edit(id){
+        disableButton();
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).slideUp("fast");
@@ -282,6 +302,10 @@
         var req_by = $("#req_by").val();
         var note_maintenance = $("#note_maintenance").val();
         var status = $("#status").val();
+        var hidden_gsm = $("#hidden_gsm").val();
+
+
+
         var id = id;
         if(type_gps_id == "" || hasil == "" || biaya_transportasi =="" || teknisi_maintenance =="" || status ==""  ){
         // alert('sama');
@@ -307,7 +331,8 @@
               teknisi_maintenance: teknisi_maintenance,
               req_by: req_by,
               note_maintenance: note_maintenance,
-             status:status
+             status:status,
+            hidden_gsm: hidden_gsm
             },
             success: function(data) {
               swal({
@@ -383,6 +408,8 @@
 
     // form edit all
     $('.edit_all').on('click', function(e){
+        disableButton();
+        $('[data-toggle="tooltip"]').tooltip("hide");
 
       var allVals = [];
       var _token = $('input[name="_token"]').val();
@@ -393,7 +420,7 @@
       if (allVals.length > 0){
           $(".edit_all").hide("fast");
           $(".delete_all").hide("fast");
-          $.get("{{ url('selected_company') }}", {}, function(data, status) {
+          $.get("{{ url('selected_maintenanceGps') }}", {}, function(data, status) {
               $("#selected").prepend(data)
           });
           $.each(allVals, function(index, value){
@@ -421,6 +448,10 @@
               $.get("{{ url('edit_form_maintenanceGps') }}/" + value, {}, function(data, status) {
                   $("#edit-form-"+value).prepend(data)
                   $("#master").prop('checked', false);
+                  $(".add").hide();
+                $(".cancel").hide();
+                $(".export").hide();
+                $(".filter").hide();
               });
           });
       }else{
@@ -498,6 +529,8 @@
               $(".add").show("fast");
               $(".edit_all").show("fast");
               $(".delete_all").show("fast");
+              $(".export").show("fast");
+              $(".filter").show("fast");
               $(".btn-round").hide("fast");
               $(".btn-round").hide("fast");
             }
@@ -514,10 +547,38 @@
         $(".add").show("fast");
         $(".edit_all").show("fast");
         $(".delete_all").show("fast");
+        $(".export").show("fast");
+        $(".filter").show("fast");
         read();
     }
 
+    function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.filter').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.filter').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
+
 </script>
-            </form>
+</form>
 
   @endsection

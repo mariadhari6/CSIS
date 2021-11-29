@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MaintenanceExport;
+use App\Exports\PemasanganMutasiGpsExport;
 use App\Models\Company;
 use App\Models\DetailCustomer;
 use App\Models\Gps;
@@ -16,6 +18,7 @@ use App\Models\Task;
 use App\Models\Teknisi;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MaintenanceGpsController extends Controller
 {
@@ -26,7 +29,7 @@ class MaintenanceGpsController extends Controller
 
     public function item_data()
     {
-        $maintenanceGps = RequestComplaint::where('task', 4)->orWhere('task', 5)->get();
+        $maintenanceGps = RequestComplaint::orderBy('id', 'DESC')->where('task', 'Maintenance GPS')->orWhere('task', 'Maintenance Sensor')->get();
         // $maintenanceGps = RequestComplaint::orderBy('id', 'DESC')->whereIn('task', [4, 5])->where('company_id', $company->id)->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
@@ -37,7 +40,7 @@ class MaintenanceGpsController extends Controller
     }
     public function item_data_onProgress()
     {
-        $maintenanceGps = RequestComplaint::whereIn('task', [4, 5])->where('status', 'On Progress')->get();
+        $maintenanceGps = RequestComplaint::whereIn('task', ['Maintenance GPS', 'Maintenance Sensor'])->where('status', 'On Progress')->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
         ]);
@@ -45,7 +48,7 @@ class MaintenanceGpsController extends Controller
 
     public function item_data_done()
     {
-        $maintenanceGps = RequestComplaint::whereIn('task', [4, 5])->where('status', 'Done')->get();
+        $maintenanceGps = RequestComplaint::whereIn('task', ['Maintenance GPS', 'Maintenance Sensor'])->where('status', 'Done')->get();
         return view('VisitAssignment.MaintenanceGPS.item_data')->with([
             'maintenanceGps' => $maintenanceGps
         ]);
@@ -54,7 +57,7 @@ class MaintenanceGpsController extends Controller
     {
         $year = $request->year;
         $month = $request->month;
-        $maintenanceGps = RequestComplaint::whereIn('task', [4, 5])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
+        $maintenanceGps = RequestComplaint::whereIn('task', ['Maintenance GPS', 'Maintenance Sensor'])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
         // dd($pemasangan_mutasi_GPS);
         return view('VisitAssignment.MaintenanceGPS.item_data', compact('maintenanceGps'));
     }
@@ -97,6 +100,7 @@ class MaintenanceGpsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $was_maintenance = '0';
         $data = RequestComplaint::findOrfail($id);
         $data->company_id = $request->company_id;
         $data->vehicle = $request->vehicle;
@@ -115,7 +119,18 @@ class MaintenanceGpsController extends Controller
         $data->note_maintenance = $request->note_maintenance;
         $data->status = $request->status;
         // $equipment_sensor_id     = $request->equipment_sensor_id;
-        // $gsm_id = $request->equipment_gsm;
+        $gsm_id = $request->equipment_gsm;
+        $company = $request->company_id;
+        $vehicle = $request->vehicle;
+        if ($request->hidden_gsm == $request->equipment_gsm) {
+            $was_maintenance = '0';
+        } else {
+            $was_maintenance = '1';
+        }
+        $hidden_gsm = $request->hidden_gsm;
+
+
+
         // $gps_type = $request->type_gps_id;
         // $gps_type_equipment = $request->type_gps_id;
 
@@ -133,7 +148,11 @@ class MaintenanceGpsController extends Controller
         //     }
         //     $data->save();
         // }
-        // Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active'));
+        Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active', 'company_id' => $company));
+        Gsm::where('id', $hidden_gsm)->update(array('was_maintenance' => $was_maintenance));
+        DetailCustomer::where('id', $vehicle)->update(array('gsm_id' => $gsm_id));
+
+
         // Gps::where('id', $gps_type)->update(array('status' => 'Used'));
         // Gps::where('id', $gps_type_equipment)->update(array('status' => 'Used'));
 
@@ -226,6 +245,49 @@ class MaintenanceGpsController extends Controller
         $data = DetailCustomer::where('company_id', $id)->get();
 
         return $data;
+    }
+    public function basedImei($id)
+    {
+
+
+
+        $data = DetailCustomer::where('vehicle', $id)->get();
+
+        return $data;
+    }
+
+    public function basedGps($id)
+    {
+        $key = DetailCustomer::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
+            return [
+                $item['id'] => $item->only(['type'])
+            ];
+        });
+        $data = $key->all();
+        $complete = array();
+
+        foreach ($data as $a) {
+
+            $j = $a['type'];
+
+
+
+            $cari_gpsType = Gps::where('id', $j)->get();
+            $a['type_gps'] = $cari_gpsType[0]->type;
+            // $a['imei_gps'] = $cari_gpsType[0]->imei;
+
+            $a['id'] = $id;
+
+
+            array_push($complete, $a);
+        }
+
+        return $complete;
+    }
+
+    public function export_maintenance()
+    {
+        return Excel::download(new MaintenanceExport, 'Maintenance.xlsx');
     }
     // public function basedSensorName($id)
     // {

@@ -3,9 +3,16 @@
     <td></td>
     <td>
         <select class="select merk-{{$gps->id}}" id="merk" name="merk" required>
+<<<<<<< HEAD
             <option style="display: none" value="{{$gps->merk}}">{{$gps->merk}}</option>
             @foreach ($merk as $item)
                 <option value="{{ $item->merk_gps }}">{{ $item->merk_gps}}</option>
+=======
+            <option class="hidden" value="{{$gps->merk}}">{{$gps->merk}}</option>
+
+            @foreach ($merk as $item)
+            <option value="{{ $item->merk_gps }}">{{ $item->merk_gps}}</option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @endforeach
 
         </select>
@@ -13,9 +20,16 @@
 
     <td>
         <select class="select type-{{$gps->id}}" id="type" name="type" required>
+<<<<<<< HEAD
             <option style="display: none" value="{{$gps->type}}">{{$gps->type}}</option>
             @foreach ($merk as $item)
                 <option value="{{ $item->id }}">{{ $item->type_gps}}</option>
+=======
+            <option class="hidden" value="{{$gps->type}}">{{$gps->type}}</option>
+
+            @foreach ($merk as $item)
+            <option value="{{ $item->type_gps }}">{{ $item->type_gps}}</option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @endforeach
         </select>
     </td>
@@ -45,9 +59,15 @@
             <option value="Beli">Beli</option> --}}
         </select></i>
     </td>
+<<<<<<< HEAD
     <td id="td-company">
         <select class="select company_id-{{$gps->id}}" id="company_id" name="company_id" required>
             <option class="hidden" value="{{$gps->company_id}}">{{$gps->company->company_name ??''}} </option>
+=======
+     <td id="td-company">
+        <select class="select company_id-{{$gps->id}}" id="company_id" name="company_id" required>
+            <option class="hidden" value="{{$gps->company_id}}">{{$gps->company->company_name??''}}</option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
             @foreach ($company as $item)
             <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name}}</option>
@@ -56,7 +76,10 @@
         </select>
 
     </td>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
     <td class="action sticky-col first-col">
         <button class="unstyled-button" type="submit">
@@ -73,10 +96,24 @@
                 if(itemID == 'Ready') {
                     $('#statusOwnership').empty();
                    $('#statusOwnership').append(
+<<<<<<< HEAD
                        `<select class="select" id="status_ownership">
                             <option value="-">-</option>
                         </select>`
                        );
+=======
+                       `<select class="select" id="status_ownership"  disable>
+                            <option value="-">-</option>
+                        </select>`
+                       );
+                     $('#td-company').empty();
+                   $('#td-company').append(
+                       `<select class="select" id="company_id" disable>
+                     <option value="">-</option>
+                     </select>`
+                   );
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 }else if(itemID == 'Error'){
                     $('#statusOwnership').empty();
                         $('#statusOwnership').append(
@@ -87,9 +124,24 @@
 
                             </select>`
                         );
+<<<<<<< HEAD
 
 
                 }else if(itemID == 'Used') {
+=======
+                    $('#td-company').empty();
+                   $('#td-company').append(
+                        `<select class="select" id="company_id" disable>
+                        <option value="" class="hidden">--Pilih Company--</option>
+                        @foreach ($company as $item)
+                        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+                        @endforeach
+                        </select>`
+                   );
+
+
+                }else {
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                         $('#statusOwnership').empty();
                         $('#statusOwnership').append(
                             `<select class="select" id="status_ownership">
@@ -99,6 +151,15 @@
                                     <option value="Beli">Beli</option>
                             </select>`
                         );
+                        $('#td-company').empty();
+                         $('#td-company').append(
+                        `<select class="select" id="company_id" disable>
+                        <option value="" class="hidden">--Pilih Company--</option>
+                        @foreach ($company as $item)
+                        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+                        @endforeach
+                        </select>`
+                   );
                 }
 
 
@@ -114,7 +175,11 @@
                         success:function(data) {
                             // alert(data.length);
                             $('select[name="type').empty();
+<<<<<<< HEAD
                             $('select[name="type').append('<option style="display: none" value=""> </option>');
+=======
+                            $('select[name="type').append('<option class="hidden" value=""> </option>');
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                                 for(var i = 0 ; i < data.length ; i++) {
                                     $('select[name="type').append('<option value="'+ data[i].type_gps + '"> '+ data[i].type_gps +'</option>');
                                         // alert(data[i].serial_number)

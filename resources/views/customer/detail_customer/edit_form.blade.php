@@ -9,14 +9,23 @@
 </td>
 <td>
     <select class="select LicencePlate-{{ $details->id }}" id="LicencePlate" name="LicencePlate">
+<<<<<<< HEAD
         @foreach ($vehicle as $item)           
+=======
+        <option class="hidden" value="{{$details->licence_plate}}">{{$details->vehicle->license_plate}}</option>
+        @foreach ($vehicle as $item)
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <option value="{{ $item->id }}" {{ $details->licence_plate  == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
         @endforeach
     </select>
 </td>
 <td>
     <select class="select VihecleType-{{ $details->id }}" id="VihecleType" name="VihecleType" disabled>
+<<<<<<< HEAD
         @foreach ($vehicle as $item)           
+=======
+        @foreach ($vehicle as $item)
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <option value="{{ $item->id }}" {{ $details->vehicle_id  == $item->id ? 'selected':'' }}>{{ $item->vehicle->name}}</option>
         @endforeach
     </select>
@@ -73,7 +82,12 @@
     </select>
 </td>
 <td>
+<<<<<<< HEAD
     <select class="select GSM-{{ $details->id }}" id="GSM" name="GSM">    
+=======
+    <select class="select GSM-{{ $details->id }}" id="GSM" name="GSM">
+        {{-- <option value=""></option> --}}
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         @foreach ($gsm as $item)
         <option value="{{ $item->id }}" {{ $details->gsm_id  == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
         @endforeach
@@ -167,12 +181,17 @@
 </td>
 <td><div class="input-div"><input type="date" class="input Waranty-{{ $details->id }}" id="Waranty" value="{{ $details->waranty }}"></div></td>
 <td>
+<<<<<<< HEAD
     <select class="select StatusLayanan-{{ $details->id }}" id="StatusLayanan" name="status_layanan"> 
+=======
+    <select class="select StatusLayanan-{{ $details->id }}" id="StatusLayanan" name="status_layanan">
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         @foreach ($status_layanan as $item)
             <option value="{{ $item->id }}" {{ $details->status_id == $item->id ? 'selected':'' }}>{{ $item->service_status_name }}</option>
         @endforeach
     </select>
 </td>
+<<<<<<< HEAD
 <td id="tanggal_pasang">
     <div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div>
 </td>
@@ -182,6 +201,13 @@
 <td id="tanggal_reaktivasi">
     <div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div>
 </td>
+=======
+<td id="tanggal_aktif"><div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div></td>
+<td id="tanggal_non_aktif">
+    <div class="input-div"><input type="date" class="input TanggalNonAktif-{{ $details->id }}" id="TanggalNonAktif" value="{{ $details->tanggal_non_aktif }}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field"></div>
+</td>
+<td id="tanggal_reaktivasi"><div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div></td>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 <td class="action sticky-col first-col">
     <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
 </td>
@@ -228,7 +254,11 @@
                                 $('select[name="VihecleType').append('<option value="'+ value.id +'">'+ value.vehicle_name +'</option>');
                                 $('select[name="PoolName').append('<option value="'+ value.id  +'">'+ value.pool_name +'</option>');
                                 $('select[name="PoolLocation').append('<option value="'+ value.id  +'">'+ value.pool_location +'</option>');
+<<<<<<< HEAD
                             });   
+=======
+                            });
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                         }
                     });
                 }
@@ -373,8 +403,80 @@
         );   
     }
 
-</script>
+    $('select[name="status_layanan"]').on('change', function(){
 
+                var Id = $(this).val();
+                // alert(Id);
+                if(Id == 2) {
+
+                    $('#tanggal_pasang').empty();
+                    $('#tanggal_pasang').append(
+                        `<div class="input-div"><input type="date" class="input  TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}" disabled></div>`
+                    );
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
+                    );
+                    $('#tanggal_reaktivasi').empty();
+                    $('#tanggal_reaktivasi').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
+                    );
+                }
+                else{
+
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
+                    );
+
+                    $('#tanggal_pasang').empty();
+                    $('#tanggal_pasang').append(
+                        `<div class="input-div"><input type="date" class="input  TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div>`
+                    );
+
+                    $('#tanggal_reaktivasi').empty();
+                    $('#tanggal_reaktivasi').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" ></div>`
+                    );
+                }
+            });
+
+            //  $('select[name="status_layanan"]').on('change', function(){
+            //     var Id = $(this).val();
+            //     // alert(Id);
+            //     if(Id == 1) {
+            //         $('#tanggal_non_aktif').empty();
+            //         $('#tanggal_non_aktif').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
+            //         );
+            //          $('#tanggal_aktif').empty();
+            //         $('#tanggal_aktif').append(
+            //             `<div class="input-div"><input type="date" class="input" value="{{ $details->tanggal_pasang }} id="TanggalPasang"></div>`
+            //         );
+            //          $('#tanggal_reaktivasi').empty();
+            //         $('#tanggal_reaktivasi').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div>`
+            //         );
+            //     }
+            //     else{
+            //         $('#tanggal_aktif').empty();
+            //         $('#tanggal_aktif').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalPasang" value="{{ $details->tanggal_pasang }} disabled></div>`
+            //         );
+            //         $('#tanggal_non_aktif').empty();
+            //         $('#tanggal_non_aktif').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
+            //         );
+            //         $('#tanggal_reaktivasi').empty();
+            //         $('#tanggal_reaktivasi').append(
+            //             `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
+            //         );
+            //     }
+            // });
+
+
+
+</script>
 
 
 

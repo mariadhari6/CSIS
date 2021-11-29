@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="title">
     <strong> {{ $company->company_name }}</strong>  
 </div>
@@ -10,6 +11,28 @@
     </div>
 
     <table class="table table-responsive" id="table_id">
+=======
+
+    <div class="text-right mt-3" id="selected">
+        <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
+        <div class="float-left mr-2">
+            <select class="form-control input-fixed" id="filter">
+                <option value="{{ url('item_data_all_status') }}">All Status Layanan</option>
+                <option value="{{ url('item_data_active') }}">Active</option>
+                <option value="{{ url('item_data_inactive') }}">In Active</option>
+            </select>
+        </div>
+        <a href="/export_detail_cust_company/{{ $company->id }}" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
+            <i class="fas fa-file-export"></i>
+        </a>
+        <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
+            <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
+    </div>
+
+    <table class="table table-responsive" id="table_detail_customer">
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         <thead>
           <tr>
             <th>
@@ -19,26 +42,26 @@
                 </label>       
             </th>   
             <th scope="col">No</th>
-            <th scope="col" class="list">Company</th>
-            <th scope="col" class="list">License Plate</th>
-            <th scope="col" class="list">Vehicle Type</th>
-            <th scope="col" class="list">PO Number</th>
-            <th scope="col" class="list">Harga Layanan</th>
-            <th scope="col" class="list">PO Date</th>
-            <th scope="col" class="list">Status PO</th>
-            <th scope="col" class="list">IMEI</th>
-            <th scope="col" class="list">Merk</th>
-            <th scope="col" class="list">Type</th>
-            <th scope="col" class="list">GSM</th>
-            <th scope="col" class="list">Provider</th>
-            <th scope="col" class="list">Sensor</th>
-            <th scope="col" class="list">Pool Name</th>
-            <th scope="col" class="list">Pool Location</th>
-            <th scope="col" class="list">Waranty </th>
-            <th scope="col" class="list">Status Layanan</th>
-            <th scope="col" class="list">Tanggal Pasang*</th>
-            <th scope="col" class="list">Tanggal Non Active*</th>
-            <th scope="col" class="list">Tanggal Reaktivasi GPS*</th>
+            <th style="min-width: 300px;">Company</th>
+            <th style="min-width: 130px;">License Plate</th>
+            <th style="min-width: 100px;">Vehicle Type</th>
+            <th style="min-width: 250px;">PO Number</th>
+            <th style="min-width: 130px;">Harga Layanan</th>
+            <th style="min-width: 110px;">PO Date</th>
+            <th style="min-width: 80px;">Status PO</th>
+            <th style="min-width: 160px;">IMEI</th>
+            <th style="min-width: 100px;">Merk</th>
+            <th style="min-width: 160px;">Type</th>
+            <th style="min-width: 160px;">GSM</th>
+            <th style="min-width: 100px;">Provider</th>
+            <th style="min-width: 50px;">Sensor</th>
+            <th style="min-width: 150px;">Pool Name</th>
+            <th style="min-width: 160px;">Pool Location</th>
+            <th style="min-width: 100px;">Waranty </th>
+            <th style="min-width: 80px;">Status Layanan</th>
+            <th style="min-width: 100px;">Tanggal Pasang*</th>
+            <th style="min-width: 100px;">Tanggal Non Active*</th>
+            <th style="min-width: 100px;">Tanggal Reaktivasi GPS*</th>
             <th scope="col" class="action sticky-col first-col">Action</th>
           </tr>
         </thead>
@@ -54,6 +77,7 @@
     });
 
     function read() {
+<<<<<<< HEAD
         var id = {{ $company->id }}; 
         $.get("{{ url('item_detail') }}/" + id , {}, function(data, status) {
             $('#table_id').DataTable().destroy();
@@ -64,6 +88,20 @@
             });
             $('#table_id').DataTable().draw();
         }); 
+=======
+        enableButton();
+
+        var id = {{ $company->id }};
+        $.get("{{ url('item_detail') }}/" + id , {}, function(data, status) {
+            $('#table_detail_customer').DataTable().destroy();
+            $('#table_detail_customer').find("#item_data").html(data);
+            $('#table_detail_customer').dataTable({
+                "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+                "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            });
+            $('#table_detail_customer').DataTable().draw();
+        });
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     }
 
     function cancel(){
@@ -71,15 +109,24 @@
     }
 
     $('.add').click(function() {
+<<<<<<< HEAD
 
         var id = {{ $company->id }}; 
+=======
+         disableButton();
+        var id = {{ $company->id }};
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $.get("{{ url('add_form_detail') }}/" + id , {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
+          $('#table_detail_customer tbody').prepend(data);
         });
     });
 
     $("#TanggalPasang").on({"click": function() {
+<<<<<<< HEAD
         $("#TanggalPasang[data-toggle='popover']").popover('hide');  
+=======
+        $("#TanggalPasang[data-toggle='popover']").popover('hide');
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         }
     });
 
@@ -105,9 +152,18 @@
         var TanggalNonAktif     = $("#TanggalNonAktif").val();
         var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
 
+<<<<<<< HEAD
         if (TanggalPasang == "") {   
             $("#TanggalPasang[data-toggle='popover']").popover('show');
             return false; 
+=======
+        if (TanggalPasang == "") {
+            $("#TanggalPasang[data-toggle='popover']").popover('show');
+            return false;
+        }
+        else{
+            $("#TanggalPasang[data-toggle='popover']").popover('hide');
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         }
         else{
             $("#TanggalPasang[data-toggle='popover']").popover('hide');
@@ -187,7 +243,7 @@
     }
 
     function edit(id){
-
+        disableButton();
         var id = id;
         var company = {{ $company->id }}
        
@@ -222,7 +278,11 @@
             }, 
             success: function(data, status){
                 $("#edit-form-"+id).prepend(data)
+<<<<<<< HEAD
             }                
+=======
+            }
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         });
         return true;
     }
@@ -310,6 +370,7 @@
         });    
     }
 
+<<<<<<< HEAD
     $('#master').on('click', function(e) {
 
         if ($(this).is(':checked',true) ) {
@@ -331,6 +392,32 @@
 
             var _token = $('input[name="_token"]').val();
 
+=======
+        });
+    }
+
+    $('#master').on('click', function(e) {
+
+        if ($(this).is(':checked',true) ) {
+            $(".task-select").prop('checked', true)
+        }
+        else {
+            $(".task-select").prop('checked',false);
+        }
+    });
+
+    $('.delete_all').on('click', function() {
+
+        var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
+        });
+
+        if (allVals.length > 0) {
+
+            var _token = $('input[name="_token"]').val();
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             swal({
                 title: 'Are you sure?',
                 text: "You want delete Selected data !",
@@ -369,10 +456,18 @@
             alert('Select the row you want to delete')
         }
     });
+<<<<<<< HEAD
 
 
     $('.edit_all').on('click', function(e){
 
+=======
+
+
+    $('.edit_all').on('click', function(e){
+        disableButton();
+        $('[data-toggle="tooltip"]').tooltip("hide");
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         var company = {{ $company->id }}
 
         var allVals = [];
@@ -416,6 +511,7 @@
                 $("#item-TanggalPasang-"+value).hide("fast");
                 $("#item-TanggalNonAktif-"+value).hide("fast");
                 $(".add").hide("fast");
+<<<<<<< HEAD
                 $.ajax({ 
                     url:"{{ url('/show_detail')}}/" + value,
                     data:{
@@ -424,6 +520,19 @@
                     success: function(data, status){
                         $("#edit-form-"+value).prepend(data)
                     }                
+=======
+                $.ajax({
+                    url:"{{ url('/show_detail')}}/" + value,
+                    data:{
+                    company : company,
+                    },
+                    success: function(data, status){
+                        $("#edit-form-"+value).prepend(data)
+                         $(".add").hide();
+                        $(".cancel").hide();
+                        $(".export").hide();
+                    }
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 });
             });
         }
@@ -501,18 +610,62 @@
                                 title: 'The selected data has been updated',
                                 showConfirmButton: false,
                                 timer: 1500
+<<<<<<< HEAD
                             }).catch(function(timeout) {});    
                             $(".save").hide("fast");
                             $(".cancel").hide("fast");
+=======
+                            }).catch(function(timeout) {});
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                             $(".add").show("fast");
                             $(".edit_all").show("fast");
                             $(".delete_all").show("fast");
+                            $(".export").show("fast");
+                            $(".btn-round").hide("fast");
+                            $(".btn-round").hide("fast");
                             read();
                         }
                     });
                 });
             });
     }
+<<<<<<< HEAD
+=======
+
+     function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
+            $(".add").show("fast");
+            $(".edit_all").show("fast");
+            $(".delete_all").show("fast");
+            $(".export").show("fast");
+            read();
+        }
+
+         function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
     function batal() {
         $(".save").hide("fast");
@@ -523,4 +676,27 @@
         read();
     }
 
+    $("#filter").change(function(){
+            var id = {{ $company->id }};
+            var value = $(this).val();
+            var url  = value+"/"+id
+            // alert(value+"/"+id);
+            filter(url)
+
+    });
+
+    function filter(url){
+      var url = url;
+      $.get(url, {}, function(data, status) {
+        $('#table_detail_customer').DataTable().destroy();
+            $('#table_detail_customer').find("#item_data").html(data);
+            $('#table_detail_customer').dataTable({
+                "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+                "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            });
+            $('#table_detail_customer').DataTable().draw();
+        });
+    }
+
 </script>
+

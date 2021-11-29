@@ -35,7 +35,7 @@
 }
 
 .bg-danger {
-    background: #ff646d !important;
+    background: #ff2e38 !important;
 }
 
 *:focus {
@@ -154,7 +154,7 @@ h4.page-title {
 }
 
 .text-danger {
-    color: #ff646d !important;
+    color: #ff2e38 !important;
 }
 .text-danger:hover {
     color: #ff646d !important;
@@ -2260,11 +2260,12 @@ body {
 
 .main-header {
     min-height: 55px;
-    width: 100%;
-    background: #5aa8d3;
+    width: 97%;
+    background: rgba(75, 133, 227, 0.771);
     position: fixed;
     z-index: 1001;
     border-bottom: 1px solid #eee;
+    margin-left: 50px;
 }
 .main-header .logo-header {
     float: left;
@@ -2281,6 +2282,17 @@ body {
     z-index: 1001;
     display: inline-block;
 }
+
+.main-header .dor{
+    min-height: 55px;
+    width: 98%;
+    background: rgba(75, 133, 227, 0.771);
+    position: fixed;
+    z-index: 1001;
+    border-bottom: 1px solid #eee;
+    /* margin-left: 50px; */
+}
+
 .main-header .logo-header a.logo {
     color: #575962;
 }
@@ -2466,7 +2478,7 @@ body {
 
 .main-panel {
     position: relative;
-    width: calc(100% - 260px);
+    width: calc(100% - 50px);
     min-height: 100%;
     float: right;
     background: #f2f8f9;
@@ -5341,7 +5353,7 @@ body {
 }
 .card .card-title {
     margin: 0;
-    color: #575962;
+    color: #ffffff;
     font-size: 18px;
     font-weight: 600;
     line-height: 1.6;
@@ -5400,7 +5412,7 @@ body {
     min-height: 64px;
 }
 .numbers{
-     font-size: 3em;
+    font-size: 3em;
     min-height: 64px;
 }
 
@@ -5503,7 +5515,7 @@ body {
     background: #5AA8D3;
 }
 .card-primary-soft {
-    background: #7EA3D9;
+    background: #a0e1f5;
 }
 
 .card-info {
@@ -5892,7 +5904,20 @@ body {
 .table th {
     font-size: 12px;
     border-color: #ebedf2 !important;
+<<<<<<< HEAD
     padding: 0.2rem !important;
+=======
+
+    /* border: 0px; */
+    /* padding: 0;
+    margin: 0;
+    border-collapse: collapse; */
+
+    /* padding: 0.75rem !important; */
+
+    padding: 0.2rem !important;
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 }
 
 /* table full-width */
@@ -6024,7 +6049,7 @@ body {
     letter-spacing: 0.04em;
     padding: 0 20px 0 0;
     position: relative;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     text-align: center;
 }
@@ -6525,8 +6550,8 @@ body {
 }
 
 .btn-danger {
-    background: #ff646d !important;
-    border-color: #ff646d !important;
+    background: #ff2e38 !important;
+    border-color: #ff2e38 !important;
 }
 .btn-danger:hover,
 .btn-danger:focus,

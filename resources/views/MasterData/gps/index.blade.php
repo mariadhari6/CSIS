@@ -13,14 +13,17 @@
         <div class="card-body">
           <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
-              <button class="btn btn-success edit_all">
+                <a href="/export_gps" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
+                <i class="fas fa-file-export"></i>
+                </a>
+              <button class="btn btn-success edit_all edit_all"  data-toggle="tooltip" title="Edit Selected">
                 <i class="fas fa-edit"></i>
               </button>
-              <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+              <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
           </div>
           <form onsubmit="return false">
             <table class="table table-responsive data" class="table_id" id="table_id" >
@@ -37,7 +40,7 @@
                 <th scope="col" class="list" >Type*</th>
                 <th scope="col" class="list" >IMEI*</th>
                 <th scope="col" class="list" >Waranty</th>
-                <th scope="col" class="list" >Po Date*</th>
+                <th scope="col" class="list" >PO Date*</th>
                 <th scope="col" class="list" >Status*</th>
                 <th scope="col" class="list" >Status Ownership*</th>
                 <th scope="col" class="list-company" >Company*</th>
@@ -166,6 +169,8 @@
 
 
 
+
+
          // change Waranty format
         warantyDate = document.querySelectorAll("#table-data-3");
         for (i = 0; i < warantyDate.length; i++) {
@@ -274,12 +279,14 @@
     $('#close-modal').click(function() {
         // deleteTemporary();
         // read_temporary()
+        read();
         $('#importData').modal('hide');
     });
 
 
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -300,6 +307,7 @@
 
      // ------ Tambah Form Input ------
      $('.add').click(function() {
+         disableButton();
         $.get("{{ url('add_form_gps') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -313,6 +321,8 @@
         var po_date = $("#po_date").val();
         var status = $("#status").val();
         var status_ownership = $("#status_ownership").val();
+        var company_id = $("#company_id").val();
+
         // alert(merk);
         //
             // break;
@@ -373,7 +383,9 @@
               waranty: waranty,
               po_date: po_date,
               status: status,
-              status_ownership: status_ownership
+              status_ownership: status_ownership,
+              company_id: company_id,
+
             },
             success: function(data) {
               swal({
@@ -432,6 +444,7 @@
     }
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -444,11 +457,14 @@
         $("#item-po_date-"+id).hide("fast");
         $("#item-status-"+id).hide("fast");
         $("#item-status_ownership-"+id).hide("fast");
+        $("#item-company_id-"+id).hide("fast");
+
         $.get("{{ url('show_gps') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
     }
     // ------ Proses Update Data ------
+      // ------ Proses Update Data ------
         function update(id) {
             var merk = $("#merk").val();
             var type = $("#type").val();
@@ -457,6 +473,8 @@
             var po_date = $("#po_date").val();
             var status = $("#status").val();
             var status_ownership = $("#status_ownership").val();
+            var company_id = $("#company_id").val();
+
             var id = id;
             $.ajax({
                 type: "get",
@@ -468,7 +486,10 @@
                 waranty: waranty,
                 po_date: po_date,
                 status:status,
-                status_ownership:status_ownership
+                status_ownership:status_ownership,
+                company_id:company_id
+
+
                 },
                 success: function(data) {
                   if (data.terpasang == "terpasang") {
@@ -551,7 +572,8 @@
 
         // Form Edit All
         $('.edit_all').on('click', function(e){
-
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
             var allVals = [];
             var _token = $('input[name="_token"]').val();
 
@@ -577,10 +599,16 @@
                     $("#item-po_date-"+value).hide("fast");
                     $("#item-status-"+value).hide("fast");
                     $("#item-status_ownership-"+value).hide("fast");
+                    $("#item-company_id-"+value).hide("fast");
+
                     $(".add").hide("fast");
                     $.get("{{ url('show_gps') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                        $(".add").hide();
+                        $(".cancel").hide();
+                        $(".import").hide();
+                        $(".export").hide();
 
                     });
                 });
@@ -614,6 +642,8 @@
                     var po_date = $(".po_date-"+value).val();
                     var status = $(".status-"+value).val();
                     var status_ownership = $(".status_ownership-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
+
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_gps') }}/"+value,
@@ -624,9 +654,12 @@
                     waranty: waranty,
                     po_date: po_date,
                     status:status,
-                    status_ownership:status_ownership
+                    status_ownership:status_ownership,
+                    company_id:company_id,
+
                     },
                     success: function(data) {
+<<<<<<< HEAD
                       if (data.terpasang == "terpasang") {
                           $(".add").show("fast");
                           $(".edit_all").show("fast");
@@ -676,6 +709,28 @@
 
 
                           }
+=======
+                            swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+
+                                // $(".save").hide();
+                                });
+                                read();
+
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                $(".import").show("fast");
+                                $(".export").show("fast");
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
+
+
+                            }
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                          });
                     });
                 });
@@ -688,8 +743,43 @@
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
+            $(".import").show("fast");
+            $(".export").show("fast");
             read();
         }
+
+         // destro datatable
+        function dataLengthAll() {
+          $('#table_id').DataTable().destroy();
+        }
+
+        function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.import').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.import').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
+
+
 
 
 

@@ -25,7 +25,7 @@ img{
     outline: none;
     height: 50px;
     width: 100%;
-    background-color: black;
+    background-color: rgba(75, 133, 227, 0.771);
     color: white;
     border-radius: 20px;
     font-weight: bold;

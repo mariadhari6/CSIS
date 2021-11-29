@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <td></td>
 <td></td>
 <td>
@@ -71,6 +72,102 @@
         @endforeach
     </select>
 </td>
+=======
+ <td></td>
+ <td></td>
+
+    <td>
+        <select class="select company_id-{{$pemasangan_mutasi_GPS->id}}" id="company_id" name="company_id" >
+
+        <option class="hidden" value=" {{$pemasangan_mutasi_GPS->company_id}}"> {{$pemasangan_mutasi_GPS->companyRequest->company_name??''}} </option>
+        @foreach ($details as $item)
+        <option value="{{ $item->company_id }}">
+        {{$item->company->company_name}}
+        </option>
+
+       @endforeach
+    </select></i>
+
+    <td><select class="select task-{{$pemasangan_mutasi_GPS->id}}" id="task" name="task">
+        <option value="{{$pemasangan_mutasi_GPS->task}} "> {{$pemasangan_mutasi_GPS->task}} </option>
+        @foreach ($task as $tasks)
+        <option value="{{ $tasks->task }}">
+            {{$tasks->task}}
+        </option>
+
+       @endforeach
+    </select></i></td>
+    </td>
+
+      <td>
+        <div class="input-div"><input type="datetime-local" class="input waktu_kesepakatan-{{$pemasangan_mutasi_GPS->id}}" id="waktu_kesepakatan" placeholder="waktu_kesepakatan" value="{{ str_replace(" ", "T", $pemasangan_mutasi_GPS->waktu_kesepakatan) }}"></i></div>
+    </td>
+    <td>
+          <select class="select vehicle-{{$pemasangan_mutasi_GPS->id}}" id="vehicle" name="vehicle">
+            <option value="{{$pemasangan_mutasi_GPS->vehicle}}">
+                {{ $pemasangan_mutasi_GPS->vehicleRequest->license_plate??'' }}
+            </option>
+            @foreach ($details as $item)
+                <option value="{{ $item->id }}">{{ $item->vehicle->license_plate??''}}</option>
+
+            @endforeach
+         </select></i>
+    </td>
+    <td>
+          <select class="select kendaraan_pasang-{{$pemasangan_mutasi_GPS->id}}"  id="kendaraan_pasang" name="kendaraan_pasang">
+
+            {{-- <option value="-">
+                {{ $pemasangan_mutasi_GPS->vehicleKendaraanPasang->license_plate ??''}}
+            </option> --}}
+            <option value="">{{ $pemasangan_mutasi_GPS->vehicleKendaraanPasang->license_plate ??''}}</option>
+            @foreach ($vehicle as $item)
+                <option value="{{ $item->id }}" {{ old('kendaraan_pasang') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+
+            @endforeach
+         </select></i>
+    </td>
+
+    {{-- <td>
+        <div class="input-div"><input type="text" class="input imei-{{$pemasangan_mutasi_GPS->id}}" id="imei" placeholder="Uang Transportasi" value="{{$pemasangan_mutasi_GPS->ime}}" required></i></div>
+    </td> --}}
+
+
+    <td><select class="select imei-{{$pemasangan_mutasi_GPS->id}}" id="imei" name="imei" required >
+        <option value="{{$pemasangan_mutasi_GPS->imei}}"> {{$pemasangan_mutasi_GPS->detailCustomerImei->imei}} </option>
+        @foreach ($details as $detail)
+        <option value="{{ $detail->id }}">
+        {{$detail->gps->imei??''}}
+        </option>
+       @endforeach
+    </select></i></td>
+
+     <td><select class="select gsm_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="gsm_pemasangan" name="gsm_pemasangan" required >
+        <option value="{{$pemasangan_mutasi_GPS->gsm_pemasangan}}"> {{$pemasangan_mutasi_GPS->detailCustomerGsm->gsm_number}} </option>
+        @foreach ($details as $item)
+        <option value="{{ $item->gsm_pemasangan}}" >
+        {{$item->gsm->gsm_number??''}}
+        </option>
+
+       @endforeach
+    </select></i></td>
+      <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps" >
+        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->detailCustomerGps->type}} </option>
+        @foreach ($gps as $gpses)
+        <option value="{{ $gpses->id }}">
+        {{$gpses->type??''}}
+        </option>
+
+       @endforeach
+    </select></i></td>
+     {{-- <td><select class="select equipment_terpakai_sensor-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_sensor" name="equipment_terpakai_sensor">
+        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_sensor}}"> {{$pemasangan_mutasi_GPS->sensor->sensor_name?? ''}} </option>
+        @foreach ($sensor as $sensors)
+        <option value="{{ $sensors->id }}" {{ old('equipment_terpakai_sensor') == $sensors->id  ? 'selected':'' }}>
+        {{$sensors->sensor_name}}
+        </option>
+       @endforeach
+    </select></i></td> --}}
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 <td>
     <div id="sensor">
         <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#exampleModal" id="modal">
@@ -94,7 +191,7 @@
                     </div>
                     <select class="form-control selectpicker" id="SerialNumberSensor" name="SerialNumberSensor" data-live-search="true">
                         @foreach ($sensor as $item)
-                            <option value="{{ $item->id }}" {{ old('serial_number') == $item->id ? 'selected':''}}>{{ $item->serial_number }}</option>
+                            <option value="{{ $item->id }}">{{ $item->serial_number }}</option>
                         @endforeach
                     </select>
 
@@ -105,7 +202,7 @@
                     </div>
                     <select class="custom-select" id="SensorName" name="SensorName" disabled>
                         @foreach ($sensor as $item)
-                        <option value="{{ $item->id }}" {{ old('sensor_name') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
+                        <option value="{{ $item->id }}">{{ $item->sensor_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -115,7 +212,7 @@
                     </div>
                     <select class="custom-select" id="MerkSensor" name="MerkSensor" disabled>
                         @foreach ($sensor as $item)
-                            <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':''}}>{{ $item->merk_sensor }}</option>
+                            <option value="{{ $item->id }}">{{ $item->merk_sensor }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -135,6 +232,7 @@
         </div>
     </div>   
 </td>
+<<<<<<< HEAD
 <td>
     <select class="select teknisi_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="teknisi_pemasangan" name="teknisi_pemasangan" required>
         <option selected value="{{ $pemasangan_mutasi_GPS->teknisi_pemasangan }}">{{$pemasangan_mutasi_GPS->teknisi->teknisi_name?? ''}}</option>
@@ -165,12 +263,50 @@
     <button class="unstyled-button" type="submit">
        <i class="fas fa-check add" id="edit" onclick="update({{ $pemasangan_mutasi_GPS->id}})"></i>
    </button>
+=======
+
+
+
+
+
+     <td>
+        <select class="select teknisi_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="teknisi_pemasangan" name="teknisi_pemasangan" required>
+            <option class="hidden" selected value="{{ $pemasangan_mutasi_GPS->teknisi_pemasangan }}">{{$pemasangan_mutasi_GPS->teknisi->teknisi_name?? ''}}</option>
+            @foreach ($teknisi as $item)
+                <option value="{{ $item->id }}">{{ $item->teknisi_name }}</option>
+            @endforeach
+        </select>
+    </td>
+
+    <td>
+        <div class="input-div"><input type="number" class="input uang_transportasi-{{$pemasangan_mutasi_GPS->id}}" id="uang_transportasi" placeholder="Uang Transportasi" value="{{$pemasangan_mutasi_GPS->uang_transportasi}}" required></i></div>
+    </td>
+
+    <td><select class="select type_visit-{{$pemasangan_mutasi_GPS->id}}" id="type_visit" name="type_visit" aria-label=".form-select-lg example" required>
+    <option class="hidden" value="{{$pemasangan_mutasi_GPS->type_visit}}"> {{$pemasangan_mutasi_GPS->type_visit}} </option>
+    <option value="Visit SLA">Visit SLA</option>
+    <option value="Visit Berbayar">Visit Berbayar</option>
+    </select></i></td>
+
+    <td><textarea class="form-control note_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="note_pemasangan" name="note_pemasangan" rows="3">{{$pemasangan_mutasi_GPS->note_pemasangan}}</textarea></i></td>
+
+    <td><select class="select status-{{$pemasangan_mutasi_GPS->id}}" id="status" name="status" aria-label=".form-select-lg example" required>
+    <option class="hidden" value="{{$pemasangan_mutasi_GPS->status}}"> {{$pemasangan_mutasi_GPS->status}} </option>
+    <option value="On Progress">On Progress</option>
+    <option value="Done">Done</option>
+    </select></i></td>
+       <td class="action sticky-col first-col">
+         <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="edit" onclick="update({{ $pemasangan_mutasi_GPS->id}})"></i>
+        </button>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
 </td>
 
 <script>
     $(document).ready(function() {
 
+<<<<<<< HEAD
         $(function(){
             $('.selectpicker').selectpicker();
         });
@@ -235,6 +371,71 @@
                     $('select[name="equipment_terpakai_gps').empty();
                 }
             });
+=======
+    $('select[name="company_id"]').on('change', function() {
+            var itemID = $(this).val();
+            // alert(itemID);
+            if(itemID) {
+                $.ajax({
+                    url: '/based_vehiclePemasangan/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="vehicle').empty();
+                        $('select[name="vehicle').append('<option class="hidden" value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="vehicle').append('<option value="'+ data[i].id + '"> '+ data[i].vehicle_license_plate +'</option>');
+                                // 16-Nov-2021   alert(data[i].serial_number)
+                            }
+                    }
+                });
+                 $.ajax({
+                    url: '/based_kendaraanPasang/'+ itemID,
+                    method: "GET",
+                    success:function(data) {
+                        //alert(data.length);
+                        $('select[name="kendaraan_pasang').empty();
+                        $('select[name="kendaraan_pasang').append('<option class="hidden" value=""> </option>');
+                            for(var i = 0 ; i < data.length ; i++) {
+                                $('select[name="kendaraan_pasang').append('<option value="'+ data[i].id + '"> '+ data[i].license_plate +'</option>');
+                                // 16-Nov-2021   alert(data[i].serial_number)
+                            }
+                    }
+                });
+            }
+            else{
+                // $('select[name="vehicle"]').empty();
+                $('select[name="imei"]').empty();
+
+            }
+         });
+        //  $('select[name="vehicle"]').on('change', function(){
+        //         var Id = $(this).val();
+        //         // alert(Id);
+        //         if(Id) {
+        //             $.ajax({
+        //                 url: '/based_imei/'+ Id,
+        //                 method: "GET",
+        //                 success:function(data) {
+        //                     $('select[name="imei').empty();
+        //                     $('select[name="gsm_pemasangan').empty();
+        //                     $('select[name="equipment_terpakai_gps').empty();
+        //                     $.each(data, function(key, value) {
+        //                         $('select[name="imei').append('<option value="'+ value.id +'">'+ value.imei_gps +'</option>');
+        //                         $('select[name="gsm_pemasangan').append('<option value="'+ value.id +'">'+ value.number_gsm +'</option>');
+        //                         $('select[name="equipment_terpakai_gps').append('<option value="'+ value.id +'">'+ value.type_gps +'</option>');
+        //                     });
+        //                 }
+        //             });
+        //         }
+        //         else{
+        //             $('select[name="imei').empty();
+        //             $('select[name="gsm_pemasangan').empty();
+        //             $('select[name="equipment_terpakai_gps').empty();
+        //         }
+        //     });
+       $(document).ready(function() {
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
           
 

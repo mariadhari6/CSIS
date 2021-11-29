@@ -3,7 +3,12 @@
     <td></td>
     <td>
         <select class="select" id="sensor_name" name="sensor_name" aria-placeholder="Sensor_name">
+<<<<<<< HEAD
             <option style="display:none;"></option>
+=======
+            <option class="hidden">--Pilih Sensor Name--</option>
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($sensorName as $item)
             <option value="{{ $item->sensor_name }}" {{ old('sensor_name') == $item->id ? 'selected':'' }}>{{ $item->sensor_name}}</option>
             @endforeach
@@ -23,7 +28,11 @@
     </td>
     <td>
         <select class="select" id="status" aria-label=".form-select-lg example" >
+<<<<<<< HEAD
             <option style="display:none;"></option>
+=======
+            <option selected class="hidden">--Pilih Status--</option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>

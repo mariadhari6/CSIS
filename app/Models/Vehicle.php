@@ -18,6 +18,7 @@ class Vehicle extends Model
         return $this->belongsTo(Company::class);
     }
 
+<<<<<<< HEAD
     public function vehicle(){
         return $this->belongsTo(VehicleType::class);
     }
@@ -25,6 +26,22 @@ class Vehicle extends Model
     public function detail(){
         
         return $this->hasMany(DetailCustomer::class);
+=======
+    public function vehicle()
+    {
+        return $this->belongsTo(VehicleType::class, 'vehicle_id', 'id');
+    }
+
+    public function detailCustomer()
+    {
+
+        return $this->hasMany(DetailCustomer::class);
+    }
+    public function requestComplaintVehicle()
+    {
+
+        return $this->hasMany(RequestComplaint::class, 'vehicle', 'id');
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     }
     
     public function requestComplaintKendaraan()

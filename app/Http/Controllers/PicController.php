@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PicExport;
 use App\Exports\TamplatePic;
 use App\Imports\PicImport;
 use App\Models\Company;
@@ -151,5 +152,10 @@ class PicController extends Controller
     public function export()
     {
         return Excel::download(new TamplatePic, 'template-pic.xlsx');
+    }
+
+    public function export_pic()
+    {
+        return Excel::download(new PicExport, 'Pic.xlsx');
     }
 }

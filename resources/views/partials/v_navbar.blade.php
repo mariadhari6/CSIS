@@ -1,5 +1,6 @@
-<div class="wrapper">
+ <div class="wrapper">
     <div class="main-header">
+<<<<<<< HEAD
         <div class="logo-header">
             <a class="logo">
                 <img src="{{ asset('images/logo_db.png') }}" width="150px" height="30px" >
@@ -12,35 +13,19 @@
         <nav class="navbar navbar-header navbar-expand-lg">
             <div class="container-fluid">
                 <h5 style="color: whitesmoke">@yield('title-table')</h5>
+=======
+        <div class="dor">
+        <div>
+            <img src="{{ asset('images/odm.png') }}" width="180px" height="44px" class="csis" >
+            <h6 class="title-table" style="color: whitesmoke">@yield('title-table')</h6>
+            <img src="{{ asset('images/white_integrasia.png') }}" width="150px" height="40px" class="integrasi float-right">
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{ asset('images/admin.png') }}" alt="user-img" width="36" class="img-circle"><span id="user">{{Auth::user()->name}}</span></span> </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li>
-                                <div class="user-box">
-                                    <div class="u-img"><img src="{{ asset('images/admin.png') }}" alt="user"></div>
-                                    <div class="u-text">
-                                        <h4>{{Auth::user()->name}}</h4>
-                                        <p class="text-muted">{{Auth::user()->email}}</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
-                                    </div>
-                                </li>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>{{ __('Logout') }}</a>
-                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                    <i class="fa fa-power-off"></i>
-                                    <button type="submit"> log out</button>
-                                </form>
-
-                            </ul>
-                            <!-- /.dropdown-user -->
-
                          </a>
                         </li>
                     </ul>
                 </div>
-            </nav>
-        </div>
+            </div>
+    </div>

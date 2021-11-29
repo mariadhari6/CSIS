@@ -10,23 +10,37 @@
     </td>
     <td>
         <select class="select" id="LicencePlate" name="LicencePlate">
+<<<<<<< HEAD
             <option style="display: none"></option>  
             @foreach ($vehicle as $item) 
+=======
+            <option class="hidden" value=""></option>
+            @foreach ($vehicle as $item)
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 <option value="{{ $item->id }}" {{ old('license_plate') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
             @endforeach
         </select>
     </td>
     <td>
         <select class="select" id="VihecleType" name="VihecleType" disabled>
+<<<<<<< HEAD
             <option style="display: none"></option>  
             @foreach ($vehicle as $item) 
+=======
+            <option class="hidden" value=""></option>
+            @foreach ($vehicle as $item)
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 <option value="{{ $item->id }}" {{ old('vehicle_id') == $item->id ? 'selected':'' }}>{{ $item->vehicle->name }}</option>
             @endforeach
         </select>
     </td>
     <td>
         <select class="select" id="PoNumber" name="PoNumber">
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ old('po_number') == $item->id ? 'selected':'' }}>{{ $item->po_number}}</option>
             @endforeach
@@ -34,7 +48,11 @@
     </td>
     <td>
         <select class="select" id="HargaLayanan" name="HargaLayanan" disabled>
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($po as $item)
                 <option value="{{ $item->id }}" {{ old('harga_layanan') == $item->id ? 'selected':'' }}>{{ $item->harga_layanan}}</option>
             @endforeach
@@ -42,7 +60,11 @@
     </td>
      <td>
         <select class="select" id="PoDate" name="PoDate" disabled>
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+        <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ old('po_date') == $item->id ? 'selected':'' }}>{{ $item->po_date}}</option>
         @endforeach
@@ -50,7 +72,11 @@
 
     <td>
         <select class="select" id="StatusPo" name="StatusPo" disabled>
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ old('status_po') == $item->id ? 'selected':'' }}>{{ $item->status_po}}</option>
         @endforeach
@@ -58,7 +84,11 @@
     </td>
     <td>
         <select class="select" id="Imei" name="Imei">
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($imei as $item)
                 <option value="{{ $item->id }}" {{ old('imei') == $item->id ? 'selected':''}}>{{ $item->imei }}</option>
             @endforeach
@@ -66,7 +96,11 @@
     </td>
     <td>
         <select class="select" id="Merk" name="Merk" disabled>
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($imei as $item)
                 <option value="{{ $item->id }}" {{ old('merk') == $item->id ? 'selected':''}}>{{ $item->merk }}</option>
             @endforeach
@@ -74,7 +108,11 @@
     </td>
     <td>
         <select class="select" id="Type" name="Type" disabled>
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($imei as $item)
                 <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':''}}>{{ $item->type }}</option>
             @endforeach
@@ -82,7 +120,11 @@
     </td>
     <td>
         <select class="select" id="GSM" name="GSM">
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($gsm as $item)
                 <option value="{{ $item->id }}" {{ old('gsm_id') == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
             @endforeach
@@ -90,7 +132,11 @@
     </td>
     <td>
         <select class="select" id="Provider" name="Provider" disabled>
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 @foreach ($gsm as $item)
                 <option value="{{ $item->id }}" {{ old('provider') == $item->id ? 'selected':''}}>{{ $item->provider }}</option>
             @endforeach
@@ -162,7 +208,11 @@
     </td>
     <td>
         <select class="select" id="PoolName" name="PoolName" disabled>
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('pool_name') == $item->id ? 'selected':'' }}>{{ $item->pool_name}}</option>
             @endforeach
@@ -170,7 +220,11 @@
     </td>
     <td>
         <select class="select" id="PoolLocation" name="PoolLocation" disabled>
+<<<<<<< HEAD
             <option style="display: none"></option>  
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('pool_location') == $item->id ? 'selected':'' }}>{{ $item->pool_location}}</option>
             @endforeach
@@ -178,19 +232,31 @@
     </td>
     <td><div class="input-div"><input type= "date" class="input" id="Waranty" placeholder="Waranty"></div></td>
     <td>
+<<<<<<< HEAD
         <select class="select" id="StatusLayanan" name="status_layanan">
             <option style="display: none"></option>
+=======
+        <select class="select" name="status_layanan" id="StatusLayanan">
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($status_layanan as $item)
             <option value="{{ $item->id }}" {{ old('status_layanan') == $item->id ? 'selected':'' }}>{{ $item->service_status_name }}</option>
         @endforeach
         </select>
     </td>
+<<<<<<< HEAD
     <td id="tanggal_pasang">
+=======
+    <td id="tanggal_aktif">
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         <div class="input-div"><input type="date" class="input" id="TanggalPasang" name="tanggal_pasang" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div>
     </td>
     <td id="tanggal_non_aktif">
         <div class="input-div"><input type="date" class="input" id="TanggalNonAktif" ></div>
+<<<<<<< HEAD
     </td>        
+=======
+    </td>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     <td id="tanggal_reaktivasi">
         <div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div>
     </td>
@@ -214,8 +280,13 @@
                 // alert(Id)
                 if(Id) {
                     $.ajax({
+<<<<<<< HEAD
                         url: '/based_imei/'+ Id,
                         method: "GET",                        
+=======
+                        url: '/based_imeiDetail/'+ Id,
+                        method: "GET",
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                         success:function(data) {
                             $('select[name="Merk').empty();
                             $('select[name="Type').empty();
@@ -293,7 +364,11 @@
                                 $('select[name="VihecleType').append('<option value="'+ value.id +'">'+ value.vehicle_name +'</option>');
                                 $('select[name="PoolName').append('<option value="'+ value.id  +'">'+ value.pool_name +'</option>');
                                 $('select[name="PoolLocation').append('<option value="'+ value.id  +'">'+ value.pool_location +'</option>');
+<<<<<<< HEAD
                             });    
+=======
+                            });
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                         }
                     });
                 }
@@ -471,7 +546,49 @@
             }
          }
 
+<<<<<<< HEAD
     </script> 
+=======
+
+            $('select[name="status_layanan"]').on('change', function(){
+                var Id = $(this).val();
+                // alert(Id);
+                if(Id == 1) {
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
+                    );
+                     $('#tanggal_aktif').empty();
+                    $('#tanggal_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalPasang"></div>`
+                    );
+                     $('#tanggal_reaktivasi').empty();
+                    $('#tanggal_reaktivasi').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div>`
+                    );
+                }
+                else{
+                    $('#tanggal_aktif').empty();
+                    $('#tanggal_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalPasang" disabled></div>`
+                    );
+                    $('#tanggal_non_aktif').empty();
+                    $('#tanggal_non_aktif').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
+                    );
+                    $('#tanggal_reaktivasi').empty();
+                    $('#tanggal_reaktivasi').append(
+                        `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
+                    );
+                }
+            });
+
+
+
+    </script>
+
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 </tr>
 
 

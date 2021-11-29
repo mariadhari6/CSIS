@@ -28,6 +28,7 @@ class CreateGsmTable extends Migration
             $table->date('terminate_date')->nullable();
             $table->string('note')->nullable();
             $table->string('provider');
+            $table->string('was_maintenance')->nullable();
             $table->timestamps();
         });
     }

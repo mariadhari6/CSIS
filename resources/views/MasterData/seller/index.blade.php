@@ -14,20 +14,27 @@
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" ></i>
                 </button>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+                <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
-                <button class="btn btn-success  mr-2 edit_all">
+                <a href="/export_seller" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
+                <i class="fas fa-file-export"></i>
+                </a>
+                <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
                   <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn btn-danger  delete_all">
+                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
               <form>
 
+<<<<<<< HEAD
           <table class="table table-hover data" class="table_id" id="table_id" >
+=======
+          <table class="table table-responsive data" class="table_seller" id="table_seller" >
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <thead>
               <tr>
 
@@ -152,7 +159,7 @@
                         for (indexA = 0; indexA < sellerCodeID.length; indexA++) {
                             var sellerCodeNumberValue = sellerCodeID[indexA].innerText;
                             var noAgreementLetterNumberValue = noAgrementLetterID[indexA].innerText;
-                            $rowCount = $("#table_id tr").length;
+                            $rowCount = $("#table_seller tr").length;
                             if($rowCount == 1){
 
                             }else{
@@ -161,8 +168,8 @@
                               var allNoAgreementLetterNum = [];
                               for($i = 0; $i < $rowResult; $i++)
                               {
-                                $sellerCodeNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
-                                $noAgreementLetterNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
+                                $sellerCodeNum = $("#table_seller").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
+                                $noAgreementLetterNum = $("#table_seller").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
                                 allSellerCodeNum = $sellerCodeNum;
                                 allNoAgreementLetterNum = $noAgreementLetterNum;
 
@@ -262,15 +269,16 @@
 
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
+        $('#table_seller').DataTable().destroy();
+        $('#table_seller').find("#item_data").html(data);
+        $('#table_seller').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
         });
-        $('#table_id').DataTable().draw();
+        $('#table_seller').DataTable().draw();
       });
     }
 
@@ -281,8 +289,9 @@
 
      // ------ Tambah Form Input ------
      $('.add').click(function() {
+         disableButton();
         $.get("{{ url('add_form_seller') }}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
+          $('#table_seller tbody').prepend(data);
         });
       });
     // ----- Proses Tambah data ------
@@ -352,6 +361,7 @@
     }
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
@@ -452,6 +462,8 @@
 
         // Form Edit All
         $('.edit_all').on('click', function(e){
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
 
             var allVals = [];
             var _token = $('input[name="_token"]').val();
@@ -478,6 +490,10 @@
                     $.get("{{ url('show_seller') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                        $(".add").hide();
+                        $(".cancel").hide();
+                        $(".import").hide();
+                        $(".export").hide();
 
                     });
                 });
@@ -530,6 +546,8 @@
                     $(".add").show("fast");
                     $(".edit_all").show("fast");
                     $(".delete_all").show("fast");
+                    $(".import").show("fast");
+                    $(".export").show("fast");
                     $(".btn-round").hide("fast");
                     $(".btn-round").hide("fast");
                     }
@@ -545,9 +563,38 @@
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
+            $(".import").show("fast");
+            $(".export").show("fast");
             read();
         }
 
+<<<<<<< HEAD
   </script>
+=======
+        function disableButton() {
 
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
+
+        }
+
+  </script>
 @endsection

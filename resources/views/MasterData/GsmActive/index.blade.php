@@ -1,6 +1,6 @@
 @extends('layouts.v_main')
-@section('title','CSIS | Gsm Active')
-@section('title-table','Gsm Active')
+@section('title','CSIS | GSM Active')
+@section('title-table','GSM Active')
 @section('master','show')
 @section('GsmActive','active')
 
@@ -10,10 +10,18 @@
       <div class="card">
         <div class="card-body">
              <div class="text-right" id="selected">
-                <button class="btn btn-success edit_all">
+                 <button class="btn btn-default float-left mr-2 dropdown-toggle filter" id="dropdownMenu" data-toggle="dropdown" ><i class="fas fa-filter"></i></button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                        <div class="form-group">
+                            <input class="form-control" id="filter-date" type="month">
+                            <button class="mt-1 btn btn-primary float-right" id="check-btn">check</button>
+                        </select>
+                        </div>
+                    </ul>
+                <button class="btn btn-success edit_all" data-toggle="tooltip" title="Edit Selected">
                 <i class="fas fa-edit"></i>
               </button>
-                <button class="btn btn-danger  delete_all">
+                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
                   <i class="fas fa-trash"></i>
                 </button>
             </div>
@@ -60,10 +68,36 @@
       read()
 
     });
+     // filter bulan dan tahun
+    $('#check-btn').click(function() {
+    var date = new Date($('#filter-date').val());
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+      $.ajax({
+          type: "get",
+          url: "{{ url('item_data_MY_GsmActive') }}",
+          data: {
+            month: month,
+            year: year,
+          },
+          success: function(data) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable( {
+                "dom": '<"top"f>rt<"bottom"lp><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+          }
+      })
+    });
+
 
 
     // ------ Tampil Data ------
     function read(){
+        enableButton();
+
       $.get("{{ url('item_data_GsmActive') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -119,6 +153,7 @@
 
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
@@ -224,6 +259,8 @@
         });
         // Edit All
         $('.edit_all').on('click', function(e){
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
 
             var allVals = [];
             var _token = $('input[name="_token"]').val();
@@ -251,6 +288,8 @@
                     $.get("{{ url('show_GsmActive') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                        $(".add").hide();
+                        $(".cancel").hide();
 
                     });
                 });
@@ -329,6 +368,30 @@
       $(".delete_all").show("fast");
       read();
     }
+
+    function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
 
 
 

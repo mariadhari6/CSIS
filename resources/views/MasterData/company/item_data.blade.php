@@ -15,15 +15,17 @@
         <td id="item-company_name-{{ $item->id}}">
             {{ $item->company_name }}
         </td>
+
         <td id="item-seller_id-{{ $item->id}}">
-            {{ $item->seller->seller_name?? ''}}
+            {{ $item->seller->seller_name??''}}
         </td>
         <td id="item-customer_code-{{ $item->id }}">
             {{ $item->customer_code }}
         </td>
 
         <td id="item-no_agreement_letter_id-{{ $item->id}}">
-                {{ $item->seller->no_agreement_letter?? ''}}
+
+                {{ $item->no_agreement_letter_id??''}}
         </td>
         <td id="item-status-{{ $item->id }}">
                 {{-- {{ $item->status}} --}}

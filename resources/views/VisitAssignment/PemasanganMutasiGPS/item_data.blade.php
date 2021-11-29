@@ -14,14 +14,19 @@
             {{ $item->companyRequest->company_name??''}}
         </td>
           <td id="item-task-{{ $item->id }}">
-            {{ $item->taskRequest->task }}
+            {{ $item->task }}
         </td>
         <td id="item-waktu_kesepakatan-{{ $item->id }}">
             {{ $item->waktu_kesepakatan }}
         </td>
         @if ($item->vehicle != null)
              <td id="item-vehicle-{{ $item->id}}">
+<<<<<<< HEAD
                 {{ $item->vehicleRequest->license_plate?? ''}}
+=======
+                {{ $item->vehicleRequest->license_plate??'' }}
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             </td>
         @elseif ($item->vehicle == null)
              <td id="item-vehicle-{{ $item->id}}">
@@ -41,7 +46,11 @@
 
         @if ($item->imei != null)
         <td id="item-imei-{{ $item->id }}">
+<<<<<<< HEAD
             {{ $item->gpsPemasangan->imei?? ''}}
+=======
+            {{ $item->detailCustomerImei->imei?? ''}}
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         </td>
         @elseif ($item->imei == null)
           <td id="item-imei-{{ $item->id }}">
@@ -60,7 +69,11 @@
         @endif
           @if ($item->equipment_terpakai_gps != null)
         <td id="item-equipment_terpakai_gps-{{ $item->id }}">
+<<<<<<< HEAD
             {{$item->gpsPemasangan->type?? ''}}
+=======
+            {{$item->detailCustomerGps->type?? ''}}
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         </td>
         @elseif ($item->equipment_terpakai_gps == null)
         <td id="item-equipment_terpakai_gps-{{ $item->id }}">

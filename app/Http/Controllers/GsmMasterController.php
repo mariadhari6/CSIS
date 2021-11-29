@@ -7,15 +7,21 @@ use App\Imports\GsmMasterImport;
 use App\Models\Company;
 use App\Models\Gsm;
 use App\Models\GsmTemporary;
+use App\Models\RequestComplaint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpParser\Node\Stmt\TryCatch;
+use App\Models\DetailCustomer;
 
 class GsmMasterController extends Controller
 {
     public function index()
     {
-        return view('MasterData.GsmMaster.index');
+        $details = DetailCustomer::orderBy('id', 'DESC')->get();
+        return view('MasterData.GsmMaster.index')->with([
+            'details' => $details
+        ]);
     }
     public function add_form()
     {
@@ -69,55 +75,73 @@ class GsmMasterController extends Controller
     public function save_import(Request $request)
     {
         $dataRequest = json_decode($request->data);
+        $data = [];
+        $fail = 0;
         foreach ($dataRequest as $key => $value) {
             $gsmNumber = $value->gsm_number;
             $serialNumber = $value->serial_number;
             $checkGsm = Gsm::where('gsm_number', '=', $gsmNumber)->first();
             $checkSerial = Gsm::where('serial_number', '=', $serialNumber)->first();
-            if ($checkGsm === null  && $checkSerial === null) {
-                try {
-                    $data = array(
+            if ($checkGsm === null && $checkSerial === null) {
+                $data[$key] = array(
+                    'status_gsm'        =>  $value->status_gsm,
+                    'gsm_number'        =>  $value->gsm_number,
+                    'company_id'        =>  Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                    'serial_number'     =>  $value->serial_number,
+                    'icc_id'            =>  $value->icc_id,
+                    'imsi'              =>  $value->imsi,
+                    'res_id'            =>  $value->res_id,
+                    'request_date'      =>  $value->request_date,
+                    'expired_date'      =>  $value->expired_date == '' ? null :  $value->expired_date,
+                    'active_date'       =>  $value->active_date == '' ? null :  $value->active_date,
+                    'terminate_date'    =>  $value->terminate_date == '' ? null :  $value->terminate_date,
+                    'note'              =>  $value->note,
+                    'provider'          =>  $value->provider
+                );
+                $gsmNumberReq = $data[$key]['gsm_number'];
+                $serialNumberReq = $data[$key]['serial_number'];
+                $checkGsm2 = GsmTemporary::where('gsm_number', '=', $gsmNumberReq)->first();
+                $checkSerial2 = GsmTemporary::where('serial_number', '=', $serialNumberReq)->first();
+
+                if ($checkGsm2 === null && $checkSerial2 === null) {
+                    GsmTemporary::insert($data[$key]);
+                } else {
+                    $fail = 1;
+                }
+            } else {
+                $fail = 1;
+            }
+        }
+
+        if ($fail === 1) {
+            GsmTemporary::truncate();
+            return 'fail';
+        } else {
+            try {
+                $gsmTemporary = GsmTemporary::orderBy('id', 'DESC')->get();
+                foreach ($gsmTemporary as $key => $value) {
+                    $data[$key] = array(
                         'status_gsm'        =>  $value->status_gsm,
                         'gsm_number'        =>  $value->gsm_number,
-                        'company_id'        =>  Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                        'company_id'        =>  $value->company_id,
                         'serial_number'     =>  $value->serial_number,
                         'icc_id'            =>  $value->icc_id,
                         'imsi'              =>  $value->imsi,
                         'res_id'            =>  $value->res_id,
                         'request_date'      =>  $value->request_date,
-                        'expired_date'      =>  $value->expired_date,
-                        'active_date'       =>  $value->active_date,
-                        'terminate_date'    =>  $value->terminate_date,
+                        'expired_date'      =>  $value->expired_date == '' ? null :  $value->expired_date,
+                        'active_date'       =>  $value->active_date == '' ? null :  $value->active_date,
+                        'terminate_date'    =>  $value->terminate_date == '' ? null :  $value->terminate_date,
                         'note'              =>  $value->note,
                         'provider'          =>  $value->provider
                     );
-                    Gsm::insert($data);
-                    // return 'success';
-                } catch (\Throwable $th) {
-                    return 'fail';
+                    Gsm::insert($data[$key]);
+                    $dataDelete = GsmTemporary::findOrfail($value->id);
+                    $dataDelete->delete();
                 }
-            } else {
+            } catch (\Throwable $th) {
                 return 'fail';
             }
-
-            // $data = array(
-            //     'status_gsm'        =>  $value->status_gsm,
-            //     'gsm_number'        =>  $value->gsm_number,
-            //     'company_id'        =>  Company::where('company_name', $value->company_id)->firstOrFail()->id,
-            //     'serial_number'     =>  $value->serial_number,
-            //     'icc_id'            =>  $value->icc_id,
-            //     'imsi'              =>  $value->imsi,
-            //     'res_id'            =>  $value->res_id,
-            //     'request_date'      =>  $value->request_date,
-            //     'expired_date'      =>  $value->expired_date,
-            //     'active_date'       =>  $value->active_date,
-            //     'terminate_date'    =>  $value->terminate_date,
-            //     'note'              =>  $value->note,
-            //     'provider'          =>  $value->provider
-            // );
-            // Gsm::insert($data);
-            // // $status_gsm = $value->status_gsm
-            // // dd($value->status_gsm);
         }
     }
 
@@ -180,6 +204,9 @@ class GsmMasterController extends Controller
         $data->terminate_date = $request->terminate_date;
         $data->note = $request->note;
         $data->provider = $request->provider;
+        if ($request->status_gsm === 'Ready' || $request->status_gsm === 'Terminate') {
+            $data->was_maintenance = '0';
+        }
         $data->save();
     }
 
@@ -199,16 +226,6 @@ class GsmMasterController extends Controller
         }
     }
 
-    public function importExcel(Request $request)
-    {
-        $file = $request->file('file');
-        $nameFile = $file->getClientOriginalName();
-        $file->move('DataGsmMaster', $nameFile);
-
-        Excel::import(new GsmMasterImport, public_path('/DataGsmMaster/' . $nameFile));
-        // return redirect('/GsmMaster');
-    }
-
     public function export()
     {
         return Excel::download(new TemplateGsm, 'template-gsm.xlsx');
@@ -216,8 +233,32 @@ class GsmMasterController extends Controller
 
     public function try()
     {
-        $jml =  Company::all('company_name')->count();
-        $input = Company::where('company_name', 'Adib')->firstOrFail()->id;
+        $gsmTemporary = GsmTemporary::orderBy('id', 'DESC')->get();
+        foreach ($gsmTemporary as $key => $value) {
+            $data[$key] = array(
+                'status_gsm'        =>  $value->status_gsm,
+                'gsm_number'        =>  $value->gsm_number,
+                'company_id'        =>  $value->company_id,
+                'serial_number'     =>  $value->serial_number,
+                'icc_id'            =>  $value->icc_id,
+                'imsi'              =>  $value->imsi,
+                'res_id'            =>  $value->res_id,
+                'request_date'      =>  $value->request_date,
+                'expired_date'      =>  $value->expired_date,
+                'active_date'       =>  $value->active_date,
+                'terminate_date'    =>  $value->terminate_date,
+                'note'              =>  $value->note,
+                'provider'          =>  $value->provider
+            );
+            Gsm::insert($data[$key]);
+            $dataDelete = GsmTemporary::findOrfail($value->id);
+            $dataDelete->delete();
+        }
+
+        return $data;
+        // return 'a';
+        // $jml =  Company::all('company_name')->count();
+        // $input = Company::where('company_name', 'Adib')->firstOrFail()->id;
         // for ($i= 0; $i <= $jml-1; $i++) {
         //     if( $input == Company::all('company_name')[$i]['company_name']){
         //         $input = Company::all('id')[$i]['id'];
@@ -227,7 +268,7 @@ class GsmMasterController extends Controller
         //     }
         // }
 
-        return $input;
+        // return $input;
 
         // $GsmMaster = Gsm::all('gsm_number');
         // $jml =  Gsm::all('gsm_number')->count();

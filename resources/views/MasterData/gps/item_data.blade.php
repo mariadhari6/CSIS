@@ -16,7 +16,7 @@
             {{ $item->merk}}
         </td>
           <td id="item-type-{{ $item->id }}">
-            {{ $item->type }}
+            {{ $item->type}}
         </td>
           <td id="item-imei-{{ $item->id }}" name="{{$item->imei}}" class="item-imei-{{$item->id}}">
             {{ $item->imei }}
@@ -33,9 +33,21 @@
           <td id="item-status_ownership-{{ $item->id }}">
             {{ $item->status_ownership }}
           </td>
+<<<<<<< HEAD
           <td id="item-company_id-{{ $item->id }}">
             {{ $item->company->company_name??'' }}
           </td>
+=======
+          @if ($item->company_id == null)
+          <td id="item-company_id-{{ $item->id }}">
+            -
+          </td>
+          @else
+          <td id="item-company_id-{{ $item->id }}">
+            {{ $item->company->company_name??'' }}
+          </td>
+          @endif
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
           <td class="sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>

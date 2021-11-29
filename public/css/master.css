@@ -131,8 +131,13 @@
 .list {
 
     position: relative;
+<<<<<<< HEAD
     min-width: 50px;
     font-size: 15px;
+=======
+    min-width: 170px;
+    font-size: 12px;
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     text-align: center;
 }
 
@@ -151,7 +156,7 @@
 .list-company {
     position: relative;
     min-width: 270px;
-    font-size: 13px;
+    font-size: 12px;
     text-align: center;
 }
 
@@ -168,17 +173,17 @@
     text-align: center;
 }
 .list-agreement {
-    min-width: 180px;
+    min-width: 260px;
     font-size: 15px;
     text-align: center;
 }
 .list-seller {
-    min-width: 180px;
+    min-width: 200px;
     font-size: 15px;
     text-align: center;
 }
 .list-sellerName {
-    min-width: 270px;
+    min-width: 400px;
     font-size: 15px;
     text-align: center;
 }
@@ -189,7 +194,7 @@
 }
 .dataTables_filter {
     position: relative;
-    right: 150px;
+    right: 180px;
     bottom: 35px;
 
 }
@@ -242,6 +247,7 @@
     background-color: white;
 }
 
+<<<<<<< HEAD
 .first-col {
     width: 100px;
     min-width: 100px;
@@ -259,6 +265,9 @@
     text-align: center;
 
 }
+=======
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
 
 
@@ -322,6 +331,16 @@
     font-family:verdana, Helvetica;
 }
 
+<<<<<<< HEAD
+=======
+
+.hidden{
+    display: none;
+
+}
+
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 .fa-eye .popover{
     width:400px;
     height:100px;
@@ -331,6 +350,7 @@
     background-color: deepskyblue;
 }
 
+<<<<<<< HEAD
 .highlighted {
     background: #b3ccff;
 }
@@ -389,5 +409,1016 @@
 
 #data_detail thead tr th{
    font-weight: bold;
+=======
+.highlighted{
+    background: #b3ccff;
 }
+
+#key{
+    text-align: left;
+
+
+}
+/* detail customer */
+.detail-content{
+    display: none;
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
+}
+
+#table_detail_customer tbody td,
+#table_detail_customer thead th
+{
+    text-align: center;
+}
+
+#table_detail_customer{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    overflow: auto;
+    height:450px;
+}
+
+#table_detail_customer thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_detail_customer thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+/* TABEL PEMASANGAN DAN MUTASI */
+
+#table_pemasangan{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    overflow: auto;
+    height:450px;
+}
+
+#table_pemasangan thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_pemasangan thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+
+
+
+/* SUMMARY CUSTOMER */
+
+.highlighted {
+    background: #b3ccff;
+}
+
+#table_summary tbody tr td#key {
+    min-width: 234px;
+    max-width: 500px;
+    text-align: left;
+}
+
+#table_summary thead tr th {
+    font-weight: bold;
+}
+
+.table-scroll {
+    position: relative;
+    width:100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    height: 300px;
+  }
+
+.table-wrap {
+    position: relative;
+}
+
+.table-scroll th,
+.table-scroll td {
+  padding: 5px 10px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.table-scroll thead th {
+    background-color: #f2f2f2;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+.data-po{
+    position: relative;
+    left: 460px;
+    width: 45rem;
+}
+
+#data-po table thead th,
+#data-po table tbody td {
+
+    text-align: center;
+}
+
+#data-po table thead th {
+    background-color: #f2f2f2;
+}
+
+#data-po table tbody td#key
+{
+    text-align: left;
+}
+
+#data_detail thead tr th{
+   font-weight: bold;
+}
+
+
+/*  */
+
+/* Tittle Table */
+.title-table {
+    display: inline-block;
+    position: relative;
+    left: 390px;
+    top: 4px;
+}
+
+/* logo teks */
+.logo-teks {
+    display: inline-block;
+}
+
+/* Side bar */
+.sidebar-new {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 60px;
+    z-index: 1;
+    color: #ffffff;
+    font-weight: 200;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+    -webkit-transition: width 0.05s linear;
+    transition: width 0.05s linear;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    z-index: 1001;
+    background: #ffffff;
+    border-right: 1px solid #eee;
+    box-shadow: 6px 1px 20px rgba(69, 65, 78, 0.1);
+}
+.sidebar-new:hover,
+nav.sidebar-new.expanded {
+    width: 270px;
+    overflow: visible;
+}
+
+.sidebar-new > ul {
+    margin: 7px 0;
+}
+
+.sidebar-new li {
+    position: relative;
+    display: block;
+    width: 250px;
+    margin-bottom: 15px;
+}
+
+.sidebar-new li > a {
+    position: relative;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left: 2px;
+    color: #83848a;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+
+.sidebar-new .nav-icon {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+.sidebar-new .nav-text {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 190px;
+    font-family: "Titillium Web", sans-serif;
+}
+
+.sidebar-new .nav-list {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 190px;
+    font-family: "Titillium Web", sans-serif;
+    margin-left: 20px;
+}
+
+.no-touch .scrollable.hover {
+    overflow-y: hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+    overflow-y: auto;
+    overflow: visible;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+nav {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+nav ul,
+nav li {
+    outline: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-new li:hover > a,
+nav.sidebar-new li.active > a,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
+.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
+.dashboard-page nav.dashboard-menu ul li.active a {
+    color: #5fa2db;
+    /* background-color: #5fa2db; */
+}
+
+.csis {
+    margin-left: 50px;
+    margin-top: 5px;
+    z-index: 1001;
+}
+
+.integrasi {
+    margin-right: 20px;
+    margin-top: 8px;
+    z-index: 1001;
+}
+
+.drop {
+    margin-left: 60px;
+}
+
+.logo-sidebar {
+    min-height: 55px;
+    background-color: rgba(84, 138, 228, 255);
+    z-index: 1001;
+}
+
+.fa-2x {
+    font-size: 2em;
+}
+
+.icon-sidebar {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    color: #c3c5ca;
+    margin-top: 6px;
+}
+
+/* Home */
+.d_company {
+    background-color: #ff1e32;
+    width: 300px;
+    height: 250px;
+}
+
+.d_company:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_company-icon {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: 100px;
+    top: 40px;
+}
+
+.d_company-teks {
+    position: relative;
+    left: 20px;
+    top: 150px;
+    font-size: 25px;
+
+
+}
+
+.d_company-number {
+    position: relative;
+    left: 240px;
+    top: 90px;
+
+    font-size: 35px;
+}
+
+.d_gps {
+    background-color: #0186ff;
+    width: 200px;
+    height: 120px;
+    position: relative;
+    right: 2px;
+}
+
+.d_gps:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_gps-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 80px;
+    top: 20px;
+}
+
+.d_gps-teks {
+    position: relative;
+    font-size: 25px;
+    left: 10px;
+    top: 40px;
+}
+
+.d_gps-number {
+    position: relative;
+    left: 140px;
+    bottom: 20px;
+    font-size: 35px;
+
+}
+
+.d_sensor {
+    background-color: #0ff861;
+    width: 200px;
+    height: 120px;
+    position: relative;
+    right: 105px;
+}
+
+.d_sensor:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_sensor-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 80px;
+    top: 20px;
+}
+
+.d_sensor-teks {
+     position: relative;
+    font-size: 25px;
+    left: 10px;
+    top: 40px;
+}
+
+.d_sensor-number {
+     position: relative;
+    left: 140px;
+    bottom: 20px;
+    font-size: 35px;
+
+}
+
+.d_vehicle {
+    background-color: #ff2267;
+    width: 415px;
+    height: 115px;
+    position: relative;
+    top: 135px;
+    right: 630px;
+}
+
+.d_vehicle:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_vehicle-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 70px;
+    top: 20px;
+}
+
+.d_vehicle-teks {
+    position: relative;
+    font-size: 25px;
+    left: 210px;
+    top: -60px;
+}
+
+.d_vehicle-number {
+    position: relative;
+    left: 340px;
+    top: -60px;
+    font-size: 35px;
+
+}
+
+.d_gsm {
+    background-color: #ffbb02;
+    width: 270px;
+    height: 120px;
+    position: relative;
+    left: 750px;
+    bottom: 145px;
+}
+
+.d_gsm:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_gsm-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 65px;
+    top: 20px;
+}
+
+.d_gsm-teks {
+    position: relative;
+    left: 190px;
+    top: -60px;
+    font-size: 25px;
+}
+
+.d_gsm-number {
+    position: relative;
+    left: 200px;
+    top: -50px;
+    font-size: 35px;
+
+}
+
+.d_RequstComp {
+    background-color: #798aa6;
+    width: 500px;
+    height: 120px;
+    position: relative;
+    /* top: 215px; */
+    left: 428px;
+    bottom: 280px;
+}
+
+.d_RequstComp:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_RequstComp-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 100px;
+    right: 100px;
+    top: 20px;
+}
+
+.d_RequstComp-teks {
+    position: relative;
+    font-size: 25px;
+    left: 270px;
+    top: -60px;
+}
+
+.d_RequstComp-number {
+     position: relative;
+    left: 430px;
+    top: -60px;
+    font-size: 35px;
+
+}
+
+.d_visitAs {
+    background-color: #00c3ff;
+    width: 220px;
+    height: 120px;
+    position: relative;
+    /* top: 215px; */
+    left: 398px;
+    bottom: 150px;
+}
+
+.d_visitAs:hover {
+    transform: scale(1.05) translateZ(0);
+}
+
+.d_visitAs-icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 35px;
+    top: 20px;
+}
+
+.d_visitAs-teks {
+    position: relative;
+    left: 120px;
+    top: -50px;
+    font-size: 25px;
+}
+
+.d_visitAs-number {
+    position: relative;
+    left: 145px;
+    top: -35px;
+    font-size: 35px;
+
+}
+
+/* Table Home */
+.table-home {
+    position:relative;
+    text-align: center;
+    top: -150px;
+    left: 100px;
+}
+/* DASHBOARD CUSTOMER */
+
+#table_dashboard_customer{
+    table-layout: auto;
+    position: relative;
+    bottom: 40px;
+    width:100%;
+    z-index: 1;
+    overflow: auto;
+    height: 460px;
+}
+
+#table_dashboard_customer thead
+{
+    background-color: #fcf7f7;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_dashboard_customer thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+#table_dashboard_customer tbody td:first-child
+{
+    position: sticky;
+    right: 0;
+    background: #ffffff;
+    z-index: 1;
+}
+
+.action-col {
+    width: 45px;
+    min-width: 45px;
+    max-width: 45px;
+    right: 0px;
+    text-align: center;
+}
+
+.cari{
+    position: relative;
+    bottom: 10px;
+    /* left: 90px; */
+}
+
+.export-dashboard{
+    position: relative;
+    bottom: 10px;
+    right: 50px;
+    float: right;
+
+}
+
+.card-dashboard_customer{
+    /* position: relative;
+    bottom: 40px; */
+    max-height:100%;
+}
+
+.disable{
+    pointer-events: none;
+    cursor: default;
+}
+
+/*  */
+
+
+.faa-ring {
+    color: #ff2e38
+}
+
+@-webkit-keyframes ring {
+    0% {
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg)
+    }
+
+    2% {
+        -webkit-transform: rotate(15deg);
+        transform: rotate(15deg)
+    }
+
+    4% {
+        -webkit-transform: rotate(-18deg);
+        transform: rotate(-18deg)
+    }
+
+    6% {
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg)
+    }
+
+    8% {
+        -webkit-transform: rotate(-22deg);
+        transform: rotate(-22deg)
+    }
+
+    10% {
+        -webkit-transform: rotate(22deg);
+        transform: rotate(22deg)
+    }
+
+    12% {
+        -webkit-transform: rotate(-18deg);
+        transform: rotate(-18deg)
+    }
+
+    14% {
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg)
+    }
+
+    16% {
+        -webkit-transform: rotate(-12deg);
+        transform: rotate(-12deg)
+    }
+
+    18% {
+        -webkit-transform: rotate(12deg);
+        transform: rotate(12deg)
+    }
+
+    20% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+}
+
+@keyframes ring {
+    0% {
+        -webkit-transform: rotate(-15deg);
+        -ms-transform: rotate(-15deg);
+        transform: rotate(-15deg)
+    }
+
+    2% {
+        -webkit-transform: rotate(15deg);
+        -ms-transform: rotate(15deg);
+        transform: rotate(15deg)
+    }
+
+    4% {
+        -webkit-transform: rotate(-18deg);
+        -ms-transform: rotate(-18deg);
+        transform: rotate(-18deg)
+    }
+
+    6% {
+        -webkit-transform: rotate(18deg);
+        -ms-transform: rotate(18deg);
+        transform: rotate(18deg)
+    }
+
+    8% {
+        -webkit-transform: rotate(-22deg);
+        -ms-transform: rotate(-22deg);
+        transform: rotate(-22deg)
+    }
+
+    10% {
+        -webkit-transform: rotate(22deg);
+        -ms-transform: rotate(22deg);
+        transform: rotate(22deg)
+    }
+
+    12% {
+        -webkit-transform: rotate(-18deg);
+        -ms-transform: rotate(-18deg);
+        transform: rotate(-18deg)
+    }
+
+    14% {
+        -webkit-transform: rotate(18deg);
+        -ms-transform: rotate(18deg);
+        transform: rotate(18deg)
+    }
+
+    16% {
+        -webkit-transform: rotate(-12deg);
+        -ms-transform: rotate(-12deg);
+        transform: rotate(-12deg)
+    }
+
+    18% {
+        -webkit-transform: rotate(12deg);
+        -ms-transform: rotate(12deg);
+        transform: rotate(12deg)
+    }
+
+    20% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+}
+
+.faa-ring.animated,
+.faa-ring.animated-hover:hover,
+.faa-parent.animated-hover:hover>.faa-ring {
+    -webkit-animation: ring 2s ease infinite;
+    animation: ring 2s ease infinite;
+    transform-origin-x: 50%;
+    transform-origin-y: 0px;
+    transform-origin-z: initial
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 600px;
+    overflow-x: hidden;
+}
+
+/* Seller */
+
+#table_seller{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    z-index: 1;
+    overflow: auto;
+    height:450px;
+}
+
+#table_seller thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_seller thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+#table_seller tbody td
+{
+    position: sticky;
+    right: 0;
+    background: #ffffff;
+    z-index: 1;
+    width: 1000px;
+}
+.company-col{
+    width: 45px;
+    min-width: 45px;
+    max-width: 45px;
+    left: 0px;
+    text-align: center;
+}
+
+/* company  */
+
+#table_id{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    z-index: 1;
+    overflow: auto;
+    height:450px;
+}
+
+#table_id thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_id thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+#table_id tbody td
+{
+    position: sticky;
+    right: 0;
+    background: #ffffff;
+    z-index: 1;
+    width: 1000px;
+}
+
+
+/* request */
+
+#table_request{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    overflow: auto;
+    height:450px;
+}
+
+#table_request thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_request thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+
+.search_company{
+ z-index: 2;
+}
+
+.modal fade{
+    z-index: 1001;
+}
+
+/* Presentase Table home */
+.presentase-table{
+    position: relative;
+    right: -70px;
+
+
+}
+
+/* Table Company Dashboard Home */
+.table_company{
+    position: relative;
+    bottom: 150px;
+    left: 170px;
+}
+
+.table_visit{
+    position: relative;
+    bottom: 150px;
+    left: 120px;
+    text-align: center;
+
+}
+
+.table_vehicle{
+    position: relative;
+    bottom: 150px;
+    left: 270px;
+    text-align: center;
+
+}
+
+.table_gps{
+    position: relative;
+    bottom: 150px;
+    left: 270px;
+    text-align: center;
+
+}
+
+.table_gsm{
+    position: relative;
+    bottom: 150px;
+    left: 270px;
+    text-align: center;
+
+}
+.table_sensor{
+    position: relative;
+    bottom: 150px;
+    left: 270px;
+    text-align: center;
+}
+
+.table_request{
+    position: relative;
+    bottom: 150px;
+    left: 250px;
+    text-align: center;
+
+}
+
+
+/* Merk GPS */
+
+#table_select{
+    table-layout: auto;
+    position: relative;
+    bottom: 20px;
+    width:100%;
+    z-index: 1;
+    overflow: auto;
+    height:450px;
+}
+
+#table_select thead
+{
+    background-color: #ffffff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#table_select thead:first-child
+{
+    position: sticky;
+    right: 0;
+    z-index: 2;
+}
+
+#table_select tbody td
+{
+    position: sticky;
+    right: 0;
+    background: #ffffff;
+    z-index: 1;
+    width: 1500px;
+    text-align: center;
+
+}
+
 

@@ -15,8 +15,8 @@ class CreateGpsTable extends Migration
     {
         Schema::create('gps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('merk');
-            $table->foreignId('type');
+            $table->string('merk');
+            $table->string('type');
             $table->bigInteger('imei');
             $table->date('waranty');
             $table->date('po_date');

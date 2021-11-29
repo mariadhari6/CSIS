@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TamplateMasterVehicle;
+use App\Exports\VehicleExport;
 use App\Imports\VehicleImport;
 use App\Models\Company;
 use App\Models\Vehicle;
@@ -100,8 +101,8 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle        = Vehicle::findOrfail($id);
-        $company        = Company::orderBy('company_name', 'DESC')->get();
-        $vehicleType    = VehicleType::orderBy('name', 'DESC')->get();
+        $company        = Company::orderBy('company_name', 'ASC')->get();
+        $vehicleType    = VehicleType::orderBy('name', 'ASC')->get();
         return view('MasterData.vehicle.edit_form')->with([
             'vehicle'       => $vehicle,
             'company'       => $company,
@@ -182,5 +183,10 @@ class VehicleController extends Controller
     public function export()
     {
         return Excel::download(new TamplateMasterVehicle, 'template-vehicle.xlsx');
+    }
+
+    public function export_vehicle()
+    {
+        return Excel::download(new VehicleExport, 'Vehicle.xlsx');
     }
 }

@@ -25,15 +25,23 @@
                     </select>
                   </div>
                 </ul>
-                <button class="btn btn-success  mr-2 edit_all">
+                <a href="/export_pemasangan_mutasi_GPS" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
+                <i class="fas fa-file-export"></i>
+                </a>
+                <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
                     <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn btn-danger  delete_all">
+                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
+<<<<<<< HEAD
             <form>
           <table class="table table-responsive" id="table_id" >
+=======
+            <form onsubmit="return false">
+          <table class="table table-responsive data " id="table_pemasangan" >
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <thead>
               <tr>
                 <th>
@@ -79,14 +87,21 @@
 
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_PemasanganMutasi') }}", {}, function(data, status) {
-         $('#table_id').DataTable().destroy();
-         $('#table_id').find("#item_data").html(data);
-         $('#table_id').dataTable( {
+         $('#table_pemasangan').DataTable().destroy();
+         $('#table_pemasangan').find("#item_data").html(data);
+         $('#table_pemasangan').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
+<<<<<<< HEAD
           });
         $('#table_id').DataTable().draw();
+=======
+            // "dom": '<lf<t>ip>'
+            });
+        $('#table_pemasangan').DataTable().draw();
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
       });
     }
         // filter bulan dan tahun
@@ -104,13 +119,13 @@
 
             },
             success: function(data) {
-              $('#table_id').DataTable().destroy();
-              $('#table_id').find("#item_data").html(data);
-              $('#table_id').dataTable( {
+              $('#table_pemasangan').DataTable().destroy();
+              $('#table_pemasangan').find("#item_data").html(data);
+              $('#table_pemasangan').dataTable( {
                   "dom": '<"top"f>rt<"bottom"lp><"clear">'
                   // "dom": '<lf<t>ip>'
                   });
-              $('#table_id').DataTable().draw();
+              $('#table_pemasangan').DataTable().draw();
             }
         })
     });
@@ -129,6 +144,7 @@
     function filter(value){
       var value = value;
       $.get(value, {}, function(data, status) {
+<<<<<<< HEAD
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable( {
@@ -138,11 +154,75 @@
       });
     }
 
+=======
+          $('#table_pemasangan').DataTable().destroy();
+          $('#table_pemasangan').find("#item_data").html(data);
+            $('#table_pemasangan').dataTable( {
+
+              "dom": '<"top"f>rt<"bottom"lp><"clear">'
+              });
+          $('#table_pemasangan').DataTable().draw();
+        });
+      }
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     // ---- Tombol Cancel -----
     function cancel() {
       read();
     }
+<<<<<<< HEAD
 
+=======
+    //  // ------ Tambah Form Input ------
+    //  $('.add').click(function() {
+    //     $.get("{{ url('add_form_PemasanganMutasi') }}", {}, function(data, status) {
+    //       $('#table_pemasangan tbody').prepend(data);
+    //     });
+    //   });
+    // ----- Proses Tambah data ------
+    // function store() {
+    //     var company_id = $("#company_id").val();
+    //     var tanggal = $("#tanggal").val();
+    //     var kendaraan_awal = $("#kendaraan_awal").val();
+    //     var imei = $("#imei").val();
+    //     var gsm_pemasangan = $("#gsm_pemasangan").val();
+    //     var kendaraan_pasang = $("#kendaraan_pasang").val();
+    //     var jenis_pekerjaan = $("#jenis_pekerjaan").val();
+    //     var equipment_terpakai_gps = $("#equipment_terpakai_gps").val();
+    //     var equipment_terpakai_sensor = $("#equipment_terpakai_sensor").val();
+    //     var teknisi = $("#teknisi").val();
+    //     var uang_transportasi = $("#uang_transportasi").val();
+    //     var type_visit = $("#type_visit").val();
+    //     var note = $("#note").val();
+    //     $.ajax({
+    //         type: "get",
+    //         url: "{{ url('store_PemasanganMutasi') }}",
+    //         data: {
+    //           company_id: company_id,
+    //           tanggal:tanggal,
+    //           kendaraan_awal: kendaraan_awal,
+    //           imei: imei,
+    //           gsm_pemasangan: gsm_pemasangan,
+    //           kendaraan_pasang:kendaraan_pasang,
+    //           jenis_pekerjaan:jenis_pekerjaan,
+    //           equipment_terpakai_gps:equipment_terpakai_gps,
+    //           equipment_terpakai_sensor:equipment_terpakai_sensor,
+    //           teknisi:teknisi,
+    //           uang_transportasi:uang_transportasi,
+    //           type_visit:type_visit,
+    //           note:note
+    //         },
+    //         success: function(data) {
+    //          swal({
+    //             type: 'success',
+    //             title: 'Data Saved',
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //         }).catch(function(timeout) { });
+    //           read();
+    //         }
+    //     })
+    // }
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -177,7 +257,13 @@
       });
     }
     // ------ Edit Form Data ------
+<<<<<<< HEAD
     function edit(id) {
+=======
+    function edit(id){
+        disableButton();
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -308,7 +394,12 @@
         });
         // Form Edit All
         $('.edit_all').on('click', function(e){
+<<<<<<< HEAD
           
+=======
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             var allVals = [];
             var _token = $('input[name="_token"]').val();
             $(".task-select:checked").each(function() {
@@ -343,6 +434,10 @@
                     $.get("{{ url('show_PemasanganMutasi') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                        $(".add").hide();
+                         $(".cancel").hide();
+                        $(".export").hide();
+                        $(".filter").hide();
                     });
                 });
             }else{
@@ -403,6 +498,7 @@
                         status                    : status
                     },
                     success: function(data) {
+<<<<<<< HEAD
                       swal ({
                         type: 'success',
                         title: 'The selected data has been updated',
@@ -415,6 +511,23 @@
                       $(".delete_all").show("fast");
                       $(".btn-round").hide("fast");
                       $(".btn-round").hide("fast");          
+=======
+                     swal({
+                                    type: 'success',
+                                    title: 'The selected data has been updated',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                // $(".save").hide();
+                                });
+                                read();
+                                $(".add").show("fast");
+                                $(".edit_all").show("fast");
+                                $(".delete_all").show("fast");
+                                 $(".export").show("fast");
+                                 $(".filter").show("fast");
+                                $(".btn-round").hide("fast");
+                                $(".btn-round").hide("fast");
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                     }
                   });
                 });
@@ -429,8 +542,37 @@
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
+            $(".export").show("fast");
+            $(".filter").show("fast");
             read();
         }
+
+        function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.filter').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.filter').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
+
 
 
 

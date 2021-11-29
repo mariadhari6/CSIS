@@ -1,6 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+<<<<<<< HEAD
+=======
+
+use App\Exports\PemasanganMutasiGpsExport;
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 use App\Models\Company;
 use App\Models\DetailCustomer;
 use App\Models\Gps;
@@ -15,6 +20,7 @@ use App\Models\Teknisi;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class PemasanganMutasiGpsController extends Controller
@@ -25,7 +31,7 @@ class PemasanganMutasiGpsController extends Controller
     }
     public function item_data_onProgress()
     {
-        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', [1, 2, 3])->where('status', 'On Progress')->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', ['Mutasi Pelepasan GPS', 'Pemasangan GPS', 'Mutasi Pemasangan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->where('status', 'On Progress')->get();
         return view('VisitAssignment.PemasanganMutasiGPS.item_data')->with([
             'pemasangan_mutasi_GPS' => $pemasangan_mutasi_GPS
         ]);
@@ -33,7 +39,7 @@ class PemasanganMutasiGpsController extends Controller
 
     public function item_data_done()
     {
-        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', [1, 2, 3])->where('status', 'Done')->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', ['Mutasi Pelepasan GPS', 'Pemasangan GPS', 'Mutasi Pemasangan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->where('status', 'Done')->get();
         return view('VisitAssignment.PemasanganMutasiGPS.item_data')->with([
             'pemasangan_mutasi_GPS' => $pemasangan_mutasi_GPS
         ]);
@@ -41,7 +47,7 @@ class PemasanganMutasiGpsController extends Controller
 
     public function item_data()
     {
-        $pemasangan_mutasi_GPS = RequestComplaint::where('task', 1)->orWhere('task', 2)->orWhere('task', 3)->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::orderBy('id', 'DESC')->where('task', 'Mutasi Pelepasan GPS')->orWhere('task', 'Mutasi Pemasangan GPS')->orWhere('task', 'Pemasangan GPS')->orWhere('task', 'Mutasi Pelepasan Pemasangan GPS')->get();
         for ($i = 0; $i <= count($pemasangan_mutasi_GPS) - 1; $i++) {
 
             $loop_row   = $pemasangan_mutasi_GPS[$i]->equipment_terpakai_sensor;
@@ -74,7 +80,7 @@ class PemasanganMutasiGpsController extends Controller
     {
         $year = $request->year;
         $month = $request->month;
-        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', [1, 2, 3])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', ['Mutasi Pelepasan GPS', 'Pemasangan GPS', 'Mutasi Pemasangan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
         // dd($pemasangan_mutasi_GPS);
         return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
     }
@@ -88,6 +94,7 @@ class PemasanganMutasiGpsController extends Controller
     public function edit_form($id)
     {
 
+<<<<<<< HEAD
         $company                = Company::orderBy('id', 'DESC')->get();
         $details                = DetailCustomer::groupBy('company_id')->selectRaw('count(*) as jumlah, company_id')->get();
         $pemasangan_mutasi_GPS  = RequestComplaint::findOrfail($id);
@@ -97,6 +104,21 @@ class PemasanganMutasiGpsController extends Controller
         $teknisi                = Teknisi::orderBy('id', 'DESC')->get();
         $task                   = Task::where('task', 'Pemasangan GPS')->orWhere('task', 'Pelepasan GPS')->orWhere('task', 'Mutasi')->get();
         $gsm_master             = Gsm::where('status_gsm', 'Ready')->get();
+=======
+        $company = Company::orderBy('id', 'DESC')->get();
+        $details = DetailCustomer::groupBy('company_id')
+            ->selectRaw('count(*) as jumlah, company_id')
+            ->get();
+        $pemasangan_mutasi_GPS = RequestComplaint::findOrfail($id);
+
+        $sensor         = Sensor::orderBy('serial_number', 'DESC')->where('status', 'Ready')->get();
+
+        $gps = Gps::where('status', 'Ready')->get();
+        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
+        $teknisi = Teknisi::orderBy('id', 'DESC')->get();
+        $task = Task::where('task', 'Mutasi Pelepasan GPS')->orWhere('task', 'Mutasi Pemasangan GPS')->orWhere('task', 'Pemasangan GPS')->orWhere('task', 'Mutasi Pelepasan Pemasangan GPS')->get();
+        $gsm_master = Gsm::where('status_gsm', 'Ready')->get();
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         return view('VisitAssignment.PemasanganMutasiGPS.edit_form')->with([
             'pemasangan_mutasi_GPS' => $pemasangan_mutasi_GPS,
@@ -129,8 +151,8 @@ class PemasanganMutasiGpsController extends Controller
         $data->kendaraan_pasang = $request->kendaraan_pasang;
         $data->status = $request->status;
         $equipment_terpakai_sensor     = $request->equipment_terpakai_sensor;
-        $gsm_id = $request->gsm_pemasangan;
-        $gps_terpakai = $request->equipment_terpakai_gps;
+        // $gsm_id = $request->gsm_pemasangan;
+        // $gps_terpakai = $request->equipment_terpakai_gps;
 
         // $a      = $batas[0] - 1;
         // $x      = "not";
@@ -144,8 +166,11 @@ class PemasanganMutasiGpsController extends Controller
                 Sensor::where('id', $arr[$i])->update(array('status' => 'Used'));
             }
             $data->save();
-            Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active'));
-            Gps::where('id', $gps_terpakai)->update(array('status' => 'Used'));
+
+            // Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active'));
+            // Gps::where('id', $gps_terpakai)->update(array('status' => 'Used'));
+        } else {
+            $data->save();
         }
     }
 
@@ -218,7 +243,11 @@ class PemasanganMutasiGpsController extends Controller
 
 
         $data = DetailCustomer::where('company_id', $id)->get();
-
+        for ($i = 0; $i < count($data); $i++) {
+            $loop = $data[$i]->vehicle_id;
+            $cari_vehicle = Vehicle::where('id', $loop)->get();
+            $data[$i]['vehicle_license_plate'] = $cari_vehicle[0]->license_plate;
+        }
         return $data;
     }
 
@@ -226,11 +255,47 @@ class PemasanganMutasiGpsController extends Controller
     {
         $key = DetailCustomer::all()->where('id', $id)->mapWithKeys(function ($item, $key) {
             return [
-                $item['id'] => $item->only(['gsm_id', 'type'])
+                $item['id'] => $item->only(['gsm_id', 'type', 'imei'])
             ];
         });
         $data = $key->all();
+        $complete = array();
+
+        foreach ($data as $a) {
+
+            $i = $a['gsm_id'];
+            $j = $a['type'];
+            $j = $a['imei'];
+
+
+            $cari_Gsm = Gsm::where('id', $i)->get();
+            $a['number_gsm'] = $cari_Gsm[0]->gsm_number;
+            $cari_gpsType = Gps::where('id', $j)->get();
+            $a['type_gps'] = $cari_gpsType[0]->type;
+            $a['imei_gps'] = $cari_gpsType[0]->imei;
+
+            $a['id'] = $id;
+
+
+            array_push($complete, $a);
+        }
+
+        return $complete;
+    }
+
+    public function basedKendaraanPasang($id)
+    {
+
+
+
+        $data = Vehicle::where('company_id', $id)->get();
+
         return $data;
+    }
+
+    public function export_pemasangan()
+    {
+        return Excel::download(new PemasanganMutasiGpsExport, 'Pemasangan_Mutasi_GPS.xlsx');
     }
 
     // public function basedSensorName($id)

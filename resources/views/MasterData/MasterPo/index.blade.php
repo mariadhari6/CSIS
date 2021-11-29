@@ -12,11 +12,11 @@
             <div class="text-right" id="selected">
             <button type="button" class="btn btn-primary float-left mr-2 add add-button">
               <b>Add</b>
-              <i class="fas fa-plus ml-2" id="add"></i>
+              <i class="fas fa-plus ml-2"></i>
               </button>
-              <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+              <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData">
                   <b> Import</b>
-                  <i class="fas fa-file-excel ml-2"></i>
+                  <i class="fas fa-file-excel ml-2 "></i>
               </button>
                <div class="float-left mr-2">
                       <div class="input-group-prepend">
@@ -37,12 +37,15 @@
                   <option value="{{ url('item_data_trial_master_po') }}">Trial</option>
                 </select>
             </div>
-                <button class="btn btn-success edit_all">
+                <a href="/export_MasterPO" class="btn btn-success  mr-2  export" data-toggle="tooltip" title="Export">
+                <i class="fas fa-file-export"></i>
+                </a>
+                <button class="btn btn-success edit_all" data-toggle="tooltip" title="Edit Selected">
                 <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
             </div>
-            <form>
+            <form onsubmit="return false">
 
             <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
@@ -58,12 +61,12 @@
                 </th>
                 <th scope="col" class="action-no">No.</th>
                 <th scope="col" class="list-company">Company*</th>
-                <th scope="col" class="list">Po Number*</th>
-                <th scope="col" class="list">Po Date*</th>
+                <th scope="col" class="list">PO Number*</th>
+                <th scope="col" class="list">PO Date*</th>
                 <th scope="col" class="list">Harga Layanan*</th>
-                <th scope="col" class="list">Jumlah Unit Po*</th>
-                <th scope="col" class="list">Status Po</th>
-                <th scope="col" class="list">Selles</th>
+                <th scope="col" class="list">Jumlah Unit PO*</th>
+                <th scope="col" class="list">Status PO</th>
+                <th scope="col" class="list">Sales</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
 
               </tr>
@@ -202,7 +205,7 @@
               harga_layanan :$td.eq(3).text(),
               jumlah_unit_po:$td.eq(4).text(),
               status_po     :$td.eq(5).text(),
-              selles        :$td.eq(6).text()
+              sales_id        :$td.eq(6).text()
 
             }
 
@@ -229,7 +232,7 @@
             // alert("save failed");
             swal({
                 type: 'warning',
-                text: 'Duplicate data or error format, Imei must 15 character',
+                text: 'data or error ',
                 showCloseButton: true,
                 showConfirmButton: false
               }).catch(function(timeout) { });
@@ -296,6 +299,7 @@
       }
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_master_po') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -313,7 +317,9 @@
       read()
     }
      // ------ Tambah Form Input ------
-     $('#add').click(function() {
+     $('.add').click(function() {
+         disableButton();
+
         $.get("{{ url('add_form_master_po') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -326,7 +332,7 @@
         var harga_layanan   = $("#harga_layanan").val();
         var jumlah_unit_po  = $("#jumlah_unit_po").val();
         var status_po       = $("#status_po").val();
-        var selles          = $("#selles").val();
+        var sales_id          = $("#sales_id").val();
         $.ajax({
             type: "get",
             url: "{{ url('store_master_po') }}",
@@ -337,7 +343,7 @@
               harga_layanan :harga_layanan,
               jumlah_unit_po:jumlah_unit_po,
               status_po     :status_po,
-              selles        :selles
+              sales_id        :sales_id
             },
             success: function(data) {
               swal({
@@ -385,6 +391,8 @@
     }
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
+
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -395,7 +403,7 @@
         $("#item-harga_layanan-"+id).hide("fast");
         $("#item-jumlah_unit_po-"+id).hide("fast");
         $("#item-status_po-"+id).hide("fast");
-        $("#item-selles-"+id).hide("fast");
+        $("#item-sales_id-"+id).hide("fast");
         $.get("{{ url('show_master_po') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -408,7 +416,7 @@
             var harga_layanan = $("#harga_layanan").val();
             var jumlah_unit_po = $("#jumlah_unit_po").val();
             var status_po = $("#status_po").val();
-            var selles = $("#selles").val();
+            var sales_id = $("#sales_id").val();
             var id = id;
             $.ajax({
                 type: "get",
@@ -420,7 +428,7 @@
                 harga_layanan: harga_layanan,
                 jumlah_unit_po: jumlah_unit_po,
                 status_po: status_po,
-                selles: selles
+                sales_id: sales_id
                 },
                 success: function(data) {
                   swal({
@@ -490,6 +498,8 @@
         });
         // Form Edit All
         $('.edit_all').on('click', function(e){
+             disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
             var allVals = [];
             var _token = $('input[name="_token"]').val();
             $(".task-select:checked").each(function() {
@@ -499,7 +509,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('selected') }}", {}, function(data, status) {
+                $.get("{{ url('selected_master_po') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -512,11 +522,15 @@
                     $("#item-harga_layanan-"+value).hide("fast");
                     $("#item-jumlah_unit_po-"+value).hide("fast");
                     $("#item-status_po-"+value).hide("fast");
-                    $("#item-selles-"+value).hide("fast");
+                    $("#item-sales_id-"+value).hide("fast");
                     $(".add").hide("fast");
                     $.get("{{ url('show_master_po') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                         $(".add").hide();
+                        $(".cancel").hide();
+                        $(".import").hide();
+                        $(".export").hide();
                     });
                 });
             }else{
@@ -546,7 +560,7 @@
                     var harga_layanan = $(".harga_layanan-"+value).val();
                     var jumlah_unit_po = $(".jumlah_unit_po-"+value).val();
                     var status_po = $(".status_po-"+value).val();
-                    var selles = $(".selles-"+value).val();
+                    var sales_id = $(".sales_id-"+value).val();
                     $.ajax({
                     type: "get",
                     url: "{{ url('update_master_po') }}/"+value,
@@ -557,7 +571,7 @@
                     harga_layanan: harga_layanan,
                     jumlah_unit_po: jumlah_unit_po,
                     status_po: status_po,
-                    selles: selles
+                    sales_id: sales_id
                     },
                     success: function(data) {
                       swal({
@@ -571,6 +585,8 @@
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
+                                 $(".import").show("fast");
+                                 $(".export").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
                     }
@@ -579,13 +595,37 @@
         });
         }
         //--------Proses Batal--------
-        function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+         function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
+        }
+
+        function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
         }
   </script>
    @endsection

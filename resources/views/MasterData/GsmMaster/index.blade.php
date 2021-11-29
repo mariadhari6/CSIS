@@ -1,7 +1,14 @@
 @extends('layouts.v_main')
+<<<<<<< HEAD
 @section('title','CSIS | Gsm Pre Active')
 @section('title-table','Gsm Master')
 @section('master','show')
+=======
+@section('title','CSIS | Master GSM')
+@section('title-table',' Master GSM')
+
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 @section('content')
 <form onsubmit="return false">
   <div class="row">
@@ -9,8 +16,15 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right" id="selected">
+<<<<<<< HEAD
                 <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
 
+=======
+                <button type="button" class="btn btn-primary btn-sm float-left mr-2 add add-button">
+                  <b>Add</b>
+                  <i class="fas fa-plus ml-2" id="add"></i>
+                </button>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
                     <option value="{{ url('item_data_all_GsmMaster') }}">All</option>
@@ -19,6 +33,7 @@
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
                   </select>
                 </div>
+<<<<<<< HEAD
                 <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
@@ -27,6 +42,19 @@
                 <i class="fas fa-edit"></i>
               </button>
               <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+=======
+                <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
+                  <b> Import</b>
+                  <i class="fas fa-file-excel ml-2"></i>
+                </button>
+                <a href="/export_gsm_master" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
+                <i class="fas fa-file-export"></i>
+                </a>
+              <button class="btn btn-success edit_all"  data-toggle="tooltip" title="Edit Selected">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             </div>
           <table class="table table-responsive data" class="table_id" id="table_id">
             <thead>
@@ -46,11 +74,11 @@
                 <th scope="col" class="list">Serial Number*</th>
                 <th scope="col" class="list">ICC ID</th>
                 <th scope="col" class="list">IMSI</th>
-                <th scope="col" class="list">Res ID</th>
+                <th scope="col" class="list">RES ID</th>
                 <th scope="col" class="list">Request Date</th>
                 <th scope="col" class="list">Expired Date</th>
                 <th scope="col" class="list">Active Date</th>
-                <th scope="col" class="list">Terminated Date</th>
+                <th scope="col" class="list">Terminate Date</th>
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="list">Provider</th>
                 <th scope="col" class="sticky-col first-col">Action</th>
@@ -208,13 +236,17 @@
             var excelDate = requestDate[i].innerText;
             var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
             try {
-                  var converted_date = date.toISOString().split('T')[0];
+                  var converted_requestDate = date.toISOString().split('T')[0];
                 }
                 catch(err) {
                   // var converted_date = 'wrong date format';
                   requestDate[i].style.backgroundColor = "#e8837d";
                 }
-            requestDate[i].innerHTML = converted_date;
+            if(converted_requestDate === undefined) {
+              requestDate[i].innerHTML = "";
+            } else {
+              requestDate[i].innerHTML = converted_requestDate;
+            }
           }
 
         // change format expiredDate
@@ -223,13 +255,18 @@
           var excelDate = expiredDate[i].innerText;
           var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
           try {
-                var converted_date = date.toISOString().split('T')[0];
+                var converted_expiredDate = date.toISOString().split('T')[0];
               }
               catch(err) {
                 // var converted_date = 'wrong date format';
                 expiredDate[i].style.backgroundColor = "#e8837d";
               }
-            expiredDate[i].innerHTML = converted_date;
+            if(converted_expiredDate === undefined) {
+              expiredDate[i].innerHTML = "";
+              expiredDate[i].style.backgroundColor = "#fff";
+            } else {
+              expiredDate[i].innerHTML = converted_expiredDate;
+            }
         }
 
         // change format activeDate
@@ -238,13 +275,18 @@
           var excelDate = activeDate[i].innerText;
           var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
           try {
-                var converted_date = date.toISOString().split('T')[0];
+                var converted_activeDate = date.toISOString().split('T')[0];
               }
               catch(err) {
                 // var converted_date = 'wrong date format';
                 activeDate[i].style.backgroundColor = "#e8837d";
               }
-            activeDate[i].innerHTML = converted_date;
+            if(converted_activeDate === undefined) {
+              activeDate[i].innerHTML = "";
+              activeDate[i].style.backgroundColor = "#fff";
+            } else {
+              activeDate[i].innerHTML = converted_activeDate;
+            }
         }
 
         // change format terminatedDate
@@ -253,13 +295,18 @@
           var excelDate = terminatedDate[i].innerText;
           var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
           try {
-                var converted_date = date.toISOString().split('T')[0];
+                var converted_terminatedDate = date.toISOString().split('T')[0];
               }
               catch(err) {
                 // var converted_date = 'wrong date format';
                 terminatedDate[i].style.backgroundColor = "#e8837d";
               }
-            terminatedDate[i].innerHTML = converted_date;
+            if(converted_terminatedDate === undefined) {
+              terminatedDate[i].innerHTML = "";
+              terminatedDate[i].style.backgroundColor = "#fff";
+            } else {
+              terminatedDate[i].innerHTML = converted_terminatedDate;
+            }
         }
 
         }
@@ -363,7 +410,11 @@
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable( {
+<<<<<<< HEAD
 
+=======
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
               "dom": '<"top"f>rt<"bottom"lp><"clear">'
               });
           $('#table_id').DataTable().draw();
@@ -372,11 +423,17 @@
 
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_GsmMaster') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
+<<<<<<< HEAD
             "pageLength": 50,
+=======
+            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
@@ -399,6 +456,7 @@
 
      // ------ Tambah Form Input ------
      $('.add').click(function() {
+         disableButton();
         $.get("{{ url('add_form_GsmMaster') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -525,6 +583,10 @@
             }
         });
       }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     }
 
     // -----Proses Delete Data ------
@@ -562,6 +624,7 @@
     }
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -687,6 +750,8 @@
 
         // Form Edit All
         $('.edit_all').on('click', function(e){
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
 
             var allVals = [];
             var _token = $('input[name="_token"]').val();
@@ -721,6 +786,11 @@
                     $.get("{{ url('show_GsmMaster') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                        $(".add").hide();
+                        $(".cancel").hide();
+                        $(".import").hide();
+                        $(".export").hide();
+
 
                     });
                 });
@@ -787,10 +857,12 @@
                       read();
 
                       $(".add").show("fast");
-                      $(".edit_all").show("fast");
-                      $(".delete_all").show("fast");
-                      $(".btn-round").hide("fast");
-                      $(".btn-round").hide("fast");
+                    $(".edit_all").show("fast");
+                    $(".delete_all").show("fast");
+                    $(".import").show("fast");
+                    $(".export").show("fast");
+                    $(".btn-round").hide("fast");
+                    $(".btn-round").hide("fast");
                     }
                 });
             });
@@ -804,6 +876,8 @@
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
+            $(".import").show("fast");
+            $(".export").show("fast");
             read();
         }
 
@@ -811,6 +885,35 @@
          function dataLengthAll() {
           $('#table_id').DataTable().destroy();
         }
+<<<<<<< HEAD
+=======
+
+         function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
+
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
   </script>
   {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}

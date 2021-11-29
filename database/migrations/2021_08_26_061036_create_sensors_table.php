@@ -16,7 +16,7 @@ class CreateSensorsTable extends Migration
         Schema::create('sensors', function (Blueprint $table) {
             $table->id();
             $table->string('sensor_name');
-            $table->foreignId('merk_sensor');
+            $table->string('merk_sensor');
             $table->string('serial_number');
             $table->string('rab_number');
             $table->date('waranty');

@@ -15,14 +15,17 @@
                 <b>Add</b>
                 <i class="fas fa-plus ml-2" id="add"></i>
               </button>
-              <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
+              <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
-              <button class="btn btn-success  mr-2 edit_all">
+                <a href="/export_sensor" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Delete Selected">
+                <i class="fas fa-file-export"></i>
+              </a>
+              <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
                 <i class="fas fa-edit"></i>
               </button>
-              <button class="btn btn-danger  delete_all">
+              <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
                 <i class="fas fa-trash"></i>
               </button>
           </div>
@@ -43,7 +46,7 @@
                 <th scope="col" class="list">Sensor Name*</th>
                 <th scope="col" class="list">Merk Sensor</th>
                 <th scope="col" class="list">Serial Number*</th>
-                <th scope="col" class="list">Rab Number*</th>
+                <th scope="col" class="list">RAB Number*</th>
                 <th scope="col" class="list">Waranty</th>
                 <th scope="col" class="list">Status</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
@@ -226,7 +229,7 @@
             // alert("save failed");
             swal({
                 type: 'warning',
-                text: 'Duplicate data or error format, Imei must 15 character',
+                text: 'data error',
                 showCloseButton: true,
                 showConfirmButton: false
               }).catch(function(timeout) { });
@@ -262,6 +265,7 @@
     });
     // ------ Tampil Data ------
     function read(){
+        enableButton();
       $.get("{{ url('item_data_sensor') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
@@ -281,6 +285,7 @@
 
      // ------ Tambah Form Input ------
      $('.add').click(function() {
+         disableButton();
         $.get("{{ url('add_form_sensor') }}", {}, function(data, status) {
           $('#table_id tbody').prepend(data);
         });
@@ -352,6 +357,7 @@
     }
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -457,6 +463,8 @@
 
         // Form Edit All
         $('.edit_all').on('click', function(e){
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
 
             var allVals = [];
             var _token = $('input[name="_token"]').val();
@@ -485,6 +493,10 @@
                     $.get("{{ url('show_sensor') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                        $(".add").hide();
+                        $(".cancel").hide();
+                        $(".import").hide();
+                        $(".export").hide();
 
                     });
                 });
@@ -542,6 +554,8 @@
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
+                                 $(".import").show("fast");
+                                $(".export").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
 
@@ -562,6 +576,30 @@
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
+        }
+
+        function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
         }
 
 

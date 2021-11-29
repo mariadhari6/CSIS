@@ -1,6 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+<<<<<<< HEAD
+=======
+
+use App\Exports\MasterPoExport;
+use App\Exports\TamplateMasterPo;
+use App\Imports\MasterPoImport;
+use App\Models\Company;
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 use App\Models\MasterPo;
 use App\Models\Pic;
 use App\Models\Sales;
@@ -26,6 +34,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MasterPoController extends Controller
 {
+<<<<<<< HEAD
     public function index(){
 
         $company = Company::orderBy('company_name', 'DESC')->get();
@@ -38,6 +47,24 @@ class MasterPoController extends Controller
         $master_po  = MasterPo::orderBy('po_number', 'DESC')->get();
         $sales      = Sales::orderBy('name', 'DESC')->get();
         $company    = Company::orderBy('company_name', 'DESC')->get();
+=======
+    public function index()
+    {
+        $company = Company::orderBy('company_name', 'ASC')->get();
+        return view('MasterData.MasterPo.index')->with([
+            'company'          => $company
+        ]);
+    }
+    public function add_form()
+    {
+        $sales = Sales::orderBy('id', 'ASC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
+        $master_po = MasterPo::orderBy('po_number', 'ASC')->get();
+        return view('MasterData.MasterPo.add_form')->with([
+            'master_po'        => $master_po,
+            'company'          => $company,
+            'sales'          => $sales
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         return view('master_po.add_form')->with([
             'master_po' => $master_po,
@@ -45,8 +72,37 @@ class MasterPoController extends Controller
             'company'   => $company
         ]);
     }
+<<<<<<< HEAD
     public function item_data(){
 
+=======
+    public function save_import(Request $request)
+    {
+        $dataRequest = json_decode($request->data);
+        foreach ($dataRequest as $key => $value) {
+
+            // try {
+            $data = array(
+                'company_id'        => Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                'po_number'         =>  $value->po_number,
+                'po_date'           => $value->po_date,
+                'harga_layanan'     =>  $value->harga_layanan,
+                'jumlah_unit_po'    =>  $value->jumlah_unit_po,
+                'status_po'         => $value->status_po,
+                'sales_id'            =>  $value->sales_id,
+                'count'             => $value->jumlah_unit_po,
+
+            );
+            MasterPo::insert($data);
+            // return 'success';
+            // } catch (\Throwable $th) {
+            //     return 'fail';
+            // }
+        }
+    }
+    public function item_data()
+    {
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $master_po = MasterPo::orderBy('id', 'DESC')->get();
         return view('master_po.item_data')->with([
             'master_po' => $master_po
@@ -63,8 +119,13 @@ class MasterPoController extends Controller
             'harga_layanan'     => $request->harga_layanan,
             'jumlah_unit_po'    => $request->jumlah_unit_po,
             'status_po'         => $request->status_po,
+<<<<<<< HEAD
             'sales_id'          => $request->sales_id,
             'count'             => $request->jumlah_unit_po
+=======
+            'sales_id'            => $request->sales_id,
+            'count'             => $request->jumlah_unit_po,
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         );
 
         MasterPo::insert($data);
@@ -72,6 +133,13 @@ class MasterPoController extends Controller
 
     public function edit_form($id){
 
+<<<<<<< HEAD
+=======
+    public function edit_form($id)
+    {
+        $sales = Sales::orderBy('id', 'ASC')->get();
+        $company = Company::orderBy('company_name', 'ASC')->get();
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $master_po = MasterPo::findOrfail($id);
         $sales      = Sales::orderBy('name', 'DESC')->get();
         $company    = Company::orderBy('company_name', 'DESC')->get();
@@ -89,7 +157,22 @@ class MasterPoController extends Controller
         $data->delete();
     }
 
+<<<<<<< HEAD
     public function update(Request $request, $id){
+=======
+    public function update(Request $request, $id)
+    {
+        $data = MasterPo::findOrfail($id);
+        $data->company_id       = $request->company_id;
+        $data->po_number        = $request->po_number;
+        $data->po_date          = $request->po_date;
+        $data->harga_layanan    = $request->harga_layanan;
+        $data->jumlah_unit_po   = $request->jumlah_unit_po;
+        $data->status_po        = $request->status_po;
+        $data->sales_id           = $request->sales_id;
+        $data->count           = $request->jumlah_unit_po;
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $data = MasterPo::findOrfail($id);
         $data->company_id = $request->company_id;
@@ -111,6 +194,7 @@ class MasterPoController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     public function updateall(Request $request, $id){
 
         $data = Gps::findOrfail($id);
@@ -121,6 +205,18 @@ class MasterPoController extends Controller
         $data->jumlah_unit_po = $request->jumlah_unit_po;
         $data->status_po = $request->status_po;
         $data->sales_id = $request->sales_id;
+=======
+    public function updateall(Request $request, $id)
+    {
+        $data = MasterPo::findOrfail($id);
+        $data->company_id       = $request->company_id;
+        $data->po_number        = $request->po_number;
+        $data->po_date          = $request->po_date;
+        $data->harga_layanan    = $request->harga_layanan;
+        $data->jumlah_unit_po   = $request->jumlah_unit_po;
+        $data->status_po        = $request->status_po;
+        $data->sales_id           = $request->sales_id;
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         echo $id;
     }
 
@@ -202,6 +298,7 @@ class MasterPoController extends Controller
 
         return Excel::download(new TamplateMasterPo, 'template-MasterPo.xlsx');
     }
+<<<<<<< HEAD
 
     public function check() {
         // $vehicle = 122;
@@ -370,6 +467,12 @@ class MasterPoController extends Controller
 
     }
 
+=======
+    public function export_masterPO()
+    {
+        return Excel::download(new MasterPoExport, 'MasterPo.xlsx');
+    }
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 }
 
 

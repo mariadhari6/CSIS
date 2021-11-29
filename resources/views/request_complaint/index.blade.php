@@ -30,11 +30,20 @@
                         <option value="{{ url('item_data_Complain_Eksternal_RequestComplain') }}">Complain Eksternal</option>
                     </select>
                 </div>
-                <button class="btn btn-success  mr-2 edit_all"> <i class="fas fa-edit"></i></button>
-                <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <a href="/export_request_complaint" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
+                <i class="fas fa-file-export"></i>
+                </a>
+                <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected"> <i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
             </div>
+<<<<<<< HEAD
         {{-- <form > --}}
           <table class="table table-responsive" id="table_id" >
+=======
+        <form onsubmit="return false">
+
+          <table class="table table-responsive data " class="table_request" id="table_request" >
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <thead>
               <tr>
                 <th>
@@ -50,16 +59,20 @@
                 <th scope="col" class="list">Internal/External*</th>
                 <th scope="col" class="list">PIC*</th>
                 <th scope="col" class="list">Vehicle*</th>
-                <th scope="col" class="list">Waktu Info</th>
+                <th scope="col" class="list">Waktu Info*</th>
                 <th scope="col" class="list">Waktu Respond*</th>
                 <th scope="col" class="list">Task*</th>
                 <th scope="col" class="list">Platform*</th>
-                <th scope="col" class="list">Detail Taks*</th>
+                <th scope="col" class="list">Detail Task*</th>
                 <th scope="col" class="list">Divisi*</th>
                 <th scope="col" class="list">Respond*</th>
                 <th scope="col" class="list">Waktu Kesepakatan*</th>
                 <th scope="col" class="list">Status*</th>
+<<<<<<< HEAD
                 <th scope="col" class="list">waktu Solve*</th>
+=======
+                <th scope="col" class="list">Waktu Solve*</th>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 <th scope="col" class="list">Status Akhir</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
               </tr>
@@ -68,7 +81,11 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+<<<<<<< HEAD
           {{-- </form> --}}
+=======
+          </form>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         </div>
       </div>
@@ -95,19 +112,21 @@
               year: year,
             },
             success: function(data) {
-              $('#table_id').DataTable().destroy();
-              $('#table_id').find("#item_data").html(data);
-              $('#table_id').dataTable( {
+              $('#table_request').DataTable().destroy();
+              $('#table_request').find("#item_data").html(data);
+              $('#table_request').dataTable( {
                   "dom": '<"top"f>rt<"bottom"lp><"clear">'
                   // "dom": '<lf<t>ip>'
                   });
-              $('#table_id').DataTable().draw();
+              $('#table_request').DataTable().draw();
             }
         })
     });
 
   // ------- filter change ------
   $("#filter").change(function(){
+         disableButton();
+
     var value = $(this).val();
     filter(value);
 });
@@ -115,12 +134,12 @@
   function filter(value){
   var value = value;
   $.get(value, {}, function(data, status) {
-      $('#table_id').DataTable().destroy();
-      $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
+      $('#table_request').DataTable().destroy();
+      $('#table_request').find("#item_data").html(data);
+        $('#table_request').dataTable( {
           "dom": '<"top"f>rt<"bottom"lp><"clear">'
           });
-      $('#table_id').DataTable().draw();
+      $('#table_request').DataTable().draw();
     });
   }
     // ---- stop dropdown -----
@@ -129,17 +148,17 @@
     });
     // ------ Tampil Data ------
     function read(){
-
+        enableButton();
       $.get("{{ url('item_data_RequestComplain') }}", {}, function(data, status) {
-         $('#table_id').DataTable().destroy();
-         $('#table_id').find("#item_data").html(data);
-         $('#table_id').dataTable( {
+         $('#table_request').DataTable().destroy();
+         $('#table_request').find("#item_data").html(data);
+         $('#table_request').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
-        $('#table_id').DataTable().draw();
+        $('#table_request').DataTable().draw();
 
       });
     }
@@ -150,8 +169,9 @@
 
      // ------ Tambah Form Input ------
      $('.add').click(function() {
+         disableButton();
         $.get("{{ url('add_form_RequestComplain') }}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
+          $('#table_request tbody').prepend(data);
         });
       });
 
@@ -172,9 +192,31 @@
         var waktu_solve = $("#waktu_solve").val();
         var status = $("#status").val();
         var status_akhir = $("#status_akhir").val();
+<<<<<<< HEAD
 
         if(company_id =="" || internal_eksternal=="" || pic_id=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status==""){
+=======
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
+        // alert(vehicle);
+        // if (vehicle = "") {
+        //     var  vehicle_id = "haloo" ;
+        // }
+
+
+        // if()
+        // var imei = $('#imei').val();
+        // var gsm_pemasangan = $('#gsm_pemasangan').val();
+        // var equipment_terpakai_gps = $('#equipment_terpakai_gps').val();
+        // alert(vehicle);
+
+
+
+        if(company_id =="" || internal_eksternal=="" || pic_id=="" || waktu_info=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status=="" ){
+            //   if(task != 1 || 2 || 3 || 4 || 5)
+            //     {
+            //         vehicle = "halllo";
+            //     }
         }else {
             $.ajax({
             type: "get",
@@ -196,6 +238,7 @@
               status:status,
               status_akhir:status_akhir
             },
+            // alert(vehicle);
             success: function(data) {
              swal({
                 type: 'success',
@@ -247,6 +290,8 @@
     }
     // ------ Edit Form Data ------
     function edit(id){
+        disableButton();
+
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -378,6 +423,8 @@
 
         // Form Edit All
         $('.edit_all').on('click', function(e){
+            disableButton();
+            $('[data-toggle="tooltip"]').tooltip("hide");
 
             var allVals = [];
             var _token = $('input[name="_token"]').val();
@@ -389,7 +436,7 @@
                 // alert(allVals);
                 $(".edit_all").hide("fast");
                 $(".delete_all").hide("fast");
-                $.get("{{ url('/selected') }}", {}, function(data, status) {
+                $.get("{{ url('/selected_detail') }}", {}, function(data, status) {
                     $("#selected").prepend(data)
                 });
                 $.each(allVals, function(index, value){
@@ -415,6 +462,12 @@
                     $.get("{{ url('show_RequestComplain') }}/" + value, {}, function(data, status) {
                         $("#edit-form-"+value).prepend(data)
                         $("#master").prop('checked', false);
+                         $(".add").hide();
+                         $(".cancel").hide();
+                        $(".export").hide();
+                        $(".filter").hide();
+
+
 
                     });
                 });
@@ -491,6 +544,8 @@
                                 $(".add").show("fast");
                                 $(".edit_all").show("fast");
                                 $(".delete_all").show("fast");
+                                 $(".export").show("fast");
+                                 $(".filter").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
                     }
@@ -502,14 +557,43 @@
         }
 
         //--------Proses Batal--------
-         function batal(){
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+        function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
+            $(".export").show("fast");
+            $(".filter").show("fast");
+
             read();
-            }
+        }
+
+        function disableButton() {
+
+          $('.add').prop('disabled', true);
+          $('.filter').prop('disabled', true);
+          $('.edit_all').prop('disabled', true);
+          $('.delete_all').prop('disabled', true);
+          $('.export').addClass('disabled');
+          $('.edit').addClass('disable');
+          $('.delete').addClass('disable');
+          $("[data-toggle= modal]").prop('disabled', true);
+
+        }
+
+        function enableButton(){
+
+          $('.add').prop('disabled', false);
+          $('.filter').prop('disabled', false);
+          $('.edit_all').prop('disabled', false);
+          $('.delete_all').prop('disabled', false);
+          $('.edit').removeClass('disable');
+          $('.export').removeClass('disabled');
+          $('.delete').removeClass('disable');
+          $("[data-toggle= modal]").prop('disabled', false);
+
+        }
 
 
 

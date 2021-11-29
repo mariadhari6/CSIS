@@ -3,14 +3,30 @@
     <td></td>
     <td>
         <select class="select" id="merk" name="merk" required>
+<<<<<<< HEAD
            <option style="display: none"></option>
+=======
+            <option class="hidden" value="">--Pilih Merk--</option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($merk as $item)
                 <option value="{{ $item->merk_gps }}"  {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>
             @endforeach
         </select>
     </td>
     <td>
+<<<<<<< HEAD
         <select class="select" id="type" name="type" required></select>
+=======
+        <select class="select" id="type" name="type" required>
+            {{-- <option class="hidden" value="">--Pilih Type--</option> --}}
+
+            @foreach ($merk as $item)
+            <option value="{{ $item->type_gps }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type_gps}}</option>
+            @endforeach
+
+        </select>
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     </td>
     <td>
         <div class="input-div"><input type="number" class="input" id="imei" name="imei" placeholder="IMEI" value="{{old('imei')}}" required></i>
@@ -29,7 +45,11 @@
     </td>
     <td>
         <select class="select @error('status') is-invalid @enderror" id="status" aria-label=".form-select-lg example" name="status" aria-placeholder="status" required>
+<<<<<<< HEAD
             <option style="display: none"></option>
+=======
+            <option class="hidden" value=""></option>
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>
@@ -40,11 +60,23 @@
     </td>
     <td id="statusOwnership">
         <select class="select" id="status_ownership" name= "status_ownership"aria-label=".form-select-lg example">
+<<<<<<< HEAD
+=======
+            {{-- <option selected disabled value="-">Pilih Status</option> --}}
+            {{-- <option value="-">-</option> --}}
+
+            {{-- <option value="-">-</option>
+            <option value="Sewa">Sewa</option>
+            <option value="Sewa Beli">Sewa Beli</option>
+            <option value="Trial">Trial</option>
+            <option value="Beli">Beli</option> --}}
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         </select></i>
         @error('status_ownership')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
     </td>
+<<<<<<< HEAD
     <td id="td-company">
         <select class="select" id="company_id" name="company_id" required>
             <option style="display: none"></option>
@@ -60,9 +92,73 @@
        <i class="fas fa-times cancel" onclick="cancel()"></i>
    <td>
 </tr>
+=======
+
+     <td id="td-company">
+        <select class="select" id="company_id" name="company_id" required>
+            {{-- <option class="hidden" value="">--Pilih company_id--</option> --}}
+
+            @foreach ($company as $item)
+            <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name}}</option>
+            @endforeach
+
+        </select>
+
+    </td>
+  <td class="action sticky-col first-col">
+         <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="add" onclick="store()"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
+    <td>
+
+
+
+
+</tr>
+<script>
+    $('select[name="status"]').on('change', function() {
+                var itemID = $(this).val();
+                // alert(itemID);
+
+                if(itemID == 'Ready') {
+                    $('#statusOwnership').empty();
+                   $('#statusOwnership').append(
+                       `<select class="select" id="status_ownership"  disable>
+                            <option value="-">-</option>
+                        </select>`
+                       );
+                     $('#td-company').empty();
+                   $('#td-company').append(
+                       `<select class="select" id="company_id" disable>
+                     <option value="">-</option>
+                     </select>`
+                   );
+
+                }else if(itemID == 'Error'){
+                    $('#statusOwnership').empty();
+                        $('#statusOwnership').append(
+                            `<select class="select" id="status_ownership">
+                                    <option value="Lokasi Customer">Lokasi Customer</option>
+                                    <option value="Lokasi Integrasia">Lokasi Integrasia</option>
+                                    <option value="GPS sudah di Return">GPS sudah di Return</option>
+
+                            </select>`
+                        );
+                    $('#td-company').empty();
+                   $('#td-company').append(
+                        `<select class="select" id="company_id" disable>
+                        <option value="" class="hidden">--Pilih Company--</option>
+                        @foreach ($company as $item)
+                        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+                        @endforeach
+                        </select>`
+                   );
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
 <script>
 
+<<<<<<< HEAD
     $('select[name="status"]').on('change', function() {
         var itemID = $(this).val();
 
@@ -96,9 +192,33 @@
             );            
         }
     });
+=======
+                }else {
+                        $('#statusOwnership').empty();
+                        $('#statusOwnership').append(
+                            `<select class="select" id="status_ownership">
+                                    <option value="Sewa">Sewa</option>
+                                    <option value="Sewa Beli">Sewa Beli</option>
+                                    <option value="Trial">Trial</option>
+                                    <option value="Beli">Beli</option>
+                            </select>`
+                        );
+                        $('#td-company').empty();
+                         $('#td-company').append(
+                        `<select class="select" id="company_id" disable>
+                        <option value="" class="hidden">--Pilih Company--</option>
+                        @foreach ($company as $item)
+                        <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+                        @endforeach
+                        </select>`
+                   );
+                }
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
 
     $('select[name="merk"]').on('change', function() {
+<<<<<<< HEAD
         var itemID = $(this).val();
         if(itemID) {
             $.ajax({
@@ -112,6 +232,29 @@
                         $('select[name="type').append('<option value="'+ data[i].type_gps+ '"> '+ data[i].type_gps +'</option>');
                     }
                 }                    
+=======
+                var itemID = $(this).val();
+
+                if(itemID) {
+                    $.ajax({
+                        url: '/based_merksensor/'+ itemID,
+                        method: "GET",
+                        success:function(data) {
+                            // alert(data.length);
+                            $('select[name="type').empty();
+                            $('select[name="type').append('<option class="hidden" value=""> </option>');
+                                for(var i = 0 ; i < data.length ; i++) {
+                                    $('select[name="type').append('<option value="'+ data[i].type_gps+ '"> '+ data[i].type_gps +'</option>');
+                                        // alert(data[i].serial_number)
+                                }
+                        }
+                    });
+                }else{
+                    $('select[name="type"]').empty();
+
+                }
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             });
         }
         else{

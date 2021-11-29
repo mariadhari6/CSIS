@@ -34,14 +34,18 @@ class DetailCustomer extends Model
         'status_id',
         'tanggal_pasang',
         'tanggal_non_aktif',
-        'tgl_reaktivasi_gps'
+        'tgl_reaktivasi_gps',
+        'jumlah_sensor'
     ];
 
 
+<<<<<<< HEAD
     public function pemasanganMutasiGps() {
 
         return $this->hasMany(PemasanganMutasiGps::class);
     }
+=======
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
     public function company() {
 
@@ -72,6 +76,16 @@ class DetailCustomer extends Model
         
         return $this->belongsTo(MasterPo::class);
     }
+<<<<<<< HEAD
+=======
+
+    public function poNumber()
+    {
+
+        return $this->belongsTo(MasterPo::class);
+    }
+
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
     public function vehicle() {
 
@@ -82,5 +96,13 @@ class DetailCustomer extends Model
 
         return $this->belongsTo(ServiceStatus::class);
     }
+<<<<<<< HEAD
     
+=======
+
+    public function requestComplaint()
+    {
+        return $this->hasMany(RequestComplaint::class);
+    }
+>>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 }

@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
 
-class CompanyImport implements ToModel, WithStartRow
+class CompanyImport implements ToModel
 {
     /**
      * @param array $row
@@ -47,8 +47,6 @@ class CompanyImport implements ToModel, WithStartRow
             'customer_code'     => $row[2],
             'no_agreement_letter_id'     => $row[3],
             'status'     => $row[4],
-
-
 
 
         ]);
