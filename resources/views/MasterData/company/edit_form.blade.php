@@ -8,12 +8,12 @@
     </td>
     <td>
        <select class="select seller_id-{{$company->id}}"  id="seller_id" name="seller_id" required>
-        {{-- <option class="hidden" selected value="{{ $company->seller_id}}">
+        <option class="hidden" selected value="{{ $company->seller_id}}">
             {{ $company->seller_id }}
-        </option> --}}
+        </option>
 
        @foreach ($seller as $item)
-        <option value="{{ $item->seller_name}}">
+        <option value="{{ $item->id}}">
             {{ $item->seller_name }}
         </option>
        @endforeach
@@ -48,9 +48,9 @@
 <script type="text/javascript">
    $('select[name="seller_id"]').on('change', function(){
 
-                // var Id = $(this).val();
-                var Id = $('#seller_id option:selected').text();
-                if(Id != 'Integrasia Utama, PT' ){
+                var Id = $(this).val();
+                // var Id = $('#seller_id option:selected').text();
+                if(Id != 22 ){
                     $.ajax({
                         url: '/dependent_company/'+ Id,
                         method: "GET",
@@ -80,5 +80,12 @@
                 }
 
             });
+
+//    $('select[name="no_agreement_letter_id"]').on('change', function(){
+//         var Id = $('#no_agreement_letter_id option:selected').text();
+//         alert(Id);
+//    });
+
+
 
 </script>

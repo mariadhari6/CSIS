@@ -18,7 +18,7 @@
         </td>
 
         <td id="item-seller_id-{{ $item->id}}">
-            {{ $item->seller_id}}
+            {{ $item->seller->seller_name??''}}
         </td>
         <td id="item-customer_code-{{ $item->id }}">
             {{ $item->customer_code }}

@@ -9,7 +9,7 @@
         <select class="select" id="seller_id" name="seller_id" required>
             <option class="hidden" value="">--Pilih Seller--</option>
             @foreach ($seller as $item)
-            <option value="{{ $item->seller_name }}" {{ old('seller_id') == $item->id ? 'selected':'' }}>{{ $item->seller_name }}</option>
+            <option value="{{ $item->id }}" {{ old('seller_id') == $item->id ? 'selected':'' }}>{{ $item->seller_name }}</option>
             @endforeach
 
         </select>
@@ -45,9 +45,9 @@
 <script type="text/javascript">
    $('select[name="seller_id"]').on('change', function(){
 
-                // var Id = $(this).val();
-                var Id = $('#seller_id option:selected').text();
-                if(Id != 'Integrasia Utama, PT' ){
+                var Id = $(this).val();
+                // var Id = $('#seller_id option:selected').text();
+                if(Id != 22 ){
                     $.ajax({
                         url: '/dependent_company/'+ Id,
                         method: "GET",

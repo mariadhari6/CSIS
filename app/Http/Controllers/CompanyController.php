@@ -40,7 +40,7 @@ class CompanyController extends Controller
             try {
                 $data = array(
                     'company_name'        => $value->company_name,
-                    'seller_id'        => $value->seller_id,
+                    'seller_id'        => Seller::where('seller_name', $value->seller_id)->firstOrFail()->id,
                     'customer_code'        =>  $value->customer_code,
                     'no_agreement_letter_id'     => $value->no_agreement_letter_id,
                     'status'     =>  $value->status,
@@ -147,10 +147,17 @@ class CompanyController extends Controller
 
     public function dependentCompany($id)
     {
-        $data = Seller::where('seller_name', $id)->get();
+        $data = Seller::where('id', $id)->get();
 
         return $data;
     }
+
+    // public function dependentCompanys($id)
+    // {
+    //     $data = Seller::where('seller_name', $id)->get();
+
+    //     return $data;
+    // }
     public function importExcel(Request $request)
     {
         $file = $request->file('file');
