@@ -31,7 +31,6 @@
         <select class="select" id="status" name="status" required>
             <option value="Active">Active</option>
             <option value="In Active">In Active</option>
-
         </select>
     </td>
     <td class="action sticky-col first-col">

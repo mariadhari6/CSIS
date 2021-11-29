@@ -1,17 +1,11 @@
 <tr id="add_form">
     <td></td>
     <td></td>
-<<<<<<< HEAD
-    <td>
-        <select class="select" id="company_id" name="company_id" required>
-            <option  style="display:none"></option>
-=======
 
      <td>
         <select class="select-search search_company" id="company_id" placeholder="Select a Company..." name="company_id" required>
             {{-- <option class="hidden" placeholder="Search Company"></option> --}}
             <option value="">Select a Company...</option>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($detail as $item )
                 <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
             @endforeach
@@ -38,16 +32,6 @@
           @endforeach --}}
        </select>
     </td>
-<<<<<<< HEAD
-    <td>
-        <select class="select" id="vehicle" name="vehicle" required>
-          {{-- <option style="display:none"></option>
-          @foreach ($detail as $item)
-              <option value="{{ $item->id }}" {{ old('vehicle') == $item->id ? 'selected':'' }}>{{ $item->vehicle->license_plate??'' }}</option>
-          @endforeach --}}
-       </select>
-    </td>   
-=======
       <td>
           <select class="select" id="pic_id" name="pic_id" required>
             {{-- <option selected disabled></option> --}}
@@ -72,7 +56,6 @@
             @endforeach --}}
          </select></i>
       </td>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     <td>
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_info" placeholder="Waktu Info"></i></div>
     </td>

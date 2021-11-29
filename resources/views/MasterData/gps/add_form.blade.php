@@ -3,20 +3,13 @@
     <td></td>
     <td>
         <select class="select" id="merk" name="merk" required>
-<<<<<<< HEAD
-           <option style="display: none"></option>
-=======
             <option class="hidden" value="">--Pilih Merk--</option>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             @foreach ($merk as $item)
                 <option value="{{ $item->merk_gps }}"  {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>
             @endforeach
         </select>
     </td>
     <td>
-<<<<<<< HEAD
-        <select class="select" id="type" name="type" required></select>
-=======
         <select class="select" id="type" name="type" required>
             {{-- <option class="hidden" value="">--Pilih Type--</option> --}}
 
@@ -26,7 +19,6 @@
 
         </select>
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     </td>
     <td>
         <div class="input-div"><input type="number" class="input" id="imei" name="imei" placeholder="IMEI" value="{{old('imei')}}" required></i>
@@ -45,11 +37,7 @@
     </td>
     <td>
         <select class="select @error('status') is-invalid @enderror" id="status" aria-label=".form-select-lg example" name="status" aria-placeholder="status" required>
-<<<<<<< HEAD
-            <option style="display: none"></option>
-=======
             <option class="hidden" value=""></option>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <option value="Ready">Ready</option>
             <option value="Used">Used</option>
             <option value="Error">Error</option>
@@ -60,8 +48,6 @@
     </td>
     <td id="statusOwnership">
         <select class="select" id="status_ownership" name= "status_ownership"aria-label=".form-select-lg example">
-<<<<<<< HEAD
-=======
             {{-- <option selected disabled value="-">Pilih Status</option> --}}
             {{-- <option value="-">-</option> --}}
 
@@ -70,29 +56,11 @@
             <option value="Sewa Beli">Sewa Beli</option>
             <option value="Trial">Trial</option>
             <option value="Beli">Beli</option> --}}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         </select></i>
         @error('status_ownership')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
     </td>
-<<<<<<< HEAD
-    <td id="td-company">
-        <select class="select" id="company_id" name="company_id" required>
-            <option style="display: none"></option>
-            @foreach ($company as $item)
-            <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name}}</option>
-            @endforeach
-        </select>
-    </td>
-    <td class="action sticky-col first-col">
-        <button class="unstyled-button" type="submit">
-           <i class="fas fa-check add" id="add" onclick="store()"></i>
-       </button>
-       <i class="fas fa-times cancel" onclick="cancel()"></i>
-   <td>
-</tr>
-=======
 
      <td id="td-company">
         <select class="select" id="company_id" name="company_id" required>
@@ -154,11 +122,10 @@
                         @endforeach
                         </select>`
                    );
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
 <script>
 
-<<<<<<< HEAD
+
     $('select[name="status"]').on('change', function() {
         var itemID = $(this).val();
 

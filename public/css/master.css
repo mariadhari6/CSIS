@@ -1,3 +1,5 @@
+/* icon */
+
 .fa-trash {
     color: red;
 }
@@ -55,7 +57,7 @@
     margin: 0px;
     padding: 13px;
     border: none;
-    border-bottom: 2px solid #79b5dd;
+    border-bottom: 2px solid #946868;
     left: 0;
     top: 0;
     width: 100%;
@@ -72,40 +74,16 @@
     color: white;
 }
 
-
+/* Datatable */
 .dataTables_length {
     margin-top: 5px;
     margin-left: 20px;
 }
 
-.dataTables_filter {
-    position: relative;
-    right: 150px;
-    bottom: 35px;
-}
-
-.action{
-    min-width: 70px;
-    text-align: center;
-}
-
-.list{
-    min-width: 150px;
-}
-
-/* tabel livetable */
-
 #table_id {
     position: relative;
     bottom: 0px;
     text-align: center;
-    table-layout: auto;
-}
-
-
-#table tbody tr td {
-    text-align: center;
-    height: 10px;
 }
 
 .action {
@@ -113,6 +91,9 @@
     min-width: 80px;
     text-align: center;
     background-color: #fff;
+
+
+
 }
 /* .list-freeze {
     min-width: 80px;
@@ -127,17 +108,10 @@
     min-width: 30px;
     text-align: center;
 }
-
 .list {
-
     position: relative;
-<<<<<<< HEAD
-    min-width: 50px;
-    font-size: 15px;
-=======
     min-width: 170px;
     font-size: 12px;
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     text-align: center;
 }
 
@@ -196,18 +170,10 @@
     position: relative;
     right: 180px;
     bottom: 35px;
-
 }
 
-
-.title {
-    font-size: 25px;
-}
-
-@media (min-width: 768px) {
-    .modal-xl {
-    width: 90%;
-    max-width:1650px;
+.fa-times {
+    color: red;
 }
 
 .input-div {
@@ -230,47 +196,34 @@
     background: none;
     padding: 1rem 0.7rem;
     font-size: 0.8rem;
-    color:#555;
+    color: #555;
     font-family: Arial, Helvetica, sans-serif;
-
 }
 
-.unstyled-button {
+.select {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 0px;
+    padding: 13px;
     border: none;
-    padding: 0;
+    border-bottom: 2px solid #79b5dd;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 20%;
+    outline: none;
     background: none;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+    color: #555;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.sticky-col {
-    position: -webkit-sticky;
-    position: sticky;
-    background-color: white;
-}
-
-<<<<<<< HEAD
-.first-col {
-    width: 100px;
-    min-width: 100px;
-    max-width: 100px;
-    right: 0px;
-}
-
-#detailcustomer tbody tr td {
-    text-align: center;
-}
-
-.list {
-    min-width: 250px;
-    font-size: 15px;
-    text-align: center;
-
-}
-=======
-
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
 
 
+/* Modal */
 .modal-dialog-full-width {
     width: 100% !important;
     height: 100% !important;
@@ -294,7 +247,7 @@
     border-top: 1px solid #9ea2a2 !important;
 }
 
-
+/* Submit button */
 .unstyled-button {
     border: none;
     padding: 0;
@@ -326,13 +279,13 @@
       width: 90%;
      max-width:1650px;
     }
-}.error{
-    color:red;
-    font-family:verdana, Helvetica;
+  }
+  .error
+{
+color:red;
+font-family:verdana, Helvetica;
 }
 
-<<<<<<< HEAD
-=======
 
 .hidden{
     display: none;
@@ -340,76 +293,15 @@
 }
 
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 .fa-eye .popover{
     width:400px;
     height:100px;
 }
 
-.fa-eye:hover {
+.fa-eye:hover{
     background-color: deepskyblue;
 }
 
-<<<<<<< HEAD
-.highlighted {
-    background: #b3ccff;
-}
-
-#table_summary tbody tr td#key {
-    min-width: 234px;
-    max-width: 1000px;
-    text-align: left;
-}
-
-#table_summary thead tr th {
-    font-weight: bold; 
-}
-
-.table-scroll {
-    position: relative;
-    width:100%;
-    z-index: 1;
-    margin: auto;
-    overflow: auto;
-    height: 300px;
-  }
-
-.table-wrap {
-    position: relative;
-}
-
-.table-scroll th,
-.table-scroll td {
-  padding: 5px 10px;
-  vertical-align: top;
-  text-align: center;
-}
-
-.table-scroll thead th {
-    background-color: #f2f2f2;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-}
-
-#data-po table thead th,
-#data-po table tbody td {
-
-    text-align: center;
-}
-
-#data-po table thead th {
-    background-color: #f2f2f2;
-}
-
-#data-po table tbody td#key
-{
-    text-align: left;
-}
-
-#data_detail thead tr th{
-   font-weight: bold;
-=======
 .highlighted{
     background: #b3ccff;
 }
@@ -422,7 +314,6 @@
 /* detail customer */
 .detail-content{
     display: none;
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 }
 
 #table_detail_customer tbody td,
@@ -1420,5 +1311,4 @@ nav.sidebar-new li.active > a,
     text-align: center;
 
 }
-
 

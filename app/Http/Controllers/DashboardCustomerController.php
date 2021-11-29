@@ -1,14 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-<<<<<<< HEAD
-use App\Models\Company;
-use App\Models\Pic;
-use App\Models\DetailCustomer;
-use Illuminate\Support\Facades\DB;
-
-
-=======
 
 use App\Models\Company;
 use App\Models\Pic;
@@ -20,32 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 use Illuminate\Http\Request;
 
 class DashboardCustomerController extends Controller
 {
-<<<<<<< HEAD
-    public function index(){
-
-        $company = DetailCustomer::groupBy('company_id')->select('company_id')->get();
-
-        for ($i=0; $i < count($company) ; $i++) { 
-            $a = $company[$i]->company_id;
-            $cari_pic            = Pic::where('company_id', $a)->get();
-            $total_gps_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(gps_id) as total_gps_installed'))->get();
-            $company[$i]["pic"]  = $cari_pic;
-            $company[$i]["total_gps_installed"] = $total_gps_installed;
-            
-        }
-
-        // return $company;
-        return view('customer.dashboard.index')->with([
-            'company'   => $company
-        ]);
-
-        // return view('customer.dashboard.index');
-=======
     public function index()
     {
 
@@ -241,6 +211,5 @@ class DashboardCustomerController extends Controller
         return view('customer.dashboard.action')->with([
             'company' => $company
         ]);
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     }
 }

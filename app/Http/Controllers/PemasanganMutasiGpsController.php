@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-<<<<<<< HEAD
-=======
 
 use App\Exports\PemasanganMutasiGpsExport;
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 use App\Models\Company;
 use App\Models\DetailCustomer;
 use App\Models\Gps;
@@ -94,17 +91,6 @@ class PemasanganMutasiGpsController extends Controller
     public function edit_form($id)
     {
 
-<<<<<<< HEAD
-        $company                = Company::orderBy('id', 'DESC')->get();
-        $details                = DetailCustomer::groupBy('company_id')->selectRaw('count(*) as jumlah, company_id')->get();
-        $pemasangan_mutasi_GPS  = RequestComplaint::findOrfail($id);
-        $sensor                 = Sensor::orderBy('id', 'ASC')->get();
-        $gps                    = Gps::where('status', 'Ready')->get();
-        $vehicle                = Vehicle::orderBy('id', 'DESC')->get();
-        $teknisi                = Teknisi::orderBy('id', 'DESC')->get();
-        $task                   = Task::where('task', 'Pemasangan GPS')->orWhere('task', 'Pelepasan GPS')->orWhere('task', 'Mutasi')->get();
-        $gsm_master             = Gsm::where('status_gsm', 'Ready')->get();
-=======
         $company = Company::orderBy('id', 'DESC')->get();
         $details = DetailCustomer::groupBy('company_id')
             ->selectRaw('count(*) as jumlah, company_id')
@@ -118,7 +104,6 @@ class PemasanganMutasiGpsController extends Controller
         $teknisi = Teknisi::orderBy('id', 'DESC')->get();
         $task = Task::where('task', 'Mutasi Pelepasan GPS')->orWhere('task', 'Mutasi Pemasangan GPS')->orWhere('task', 'Pemasangan GPS')->orWhere('task', 'Mutasi Pelepasan Pemasangan GPS')->get();
         $gsm_master = Gsm::where('status_gsm', 'Ready')->get();
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         return view('VisitAssignment.PemasanganMutasiGPS.edit_form')->with([
             'pemasangan_mutasi_GPS' => $pemasangan_mutasi_GPS,

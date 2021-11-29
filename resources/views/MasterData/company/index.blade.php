@@ -6,10 +6,6 @@
 
 
 @section('content')
-<<<<<<< HEAD
-
-=======
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
       <div class="card">
         <div class="card-body">
             <div class="text-right" id="selected">
@@ -31,12 +27,8 @@
                 <i class="fas fa-trash"></i>
               </button>
             </div>
-<<<<<<< HEAD
-            <form>
-=======
             <form onsubmit="return false">
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
              <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
@@ -431,13 +423,9 @@
    });
 
     // form edit all
-<<<<<<< HEAD
-    $('.edit_all').on('click', function(e) {
-=======
     $('.edit_all').on('click', function(e){
         disableButton();
         $('[data-toggle="tooltip"]').tooltip("hide");
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
       var allVals = [];
       var _token = $('input[name="_token"]').val();
@@ -472,8 +460,6 @@
           alert('Select the row you want to edit')
       }
 
-<<<<<<< HEAD
-=======
     $(".task-select:checked").each(function() {
         allVals.push($(this).attr("id"));
     });
@@ -506,17 +492,12 @@
     }else{
         alert('Select the row you want to edit')
     }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     });
 
      function updateSelected() {
 
             var allVals = [];
 
-<<<<<<< HEAD
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-=======
                 $.ajax({
                 type: "get",
                 url: "{{ url('update_company') }}/"+value,
@@ -546,7 +527,6 @@
                     $(".btn-round").hide("fast");
                     $(".btn-round").hide("fast");
                 }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             });
             swal({
                 title: "Are you sure?",
@@ -656,11 +636,6 @@
             $(".export").show("fast");
             read();
         }
-<<<<<<< HEAD
-  </script>
-
-@endsection
-=======
 
         function disableButton() {
 
@@ -696,4 +671,3 @@
 
   </script>
    @endsection
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54

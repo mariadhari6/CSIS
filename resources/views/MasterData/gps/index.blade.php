@@ -102,6 +102,7 @@
     excel_file.addEventListener("change",(event)=>{
         if(
             ![
+                "application/vnd.ms-works=wps-office-et.desktop",
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "application/vnd.ms-excel",
             ].includes(event.target.files[0].type)
@@ -659,57 +660,6 @@
 
                     },
                     success: function(data) {
-<<<<<<< HEAD
-                      if (data.terpasang == "terpasang") {
-                          $(".add").show("fast");
-                          $(".edit_all").show("fast");
-                          $(".delete_all").show("fast");
-                          $(".btn-round").hide("fast");
-                          $(".btn-round").hide("fast");
-                        swal({
-                          type: 'error',
-                          title: 'Sorry',
-                          text : 'GPS Installed in ' +" "+ data.company_name +" "+ 'with License Plate'  +" "+ data.nomor_license ,
-                          showCloseButton: true,
-                          showConfirmButton: false,
-                        });
-                          return false ;
-                          
-
-                      }
-                      else{
-                        swal({
-                            type: 'success',
-                            title: ' Data Updated',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).catch(function(timeout) { });
-                        read();
-                        $(".add").show("fast");
-                        $(".edit_all").show("fast");
-                        $(".delete_all").show("fast");
-                        $(".btn-round").hide("fast");
-                        $(".btn-round").hide("fast");
-                      }
-                            // swal({
-                            //         type: 'success',
-                            //         title: 'The selected data has been updated',
-                            //         showConfirmButton: false,
-                            //         timer: 1500
-
-                            //     // $(".save").hide();
-                            //     });
-                            //     read();
-
-                            //     $(".add").show("fast");
-                            //     $(".edit_all").show("fast");
-                            //     $(".delete_all").show("fast");
-                            //     $(".btn-round").hide("fast");
-                            //     $(".btn-round").hide("fast");
-
-
-                          }
-=======
                             swal({
                                     type: 'success',
                                     title: 'The selected data has been updated',
@@ -730,7 +680,6 @@
 
 
                             }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                          });
                     });
                 });

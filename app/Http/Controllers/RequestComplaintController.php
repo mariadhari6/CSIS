@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-<<<<<<< HEAD
-=======
 
 use App\Exports\RequestComplaintExport;
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 use App\Models\Company;
 use App\Models\DetailCustomer;
 use App\Models\Pic;
@@ -16,19 +13,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
-<<<<<<< HEAD
-
-class RequestComplaintController extends Controller
-{
-    public function index() {
-=======
 use Maatwebsite\Excel\Facades\Excel;
 
 class RequestComplaintController extends Controller
 {
     public function index()
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         return view('request_complaint.index');
     }
@@ -58,12 +48,8 @@ class RequestComplaintController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-    public function item_data_MY(Request $request) {
-=======
     public function item_data_MY(Request $request)
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $year = $request->year;
         $month = $request->month;
@@ -71,12 +57,8 @@ class RequestComplaintController extends Controller
         return view('request_complaint.item_data', compact('request_complain'));
     }
 
-<<<<<<< HEAD
-    public function item_data_request_internal() {
-=======
     public function item_data_request_internal()
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $request_complain = RequestComplaint::where('internal_eksternal', 'Request Internal')->get();
         return view('request_complaint.item_data')->with([
@@ -84,12 +66,8 @@ class RequestComplaintController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-    public function item_data_request_eksternal() {
-=======
     public function item_data_request_eksternal()
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $request_complain = RequestComplaint::where('internal_eksternal', 'Request Eksternal')->get();
         return view('request_complaint.item_data')->with([
@@ -97,12 +75,8 @@ class RequestComplaintController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-    public function item_data_complain_internal() {
-=======
     public function item_data_complain_internal()
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $request_complain = RequestComplaint::where('internal_eksternal', 'Complain Internal')->get();
         return view('request_complaint.item_data')->with([
@@ -110,51 +84,14 @@ class RequestComplaintController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-    public function item_data_complain_eksternal() {
-=======
     public function item_data_complain_eksternal()
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $request_complain = RequestComplaint::where('internal_eksternal', 'Complain Eksternal')->get();
         return view('request_complaint.item_data')->with([
             'request_complain' => $request_complain
         ]);
     }
-<<<<<<< HEAD
-    public function item_data() {
-
-        $request_complain = RequestComplaint::orderBy('id', 'DESC')->get();
-        return view('request_complaint.item_data', compact('request_complain'));
-        
-    }
-
-    public function store(Request $request) {
-
-        $task               = $request->task;
-        $vehicle            = $request->vehicle;
-        $waktu_info         = Carbon::parse( $request->waktu_info );
-        $waktu_respon       = Carbon::parse( $request->waktu_respond );
-        $satu_jam           = $waktu_info->addHours(1);
-
-        if ( $waktu_respon <= $satu_jam) {
-            $status_waktu_respon = "tidak telat" ;
-        }else {
-            $status_waktu_respon = "telat" ;
-        }
-        
-        $imei               = DetailCustomer::where('vehicle_id', $vehicle)->pluck('imei');
-        $gsm                = DetailCustomer::where('vehicle_id', $vehicle)->pluck('gsm_id');
-        $type               = DetailCustomer::where('vehicle_id', $vehicle)->pluck('type');
-        $sensor             = DetailCustomer::where('vehicle_id', $vehicle)->pluck('sensor_all');
-        $equipment_gps_id   = count($imei);
-        $explode_sensor     = explode(' ', $sensor[0]);
-        $equipment_sensor_id = count($explode_sensor) ;
-
-        if ($task == 1 || $task == 2 || $task == 3) {
-            
-=======
     public function item_data()
     {
 
@@ -197,7 +134,6 @@ class RequestComplaintController extends Controller
 
         if ($task == "Pemasangan GPS" || $task == "Mutasi Pemasangan GPS" || $task == "Mutasi Pelepasan GPS" || $task == "Mutasi Pelepasan Pemasangan GPS") {
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             $data = array(
                 'company_id'                =>  $request->company_id,
                 'internal_eksternal'        =>  $request->internal_eksternal,
@@ -214,18 +150,6 @@ class RequestComplaintController extends Controller
                 'waktu_solve'               =>  $request->waktu_solve,
                 'status'                    =>  $request->status,
                 'status_akhir'              =>  $request->status_akhir,
-<<<<<<< HEAD
-                'imei'                      =>  $imei[0],
-                'gsm_pemasangan'            =>  $gsm[0],
-                'equipment_terpakai_gps'    =>  $type[0],
-                'status_waktu_respon'       =>  $status_waktu_respon,
-                'equipment_terpakai_sensor' =>  $sensor[0]
-
-
-            );
-        }
-        elseif($task == 4|| $task == 5 ){
-=======
                 'imei'                      =>  $imei == null ? null : $imei[0],
                 'gsm_pemasangan'            =>  $gsm == null ? null : $gsm[0],
                 'equipment_terpakai_gps'    =>  $type == null ? null : $type[0],
@@ -235,7 +159,6 @@ class RequestComplaintController extends Controller
 
             );
         } elseif ($task == "Maintenance GPS" || $task == "Maintenance Sensor") {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
             $data = array(
                 'company_id'                =>  $request->company_id,
@@ -253,21 +176,6 @@ class RequestComplaintController extends Controller
                 'waktu_solve'               =>  $request->waktu_solve,
                 'status'                    =>  $request->status,
                 'status_akhir'              =>  $request->status_akhir,
-<<<<<<< HEAD
-                'type_gps_id'               =>  $type[0],
-                'equipment_gsm'             =>  $gsm[0],
-                'equipment_gps_id'          =>  $equipment_gps_id,
-                'equipment_sensor_id'       =>  $equipment_sensor_id,
-                'status_waktu_respon'       =>  $status_waktu_respon,
-                'equipment_terpakai_sensor' =>  $sensor[0]
-
-            );
-
-
-        }
-        else {
-
-=======
                 'type_gps_id'               =>  $type == null ? null : $type[0],
                 'equipment_gsm'             =>  $gsm == null ? null : $gsm[0],
                 'equipment_gps_id'          =>  $request->$equipment_gps_id,
@@ -278,7 +186,6 @@ class RequestComplaintController extends Controller
             );
         } else {
             // $vehicle_id = "halo";
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             $data = array(
                 'company_id'                =>  $request->company_id,
                 'internal_eksternal'        =>  $request->internal_eksternal,
@@ -295,34 +202,19 @@ class RequestComplaintController extends Controller
                 'waktu_solve'               =>  $request->waktu_solve,
                 'status'                    =>  $request->status,
                 'status_akhir'              =>  $request->status_akhir,
-<<<<<<< HEAD
-                'status_waktu_respon'       =>  $status_waktu_respon,
-                'equipment_terpakai_sensor' =>  $sensor[0]
-            );
-            
-        }
-            
-=======
                 'status_waktu_respon'       =>  $status_waktu_respon == null ? null : $status_waktu_respon,
                 'equipment_terpakai_sensor' =>  $sensor == null ? null : $sensor[0]
             );
         }
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         RequestComplaint::insert($data);
     }
 
-<<<<<<< HEAD
-    public function edit_form($id) {
-        
-
-=======
     public function edit_form($id)
     {
 
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $pic = Pic::orderBy('id', 'DESC')->get();
         $detail = DetailCustomer::groupBy('company_id')->selectRaw('count(*) as jumlah, company_id')->get();
         $company = Company::orderBy('id', 'DESC')->get();
@@ -341,41 +233,13 @@ class RequestComplaintController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-    public function destroy($id) {
-=======
     public function destroy($id)
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $data = RequestComplaint::findOrfail($id);
         $data->delete();
     }
 
-<<<<<<< HEAD
-    public function update(Request $request, $id) {
-
-        $waktu_kesepakatan  = Carbon::parse( $request->waktu_kesepakatan );
-        $waktu_solve        = Carbon::parse( $request->waktu_solve );
-        $dua_hari           = $waktu_kesepakatan->addHours(48);
-        
-        if ( $waktu_solve <= $dua_hari) {
-            $status_waktu_solve = "tidak telat" ;
-        }else {
-            $status_waktu_solve = "telat" ;
-        }
-
-        $waktu_info         = Carbon::parse( $request->waktu_info );
-        $waktu_respon       = Carbon::parse( $request->waktu_respond );
-        $satu_jam           = $waktu_info->addHours(1);
-        
-        if ( $waktu_respon <= $satu_jam) {
-            $status_waktu_respon = "tidak telat" ;
-        }else {
-            $status_waktu_respon = "telat" ;
-        }
-    
-=======
     public function update(Request $request, $id)
     {
 
@@ -399,7 +263,6 @@ class RequestComplaintController extends Controller
             $status_waktu_respon = "telat";
         }
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $data = RequestComplaint::findOrfail($id);
         $data->company_id           = $request->company_id;
         $data->internal_eksternal   = $request->internal_eksternal;
@@ -422,12 +285,8 @@ class RequestComplaintController extends Controller
         $data->save();
     }
 
-<<<<<<< HEAD
-    public function selected() {
-=======
     public function selected()
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $request_complain = RequestComplaint::all();
         return view('request_complaint.selected')->with([
@@ -435,12 +294,8 @@ class RequestComplaintController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-    public function updateall(Request $request, $id) {
-=======
     public function updateall(Request $request, $id)
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $data = RequestComplaint::findOrfail($id);
         $data->company_id = $request->company_id;
@@ -462,12 +317,8 @@ class RequestComplaintController extends Controller
         echo $id;
     }
 
-<<<<<<< HEAD
-    public function deleteAll(Request $request) {
-=======
     public function deleteAll(Request $request)
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         if ($request->ajax()) {
             $ids = $request->input('id');
@@ -475,44 +326,14 @@ class RequestComplaintController extends Controller
         }
     }
 
-<<<<<<< HEAD
-    public function datatable(Request $request) {
-=======
     public function datatable(Request $request)
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         if ($request->ajax()) {
             return DataTables::of(RequestComplaint::all())->make(true);
         }
     }
 
-<<<<<<< HEAD
-    public function updateSelected(Request $request) {
-
-        RequestComplaint::where('item_type_id', '=', 1)->update(['colour' => 'black']);
-    }
-    
-    public function basedPic($id) {
-
-        $data = Pic::where('company_id', $id)->get();
-        return $data;
-    }
-    
-    public function basedVehicle($id) {
-
-        $data = DetailCustomer::where('company_id', $id)->get();
-
-        for ($i=0; $i < count($data) ; $i++) { 
-            $loop = $data[$i]->vehicle_id;
-            $cari_vehicle = Vehicle::where('id', $loop)->get();
-            $data[$i]['vehicle_license_plate'] = $cari_vehicle[0]->license_plate;
-            $data[$i]['id'] = $cari_vehicle[0]->id;
-        }
-
-        return $data;
-    }
-=======
     public function updateSelected(Request $request)
     {
 
@@ -528,21 +349,9 @@ class RequestComplaintController extends Controller
 
     public function basedVehicle($id)
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
     public function basedInternalEksternal(Request $request) {
 
-<<<<<<< HEAD
-        $id = $request->request_complain;
-    
-        if ($id == "Request Internal" || $id == "Request Eksternal") {
-            $data = Task::where('jenis', '=', 'request')->get();
-        }
-        else{
-            $data = Task::where('jenis', '=', 'complain')->get();   
-        }
-        return $data;
-=======
         for ($i = 0; $i < count($data); $i++) {
             $loop = $data[$i]->vehicle_id;
             $cari_vehicle = Vehicle::where('id', $loop)->get();
@@ -574,6 +383,5 @@ class RequestComplaintController extends Controller
     public function dashboard()
     {
         return view('request_complaint.Dashboard.dashboard');
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     }
 }

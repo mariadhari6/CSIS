@@ -44,26 +44,11 @@
                 <i class="la la-home fa-2x icon-sidebar"
                 {{ request()->is('customer_service')? 'style=color:#5fa2db' : ''}}
 
-<<<<<<< HEAD
-            </div>
-        </div>
-        <ul class="nav">
-            <li class="nav-item {{ request()->is('/customer_service') ? ' active' : ''}}">
-                <a href="{{url('/customer_service')}}">
-                    <i class="fas fa-home"></i>
-                    <p>Home</p>
-
-                </a>
-            </li>
-
-            <li class="nav-item
-=======
                 ></i>
                 <span class="nav-text">Home</span>
             </a>
         </li>
         <li class="nav-item
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             {{ request()->is('seller') ? ' active' : ''}}
             {{ request()->is('Company') ? ' active' : ''}}
             {{ request()->is('pic') ? ' active' : ''}}
@@ -253,61 +238,6 @@
                             <a class="collapse-item @yield('Dashboard_Visit_Assignment')" href="{{url('/Dashboard_Visit_Assignment')}}">
                                 <span class="nav-list">Dashboard</span>
                             </a>
-<<<<<<< HEAD
-
-                            <div class="collapse @yield('gsm')" id="gsm" aria-expanded="true" style="">
-                                <ul class="nav">
-
-                                    <li class="nav-item {{ request()->is('GsmMaster') ? ' active' : ''}}">
-                                        <a class="collapse-item @yield('GsmMaster')" href="{{url('/GsmMaster')}}">
-                                            <span class="link-collapse">Master Gsm</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item {{ request()->is('Active') ? ' active' : ''}}">
-                                        <a class="collapse-item @yield('Active')" href="{{url('/GsmActive') }}">
-                                            <span class="link-collapse">Master Active</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item {{ request()->is('GsmTerminate') ? ' active' : ''}}">
-                                        <a class="collapse-item @yield('Terminate')" href="{{url('/GsmTerminate') }}">
-                                            <span class="link-collapse">Master Terminated</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item
-                {{ request()->is('detail_customer') ? ' active' : ''}}
-                ">
-                    <a class="" data-toggle="collapse" href="#customer" aria-expanded="true">
-                        <i class="fas fa-user-friends"></i>
-                        <p>Data Customer</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse @yield('customer')" id="customer" aria-expanded="true" style="">
-                        <ul class="nav">
-                            <li class="nav-item {{ request()->is('detail_customer') ? ' active' : ''}}">
-                                <a class="collapse-item @yield('detail_customer')" href="{{url('/detail_customer')}}">
-                                    <span class="link-collapse">Detail Customer</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('summary')}}">
-                                    <span class="link-collapse">Summary</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('dashboard_customer')}}">
-                                    <span class="link-collapse">Dashboard Customer</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-            </li>
-=======
                         </li>
                     </ul>
                 </div>
@@ -319,7 +249,6 @@
             <a href="{{url('/user')}}">
                 <i class="fas fa-users fa-2x icon-sidebar"
                 {{ request()->is('user')? 'style=color:#5fa2db' : ''}}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
                 ></i>
                 {{-- <i class="la la-home fa-2x icon-sidebar"></i> --}}
@@ -582,17 +511,6 @@
                         </li>
                     </ul>
                 </div>
-<<<<<<< HEAD
-            </li>
-            
-{{--
-            <li class="nav-item">
-                <a href="{{ url('/livetable') }}">Example Crud</a>
-            </li> --}}
-        </ul>
-    </div>
-</div>
-=======
         </li>
         @endrole
 
@@ -635,4 +553,3 @@
         @endrole
     </ul>
 </nav>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54

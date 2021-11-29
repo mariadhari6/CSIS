@@ -14,13 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use App\Imports\GpsImport;
 use App\Models\Company;
-<<<<<<< HEAD
-use App\Models\GpsTemp;
-=======
-use App\Models\DetailCustomer;
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 use App\Models\GpsTemporary;
-use App\Models\Vehicle;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GpsController extends Controller
@@ -34,26 +28,16 @@ class GpsController extends Controller
     {
         $gps = Gps::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'ASC')->get();
-<<<<<<< HEAD
-=======
-
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $merk = MerkGps::groupBy('merk_gps')
                         ->selectRaw('count(*) as jumlah, merk_gps')
                         ->get();
         return view('MasterData.gps.add_form')->with([
-<<<<<<< HEAD
-            'gps'       => $gps,
-            'merk'      => $merk,
-            'company'   => $company
-=======
 
             'gps' => $gps,
             'merk' => $merk,
             'company' => $company,
 
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         ]);
     }
 
@@ -101,11 +85,7 @@ class GpsController extends Controller
                 $imeiReq = $data[$key]['imei'];
                 $checkImei = GpsTemporary::where('imei', '=', $imeiReq)->first();
 
-<<<<<<< HEAD
-                if ($checkImei === null ) {
-=======
                 if ($checkImei === null) {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                     GpsTemporary::insert($data[$key]);
                 } else {
                     $fail = 1;
@@ -115,31 +95,6 @@ class GpsController extends Controller
                 $fail = 1;
             }
         }
-<<<<<<< HEAD
-
-        if( $fail === 1 ){
-            GpsTemporary::truncate();
-            return 'fail';
-        } else {
-            try {
-                $gpsTemporary = GpsTemporary::orderBy('id', 'DESC')->get();
-                foreach ($gpsTemporary as $key => $value){
-                    $data[$key] = array(
-                        'merk'        =>  (string) $value->merk,
-                        'type'        =>  (string) $value->type,
-                        'imei'        =>  $value->imei,
-                        'waranty'     =>  $value->waranty,
-                        'po_date'     =>  $value->po_date,
-                        'status'           =>  (string) $value->status,
-                        'status_ownership' =>  (string) $value->status_ownership,
-                    );
-                    Gps::insert($data[$key]);
-                    $dataDelete = GpsTemporary::findOrfail($value->id);
-                    $dataDelete->delete();
-                }
-            } catch (\Throwable $th) {
-                return 'fail';
-=======
         GpsTemporary::truncate();
         if ($fail === true) {
             return 'fail';
@@ -150,7 +105,6 @@ class GpsController extends Controller
                 } catch (\Throwable $th) {
                     $fail = true;
                 }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             }
         }
     }
@@ -159,16 +113,6 @@ class GpsController extends Controller
     {
       
         $data = array(
-<<<<<<< HEAD
-            'merk'              =>  $request->merk,
-            'type'              =>  $request->type,
-            'imei'              =>  $request->imei,
-            'waranty'           =>  $request->waranty,
-            'po_date'           =>  $request->po_date,
-            'status'            =>  $request->status,
-            'status_ownership'  =>  $request->status_ownership,
-            'company_id'        =>  $request->company_id
-=======
             'merk'    =>  $request->merk,
             'type'   =>  $request->type,
             'imei'     =>  $request->imei,
@@ -178,7 +122,6 @@ class GpsController extends Controller
             'status_ownership' => $request->status_ownership,
             'company_id' => $request->company_id
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         );
 
         Gps::insert($data);
@@ -189,27 +132,19 @@ class GpsController extends Controller
         $merk = MerkGps::groupBy('merk_gps')
             ->selectRaw('count(*) as jumlah, merk_gps')
             ->get();
-<<<<<<< HEAD
-=======
         $company = Company::orderBy('id', 'ASC')->get();
 
         // $merk_gps = MerkGps::orderBy('id', 'DESC')->get();
         // $type_gps = TypeGps::orderBy('id', 'DESC')->get();
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $gps = Gps::findOrfail($id);
         $company = Company::orderBy('id', 'ASC')->get();
 
         return view('MasterData.gps.edit_form')->with([
             'gps' => $gps,
             'merk' => $merk,
-<<<<<<< HEAD
-            'company' => $company
-           
-=======
             'company' => $company,
 
             // 'type_gps' => $type_gps
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         ]);
     }
@@ -225,11 +160,7 @@ class GpsController extends Controller
         $status = $request->status;
         $cek_status = DetailCustomer::where('imei', $id)->where('status_id', 1)->get();
         $cek_detail = DetailCustomer::where('imei', $id)->first();
-<<<<<<< HEAD
-        if ($cek_detail == null ) {
-=======
         if ($cek_detail == null) {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             $data           = Gps::findOrfail($id);
             $data->merk     = $request->merk;
             $data->type     = $request->type;
@@ -239,19 +170,11 @@ class GpsController extends Controller
             $data->status   = $request->status;
             $data->status_ownership = $request->status_ownership;
             $data->company_id = $request->company_id;
-<<<<<<< HEAD
-            $data->save();
-        }
-        else{
-
-            if ($cek_status && $status != "Used" ) {
-=======
 
             $data->save();
         } else {
 
             if ($cek_status && $status != "Used") {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 foreach ($cek_status as $item) {
                     $company_id = $item->company_id;
                     $licence_id = $item->licence_plate;
@@ -260,16 +183,9 @@ class GpsController extends Controller
                     $item['company_name']   = $cari_company[0]->company_name;
                     $item['nomor_license']  = $cari_license[0]->license_plate;
                     $item['terpasang'] = "terpasang";
-<<<<<<< HEAD
-                    return $item ;
-                }
-            }
-            else {
-=======
                     return $item;
                 }
             } else {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 $data           = Gps::findOrfail($id);
                 $data->merk     = $request->merk;
                 $data->type     = $request->type;
@@ -279,33 +195,10 @@ class GpsController extends Controller
                 $data->status   = $request->status;
                 $data->status_ownership = $request->status_ownership;
                 $data->company_id = $request->company_id;
-<<<<<<< HEAD
-                $data->save();                
-            }
-        }
-
-
-        // if ($cek_detail) {
-        //     return $warning;
-        // }else {
-        //     $data           = Gps::findOrfail($id);
-        //     $data->merk     = $request->merk;
-        //     $data->type     = $request->type;
-        //     $data->imei     = $request->imei;
-        //     $data->waranty  = $request->waranty;
-        //     $data->po_date  = $request->po_date;
-        //     $data->status   = $request->status;
-        //     $data->status_ownership = $request->status_ownership;
-        //     $data->save();
-        // }
-
-        // $cek_detail = DetailCustomer::where('imei', $id)->where('status_id', 2)-get();
-=======
 
                 $data->save();
             }
         }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     }
 
     public function selected()
@@ -330,10 +223,6 @@ class GpsController extends Controller
         $data->status = $request->status;
         $data->status_ownership = $request->status_ownership;
         $data->company_id = $request->company_id;
-<<<<<<< HEAD
-=======
-
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         echo $id;
     }
 

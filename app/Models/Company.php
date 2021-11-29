@@ -45,15 +45,11 @@ class Company extends Model
     {
         return $this->hasMany(RequestComplaint::class);
     }
-<<<<<<< HEAD
-    
-=======
     public function gps()
     {
         return $this->hasMany(Gps::class);
     }
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     public function masterPo()
     {
         return $this->hasMany(MasterPo::class, 'company_id', 'id');
@@ -85,10 +81,6 @@ class Company extends Model
 
         return $this->hasMany(Vehicle::class);
     }
-    
-    public function gps()
-    {
-        return $this->hasMany(Gps::class);
-    }
+
 
 }

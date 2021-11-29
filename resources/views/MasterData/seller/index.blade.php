@@ -30,11 +30,7 @@
             </div>
               <form>
 
-<<<<<<< HEAD
-          <table class="table table-hover data" class="table_id" id="table_id" >
-=======
           <table class="table table-responsive data" class="table_seller" id="table_seller" >
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <thead>
               <tr>
 
@@ -568,9 +564,6 @@
             read();
         }
 
-<<<<<<< HEAD
-  </script>
-=======
         function disableButton() {
 
           $('.add').prop('disabled', true);
@@ -592,7 +585,6 @@
           $('.export').removeClass('disabled');
           $('.delete').removeClass('disable');
           $("[data-toggle= modal]").prop('disabled', false);
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         }
 

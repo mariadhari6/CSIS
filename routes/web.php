@@ -3,8 +3,6 @@
 
 use App\Http\Controllers\UsernameController;
 use App\Http\Controllers\DetailCustomerController;
-use App\Http\Controllers\SummaryController;
-use App\Http\Controllers\DashboardCustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChangePasswordController;
@@ -20,13 +18,10 @@ use App\Http\Controllers\SensorController;
 use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\DashboardCustomerController;
 use App\Http\Controllers\DashboardVisitAssignmentController;
-use App\Http\Controllers\MaintenanceGpsController;
+
 use App\Http\Controllers\RequestComplaintController;
 use App\Http\Controllers\MasterPoController;
-use App\Http\Controllers\DetailCustomer;
 use App\Http\Controllers\VehicleController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\MaintenanceGpsController;
 use App\Http\Controllers\MerkGpsController;
 use App\Http\Controllers\SummaryController;
@@ -40,9 +35,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleTypeController;
 use App\Models\DetailCustomer;
 use App\Models\PemasanganMutasiGps;
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 use App\Models\Username;
-use Faker\Guesser\Name;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -58,49 +52,18 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/dashboard-cs', function () {
-//     return 'Cs Login';
-// })->name('dashboard_cs');
-
 Route::get('/', function () {
     return view('auth.login');
-    //auth.login
 });
 
 Route::get('/register', function () {
     return view('auth.register');
 });
 
-<<<<<<< HEAD
-Auth::routes();
-
-Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin', 'auth'], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.homepage');
-=======
-// Route::get('/login', function () {
-//     return view('partials.v_landingpage');
-// });
-
-
-// Route::get('/livetable/datatable', [UsernameController::class, 'datatable'])->name('livetable.list');
-
-// Route::post('/selected-username', [UsernameController::class, 'deleteall'])->name('livetable.delete_all');
-// Route::get('/selectedDelete', 'UsernameController@deleteAll')->name('livetable.delete_all');
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
     return view('auth.login');
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 });
-// Route::group(['middleware' => ['role:superAdmin']], function () {
-//     // Route::get('/admin', [AdminController::class, 'index'])->name('admin.homepage');
 
-//     Route::get('/test', function () {
-//         return 'login super admin';
-//     });
-// });
 Route::group(
     ['middleware' => ['role:superAdmin']],
     function () {
@@ -184,6 +147,7 @@ Route::group(
         Route::get('/update_vehicle_type/{id}', [VehicleTypeController::class, 'update']);
     }
 );
+
 Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('logout_odm');
 
@@ -192,17 +156,6 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     // Edit Profile
     Route::get('profile',  [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
-
-
-    Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
-    Route::get('/item_summary', [SummaryController::class, 'item_data'])->name('item_summary');
-    Route::get('/add_summary', [DetailCustomerController::class, 'add_form'])->name('add_summary');
-    Route::get('/apioslog', [UsernameController::class, 'getApi']);
-    
-    Route::get('/api', [UsernameController::class, 'Api']);
-
-    Route::get('/dashboard_customer', [DashboardCustomerController::class, 'index'])->name('dashboard_customer');
-
 
     // Company
     Route::get('/Company', [CompanyController::class, 'index'])->name('company');
@@ -272,6 +225,7 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/selectedDelete_GsmActive', [GsmActiveController::class, 'deleteAll']);
     Route::get('/selected_GsmActive', [GsmActiveController::class, 'selected']);
     Route::get('/update_all/{id}', [GsmActiveController::class, 'updateall']);
+
     //Gsm Terminate
     Route::get('/GsmTerminate', [GsmTerminateController::class, 'index'])->name('GsmTerminate');
     Route::get('/item_data_GsmTerminate', [GsmTerminateController::class, 'item_data']);
@@ -328,6 +282,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
 
 
 
+
+
     //gsm Master
     Route::get('/GsmMaster', [GsmMasterController::class, 'index'])->name('GsmMaster');
     Route::get('/item_data_GsmMaster', [GsmMasterController::class, 'item_data']);
@@ -376,6 +332,7 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/based_license/{id}', [DetailCustomerController::class, 'basedLicense']);
     Route::get('/based_po/{id}', [DetailCustomerController::class, 'basedPO']);
     Route::get('/based_ponumber/{id}', [DetailCustomerController::class, 'basedPonumber']);
+    // Route::get('/based_sensor/{id}', [DetailCustomerController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [DetailCustomerController::class, 'basedSerialNumber']);
     Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
     Route::get('/export_detail_customer', [DetailCustomerController::class, 'export_detail']);
@@ -401,13 +358,6 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/item_data_onProgress_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_onProgress'])->name('item_data_onprogress');
     Route::get('/item_data_done_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_done'])->name('item_data_done');
     Route::get('/item_data_all_pemasangan', [PemasanganMutasiGpsController::class, 'item_data']);
-<<<<<<< HEAD
-    // Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
-    // Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensorName']);
-    Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
-    // Route::get('/based_vehicle/{id}', [PemasanganMutasiGpsController::class, 'basedVehicle']);
-    // Route::get('/based_imei/{id}', [PemasanganMutasiGpsController::class, 'basedImei']);
-=======
     Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
     // Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensorName']);
     Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
@@ -417,31 +367,15 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/export_pemasangan_mutasi_GPS', [PemasanganMutasiGpsController::class, 'export_pemasangan']);
 
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
     // Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
     // Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
     // Route::get('/dependent_KendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'dependentKendaraanPasang']);
 
-    Route::get('/GsmMaster', [GsmMasterController::class, 'index'])->name('GsmMaster');
-    Route::get('/item_data_GsmMaster', [GsmMasterController::class, 'item_data']);
-    Route::get('/item_data_temporary_GsmMaster', [GsmMasterController::class, 'item_data_temporary']);
-    Route::get('/item_data_all_GsmMaster', [GsmMasterController::class, 'item_data']);
-    Route::get('/item_data_ready_GsmMaster', [GsmMasterController::class, 'item_data_ready']);
-    Route::get('/item_data_active_GsmMaster', [GsmMasterController::class, 'item_data_active']);
-    Route::get('/item_data_terminate_GsmMaster', [GsmMasterController::class, 'item_data_terminate']);
-    Route::get('/add_form_GsmMaster', [GsmMasterController::class, 'add_form']);
-    Route::get('/store_GsmMaster', [GsmMasterController::class, 'store']);
-    Route::get('/destroy_GsmMaster/{id}', [GsmMasterController::class, 'destroy']);
-    Route::get('/show_GsmMaster/{id}', [GsmMasterController::class, 'edit_form']);
-    Route::get('/update_GsmMaster/{id}', [GsmMasterController::class, 'update']);
-    Route::get('/selectedDelete_GsmMaster', [GsmMasterController::class, 'deleteAll']);
-    Route::get('/update_all/{id}', [GsmMasterController::class, 'updateall']);
-    Route::post('/importExcel_GsmMaster', [GsmMasterController::class, 'importExcel'])->name('importExcel_GsmMaster');
-    Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
-    Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
-
-    // Request Complainhttp://127.0.0.1:8000/summary
+    Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);
+    Route::get('/dependent_JenisPekerjaan/{id}', [PemasanganMutasiGpsController::class, 'dependentJenisPekerjaan']);
+    // Route::get('/dependent_KendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'dependentKendaraanPasang']);
+    // Request Complain
     Route::get('/RequestComplain', [RequestComplaintController::class, 'index'])->name('request.complain');
     Route::get('/item_data_RequestComplain', [RequestComplaintController::class, 'item_data']);
     Route::get('/item_data_MY_RequestComplain', [RequestComplaintController::class, 'item_data_MY']);
@@ -456,71 +390,18 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/show_RequestComplain/{id}', [RequestComplaintController::class, 'edit_form']);
     Route::get('/update_RequestComplain/{id}', [RequestComplaintController::class, 'update']);
     Route::get('/selectedDelete_RequestComplain', [RequestComplaintController::class, 'deleteAll']);
-    Route::get('/selected_request', [RequestComplaintController::class, 'selected']);
+    Route::get('/selected_detail', [RequestComplaintController::class, 'selected']);
     Route::get('/update_all/{id}', [RequestComplaintController::class, 'updateall']);
     Route::get('/based_pic/{id}', [RequestComplaintController::class, 'basedPic']);
-<<<<<<< HEAD
-    Route::get('/based_vehicle/{id}', [RequestComplaintController::class, 'basedVehicle']);
-    Route::get('/based_internal_eksternal', [RequestComplaintController::class, 'basedInternalEksternal']);
-=======
     Route::get('/based_vehicleRequest/{id}', [RequestComplaintController::class, 'basedVehicle']);
     Route::get('/based_internal_eksternal', [RequestComplaintController::class, 'basedInternalEksternal']);
     Route::get('/based_pemasangan/{id}', [RequestComplaintController::class, 'basedPemasangan']);
     Route::get('/Dashboard_RequestComplain', [RequestComplaintController::class, 'dashboard']);
     Route::get('/export_request_complaint', [RequestComplaintController::class, 'export_request']);
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
-
-    Route::get('/count', [SummaryController::class, 'countPo']);
-    Route::get('/filter', [SummaryController::class, 'filter']); 
-    Route::get('/data-po', [SummaryController::class, 'DataPo']); 
-    Route::get('/item_summary', [SummaryController::class, 'item_summary']);
-
-<<<<<<< HEAD
-    Route::get('/detail/{id}', [DetailCustomerController::class, 'Test'])->name('detail');
-
-     //Master PO
-     Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');
-     Route::get('/item_data_master_po', [MasterPoController::class, 'item_data'])->name('item_master_po');
-     Route::get('/add_form_master_po', [MasterPoController::class, 'add_form'])->name('add_master_po');
-     Route::get('/store_master_po', [MasterPoController::class, 'store']);
-     Route::get('/destroy_master_po/{id}', [MasterPoController::class, 'destroy']);
-     Route::get('/show_master_po/{id}', [MasterPoController::class, 'edit_form']);
-     Route::get('/update_master_po/{id}', [MasterPoController::class, 'update']);
-     Route::get('/selectedDelete_master_po', [MasterPoController::class, 'deleteAll']);
-     Route::get('/selected_master_po', [MasterPoController::class, 'selected']);
-     Route::get('/update_all/{id}', [MasterPoController::class, 'updateall']);
-     Route::get('/item_data_All_master_po', [MasterPoController::class, 'item_data']);
-     Route::get('/item_data_beli_master_po', [MasterPoController::class, 'item_data_Beli']);
-     Route::get('/item_data_sewa_master_po', [MasterPoController::class, 'item_data_Sewa']);
-     Route::get('/item_data_sewa_beli_master_po', [MasterPoController::class, 'item_data_Sewa_Beli']);
-     Route::get('/item_data_trial_master_po', [MasterPoController::class, 'item_data_Trial']);
-     Route::get('/filter_company/{id}', [MasterPoController::class, 'filter_company']);
-
-     Route::get('/Vehicle', [VehicleController::class, 'index'])->name('company');
-     Route::get('/item_data_vehicle', [VehicleController::class, 'item_data']);
-     Route::get('/add_form_vehicle', [VehicleController::class, 'add_form']);
-     Route::get('/store_vehicle', [VehicleController::class, 'store']);
-     Route::get('/destroy_vehicle/{id}', [VehicleController::class, 'destroy']);
-     Route::get('/show_vehicle/{id}', [VehicleController::class, 'show']);
-     Route::get('/update_vehicle/{id}', [VehicleController::class, 'update']);
-     Route::get('/selectedDelete_vehicle', [VehicleController::class, 'deleteAll']);
-     Route::get('/selected_vehicle', [VehicleController::class, 'selected']);
-     Route::get('/update_all/{id}', [VehicleController::class, 'updateall']);
-     Route::get('/dependent_company/{id}', [CompanyController::class, 'dependentCompany']);
-     Route::get('/show_no_agreement/{id}', [CompanyController::class, 'showAgreement']);
-
-     Route::get('/cek', [MasterPoController::class, 'check']);
-
-
-      // Maintenance GPS
-=======
-
-
     Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
 
     // Maintenance GPS
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     Route::get('/MaintenanceGps', [MaintenanceGpsController::class, 'index']);
     Route::get('/item_data_maintenanace_gps', [MaintenanceGpsController::class, 'item_data']);
     Route::get('/item_data_MY_Maintennace', [MaintenanceGpsController::class, 'item_data_MY']);
@@ -541,14 +422,9 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     // Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensor']);
     // Route::get('/based_sensor/{id}', [MaintenanceGpsController::class, 'basedSensorName']);
     // Route::get('/based_serialnumber/{id}', [MaintenanceGpsController::class, 'basedSerialNumber']);
-<<<<<<< HEAD
-    // Route::get('/based_vehicle/{id}', [MaintenanceGpsController::class, 'basedVehicle']);
-   
-=======
     Route::get('/based_vehicleMaintenance/{id}', [MaintenanceGpsController::class, 'basedVehicle']);
     Route::get('/based_typegps/{id}', [MaintenanceGpsController::class, 'basedGps']);
     Route::get('/export_maintenance', [MaintenanceGpsController::class, 'export_maintenance']);
-
 
     // Master PO
     Route::get('/master_po', [MasterPoController::class, 'index'])->name('master_po');
@@ -573,9 +449,6 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/download_template_masterPo', [MasterPoController::class, 'export']);
     Route::get('/export_MasterPO', [MasterPoController::class, 'export_masterPO']);
 
-
-
-
     //Dashboar Visit Assignment
     Route::get('/dashboard_visit_assignment', [DashboardVisitAssignmentController::class, 'index']);
 
@@ -596,7 +469,6 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::post('/importExcel_MasterVehicle', [VehicleController::class, 'importExcel'])->name('importExcel_MasterVehicle');
     Route::get('/download_template_MasterVehicle', [VehicleController::class, 'export']);
     Route::get('/export_vehicle', [VehicleController::class, 'export_vehicle']);
-
 
     Route::get('/cek', [MasterPoController::class, 'check']);
 
@@ -625,40 +497,6 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/update_dashboard_customer/{id}', [DashboardCustomerController::class, 'update']);
     Route::get('/edit_dashboard_customer/{id}', [DashboardCustomerController::class, 'edit']);
 
-
-
-
-    //
-
-    // // Pemasangan Mutasi GPS
-    // Route::get('/PemasanganMutasi', [PemasanganMutasiGpsController::class, 'index'])->name('PesanganMutasi');
-    // Route::get('/item_data_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data']);
-    // Route::get('/item_data_MY_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'item_data_MY']);
-    // Route::get('/add_form_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'add_form']);
-    // Route::get('/store_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'store']);
-    // Route::get('/destroy_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'destroy']);
-    // Route::get('/show_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'edit_form']);
-    // Route::get('/update_PemasanganMutasi/{id}', [PemasanganMutasiGpsController::class, 'update']);
-    // Route::get('/selectedDelete_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'deleteAll']);
-    // Route::get('/selected_PemasanganMutasi', [PemasanganMutasiGpsController::class, 'selected']);
-    // Route::get('/update_all/{id}', [PemasanganMutasiGpsController::class, 'updateall']);
-    // Route::get('/item_data_onProgress_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_onProgress'])->name('item_data_onprogress');
-    // Route::get('/item_data_done_pemasangan', [PemasanganMutasiGpsController::class, 'item_data_done'])->name('item_data_done');
-    // Route::get('/item_data_all_pemasangan', [PemasanganMutasiGpsController::class, 'item_data']);
-    // Route::get('/based_sensor/{id}', [PemasanganMutasiGpsController::class, 'basedSensor']);
-    // Route::get('/based_serialnumber/{id}', [PemasanganMutasiGpsController::class, 'basedSerialNumber']);
-    // Route::get('/based_vehiclePemasangan/{id}', [PemasanganMutasiGpsController::class, 'basedVehicle']);
-    // Route::get('/based_imei/{id}', [PemasanganMutasiGpsController::class, 'basedImei']);
-    // Route::get('/based_kendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'basedKendaraanPasang']);
-    // Route::get('/export_pemasangan_mutasi_GPS', [PemasanganMutasiGpsController::class, 'export_pemasangan']);
-
-
-
-
-
-
-
-
     //dashboard
 
     Route::get('/Dashboard_Visit_Assignment', [DashboardVisitAssignmentController::class, 'dashboard']);
@@ -685,22 +523,21 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/based_vehicleMaintenance/{id}', [MaintenanceGpsController::class, 'basedVehicle']);
     Route::get('/based_typegps/{id}', [MaintenanceGpsController::class, 'basedGps']);
     Route::get('/export_maintenance', [MaintenanceGpsController::class, 'export_maintenance']);
+
 });
 
 
 Route::group(['middleware' => ['role:cs']], function () {
     Route::get('/customer_service', [CustomerServiceController::class, 'index'])->name('cs.homepage');
 
-    // dashboard home
-
 });
 
 Route::group(['middleware' => ['role:teknisi']], function () {
 
-
     Route::get('/teknisi', [TeknisiController::class, 'index'])->name('teknisi.homepage');
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
+
 });
+
 
 Auth::routes();
 

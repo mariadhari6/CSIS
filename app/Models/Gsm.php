@@ -33,8 +33,5 @@ class Gsm extends Model
     {
         return $this->hasMany(RequestComplaint::class, 'equipment_gsm', 'id');
     }
-    public function detail()
-    {
-        return $this->hasMany(DetailCustomer::class);
-    }
+ 
 }

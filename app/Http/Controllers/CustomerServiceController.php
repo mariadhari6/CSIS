@@ -19,31 +19,33 @@ use function PHPSTORM_META\type;
 
 class CustomerServiceController extends Controller
 {
-    //
+    
     public function index()
     {
 
-        $company = DetailCustomer::where('status_id', 1)->get();
-        $gps = Gps::all();
-        $vehicle = DetailCustomer::all();
-        $sensor = Sensor::all();
-        $gsm = Gsm::all();
-        $request = RequestComplaint::all();
-        $visit = RequestComplaint::whereIn('task', ['Mutasi Pelepasan GPS', 'Pemasangan GPS', 'Mutasi Pemasangan GPS', 'Mutasi Pelepasan Pemasangan GPS', 'Maintenance Sensor', 'Maintenance GPS'])->get();
+        // $company = DetailCustomer::where('status_id', 1)->get();
+        // $gps = Gps::all();
+        // $vehicle = DetailCustomer::all();
+        // $sensor = Sensor::all();
+        // $gsm = Gsm::all();
+        // $request = RequestComplaint::all();
+        // $visit = RequestComplaint::whereIn('task', ['Mutasi Pelepasan GPS', 'Pemasangan GPS', 'Mutasi Pemasangan GPS', 'Mutasi Pelepasan Pemasangan GPS', 'Maintenance Sensor', 'Maintenance GPS'])->get();
 
 
-        $username = Username::where('id', 3)->count();
+        // $username = Username::where('id', 3)->count();
         return view('home.cs')->with([
-            'company' => $company,
-            'gps' => $gps,
-            'vehicle' => $vehicle,
-            'sensor' => $sensor,
-            'username' => $username,
-            'gsm' => $gsm,
-            'request' => $request,
-            'visit' => $visit
+            // 'company' => $company,
+            // 'gps' => $gps,
+            // 'vehicle' => $vehicle,
+            // 'sensor' => $sensor,
+            // 'username' => $username,
+            // 'gsm' => $gsm,
+            // 'request' => $request,
+            // 'visit' => $visit
 
         ]);
+
+        
     }
     public function utama()
     {
@@ -52,126 +54,81 @@ class CustomerServiceController extends Controller
 
     public function company_home()
     {
-        // $company = Company::groupBy('seller_id')->select('seller_id')->get();
+        
+        // $company = DetailCustomer::groupBy('company_id')->where('status_id', 1)->select('company_id')->get();
 
-        // for ($i = 0; $i < count($company); $i++) {
-        //     $a = $company[$i]->seller_id;
-        //     $cari_company = Company::where('seller_id', $a)->get();
-        //     // dd($cari_company);
-        //     $total_company_installed = Company::where('seller_id', $a)->select(DB::raw('count(company_name) as total_company'))->get();
-        //     // dd($total_company_installed);
-        //     $company[$i]["company"] = $cari_company;
-        //     $company[$i]["total_company"] = $total_company_installed;
-        // }
-
-        // $company = DetailCustomer::groupBy('company_id')->select('company_id')->get();
         // for ($i = 0; $i < count($company); $i++) {
         //     $a = $company[$i]->company_id;
         //     $cari_seller = Company::groupBy('seller_id')->where('id', $a)->select('seller_id')->get();
-
-        //     // dd($cari_seller);
-        //     $total_company_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(company_id) as total_company'))->get();
-        //     // dd($total_company_installed);
-        //     // $gps     = DetailCustomer::where('company_id', $a)->pluck('type');
-        //     // $company[$i]["gps_type"] =   $gps;
+        //     $total_company_installed = DetailCustomer::where('company_id', $a)->where('status_id', 1)->select(DB::raw('count(company_id) as total_company'))->get();
+        //     $cari_gps = DetailCustomer::where('company_id', $a)->pluck('type');
         //     $company[$i]["seller"] = $cari_seller;
+        //     $company[$i]["gps"] = $cari_gps;
         //     $company[$i]["total_company"] = $total_company_installed;
         // }
 
-        $company = DetailCustomer::groupBy('company_id')->where('status_id', 1)->select('company_id')->get();
+        // for ($j = 0; $j < count($company); $j++) {
+        //     $gps_ = array();
+        //     foreach ($company[$j]["gps"] as $value) {
+        //         if ($value != null) {
+        //             if (str_contains($value, ' ')) {
+        //                 $exploded = explode(" ", $value);
+        //                 for ($i = 0; $i < count($exploded); $i++) {
+        //                     array_push($gps_, $exploded[$i]);
+        //                 }
+        //             } else {
+        //                 array_push($gps_, $value);
+        //             }
+        //         }
+        //     }
 
+        //     // PROSES MENCARI Gps name
+        //     $unique_gps = array_unique($gps_);
 
-        for ($i = 0; $i < count($company); $i++) {
-            $a = $company[$i]->company_id;
-            $cari_seller = Company::groupBy('seller_id')->where('id', $a)->select('seller_id')->get();
+        //     $company[$j]["unique_gps"] = array_map(function ($gpsId) {
+        //         $gps_name = Gps::where('id', $gpsId)->pluck('type');
+        //         return $gps_name[0];
+        //     }, $unique_gps);
 
-            // return $cari_seller;
-            // $cari_vehicle_type = Vehicle::groupBy('vehicle_id')->where('company_id', $a)->select('vehicle_id')->get();
-            $total_company_installed = DetailCustomer::where('company_id', $a)->where('status_id', 1)->select(DB::raw('count(company_id) as total_company'))->get();
-            // $total_vehicleperType_installed = DetailCustomer::groupBy('')->where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_pervehicle_type,vehicle_id'))->get();
+        //     $sens = $company[$j]["unique_gps"];
 
-            $cari_gps = DetailCustomer::where('company_id', $a)->pluck('type');
-            // return $company;
-            $company[$i]["seller"] = $cari_seller;
+        //     $array_count_values = array_count_values($sens);
+        //     $gpsFinal = array();
 
-            $company[$i]["gps"] = $cari_gps;
+        //     foreach ($array_count_values as $gpsName => $gpsTotal) {
+        //         array_push($gpsFinal, array(
+        //             "type_gps" => $gpsName,
+        //             "type_total" => $gpsTotal
+        //         ));
+        //     }
 
-            $company[$i]["total_company"] = $total_company_installed;
-        }
+        //     $company[$j]["gps"] = $gpsFinal;
 
-        for ($j = 0; $j < count($company); $j++) {
-            $gps_ = array();
-            foreach ($company[$j]["gps"] as $value) {
-                if ($value != null) {
-                    if (str_contains($value, ' ')) {
-                        $exploded = explode(" ", $value);
-                        for ($i = 0; $i < count($exploded); $i++) {
-                            array_push($gps_, $exploded[$i]);
-                        }
-                    } else {
-                        array_push($gps_, $value);
-                    }
-                }
-            }
+        //     unset($company[$j]["unique_gps"]);
+        //     //
+        // }
 
-            // PROSES MENCARI Gps name
-            $unique_gps = array_unique($gps_);
-
-            $company[$j]["unique_gps"] = array_map(function ($gpsId) {
-                $gps_name = Gps::where('id', $gpsId)->pluck('type');
-                return $gps_name[0];
-            }, $unique_gps);
-
-            $sens = $company[$j]["unique_gps"];
-
-            $array_count_values = array_count_values($sens);
-            $gpsFinal = array();
-
-            foreach ($array_count_values as $gpsName => $gpsTotal) {
-                array_push($gpsFinal, array(
-                    "type_gps" => $gpsName,
-                    "type_total" => $gpsTotal
-                ));
-            }
-
-            $company[$j]["gps"] = $gpsFinal;
-
-            unset($company[$j]["unique_gps"]);
-            //
-        }
-
-
-
-
-
-
-        // return $company;
-        return view('home.company', compact('company'));
+        // // return $company;
+        // return view('home.company', compact('company'));
     }
+
     public function gps_home()
     {
-        // $data_total_merk = Gps::groupBy('merk')->selectRaw('count(merk) as jumlah_merk, merk')->get();
-        // $data_total_type = Gps::groupBy('type')->selectRaw('count(type) as jumlah_type, type')->get();
-        // $data_total_status = Gps::groupBy('status')->selectRaw('count(status) as jumlah_status, status')->get();
+    
         $gps_ready = Gps::groupBy('status')->where('status', 'Ready')->select('status')->get();
 
         for ($i = 0; $i < count($gps_ready); $i++) {
             $a = $gps_ready[$i]->status;
 
             $cari_type = Gps::groupBy('type')->where('status', $a)->select('type')->get();
-            // dd($cari_company);
             $total_status_installed = Gps::where('status', $a)->select(DB::raw('count(status) as total_status'))->get();
             $total_type_installed = Gps::groupBy('type')->where('status', $a)->select(DB::raw('count(type) as total_pertype,type'))->get();
-
-
             $gps_ready[$i]["type"] = $cari_type;
-            // $gps_ready[$i]["type"] = array_unique($gps_ready[$i]["type"]);
+    
             $gps_ready[$i]["total_pertype"] = $total_type_installed;
 
             $gps_ready[$i]["total_status"] = $total_status_installed;
         }
-
-
 
         $gps_used = Gps::groupBy('status')->where('status', 'Used')->select('status')->get();
 
@@ -185,7 +142,6 @@ class CustomerServiceController extends Controller
 
 
             $gps_used[$i]["type"] = $cari_type;
-            // $gps_used[$i]["type"] = array_unique($gps_used[$i]["type"]);
             $gps_used[$i]["total_pertype"] = $total_type_installed;
 
             $gps_used[$i]["total_status"] = $total_status_installed;
@@ -197,20 +153,15 @@ class CustomerServiceController extends Controller
             $a = $gps_error[$i]->status;
 
             $cari_type = Gps::groupBy('type')->where('status', $a)->select('type')->get();
-            // dd($cari_company);
             $total_status_installed = Gps::where('status', $a)->select(DB::raw('count(status) as total_status'))->get();
             $total_type_installed = Gps::groupBy('type')->where('status', $a)->select(DB::raw('count(type) as total_pertype,type'))->get();
 
 
             $gps_error[$i]["type"] = $cari_type;
-            // $gps_error[$i]["type"] = array_unique($gps_error[$i]["type"]);
             $gps_error[$i]["total_pertype"] = $total_type_installed;
 
             $gps_error[$i]["total_status"] = $total_status_installed;
         }
-
-        // return $gps_error;
-
 
         return view('home.gps', compact('gps_error', 'gps_ready', 'gps_used'));
     }
@@ -224,13 +175,10 @@ class CustomerServiceController extends Controller
             $a = $sensor_ready[$i]->status;
 
             $cari_sensor_name = Sensor::groupBy('sensor_name')->where('status', $a)->select('sensor_name')->get();
-            // dd($cari_company);
             $total_status_installed = Sensor::where('status', $a)->select(DB::raw('count(status) as total_status'))->get();
             $total_sensor_name_installed = Sensor::groupBy('sensor_name')->where('status', $a)->select(DB::raw('count(sensor_name) as total_persensor_name,sensor_name'))->get();
 
-
             $sensor_ready[$i]["sensor_name"] = $cari_sensor_name;
-            // $gps[$i]["sensor_name"] = array_unique($gps[$i]["sensor_name"]);
             $sensor_ready[$i]["total_persensor_name"] = $total_sensor_name_installed;
             $sensor_ready[$i]["total_status"] = $total_status_installed;
         }

@@ -38,11 +38,7 @@ class HomeController extends Controller
 
 
 
-<<<<<<< HEAD
-        return view('tes')->with([
-=======
         return view('home')->with([
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             'company' => $company,
             'gps' => $gps,
             'vehicle' => $vehicle,

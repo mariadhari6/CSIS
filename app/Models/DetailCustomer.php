@@ -39,13 +39,10 @@ class DetailCustomer extends Model
     ];
 
 
-<<<<<<< HEAD
     public function pemasanganMutasiGps() {
 
         return $this->hasMany(PemasanganMutasiGps::class);
     }
-=======
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
     public function company() {
 
@@ -76,8 +73,6 @@ class DetailCustomer extends Model
         
         return $this->belongsTo(MasterPo::class);
     }
-<<<<<<< HEAD
-=======
 
     public function poNumber()
     {
@@ -85,7 +80,6 @@ class DetailCustomer extends Model
         return $this->belongsTo(MasterPo::class);
     }
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
     public function vehicle() {
 
@@ -96,13 +90,9 @@ class DetailCustomer extends Model
 
         return $this->belongsTo(ServiceStatus::class);
     }
-<<<<<<< HEAD
-    
-=======
 
     public function requestComplaint()
     {
         return $this->hasMany(RequestComplaint::class);
     }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 }

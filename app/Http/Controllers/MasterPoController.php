@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-<<<<<<< HEAD
-=======
 
 use App\Exports\MasterPoExport;
 use App\Exports\TamplateMasterPo;
 use App\Imports\MasterPoImport;
 use App\Models\Company;
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 use App\Models\MasterPo;
 use App\Models\Pic;
 use App\Models\Sales;
@@ -34,20 +31,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MasterPoController extends Controller
 {
-<<<<<<< HEAD
-    public function index(){
-
-        $company = Company::orderBy('company_name', 'DESC')->get();
-        return view('master_po.index')->with([
-            'company' => $company
-        ]);
-    }
-    public function add_form(){
-
-        $master_po  = MasterPo::orderBy('po_number', 'DESC')->get();
-        $sales      = Sales::orderBy('name', 'DESC')->get();
-        $company    = Company::orderBy('company_name', 'DESC')->get();
-=======
     public function index()
     {
         $company = Company::orderBy('company_name', 'ASC')->get();
@@ -64,18 +47,10 @@ class MasterPoController extends Controller
             'master_po'        => $master_po,
             'company'          => $company,
             'sales'          => $sales
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
-        return view('master_po.add_form')->with([
-            'master_po' => $master_po,
-            'sales'     => $sales,
-            'company'   => $company
+    
         ]);
     }
-<<<<<<< HEAD
-    public function item_data(){
-
-=======
     public function save_import(Request $request)
     {
         $dataRequest = json_decode($request->data);
@@ -102,7 +77,6 @@ class MasterPoController extends Controller
     }
     public function item_data()
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $master_po = MasterPo::orderBy('id', 'DESC')->get();
         return view('master_po.item_data')->with([
             'master_po' => $master_po
@@ -119,27 +93,18 @@ class MasterPoController extends Controller
             'harga_layanan'     => $request->harga_layanan,
             'jumlah_unit_po'    => $request->jumlah_unit_po,
             'status_po'         => $request->status_po,
-<<<<<<< HEAD
-            'sales_id'          => $request->sales_id,
-            'count'             => $request->jumlah_unit_po
-=======
             'sales_id'            => $request->sales_id,
             'count'             => $request->jumlah_unit_po,
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         );
 
         MasterPo::insert($data);
     }
 
-    public function edit_form($id){
 
-<<<<<<< HEAD
-=======
     public function edit_form($id)
     {
         $sales = Sales::orderBy('id', 'ASC')->get();
         $company = Company::orderBy('company_name', 'ASC')->get();
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $master_po = MasterPo::findOrfail($id);
         $sales      = Sales::orderBy('name', 'DESC')->get();
         $company    = Company::orderBy('company_name', 'DESC')->get();
@@ -157,9 +122,6 @@ class MasterPoController extends Controller
         $data->delete();
     }
 
-<<<<<<< HEAD
-    public function update(Request $request, $id){
-=======
     public function update(Request $request, $id)
     {
         $data = MasterPo::findOrfail($id);
@@ -172,7 +134,6 @@ class MasterPoController extends Controller
         $data->sales_id           = $request->sales_id;
         $data->count           = $request->jumlah_unit_po;
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $data = MasterPo::findOrfail($id);
         $data->company_id = $request->company_id;
@@ -194,18 +155,6 @@ class MasterPoController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-    public function updateall(Request $request, $id){
-
-        $data = Gps::findOrfail($id);
-        $data->company_id = $request->company_id;
-        $data->po_number = $request->po_number;
-        $data->po_date = $request->po_date;
-        $data->harga_layanan = $request->harga_layanan;
-        $data->jumlah_unit_po = $request->jumlah_unit_po;
-        $data->status_po = $request->status_po;
-        $data->sales_id = $request->sales_id;
-=======
     public function updateall(Request $request, $id)
     {
         $data = MasterPo::findOrfail($id);
@@ -216,7 +165,6 @@ class MasterPoController extends Controller
         $data->jumlah_unit_po   = $request->jumlah_unit_po;
         $data->status_po        = $request->status_po;
         $data->sales_id           = $request->sales_id;
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         echo $id;
     }
 
@@ -298,181 +246,10 @@ class MasterPoController extends Controller
 
         return Excel::download(new TamplateMasterPo, 'template-MasterPo.xlsx');
     }
-<<<<<<< HEAD
-
-    public function check() {
-        // $vehicle = 122;
-        // $imei = DetailCustomer::where('vehicle_id', $vehicle)->pluck('imei');
-        // $gsm = DetailCustomer::where('vehicle_id', $vehicle)->pluck('gsm_id');
-        // $type = DetailCustomer::where('vehicle_id', $vehicle)->pluck('type');
-        // return $type[0];
-
-
-        // $now            = Carbon::now();
-        // $month          = $now->month;
-        // $year           = $now->year;
-        // $filter_lastDay = $now->endOfMonth()->toDateString();
-
-        // $data = DetailCustomer::groupBy('company_id')->select('company_id')->get();
-        
-        // for ($i=0; $i < count($data) ; $i++) { 
-
-        //     $company_id = $data[$i]->company_id;
-        //     $cari_tanggal_awal_pasang_per_company = DetailCustomer::where('company_id', $company_id)
-        //     ->select('tanggal_pasang')->orderBy('tanggal_pasang', 'ASC')->get();
-
-        //     $data[$i]['tanggal_pasang_awal'] =  $cari_tanggal_awal_pasang_per_company[0]->tanggal_pasang;
-        // }
-
-        // for ($i=0; $i < count($data) ; $i++) {  
-
-        //     $company_id = $data[$i]->company_id;
-        //     $tanggal_pasang_awal = $data[$i]->tanggal_pasang_awal;
-        //     $cari_total_gps = DetailCustomer::where('company_id', $company_id)->whereBetween('tanggal_pasang', [$tanggal_pasang_awal, $filter_lastDay])
-        //     ->select(DB::raw('count(gps_id) as total_gps'))->get();
-
-        //     $data[$i]['total_gps'] = $cari_total_gps[0]->total_gps;
-        // }
-
-        // for ($i=0; $i < count($data) ; $i++) { 
-
-        //     $company_id = $data[$i]->company_id;
-       
-        //     $data_pasang = DetailCustomer::where('company_id', $company_id)->whereMonth('tanggal_pasang', $month)->whereYear('tanggal_pasang', $year)
-        //     ->select(DB::raw('count(tanggal_pasang) as penambahan_layanan '))->get();
-
-        //     $data[$i]['penambahan'] = $data_pasang[0]->penambahan_layanan; 
-                
-        // }
-
-        // for ($i=0; $i < count($data) ; $i++) { 
-
-        //     $company_id = $data[$i]->company_id;
-       
-        //     $data_terminate = DetailCustomer::where('company_id', $company_id)->whereMonth('tanggal_non_aktif', $month)->whereYear('tanggal_non_aktif', $year)
-        //     ->select(DB::raw('count(tanggal_non_aktif) as terminate')
-        //     )->get();
-
-        //     $data[$i]['terminate'] = $data_terminate[0]->terminate;  
-           
-        //     $data[$i]->total_gps = $data[$i]->total_gps - $data[$i]->terminate;
-                
-            
-        // }
-
-        // for ($i=0; $i < count($data) ; $i++) {
-
-        //     $company_id = $data[$i]->company_id;
-       
-        //     $data_reaktivasi = DetailCustomer::where('company_id', $company_id)->whereMonth('tgl_reaktivasi_gps', $month)->whereYear('tgl_reaktivasi_gps', $year)
-        //     ->select(DB::raw('count(tgl_reaktivasi_gps) as reaktivasi')
-        //     )->get();
-
-        //     $data[$i]['reaktivasi'] = $data_reaktivasi[0]->reaktivasi;  
-           
-        //     $data[$i]->total_gps    = $data[$i]->total_gps  + $data[$i]->reaktivasi;
-        //     $data[$i]->penambahan   = $data[$i]->penambahan + $data[$i]->reaktivasi;
-                
-            
-        // }
-
-        // return $data;
-        // $warning = array();
-        // $id = 454;
-        // $cek_detail = DetailCustomer::where('imei', $id)->first();
-        
-
-        // $cek_status = DetailCustomer::where('imei', $id)->where('status_id', 1)->get();
-        // $cari_company    = DetailCustomer::where('imei', $id)->where('status_id', 1)->first();
-        // $license    = DetailCustomer::where('imei', $id)->where('status_id', 1)->pluck('licence_plate')->first();
-        // $company['company_id'] = $cari_company;
-        // for ($i=0; $i <count($cek_status) ; $i++) { 
-        //     $cek_status[$i]['terpasang'] = "terpasang";
-        // }
-
-        // return $cek_status;
-
-        // foreach ($cek_status as $item) {
-           
-
-        //     return $item->licence_plate;    
-        // }
-        // $h = Company::where('id', 69)->get();
-
-        // return $h[0]->id;
-
-        // return $license;
-    
-
-        // $company = DetailCustomer::groupBy('company_id')->select('company_id')->get();
-
-        // for ($i=0; $i < count($company) ; $i++) { 
-        //     $a = $company[$i]->company_id;
-        //     $cari_pic            = Pic::where('company_id', $a)->get();
-        //     $total_gps_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(gps_id) as total_gps_installed'))->get();
-        //     $company[$i]["pic"]  = $cari_pic;
-        //     $company[$i]["total_gps_installed"] = $total_gps_installed;
-            
-        // }
-
-        // return $company;
-          
-        // $data = DetailCustomer::groupBy('company_id')->select('company_id')->get();
-        // for ($i=0; $i < count($data) ; $i++) { 
-
-        //     $company_id = $data[$i]->company_id;
-        //     $cari_tanggal_awal_pasang_per_company = DetailCustomer::where('company_id', $company_id)
-        //     ->select('tanggal_pasang')->orderBy('tanggal_pasang', 'ASC')->get();
-
-        //     print($cari_tanggal_awal_pasang_per_company);
-        //     // $data[$i]['tanggal_pasang_awal'] =  $cari_tanggal_awal_pasang_per_company[0]->tanggal_pasang;
-        // }
-
-        // $time = '2021-11-13 09:00:00';
-        // $a = Carbon::parse($time);
-
-        // $satu_jam = $a->addHours(1);
-        // // $t = date("H:i",strtotime($time));
-
-        // $enter ='2021-11-13 10:01:00';;
-        // if ( $enter <= $satu_jam) {
-        //     echo 'tidak telat';
-        // }
-        // else {
-        //     echo 'telat';
-        // }
-
-        // return $satu_jam;
-        $vehicle = 156;
-        $sensor     = DetailCustomer::where('vehicle_id', $vehicle)->pluck('sensor_all');
-        $explode_sensor    = explode(' ', $sensor[0]);
-        
-        return count($h);
-
-     
-
-      
-
-
-
-
-
-        
-
-      
-
-
-
-        
-
-    }
-
-=======
     public function export_masterPO()
     {
         return Excel::download(new MasterPoExport, 'MasterPo.xlsx');
     }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 }
 
 
