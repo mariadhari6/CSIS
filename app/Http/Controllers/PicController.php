@@ -37,22 +37,28 @@ class PicController extends Controller
     {
         $dataRequest = json_decode($request->data);
         foreach ($dataRequest as $key => $value) {
+            $a = $value->date_of_birth;
+            // try {
+            $data = array(
+                'company_id'        => Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                'pic_name'          =>  $value->pic_name,
+                'phone'             => $value->phone,
+                'email'             =>  $value->email,
+                'position'          =>  $value->position,
+                'date_of_birth'     =>  $value->date_of_birth == '' ? null :  $value->date_of_birth,
+            );
+            Pic::insert($data);
 
-            try {
-                $data = array(
-                    'company_id'        => Company::where('company_name', $value->company_id)->firstOrFail()->id,
-                    'pic_name'          =>  $value->pic_name,
-                    'phone'             => $value->phone,
-                    'email'             =>  $value->email,
-                    'position'          =>  $value->position,
-                    'date_of_birth'     =>  $value->date_of_birth
-                );
-                Pic::insert($data);
-                // return 'success';
-            } catch (\Throwable $th) {
-                return 'fail';
-            }
+            // return 'success';
+            // } catch (\Throwable $th) {
+            //     return 'fail';
+            // }
         }
+        // }
+        // if ($a == '') {
+        //     return 'is null';
+        // }
+        // return $a;
     }
 
     public function store(Request $request)

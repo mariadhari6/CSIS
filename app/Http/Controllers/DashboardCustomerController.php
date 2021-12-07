@@ -158,7 +158,14 @@ class DashboardCustomerController extends Controller
 
             $poolNameLoc = array();
 
-            for ($j = 0; $j < count($poolnameFinal); $j++) {
+            // for ($j = 0; $j < count($poolnameFinal); $j++) {
+            //     array_push($poolNameLoc, array(
+            //         "pool_name" => $poolnameFinal[$j]["pool_name"],
+            //         "pool_loc" => $poolLocFinal[$j]["pool_loc"],
+            //         "pool_total" => $poolnameFinal[$j]["pool_total"]
+            //     ));
+            // }
+            for ($j = 0; $j < count($poolLocFinal); $j++) {
                 array_push($poolNameLoc, array(
                     "pool_name" => $poolnameFinal[$j]["pool_name"],
                     "pool_loc" => $poolLocFinal[$j]["pool_loc"],

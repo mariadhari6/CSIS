@@ -45,7 +45,6 @@ class CompanyController extends Controller
                     'no_agreement_letter_id'     => $value->no_agreement_letter_id,
                     'status'     =>  $value->status,
 
-
                 );
                 Company::insert($data);
                 // return 'success';
@@ -151,13 +150,6 @@ class CompanyController extends Controller
 
         return $data;
     }
-
-    // public function dependentCompanys($id)
-    // {
-    //     $data = Seller::where('seller_name', $id)->get();
-
-    //     return $data;
-    // }
     public function importExcel(Request $request)
     {
         $file = $request->file('file');

@@ -9,8 +9,8 @@
         </select>
     </td>
     <td>
-        <select class="select" id="LicencePlate" name="LicencePlate">
-            <option class="hidden" value=""></option>
+       <select class="select-search search_selectpicker" id="LicencePlate" name="LicencePlate" data-live-search="true">
+            <option style="display: none"></option>
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('license_plate') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
             @endforeach
@@ -57,7 +57,7 @@
         </select>
     </td>
     <td>
-        <select class="select" id="Imei" name="Imei">
+        <select class="select-search_imei search_selectpicker" id="Imei" name="Imei">
             <option class="hidden" value=""></option>
             @foreach ($imei as $item)
                 <option value="{{ $item->id }}" {{ old('imei') == $item->id ? 'selected':''}}>{{ $item->imei }}</option>
@@ -81,7 +81,7 @@
         </select>
     </td>
     <td>
-        <select class="select" id="GSM" name="GSM">
+        <select class="select-search_gsm search_selectpicker" id="GSM" name="GSM">
             <option class="hidden" value=""></option>
             @foreach ($gsm as $item)
                 <option value="{{ $item->id }}" {{ old('gsm_id') == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
@@ -201,7 +201,35 @@
     </td>
 
     <script>
+  $(document).ready(function() {
+    new TomSelect(".select-search",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
 
+    $(document).ready(function() {
+    new TomSelect(".select-search_imei",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
+
+    $(document).ready(function() {
+    new TomSelect(".select-search_gsm",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
         $(document).ready(function() {
 
             $(function(){

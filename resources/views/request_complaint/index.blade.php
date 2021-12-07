@@ -181,6 +181,8 @@
         var waktu_solve = $("#waktu_solve").val();
         var status = $("#status").val();
         var status_akhir = $("#status_akhir").val();
+        // alert(company_id);
+        // var waktu_kesepakatan_m = '0';
 
         // alert(vehicle);
         // if (vehicle = "") {
@@ -196,11 +198,53 @@
 
 
 
-        if(company_id =="" || internal_eksternal=="" || pic_id=="" || waktu_info=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status=="" ){
+        if(company_id =="" || internal_eksternal=="" || pic_id=="" || waktu_info=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || status=="" ){
             //   if(task != 1 || 2 || 3 || 4 || 5)
             //     {
             //         vehicle = "halllo";
             //     }
+            alert('if 1');
+        }else if( waktu_kesepakatan =="" &&
+                    task == "Maintenance GPS" ||
+                    task == "Maintenance Sensor" ||
+                    task == "Mutasi Pelepasan GPS" ||
+                    task == "Mutasi Pemasangan GPS" ||
+                    task == "Mutasi Pemasangan dan Pelepasan GPS"||
+                    task == "Pemasangan GPS")
+        {
+
+            $.ajax({
+            type: "get",
+            url: "{{ url('store_RequestComplain') }}",
+            data: {
+              company_id: company_id,
+              internal_eksternal:internal_eksternal,
+              pic_id: pic_id,
+              vehicle: vehicle,
+              waktu_info: waktu_info,
+             waktu_respond:waktu_respond,
+              task:task,
+              platform:platform,
+              detail_task:detail_task,
+              divisi:divisi,
+              respond:respond,
+              waktu_kesepakatan:waktu_kesepakatan,
+              waktu_solve:waktu_solve,
+              status:status,
+              status_akhir:status_akhir
+            },
+            // alert(vehicle);
+            success: function(data) {
+             swal({
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
+              read();
+            }
+        })
+
         }else {
             $.ajax({
             type: "get",
@@ -235,6 +279,9 @@
         })
 
         }
+
+            // alert(waktu_kesepakatan_m);
+
 
 
     }

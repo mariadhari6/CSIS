@@ -644,7 +644,7 @@ nav.sidebar-new li.active > a,
     position: relative;
     left: 20px;
     top: 150px;
-    font-size: 25px;
+    font-size: 20px;
 
 
 }
@@ -654,7 +654,7 @@ nav.sidebar-new li.active > a,
     left: 240px;
     top: 90px;
 
-    font-size: 35px;
+    font-size: 25px;
 }
 
 .d_gps {
@@ -679,7 +679,7 @@ nav.sidebar-new li.active > a,
 
 .d_gps-teks {
     position: relative;
-    font-size: 25px;
+    font-size: 20px;
     left: 10px;
     top: 40px;
 }
@@ -688,7 +688,7 @@ nav.sidebar-new li.active > a,
     position: relative;
     left: 140px;
     bottom: 20px;
-    font-size: 35px;
+    font-size: 25px;
 
 }
 
@@ -714,7 +714,7 @@ nav.sidebar-new li.active > a,
 
 .d_sensor-teks {
      position: relative;
-    font-size: 25px;
+    font-size: 20px;
     left: 10px;
     top: 40px;
 }
@@ -723,7 +723,7 @@ nav.sidebar-new li.active > a,
      position: relative;
     left: 140px;
     bottom: 20px;
-    font-size: 35px;
+    font-size: 25px;
 
 }
 
@@ -750,7 +750,7 @@ nav.sidebar-new li.active > a,
 
 .d_vehicle-teks {
     position: relative;
-    font-size: 25px;
+    font-size: 20px;
     left: 210px;
     top: -60px;
 }
@@ -759,7 +759,7 @@ nav.sidebar-new li.active > a,
     position: relative;
     left: 340px;
     top: -60px;
-    font-size: 35px;
+    font-size: 25px;
 
 }
 
@@ -788,14 +788,14 @@ nav.sidebar-new li.active > a,
     position: relative;
     left: 190px;
     top: -60px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .d_gsm-number {
     position: relative;
     left: 200px;
     top: -50px;
-    font-size: 35px;
+    font-size: 25px;
 
 }
 
@@ -824,7 +824,7 @@ nav.sidebar-new li.active > a,
 
 .d_RequstComp-teks {
     position: relative;
-    font-size: 25px;
+    font-size: 20px;
     left: 270px;
     top: -60px;
 }
@@ -833,7 +833,7 @@ nav.sidebar-new li.active > a,
      position: relative;
     left: 430px;
     top: -60px;
-    font-size: 35px;
+    font-size: 25px;
 
 }
 
@@ -863,14 +863,14 @@ nav.sidebar-new li.active > a,
     position: relative;
     left: 120px;
     top: -50px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .d_visitAs-number {
     position: relative;
     left: 145px;
     top: -35px;
-    font-size: 35px;
+    font-size: 25px;
 
 }
 
@@ -1311,5 +1311,10 @@ nav.sidebar-new li.active > a,
     text-align: center;
 
 }
+
+.search_selectpicker{
+ z-index: 2;
+}
+
 
 

@@ -374,12 +374,12 @@ class CustomerServiceController extends Controller
 
     public function visit_home()
     {
-        $pemasangan = RequestComplaint::groupBy('status')->where('task', 'Pemasangan GPS')->selectRaw('count(task) as jumlah_status_pemasangan, status')->get();
+        $pemasangan = RequestComplaint::groupBy('status')->where('task', 'Pemasangan GPS')->selectRaw('count(status) as jumlah_status_pemasangan, status')->get();
         // return $pemasangan;
-        $mutasi = RequestComplaint::groupBy('status')->whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->selectRaw('count(task) as jumlah_status_mutasi, status')->get();
+        $mutasi = RequestComplaint::groupBy('status')->whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->selectRaw('count(status) as jumlah_status_mutasi, status')->get();
         // return $mutasi;
-        $maintenance_gps = RequestComplaint::groupBy('status')->where('task', 'Maintenance GPS')->selectRaw('count(task) as jumlah_status_maintenance_gps, status')->get();
-        $maintenance_sensor = RequestComplaint::groupBy('status')->where('task', 'Maintenance Sensor')->selectRaw('count(task) as jumlah_status_maintenance_sensor, status')->get();
+        $maintenance_gps = RequestComplaint::groupBy('status')->where('task', 'Maintenance GPS')->selectRaw('count(status) as jumlah_status_maintenance_gps, status')->get();
+        $maintenance_sensor = RequestComplaint::groupBy('status')->where('task', 'Maintenance Sensor')->selectRaw('count(status) as jumlah_status_maintenance_sensor, status')->get();
         // return $maintenance_sensor;
         // presentase pemasangan
         $jumlah_done_pemasangan = RequestComplaint::where('task', 'Pemasangan GPS')->where('status', 'Done')->count();
@@ -395,7 +395,7 @@ class CustomerServiceController extends Controller
         $jumlah_done_maintenance_gps = RequestComplaint::where('task', 'Maintenance GPS')->where('status', 'Done')->count();
         $jumlah_total_maintenance_gps = RequestComplaint::where('task', 'Maintenance GPS')->count();
         $presentase_maintenance_gps = ($jumlah_done_maintenance_gps / $jumlah_total_maintenance_gps) * 100;
-
+        // return $presentase_maintenance_gps;
         // presentase maintenance gps
         $jumlah_done_maintenance_sensor = RequestComplaint::where('task', 'Maintenance Sensor')->where('status', 'Done')->count();
         $jumlah_total_maintenance_sensor = RequestComplaint::where('task', 'Maintenance Sensor')->count();

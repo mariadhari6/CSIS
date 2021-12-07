@@ -4,10 +4,10 @@
 
     <td>
         <select class="select company_id-{{$pic->id}}" id="company_id" name="company_id" required>
-        <option value="{{ $pic->company->id }}">{{ $pic->company->company_name }}</option>
+        <option value="{{ $pic->company_id }}">{{ $pic->company->company_name??'' }}</option>
 
         @foreach ($company as $item)
-        <option value="{{ $item->id }}">{{ $item->company_name }}</option>
+        <option value="{{ $item->id }}">{{ $item->company_name??'' }}</option>
         @endforeach
 
         </select></i>

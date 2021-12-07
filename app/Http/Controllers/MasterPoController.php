@@ -47,7 +47,8 @@ class MasterPoController extends Controller
                 'harga_layanan'     =>  $value->harga_layanan,
                 'jumlah_unit_po'    =>  $value->jumlah_unit_po,
                 'status_po'         => $value->status_po,
-                'sales_id'            =>  $value->sales_id,
+                'sales_id'          => Sales::where('name', $value->sales_id)->firstOrFail()->id,
+
                 'count'             => $value->jumlah_unit_po,
 
             );

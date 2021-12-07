@@ -7,7 +7,7 @@
         <option class="hidden" value=" {{$pemasangan_mutasi_GPS->company_id}}"> {{$pemasangan_mutasi_GPS->companyRequest->company_name??''}} </option>
         @foreach ($details as $item)
         <option value="{{ $item->company_id }}">
-        {{$item->company->company_name}}
+        {{$item->company->company_name??''}}
         </option>
 
        @endforeach
@@ -39,7 +39,7 @@
          </select></i>
     </td>
     <td>
-          <select class="select kendaraan_pasang-{{$pemasangan_mutasi_GPS->id}}"  id="kendaraan_pasang" name="kendaraan_pasang">
+          <select class="select-search search_selectpicker kendaraan_pasang-{{$pemasangan_mutasi_GPS->id}}"  id="kendaraan_pasang" name="kendaraan_pasang">
 
             {{-- <option value="-">
                 {{ $pemasangan_mutasi_GPS->vehicleKendaraanPasang->license_plate ??''}}
@@ -58,7 +58,7 @@
 
 
     <td><select class="select imei-{{$pemasangan_mutasi_GPS->id}}" id="imei" name="imei" required >
-        <option value="{{$pemasangan_mutasi_GPS->imei}}"> {{$pemasangan_mutasi_GPS->detailCustomerImei->imei}} </option>
+        <option value="{{$pemasangan_mutasi_GPS->imei}}"> {{$pemasangan_mutasi_GPS->detailCustomerImei->imei??''}} </option>
         @foreach ($details as $detail)
         <option value="{{ $detail->id }}">
         {{$detail->gps->imei??''}}
@@ -67,7 +67,7 @@
     </select></i></td>
 
      <td><select class="select gsm_pemasangan-{{$pemasangan_mutasi_GPS->id}}" id="gsm_pemasangan" name="gsm_pemasangan" required >
-        <option value="{{$pemasangan_mutasi_GPS->gsm_pemasangan}}"> {{$pemasangan_mutasi_GPS->detailCustomerGsm->gsm_number}} </option>
+        <option value="{{$pemasangan_mutasi_GPS->gsm_pemasangan}}"> {{$pemasangan_mutasi_GPS->detailCustomerGsm->gsm_number??''}} </option>
         @foreach ($details as $item)
         <option value="{{ $item->gsm_pemasangan}}" >
         {{$item->gsm->gsm_number??''}}
@@ -76,7 +76,7 @@
        @endforeach
     </select></i></td>
       <td><select class="select equipment_terpakai_gps-{{$pemasangan_mutasi_GPS->id}}" id="equipment_terpakai_gps" name="equipment_terpakai_gps" >
-        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->detailCustomerGps->type}} </option>
+        <option value="{{$pemasangan_mutasi_GPS->equipment_terpakai_gps}}"> {{$pemasangan_mutasi_GPS->detailCustomerGps->type??''}} </option>
         @foreach ($gps as $gpses)
         <option value="{{ $gpses->id }}">
         {{$gpses->type??''}}
@@ -201,6 +201,16 @@
 
 
 <script>
+
+        $(document).ready(function() {
+    new TomSelect(".select-search",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
 
     $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();

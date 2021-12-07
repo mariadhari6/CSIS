@@ -67,13 +67,71 @@ class GpsController extends Controller
 
     public function save_import(Request $request)
     {
+        // $dataRequest = json_decode($request->data);
+        // $data = [];
+        // $fail = 0;
+        // foreach ($dataRequest as $key => $value) {
+        //     $imeiNumber = $value->imei;
+        //     $checkImei = Gps::where('imei', '=', $imeiNumber)->first();
+        //     if ($checkImei === null) {
+        //         $data[$key] = array(
+        //             'merk'        =>  (string) $value->merk,
+        //             'type'        =>  (string) $value->type,
+        //             'imei'        =>  $value->imei,
+        //             'waranty'     =>  $value->waranty,
+        //             'po_date'     =>  $value->po_date,
+        //             'status'           =>  (string) $value->status,
+        //             'status_ownership' =>  (string) $value->status_ownership,
+        //         );
+        //         // GpsTemporary::insert($data);
+
+        //         $imeiReq = $data[$key]['imei'];
+        //         $checkImei = GpsTemporary::where('imei', '=', $imeiReq)->first();
+
+        //         if ($checkImei === null) {
+        //             GpsTemporary::insert($data[$key]);
+        //         } else {
+        //             $fail = 1;
+        //         }
+        //         // echo $data;
+        //     } else {
+        //         $fail = 1;
+        //     }
+        // }
+        // GpsTemporary::truncate();
+        // if ($fail === true) {
+        //     return 'fail';
+        // } else {
+        //     for ($i = 0; $i < count($data); $i++) {
+        //         try {
+        //             Gps::insert($data[$i]);
+        //         } catch (\Throwable $th) {
+        //             $fail = true;
+        //         }
+        //     }
+        // }
+
         $dataRequest = json_decode($request->data);
         $data = [];
         $fail = 0;
+        $success = 0;
         foreach ($dataRequest as $key => $value) {
             $imeiNumber = $value->imei;
             $checkImei = Gps::where('imei', '=', $imeiNumber)->first();
             if ($checkImei === null) {
+
+                $success = 1;
+                $fail = 0;
+            } else {
+                $fail = 1;
+                $success = 1;
+            }
+        }
+        if ($fail == 1 && $success == 1) {
+            return 'fail';
+        } else if ($fail == 0 && $success == 1) {
+            foreach ($dataRequest as $key => $value) {
+
                 $data[$key] = array(
                     'merk'        =>  (string) $value->merk,
                     'type'        =>  (string) $value->type,
@@ -82,32 +140,11 @@ class GpsController extends Controller
                     'po_date'     =>  $value->po_date,
                     'status'           =>  (string) $value->status,
                     'status_ownership' =>  (string) $value->status_ownership,
+                    // 'company_id'     =>  $value->company_id == '' ? null :  $value->company_id,
+
+
                 );
-                // GpsTemporary::insert($data);
-
-                $imeiReq = $data[$key]['imei'];
-                $checkImei = GpsTemporary::where('imei', '=', $imeiReq)->first();
-
-                if ($checkImei === null) {
-                    GpsTemporary::insert($data[$key]);
-                } else {
-                    $fail = 1;
-                }
-                // echo $data;
-            } else {
-                $fail = 1;
-            }
-        }
-        GpsTemporary::truncate();
-        if ($fail === true) {
-            return 'fail';
-        } else {
-            for ($i = 0; $i < count($data); $i++) {
-                try {
-                    Gps::insert($data[$i]);
-                } catch (\Throwable $th) {
-                    $fail = true;
-                }
+                Gps::insert($data[$key]);
             }
         }
     }

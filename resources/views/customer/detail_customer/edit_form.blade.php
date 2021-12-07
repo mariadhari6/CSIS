@@ -8,7 +8,7 @@
     </select>
 </td>
 <td>
-    <select class="select LicencePlate-{{ $details->id }}" id="LicencePlate" name="LicencePlate">
+    <select class="select-search search_selectpicker LicencePlate-{{ $details->id }}" id="LicencePlate" name="LicencePlate">
         <option class="hidden" value="{{$details->licence_plate}}">{{$details->vehicle->license_plate}}</option>
         @foreach ($vehicle as $item)
             <option value="{{ $item->id }}" {{ $details->licence_plate  == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
@@ -53,7 +53,7 @@
     </select>
 </td>
 <td>
-    <select class="select Imei-{{ $details->id }}" id="Imei" name="Imei">
+    <select class="select-search_imei search_selectpicker Imei-{{ $details->id }}" id="Imei" name="Imei">
         @foreach ($imei as $item)
             <option value="{{ $item->id }}" {{ $details->imei == $item->id ? 'selected':''}}>{{ $item->imei }}</option>
         @endforeach
@@ -74,7 +74,7 @@
     </select>
 </td>
 <td>
-    <select class="select GSM-{{ $details->id }}" id="GSM" name="GSM">
+    <select class="select-search_gsm search_selectpicker GSM-{{ $details->id }}" id="GSM" name="GSM">
         {{-- <option value=""></option> --}}
         @foreach ($gsm as $item)
         <option value="{{ $item->id }}" {{ $details->gsm_id  == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
@@ -185,6 +185,36 @@
 </td>
 
 <script>
+
+      $(document).ready(function() {
+    new TomSelect(".select-search",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
+
+    $(document).ready(function() {
+    new TomSelect(".select-search_imei",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
+
+    $(document).ready(function() {
+    new TomSelect(".select-search_gsm",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
 
     $(document).ready(function() {
 

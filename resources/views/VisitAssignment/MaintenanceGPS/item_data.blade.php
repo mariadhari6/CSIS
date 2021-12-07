@@ -13,7 +13,7 @@
             {{ $no++ }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->companyRequest->company_name }}
+            {{ $item->companyRequest->company_name ??''}}
         </td>
         <td id="item-task-{{ $item->id}}">
             {{ $item->task }}
@@ -27,7 +27,7 @@
 
         @if ($item->type_gps_id !=null)
             <td id="item-type_gps_id-{{ $item->id }}">
-            {{$item->gpsMaintenance->type}}
+            {{$item->gpsMaintenance->type??''}}
             </td>
         @elseif ($item->type_gps_id ==null)
             <td id="item-type_gps_id-{{ $item->id }}">

@@ -28,7 +28,7 @@ class RequestComplaintExport implements FromCollection, WithHeadings, WithMappin
             $request->pic->pic_name,
             $request->vehicleRequest->license_plate,
             Carbon::parse($request->waktu_info)->toFormattedDateString(),
-            $request->taskRequest->task,
+            $request->task,
             $request->platform,
             $request->detail_task,
             $request->divisi,

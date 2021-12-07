@@ -79,70 +79,49 @@ class GsmMasterController extends Controller
         $dataRequest = json_decode($request->data);
         $data = [];
         $fail = 0;
+        $success = 0;
         foreach ($dataRequest as $key => $value) {
             $gsmNumber = $value->gsm_number;
             $serialNumber = $value->serial_number;
             $checkGsm = Gsm::where('gsm_number', '=', $gsmNumber)->first();
             $checkSerial = Gsm::where('serial_number', '=', $serialNumber)->first();
             if ($checkGsm === null && $checkSerial === null) {
+                $success = 1;
+                $fail = 0;
+            } else {
+                $fail = 1;
+                $success = 1;
+            }
+        }
+
+        if ($fail == 1 && $success == 1) {
+            return 'fail';
+        } else if ($fail == 0 && $success == 1) {
+            // $dataRequest = json_decode($request->data);
+            foreach ($dataRequest as $key => $value) {
+                try {
+                    $company = Company::where('company_name', $value->company_id)->firstOrFail()->id;
+                } catch (\Throwable $th) {
+                    $company = null;
+                }
+
                 $data[$key] = array(
                     'status_gsm'        =>  $value->status_gsm,
                     'gsm_number'        =>  $value->gsm_number,
-                    'company_id'        =>  Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                    'company_id'        =>  $company,
                     'serial_number'     =>  $value->serial_number,
                     'icc_id'            =>  $value->icc_id,
                     'imsi'              =>  $value->imsi,
                     'res_id'            =>  $value->res_id,
                     'request_date'      =>  $value->request_date,
-                    'expired_date'      =>  $value->expired_date == '' ? null :  $value->expired_date,
-                    'active_date'       =>  $value->active_date == '' ? null :  $value->active_date,
-                    'terminate_date'    =>  $value->terminate_date == '' ? null :  $value->terminate_date,
+                    'expired_date'      =>  $value->expired_date == "" ? null :  $value->expired_date,
+                    'active_date'       =>  $value->active_date == "" ? null :  $value->active_date,
+                    'terminate_date'    =>  $value->terminate_date == "" ? null :  $value->terminate_date,
                     'note'              =>  $value->note,
-                    'provider'          =>  $value->provider
+                    'provider'          =>  $value->provider,
+                    'was_maintenance'   =>  '0'
                 );
-                $gsmNumberReq = $data[$key]['gsm_number'];
-                $serialNumberReq = $data[$key]['serial_number'];
-                $checkGsm2 = GsmTemporary::where('gsm_number', '=', $gsmNumberReq)->first();
-                $checkSerial2 = GsmTemporary::where('serial_number', '=', $serialNumberReq)->first();
-
-                if ($checkGsm2 === null && $checkSerial2 === null) {
-                    GsmTemporary::insert($data[$key]);
-                } else {
-                    $fail = 1;
-                }
-            } else {
-                $fail = 1;
-            }
-        }
-
-        if ($fail === 1) {
-            GsmTemporary::truncate();
-            return 'fail';
-        } else {
-            try {
-                $gsmTemporary = GsmTemporary::orderBy('id', 'DESC')->get();
-                foreach ($gsmTemporary as $key => $value) {
-                    $data[$key] = array(
-                        'status_gsm'        =>  $value->status_gsm,
-                        'gsm_number'        =>  $value->gsm_number,
-                        'company_id'        =>  $value->company_id,
-                        'serial_number'     =>  $value->serial_number,
-                        'icc_id'            =>  $value->icc_id,
-                        'imsi'              =>  $value->imsi,
-                        'res_id'            =>  $value->res_id,
-                        'request_date'      =>  $value->request_date,
-                        'expired_date'      =>  $value->expired_date == '' ? null :  $value->expired_date,
-                        'active_date'       =>  $value->active_date == '' ? null :  $value->active_date,
-                        'terminate_date'    =>  $value->terminate_date == '' ? null :  $value->terminate_date,
-                        'note'              =>  $value->note,
-                        'provider'          =>  $value->provider
-                    );
-                    Gsm::insert($data[$key]);
-                    $dataDelete = GsmTemporary::findOrfail($value->id);
-                    $dataDelete->delete();
-                }
-            } catch (\Throwable $th) {
-                return 'fail';
+                Gsm::insert($data[$key]);
             }
         }
     }

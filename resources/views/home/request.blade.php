@@ -32,7 +32,6 @@
                             {{$item->status}}
                          </td>
 
-
                         <td>
                             {{$item->jumlah_status_complaint}}
                          </td>
@@ -62,7 +61,7 @@
             <div class="card-body">
                 <h6 style="float: left">Request</h6>
                 <h6 class="presentase-table" >{{round($presentase_request,1)}}%</h6>
-                <table class="table table-hover data " class="table_home" id="table_request" >
+                <table class="table table-hover data " class="table_home" id="table_home" >
 
                 <tr>
                     <th scope="col" class="list">Status</th>

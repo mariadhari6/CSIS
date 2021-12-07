@@ -4,7 +4,7 @@
 
 
 
-    <td><select class="select-search search_companycompany_id-{{$request_complain->id}}" id="company_id" name="company_id" required>
+    <td><select class="select-search search_selectpicker company_id-{{$request_complain->id}}" id="company_id" name="company_id" required>
         <option value="{{$request_complain->company_id}}"> {{$request_complain->companyRequest->company_name??''}} </option>
         @foreach ($detail as $item )
             <option name="company" value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
@@ -29,7 +29,7 @@
 
        @endforeach --}}
     <td>
-          <select class="select vehicle-{{$request_complain->id}}" id="vehicle" name="vehicle" required>
+          <select class="select-search_vehicle search_selectpicker vehicle-{{$request_complain->id}}" id="vehicle" name="vehicle" required>
             <option value="{{$request_complain->vehicle}}">{{$request_complain->vehicleRequest->license_plate??''}}</option>
 
             {{-- @foreach ($detail as $item)
@@ -46,7 +46,7 @@
     </td>
 
     <td>
-        <select class="select task-{{$request_complain->id}}" id="task" name="task" required>
+        <select class="select-search_task search_selectpicker task-{{$request_complain->id}}" id="task" name="task" required>
         <option value="{{$request_complain->task}}"> {{$request_complain->task??''}} </option>
        @foreach ($task_request as $item)
         <option value="{{ $item->task }}" {{ old('task') == $item->task ? 'selected':'' }}>{{ $item->task }}</option>
@@ -98,7 +98,7 @@
 
     <script>
 
-           $(document).ready(function() {
+         $(document).ready(function() {
     new TomSelect(".select-search",{
     create: false,
     sortField: {
@@ -107,6 +107,28 @@
     }
     });
     });
+
+    $(document).ready(function() {
+    new TomSelect(".select-search_task",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
+
+    $(document).ready(function() {
+    new TomSelect(".select-search_vehicle",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
+
+
 
 
 

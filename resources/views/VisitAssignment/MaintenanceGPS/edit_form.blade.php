@@ -8,7 +8,7 @@
             </option>
 
             @foreach ($details as $item)
-            <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
+            <option value="{{ $item->company_id }}">{{ $item->company->company_name??'' }}</option>
             @endforeach
 
         </select>
