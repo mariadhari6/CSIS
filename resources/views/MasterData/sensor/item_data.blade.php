@@ -12,6 +12,10 @@
         <td id="item-no-{{ $sensors->id}}">
             {{ $no++ }}
         </td>
+
+        {{-- <td id="item-company_id-{{ $sellers->id}}">
+                {{ $sellers->company->company_name}}
+        </td> --}}
         <td id="item-sensor_name-{{ $sensors->id}}">
             {{ $sensors->sensor_name }}
         </td>

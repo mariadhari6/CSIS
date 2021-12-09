@@ -1,6 +1,7 @@
 <?php $no=1; ?>
 @foreach ($gps as $item)
     <tr id="edit-form-{{ $item->id }}">
+
          <td id="td-checkbox-{{ $item->id }}" class="{{ $item->id }}">
             <div>
                 <label class="form-check-label">
@@ -12,6 +13,10 @@
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
+
+        {{-- <td id="item-company_id-{{ $sellers->id}}">
+                {{ $sellers->company->company_name}}
+        </td> --}}
         <td id="item-merk-{{ $item->id}}">
             {{ $item->merk}}
         </td>
@@ -33,11 +38,6 @@
           <td id="item-status_ownership-{{ $item->id }}">
             {{ $item->status_ownership }}
           </td>
-<<<<<<< HEAD
-          <td id="item-company_id-{{ $item->id }}">
-            {{ $item->company->company_name??'' }}
-          </td>
-=======
           @if ($item->company_id == null)
           <td id="item-company_id-{{ $item->id }}">
             -
@@ -47,7 +47,6 @@
             {{ $item->company->company_name??'' }}
           </td>
           @endif
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
           <td class="sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
@@ -56,3 +55,4 @@
         </td>
     </tr>
 @endforeach
+

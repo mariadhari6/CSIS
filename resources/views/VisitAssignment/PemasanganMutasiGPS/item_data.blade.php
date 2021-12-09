@@ -2,14 +2,18 @@
 @foreach ($pemasangan_mutasi_GPS as $item)
     <tr id="edit-form-{{ $item->id }}">
          <td id="td-checkbox-{{ $item->id }}">
-            <label class="form-check-label">
-                <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
-                <span class="form-check-sign"></span>
-            </label>              
+            <div>
+                <label class="form-check-label">
+                    <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
+                    <span class="form-check-sign"></span>
+                </label>
+            </div>
         </td>
         <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
         </td>
+
+
         <td id="item-company_id-{{ $item->id}}">
             {{ $item->companyRequest->company_name??''}}
         </td>
@@ -21,12 +25,8 @@
         </td>
         @if ($item->vehicle != null)
              <td id="item-vehicle-{{ $item->id}}">
-<<<<<<< HEAD
-                {{ $item->vehicleRequest->license_plate?? ''}}
-=======
                 {{ $item->vehicleRequest->license_plate??'' }}
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             </td>
         @elseif ($item->vehicle == null)
              <td id="item-vehicle-{{ $item->id}}">
@@ -46,11 +46,7 @@
 
         @if ($item->imei != null)
         <td id="item-imei-{{ $item->id }}">
-<<<<<<< HEAD
-            {{ $item->gpsPemasangan->imei?? ''}}
-=======
             {{ $item->detailCustomerImei->imei?? ''}}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         </td>
         @elseif ($item->imei == null)
           <td id="item-imei-{{ $item->id }}">
@@ -69,11 +65,7 @@
         @endif
           @if ($item->equipment_terpakai_gps != null)
         <td id="item-equipment_terpakai_gps-{{ $item->id }}">
-<<<<<<< HEAD
-            {{$item->gpsPemasangan->type?? ''}}
-=======
             {{$item->detailCustomerGps->type?? ''}}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         </td>
         @elseif ($item->equipment_terpakai_gps == null)
         <td id="item-equipment_terpakai_gps-{{ $item->id }}">

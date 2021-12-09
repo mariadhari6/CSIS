@@ -29,7 +29,6 @@ class CompanyController extends Controller
     public function item_data()
     {
         $company = Company::orderBy('id', 'DESC')->get();
-        
         return view('MasterData.company.item_data')->with([
             'company' => $company
         ]);
@@ -129,7 +128,6 @@ class CompanyController extends Controller
         if ($request->ajax()) {
             $ids = $request->input('id');
             DB::table('companies')->whereIn('id', $ids)->delete();
-            
         }
     }
 

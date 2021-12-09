@@ -16,45 +16,26 @@
     <td id="item-internal_eksternal-{{ $request_complains->id }}">
         {{ $request_complains->internal_eksternal }}
     </td>
-<<<<<<< HEAD
-    <td id="item-pic-{{ $request_complains->id}}">
-        {{ $request_complains->pic->pic_name?? ''}}
-    </td>
-    <td id="item-vehicle-{{ $request_complains->id }}">
-        {{$request_complains->vehicleRequest->license_plate?? ''}}
-=======
     <td id="item-pic_id-{{ $request_complains->id}}">
         {{ $request_complains->pic->pic_name?? ''}}
     </td>
     <td id="item-vehicle-{{ $request_complains->id }}">
         {{$request_complains->vehicleRequest->license_plate??''}}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     </td>
     <td id="item-waktu_info-{{ $request_complains->id }}">
         {{ $request_complains->waktu_info}}
     </td>
     @if ($request_complains->status_waktu_respon == "telat")
-<<<<<<< HEAD
-        <td id="item-waktu_respond-{{ $request_complains->id }}" style="background-color:#FF0000; color: white">
-            {{ $request_complains->waktu_respond}}
-        </td>
-    @else 
-=======
         <td id="item-waktu_respond-{{ $request_complains->id }}" style="color:#FF0000; ">
             {{ $request_complains->waktu_respond}}
         </td>
     @else
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         <td id="item-waktu_respond-{{ $request_complains->id }}">
             {{ $request_complains->waktu_respond}}
         </td>
     @endif
     <td id="item-task-{{ $request_complains->id }}">
-<<<<<<< HEAD
-        {{ $request_complains->taskRequest->task??''}}
-=======
         {{ $request_complains->task}}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     </td>
     <td id="item-platform-{{ $request_complains->id }}">
         {{ $request_complains->platform}}
@@ -75,19 +56,11 @@
         {{ $request_complains->status }}
     </td>
     @if ($request_complains->status_waktu_solve == "telat")
-<<<<<<< HEAD
-        <td id="item-waktu_respond-{{ $request_complains->id }}" style="background-color:#FF0000; color: white">
-            {{ $request_complains->waktu_solve}}
-        </td>
-    @elseif($request_complains->waktu_solve == null && $request_complains->status == "Done")
-        <td id="item-waktu_respond-{{ $request_complains->id }}" style="background-color:#FF0000; color: white">
-=======
         <td id="item-waktu_respond-{{ $request_complains->id }}" style="color:#FF0000;">
             {{ $request_complains->waktu_solve}}
         </td>
     @elseif($request_complains->waktu_solve == null && $request_complains->status == "Done")
         <td id="item-waktu_respond-{{ $request_complains->id }}" style="background-color:#ff8383; color: white">
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             {{ $request_complains->waktu_solve}}
         </td>
     @else

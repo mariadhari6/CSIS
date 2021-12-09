@@ -13,26 +13,27 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SellerController extends Controller
 {
-    public function index() {
-
+    public function index()
+    {
         return view('MasterData.seller.index');
     }
 
-    public function add_form() {
+    public function add_form()
+    {
 
         return view('MasterData.seller.add_form');
     }
 
-    public function item_data() {
-
+    public function item_data()
+    {
         $seller = Seller::orderBy('id', 'DESC')->get();
         return view('MasterData.seller.item_data')->with([
             'seller' => $seller
         ]);
     }
 
-    public function save_import(Request $request) {
-
+    public function save_import(Request $request)
+    {
         $dataRequest = json_decode($request->data);
         foreach ($dataRequest as $key => $value) {
             $sellerCode = $value->seller_code;
@@ -58,20 +59,19 @@ class SellerController extends Controller
         }
     }
 
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $data = array(
             'seller_name'           => $request->seller_name,
             'seller_code'           => $request->seller_code,
             'no_agreement_letter'   => $request->no_agreement_letter,
             'status'                => $request->status
         );
-
         Seller::insert($data);
     }
 
-    public function edit_form($id) {
-        
+    public function edit_form($id)
+    {
         $seller    = Seller::findOrfail($id);
         return view('MasterData.seller.edit_form')->with([
             'seller' => $seller,

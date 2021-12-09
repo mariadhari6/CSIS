@@ -1,12 +1,7 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
-@section('title','CSIC | Maintenance GPS')
-@section('title-table','Maintenance GPS')
-=======
 @section('title','CSIC | Maintenance Device')
 @section('title-table','Maintenance Device')
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 @section('content')
     <form onsubmit="return false">
 
@@ -58,15 +53,9 @@
                 <th scope="col" class="list">Vehicle</th>
                 <th scope="col" class="list">Tanggal</th>
                 <th scope="col" class="list">Type GPS*</th>
-<<<<<<< HEAD
-                <th scope="col" class="list">GPS terpasang</th>
-                <th scope="col" class="list">Sensor terpasang</th>
-                <th scope="col" class="list">GSM</th>
-=======
                 <th scope="col" class="list">GPS Terpakai</th>
                 <th scope="col" class="list">Sensor Terpakai</th>
                 <th scope="col" class="list">GSM Terpakai</th>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 <th scope="col" class="list">Ketersediaan Kendaraan</th>
                 <th scope="col" class="list">Keterangan</th>
                 <th scope="col" class="list">Hasil*</th>

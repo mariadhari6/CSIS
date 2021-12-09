@@ -4,6 +4,7 @@
 
 
 @section('content')
+ {{-- <form> --}}
 
   <div class="row">
     <div class="col-md-12">
@@ -35,20 +36,17 @@
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
-<<<<<<< HEAD
-            <form>
-          <table class="table table-responsive" id="table_id" >
-=======
             <form onsubmit="return false">
           <table class="table table-responsive data " id="table_pemasangan" >
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <thead>
               <tr>
                 <th>
-                  <label class="form-check-label">
-                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                    <span class="form-check-sign"></span>
-                  </label>                      
+                    <div>
+                        <label class="form-check-label">
+                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                            <span class="form-check-sign"></span>
+                        </label>
+                    </div>
                 </th>
                 <th scope="col" class="action-no">No.</th>
                 <th scope="col" class="list-company">Company</th>
@@ -66,9 +64,12 @@
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="list">Status*</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
+
             </thead>
             <tbody  id="item_data">
+              {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
           </form>
@@ -80,11 +81,9 @@
 
 
   <script>
-
     $(document).ready(function() {
-      read();
+      read()
     });
-
     // ------ Tampil Data ------
     function read(){
         enableButton();
@@ -93,15 +92,11 @@
          $('#table_pemasangan').find("#item_data").html(data);
          $('#table_pemasangan').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
-<<<<<<< HEAD
-          });
-        $('#table_id').DataTable().draw();
-=======
             // "dom": '<lf<t>ip>'
             });
         $('#table_pemasangan').DataTable().draw();
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
       });
     }
         // filter bulan dan tahun
@@ -141,20 +136,9 @@
     });
 
     // ------- filter --------
-    function filter(value){
+      function filter(value){
       var value = value;
       $.get(value, {}, function(data, status) {
-<<<<<<< HEAD
-          $('#table_id').DataTable().destroy();
-          $('#table_id').find("#item_data").html(data);
-            $('#table_id').dataTable( {
-              "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            });
-          $('#table_id').DataTable().draw();
-      });
-    }
-
-=======
           $('#table_pemasangan').DataTable().destroy();
           $('#table_pemasangan').find("#item_data").html(data);
             $('#table_pemasangan').dataTable( {
@@ -164,14 +148,10 @@
           $('#table_pemasangan').DataTable().draw();
         });
       }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     // ---- Tombol Cancel -----
     function cancel() {
-      read();
+      read()
     }
-<<<<<<< HEAD
-
-=======
     //  // ------ Tambah Form Input ------
     //  $('.add').click(function() {
     //     $.get("{{ url('add_form_PemasanganMutasi') }}", {}, function(data, status) {
@@ -222,7 +202,6 @@
     //         }
     //     })
     // }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -257,13 +236,9 @@
       });
     }
     // ------ Edit Form Data ------
-<<<<<<< HEAD
-    function edit(id) {
-=======
     function edit(id){
         disableButton();
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -288,55 +263,56 @@
     }
     // ------ Proses Update Data ------
         function update(id) {
-            var company_id                = $("#company_id").val();
-            var task                      = $("#task").val();
-            var waktu_kesepakatan         = $("#waktu_kesepakatan").val();
-            var vehicle                   = $("#vehicle").val();
-            var imei                      = $("#imei").val();
-            var gsm_pemasangan            = $("#gsm_pemasangan").val();
-            var equipment_terpakai_gps    = $("#equipment_terpakai_gps").val();
+            var company_id = $("#company_id").val();
+            var task = $("#task").val();
+            var waktu_kesepakatan = $("#waktu_kesepakatan").val();
+            var vehicle = $("#vehicle").val();
+            var imei = $("#imei").val();
+            var gsm_pemasangan = $("#gsm_pemasangan").val();
+            var equipment_terpakai_gps = $("#equipment_terpakai_gps").val();
             var equipment_terpakai_sensor = $("#equipment_terpakai_sensor").val();
-            var teknisi_pemasangan        = $("#teknisi_pemasangan").val();
-            var uang_transportasi         = $("#uang_transportasi").val();
-            var type_visit                = $("#type_visit").val();
-            var note_pemasangan           = $("#note_pemasangan").val();
-            var kendaraan_pasang          = $("#kendaraan_pasang").val();
-            var status                    = $("#status").val();
-            var id                        = id;
-            if(imei =="" || gsm_pemasangan =="" || teknisi_pemasangan =="" || uang_transportasi =="" || type_visit=="" || status=="" ){} 
-            else {
-                $.ajax({
-                    type: "get",
-                    url: "{{ url('update_PemasanganMutasi') }}/"+id,
-                    data: {
-                    company_id                : company_id,
-                    task                      : task,
-                    waktu_kesepakatan         : waktu_kesepakatan,
-                    vehicle                   : vehicle,
-                    imei                      : imei,
-                    gsm_pemasangan            : gsm_pemasangan,
-                    equipment_terpakai_gps    : equipment_terpakai_gps,
-                    equipment_terpakai_sensor : equipment_terpakai_sensor,
-                    teknisi_pemasangan        : teknisi_pemasangan,
-                    uang_transportasi         : uang_transportasi,
-                    type_visit                : type_visit,
-                    note_pemasangan           : note_pemasangan,
-                    kendaraan_pasang          : kendaraan_pasang,
-                    status                    : status
-                    },
-                    success: function(data) {
-                      swal({
-                          type: 'success',
-                          title: ' Data Updated',
-                          showConfirmButton: false,
-                          timer: 1500
-                      }).catch(function(timeout) { });
-                      read();
-                    }
-              });
-            }
+            var teknisi_pemasangan = $("#teknisi_pemasangan").val();
+            var uang_transportasi = $("#uang_transportasi").val();
+            var type_visit = $("#type_visit").val();
+            var note_pemasangan = $("#note_pemasangan").val();
+            var kendaraan_pasang = $("#kendaraan_pasang").val();
+            var status = $("#status").val();
+            var id = id;
+        if(imei =="" || gsm_pemasangan =="" || teknisi_pemasangan =="" || uang_transportasi =="" || type_visit=="" || status=="" ){
+        } else {
+            $.ajax({
+                type: "get",
+                url: "{{ url('update_PemasanganMutasi') }}/"+id,
+                data: {
+                company_id: company_id,
+                task:task,
+                waktu_kesepakatan: waktu_kesepakatan,
+                vehicle: vehicle,
+                imei: imei,
+                gsm_pemasangan: gsm_pemasangan,
+                equipment_terpakai_gps:equipment_terpakai_gps,
+                equipment_terpakai_sensor:equipment_terpakai_sensor,
+                teknisi_pemasangan:teknisi_pemasangan,
+                uang_transportasi:uang_transportasi,
+                type_visit:type_visit,
+                note_pemasangan:note_pemasangan,
+                kendaraan_pasang:kendaraan_pasang,
+                status:status
+
+                },
+                success: function(data) {
+                swal({
+                    type: 'success',
+                    title: ' Data Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                read();
+                }
+            });
         }
-        
+        }
+        // checkbox all
         $('#master').on('click', function(e) {
           if($(this).is(':checked',true)){
               $(".task-select").prop('checked', true);
@@ -344,7 +320,6 @@
               $(".task-select").prop('checked',false);
           }
         });
-
          // Delete All
         $('.delete_all').on('click', function(){
           event.preventDefault();
@@ -394,12 +369,8 @@
         });
         // Form Edit All
         $('.edit_all').on('click', function(e){
-<<<<<<< HEAD
-          
-=======
             disableButton();
             $('[data-toggle="tooltip"]').tooltip("hide");
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             var allVals = [];
             var _token = $('input[name="_token"]').val();
             $(".task-select:checked").each(function() {
@@ -444,8 +415,6 @@
                 alert('Select the row you want to edit')
             }
         });
-
-
         // ------ Proses Update Data ------
         function updateSelected() {
             var allVals = [];
@@ -463,55 +432,41 @@
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
                 $.each(allVals, function(index, value){
-                    var company_id                = $(".company_id-"+value).val();
-                    var task                      = $(".task-"+value).val();
-                    var waktu_kesepakatan         = $(".waktu_kesepakatan-"+value).val();
-                    var vehicle                   = $(".vehicle-"+value).val();
-                    var imei                      = $(".imei-"+value).val();
-                    var gsm_pemasangan            = $(".gsm_pemasangan-"+value).val();
-                    var equipment_terpakai_gps    = $(".equipment_terpakai_gps-"+value).val();
+                    var company_id = $(".company_id-"+value).val();
+                    var task = $(".task-"+value).val();
+                    var waktu_kesepakatan = $(".waktu_kesepakatan-"+value).val();
+                    var vehicle = $(".vehicle-"+value).val();
+                    var imei = $(".imei-"+value).val();
+                    var gsm_pemasangan = $(".gsm_pemasangan-"+value).val();
+                    var equipment_terpakai_gps = $(".equipment_terpakai_gps-"+value).val();
                     var equipment_terpakai_sensor = $(".equipment_terpakai_sensor-"+value).val();
-                    var teknisi_pemasangan        = $(".teknisi_pemasangan-"+value).val();
-                    var uang_transportasi         = $(".uang_transportasi-"+value).val();
-                    var type_visit                = $(".type_visit-"+value).val();
-                    var note_pemasangan           = $(".note_pemasangan-"+value).val();
-                    var kendaraan_pasang          = $(".kendaraan_pasang-"+value).val();
-                    var status                    = $(".status-"+value).val();
+                    var teknisi_pemasangan = $(".teknisi_pemasangan-"+value).val();
+                    var uang_transportasi = $(".uang_transportasi-"+value).val();
+                    var type_visit = $(".type_visit-"+value).val();
+                    var note_pemasangan = $(".note_pemasangan-"+value).val();
+                    var kendaraan_pasang = $(".kendaraan_pasang-"+value).val();
+                    var status = $(".status-"+value).val();
 
-                  $.ajax({
+                    $.ajax({
                     type: "get",
                     url: "{{ url('update_PemasanganMutasi') }}/"+value,
                     data: {
-                        company_id                : company_id,
-                        task                      : task,
-                        waktu_kesepakatan         : waktu_kesepakatan,
-                        vehicle                   : vehicle,
-                        imei                      : imei,
-                        gsm_pemasangan            : gsm_pemasangan,
-                        equipment_terpakai_gps    : equipment_terpakai_gps,
-                        equipment_terpakai_sensor : equipment_terpakai_sensor,
-                        teknisi_pemasangan        : teknisi_pemasangan,
-                        uang_transportasi         : uang_transportasi,
-                        type_visit                : type_visit,
-                        note_pemasangan           : note_pemasangan,
-                        kendaraan_pasang          : kendaraan_pasang,
-                        status                    : status
+                        company_id: company_id,
+                        task:task,
+                        waktu_kesepakatan: waktu_kesepakatan,
+                        vehicle: vehicle,
+                        imei: imei,
+                        gsm_pemasangan: gsm_pemasangan,
+                        equipment_terpakai_gps:equipment_terpakai_gps,
+                        equipment_terpakai_sensor:equipment_terpakai_sensor,
+                        teknisi_pemasangan:teknisi_pemasangan,
+                        uang_transportasi:uang_transportasi,
+                        type_visit:type_visit,
+                        note_pemasangan:note_pemasangan,
+                        kendaraan_pasang:kendaraan_pasang,
+                        status:status
                     },
                     success: function(data) {
-<<<<<<< HEAD
-                      swal ({
-                        type: 'success',
-                        title: 'The selected data has been updated',
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                      read();
-                      $(".add").show("fast");
-                      $(".edit_all").show("fast");
-                      $(".delete_all").show("fast");
-                      $(".btn-round").hide("fast");
-                      $(".btn-round").hide("fast");          
-=======
                      swal({
                                     type: 'success',
                                     title: 'The selected data has been updated',
@@ -527,16 +482,13 @@
                                  $(".filter").show("fast");
                                 $(".btn-round").hide("fast");
                                 $(".btn-round").hide("fast");
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                     }
-                  });
                 });
-              });
+            });
+        });
         }
-
         //--------Proses Batal--------
-        function cancelUpdateSelected(){
-
+         function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
             $("#cancel-selected").hide("fast");
             $(".add").show("fast");
@@ -578,4 +530,6 @@
 
 
   </script>
-@endsection
+          {{-- </form> --}}
+
+   @endsection

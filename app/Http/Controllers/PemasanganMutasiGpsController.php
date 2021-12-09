@@ -22,8 +22,9 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PemasanganMutasiGpsController extends Controller
 {
-    public function index() {
-        
+    public function index()
+    {
+        // $pemasangan_mutasi_GPS = PemasanganMutasiGps::with('requestComplain')->get();
         return view('VisitAssignment.PemasanganMutasiGPS.index');
     }
     public function item_data_onProgress()
@@ -107,14 +108,14 @@ class PemasanganMutasiGpsController extends Controller
 
         return view('VisitAssignment.PemasanganMutasiGPS.edit_form')->with([
             'pemasangan_mutasi_GPS' => $pemasangan_mutasi_GPS,
-            'company'               => $company,
-            'details'               => $details,
-            'sensor'                => $sensor,
-            'gps'                   => $gps,
-            'teknisi'               => $teknisi,
-            'task'                  => $task,
-            'gsm_master'            => $gsm_master,
-            'vehicle'               => $vehicle
+            'company' => $company,
+            'details' => $details,
+            'sensor' => $sensor,
+            'gps' => $gps,
+            'teknisi' => $teknisi,
+            'task' => $task,
+            'gsm_master' => $gsm_master,
+            'vehicle' => $vehicle
         ]);
     }
 

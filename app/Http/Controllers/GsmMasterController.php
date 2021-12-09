@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use PhpParser\Node\Stmt\TryCatch;
 use App\Models\DetailCustomer;
 
+
 class GsmMasterController extends Controller
 {
     public function index()
@@ -23,6 +24,7 @@ class GsmMasterController extends Controller
             'details' => $details
         ]);
     }
+
     public function add_form()
     {
         $company = Company::orderBy('id', 'DESC')->get();

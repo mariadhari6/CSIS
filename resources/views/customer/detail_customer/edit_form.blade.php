@@ -1,39 +1,31 @@
 <td></td>
 <td></td>
 <td>
-    <select class="select CompanyId-{{ $details->id }}" id="CompanyId">    
-        @foreach ($company as $item)           
+    <select class="select CompanyId-{{ $details->id }}" id="CompanyId">
+        @foreach ($company as $item)
             <option value="{{ $item->id }}" {{ $item->id ==  $details->company_id  ? 'selected':'' }}>{{ $item->company_name }}</option>
         @endforeach
     </select>
 </td>
 <td>
-    <select class="select LicencePlate-{{ $details->id }}" id="LicencePlate" name="LicencePlate">
-<<<<<<< HEAD
-        @foreach ($vehicle as $item)           
-=======
+    <select class="select-search search_selectpicker LicencePlate-{{ $details->id }}" id="LicencePlate" name="LicencePlate">
         <option class="hidden" value="{{$details->licence_plate}}">{{$details->vehicle->license_plate}}</option>
         @foreach ($vehicle as $item)
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <option value="{{ $item->id }}" {{ $details->licence_plate  == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
         @endforeach
     </select>
 </td>
 <td>
     <select class="select VihecleType-{{ $details->id }}" id="VihecleType" name="VihecleType" disabled>
-<<<<<<< HEAD
-        @foreach ($vehicle as $item)           
-=======
         @foreach ($vehicle as $item)
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <option value="{{ $item->id }}" {{ $details->vehicle_id  == $item->id ? 'selected':'' }}>{{ $item->vehicle->name}}</option>
         @endforeach
     </select>
-  
+
 </td>
 <td>
     <select class="select PoNumber-{{ $details->id }}" id="PoNumber" name="PoNumber">
-        @foreach ($po as $item)           
+        @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ $details->po_id  == $item->id ? 'selected':'' }}>{{ $item->po_number }}</option>
         @endforeach
     </select>
@@ -41,60 +33,56 @@
 </td>
 <td>
     <select class="select HargaLayanan-{{ $details->id }}" id="HargaLayanan" name="HargaLayanan" disabled>
-        @foreach ($po as $item)           
+        @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ $details->harga_layanan  == $item->id ? 'selected':'' }}>{{ $item->harga_layanan }}</option>
         @endforeach
     </select>
 </td>
 <td>
     <select class="select PoDate-{{ $details->id }}" id="PoDate"  name="PoDate" disabled>
-        @foreach ($po as $item)           
+        @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ $details->po_date  == $item->id ? 'selected':'' }}>{{ $item->po_date }}</option>
         @endforeach
     </select>
 </td>
 <td>
     <select class="select StatusPo-{{ $details->id }}" id="StatusPo" name="StatusPo" disabled >
-        @foreach ($po as $item)           
+        @foreach ($po as $item)
             <option value="{{ $item->id }}" {{ $details->status_po  == $item->id ? 'selected':'' }}>{{ $item->status_po }}</option>
         @endforeach
     </select>
 </td>
 <td>
-    <select class="select Imei-{{ $details->id }}" id="Imei" name="Imei">    
+    <select class="select-search_imei search_selectpicker Imei-{{ $details->id }}" id="Imei" name="Imei">
         @foreach ($imei as $item)
             <option value="{{ $item->id }}" {{ $details->imei == $item->id ? 'selected':''}}>{{ $item->imei }}</option>
         @endforeach
     </select>
 </td>
-<td> 
-    <select class="select Merk-{{ $details->id }}" id="Merk" disabled>    
+<td>
+    <select class="select Merk-{{ $details->id }}" id="Merk" disabled>
         @foreach ($imei as $item)
-            <option value="{{ $item->id }}" {{ $details->merk == $item->id ? 'selected':''}}>{{ $item->merk }}</option>
+            <option value="{{ $item->id }}" {{ $details->imei == $item->id ? 'selected':''}}>{{ $item->merk }}</option>
         @endforeach
     </select>
 </td>
 <td>
-    <select class="select Type-{{ $details->id }}" id="Type" disabled name="Type">    
+    <select class="select Type-{{ $details->id }}" id="Type" disabled name="Type">
         @foreach ($imei as $item)
-            <option value="{{ $item->id }}" {{ $details->type == $item->id ? 'selected':''}}>{{ $item->type }}</option>
+            <option value="{{ $item->id }}" {{ $details->imei == $item->id ? 'selected':''}}>{{ $item->type }}</option>
         @endforeach
     </select>
 </td>
 <td>
-<<<<<<< HEAD
-    <select class="select GSM-{{ $details->id }}" id="GSM" name="GSM">    
-=======
-    <select class="select GSM-{{ $details->id }}" id="GSM" name="GSM">
-        {{-- <option value=""></option> --}}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
+    <select class="select-search_gsm search_selectpicker GSM-{{ $details->id }}" id="GSM" name="GSM">
         @foreach ($gsm as $item)
         <option value="{{ $item->id }}" {{ $details->gsm_id  == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
         @endforeach
     </select>
+
 </td>
 <td>
-    <select class="select Provider-{{ $details->id }}" id="Provider" name="Provider">    
+    <select class="select Provider-{{ $details->id }}" id="Provider" name="Provider">
         @foreach ($gsm as $item)
         <option value="{{ $item->id }}" {{ $details->provider  == $item->id ? 'selected':''}}>{{ $item->provider }}</option>
         @endforeach
@@ -104,8 +92,8 @@
     <div class="col m" id="sensor">
         <a><option class="SensorAll-{{$details->id}}" value="{{ $details->sensor_all }}" id="SensorAll" data-toggle="modal" data-target="#exampleModal">{{ $details->sensor_all }}</option></a>
     </div>
- 
-        
+
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -125,7 +113,7 @@
                             <option value="{{ $item->id }}" {{ old('serial_number') == $item->id ? 'selected':''}}>{{ $item->serial_number }}</option>
                         @endforeach
                     </select>
-                   
+
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -153,7 +141,7 @@
                     <button  class="btn btn-primary float-right mb-2 mr-2" onclick="add()" >Add</button>
                     <button  type="button" class="btn btn-danger float-right mb-2 mr-2" id="clear">Clear</button>
                 </div>
-                
+
                 <div class="input-group">
                     <span class="input-group-text">Sensor terpilih</span>
                     <textarea class="form-control" aria-label="With textarea" id="SensorTerpilih" disabled>{{ $details->sensor_all}}</textarea>
@@ -165,7 +153,7 @@
 </td>
 <td>
     <select class="select PoolName-{{ $details->id }}" id="PoolName" disabled name="PoolName">
-        @foreach ($vehicle as $item)           
+        @foreach ($vehicle as $item)
             <option value="{{ $item->id }}" {{ $details->pool_name  == $item->id ? 'selected':'' }}>{{ $item->pool_name }}</option>
         @endforeach
     </select>
@@ -173,7 +161,7 @@
 
 <td>
     <select class="select PoolLocation-{{ $details->id }}" id="PoolLocation" disabled name="PoolLocation">
-        @foreach ($vehicle as $item)           
+        @foreach ($vehicle as $item)
             <option value="{{ $item->id }}" {{ $details->pool_location  == $item->id ? 'selected':'' }}>{{ $item->pool_location }}</option>
         @endforeach
     </select>
@@ -181,38 +169,52 @@
 </td>
 <td><div class="input-div"><input type="date" class="input Waranty-{{ $details->id }}" id="Waranty" value="{{ $details->waranty }}"></div></td>
 <td>
-<<<<<<< HEAD
-    <select class="select StatusLayanan-{{ $details->id }}" id="StatusLayanan" name="status_layanan"> 
-=======
     <select class="select StatusLayanan-{{ $details->id }}" id="StatusLayanan" name="status_layanan">
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         @foreach ($status_layanan as $item)
             <option value="{{ $item->id }}" {{ $details->status_id == $item->id ? 'selected':'' }}>{{ $item->service_status_name }}</option>
         @endforeach
     </select>
 </td>
-<<<<<<< HEAD
-<td id="tanggal_pasang">
-    <div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div>
-</td>
-<td id="tanggal_non_aktif">
-    <div class="input-div"><input type="date" class="input TanggalNonAktif-{{ $details->id }}" id="TanggalNonAktif" value="{{ $details->tanggal_non_aktif }}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field"></div>
-</td>
-<td id="tanggal_reaktivasi">
-    <div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div>
-</td>
-=======
 <td id="tanggal_aktif"><div class="input-div"><input type="date" class="input TanggalPasang-{{ $details->id }}" id="TanggalPasang" value="{{ $details->tanggal_pasang }}"></div></td>
 <td id="tanggal_non_aktif">
     <div class="input-div"><input type="date" class="input TanggalNonAktif-{{ $details->id }}" id="TanggalNonAktif" value="{{ $details->tanggal_non_aktif }}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field"></div>
 </td>
 <td id="tanggal_reaktivasi"><div class="input-div"><input type="date" class="input TanggalReaktivasi-{{ $details->id }}" id="TanggalReaktivasi" value="{{ $details->tgl_reaktivasi_gps}}" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div></td>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 <td class="action sticky-col first-col">
     <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
 </td>
 
 <script>
+
+      $(document).ready(function() {
+    new TomSelect(".select-search",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
+
+    $(document).ready(function() {
+    new TomSelect(".select-search_imei",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
+
+    $(document).ready(function() {
+    new TomSelect(".select-search_gsm",{
+    create: false,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+    });
+    });
 
     $(document).ready(function() {
 
@@ -222,13 +224,13 @@
                 if(Id) {
                     $.ajax({
                         url: '/based_sensor/'+ Id,
-                        method: "GET",                        
+                        method: "GET",
                         success:function(data) {
                             $('select[name="SensorName').empty();
                             $('select[name="MerkSensor').empty();
                                 $.each(data, function(key, value) {
                                     $('select[name="SensorName').append('<option value="'+ key +'">'+ value.sensor_name +'</option>');
-                                    $('select[name="MerkSensor').append('<option value="'+ key +'">'+ value.merk_sensor +'</option>');                                 
+                                    $('select[name="MerkSensor').append('<option value="'+ key +'">'+ value.merk_sensor +'</option>');
                                });
                         }
                     });
@@ -236,16 +238,16 @@
                     $('select[name="SensorName').empty();
                     $('select[name="MerkSensor').empty();
                 }
-        
+
         });
 
         $('select[name="LicencePlate"]').on('change', function() {
-            
+
                 var Id = $(this).val();
                 if(Id) {
                     $.ajax({
                         url: '/based_license/'+ Id,
-                        method: "GET",                        
+                        method: "GET",
                         success:function(data) {
                             $('select[name="VihecleType').empty();
                             $('select[name="PoolName').empty();
@@ -254,11 +256,7 @@
                                 $('select[name="VihecleType').append('<option value="'+ value.id +'">'+ value.vehicle_name +'</option>');
                                 $('select[name="PoolName').append('<option value="'+ value.id  +'">'+ value.pool_name +'</option>');
                                 $('select[name="PoolLocation').append('<option value="'+ value.id  +'">'+ value.pool_location +'</option>');
-<<<<<<< HEAD
-                            });   
-=======
                             });
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                         }
                     });
                 }
@@ -271,22 +269,22 @@
 
             $('select[name="PoNumber"]').on('change', function() {
                 var Id = $(this).val();
-               
+
                 if(Id) {
                     $.ajax({
                         url: '/based_ponumber/'+ Id,
-                        method: "GET",                        
+                        method: "GET",
                         success:function(data) {
                             $('select[name="HargaLayanan').empty();
                             $('select[name="PoDate').empty();
                             $('select[name="StatusPo').empty();
-                           
+
                                 $.each(data, function(key, value) {
                                     $('select[name="HargaLayanan').append('<option value="'+ key +'">'+ value.harga_layanan +'</option>');
                                     $('select[name="PoDate').append('<option value="'+ key +'">'+ value.po_date +'</option>');
                                     $('select[name="StatusPo').append('<option value="'+ key +'">'+ value.status_po +'</option>');
-                                   
-                                                                     
+
+
                                });
                         }
                     });
@@ -295,7 +293,7 @@
                     $('select[name="HargaLayanan').empty();
                     $('select[name="PoDate').empty();
                     $('select[name="StatusPo').empty();
-                        
+
                 }
             });
 
@@ -303,14 +301,14 @@
                 var Id = $(this).val();
                 if(Id) {
                     $.ajax({
-                        url: '/based_imei/'+ Id,
-                        method: "GET",                        
+                        url: '/based_imeiDetail/'+ Id,
+                        method: "GET",
                         success:function(data) {
                             $('select[name="Merk').empty();
                             $('select[name="Type').empty();
                                 $.each(data, function(key, value) {
                                     $('select[name="Merk').append('<option value="'+ key +'">'+ value.merk +'</option>');
-                                    $('select[name="Type').append('<option value="'+ key +'">'+ value.type +'</option>');  
+                                    $('select[name="Type').append('<option value="'+ key +'">'+ value.type +'</option>');
                                });
                         }
                     });
@@ -318,7 +316,7 @@
                     $('select[name="Merk').empty();
                     $('select[name="Type').empty();
                 }
-        
+
             });
 
 
@@ -327,47 +325,20 @@
                 if(Id) {
                     $.ajax({
                         url: '/based_gsm/'+ Id,
-                        method: "GET",                        
+                        method: "GET",
                         success:function(data) {
                             $('select[name="Provider').empty();
                                 $.each(data, function(key, value) {
-                                    $('select[name="Provider').append('<option value="'+ key +'">'+ value.provider +'</option>');                                 
+                                    $('select[name="Provider').append('<option value="'+ key +'">'+ value.provider +'</option>');
                                });
                         }
                     });
                 }else{
                     $('select[name="Provider').empty();
                 }
-        
+
             });
 
-            // $('select[name="status_layanan"]').on('change', function(){
-            //     var Id = $(this).val();
-            //     // alert(Id);
-            //     if(Id == 1) {
-            //         $('#tanggal_non_aktif').empty();
-            //         $('#tanggal_non_aktif').append(
-            //             `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
-            //         );
-            //     }
-            //     else{
-            //         $('#tanggal_pasang').empty();
-            //         $('#tanggal_pasang').append(
-            //             `<div class="input-div"><input type="date" class="input" id="TanggalPasang" disabled></div>`
-            //         );
-            //         $('#tanggal_non_aktif').empty();
-            //         $('#tanggal_non_aktif').append(
-            //             `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
-            //         );
-            //         $('#tanggal_reaktivasi').empty();
-            //         $('#tanggal_reaktivasi').append(
-            //             `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
-            //         );
-            //     }
-            // });
-
-            
-        
             $('#clear').click(function(){
                 var sensorterpilih =  document.getElementById("SensorTerpilih").value;
                 if (sensorterpilih == ""){
@@ -400,7 +371,7 @@
         $('#sensor').empty();
         $('#sensor').append(
             '<option value="'+ sensorterpilih + '" id="SensorAll" data-toggle="modal" data-target="#exampleModal"> '+ sensorterpilih +'</option>'
-        );   
+        );
     }
 
     $('select[name="status_layanan"]').on('change', function(){
@@ -477,6 +448,5 @@
 
 
 </script>
-
 
 

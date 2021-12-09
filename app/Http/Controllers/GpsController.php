@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Exports\GpsExport;
 use App\Exports\TemplateGps;
 use App\Models\Gps;
-use App\Models\DetailCustomer;
-use App\Models\Vehicle;
 use App\Models\MerkGps;
 use App\Models\TypeGps;
 use Illuminate\Http\Request;
@@ -14,7 +12,9 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use App\Imports\GpsImport;
 use App\Models\Company;
+use App\Models\DetailCustomer;
 use App\Models\GpsTemporary;
+use App\Models\Vehicle;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GpsController extends Controller
@@ -23,14 +23,17 @@ class GpsController extends Controller
     {
         return view('MasterData.gps.index');
     }
-
     public function add_form()
     {
         $gps = Gps::orderBy('id', 'DESC')->get();
         $company = Company::orderBy('id', 'ASC')->get();
+
         $merk = MerkGps::groupBy('merk_gps')
-                        ->selectRaw('count(*) as jumlah, merk_gps')
-                        ->get();
+            ->selectRaw('count(*) as jumlah, merk_gps')
+            ->get();
+        // $merk = MerkGps::orderBy('id', 'DESC')->get();
+
+        // $type = TypeGps::orderBy('id', 'DESC')->get();
         return view('MasterData.gps.add_form')->with([
 
             'gps' => $gps,
@@ -49,13 +52,13 @@ class GpsController extends Controller
 
         ]);
     }
-    
     public function item_data_temporary()
     {
         $gps = GpsTemporary::orderBy('id', 'ASC')->get();
         return view('MasterData.gps.item_data_temporary')->with([
             'gps' => $gps
         ]);
+        // dd($gps);
     }
     public function deleteTemporary()
     {
@@ -111,7 +114,11 @@ class GpsController extends Controller
 
     public function store(Request $request)
     {
-      
+
+
+        // $this->validate($request, [
+        //     'imei.*' => 'required|min:15',
+        // ]);
         $data = array(
             'merk'    =>  $request->merk,
             'type'   =>  $request->type,
@@ -123,7 +130,6 @@ class GpsController extends Controller
             'company_id' => $request->company_id
 
         );
-
         Gps::insert($data);
     }
 
@@ -137,8 +143,6 @@ class GpsController extends Controller
         // $merk_gps = MerkGps::orderBy('id', 'DESC')->get();
         // $type_gps = TypeGps::orderBy('id', 'DESC')->get();
         $gps = Gps::findOrfail($id);
-        $company = Company::orderBy('id', 'ASC')->get();
-
         return view('MasterData.gps.edit_form')->with([
             'gps' => $gps,
             'merk' => $merk,
@@ -205,10 +209,12 @@ class GpsController extends Controller
     {
         $gps = Gps::all();
         $merk_gps = MerkGps::all();
+        // $type_gps = TypeGps::all();
 
         return view('MasterData.gps.selected')->with([
             'gps' => $gps,
             'merk_gps' => $merk_gps,
+            // 'type_gps' => $type_gps
         ]);
     }
 
@@ -223,6 +229,7 @@ class GpsController extends Controller
         $data->status = $request->status;
         $data->status_ownership = $request->status_ownership;
         $data->company_id = $request->company_id;
+
         echo $id;
     }
 
@@ -255,6 +262,7 @@ class GpsController extends Controller
         $file->move('MasterGps', $nameFile);
 
         Excel::import(new GpsImport, public_path('/MasterGps/' . $nameFile));
+        // return redirect('/GsmMaster');
     }
     public function export()
     {
@@ -268,12 +276,18 @@ class GpsController extends Controller
 
     public function try()
     {
+
         $input = MerkGps::where('merk', 'Ruptela')->firstOrFail()->id;
+        // $input = TypeGps::where('type_gps', 'FM Pro 4')->firstOrFail()->id;
         return $input;
     }
     public function basedType($id)
     {
+
+
+
         $data = MerkGps::where('merk_gps', $id)->get();
+
         return $data;
     }
 }

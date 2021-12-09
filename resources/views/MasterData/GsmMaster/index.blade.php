@@ -1,14 +1,8 @@
 @extends('layouts.v_main')
-<<<<<<< HEAD
-@section('title','CSIS | Gsm Pre Active')
-@section('title-table','Gsm Master')
-@section('master','show')
-=======
 @section('title','CSIS | Master GSM')
 @section('title-table',' Master GSM')
 
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 @section('content')
 <form onsubmit="return false">
   <div class="row">
@@ -16,15 +10,10 @@
       <div class="card">
         <div class="card-body">
             <div class="text-right" id="selected">
-<<<<<<< HEAD
-                <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-
-=======
                 <button type="button" class="btn btn-primary btn-sm float-left mr-2 add add-button">
                   <b>Add</b>
                   <i class="fas fa-plus ml-2" id="add"></i>
                 </button>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
                     <option value="{{ url('item_data_all_GsmMaster') }}">All</option>
@@ -33,16 +22,6 @@
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
                   </select>
                 </div>
-<<<<<<< HEAD
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData">
-                  <b> Import</b>
-                  <i class="fas fa-file-excel ml-2"></i>
-                </button>
-              <button class="btn btn-success edit_all">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-=======
                 <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
@@ -54,7 +33,6 @@
                 <i class="fas fa-edit"></i>
               </button>
               <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             </div>
           <table class="table table-responsive data" class="table_id" id="table_id">
             <thead>
@@ -410,11 +388,7 @@
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable( {
-<<<<<<< HEAD
-
-=======
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
               "dom": '<"top"f>rt<"bottom"lp><"clear">'
               });
           $('#table_id').DataTable().draw();
@@ -428,12 +402,8 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
-<<<<<<< HEAD
-            "pageLength": 50,
-=======
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
             // "dom": '<lf<t>ip>'
             });
@@ -583,10 +553,7 @@
             }
         });
       }
-<<<<<<< HEAD
-=======
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     }
 
     // -----Proses Delete Data ------
@@ -885,8 +852,6 @@
          function dataLengthAll() {
           $('#table_id').DataTable().destroy();
         }
-<<<<<<< HEAD
-=======
 
          function disableButton() {
 
@@ -913,7 +878,6 @@
         }
 
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
   </script>
   {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}

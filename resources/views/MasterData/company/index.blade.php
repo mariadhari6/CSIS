@@ -54,10 +54,7 @@
               </tbody>
              </table>
             </form>
-<<<<<<< HEAD
-=======
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             </div>
         </div>
         {{-- modal Import --}}
@@ -320,13 +317,14 @@
         disableButton();
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
-        $("#td-button-"+id).hide("fast");
-        $("#item-no-"+id).hide("fast");
-        $("#item-company_name-"+id).hide("fast");
-        $("#item-seller_id-"+id).hide("fast");
-        $("#item-customer_code-"+id).hide("fast");
-        $("#item-no_agreement_letter_id-"+id).hide("fast");
-        $("#item-status-"+id).hide("fast");
+        // $("#item-no-"+id).hide("fast");
+        $("#td-button-"+id).slideUp("fast");
+        $("#item-no-"+id).slideUp("fast");
+        $("#item-company_name-"+id).slideUp("fast");
+        $("#item-seller_id-"+id).slideUp("fast");
+        $("#item-customer_code-"+id).slideUp("fast");
+        $("#item-no_agreement_letter_id-"+id).slideUp("fast");
+        $("#item-status-"+id).slideUp("fast");
         $.get("{{ url('edit_form_company') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -427,38 +425,8 @@
         disableButton();
         $('[data-toggle="tooltip"]').tooltip("hide");
 
-      var allVals = [];
-      var _token = $('input[name="_token"]').val();
-
-      $(".task-select:checked").each(function() {
-          allVals.push($(this).attr("id"));
-      });
-      if (allVals.length > 0){
-          $(".edit_all").hide("fast");
-          $(".delete_all").hide("fast");
-          $.get("{{ url('selected_company') }}", {}, function(data, status) {
-              $("#selected").prepend(data)
-          });
-          $.each(allVals, function(index, value){
-              $("#td-checkbox-"+value).hide("fast");
-              $("#td-button-"+value).hide("fast");
-              $("#item-no-"+value).slideUp("fast");
-              $("#item-company_name-"+value).slideUp("fast");
-              $("#item-seller_id-"+value).slideUp("fast");
-              $("#item-customer_code-"+value).slideUp("fast");
-              $("#item-no_agreement_letter_id-"+value).slideUp("fast");
-              $("#item-status-"+value).slideUp("fast");
-
-              $(".add").hide("fast");
-              $.get("{{ url('edit_form_company') }}/" + value, {}, function(data, status) {
-                  $("#edit-form-"+value).prepend(data)
-                  $("#master").prop('checked', false);
-              });
-          });
-      }
-      else {
-          alert('Select the row you want to edit')
-      }
+    var allVals = [];
+    var _token = $('input[name="_token"]').val();
 
     $(".task-select:checked").each(function() {
         allVals.push($(this).attr("id"));
@@ -494,9 +462,29 @@
     }
     });
 
-     function updateSelected() {
+      // ------ Proses Update Data ------
+    function updateSelected() {
+        var allVals = [];
 
-            var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
+        });
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to do an update?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: '#00FF00',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes Update',
+            showLoaderOnConfirm: true,
+        }).then((willDelete) => {
+            $.each(allVals, function(index, value){
+                var company_name = $(".company_name-"+value).val();
+                var seller_id = $(".seller_id-"+value).val();
+                var customer_code = $(".customer_code-"+value).val();
+                var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
+                var status = $(".status-"+value).val();
 
                 $.ajax({
                 type: "get",
@@ -528,107 +516,15 @@
                     $(".btn-round").hide("fast");
                 }
             });
-            swal({
-                title: "Are you sure?",
-                text: "Do you want to do an update?",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonColor: '#00FF00',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes Update',
-                showLoaderOnConfirm: true,
-            }).then((willDelete) => {
-                $.each(allVals, function(index, value){
-                    var company_name = $(".company_name-"+value).val();
-                    var seller_id = $(".seller_id-"+value).val();
-                    var customer_code = $(".customer_code-"+value).val();
-                    var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
-                    var status = $(".status-"+value).val();
-                    $.ajax({
-                    type: "get",
-                    url: "{{ url('update_company') }}/"+value,
-                    data: {
-                        company_name: company_name,
-                        seller_id: seller_id,
-                        customer_code: customer_code,
-                        no_agreement_letter_id:no_agreement_letter_id,
-                        status: status
-                    },
-                    success: function(data) {
-                    swal({
-                          type: 'success',
-                          title: 'The selected data has been updated',
-                          showConfirmButton: false,
-                          timer: 1500
-                        });
-                            read();
-                            $(".add").show("fast");
-                            $(".edit_all").show("fast");
-                            $(".delete_all").show("fast");
-                            $(".btn-round").hide("fast");
-                            $(".btn-round").hide("fast");
-                    }
-                });
 
             });
-          });
+        });
         }
-        function updateSelected() {
 
-          var allVals = [];
-
-          $(".task-select:checked").each(function() {
-              allVals.push($(this).attr("id"));
-          });
-          swal({
-              title: "Are you sure?",
-              text: "Do you want to do an update?",
-              type: "info",
-              showCancelButton: true,
-              confirmButtonColor: '#00FF00',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes Update',
-              showLoaderOnConfirm: true,
-          }).then((willDelete) => {
-              $.each(allVals, function(index, value){
-                  var company_name = $(".company_name-"+value).val();
-                  var seller_id = $(".seller_id-"+value).val();
-                  var customer_code = $(".customer_code-"+value).val();
-                  var no_agreement_letter_id = $(".no_agreement_letter_id-"+value).val();
-                  var status = $(".status-"+value).val();
-                  $.ajax({
-                  type: "get",
-                  url: "{{ url('update_company') }}/"+value,
-                  data: {
-                      company_name: company_name,
-                      seller_id: seller_id,
-                      customer_code: customer_code,
-                      no_agreement_letter_id:no_agreement_letter_id,
-                      status: status
-                  },
-                  success: function(data) {
-                  swal({
-                        type: 'success',
-                        title: 'The selected data has been updated',
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                          read();
-                          $(".add").show("fast");
-                          $(".edit_all").show("fast");
-                          $(".delete_all").show("fast");
-                          $(".btn-round").hide("fast");
-                          $(".btn-round").hide("fast");
-                  }
-              });
-
-              });
-            });
-          }
-
-        function batal() {
-            $(".save").hide("fast");
-            $(".cancel").hide("fast");
+         //--------Proses Batal--------
+        function cancelUpdateSelected(){
+            $("#save-selected").hide("fast");
+            $("#cancel-selected").hide("fast");
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");

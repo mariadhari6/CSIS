@@ -11,6 +11,8 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
+
+
           <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
                 <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
@@ -30,10 +32,12 @@
             <thead>
               <tr>
                 <th>
-                  <label class="form-check-label">
-                    <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                    <span class="form-check-sign"></span>
-                  </label>
+                    <div>
+                        <label class="form-check-label">
+                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
+                            <span class="form-check-sign"></span>
+                        </label>
+                    </div>
                 </th>
                 <th scope="col" class="action-no">No.</th>
                 <th scope="col" class="list" >Merk*</th>
@@ -53,6 +57,7 @@
             </tbody>
           </table>
           </form>
+        {{-- </div> --}}
         </div>
       </div>
     </div>
@@ -82,11 +87,13 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer-full-width  modal-footer"></div>
-      </div>
+        <div class="modal-footer-full-width  modal-footer">
+
+        </div>
+        </div>
+			</div>
 		</div>
 	</div>
-
   <script>
     $(document).ready(function() {
         $.ajaxSetup({
@@ -102,11 +109,10 @@
     excel_file.addEventListener("change",(event)=>{
         if(
             ![
-                "application/vnd.ms-works=wps-office-et.desktop",
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "application/vnd.ms-excel",
             ].includes(event.target.files[0].type)
-        ) { 
+        ) {
             document.getElementById("excel_data").innerHTML =
             '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
             excel_file.value = "";
@@ -737,4 +743,5 @@
 {{-- //   <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
    @endsection
+
 

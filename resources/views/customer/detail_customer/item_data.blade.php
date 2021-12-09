@@ -10,7 +10,7 @@
             </div>
         </td>
         <td id="item-no-{{ $detail->id}}">
-            {{ $no++ }}  
+            {{ $no++ }}
         </td>
         <td id="item-CompanyId-{{ $detail->id }}">
             {{ $detail->company->company_name}}
@@ -25,7 +25,7 @@
             {{ $detail->po->po_number }}
         </td>
         <td id="item-HargaLayanan-{{ $detail->id }}">
-            {{ $detail->po->harga_layanan }} 
+            {{ $detail->po->harga_layanan }}
         </td>
         <td id="item-PoDate-{{ $detail->id }}">
             {{ date('d-M-Y', strtotime($detail->po->po_date))}}
@@ -64,7 +64,7 @@
         <td id="item-Waranty-{{ $detail->id }}">
             @if ($detail->waranty == "")
                 -
-            @else 
+            @else
             {{ date('d-M-Y', strtotime($detail->waranty)) }}
             @endif
         </td>
@@ -73,21 +73,21 @@
         </td>
         <td id="item-TanggalPasang-{{ $detail->id }}">
              {{-- {{ $detail->tanggal_pasang }}->format('d/m/Y');  --}}
-            {{ date('d-M-Y', strtotime($detail->tanggal_pasang)) }} 
+            {{ date('d-M-Y', strtotime($detail->tanggal_pasang)) }}
         </td>
         <td id="item-TanggalNonAktif-{{ $detail->id }}">
             @if ($detail->tanggal_non_aktif == null)
                 {{ $detail->tanggal_non_aktif }}
             @else
                 {{ date('d-M-Y', strtotime($detail->tanggal_non_aktif)) }}
-            @endif 
+            @endif
         </td>
         <td id="item-TanggalReaktivasi-{{ $detail->id }}">
             @if ($detail->tgl_reaktivasi_gps == null)
                 {{ $detail->tgl_reaktivasi_gps }}
             @else
                 {{ date('d-M-Y', strtotime($detail->tgl_reaktivasi_gps)) }}
-            @endif 
+            @endif
         </td>
         <td  class="action sticky-col first-col" id="td-button-{{ $detail->id }}" >
             <div id="button-{{ $detail->id }}">
@@ -99,15 +99,11 @@
 
     <script>
         $(document).ready(function(){
-            $('[data-toggle="popover"]').popover();   
+            $('[data-toggle="popover"]').popover();
         });
     </script>
 
    @endforeach
 
-<<<<<<< HEAD
- 
-=======
 
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54

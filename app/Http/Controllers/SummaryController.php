@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\SummaryCustomer;
 use App\Models\Company;
 use App\Models\DetailCustomer;
@@ -25,10 +26,10 @@ class SummaryController extends Controller
             'month'   => $month,
             'year'    => $year
         ]);
-
     }
 
-    public function filter(Request $request) {   
+    public function filter(Request $request)
+    {
 
         $company        = $request->Company;
         $month          = $request->Month;
@@ -180,8 +181,8 @@ class SummaryController extends Controller
         }
     }
 
-                $data[$i]['total_gps'] = $cari_total_gps[0]->total_gps;
-            }
+    public function DataPo(Request $request)
+    {
 
         $company = $request->company;
 
@@ -201,7 +202,8 @@ class SummaryController extends Controller
     }
 
 
-    public function item_summary() {
+    public function item_summary()
+    {
 
         $now            = Carbon::now();
         $month          = $now->month;

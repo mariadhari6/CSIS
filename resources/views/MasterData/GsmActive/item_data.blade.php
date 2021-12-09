@@ -20,7 +20,7 @@
             {{ $item->gsm_number }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
-            {{ $item->company_id }}
+            {{ $item->company->company_name }}
         </td>
         <td id="item-request_date-{{ $item->id }}">
             {{ $item->request_date }}

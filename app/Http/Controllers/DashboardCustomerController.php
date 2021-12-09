@@ -59,7 +59,7 @@ class DashboardCustomerController extends Controller
                 }
             }
 
-            // PROSES MENCARI SENSOR NAME
+                // PROSES MENCARI SENSOR NAME
             $unique_sensor = array_unique($sensor_);
 
             $company[$j]["unique_sensor"] = array_map(function ($sensorId) {
@@ -70,6 +70,7 @@ class DashboardCustomerController extends Controller
             $sens = $company[$j]["unique_sensor"];
 
             $array_count_values = array_count_values($sens);
+        
             $sensorFinal = array();
 
             foreach ($array_count_values as $sensorName => $sensorTotal) {
@@ -120,9 +121,7 @@ class DashboardCustomerController extends Controller
             }
 
             $company[$i]['vehicle'] = $vehicleFinal;
-            //
-
-
+            
             // PROSES MENCARI POOL
 
             $company[$i]["unique_pool_name"] = array_map(function ($vehicleId) {
@@ -158,7 +157,7 @@ class DashboardCustomerController extends Controller
 
             $poolNameLoc = array();
 
-            for ($j = 0; $j < count($poolnameFinal); $j++) {
+            for ($j=0 ; $j < count($poolLocFinal); $j++) {
                 array_push($poolNameLoc, array(
                     "pool_name" => $poolnameFinal[$j]["pool_name"],
                     "pool_loc" => $poolLocFinal[$j]["pool_loc"],
@@ -168,14 +167,13 @@ class DashboardCustomerController extends Controller
 
             $company[$i]["pool"] = $poolNameLoc;
 
-            unset($company[$i]["vehicle_name"]);
-            unset($company[$i]["unique_vehicle"]);
-            unset($company[$i]["unique_pool_name"]);
-            unset($company[$i]["unique_pool_location"]);
-            //
+            // unset($company[$i]["vehicle_name"]);
+            // unset($company[$i]["unique_vehicle"]);
+            // unset($company[$i]["unique_pool_name"]);
+            // unset($company[$i]["unique_pool_location"]);
+            
 
         }
-
 
 
         // return $company;

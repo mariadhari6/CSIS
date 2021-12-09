@@ -1,10 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Company;
-use App\Models\Gps;
-use App\Models\Sensor;
-use App\Models\Vehicle;
 
 use App\Models\Company;
 use App\Models\Gps;

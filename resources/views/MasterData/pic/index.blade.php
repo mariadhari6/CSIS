@@ -33,6 +33,8 @@
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
+
+
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -49,6 +51,7 @@
                 <th scope="col" class="list-picPosition">Position*</th>
                 <th scope="col" class="list">Date of Birth</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
+
               </tr>
             </thead>
             <tbody  id="item_data">

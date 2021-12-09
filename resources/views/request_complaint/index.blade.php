@@ -36,14 +36,9 @@
                 <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected"> <i class="fas fa-edit"></i></button>
                 <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
             </div>
-<<<<<<< HEAD
-        {{-- <form > --}}
-          <table class="table table-responsive" id="table_id" >
-=======
         <form onsubmit="return false">
 
           <table class="table table-responsive data " class="table_request" id="table_request" >
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <thead>
               <tr>
                 <th>
@@ -68,24 +63,18 @@
                 <th scope="col" class="list">Respond*</th>
                 <th scope="col" class="list">Waktu Kesepakatan*</th>
                 <th scope="col" class="list">Status*</th>
-<<<<<<< HEAD
-                <th scope="col" class="list">waktu Solve*</th>
-=======
                 <th scope="col" class="list">Waktu Solve*</th>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 <th scope="col" class="list">Status Akhir</th>
-                <th scope="col" class="action sticky-col first-col">Action</th>
+                 <th scope="col" class="action sticky-col first-col">Action</th>
+
+
               </tr>
             </thead>
             <tbody  id="item_data">
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-<<<<<<< HEAD
-          {{-- </form> --}}
-=======
           </form>
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         </div>
       </div>
@@ -192,11 +181,6 @@
         var waktu_solve = $("#waktu_solve").val();
         var status = $("#status").val();
         var status_akhir = $("#status_akhir").val();
-<<<<<<< HEAD
-
-        if(company_id =="" || internal_eksternal=="" || pic_id=="" || task=="" || platform=="" || detail_task=="" || divisi=="" || waktu_respond=="" || waktu_kesepakatan=="" || status==""){
-=======
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         // alert(vehicle);
         // if (vehicle = "") {
@@ -601,3 +585,4 @@
   </script>
 
    @endsection
+

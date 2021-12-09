@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-<div class="title">
-    <strong> {{ $company->company_name }}</strong>  
-</div>
-    <div class="text-right mt-3" id="selected">
-        <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-        <button class="btn btn-success  mr-2 edit_all">
-            <i class="fas fa-edit"></i>
-        </button>
-        <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-    </div>
-
-    <table class="table table-responsive" id="table_id">
-=======
 
     <div class="text-right mt-3" id="selected">
         <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
@@ -32,15 +18,14 @@
     </div>
 
     <table class="table table-responsive" id="table_detail_customer">
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         <thead>
           <tr>
             <th>
                 <label class="form-check-label">
                     <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
                     <span class="form-check-sign"></span>
-                </label>       
-            </th>   
+                </label>
+            </th>
             <th scope="col">No</th>
             <th style="min-width: 300px;">Company</th>
             <th style="min-width: 130px;">License Plate</th>
@@ -65,7 +50,7 @@
             <th scope="col" class="action sticky-col first-col">Action</th>
           </tr>
         </thead>
-        <tbody  id="item_data">      
+        <tbody  id="item_data">
         </tbody>
     </table>
 
@@ -77,18 +62,6 @@
     });
 
     function read() {
-<<<<<<< HEAD
-        var id = {{ $company->id }}; 
-        $.get("{{ url('item_detail') }}/" + id , {}, function(data, status) {
-            $('#table_id').DataTable().destroy();
-            $('#table_id').find("#item_data").html(data);
-            $('#table_id').dataTable({
-                "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-                "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            });
-            $('#table_id').DataTable().draw();
-        }); 
-=======
         enableButton();
 
         var id = {{ $company->id }};
@@ -101,7 +74,6 @@
             });
             $('#table_detail_customer').DataTable().draw();
         });
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     }
 
     function cancel(){
@@ -109,24 +81,15 @@
     }
 
     $('.add').click(function() {
-<<<<<<< HEAD
-
-        var id = {{ $company->id }}; 
-=======
          disableButton();
         var id = {{ $company->id }};
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         $.get("{{ url('add_form_detail') }}/" + id , {}, function(data, status) {
           $('#table_detail_customer tbody').prepend(data);
         });
     });
 
     $("#TanggalPasang").on({"click": function() {
-<<<<<<< HEAD
-        $("#TanggalPasang[data-toggle='popover']").popover('hide');  
-=======
         $("#TanggalPasang[data-toggle='popover']").popover('hide');
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         }
     });
 
@@ -152,23 +115,14 @@
         var TanggalNonAktif     = $("#TanggalNonAktif").val();
         var TanggalReaktivasi   = $("#TanggalReaktivasi").val();
 
-<<<<<<< HEAD
-        if (TanggalPasang == "") {   
-            $("#TanggalPasang[data-toggle='popover']").popover('show');
-            return false; 
-=======
         if (TanggalPasang == "") {
             $("#TanggalPasang[data-toggle='popover']").popover('show');
             return false;
         }
         else{
             $("#TanggalPasang[data-toggle='popover']").popover('hide');
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         }
-        else{
-            $("#TanggalPasang[data-toggle='popover']").popover('hide');
-        }
-       
+
         $.ajax({
             type: "get",
             url: "{{ url('store_detail')}}",
@@ -202,15 +156,16 @@
                     timer: 2000
                 }).catch(function(timeout){ })
                     read();
-            }  
-        });       
+            }
+        });
     }
 
 
-   
+
     function destroy(id){
 
         var id = id;
+        
         swal({
             title: 'Are you sure?',
             text: "You want delete to this data!",
@@ -226,7 +181,7 @@
                         type: "get",
                         url: "{{ url('destroy_detail') }}/" + id,
                         data: "id=" + id,
-                        success: function(data) {
+                        success: function(data) {  
                             swal({
                                 type: 'success',
                                 title: 'Data Deleted',
@@ -236,17 +191,17 @@
                             read();
                         }
                     });
-                });
-            },
-            allowOutsideClick: false
-        });
+                    });
+                },
+                allowOutsideClick: false
+            });
     }
 
     function edit(id){
         disableButton();
         var id = id;
         var company = {{ $company->id }}
-       
+
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
         $("#item-no-"+id).hide("fast");
@@ -271,18 +226,14 @@
         $("#item-TanggalNonAktif-"+id).hide("fast");
         $("#item-TanggalReaktivasi-"+id).hide("fast");
 
-        $.ajax({ 
+        $.ajax({
             url:"{{ url('/show_detail')}}/" + id,
             data:{
             company : company,
-            }, 
+            },
             success: function(data, status){
                 $("#edit-form-"+id).prepend(data)
-<<<<<<< HEAD
-            }                
-=======
             }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         });
         return true;
     }
@@ -366,33 +317,7 @@
                 }).catch(function(timeout) { })
                     read();
             }
-                
-        });    
-    }
 
-<<<<<<< HEAD
-    $('#master').on('click', function(e) {
-
-        if ($(this).is(':checked',true) ) {
-            $(".task-select").prop('checked', true)
-        }
-        else {
-            $(".task-select").prop('checked',false);
-        }
-    });
-
-    $('.delete_all').on('click', function() {
-
-        var allVals = [];
-        $(".task-select:checked").each(function() {
-            allVals.push($(this).attr("id"));
-        });
-
-        if (allVals.length > 0) {
-
-            var _token = $('input[name="_token"]').val();
-
-=======
         });
     }
 
@@ -417,7 +342,6 @@
 
             var _token = $('input[name="_token"]').val();
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             swal({
                 title: 'Are you sure?',
                 text: "You want delete Selected data !",
@@ -456,18 +380,11 @@
             alert('Select the row you want to delete')
         }
     });
-<<<<<<< HEAD
-
-
-    $('.edit_all').on('click', function(e){
-
-=======
 
 
     $('.edit_all').on('click', function(e){
         disableButton();
         $('[data-toggle="tooltip"]').tooltip("hide");
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         var company = {{ $company->id }}
 
         var allVals = [];
@@ -511,16 +428,6 @@
                 $("#item-TanggalPasang-"+value).hide("fast");
                 $("#item-TanggalNonAktif-"+value).hide("fast");
                 $(".add").hide("fast");
-<<<<<<< HEAD
-                $.ajax({ 
-                    url:"{{ url('/show_detail')}}/" + value,
-                    data:{
-                    company : company,
-                    }, 
-                    success: function(data, status){
-                        $("#edit-form-"+value).prepend(data)
-                    }                
-=======
                 $.ajax({
                     url:"{{ url('/show_detail')}}/" + value,
                     data:{
@@ -532,7 +439,6 @@
                         $(".cancel").hide();
                         $(".export").hide();
                     }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                 });
             });
         }
@@ -610,13 +516,7 @@
                                 title: 'The selected data has been updated',
                                 showConfirmButton: false,
                                 timer: 1500
-<<<<<<< HEAD
-                            }).catch(function(timeout) {});    
-                            $(".save").hide("fast");
-                            $(".cancel").hide("fast");
-=======
                             }).catch(function(timeout) {});
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
                             $(".add").show("fast");
                             $(".edit_all").show("fast");
                             $(".delete_all").show("fast");
@@ -629,8 +529,6 @@
                 });
             });
     }
-<<<<<<< HEAD
-=======
 
      function cancelUpdateSelected(){
             $("#save-selected").hide("fast");
@@ -665,16 +563,7 @@
           $("[data-toggle= modal]").prop('disabled', false);
 
         }
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
-    function batal() {
-        $(".save").hide("fast");
-        $(".cancel").hide("fast");
-        $(".add").show("fast");
-        $(".edit_all").show("fast");
-        $(".delete_all").show("fast");
-        read();
-    }
 
     $("#filter").change(function(){
             var id = {{ $company->id }};

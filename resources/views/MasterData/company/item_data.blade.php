@@ -1,5 +1,5 @@
 <?php $no=1; ?>
- @foreach ($company as $item)
+@foreach ($company as $item)
     <tr id="edit-form-{{ $item->id }}">
         <td id="td-checkbox-{{ $item->id }}">
             <div>
@@ -7,6 +7,7 @@
                     <input class="form-check-input task-select" type="checkbox" id="{{$item->id}}">
                     <span class="form-check-sign"></span>
                 </label>
+            </div>
         </td>
          <td id="item-no-{{ $item->id}}">
             {{ $no++ }}
@@ -28,6 +29,8 @@
                 {{ $item->no_agreement_letter_id??''}}
         </td>
         <td id="item-status-{{ $item->id }}">
+                {{-- {{ $item->status}} --}}
+
             @if ($item->status == 'Active')
                 <span class="badge badge-info">{{ $item->status }}</span>
             @elseif ($item->status == 'In Active')
@@ -41,5 +44,5 @@
             </div>
         </td>
     </tr>
-@endforeach 
+@endforeach
 

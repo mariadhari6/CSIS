@@ -93,7 +93,8 @@ class VehicleController extends Controller
             'license_plate'     =>  $request->license_plate,
             'vehicle_id'        =>  $request->vehicle_id,
             'pool_name'         => $request->pool_name,
-            'pool_location'     =>  $request->pool_location
+            'pool_location'     =>  $request->pool_location,
+            'status'            =>  $request->status
         );
         Vehicle::insert($data);
     }
@@ -125,6 +126,7 @@ class VehicleController extends Controller
         $data->vehicle_id       = $request->vehicle_id;
         $data->pool_name        = $request->pool_name;
         $data->pool_location    = $request->pool_location;
+        $data->status           = $request->status;
 
         $data->save();
     }
@@ -145,8 +147,9 @@ class VehicleController extends Controller
         $data->vehicle_id       = $request->vehicle_id;
         $data->pool_name        = $request->pool_name;
         $data->pool_location    = $request->pool_location;
+        $data->status           = $request->status;
 
-        echo $id;
+        $data->save();
     }
 
     public function deleteAll(Request $request)

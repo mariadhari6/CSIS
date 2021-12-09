@@ -1,14 +1,19 @@
-<tr>
-    <td></td>
-    <td></td>
+<tr id="add_form">
+
+
+<td></td>
+<td></td>
+
     <td>
         <select class="select" id="merk" name="merk" required>
             <option class="hidden" value="">--Pilih Merk--</option>
             @foreach ($merk as $item)
-                <option value="{{ $item->merk_gps }}"  {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>
+            <option value="{{ $item->merk_gps }}"  {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>
             @endforeach
         </select>
+
     </td>
+
     <td>
         <select class="select" id="type" name="type" required>
             {{-- <option class="hidden" value="">--Pilih Type--</option> --}}
@@ -20,9 +25,14 @@
         </select>
 
     </td>
+     {{-- <td>
+        <div class="input-div"><input type="text" class="input" id="merk" placeholder="Merk"></i>
+    </td> --}}
     <td>
         <div class="input-div"><input type="number" class="input" id="imei" name="imei" placeholder="IMEI" value="{{old('imei')}}" required></i>
+
     </td>
+
     <td>
         <div class="input-div"><input type="date" class="input @error('waranty') is-invalid @enderror" id="waranty" placeholder="Waranty" name="waranty" value="{{old('waranty')}}"></i>
         @error('waranty')
@@ -123,43 +133,7 @@
                         </select>`
                    );
 
-<script>
 
-
-    $('select[name="status"]').on('change', function() {
-        var itemID = $(this).val();
-
-        if(itemID == 'Ready') {
-            $('#statusOwnership').empty();
-            $('#statusOwnership').append(
-                `<select class="select" id="status_ownership"  disable>
-                    <option value="-">-</option>
-                </select>`
-            );
-        }else if(itemID == 'Error') {
-            $('#statusOwnership').empty();
-            $('#statusOwnership').append(
-                `<select class="select" id="status_ownership">
-                    <option style="display: none"></option>
-                    <option value="Lokasi Customer">Lokasi Customer</option>
-                    <option value="Lokasi Integrasia">Lokasi Integrasia</option>
-                    <option value="GPS sudah di Return">GPS sudah di Return</option>
-                </select>`
-            );
-        }else {
-            $('#statusOwnership').empty();
-            $('#statusOwnership').append(
-                `<select class="select" id="status_ownership">
-                    <option style="display: none"></option>
-                    <option value="Sewa">Sewa</option>
-                    <option value="Sewa Beli">Sewa Beli</option>
-                    <option value="Trial">Trial</option>
-                    <option value="Beli">Beli</option>
-                </select>`
-            );            
-        }
-    });
-=======
                 }else {
                         $('#statusOwnership').empty();
                         $('#statusOwnership').append(
@@ -181,25 +155,10 @@
                    );
                 }
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
 
+            });
     $('select[name="merk"]').on('change', function() {
-<<<<<<< HEAD
-        var itemID = $(this).val();
-        if(itemID) {
-            $.ajax({
-
-                url: '/based_merksensor/'+ itemID,
-                method: "GET",
-                success:function(data) {
-                    $('select[name="type').empty();
-                    $('select[name="type').append('<option style="display: none"></option>');
-                    for(var i = 0 ; i < data.length ; i++) {
-                        $('select[name="type').append('<option value="'+ data[i].type_gps+ '"> '+ data[i].type_gps +'</option>');
-                    }
-                }                    
-=======
                 var itemID = $(this).val();
 
                 if(itemID) {
@@ -221,17 +180,8 @@
 
                 }
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             });
-        }
-        else{
-            $('select[name="type"]').empty();
-        }
-    });
-
 </script>
 
 
- 
-    
-    
+

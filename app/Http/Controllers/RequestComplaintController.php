@@ -23,12 +23,8 @@ class RequestComplaintController extends Controller
         return view('request_complaint.index');
     }
 
-<<<<<<< HEAD
-    public function add_form() {
-=======
     public function add_form()
     {
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         $detail             = DetailCustomer::groupBy('company_id')->selectRaw('count(*) as jumlah, company_id')->get();
         $pic                = Pic::orderBy('pic_name', 'ASC')->get();
@@ -350,7 +346,7 @@ class RequestComplaintController extends Controller
     public function basedVehicle($id)
     {
 
-    public function basedInternalEksternal(Request $request) {
+        $data = DetailCustomer::where('company_id', $id)->get();
 
         for ($i = 0; $i < count($data); $i++) {
             $loop = $data[$i]->vehicle_id;

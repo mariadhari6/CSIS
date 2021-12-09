@@ -1,5 +1,7 @@
     <td></td>
     <td></td>
+
+
     <td>
         <div class="input-div"><input type="text" class="input company_name-{{$company->id}}" id="company_name" placeholder="Company Name" value="{{ $company->company_name}}" required></i>
         </div>

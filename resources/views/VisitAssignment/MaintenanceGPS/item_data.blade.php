@@ -27,11 +27,7 @@
 
         @if ($item->type_gps_id !=null)
             <td id="item-type_gps_id-{{ $item->id }}">
-<<<<<<< HEAD
-            {{ $item->gpsMaintenance->type ??''}}
-=======
             {{$item->gpsMaintenance->type}}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             </td>
         @elseif ($item->type_gps_id ==null)
             <td id="item-type_gps_id-{{ $item->id }}">
@@ -51,11 +47,7 @@
 
         @if ($item->equipment_sensor_id != null)
         <td id="item-equipment_sensor_id-{{ $item->id }}">
-<<<<<<< HEAD
-            {{ $item->equipment_sensor_id }}    
-=======
              {{ $item->equipment_sensor_id }}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
 
         </td>
         @elseif ($item->equipment_sensor_id == null)
@@ -63,6 +55,14 @@
             -
         </td>
         @endif
+
+        {{-- <td id="item-equipment_sensor_id-{{ $item->id }}" >
+
+             <i class="fas fa-eye" data-toggle="popover"  data-placement="bottom" data-content="{{ $item->equipment_sensor_id_all_name }}" ></i>
+
+            {{-- {{ $item->equipment_sensor_id_all_name }} --}}
+
+        {{-- </td> --}}
 
         @if ($item->equipment_gsm !=null)
         <td id="item-equipment_gsm-{{ $item->id}}">

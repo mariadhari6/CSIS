@@ -1,31 +1,19 @@
 <tr id="add_form">
+
     <td></td>
     <td></td>
     <td>
-<<<<<<< HEAD
-        <select class="select" id="status_gsm" aria-label=".form-select-lg example">
-            <option style="display: none"></option>
-=======
         <select class="select" id="status_gsm" name="status" aria-label=".form-select-lg example" required>
             <option value="" class="hidden">--Pilih Status--</option>
             {{-- <option value="">-</option> --}}
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
             <option value="Ready">Ready</option>
             <option value="Active">Active</option>
             <option value="Terminate">Terminate</option>
         </select></i>
     </td>
-    <td> 
-        <div class="input-div"><input type="text" class="input" id="gsm_number" placeholder="GSM Number">
-    </td>
-<<<<<<< HEAD
     <td>
-        <select class="select" id="company_id" name="company_id"> 
-            <option style="display: none"></option>
-            @foreach ($company as $item)
-            <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
-            @endforeach
-=======
+        <div class="input-div"><input type="text" class="input" id="gsm_number" placeholder="GSM Number" required>
+    </td>
     <td id="td-company">
         <select class="select" id="company_id" name="company_id" required>
 
@@ -34,56 +22,45 @@
           <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
          @endforeach
 
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
         </select>
      </td>
-    <td> 
-        <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number">
+    <td>
+        <div class="input-div"><input type="text" class="input" id="serial_number" placeholder="Serial Number" required>
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="icc_id" placeholder="ICC ID">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="imsi" placeholder="IMSI">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="text" class="input" id="res_id" placeholder="Res ID">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="date" class="input" id="request_date" placeholder="Request Date">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="date" class="input" id="expired_date" placeholder="Expired Date">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="date" class="input" id="active_date" placeholder="Active Date">
     </td>
-    <td> 
+    <td>
         <div class="input-div"><input type="date" class="input" id="terminate_date" placeholder="Terminate Date">
     </td>
     <td>
-<<<<<<< HEAD
-        <textarea class="form-control" id="note" name="note" ></textarea>
-=======
         <textarea class="form-control" id="note" name="note"></textarea>
     </td>
      <td>
         <div class="input-div"><input type="text" class="input" id="provider" placeholder="Provider">
->>>>>>> 0293daf947a64c7bb2c3c3f1585c4b26e5483f54
     </td>
+
+    <td class="action sticky-col first-col">
+         <button class="unstyled-button" type="submit">
+            <i class="fas fa-check add" id="add" onclick="store()"></i>
+        </button>
+        <i class="fas fa-times cancel" onclick="cancel()"></i>
     <td>
-        <select class="select" id="provider">
-            <option style="display: none"></option>
-            <option value="Telkomsel">Telkomsel</option>
-            <option value="XL Axiata">XL Axiata</option>
-            <option value="Tri">Tri</option>
-            <option value="Indosat">Indosat</option>
-            <option value="Smartfren">SmartFrend</option>
-        </select>
-    </td>
-    <td class="sticky-col first-col">
-        <i class="fas fa-check add" id="add" onclick="store()"></i><i class="fas fa-times cancel" onclick="cancel()"></i>
-    </td>
 </tr>
 
 <script>

@@ -7,7 +7,7 @@
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-       
+
         {{-- template admin --}}
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{asset('template-admin')}}/assets/css/ready.css">
@@ -30,8 +30,6 @@
         <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script> --}}
 
-        {{-- https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css --}}
-
         {{-- Ajax --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
@@ -42,9 +40,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
 
-        {{-- boostrap-select --}}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-        
         {{-- charts --}}
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
