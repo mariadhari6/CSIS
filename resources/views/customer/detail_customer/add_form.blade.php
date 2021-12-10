@@ -9,7 +9,8 @@
         </select>
     </td>
     <td>
-       <select class="select-search search_selectpicker" id="LicencePlate" name="LicencePlate" data-live-search="true">
+        {{-- select-search search_selectpicker --}}
+       <select class="form-control selectpicker" id="LicencePlate" name="LicencePlate" data-live-search="true">
             <option style="display: none"></option>
             @foreach ($vehicle as $item)
                 <option value="{{ $item->id }}" {{ old('license_plate') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
