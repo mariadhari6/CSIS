@@ -124,6 +124,8 @@ class MaintenanceGpsController extends Controller
         $data->status = $request->status;
         // $equipment_sensor_id     = $request->equipment_sensor_id;
         $gsm_id = $request->equipment_gsm;
+        $gsm = $request->equipment_gsm;
+
         $company = $request->company_id;
         $vehicle = $request->vehicle;
         if ($request->hidden_gsm == $request->equipment_gsm) {
@@ -154,7 +156,7 @@ class MaintenanceGpsController extends Controller
         // }
         Gsm::where('id', $gsm_id)->update(array('status_gsm' => 'Active', 'company_id' => $company));
         Gsm::where('id', $hidden_gsm)->update(array('was_maintenance' => $was_maintenance));
-        DetailCustomer::where('id', $vehicle)->update(array('gsm_id' => $gsm_id));
+        DetailCustomer::where('licence_plate', $vehicle)->update(array('gsm_id' => $gsm));
 
 
         // Gps::where('id', $gps_type)->update(array('status' => 'Used'));

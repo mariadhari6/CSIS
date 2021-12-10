@@ -13,19 +13,19 @@
             {{ $no++ }}
         </td>
         <td id="item-CompanyId-{{ $detail->id }}">
-            {{ $detail->company->company_name}}
+            {{ $detail->company->company_name??''}}
         </td>
         <td id="item-LicencePlate-{{ $detail->id }}">
-            {{ $detail->vehicle->license_plate}}
+            {{ $detail->vehicle->license_plate??''}}
         </td>
         <td id="item-VihecleType-{{ $detail->id }}">
-            {{ $detail->vehicle->vehicle->name}}
+            {{ $detail->vehicle->vehicle->name??''}}
         </td>
         <td id="item-PoNumber-{{ $detail->id }}">
-            {{ $detail->po->po_number }}
+            {{ $detail->po->po_number??'' }}
         </td>
         <td id="item-HargaLayanan-{{ $detail->id }}">
-            {{ $detail->po->harga_layanan }}
+            {{ $detail->po->harga_layanan??'' }}
         </td>
         <td id="item-PoDate-{{ $detail->id }}">
             {{ date('d-M-Y', strtotime($detail->po->po_date))}}
@@ -43,10 +43,10 @@
             {{ $detail->gps->type }}
         </td>
         <td id="item-GSM-{{ $detail->id }}">
-            {{ $detail->gsm->gsm_number }}
+            {{ $detail->gsm->gsm_number??'' }}
         </td>
         <td id="item-Provider-{{ $detail->id }}">
-            {{ $detail->gsm->provider }}
+            {{ $detail->gsm->provider??'' }}
         </td>
         <td id="item-SensorAll-{{ $detail->id }}">
             @if ($detail->sensor_all_name == "")

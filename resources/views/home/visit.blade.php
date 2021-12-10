@@ -18,22 +18,22 @@
                     <tr>
                         @if ($item->status == 'On Progress')
                             <td style="color: red">
-                            {{$item->status}}
+                            {{$item->status??''}}
                             </td>
                         @else
                         <td>
-                            {{$item->status}}
+                            {{$item->status??''}}
                         </td>
                         @endif
 
 
                         @if ($item->status == 'On Progress')
                          <td style="color: red">
-                            {{$item->jumlah_status_pemasangan}}
+                            {{$item->jumlah_status_pemasangan??''}}
                          </td>
                          @else
                         <td>
-                            {{$item->jumlah_status_pemasangan}}
+                            {{$item->jumlah_status_pemasangan??''}}
                          </td>
                         @endif
 
@@ -43,7 +43,7 @@
                     <tfoot>
                     <tr>
                         <th>TOTAL</th>
-                        <th style="text-align:center">{{$jumlah_total_pemasangan}}</th>
+                        <th style="text-align:center">{{$jumlah_total_pemasangan??''}}</th>
                     </tr>
                     </tfoot>
 
@@ -59,7 +59,7 @@
         <div class="card">
             <div class="card-body">
                 <h6 style="float: left">Mutasi</h6>
-                <h6 class="presentase-table" >{{round($presentase_mutasi,1)}}%</h6>
+                <h6 class="presentase-table" >{{round($presentase_mutasi, 1)}}%</h6>
                 <table class="table table-hover data " class="table_home" id="table_home" >
 
                 <tr>
@@ -74,22 +74,22 @@
                     <tr>
                         @if ($item->status == 'On Progress')
                             <td style="color: red">
-                            {{$item->status}}
+                            {{$item->status??''}}
                             </td>
                         @else
                         <td>
-                            {{$item->status}}
+                            {{$item->status??''}}
                         </td>
                         @endif
 
 
                         @if ($item->status == 'On Progress')
                          <td style="color: red">
-                            {{$item->jumlah_status_mutasi}}
+                            {{$item->jumlah_status_mutasi??''}}
                          </td>
                          @else
                         <td>
-                            {{$item->jumlah_status_mutasi}}
+                            {{$item->jumlah_status_mutasi??''}}
                          </td>
                         @endif
 
@@ -99,7 +99,7 @@
                      <tfoot>
                     <tr>
                         <th>TOTAL</th>
-                        <th style="text-align:center">{{$jumlah_total_mutasi}}</th>
+                        <th style="text-align:center">{{$jumlah_total_mutasi??''}}</th>
                     </tr>
                     </tfoot>
 
@@ -115,7 +115,7 @@
         <div class="card">
             <div class="card-body">
                 <h6 style="float: left">Maintenance GPS</h6>
-                <h6 class="presentase-table" >{{round($presentase_maintenance_gps,1)}}%</h6>
+                <h6 class="presentase-table" >{{round($presentase_maintenance_gps, 1)}}%</h6>
 
                 <table class="table table-hover data " class="table_home" id="table_home" >
 
@@ -131,22 +131,22 @@
                     <tr>
                         @if ($item->status == 'On Progress')
                             <td style="color: red">
-                            {{$item->status}}
+                            {{$item->status??''}}
                             </td>
                         @else
                         <td>
-                            {{$item->status}}
+                            {{$item->status??''}}
                         </td>
                         @endif
 
 
                         @if ($item->status == 'On Progress')
                          <td style="color: red">
-                            {{$item->jumlah_status_maintenance_gps}}
+                            {{$item->jumlah_status_maintenance_gps??''}}
                          </td>
                          @else
                         <td>
-                            {{$item->jumlah_status_maintenance_gps}}
+                            {{$item->jumlah_status_maintenance_gps??''}}
                          </td>
                         @endif
 
@@ -157,7 +157,7 @@
                      <tfoot>
                     <tr>
                         <th>TOTAL</th>
-                        <th style="text-align:center">{{$jumlah_total_maintenance_gps}}</th>
+                        <th style="text-align:center">{{$jumlah_total_maintenance_gps??''}}</th>
                     </tr>
                     </tfoot>
 
@@ -173,7 +173,7 @@
         <div class="card">
             <div class="card-body">
                 <h6 style="float: left">Maintenance Sensor</h6>
-                <h6 class="presentase-table" >{{round($presentase_maintenance_sensor,1)}}%</h6>
+                <h6 class="presentase-table" >{{round($presentase_maintenance_sensor, 1)}}%</h6>
 
                 <table class="table table-hover data " class="table_home" id="table_home" >
 
@@ -189,22 +189,22 @@
                     <tr>
                         @if ($item->status == 'On Progress')
                             <td style="color: red">
-                            {{$item->status}}
+                            {{$item->status??''}}
                             </td>
                         @else
                         <td>
-                            {{$item->status}}
+                            {{$item->status??''}}
                         </td>
                         @endif
 
 
                         @if ($item->status == 'On Progress')
                          <td style="color: red">
-                            {{$item->jumlah_status_maintenance_sensor}}
+                            {{$item->jumlah_status_maintenance_sensor??''}}
                          </td>
                          @else
                         <td>
-                            {{$item->jumlah_status_maintenance_sensor}}
+                            {{$item->jumlah_status_maintenance_sensor??''}}
                          </td>
                         @endif
 
@@ -215,7 +215,7 @@
                      <tfoot>
                     <tr>
                         <th>TOTAL</th>
-                        <th style="text-align:center">{{$jumlah_total_maintenance_sensor}}</th>
+                        <th style="text-align:center">{{$jumlah_total_maintenance_sensor??''}}</th>
                     </tr>
                     </tfoot>
 

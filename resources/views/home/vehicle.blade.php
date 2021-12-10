@@ -7,9 +7,9 @@
 
                 <tr>
                     <th scope="col" class="list">Company Name</th>
-                    <th scope="col" class="list">Total Vehicle Type</th>
+                    <th scope="col" class="list">Total Vehicle</th>
                     <th scope="col" class="list">Vehicle Type</th>
-                    <th scope="col" class="list">Total Per Vehicle Type</th>
+                    <th scope="col" class="list">Jumlah Unit Per Vehicle Type</th>
 
 
 

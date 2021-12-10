@@ -9,7 +9,7 @@
 </td>
 <td>
     <select class="select-search search_selectpicker LicencePlate-{{ $details->id }}" id="LicencePlate" name="LicencePlate">
-        <option class="hidden" value="{{$details->licence_plate}}">{{$details->vehicle->license_plate}}</option>
+        <option value="{{$details->licence_plate}}">{{$details->vehicle->license_plate}}</option>
         @foreach ($vehicle as $item)
             <option value="{{ $item->id }}" {{ $details->licence_plate  == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
         @endforeach
@@ -17,8 +17,9 @@
 </td>
 <td>
     <select class="select VihecleType-{{ $details->id }}" id="VihecleType" name="VihecleType" disabled>
+        <option value="{{$details->licence_plate}}">{{ $details->vehicle->vehicle->name }}</option>
         @foreach ($vehicle as $item)
-            <option value="{{ $item->id }}" {{ $details->vehicle_id  == $item->id ? 'selected':'' }}>{{ $item->vehicle->name}}</option>
+            <option value="{{ $item->id }}" {{ $details->licence_plate  == $item->id ? 'selected':'' }}>{{ $item->vehicle->name}}</option>
         @endforeach
     </select>
 
@@ -54,35 +55,40 @@
 </td>
 <td>
     <select class="select-search_imei search_selectpicker Imei-{{ $details->id }}" id="Imei" name="Imei">
+        <option value="{{$details->imei}}">{{ $details->gps->imei }}</option>
         @foreach ($imei as $item)
             <option value="{{ $item->id }}" {{ $details->imei == $item->id ? 'selected':''}}>{{ $item->imei }}</option>
         @endforeach
     </select>
 </td>
 <td>
-    <select class="select Merk-{{ $details->id }}" id="Merk" disabled>
+    <select class="select Merk-{{ $details->id }}" id="Merk" disabled name="Merk">
+        <option value="{{$details->imei}}">{{ $details->gps->merk }}</option>
         @foreach ($imei as $item)
-            <option value="{{ $item->id }}" {{ $details->merk == $item->id ? 'selected':''}}>{{ $item->merk }}</option>
+            <option value="{{ $item->id }}" {{ $details->imei == $item->id ? 'selected':''}}>{{ $item->merk }}</option>
         @endforeach
     </select>
 </td>
 <td>
     <select class="select Type-{{ $details->id }}" id="Type" disabled name="Type">
+        <option value="{{$details->imei}}">{{ $details->gps->type }}</option>
         @foreach ($imei as $item)
-            <option value="{{ $item->id }}" {{ $details->type == $item->id ? 'selected':''}}>{{ $item->type }}</option>
+            <option value="{{ $item->id }}" {{ $details->imei == $item->id ? 'selected':''}}>{{ $item->type }}</option>
         @endforeach
     </select>
 </td>
 <td>
     <select class="select-search_gsm search_selectpicker GSM-{{ $details->id }}" id="GSM" name="GSM">
-        {{-- <option value=""></option> --}}
+        <option value="{{$details->gsm_id}}">{{ $details->gsm->gsm_number }}</option>
         @foreach ($gsm as $item)
         <option value="{{ $item->id }}" {{ $details->gsm_id  == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
         @endforeach
     </select>
+
 </td>
 <td>
     <select class="select Provider-{{ $details->id }}" id="Provider" name="Provider">
+        <option value="{{$details->gsm_id}}">{{ $details->gsm->provider }}</option>
         @foreach ($gsm as $item)
         <option value="{{ $item->id }}" {{ $details->provider  == $item->id ? 'selected':''}}>{{ $item->provider }}</option>
         @endforeach
@@ -153,16 +159,18 @@
 </td>
 <td>
     <select class="select PoolName-{{ $details->id }}" id="PoolName" disabled name="PoolName">
+        <option value="{{$details->licence_plate}}">{{ $details->vehicle->pool_name }}</option>
         @foreach ($vehicle as $item)
-            <option value="{{ $item->id }}" {{ $details->pool_name  == $item->id ? 'selected':'' }}>{{ $item->pool_name }}</option>
+            <option value="{{ $item->id }}" {{ $details->licence_plate  == $item->id ? 'selected':'' }}>{{ $item->pool_name }}</option>
         @endforeach
     </select>
 </td>
 
 <td>
     <select class="select PoolLocation-{{ $details->id }}" id="PoolLocation" disabled name="PoolLocation">
+        <option value="{{$details->licence_plate}}">{{ $details->vehicle->pool_location }}</option>
         @foreach ($vehicle as $item)
-            <option value="{{ $item->id }}" {{ $details->pool_location  == $item->id ? 'selected':'' }}>{{ $item->pool_location }}</option>
+            <option value="{{ $item->id }}" {{ $details->licence_plate  == $item->id ? 'selected':'' }}>{{ $item->pool_location }}</option>
         @endforeach
     </select>
 
@@ -301,7 +309,7 @@
                 var Id = $(this).val();
                 if(Id) {
                     $.ajax({
-                        url: '/based_imei/'+ Id,
+                        url: '/based_imeiDetail/'+ Id,
                         method: "GET",
                         success:function(data) {
                             $('select[name="Merk').empty();
@@ -448,6 +456,4 @@
 
 
 </script>
-
-
 

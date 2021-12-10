@@ -26,6 +26,13 @@
     <td>
         <div class="input-div"><input type="text" class="input pool_location-{{$vehicle->id}}" id="pool_location" value="{{ $vehicle->pool_location }}" required></div>
     </td>
+    <td>
+        <select class="select status-{{$vehicle->id}}" id="status">
+            <option value="{{ $vehicle->status }}" style="display: none">{{ $vehicle->status }}</option>
+            <option value="Ready">Ready</option>
+            <option value="Used">Used</option>
+        </select>
+    </td>
     <td class="action sticky-col first-col">
          <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="edit" onclick="update({{ $vehicle->id}})"></i>

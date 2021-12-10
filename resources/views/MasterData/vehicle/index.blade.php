@@ -40,6 +40,7 @@
                     <th scope="col" class="list">Vehicle Type*</th>
                     <th scope="col" class="list">Pool Name*</th>
                     <th scope="col" class="list">Pool Location*</th>
+                    <th scope="col" class="list">Status*</th>
                     <th scope="col" class="action sticky-col first-col">Action</th>
 
                     </tr>
@@ -277,10 +278,7 @@
         var vehicle_id      = $("#vehicle_id").val();
         var pool_name       = $("#pool_name").val();
         var pool_location   = $("#pool_location").val();
-        // var license_plateNum = $("#table_id").find("tbody>tr:eq(1)>td:eq(3)").attr("name");
-        //  alert(license_plateNum);
-
-
+        var status          = $("#status").val();
     $rowCount = $("#table_id tr").length;
       if ($rowCount == 2) {
         // alert('table empty')
@@ -327,7 +325,8 @@
               license_plate : license_plate,
               vehicle_id    : vehicle_id,
               pool_name     : pool_name,
-              pool_location : pool_location
+              pool_location : pool_location,
+              status        : status
             },
              success: function(data) {
                 swal({
@@ -385,6 +384,7 @@
         $("#item-vehicle_id-"+id).slideUp("fast");
         $("#item-pool_name-"+id).slideUp("fast");
         $("#item-pool_location-"+id).slideUp("fast");
+        $("#item-status-"+id).slideUp("fast");
         $.get("{{ url('show_vehicle') }}/" + id, {}, function(data, status) {
             $("#edit-form-"+id).prepend(data)
         });
@@ -395,6 +395,7 @@
         var vehicle_id      = $("#vehicle_id").val();
         var pool_name       = $("#pool_name").val();
         var pool_location   = $("#pool_location").val();
+        var status          = $("#status").val();
         var id = id;
         $.ajax({
             type: "get",
@@ -404,7 +405,8 @@
               license_plate :   license_plate,
               vehicle_id    :   vehicle_id,
               pool_name     :   pool_name,
-              pool_location :   pool_location
+              pool_location :   pool_location,
+              status        :   status
             },
             success: function(data) {
               swal({
@@ -496,6 +498,7 @@
                 $("#item-vehicle_id-"+value).slideUp("fast");
                 $("#item-pool_name-"+value).slideUp("fast");
                 $("#item-pool_location-"+value).slideUp("fast");
+                $("#item-status-"+value).slideUp("fast");
                 $(".add").hide("fast");
                 $.get("{{ url('show_vehicle') }}/" + value, {}, function(data, status) {
                     $("#edit-form-"+value).prepend(data)
@@ -532,6 +535,8 @@
                 var vehicle_id      = $(".vehicle_id-"+value).val();
                 var pool_name       = $(".pool_name-"+value).val();
                 var pool_location   = $(".pool_location-"+value).val();
+                var status          = $(".status-"+value).val();
+
                 $.ajax({
                 type: "get",
                 url: "{{ url('update_vehicle') }}/"+value,
@@ -540,7 +545,8 @@
                     license_plate   : license_plate,
                     vehicle_id      : vehicle_id,
                     pool_name       : pool_name ,
-                    pool_location   : pool_location
+                    pool_location   : pool_location,
+                    status          : status
                 },
                 success: function(data) {
                 swal({
@@ -548,8 +554,6 @@
                         title: 'The selected data has been updated',
                         showConfirmButton: false,
                         timer: 1500
-
-                    // $(".save").hide();
                     });
                     read();
 

@@ -384,22 +384,25 @@ class CustomerServiceController extends Controller
         // presentase pemasangan
         $jumlah_done_pemasangan = RequestComplaint::where('task', 'Pemasangan GPS')->where('status', 'Done')->count();
         $jumlah_total_pemasangan = RequestComplaint::where('task', 'Pemasangan GPS')->count();
-        $presentase_pemasangan = ($jumlah_done_pemasangan / $jumlah_total_pemasangan) * 100;
+        $jumlah_total_pemasangan = RequestComplaint::where('task', 'Pemasangan GPS')->count();
+        $presentase_pemasangan = $jumlah_total_pemasangan == 0 ? 0 : ($jumlah_done_pemasangan / $jumlah_total_pemasangan) * 100;
 
         // presentase mutasi
         $jumlah_done_mutasi = RequestComplaint::whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->where('status', 'Done')->count();
         $jumlah_total_mutasi = RequestComplaint::whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->count();
-        $presentase_mutasi = ($jumlah_done_mutasi / $jumlah_total_mutasi) * 100;
+        $presentase_mutasi = $jumlah_total_mutasi == 0 ? 0 : ($jumlah_done_mutasi / $jumlah_total_mutasi) * 100;
 
         // presentase maintenance gps
         $jumlah_done_maintenance_gps = RequestComplaint::where('task', 'Maintenance GPS')->where('status', 'Done')->count();
         $jumlah_total_maintenance_gps = RequestComplaint::where('task', 'Maintenance GPS')->count();
-        $presentase_maintenance_gps = ($jumlah_done_maintenance_gps / $jumlah_total_maintenance_gps) * 100;
+        $presentase_maintenance_gps = $jumlah_total_maintenance_gps == 0 ? 0 : ($jumlah_done_maintenance_gps / $jumlah_total_maintenance_gps) * 100;
         // return $presentase_maintenance_gps;
         // presentase maintenance gps
         $jumlah_done_maintenance_sensor = RequestComplaint::where('task', 'Maintenance Sensor')->where('status', 'Done')->count();
+
         $jumlah_total_maintenance_sensor = RequestComplaint::where('task', 'Maintenance Sensor')->count();
-        $presentase_maintenance_sensor = ($jumlah_done_maintenance_sensor / $jumlah_total_maintenance_sensor) * 100;
+
+        $presentase_maintenance_sensor = $jumlah_total_maintenance_sensor == 0 ? 0 : ($jumlah_done_maintenance_sensor / $jumlah_total_maintenance_sensor) * 100;
 
 
 

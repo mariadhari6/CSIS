@@ -28,6 +28,9 @@
         <td id="item-pool_location-{{ $item->id}}">
             {{ $item->pool_location }}
         </td>
+        <td id="item-status-{{ $item->id}}">
+            {{ $item->status }}
+        </td>
 
         <td class="action sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
