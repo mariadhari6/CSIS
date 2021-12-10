@@ -173,11 +173,10 @@ class DetailCustomerController extends Controller
         $details        = DetailCustomer::findOrfail($id);
         $company        = Company::where('id', $data)->get();
         $imei           = Gps::where('status', 'Ready')->get();
-
         $gsm            = Gsm::where('status_gsm', 'Ready')->get();
         $sensor         = Sensor::where('status', 'Ready')->get();
-        $vehicle        = Vehicle::where('status', 'Ready')->get();
-        $po             = MasterPo::orderBy('po_number', 'DESC')->get();
+        $vehicle        = Vehicle::where('company_id', $details->company_id )->where('status', 'Ready')->get();
+        $po             = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $details->company_id)->get();
         $status_layanan = ServiceStatus::orderBy('service_status_name', 'ASC')->get();
 
 
@@ -189,7 +188,7 @@ class DetailCustomerController extends Controller
             'sensor'            => $sensor,
             'po'                => $po,
             'vehicle'           => $vehicle,
-            'status_layanan'    => $status_layanan
+            'status_layanan'    => $status_layanan,
         ]);
 
     }
@@ -321,6 +320,7 @@ class DetailCustomerController extends Controller
                 $item['id'] => $item->only(['merk', 'type'])
             ];
         });
+        
         $data = $key->all();
         return $data;
     }
@@ -395,41 +395,6 @@ class DetailCustomerController extends Controller
     {
         return Excel::download(new DetailCustCompany($request->id), 'Detail_Customer_Company.xlsx');
     }
-
-    // public function basedPO($id){
-    //     $data = MasterPo::where('company_id', $id)->get();
-    //     return $data;
-    // }
-
-    // public function basedCompany($id)
-    // {
-    //     $data = Vehicle::where('company_id', $id)->get();
-    //     return $data;
-    // }
-
-
-    // public function basedSensorName($id)
-    // {
-
-
-
-    //     $data = Sensor::where('sensor_name', $id )->get();
-
-    //     return $data;
-
-
-    // }
-    // public function basedSerialNumber($id)
-    // {
-
-
-
-    //     $data = Sensor::where('serial_number', $id )->get();
-
-    //     return $data;
-
-
-    // }
 
     public function Active($id)
     {

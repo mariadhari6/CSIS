@@ -1,12 +1,12 @@
 <div class="row" id="table-gsm">
 
 
-<div class="col-md-6">
+    <div class="col-md-6">
         <div class="card card-stats ">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5">
-                                <i class='fas fa-exclamation-circle faa-ring animated fa-3x'><span class="badge badge-danger">{{$gsm_no_assign->count()}}</span></i>
+                                <i class='fas fa-exclamation-circle faa-ring animated fa-2x'><span class="badge badge-danger">{{$gsm_no_assign->count()}}</span></i>
                         </div>
                         <div class="col-5">
                              <button type="button" class="btn btn-danger float-left mr-2" data-toggle="modal" data-target="#importData"">
@@ -19,7 +19,6 @@
                 </div>
             </div>
     </div>
-
 
        <div class="col-md-6">
         <div class="card card-stats ">
