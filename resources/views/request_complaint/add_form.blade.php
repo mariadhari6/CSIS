@@ -1,13 +1,12 @@
-<tr id="add_form">
-
+<tr>
     <td></td>
     <td></td>
-
-     <td>
+    <td>
         <select class="select-search search_company" id="company_id" placeholder="Select a Company..." name="company_id" required>
+            {{-- <option class="hidden" placeholder="Search Company"></option> --}}
             <option value="">Select a Company...</option>
             @foreach ($detail as $item )
-                <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
+            <option value="{{ $item->company_id }}">{{ $item->company->company_name }}</option>
             @endforeach
         </select></i>
     </td>
@@ -26,9 +25,7 @@
         </select>
     </td>
     <td>
-        <select class="select" id="vehicle" name="vehicle">
-            <option value="" class="hidden">--Pilih Vehicle--</option>
-        </select>
+        <select class="form-control" name="vehicle" id="vehicle"></select>
     </td>
     <td>
         <div class="input-div"><input type="datetime-local" class="input" id="waktu_info" placeholder="Waktu Info"></i></div>
@@ -91,17 +88,18 @@
     <td>
 
     <script>
-
     $(document).ready(function() {
-    new TomSelect(".select-search",{
-    create: false,
-    sortField: {
-        field: "text",
-        direction: "asc"
-    }
-    });
-    });
+        new TomSelect(".select-search",{
+        create: false,
+            sortField: {
+                field: "text",
+                direction: "asc"
+            }
+        });
 
+        $('#vehicle').select2();
+
+    })
 
     $('select[name="company_id"]').on('change', function() {
             var itemID = $(this).val();

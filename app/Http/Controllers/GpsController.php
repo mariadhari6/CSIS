@@ -47,6 +47,7 @@ class GpsController extends Controller
     public function item_data()
     {
         $gps = Gps::orderBy('id', 'DESC')->get();
+
         return view('MasterData.gps.item_data')->with([
             'gps' => $gps,
 

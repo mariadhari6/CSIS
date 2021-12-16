@@ -38,7 +38,7 @@
             </div>
         <form onsubmit="return false">
 
-          <table class="table table-responsive data " class="table_request" id="table_request" >
+          <table class="table table-responsive" id="table_request" >
             <thead>
               <tr>
                 <th>
@@ -578,11 +578,6 @@
           $("[data-toggle= modal]").prop('disabled', false);
 
         }
-
-
-
-
   </script>
-
-   @endsection
+@endsection
 

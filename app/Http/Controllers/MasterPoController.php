@@ -238,9 +238,9 @@ class MasterPoController extends Controller
 
     public function check(){
 
-        $detail_sensor = DetailCustomer::where('id', 228)->pluck('sensor_all');
-        $explode = explode(' ',$detail_sensor[0]);
-        $temp = array();
+        // $detail_sensor = DetailCustomer::where('id', 228)->pluck('sensor_all');
+        // $explode = explode(' ',$detail_sensor[0]);
+        // $temp = array();
        
        
 
@@ -262,8 +262,14 @@ class MasterPoController extends Controller
         // }else{
         //     echo 'tidak ada';
         // }
-        $gsm = Sensor::where('status', 'Used')->get();
-        return $gsm;
+        // $gsm = Sensor::where('status', 'Used')->get();
+        // return $gsm;'
+
+        $data = DetailCustomer::groupBy('company_id')->select('company_id')->get();
+
+        return $data;
+        
+
         
         
 
