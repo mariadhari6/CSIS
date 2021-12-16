@@ -244,16 +244,57 @@
 
      // ------ Tampil Data ------
     function read(){
-      $.get("{{ url('item_data_vehicle') }}", {}, function(data, status) {
-         $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-         $('#table_id').dataTable( {
-            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
+      // $.get("{{ url('item_data_vehicle') }}", {}, function(data, status) {
+      //    $('#table_id').DataTable().destroy();
+      //   $('#table_id').find("#item_data").html(data);
+      //    $('#table_id').dataTable( {
+      //       "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
 
-            "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            });
-        $('#table_id').DataTable().draw();
-      });
+      //       "dom": '<"top"f>rt<"bottom"lp><"clear">'
+      //       });
+      //   $('#table_id').DataTable().draw();
+      // });
+
+      $('#table_id').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{!! url('item_data_vehicle') !!}', // memanggil route yang menampilkan data json
+            columns: [
+              
+                { "data": null,"sortable": false, 
+                  render: function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                            }  
+                },
+
+                { "data": null,"sortable": false, 
+                  render: function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                            }  
+                },
+
+                { 
+                    data: 'company.company_name',
+                    name: 'company_id'
+                },
+                {
+                    data: 'license_plate',
+                    name: 'license_plate'
+                },
+                {
+                    data: 'vehicle_id',
+                    name: 'vehicle_id'
+                },
+                {
+                    data: 'pool_name',
+                    name: 'pool_name'
+                },
+                {
+                    data: 'pool_location',
+                    name: 'pool_location'
+                }
+            ]
+        });
     }
     function cancel() {
       read();

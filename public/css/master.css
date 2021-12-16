@@ -569,237 +569,255 @@ nav.sidebar-new li.active > a,
 }
 
 /* Home */
-.d_company {
-    background-color: #ff1e32;
-    width: 300px;
-    height: 400px;
-}
+@media screen and (min-width: 600px) {
+    .d_company {
+        background-color: #ff1e32;
+        width: 98%;
+        height: 114%;
+        /* width: 300px; */
+        /* height: 250px; */
+    }
 
-.d_company:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_company:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_company-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 100px;
-    top: 100px;
-}
+    .d_company-icon {
+        height: 50px;
+        width: 50px;
+        position: relative;
+        left: 100px;
+        top: 40px;
+    }
 
-.d_company-teks {
-    position: relative;
-    left: 110px;
-    top: 110px;
-}
+    .d_company-teks {
+        position: relative;
+        left: 20px;
+        top: 150px;
+        font-size: 20px;
+    }
 
-.d_company-number {
-    position: relative;
-    left: 110px;
-    top: 110px;
-    font-weight: bold;
-}
+    .d_company-number {
+        position: relative;
+        left: 240px;
+        top: 90px;
 
-.d_gps {
-    background-color: #0186ff;
-    width: 200px;
-    height: 200px;
-    position: relative;
-    right: 20px;
-}
+        font-size: 25px;
+    }
 
-.d_gps:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_gps {
+        background-color: #0186ff;
+        width: 70%;
+        height: 55%;
+        /* width: 200px; */
+        /* height: 120px; */
+        position: relative;
+        right: 6%;
+    }
 
-.d_gps-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 80px;
-    top: 80px;
-}
+    .d_gps:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_gps-teks {
-    position: relative;
-    left: 80px;
-    top: 30px;
-}
+    .d_gps-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 80px;
+        top: 20px;
+    }
 
-.d_gps-number {
-    position: relative;
-    left: 80px;
-    top: 26px;
-    font-weight: bold;
-}
+    .d_gps-teks {
+        position: relative;
+        font-size: 20px;
+        left: 10px;
+        top: 40px;
+    }
 
-.d_sensor {
-    background-color: #0ff861;
-    width: 200px;
-    height: 200px;
-    position: relative;
-    right: 140px;
-}
+    .d_gps-number {
+        position: relative;
+        left: 140px;
+        bottom: 20px;
+        font-size: 25px;
+    }
 
-.d_sensor:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_sensor {
+        background-color: #0ff861;
+        width: 70%;
+        height: 55%;
+        /* width: 200px;
+        height: 120px; */
+        position: relative;
+        /* right: 105px; */
+        right: 39%;
+    }
 
-.d_sensor-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 80px;
-    top: 80px;
-}
+    .d_sensor:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_sensor-teks {
-    position: relative;
-    left: 72px;
-    top: 30px;
-}
+    .d_sensor-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 80px;
+        top: 20px;
+    }
 
-.d_sensor-number {
-    position: relative;
-    left: 80px;
-    top: 26px;
-    font-weight: bold;
-}
+    .d_sensor-teks {
+        position: relative;
+        font-size: 20px;
+        left: 10px;
+        top: 40px;
+    }
 
-.d_vehicle {
-    background-color: #ff2267;
-    width: 415px;
-    height: 185px;
-    position: relative;
-    top: 215px;
-    right: 690px;
-}
+    .d_sensor-number {
+        position: relative;
+        left: 140px;
+        bottom: 20px;
+        font-size: 25px;
+    }
 
-.d_vehicle:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_vehicle {
+        background-color: #ff2267;
+        width: 147%;
+        height: 53%;
+        position: relative;
+        top: 135px;
+        right: 226%;
+    }
 
-.d_vehicle-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 140px;
-    top: 60px;
-}
+    .d_vehicle:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_vehicle-teks {
-    position: relative;
-    left: 210px;
-    top: -15px;
-}
+    .d_vehicle-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 70px;
+        top: 20px;
+    }
 
-.d_vehicle-number {
-    position: relative;
-    left: 212px;
-    top: -12px;
-    font-weight: bold;
-}
+    .d_vehicle-teks {
+        position: relative;
+        font-size: 20px;
+        left: 210px;
+        top: -60px;
+    }
 
-.d_gsm {
-    background-color: #ffbb02;
-    width: 300px;
-    height: 400px;
-    position: relative;
-    left: 750px;
-    bottom: 430px;
-}
+    .d_vehicle-number {
+        position: relative;
+        left: 340px;
+        top: -60px;
+        font-size: 25px;
+    }
 
-.d_gsm:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_gsm {
+        background-color: #ffbb02;
+        width: 100%;
+        height: 53%;
+        position: relative;
+        left: 256%;
+        bottom: 38%;
+    }
 
-.d_gsm-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 100px;
-    top: 100px;
-}
+    .d_gsm:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_gsm-teks {
-    position: relative;
-    left: 125px;
-    top: 108px;
-}
+    .d_gsm-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 65px;
+        top: 20px;
+    }
 
-.d_gsm-number {
-    position: relative;
-    left: 125px;
-    top: 107px;
-    font-weight: bold;
-}
+    .d_gsm-teks {
+        position: relative;
+        left: 190px;
+        top: -60px;
+        font-size: 20px;
+    }
 
-.d_RequstComp {
-    background-color: #798aa6;
-    width: 258px;
-    height: 200px;
-    position: relative;
-    /* top: 215px; */
-    left: 734px;
-    bottom: 430px;
-}
+    .d_gsm-number {
+        position: relative;
+        left: 200px;
+        top: -50px;
+        font-size: 25px;
+    }
 
-.d_RequstComp:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_RequstComp {
+        background-color: #798aa6;
+        width: 177%;
+        height: 56%;
+        position: relative;
+        /* top: 215px; */
+        left: 146%;
+        bottom: 100%;
+    }
 
-.d_RequstComp-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 100px;
-    top: 40px;
-}
+    .d_RequstComp:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_RequstComp-teks {
-    position: relative;
-    left: 60px;
-    top: 20px;
-}
+    .d_RequstComp-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 100px;
+        right: 100px;
+        top: 20px;
+    }
 
-.d_RequstComp-number {
-    position: relative;
-    left: 119px;
-    top: 20px;
-    font-weight: bold;
-}
+    .d_RequstComp-teks {
+        position: relative;
+        font-size: 20px;
+        left: 270px;
+        top: -60px;
+    }
 
-.d_visitAs {
-    background-color: #00c3ff;
-    width: 258px;
-    height: 185px;
-    position: relative;
-    /* top: 215px; */
-    left: 398px;
-    bottom: 215px;
-}
+    .d_RequstComp-number {
+        position: relative;
+        left: 430px;
+        top: -60px;
+        font-size: 25px;
+    }
 
-.d_visitAs:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_visitAs {
+        background-color: #00c3ff;
+        width: 71%;
+        height: 53%;
+        position: relative;
+        /* top: 215px; */
+        left: 142%;
+        bottom: 38%;
+    }
 
-.d_visitAs-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 100px;
-    top: 40px;
-}
+    .d_visitAs:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_visitAs-teks {
-    position: relative;
-    left: 68px;
-    top: 20px;
-}
+    .d_visitAs-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 35px;
+        top: 20px;
+    }
 
-.d_visitAs-number {
-    position: relative;
-    left: 119px;
-    top: 20px;
-    font-weight: bold;
+    .d_visitAs-teks {
+        position: relative;
+        left: 120px;
+        top: -50px;
+        font-size: 20px;
+    }
+
+    .d_visitAs-number {
+        position: relative;
+        left: 145px;
+        top: -35px;
+        font-size: 25px;
+    }
 }

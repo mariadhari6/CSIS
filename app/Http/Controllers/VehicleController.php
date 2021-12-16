@@ -30,11 +30,13 @@ class VehicleController extends Controller
 
     public function item_data()
     {
-        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
+        // $vehicle = Vehicle::orderBy('id', 'DESC')->get();
 
-        return view('MasterData.vehicle.item_data')->with([
-            'vehicle' => $vehicle
-        ]);
+        // return view('MasterData.vehicle.item_data')->with([
+        //     'vehicle' => $vehicle
+        // ]);
+
+        return DataTables::of(Vehicle::query())->toJson();
     }
     public function save_import(Request $request)
     {
