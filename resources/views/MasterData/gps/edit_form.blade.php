@@ -102,7 +102,7 @@
                     $('#td-company').empty();
                    $('#td-company').append(
                         `<select class="select" id="company_id" disable>
-                        <option value="" class="hidden">--Pilih Company--</option>
+                        <option value="{{$gps->company_id}}" class="hidden">{{$gps->company->company_name??''}}</option>
                         @foreach ($company as $item)
                         <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
                         @endforeach
@@ -123,7 +123,7 @@
                         $('#td-company').empty();
                          $('#td-company').append(
                         `<select class="select" id="company_id" disable>
-                        <option value="" class="hidden">--Pilih Company--</option>
+                        <option value="{{$gps->company_id}}" class="hidden">{{$gps->company->company_name??''}}</option>
                         @foreach ($company as $item)
                         <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
                         @endforeach

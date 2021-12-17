@@ -25,7 +25,7 @@ class CustomerServiceController extends Controller
 
         $company = DetailCustomer::where('status_id', 1)->get();
         $gps = Gps::all();
-        $vehicle = DetailCustomer::all();
+        $vehicle = DetailCustomer::where('status_id', 1)->get();
         $sensor = Sensor::all();
         $gsm = Gsm::all();
         $request = RequestComplaint::all();
@@ -310,7 +310,7 @@ class CustomerServiceController extends Controller
 
     public function vehicle_home()
     {
-        $vehicle = DetailCustomer::groupBy('company_id')->select('company_id')->get();
+        $vehicle = DetailCustomer::groupBy('company_id')->where('status_id', 1)->select('company_id')->get();
 
 
         for ($i = 0; $i < count($vehicle); $i++) {
@@ -320,13 +320,16 @@ class CustomerServiceController extends Controller
             $total_vehicle_type_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_vehicletype'))->get();
             // $total_vehicleperType_installed = DetailCustomer::groupBy('')->where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_pervehicle_type,vehicle_id'))->get();
 
-            $cari_vehicle_type = DetailCustomer::where('company_id', $a)->pluck('vehicle_id');
-            // return $vehicle;
+            // $cari_vehicle_type = DetailCustomer::where('company_id', $a)->pluck('vehicle_id');
+            // // return $vehicle;
 
-            $vehicle[$i]["vehicle_type"] = $cari_vehicle_type;
+            // $vehicle[$i]["vehicle_type"] = $cari_vehicle_type;
 
             $vehicle[$i]["total_vehicletype"] = $total_vehicle_type_installed;
         }
+
+
+
 
         for ($i = 0; $i < count($vehicle); $i++) {
             $vehicle_ = array();
