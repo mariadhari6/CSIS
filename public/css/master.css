@@ -398,7 +398,7 @@ font-family:verdana, Helvetica;
     z-index: 1;
     margin: auto;
     overflow: auto;
-    height: 450px;
+    height: 75vh;
   }
 
 .table-wrap {

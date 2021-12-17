@@ -272,15 +272,12 @@ class SummaryController extends Controller
 
         $data_finish = $data->sortByDesc('total_gps');
 
+        return view('customer.summary.item_summary')->with([
+            'data_finish'   => $data_finish,
+            'month'         => $month,
+            'year'          => $year,
 
-        return $data_finish;
-
-        // return view('customer.summary.item_summary')->with([
-        //     'data_finish'   => $data_finish,
-        //     'month'         => $month,
-        //     'year'          => $year,
-
-        // ]);
+        ]);
     }
 }
 
