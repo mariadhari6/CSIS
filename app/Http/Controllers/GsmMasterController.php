@@ -20,9 +20,21 @@ class GsmMasterController extends Controller
 {
     public function index()
     {
+        $GsmMaster = Gsm::orderBy('id', 'DESC')->get();
+        $gsmNumberGet = $GsmMaster->map(function ($item) {
+            return collect($item->toArray())
+                ->only(['gsm_number'])
+                ->all();
+        });
+        $gsmSerialGet = $GsmMaster->map(function ($item) {
+            return collect($item->toArray())
+                ->only(['serial_number'])
+                ->all();
+        });
+        // dd($subset);
         $details = DetailCustomer::orderBy('id', 'DESC')->get();
         return view('MasterData.GsmMaster.index')->with([
-            'details' => $details
+            'details' => $details, 'gsmNumberGet' => $gsmNumberGet, 'gsmSerialGet' => $gsmSerialGet
         ]);
     }
 

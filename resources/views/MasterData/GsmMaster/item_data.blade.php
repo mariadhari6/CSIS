@@ -59,3 +59,14 @@
         </td>
     </tr>
 @endforeach
+    {{-- <tr>
+        <td>
+            Current Page: {{ $GsmMaster->currentPage() }}<br>
+            Jumlah Data: {{ $GsmMaster->total() }}<br>
+            Data perhalaman: {{ $GsmMaster->perPage() }}<br>
+            <br>
+            {{ $GsmMaster->links() }}
+        </td>
+    </tr> --}}
+
+

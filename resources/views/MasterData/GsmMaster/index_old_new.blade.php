@@ -22,7 +22,7 @@
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
                   </select>
                 </div>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData" ">
+                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
@@ -63,13 +63,6 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-          
-            {{-- Current Page: {{ $GsmMaster->currentPage() }}<br>
-            Jumlah Data: {{ $GsmMaster->total() }}<br>
-            Data perhalaman: {{ $GsmMaster->perPage() }}<br>
-            <br>
-            {{ $GsmMaster->links() }} --}}
-
         </div>
       </div>
     </div>
@@ -94,10 +87,6 @@
               <input type="file" id="excel_file" />
               <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
               <a  class="btn btn-secondary btn-xs" href="/download_template_gsm" style="color:white">Download Template</a>
-              <div class="mt-2 progress">
-                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="">
-                </div>
-              </div>
             </div>
             <div class="card-body">
               <div id="excel_data" ></div>
@@ -123,141 +112,182 @@
       read()
     });
 
-    // -- Get all data gsm master --
-    var gsmNumberGet = {!! json_encode($gsmNumberGet->toArray()) !!};
-    var gsmSerialGet = {!! json_encode($gsmSerialGet->toArray()) !!};
-
      // -- excel export to html tabel --
     const excel_file = document.getElementById("excel_file");
-    var allGsmNum = [];
-    var allSerNum = [];
 
     excel_file.addEventListener("change", (event) => {
-    
-      function progress_bar_process(percentage, timer)
-      {
-        $('.progress-bar').css('width', percentage + '%');
-        if(percentage > 100)
-        {
-          clearInterval(timer);
-          $('#process').css('display', 'none');
-          $('.progress-bar').css('width', '0%');
+      if (
+        ![
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.ms-excel",
+        ].includes(event.target.files[0].type)
+      ) {
+        document.getElementById("excel_data").innerHTML =
+          '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
 
-          if (
-              ![
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                "application/vnd.ms-excel",
-              ].includes(event.target.files[0].type)
-            ) {
-              document.getElementById("excel_data").innerHTML =
-                '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+        excel_file.value = "";
 
-              excel_file.value = "";
+        return false;
+      }
 
-              return false;
+      var reader = new FileReader();
+
+      reader.readAsArrayBuffer(event.target.files[0]);
+
+      reader.onload = function (event) {
+        var data = new Uint8Array(reader.result);
+
+        var work_book = XLSX.read(data, { type: "array" });
+
+        var sheet_name = work_book.SheetNames;
+
+        var sheet_data = XLSX.utils.sheet_to_json(
+          work_book.Sheets[sheet_name[0]],
+          { header: 1 }
+        );
+
+        if (sheet_data.length > 0) {
+          var table_output = '<table class="table table-bordered" id="importTable">';
+
+          for (var row = 0; row < sheet_data.length; row++) {
+            table_output += "<tr>";
+
+            for (var cell = 0; cell < sheet_data[row].length; cell++) {
+              if (row == 0) {
+                table_output += "<th>" + sheet_data[row][cell] + "</th>";
+              } else {
+                table_output += '<td contenteditable id="table-data-' + cell + '" >' + sheet_data[row][cell] + "</td>";
+              }
             }
 
-            var reader = new FileReader();
+            table_output += "</tr>";
+          }
 
-            reader.readAsArrayBuffer(event.target.files[0]);
+          table_output += "</table>";
 
-            reader.onload = function (event) {
-              var data = new Uint8Array(reader.result);
+          document.getElementById("excel_data").innerHTML = table_output;
 
-              var work_book = XLSX.read(data, { type: "array" });
-
-              var sheet_name = work_book.SheetNames;
-
-              var sheet_data = XLSX.utils.sheet_to_json(
-                work_book.Sheets[sheet_name[0]],
-                { header: 1 }
-              );
-
-              if (sheet_data.length > 0) {
-                var table_output = '<table class="table table-bordered" id="importTable">';
-
-                for (var row = 0; row < sheet_data.length; row++) {
-                  table_output += "<tr>";
-
-                  for (var cell = 0; cell < sheet_data[row].length; cell++) {
-                    if (row == 0) {
-                      table_output += "<th>" + sheet_data[row][cell] + "</th>";
-                    } else {
-                      if (cell == 7 || cell == 8 || cell == 9 || cell == 10) {
-                        
-                        if(sheet_data[row][cell] === undefined) {
-                          datas = "";
-                        } else {
-                          var converted_requestDate = new Date(Math.round((sheet_data[row][cell] - (25567 + 2)) * 86400 * 1000));
-                          var datas = converted_requestDate.toISOString().split('T')[0];
-                        }
-
-                      } else {
-                        var datas = sheet_data[row][cell];
-                      }
-                      table_output += '<td contenteditable id="table-data-' + cell + '" >' + datas + "</td>";
-                    }
+           // check duplicate data
+          gsmNumberID = document.querySelectorAll("#table-data-1");
+          serialNumberID = document.querySelectorAll("#table-data-3");
+          for (indexA = 0; indexA < gsmNumberID.length; indexA++) {
+            var gsmNumberValue = gsmNumberID[indexA].innerText; //0
+            var serialNumberValue = serialNumberID[indexA].innerText;
+            $rowCount = $("#table_id tr").length;
+            if ($rowCount == 1) {
+              // alert('table empty')
+            } else {
+              $rowResult = $rowCount - 1;
+              var allGsmNum = [];
+              var allSerNum = [];
+              for($i = 0; $i < $rowResult; $i++)
+                  { 
+                    // $numArr = $i-1;
+                    $gsmNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
+                    $serNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(5)").attr("name");
+                    allGsmNum[$i] = $gsmNum;
+                    allSerNum[$i] = $serNum;
                   }
-
-                  table_output += "</tr>";
-                }
-
-                table_output += "</table>";
-
-                document.getElementById("excel_data").innerHTML = table_output;
-
-                // check duplicate data
-                gsmNumberID = document.querySelectorAll("#table-data-1");
-                serialNumberID = document.querySelectorAll("#table-data-3");
-                for (indexA = 0; indexA < gsmNumberID.length; indexA++) {
-                  var gsmNumberValue = gsmNumberID[indexA].innerText; //0
-                  var serialNumberValue = serialNumberID[indexA].innerText;
-                  if( 
-                      gsmNumberGet[gsmNumberGet.findIndex(x => x.gsm_number == gsmNumberValue)] != undefined ||
-                      gsmSerialGet[gsmSerialGet.findIndex(x => x.serial_number == serialNumberValue)] != undefined
-                    )
-                    {
-                      gsmNumberID[indexA].style.backgroundColor = "#e8837d";
+                  // alert(allGsmNum[0]);
+              for (let index = 0; index < allGsmNum.length; index++) {
+                if( gsmNumberValue == allGsmNum[index] ){
+                    gsmNumberID[indexA].style.backgroundColor = "#e8837d";
+                    if( serialNumberValue == allSerNum[index] ){
                       serialNumberID[indexA].style.backgroundColor = "#e8837d";
                     }
-                }
+                } else if( serialNumberValue == allSerNum[index]){
+                    serialNumberID[indexA].style.backgroundColor = "#e8837d";
+                } else if( index == allGsmNum.length) {
 
+                }    
               }
-              excel_file.value = "";
-            };
-          
+            }
+            // alert( typeof serialNumberValue );
+          }
+
+          // change format RequestDate
+          requestDate = document.querySelectorAll("#table-data-7");
+          for (i = 0; i < requestDate.length; i++) {
+            var excelDate = requestDate[i].innerText;
+            var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+            try {
+                  var converted_requestDate = date.toISOString().split('T')[0];
+                }
+                catch(err) {
+                  // var converted_date = 'wrong date format';
+                  requestDate[i].style.backgroundColor = "#e8837d";
+                }
+            if(converted_requestDate === undefined) {
+              requestDate[i].innerHTML = "";
+            } else {
+              requestDate[i].innerHTML = converted_requestDate;
+            }
+          }
+
+        // change format expiredDate	
+        expiredDate = document.querySelectorAll("#table-data-8");
+        for (i = 0; i < expiredDate.length; i++) {
+          var excelDate = expiredDate[i].innerText;
+          var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+          try {
+                var converted_expiredDate = date.toISOString().split('T')[0];
+              }
+              catch(err) {
+                // var converted_date = 'wrong date format';
+                expiredDate[i].style.backgroundColor = "#e8837d";
+              }
+            if(converted_expiredDate === undefined) {
+              expiredDate[i].innerHTML = "";
+              expiredDate[i].style.backgroundColor = "#fff";
+            } else {
+              expiredDate[i].innerHTML = converted_expiredDate;
+            }
         }
-      }
 
-      var percentage = 0;
-      var timer = setInterval(function(){
-      percentage = percentage + 20;
-      progress_bar_process(percentage, timer);
-      }, 1000);
+        // change format activeDate	
+        activeDate = document.querySelectorAll("#table-data-9");
+        for (i = 0; i < activeDate.length; i++) {
+          var excelDate = activeDate[i].innerText;
+          var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+          try {
+                var converted_activeDate = date.toISOString().split('T')[0];
+              }
+              catch(err) {
+                // var converted_date = 'wrong date format';
+                activeDate[i].style.backgroundColor = "#e8837d";
+              }
+            if(converted_activeDate === undefined) {
+              activeDate[i].innerHTML = "";
+              activeDate[i].style.backgroundColor = "#fff";
+            } else {
+              activeDate[i].innerHTML = converted_activeDate;
+            }
+        }
 
+        // change format terminatedDate	
+        terminatedDate = document.querySelectorAll("#table-data-10");
+        for (i = 0; i < terminatedDate.length; i++) {
+          var excelDate = terminatedDate[i].innerText;
+          var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+          try {
+                var converted_terminatedDate = date.toISOString().split('T')[0];
+              }
+              catch(err) {
+                // var converted_date = 'wrong date format';
+                terminatedDate[i].style.backgroundColor = "#e8837d";
+              }
+            if(converted_terminatedDate === undefined) {
+              terminatedDate[i].innerHTML = "";
+              terminatedDate[i].style.backgroundColor = "#fff";
+            } else {
+              terminatedDate[i].innerHTML = converted_terminatedDate;
+            }
+        }
+
+        }
+        excel_file.value = "";
+      };
     });
-
-    function progress_bar_process(percentage, timer)
-    {
-      $('.progress-bar').css('width', percentage + '%');
-      if(percentage > 100)
-      {
-        clearInterval(timer);
-        $('#process').css('display', 'none');
-        $('.progress-bar').css('width', '0%');
-        setTimeout(function(){
-        swal({ 
-              type: 'success',
-              title: 'Data Saved',
-              showConfirmButton: false,
-              timer: 1500
-        }).catch(function(timeout) { });
-        read();
-        $("#importTable tr").remove(); 
-        $('#importData').modal('hide');
-        }, 5000);
-      }
-    }
 
     // ------- save data import -----
     function save_data() {
@@ -312,11 +342,14 @@
               }).catch(function(timeout) { });
           } else {
             try {
-              var percentage = 0;
-              var timer = setInterval(function(){
-              percentage = percentage + 20;
-              progress_bar_process(percentage, timer);
-              }, 1000);
+            swal({ 
+                type: 'success',
+                title: 'Data Saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
+            read();
+            $('#importData').modal('hide');
             } catch (error) {
               swal({
                 type: 'warning',
@@ -795,6 +828,11 @@
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
             read();
+        }
+
+         // destro datatable
+         function dataLengthAll() {
+          $('#table_id').DataTable().destroy();
         }
 
   </script>
