@@ -23,25 +23,25 @@ class CustomerServiceController extends Controller
     public function index()
     {
 
-        // $company = DetailCustomer::where('status_id', 1)->get();
-        // $gps = Gps::all();
-        // $vehicle = DetailCustomer::all();
-        // $sensor = Sensor::all();
-        // $gsm = Gsm::all();
-        // $request = RequestComplaint::all();
-        // $visit = RequestComplaint::whereIn('task', ['Mutasi Pelepasan GPS', 'Pemasangan GPS', 'Mutasi Pemasangan GPS', 'Mutasi Pelepasan Pemasangan GPS', 'Maintenance Sensor', 'Maintenance GPS'])->get();
+        $company = DetailCustomer::where('status_id', 1)->get();
+        $gps = Gps::all();
+        $vehicle = DetailCustomer::where('status_id', 1)->get();
+        $sensor = Sensor::all();
+        $gsm = Gsm::all();
+        $request = RequestComplaint::all();
+        $visit = RequestComplaint::whereIn('task', ['Mutasi Pelepasan GPS', 'Pemasangan GPS', 'Mutasi Pemasangan GPS', 'Mutasi Pelepasan Pemasangan GPS', 'Maintenance Sensor', 'Maintenance GPS'])->get();
 
 
-        // $username = Username::where('id', 3)->count();
+        $username = Username::where('id', 3)->count();
         return view('home.cs')->with([
-            // 'company' => $company,
-            // 'gps' => $gps,
-            // 'vehicle' => $vehicle,
-            // 'sensor' => $sensor,
-            // 'username' => $username,
-            // 'gsm' => $gsm,
-            // 'request' => $request,
-            // 'visit' => $visit
+            'company' => $company,
+            'gps' => $gps,
+            'vehicle' => $vehicle,
+            'sensor' => $sensor,
+            'username' => $username,
+            'gsm' => $gsm,
+            'request' => $request,
+            'visit' => $visit
 
         ]);
     }
@@ -310,7 +310,7 @@ class CustomerServiceController extends Controller
 
     public function vehicle_home()
     {
-        $vehicle = DetailCustomer::groupBy('company_id')->select('company_id')->get();
+        $vehicle = DetailCustomer::groupBy('company_id')->where('status_id', 1)->select('company_id')->get();
 
 
         for ($i = 0; $i < count($vehicle); $i++) {
@@ -320,13 +320,16 @@ class CustomerServiceController extends Controller
             $total_vehicle_type_installed = DetailCustomer::where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_vehicletype'))->get();
             // $total_vehicleperType_installed = DetailCustomer::groupBy('')->where('company_id', $a)->select(DB::raw('count(vehicle_id) as total_pervehicle_type,vehicle_id'))->get();
 
-            $cari_vehicle_type = DetailCustomer::where('company_id', $a)->pluck('vehicle_id');
-            // return $vehicle;
+            // $cari_vehicle_type = DetailCustomer::where('company_id', $a)->pluck('vehicle_id');
+            // // return $vehicle;
 
-            $vehicle[$i]["vehicle_type"] = $cari_vehicle_type;
+            // $vehicle[$i]["vehicle_type"] = $cari_vehicle_type;
 
             $vehicle[$i]["total_vehicletype"] = $total_vehicle_type_installed;
         }
+
+
+
 
         for ($i = 0; $i < count($vehicle); $i++) {
             $vehicle_ = array();
@@ -374,32 +377,35 @@ class CustomerServiceController extends Controller
 
     public function visit_home()
     {
-        $pemasangan = RequestComplaint::groupBy('status')->where('task', 'Pemasangan GPS')->selectRaw('count(task) as jumlah_status_pemasangan, status')->get();
+        $pemasangan = RequestComplaint::groupBy('status')->where('task', 'Pemasangan GPS')->selectRaw('count(status) as jumlah_status_pemasangan, status')->get();
         // return $pemasangan;
-        $mutasi = RequestComplaint::groupBy('status')->whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->selectRaw('count(task) as jumlah_status_mutasi, status')->get();
+        $mutasi = RequestComplaint::groupBy('status')->whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->selectRaw('count(status) as jumlah_status_mutasi, status')->get();
         // return $mutasi;
-        $maintenance_gps = RequestComplaint::groupBy('status')->where('task', 'Maintenance GPS')->selectRaw('count(task) as jumlah_status_maintenance_gps, status')->get();
-        $maintenance_sensor = RequestComplaint::groupBy('status')->where('task', 'Maintenance Sensor')->selectRaw('count(task) as jumlah_status_maintenance_sensor, status')->get();
+        $maintenance_gps = RequestComplaint::groupBy('status')->where('task', 'Maintenance GPS')->selectRaw('count(status) as jumlah_status_maintenance_gps, status')->get();
+        $maintenance_sensor = RequestComplaint::groupBy('status')->where('task', 'Maintenance Sensor')->selectRaw('count(status) as jumlah_status_maintenance_sensor, status')->get();
         // return $maintenance_sensor;
         // presentase pemasangan
         $jumlah_done_pemasangan = RequestComplaint::where('task', 'Pemasangan GPS')->where('status', 'Done')->count();
         $jumlah_total_pemasangan = RequestComplaint::where('task', 'Pemasangan GPS')->count();
-        $presentase_pemasangan = ($jumlah_done_pemasangan / $jumlah_total_pemasangan) * 100;
+        $jumlah_total_pemasangan = RequestComplaint::where('task', 'Pemasangan GPS')->count();
+        $presentase_pemasangan = $jumlah_total_pemasangan == 0 ? 0 : ($jumlah_done_pemasangan / $jumlah_total_pemasangan) * 100;
 
         // presentase mutasi
         $jumlah_done_mutasi = RequestComplaint::whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->where('status', 'Done')->count();
         $jumlah_total_mutasi = RequestComplaint::whereIn('task', ['Mutasi Pemasangan GPS', 'Mutasi Pelepasan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->count();
-        $presentase_mutasi = ($jumlah_done_mutasi / $jumlah_total_mutasi) * 100;
+        $presentase_mutasi = $jumlah_total_mutasi == 0 ? 0 : ($jumlah_done_mutasi / $jumlah_total_mutasi) * 100;
 
         // presentase maintenance gps
         $jumlah_done_maintenance_gps = RequestComplaint::where('task', 'Maintenance GPS')->where('status', 'Done')->count();
         $jumlah_total_maintenance_gps = RequestComplaint::where('task', 'Maintenance GPS')->count();
-        $presentase_maintenance_gps = ($jumlah_done_maintenance_gps / $jumlah_total_maintenance_gps) * 100;
-
+        $presentase_maintenance_gps = $jumlah_total_maintenance_gps == 0 ? 0 : ($jumlah_done_maintenance_gps / $jumlah_total_maintenance_gps) * 100;
+        // return $presentase_maintenance_gps;
         // presentase maintenance gps
         $jumlah_done_maintenance_sensor = RequestComplaint::where('task', 'Maintenance Sensor')->where('status', 'Done')->count();
+
         $jumlah_total_maintenance_sensor = RequestComplaint::where('task', 'Maintenance Sensor')->count();
-        $presentase_maintenance_sensor = ($jumlah_done_maintenance_sensor / $jumlah_total_maintenance_sensor) * 100;
+
+        $presentase_maintenance_sensor = $jumlah_total_maintenance_sensor == 0 ? 0 : ($jumlah_done_maintenance_sensor / $jumlah_total_maintenance_sensor) * 100;
 
 
 

@@ -98,14 +98,15 @@
 
     <script>
 
-           $(document).ready(function() {
-    new TomSelect(".select-search",{
-    create: false,
-    sortField: {
-        field: "text",
-        direction: "asc"
-    }
-    });
+    $(document).ready(function() {
+        new TomSelect(".select-search",{
+        create: false,
+            sortField: {
+                field: "text",
+                direction: "asc"
+            }
+        });
+        $('#vehicle').select2();
     });
 
 

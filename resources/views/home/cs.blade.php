@@ -7,7 +7,151 @@
 
 @section('content')
 
-<div class="container-fluid">
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="column1">
+                <div class="card card-stats card-success d_company company">
+                    <div class="awal">
+                        <i class="fas fa-building fa-7x d_company-icon"></i>
+                    </div>
+                    <div class="teks-number">
+                        <p class=" d_company-teks">Company</p>
+                        <p class="d_company-number">{{ $company->count()}}</p>    
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="column2">
+                <div class="row b">
+                    <div class="column4">
+                        <div class="card card-stats card-danger d_gps gps">
+                            <div class="awal">
+                                <i class="fas fa-map-marker-alt fa-3x d_gps-icon"></i>
+                            </div>                           
+                            <div class="teks-number">
+                                <p class="d_gps-teks">GPS</p>
+                                <p class="d_gps-number">{{ $gps->count() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column5">
+                        <div class="card card-stats card-warning d_sensor sensor">
+                            <div class="awal">
+                                <i class="fas fa-rss fa-3x d_sensor-icon"></i>
+                            </div>
+                            <div class="teks-number">
+                                <p class="d_sensor-teks">Sensor</p>
+                                <p class="d_sensor-number">{{ $sensor->count() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                <div class="row a">
+                    <div class="card card-stats card-success d_vehicle visit">
+                        <div class="row" style="width: 100%; height: 100%;margin-left:3px " >
+                            <div class="column6">
+                                <i class="fas fa-users-cog fa-5x d_vehicle-icon"></i>
+                            </div>
+                            <div class="column7">
+                                <p class="d_vehicle-teks">Visit Assignment</p>
+                                <p class="d_vehicle-number">{{ $visit->count() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+
+
+            <div class="column3"> 
+                <div class="row a">
+                    <div class="card card-stats card-success d_RequstComp request">
+                        <div class="row" style="width: 100%; height: 100%;margin-left:3px">
+                            <div class="column6">
+                                <i class="fas fa-comments fa-5x d_RequstComp-icon"></i>
+                            </div>
+                            <div class="column7">
+                                <p class="d_RequstComp-teks">Request Complain</p>
+                                <p class="d_RequstComp-number">{{ $request->count() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row a">
+                    <div class="column4">
+                        <div class="card card-stats card-success d_gsm gsm">
+                            <div class="row" style="width: 100%;margin-left:3px">
+                                <div class="column6">
+                                    <i class="fas fa-sim-card fa-5x d_gsm-icon"></i>
+                                </div>
+                                <div class="column7">
+                                    <p class="d_gsm-teks">GSM</p>
+                                <p class="d_gsm-number">{{ $gsm->count() }}</p>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="column5">
+                        <div class="card card-stats card-success d_visitAs vehicle">
+                            <div class="row">
+                                <div class="column6">
+                                    <i class="fas fa-truck fa-4x d_visitAs-icon"></i>
+                                </div>
+                                <div class="column7">
+                                    <p class="d_visitAs-teks">Vehicle</p>
+                                    <p class="d_visitAs-number">{{ $vehicle->count() }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div>
+    <div class="table-home table_home"></div>
+        
+    <div class="table_company">
+    
+    </div>
+    <div class="table_gps">
+    
+    </div>
+    
+    <div class="table_request">
+    
+    </div>
+    
+    <div class="table_visit">
+    
+    </div>
+    <div class="table_gsm">
+    
+    </div>
+    
+    <div class="table_sensor">
+    
+    </div>
+    
+    <div class="table_vehicle">
+    
+    </div>
+</div>    
+</div>
+
+
+       
+
+ 
+
+   
+
+
+{{-- <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
             <div class="card card-stats card-success d_company company">
@@ -65,38 +209,12 @@
             </div>
         </div>
 
-        <div class="table-home table_home">
-
-        </div>
-
-        <div class="table_company">
-
-        </div>
-        <div class="table_gps">
-
-        </div>
-
-        <div class="table_request">
-
-        </div>
-
-        <div class="table_visit">
-
-        </div>
-        <div class="table_gsm">
-
-        </div>
-
-        <div class="table_sensor">
-
-        </div>
-
-        <div class="table_vehicle">
-
-        </div>
+       
         <br>
     </div>
-</div>
+</div>      --}}
+
+
 <script>
     $('.company').click(function() {
         // $("#table-company").slideUp("fast");
@@ -209,3 +327,8 @@
 </script>
 
 @endsection
+
+
+
+
+
