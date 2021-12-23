@@ -74,8 +74,12 @@
     <td class="action sticky-col first-col" id="td-button-{{ $request_complains->id }}">
 
         <div id="button-{{ $request_complains->id }}">
+         <button class="unstyled-button" type="submit">
             <i class="fas fa-pen edit" onclick="edit({{ $request_complains->id }})"></i>
+         </button>
+         <button class="unstyled-button" type="submit">
             <i class="fas fa-trash delete" onclick="destroy({{ $request_complains->id }})"></i>
+         </button>
         </div>
     </td>
 </tr>

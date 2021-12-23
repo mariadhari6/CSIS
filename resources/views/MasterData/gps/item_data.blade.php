@@ -1,4 +1,4 @@
-<?php $no=1; ?>
+
 @foreach ($gps as $item)
     <tr id="edit-form-{{ $item->id }}">
 
@@ -49,10 +49,17 @@
           @endif
           <td class="sticky-col first-col" id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
+            <button class="unstyled-button" type="submit">
                 <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
+            </button>
+            <button class="unstyled-button" type="submit">
                 <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
+            </button>
             </div>
         </td>
     </tr>
 @endforeach
+<script>
+        var no =  {!! json_encode($no) !!};
+</script>
 

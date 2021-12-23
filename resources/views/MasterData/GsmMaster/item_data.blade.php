@@ -1,4 +1,3 @@
-<?php $no=1; ?>
 @foreach ($GsmMaster as $item)
     <tr id="edit-form-{{ $item->id }}" {{ $item->was_maintenance === "1" ? 'style=background-color:#e8837d' : ""  }}>
         <td id="td-checkbox-{{ $item->id }}" class="{{ $item->id }}">
@@ -9,7 +8,7 @@
                 </label>
             </div>
         </td>
-        <td id="item-no-{{ $item->id}}">
+        <td id="item-no-{{ $item->id}}" class="numbering">
             {{ $no++ }}
         </td>
         <td id="item-status_gsm-{{ $item->id}}" class="status" name="{{ $item->status_gsm }}">
@@ -59,3 +58,10 @@
         </td>
     </tr>
 @endforeach
+
+<script>
+        var no =  {!! json_encode($no) !!};
+</script>
+
+
+

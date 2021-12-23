@@ -36,8 +36,12 @@
         </td>
           <td class="action sticky-col first-col" id="td-button-{{ $sensors->id }}">
             <div id="button-{{ $sensors->id }}">
+            <button class="unstyled-button" type="submit">
                 <i class="fas fa-pen edit" onclick="edit({{ $sensors->id }})"></i>
+            </button>
+            <button class="unstyled-button" type="submit">
                 <i class="fas fa-trash delete" onclick="destroy({{ $sensors->id }})"></i>
+            </button>
             </div>
         </td>
     </tr>

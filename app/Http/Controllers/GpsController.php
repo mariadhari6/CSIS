@@ -21,7 +21,16 @@ class GpsController extends Controller
 {
     public function index()
     {
-        return view('MasterData.gps.index');
+
+        $gps = Gps::orderBy('id', 'DESC')->get();
+        $imeiNumberGet = $gps->map(function ($item) {
+            return collect($item->toArray())
+                ->only(['imei'])
+                ->all();
+        });
+        return view('MasterData.gps.index')->with([
+            'imeiNumberGet' => $imeiNumberGet,
+        ]);
     }
     public function add_form()
     {
@@ -44,11 +53,13 @@ class GpsController extends Controller
         ]);
     }
 
-    public function item_data()
+    public function item_data(Request $request)
     {
-        $gps = Gps::orderBy('id', 'DESC')->get();
+        $gps = Gps::orderBy('id', 'DESC')->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.gps.item_data')->with([
-            'gps' => $gps,
+            'gps' => $gps, 'no' => $no
+
 
         ]);
     }

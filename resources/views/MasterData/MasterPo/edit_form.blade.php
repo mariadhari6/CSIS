@@ -41,5 +41,7 @@
          <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="edit" onclick="update({{ $master_po->id}})"></i>
         </button>
+         <button class="unstyled-button" type="submit">
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
+         </button>
     </td>

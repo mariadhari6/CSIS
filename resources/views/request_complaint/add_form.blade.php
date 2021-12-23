@@ -112,7 +112,9 @@
          <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="add" onclick="store()"></i>
         </button>
+         <button class="unstyled-button" type="submit">
         <i class="fas fa-times cancel" onclick="cancel()"></i>
+         </button>
     <td>
         {{-- input untuk pemasangan dan maintenance --}}
 
@@ -129,6 +131,9 @@
         direction: "asc"
     }
     });
+     $('#vehicle').select2();
+     $('#task').select2();
+
     });
 
 

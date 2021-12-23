@@ -15,7 +15,7 @@
 
           <div class="text-right" id="selected">
               <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-                <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData" onclick="dataLengthAll()">
+                <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData" >
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
@@ -56,6 +56,11 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+           <div class="paginate float-right mt-2">
+            <button class="btn btn-light" id="previous">Previous</button>
+            <button class="btn btn-secondary" id="currentPage"></button>
+            <button class="btn btn-light" id="next">Next</button>
+          </div>
           </form>
         {{-- </div> --}}
         </div>
@@ -81,6 +86,10 @@
               <input type="file" id="excel_file" />
               <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
               <a  class="btn btn-secondary btn-xs" href="/download_template_gps" style="color:white">Download Template</a>
+              <div class="mt-2 progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="">
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <div id="excel_data" ></div>
@@ -102,12 +111,26 @@
             }
         });
       read()
+      currentPage()
+
     });
+
+    var imeiNumberGet = {!! json_encode($imeiNumberGet->toArray()) !!};
+
     // -- excel export to html tabel---
 
     const excel_file = document.getElementById("excel_file");
+    var allimeiNum = [];
     excel_file.addEventListener("change",(event)=>{
-        if(
+        function progress_bar_process(percentage, timer)
+        {
+            $('.progress-bar').css('width',percentage + '%');
+            if(percentage > 100)
+            {
+                clearInterval(timer);
+                $('#process').css('display','none');
+                $('.progress-bar').css('width','0%');
+                if(
             ![
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "application/vnd.ms-excel",
@@ -138,7 +161,20 @@
                                     table_output += "<th>" + sheet_data[row][cell] + "</th>";
 
                                 } else {
+                                    if (cell == 7 || cell == 8 || cell == 9 || cell == 10) {
+
+                                if(sheet_data[row][cell] === undefined) {
+                                datas = "";
+                                } else {
+                                var converted_requestDate = new Date(Math.round((sheet_data[row][cell] - (25567 + 2)) * 86400 * 1000));
+                                var datas = converted_requestDate.toISOString().split('T')[0];
+                                }
+
+                            } else {
+                                var datas = sheet_data[row][cell];
+                            }
                                     table_output += '<td contenteditable id="table-data-' + cell +'" >' + sheet_data[row][cell] + "</td>";
+
                                 }
                             }
                             table_output += "</tr>";
@@ -151,30 +187,12 @@
                         imeiNumber = document.querySelectorAll("#table-data-2");
                         for(indexA = 0; indexA < imeiNumber.length; indexA++){
                         var imeiValue = imeiNumber[indexA].innerText;
-                        $rowCount = $("#table_id tr").length;
-
-                        if ($rowCount==1){
-
-                        } else {
-                            $rowResult = $rowCount -1;
-                            var allImei = [];
-                            for($i = 0; $i < $rowResult; $i++)
+                        if(imeiNumberGet[imeiNumberGet.findIndex(x => x.imei == imeiValue)] != undefined)
                             {
-                            $imeiNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
-                            allImei[$i] = $imeiNum;
-                            }
-                    for (let index = 0; index < allImei.length; index++) {
-                        if( imeiValue == allImei[index] ){
                             imeiNumber[indexA].style.backgroundColor = "#e8837d";
-                    } else if ( index == allImei.length){
-
+                            }
+                        }
                     }
-                }
-            }
-        }
-
-
-
 
 
 
@@ -205,12 +223,43 @@
             po_Date[i].innerHTML = converted_date;
 
         }
-        // Imei Harus 15 caracter Import
-        //
-        }
+               // Imei Harus 15 caracter Import
+
             excel_file.value = "";
         };
+    }
+    }
+
+
+    var percentage = 0;
+      var timer = setInterval(function(){
+      percentage = percentage + 20;
+      progress_bar_process(percentage, timer);
+      }, 1000);
+
     });
+
+         function progress_bar_process(percentage, timer)
+    {
+      $('.progress-bar').css('width', percentage + '%');
+      if(percentage > 100)
+      {
+        clearInterval(timer);
+        $('#process').css('display', 'none');
+        $('.progress-bar').css('width', '0%');
+        setTimeout(function(){
+        swal({
+              type: 'success',
+              title: 'Data Saved',
+              showConfirmButton: false,
+              timer: 1500
+        }).catch(function(timeout) { });
+        read();
+        $("#importTable tr").remove();
+        $('#importData').modal('hide');
+        }, 5000);
+      }
+    }
 
 
     // -- save data import  -----
@@ -259,14 +308,11 @@
               }).catch(function(timeout) { });
           } else {
               try {
-            swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-            read();
-            $('#importData').modal('hide');
+            var percentage = 0;
+              var timer = setInterval(function(){
+              percentage = percentage + 20;
+              progress_bar_process(percentage, timer);
+              }, 1000);
             } catch (error) {
               swal({
                 type: 'warning',
@@ -277,7 +323,7 @@
 
             }
           }
-          }
+        }
       });
     }
 
@@ -297,14 +343,78 @@
       $.get("{{ url('item_data_gps') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
-              "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-            "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            // "dom": '<lf<t>ip>'
+         $('#table_id').dataTable( {
+            "pageLength": 50,
+            "dom": '<"top"f>rt<"bottom"><"clear">'
             });
         $('#table_id').DataTable().draw();
       });
     }
+
+     // Paginate
+    let numberPaginate = 1;
+    // next paginate
+    $( "#next" ).click(function() {
+      numberPaginate += 1;
+      $.get(`{{ url('item_data_gps?page=${numberPaginate}') }}` , {}, function(data, status) {
+        if(data != ""){
+
+        $.ajax({
+          type: "get",
+          url: `{{ url('item_data_gps?page=${numberPaginate}') }}`,
+          data: {
+            no: no,
+          },
+          success: function(datas) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": 50,
+                "dom": '<"top"f>rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+            currentPage()
+          }
+        });
+
+        } else {
+          numberPaginate -= 1;
+          // alert(numberPaginate);
+        }
+      });
+    });
+
+    // previous paginate
+    $( "#previous" ).click(function() {
+      if (numberPaginate > 1) {
+          numberPaginate -= 1;
+          $.ajax({
+          type: "get",
+          url: `{{ url('item_data_gps?page=${numberPaginate}') }}`,
+          data: {
+            no: no - 100,
+          },
+          success: function(datas) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": 50,
+                "dom": '<"top"f>rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+            currentPage()
+          }
+        });
+      }
+    });
+
+    // current Page
+    function currentPage(){
+      $("#currentPage").text(numberPaginate);
+    }
+
 
 
     // ---- Tombol Cancel -----

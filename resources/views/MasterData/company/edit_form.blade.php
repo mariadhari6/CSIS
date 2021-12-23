@@ -42,8 +42,12 @@
         </select>
     </td>
     <td class="action sticky-col first-col">
+        <button class="unstyled-button" type="submit">
         <i class="fas fa-check add" id="edit" onclick="update({{ $company->id}})"></i>
+        </button>
+        <button class="unstyled-button" type="submit">
         <i class="fas fa-times cancel" onclick="cancel()" ></i>
+        </button>
     </td>
 <script type="text/javascript">
    $('select[name="seller_id"]').on('change', function(){

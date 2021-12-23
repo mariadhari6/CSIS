@@ -28,7 +28,7 @@ class CompanyController extends Controller
 
     public function item_data()
     {
-        $company = Company::orderBy('id', 'DESC')->get();
+        $company = Company::orderBy('id', 'DESC')->paginate(50);
         return view('MasterData.company.item_data')->with([
             'company' => $company
         ]);
@@ -36,21 +36,27 @@ class CompanyController extends Controller
     public function save_import(Request $request)
     {
         $dataRequest = json_decode($request->data);
+        $data = [];
+        $fail = 0;
+        $success = 0;
         foreach ($dataRequest as $key => $value) {
             try {
-                $data = array(
-                    'company_name'        => $value->company_name,
-                    'seller_id'        => Seller::where('seller_name', $value->seller_id)->firstOrFail()->id,
-                    'customer_code'        =>  $value->customer_code,
-                    'no_agreement_letter_id'     => $value->no_agreement_letter_id,
-                    'status'     =>  $value->status,
-
-                );
-                Company::insert($data);
-                // return 'success';
+                $seller = Seller::where('seller_name', $value->seller_id)->firstOrFail()->id;
             } catch (\Throwable $th) {
-                return 'fail';
+                $seller = null;
             }
+
+            $data[$key] = array(
+                'company_name'        => $value->company_name,
+                'seller_id'        => $seller,
+                'customer_code'        =>  $value->customer_code,
+                'no_agreement_letter_id'     => $value->no_agreement_letter_id,
+                'status'     =>  $value->status,
+
+            );
+            Company::insert($data);
+            // return 'success';
+
         }
     }
 

@@ -93,7 +93,12 @@
         <div class="input-div"><input type="text" class="input status_akhir-{{$request_complain->id}}" id="status_akhir" placeholder="status akhir" value="{{ $request_complain->status_akhir}}" required ></i></div>
     </td>
     <td class="action sticky-col first-col">
-        <i class="fas fa-check add" id="edit" onclick="update({{ $request_complain->id}})"></i><i class="fas fa-times cancel" onclick="cancel()" ></i>
+         <button class="unstyled-button" type="submit">
+        <i class="fas fa-check add" id="edit" onclick="update({{ $request_complain->id}})"></i>
+         </button>
+         <button class="unstyled-button" type="submit">
+        <i class="fas fa-times cancel" onclick="cancel()" ></i>
+         </button>
     </td>
 
     <script>

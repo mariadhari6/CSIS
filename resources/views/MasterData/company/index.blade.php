@@ -75,6 +75,10 @@
               <input type="file" id="excel_file" />
               <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
               <a  class="btn btn-secondary btn-xs" href="/download_template_Company" style="color:white">Download Template</a>
+              <div class="mt-2 progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="">
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <div id="excel_data" ></div>
@@ -103,7 +107,15 @@
 
     const excel_file = document.getElementById("excel_file");
     excel_file.addEventListener("change",(event)=>{
-        if(
+        function progress_bar_process(percentage, timer)
+        {
+            $('.progress-bar').css('width',percentage + '%');
+            if(percentage > 100)
+            {
+                clearInterval(timer);
+                $('#process').css('display','none');
+                $('.progress-bar').css('width','0%');
+                if(
             ![
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "application/vnd.ms-excel",
@@ -114,6 +126,7 @@
             excel_file.value = "";
             return false;
         }
+
         var reader = new FileReader();
         reader.readAsArrayBuffer(event.target.files[0]);
         reader.onload = function (event){
@@ -126,13 +139,27 @@
             );
             if (sheet_data.length > 0){
                 var table_output = '<table class="table table-bordered" id="importTable">';
+
                 for(var row = 0; row < sheet_data.length; row++) {
                     table_output += "<tr>";
+
                     for (var cell = 0; cell < sheet_data[row].length; cell++){
                         if (row == 0){
                             table_output += "<th>" + sheet_data[row][cell] + "</th>";
 
                         } else {
+                            if (cell == 7 || cell == 8 || cell == 9 || cell == 10) {
+
+                        if(sheet_data[row][cell] === undefined) {
+                          datas = "";
+                        } else {
+                          var converted_requestDate = new Date(Math.round((sheet_data[row][cell] - (25567 + 2)) * 86400 * 1000));
+                          var datas = converted_requestDate.toISOString().split('T')[0];
+                        }
+
+                      } else {
+                        var datas = sheet_data[row][cell];
+                      }
                             table_output += '<td contenteditable id="table-data-' + cell +'" >' + sheet_data[row][cell] + "</td>";
 
                         }
@@ -145,11 +172,39 @@
             }
             excel_file.value = "";
         };
-
+      }
+     }
+     var percentage = 0;
+      var timer = setInterval(function(){
+      percentage = percentage + 20;
+      progress_bar_process(percentage, timer);
+      }, 1000);
     });
 
-    // ------ save data import -------
+     function progress_bar_process(percentage, timer)
+    {
+      $('.progress-bar').css('width', percentage + '%');
+      if(percentage > 100)
+      {
+        clearInterval(timer);
+        $('#process').css('display', 'none');
+        $('.progress-bar').css('width', '0%');
+        setTimeout(function(){
+        swal({
+              type: 'success',
+              title: 'Data Saved',
+              showConfirmButton: false,
+              timer: 1500
+        }).catch(function(timeout) { });
+        read();
+        $("#importTable tr").remove();
+        $('#importData').modal('hide');
+        }, 5000);
+      }
+    }
 
+
+    // ------ save data import -------
     function save_data(){
         var total = 0;
         var jsonTable = $('#importTable tbody tr:has(td)').map(function(){
@@ -171,7 +226,7 @@
         var item = document.querySelectorAll("#table-data-8");
         var tes = $("#importTable").find("tbody>tr:eq(1)>td:eq(1)").attr("style");
         var success;
-                $.ajax({
+        $.ajax({
         type: 'POST',
         dataType: 'JSON',
         url: "{{ url('/save_import_Company') }}",
@@ -190,14 +245,11 @@
               }).catch(function(timeout) { });
           } else {
               try {
-            swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-            read();
-            $('#importData').modal('hide');
+              var percentage = 0;
+              var timer = setInterval(function(){
+              percentage = percentage + 20;
+              progress_bar_process(percentage, timer);
+              }, 1000);
             } catch (error) {
               swal({
                 type: 'warning',

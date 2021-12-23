@@ -6,7 +6,7 @@
 
     <td>
         <select class="select" id="merk" name="merk" required>
-            <option class="hidden" value="">--Pilih Merk--</option>
+            {{-- <option value="">Select a merk...</option> --}}
             @foreach ($merk as $item)
             <option value="{{ $item->merk_gps }}"  {{ old('merk') == $item->id ? 'selected':'' }}>{{ $item->merk_gps}}</option>
             @endforeach
@@ -18,9 +18,9 @@
         <select class="select" id="type" name="type" required>
             {{-- <option class="hidden" value="">--Pilih Type--</option> --}}
 
-            @foreach ($merk as $item)
+            {{-- @foreach ($merk as $item)
             <option value="{{ $item->type_gps }}" {{ old('type') == $item->id ? 'selected':'' }}>{{ $item->type_gps}}</option>
-            @endforeach
+            @endforeach --}}
 
         </select>
 
@@ -87,7 +87,9 @@
          <button class="unstyled-button" type="submit">
             <i class="fas fa-check add" id="add" onclick="store()"></i>
         </button>
+         <button class="unstyled-button" type="submit">
         <i class="fas fa-times cancel" onclick="cancel()"></i>
+         </button>
     <td>
 
 
@@ -168,7 +170,7 @@
                         success:function(data) {
                             // alert(data.length);
                             $('select[name="type').empty();
-                            $('select[name="type').append('<option class="hidden" value=""> </option>');
+                            $('select[name="type').append('<option value="" class="hidden">--Pilih Merk--</option>');
                                 for(var i = 0 ; i < data.length ; i++) {
                                     $('select[name="type').append('<option value="'+ data[i].type_gps+ '"> '+ data[i].type_gps +'</option>');
                                         // alert(data[i].serial_number)

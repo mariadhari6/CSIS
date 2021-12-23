@@ -37,8 +37,12 @@
       <textarea class="form-control" id="note" name="note" rows="3"></textarea>
    </td>
     <td class="action m-3">
+    <button class="unstyled-button" type="submit">
       <i class="fas fa-check add" id="add" onclick="store()"></i>
+    </button>
+    <button class="unstyled-button" type="submit">
       <i class="fas fa-times cancel" onclick="cancel()"></i>
+    </button>
    </td>
 
 </tr>
