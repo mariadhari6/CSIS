@@ -46,11 +46,13 @@ class GsmMasterController extends Controller
         ]);
     }
 
-    public function item_data()
+    public function item_data(Request $request)
     {
-        $GsmMaster = Gsm::orderBy('id', 'DESC')->get();
+        $GsmMaster = Gsm::orderBy('id', 'DESC')->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.GsmMaster.item_data')->with([
-            'GsmMaster' => $GsmMaster
+            'GsmMaster' => $GsmMaster,
+            'no' => $no
         ]);
     }
 
@@ -65,7 +67,7 @@ class GsmMasterController extends Controller
 
     public function item_data_ready()
     {
-        $GsmMaster = Gsm::where('status_gsm', 'Ready')->get();
+        $GsmMaster = Gsm::where('status_gsm', 'Ready')->paginate(50);
         return view('MasterData.GsmMaster.item_data')->with([
             'GsmMaster' => $GsmMaster
         ]);
@@ -73,7 +75,7 @@ class GsmMasterController extends Controller
 
     public function item_data_active()
     {
-        $GsmMaster = Gsm::where('status_gsm', 'Active')->get();
+        $GsmMaster = Gsm::where('status_gsm', 'Active')->paginate(50);
         return view('MasterData.GsmMaster.item_data')->with([
             'GsmMaster' => $GsmMaster
         ]);
@@ -81,7 +83,7 @@ class GsmMasterController extends Controller
 
     public function item_data_terminate()
     {
-        $GsmMaster = Gsm::where('status_gsm', 'Terminate')->get();
+        $GsmMaster = Gsm::where('status_gsm', 'Terminate')->paginate(50);
         return view('MasterData.GsmMaster.item_data')->with([
             'GsmMaster' => $GsmMaster
         ]);

@@ -63,13 +63,11 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-          
-            {{-- Current Page: {{ $GsmMaster->currentPage() }}<br>
-            Jumlah Data: {{ $GsmMaster->total() }}<br>
-            Data perhalaman: {{ $GsmMaster->perPage() }}<br>
-            <br>
-            {{ $GsmMaster->links() }} --}}
-
+          <div class="paginate float-right mt-2">
+            <button class="btn btn-light" id="previous">Previous</button>
+            <button class="btn btn-secondary" id="currentPage"></button>
+            <button class="btn btn-light" id="next">Next</button>
+          </div>
         </div>
       </div>
     </div>
@@ -121,6 +119,9 @@
       });
 
       read()
+
+      currentPage()
+
     });
 
     // -- Get all data gsm master --
@@ -212,14 +213,12 @@
                 for (indexA = 0; indexA < gsmNumberID.length; indexA++) {
                   var gsmNumberValue = gsmNumberID[indexA].innerText; //0
                   var serialNumberValue = serialNumberID[indexA].innerText;
-                  if( 
-                      gsmNumberGet[gsmNumberGet.findIndex(x => x.gsm_number == gsmNumberValue)] != undefined ||
-                      gsmSerialGet[gsmSerialGet.findIndex(x => x.serial_number == serialNumberValue)] != undefined
-                    )
-                    {
+                  if( gsmNumberGet[gsmNumberGet.findIndex(x => x.gsm_number == gsmNumberValue)] != undefined ){
                       gsmNumberID[indexA].style.backgroundColor = "#e8837d";
-                      serialNumberID[indexA].style.backgroundColor = "#e8837d";
                     }
+                  if(gsmSerialGet[gsmSerialGet.findIndex(x => x.serial_number == serialNumberValue)] != undefined ){
+                      serialNumberID[indexA].style.backgroundColor = "#e8837d";
+                  }
                 }
 
               }
@@ -353,7 +352,7 @@
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable( {
 
-              "dom": '<"top"f>rt<"bottom"lp><"clear">'
+              "dom": '<"top"f>rt<"bottom"><"clear">'
               });
           $('#table_id').DataTable().draw();
         });
@@ -366,11 +365,74 @@
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
             "pageLength": 50,
-            "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            // "dom": '<lf<t>ip>'
+            "dom": '<"top"f>rt<"bottom"><"clear">'
             });
         $('#table_id').DataTable().draw();
       });
+    }
+
+    // Paginate
+    let numberPaginate = 1;
+    // next paginate
+    $( "#next" ).click(function() {
+      numberPaginate += 1;
+      $.get(`{{ url('item_data_GsmMaster?page=${numberPaginate}') }}` , {}, function(data, status) {
+        if(data != ""){
+
+        $.ajax({
+          type: "get",
+          url: `{{ url('item_data_GsmMaster?page=${numberPaginate}') }}`,
+          data: {
+            no: no,
+          },
+          success: function(datas) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": 50,
+                "dom": '<"top"f>rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+            currentPage()
+          }
+        });
+
+        } else {
+          numberPaginate -= 1;
+          // alert(numberPaginate);
+        }
+      });
+    });
+
+    // previous paginate
+    $( "#previous" ).click(function() {
+      if (numberPaginate > 1) {
+          numberPaginate -= 1;
+          $.ajax({
+          type: "get",
+          url: `{{ url('item_data_GsmMaster?page=${numberPaginate}') }}`,
+          data: {
+            no: no - 100,
+          },
+          success: function(datas) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": 50,
+                "dom": '<"top"f>rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+            currentPage()
+          }
+        });
+      } 
+    });
+
+    // current Page
+    function currentPage(){
+      $("#currentPage").text(numberPaginate);
     }
 
      // ------ Tambah Form Input ------
