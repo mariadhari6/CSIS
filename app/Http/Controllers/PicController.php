@@ -26,39 +26,35 @@ class PicController extends Controller
         ]);
     }
 
-    public function item_data()
+    public function item_data(Request $request)
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.pic.item_data')->with([
-            'pic' => $pic
+            'pic'   => $pic,
+            'no'    => $no
         ]);
     }
     public function save_import(Request $request)
     {
         $dataRequest = json_decode($request->data);
         foreach ($dataRequest as $key => $value) {
-            $a = $value->date_of_birth;
-            // try {
-            $data = array(
-                'company_id'        => Company::where('company_name', $value->company_id)->firstOrFail()->id,
-                'pic_name'          =>  $value->pic_name,
-                'phone'             => $value->phone,
-                'email'             =>  $value->email,
-                'position'          =>  $value->position,
-                'date_of_birth'     =>  $value->date_of_birth == '' ? null :  $value->date_of_birth,
-            );
-            Pic::insert($data);
 
-            // return 'success';
-            // } catch (\Throwable $th) {
-            //     return 'fail';
-            // }
+            try {
+                $data = array(
+                    'company_id'        => Company::where('company_name', $value->company_id)->firstOrFail()->id,
+                    'pic_name'          =>  $value->pic_name,
+                    'phone'             => $value->phone,
+                    'email'             =>  $value->email,
+                    'position'          =>  $value->position,
+                    'date_of_birth'     =>  $value->date_of_birth
+                );
+                Pic::insert($data);
+                // return 'success';
+            } catch (\Throwable $th) {
+                return 'fail';
+            }
         }
-        // }
-        // if ($a == '') {
-        //     return 'is null';
-        // }
-        // return $a;
     }
 
     public function store(Request $request)

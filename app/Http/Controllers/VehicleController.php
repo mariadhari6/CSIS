@@ -17,7 +17,16 @@ class VehicleController extends Controller
 {
     public function index()
     {
-        return view('MasterData.vehicle.index');
+        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
+        $vehicleLicenseGet = $vehicle->map(function ($item) {
+            return collect($item->toArray())
+                ->only(['license_plate'])
+                ->all();
+        });
+
+        return view('MasterData.vehicle.index')->with([
+            'vehicleLicenseGet' => $vehicleLicenseGet
+        ]);
     }
     public function add_form()
     {
@@ -45,37 +54,20 @@ class VehicleController extends Controller
             $checklicensePlate = Vehicle::where('license_plate', '=', $licensePlateNum)->first();
             if ($checklicensePlate === null) {
                 try {
-
-
                     $data = array(
                         'company_id'    => Company::where('company_name', $value->company_id)->firstOrFail()->id,
                         'license_plate' => $value->license_plate,
                         'vehicle_id'    => VehicleType::where('name', $value->vehicle_id)->firstOrFail()->id,
                         'pool_name'     => $value->pool_name,
                         'pool_location' => $value->pool_location,
-                        // $i = VehicleType::where('id', 2)->get();
-                        // // echo $i[0]['name'];
-                        // if ($value->vehicle_id == $i[0]['name']) {
-                        //     echo 'data ada';
-                        // } else {
-                        //     echo gettype($value->vehicle_id) . ' == ' .  $i[0]['name'];
-                        // }
-                        // echo $value->vehicle_id;
-
-
+                        'status'        => $value->status
                     );
-                    // $i = VehicleType::where('name')
-                    // echo $data;
-                    // if($value->vehicle_id == VehicleType:: where())
                     Vehicle::insert($data);
                 } catch (\Throwable $th) {
                     return 'fail';
                 }
-
-                //     } else {
-                //         return 'fail';
-                //     }
-
+            } else {
+                return 'fail';
             }
         }
     }

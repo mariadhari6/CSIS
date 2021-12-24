@@ -15,7 +15,24 @@ class SellerController extends Controller
 {
     public function index()
     {
-        return view('MasterData.seller.index');
+        $seller = Seller::orderBy('id', 'DESC')->get();
+        $sellerCodeGet = $seller->map(function ($item) {
+            return collect($item->toArray())
+                ->only(['seller_code'])
+                ->all();
+        });
+
+
+        $no_aggrementGet = $seller->map(function ($item) {
+            return collect($item->toArray())
+                ->only(['no_agreement_letter'])
+                ->all();
+        });
+
+        return view('MasterData.seller.index')->with([
+            'sellerCodeGet' => $sellerCodeGet,
+            'no_aggrementGet' => $no_aggrementGet
+        ]);
     }
 
     public function add_form()
@@ -24,11 +41,13 @@ class SellerController extends Controller
         return view('MasterData.seller.add_form');
     }
 
-    public function item_data()
+    public function item_data(Request $request)
     {
-        $seller = Seller::orderBy('id', 'DESC')->get();
+        $seller = Seller::orderBy('id', 'DESC')->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.seller.item_data')->with([
-            'seller' => $seller
+            'seller'    => $seller,
+            'no'        => $no
         ]);
     }
 
