@@ -42,3 +42,7 @@
     </tr>
 @endforeach
 
+<script>
+    var no =  {!! json_encode($no) !!};
+</script>
+

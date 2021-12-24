@@ -5,114 +5,117 @@
 
 @section('content')
 <form onsubmit="return false">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-            <div class="text-right" id="selected">
-                <button type="button" class="btn btn-primary btn-sm float-left mr-2 add add-button">
-                  <b>Add</b>
-                  <i class="fas fa-plus ml-2" id="add"></i>
-                </button>
-                <div class="float-left mr-2">
-                  <select class="form-control input-fixed" id="filter">
-                    <option value="{{ url('item_data_all_GsmMaster') }}">All</option>
-                    <option value="{{ url('item_data_ready_GsmMaster') }}">Ready</option>
-                    <option value="{{ url('item_data_active_GsmMaster') }}">Active</option>
-                    <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
-                  </select>
-                </div>
-                <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal" data-target="#importData" ">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right" id="selected">
+                        <button type="button" class="btn btn-primary btn-sm float-left mr-2 add add-button">
+                            <b>Add</b>
+                            <i class="fas fa-plus ml-2" id="add"></i>
+                        </button>
+                        <div class="float-left mr-2">
+                            <select class="form-control input-fixed" id="filter">
+                                <option value="{{ url('item_data_all_GsmMaster') }}">All</option>
+                                <option value="{{ url('item_data_ready_GsmMaster') }}">Ready</option>
+                                <option value="{{ url('item_data_active_GsmMaster') }}">Active</option>
+                                <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-success float-left mr-2" data-toggle="modal"
+                            data-target="#importData" ">
                   <b> Import</b>
-                  <i class="fas fa-file-excel ml-2"></i>
-                </button>
-              <button class="btn btn-success edit_all">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
-            </div>
-          <table class="table table-responsive data" class="table_id" id="table_id">
-            <thead>
-              <tr>
-                <th class="freeze-header">
-                    <div>
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
+                  <i class=" fas fa-file-excel ml-2"></i>
+                        </button>
+                        <button class="btn btn-success edit_all">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
                     </div>
-                </th>
-                <th scope="col" class="action-no">No.</th>
-                <th scope="col" class="list">Status GSM*</th>
-                <th scope="col" class="list-gsmNumber">GSM Number*</th>
-                <th scope="col" class="list-company">Company*</th>
-                <th scope="col" class="list">Serial Number*</th>
-                <th scope="col" class="list">ICC ID</th>
-                <th scope="col" class="list">IMSI</th>
-                <th scope="col" class="list">Res ID</th>
-                <th scope="col" class="list">Request Date</th>
-                <th scope="col" class="list">Expired Date</th>
-                <th scope="col" class="list">Active Date</th>
-                <th scope="col" class="list">Terminated Date</th>
-                <th scope="col" class="list">Note</th>
-                <th scope="col" class="list">Provider</th>
-                <th scope="col" class="sticky-col first-col">Action</th>
-              </tr>
-            </thead>
-            <tbody id="item_data">
-              {{-- {{ csrf_field() }} --}}
-            </tbody>
-          </table>
-          
-            {{-- Current Page: {{ $GsmMaster->currentPage() }}<br>
-            Jumlah Data: {{ $GsmMaster->total() }}<br>
-            Data perhalaman: {{ $GsmMaster->perPage() }}<br>
-            <br>
-            {{ $GsmMaster->links() }} --}}
-
+                    <table class="table table-responsive data" class="table_id" id="table_id">
+                        <thead>
+                            <tr>
+                                <th class="freeze-header">
+                                    <div>
+                                        <label class="form-check-label">
+                                            <input class="form-check-input  select-all-checkbox" type="checkbox"
+                                                id="master">
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th scope="col" class="action-no">No.</th>
+                                <th scope="col" class="list">Status GSM*</th>
+                                <th scope="col" class="list-gsmNumber">GSM Number*</th>
+                                <th scope="col" class="list-company">Company*</th>
+                                <th scope="col" class="list">Serial Number*</th>
+                                <th scope="col" class="list">ICC ID</th>
+                                <th scope="col" class="list">IMSI</th>
+                                <th scope="col" class="list">Res ID</th>
+                                <th scope="col" class="list">Request Date</th>
+                                <th scope="col" class="list">Expired Date</th>
+                                <th scope="col" class="list">Active Date</th>
+                                <th scope="col" class="list">Terminated Date</th>
+                                <th scope="col" class="list">Note</th>
+                                <th scope="col" class="list">Provider</th>
+                                <th scope="col" class="sticky-col first-col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="item_data">
+                            {{-- {{ csrf_field() }} --}}
+                        </tbody>
+                    </table>
+                    <div class="paginate float-right mt-2">
+                        <button class="btn btn-light" id="previous">Previous</button>
+                        <button class="btn btn-secondary" id="currentPage"></button>
+                        <button class="btn btn-light" id="next">Next</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </form>
 
-  <!-- Modal Import -->
-  <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
-		<div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role="document">
-			<div class="modal-content-full-width modal-content">
-				<div class="modal-header-full-width modal-header bg-primary">
-					<h6 class="modal-title">Import data</h6>
-					<button type="button" class="close" id="close-modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-          <div class="card">
-            <div class="card-header">
-              <b>Select Excel File</b>
-              <br>
-              <input type="file" id="excel_file" />
-              <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
-              <a  class="btn btn-secondary btn-xs" href="/download_template_gsm" style="color:white">Download Template</a>
-              <div class="mt-2 progress">
-                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="">
+<!-- Modal Import -->
+<div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
+    <div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role=" document">
+        <div class="modal-content-full-width modal-content">
+            <div class="modal-header-full-width modal-header bg-primary">
+                <h6 class="modal-title">Import data</h6>
+                <button type="button" class="close" id="close-modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        <b>Select Excel File</b>
+                        <br>
+                        <input type="file" id="excel_file" />
+                        <button type="button" class="btn btn-success btn-xs" id="send"
+                            onclick="save_data()">Save</button>
+                        <a class="btn btn-secondary btn-xs" href="/download_template_gsm" style="color:white">Download
+                            Template</a>
+                        <div class="mt-2 progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0"
+                                aria-valuemax="100" style="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="excel_data"></div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="card-body">
-              <div id="excel_data" ></div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer-full-width  modal-footer">
-         
-        </div>
-        </div>
-			</div>
-		</div>
-	</div>
+            <div class="modal-footer-full-width  modal-footer">
 
-  <script>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
     $(document).ready(function() {
       $.ajaxSetup({
           headers: {
@@ -121,6 +124,9 @@
       });
 
       read()
+
+      currentPage()
+
     });
 
     // -- Get all data gsm master --
@@ -133,7 +139,7 @@
     var allSerNum = [];
 
     excel_file.addEventListener("change", (event) => {
-    
+
       function progress_bar_process(percentage, timer)
       {
         $('.progress-bar').css('width', percentage + '%');
@@ -185,7 +191,7 @@
                       table_output += "<th>" + sheet_data[row][cell] + "</th>";
                     } else {
                       if (cell == 7 || cell == 8 || cell == 9 || cell == 10) {
-                        
+
                         if(sheet_data[row][cell] === undefined) {
                           datas = "";
                         } else {
@@ -213,20 +219,18 @@
                 for (indexA = 0; indexA < gsmNumberID.length; indexA++) {
                   var gsmNumberValue = gsmNumberID[indexA].innerText; //0
                   var serialNumberValue = serialNumberID[indexA].innerText;
-                  if( 
-                      gsmNumberGet[gsmNumberGet.findIndex(x => x.gsm_number == gsmNumberValue)] != undefined ||
-                      gsmSerialGet[gsmSerialGet.findIndex(x => x.serial_number == serialNumberValue)] != undefined
-                    )
-                    {
+                  if( gsmNumberGet[gsmNumberGet.findIndex(x => x.gsm_number == gsmNumberValue)] != undefined ){
                       gsmNumberID[indexA].style.backgroundColor = "#e8837d";
-                      serialNumberID[indexA].style.backgroundColor = "#e8837d";
                     }
+                  if(gsmSerialGet[gsmSerialGet.findIndex(x => x.serial_number == serialNumberValue)] != undefined ){
+                      serialNumberID[indexA].style.backgroundColor = "#e8837d";
+                  }
                 }
 
               }
               excel_file.value = "";
             };
-          
+
         }
       }
 
@@ -247,14 +251,14 @@
         $('#process').css('display', 'none');
         $('.progress-bar').css('width', '0%');
         setTimeout(function(){
-        swal({ 
+        swal({
               type: 'success',
               title: 'Data Saved',
               showConfirmButton: false,
               timer: 1500
         }).catch(function(timeout) { });
         read();
-        $("#importTable tr").remove(); 
+        $("#importTable tr").remove();
         $('#importData').modal('hide');
         }, 5000);
       }
@@ -296,7 +300,7 @@
 
       $.ajax({
         type: 'POST',
-        dataType: 'JSON', 
+        dataType: 'JSON',
         url: "{{ url('save_import_GsmMaster') }}",
         data: {
            data   : JSON.stringify(data) ,
@@ -330,7 +334,7 @@
           }
           }
       });
-      
+
     }
 
     // ---- Close Modal -------
@@ -341,7 +345,7 @@
     });
 
     // ------- filter change ------
-    $("#filter").change(function(){ 
+    $("#filter").change(function(){
         var value = $(this).val();
         filter(value);
     });
@@ -354,7 +358,7 @@
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable( {
 
-              "dom": '<"top"f>rt<"bottom"lp><"clear">'
+              "dom": '<"top"f>rt<"bottom"><"clear">'
               });
           $('#table_id').DataTable().draw();
         });
@@ -367,11 +371,74 @@
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
             "pageLength": 50,
-            "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            // "dom": '<lf<t>ip>'
+            "dom": '<"top"f>rt<"bottom"><"clear">'
             });
         $('#table_id').DataTable().draw();
       });
+    }
+
+    // Paginate
+    let numberPaginate = 1;
+    // next paginate
+    $( "#next" ).click(function() {
+      numberPaginate += 1;
+      $.get(`{{ url('item_data_GsmMaster?page=${numberPaginate}') }}` , {}, function(data, status) {
+        if(data != ""){
+
+        $.ajax({
+          type: "get",
+          url: `{{ url('item_data_GsmMaster?page=${numberPaginate}') }}`,
+          data: {
+            no: no,
+          },
+          success: function(datas) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": 50,
+                "dom": '<"top"f>rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+            currentPage();
+          }
+        });
+
+        } else {
+          numberPaginate -= 1;
+          // alert(numberPaginate);
+        }
+      });
+    });
+
+    // previous paginate
+    $( "#previous" ).click(function() {
+      if (numberPaginate > 1) {
+          numberPaginate -= 1;
+          $.ajax({
+          type: "get",
+          url: `{{ url('item_data_GsmMaster?page=${numberPaginate}') }}`,
+          data: {
+            no: no - 100,
+          },
+          success: function(datas) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": 50,
+                "dom": '<"top"f>rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+            currentPage()
+          }
+        });
+      }
+    });
+
+    // current Page
+    function currentPage(){
+      $("#currentPage").text(numberPaginate);
     }
 
      // ------ Tambah Form Input ------
@@ -393,7 +460,7 @@
           $('#table_id tbody').prepend(data);
         });
       });
-      
+
     // ----- Proses Tambah data ------
     function store() {
       var status_gsm = $("#status_gsm").val();
@@ -439,7 +506,7 @@
       //         // break;
       //       }
       //   });
-      
+
       $rowCount = $("#table_id tr").length;
       if ($rowCount == 2) {
         // alert('table empty')
@@ -448,7 +515,7 @@
         var allGsmNum = [];
         var allSerNum = [];
         for($i = 1; $i <= $rowResult; $i++)
-            { 
+            {
               $numArr = $i-1;
               $gsmNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
               $serNum = $("#table_id").find("tbody>tr:eq("+ $i +")>td:eq(5)").attr("name");
@@ -476,11 +543,11 @@
                   timer: 1500
                 }).catch(function(timeout) { });
 
-           
+
               break;
           } else {
               $success = true;
-          }    
+          }
         }
       }
 
@@ -515,9 +582,9 @@
             }
         });
       }
-      
+
     }
-    
+
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -798,7 +865,7 @@
             read();
         }
 
-  </script>
-  {{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
+</script>
+{{-- <iframe name="dummyframe" id="dummyframe" onload="read_temporary()" style="display: none;"></iframe> --}}
 
-   @endsection
+@endsection

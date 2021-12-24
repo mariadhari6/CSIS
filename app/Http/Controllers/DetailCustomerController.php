@@ -152,7 +152,7 @@ class DetailCustomerController extends Controller
         $sensor     = $data->sensor_all;
         Vehicle::where('id', $license)->update(array('status' => 'Ready'));
         $po = MasterPo::where('id', $data->po_id)->pluck('count');
-        MasterPo::where('id', $data->po_id)->update(array('count' => $po[0]+1 ));
+        MasterPo::where('id', $data->po_id)->update(array('count' => $po[0] + 1));
         Gsm::where('id', $gsm)->update(array('status_gsm' => 'Ready', 'company_id' => ""));
         Gps::where('id', $imei)->update(array('status' => 'Ready', 'company_id' => ""));
         if ($sensor != "") {
@@ -161,7 +161,7 @@ class DetailCustomerController extends Controller
             for ($i = 0; $i <= $lengthArr; $i++) {
                 Sensor::where('id', $arr[$i])->update(array('status' => 'Ready'));
             }
-        }   
+        }
 
         $data->delete();
     }
@@ -175,7 +175,7 @@ class DetailCustomerController extends Controller
         $imei           = Gps::where('status', 'Ready')->get();
         $gsm            = Gsm::where('status_gsm', 'Ready')->get();
         $sensor         = Sensor::where('status', 'Ready')->get();
-        $vehicle        = Vehicle::where('company_id', $details->company_id )->where('status', 'Ready')->get();
+        $vehicle        = Vehicle::where('company_id', $details->company_id)->where('status', 'Ready')->get();
         $po             = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $details->company_id)->get();
         $status_layanan = ServiceStatus::orderBy('service_status_name', 'ASC')->get();
 
@@ -190,7 +190,6 @@ class DetailCustomerController extends Controller
             'vehicle'           => $vehicle,
             'status_layanan'    => $status_layanan,
         ]);
-
     }
 
     public function update(Request $request, $id)
@@ -211,56 +210,55 @@ class DetailCustomerController extends Controller
         $detail_gsm         = DetailCustomer::where('id', $id)->pluck('gsm_id');
         $detail_sensor      = DetailCustomer::where('id', $id)->pluck('sensor_all');
 
-      
+
         $request_company    = $request->CompanyId;
         $request_license    = $request->LicencePlate;
         $request_po         = $request->PoNumber;
         $request_imei       = $request->Imei;
         $request_GSM        = $request->GSM;
         $request_sensor     = $request->SensorAll;
-        
 
-        if ( $request_license != $detail_license[0] ) {
-            Vehicle::where('id', $detail_license[0] )->update(array('status' => 'Ready'));
-            Vehicle::where('id', $request_license )->update(array('status' => 'Used'));      
+
+        if ($request_license != $detail_license[0]) {
+            Vehicle::where('id', $detail_license[0])->update(array('status' => 'Ready'));
+            Vehicle::where('id', $request_license)->update(array('status' => 'Used'));
         }
 
-        if ( $request_po != $detail_po[0] ) {
-            $po_lama = MasterPo::where('id', $detail_po[0] )->pluck('count');
-            MasterPo::where('id', $detail_po[0])->update(array('count' => $po_lama[0]+1 ));
+        if ($request_po != $detail_po[0]) {
+            $po_lama = MasterPo::where('id', $detail_po[0])->pluck('count');
+            MasterPo::where('id', $detail_po[0])->update(array('count' => $po_lama[0] + 1));
 
-            $po_baru = MasterPo::where('id', $request_po )->pluck('count');
-            MasterPo::where('id', $request_po)->update(array('count' => $po_baru[0]-1 ));
-
+            $po_baru = MasterPo::where('id', $request_po)->pluck('count');
+            MasterPo::where('id', $request_po)->update(array('count' => $po_baru[0] - 1));
         }
 
-        if ( $request_imei != $detail_imei[0] ) {
-            Gps::where('id', $detail_imei[0] )->update(array('status' => 'Ready', 'company_id' => ""));      
-            Gps::where('id', $request_imei )->update(array('status' => 'Used', 'company_id' => $request_company ));      
+        if ($request_imei != $detail_imei[0]) {
+            Gps::where('id', $detail_imei[0])->update(array('status' => 'Ready', 'company_id' => ""));
+            Gps::where('id', $request_imei)->update(array('status' => 'Used', 'company_id' => $request_company));
         }
 
-        if ( $request_GSM != $detail_gsm[0] ) {
-            Gsm::where('id', $detail_gsm[0] )->update(array('status_gsm' => 'Ready', 'company_id' => ""));
-            Gsm::where('id', $request_GSM )->update(array('status_gsm' => 'Used', 'company_id' => $request_company));
+        if ($request_GSM != $detail_gsm[0]) {
+            Gsm::where('id', $detail_gsm[0])->update(array('status_gsm' => 'Ready', 'company_id' => ""));
+            Gsm::where('id', $request_GSM)->update(array('status_gsm' => 'Used', 'company_id' => $request_company));
         }
 
         if ($detail_sensor[0] != "") {
-            $explode_sensor = explode(' ',$detail_sensor[0]);
+            $explode_sensor = explode(' ', $detail_sensor[0]);
         }
 
         if ($request_sensor != "") {
             $explode_request = explode(' ', $request_sensor);
         }
 
-        $result=array_diff($explode_sensor,$explode_request);
+        $result = array_diff($explode_sensor, $explode_request);
 
         if ($result != null) {
-            for ($i=0; $i < count($result) ; $i++) { 
-                 Sensor::where('id', $result[$i] )->update(array('status' => 'Ready'));
+            for ($i = 0; $i < count($result); $i++) {
+                Sensor::where('id', $result[$i])->update(array('status' => 'Ready'));
             }
 
-            for ($i=0; $i < count($explode_request) ; $i++) { 
-                Sensor::where('id', $explode_request[$i] )->update(array('status' => 'Used'));
+            for ($i = 0; $i < count($explode_request); $i++) {
+                Sensor::where('id', $explode_request[$i])->update(array('status' => 'Used'));
             }
         }
 
@@ -286,7 +284,6 @@ class DetailCustomerController extends Controller
         $data->tgl_reaktivasi_gps    = $request->TanggalReaktivasi;
         $data->jumlah_sensor         = $jumlah_sensor;
         $data->save();
-        
     }
 
     public function deleteAll(Request $request)
@@ -320,7 +317,7 @@ class DetailCustomerController extends Controller
                 $item['id'] => $item->only(['merk', 'type'])
             ];
         });
-        
+
         $data = $key->all();
         return $data;
     }

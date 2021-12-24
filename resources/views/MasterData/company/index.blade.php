@@ -97,8 +97,7 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-      read();
-
+      read()
     });
 
     const excel_file = document.getElementById("excel_file");

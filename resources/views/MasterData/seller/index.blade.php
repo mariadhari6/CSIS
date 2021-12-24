@@ -1,128 +1,155 @@
-@extends('layouts.v_main')
-@section('title','CSIS | Seller')
-@section('title-table', 'Seller')
-@section('master','show')
-@section('seller','active')
-
-@section('content')
-    <div class="row">
+@extends('layouts.v_main') @section('title','CSIS | Seller')
+@section('title-table', 'Seller') @section('master','show')
+@section('seller','active') @section('content')
+<div class="row">
     <div class="col-md-12">
-    <div class="card">
-        <div class="card-body">
-            <div class="text-right" id="selected">
-                <button type="button" class="btn btn-primary float-left mr-2 add" id="add" >
-                  <b>Add</b>
-                  <i class="fas fa-plus ml-2" ></i>
-                </button>
-                <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData">
-                  <b> Import</b>
-                  <i class="fas fa-file-excel ml-2"></i>
-                </button>
-                <a href="/export_seller" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
-                <i class="fas fa-file-export"></i>
-                </a>
-                <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
-                  <i class="fas fa-trash"></i>
-                </button>
-            </div>
-              <form>
-
-          <table class="table table-responsive data" class="table_seller" id="table_seller" >
-            <thead>
-              <tr>
-
-                <th>
-                    <div>
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-                </th>
-                <th scope="col" class="action-no">No.</th>
-                <th scope="col" class="list-sellerName">Seller Name*</th>
-                <th scope="col" class="list-sellerCode">Seller Code*</th>
-                <th scope="col" class="list-seller">No Agreement Letter*</th>
-                <th scope="col" class="list-seller">Status*</th>
-                <th scope="col" class="action sticky-col first-col">Action</th>
-
-              </tr>
-            </thead>
-            <tbody  id="item_data">
-              {{-- {{ csrf_field() }} --}}
-            </tbody>
-
-          </table>
-           </form>
-
-        </div>
-      </div>
-       <!-- Modal Import -->
-  <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
-		<div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role="document">
-			<div class="modal-content-full-width modal-content">
-				<div class="modal-header-full-width modal-header bg-primary">
-					<h6 class="modal-title">Import data</h6>
-					<button type="button" class="close" id="close-modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-          <div class="card">
-            <div class="card-header">
-              <b>Select Excel File</b>
-              <br>
-              <input type="file" id="excel_file" />
-              <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
-              <a  class="btn btn-secondary btn-xs" href="/download_template_seller" style="color:white">Download Template</a>
-            </div>
+        <div class="card">
             <div class="card-body">
-              <div id="excel_data" ></div>
+                <div class="text-right" id="selected">
+                    <button type="button" class="btn btn-primary float-left mr-2 add" id="add">
+                        <b>Add</b>
+                        <i class="fas fa-plus ml-2"></i>
+                    </button>
+                    <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal"
+                        data-target="#importData">
+                        <b> Import</b>
+                        <i class="fas fa-file-excel ml-2"></i>
+                    </button>
+                    <a href="/export_seller" class="btn btn-success mr-2 export" data-toggle="tooltip" title="Export">
+                        <i class="fas fa-file-export"></i>
+                    </a>
+                    <button class="btn btn-success mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-danger delete_all" data-toggle="tooltip" title="Delete Selected">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <form>
+                    <table class="table table-responsive data" class="table_seller" id="table_seller">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div>
+                                        <label class="form-check-label">
+                                            <input class="
+                                                    form-check-input
+                                                    select-all-checkbox
+                                                " type="checkbox" id="master" />
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th scope="col" class="action-no">No.</th>
+                                <th scope="col" class="list-sellerName">
+                                    Seller Name*
+                                </th>
+                                <th scope="col" class="list-sellerCode">
+                                    Seller Code*
+                                </th>
+                                <th scope="col" class="list-seller">
+                                    No Agreement Letter*
+                                </th>
+                                <th scope="col" class="list-seller">Status*</th>
+                                <th scope="col" class="action sticky-col first-col">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="item_data">
+                            {{-- {{ csrf_field() }}
+                            --}}
+                        </tbody>
+                    </table>
+                    <div class="paginate float-right mt-2">
+                        <button class="btn btn-light" id="previous">
+                            Previous
+                        </button>
+                        <button class="btn btn-secondary" id="currentPage"></button>
+                        <button class="btn btn-light" id="next">Next</button>
+                    </div>
+                </form>
             </div>
-          </div>
         </div>
-        <div class="modal-footer-full-width  modal-footer">
-
+        <!-- Modal Import -->
+        <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData"
+            aria-hidden="true">
+            <div class="modal-dialog-full-width modal-dialog" style="width:
+            1000px; height: 1000px;"" role=" document">
+                <div class="modal-content-full-width modal-content">
+                    <div class="modal-header-full-width modal-header bg-primary">
+                        <h6 class="modal-title">Import data</h6>
+                        <button type="button" class="close" id="close-modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-header">
+                                <b>Select Excel File</b>
+                                <br />
+                                <input type="file" id="excel_file" />
+                                <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()">
+                                    Save
+                                </button>
+                                <a class="btn btn-secondary btn-xs" href="/download_template_seller"
+                                    style="color: white">Download Template</a>
+                                <div class="mt-2 progress">
+                                    <div class="
+                                        progress-bar progress-bar-striped
+                                        active
+                                    " role="progressbar" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="excel_data"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer-full-width modal-footer"></div>
+                </div>
+            </div>
         </div>
-        </div>
-			</div>
-		</div>
-	</div>
+    </div>
 
-
-
-
-  <script>
-
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
       $.ajaxSetup({
-            header:{
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
+        header:{
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
       });
-      read()
+      read();
+      currentPage();
     });
+
+    var sellerCodeGet     = {!! json_encode($sellerCodeGet->toArray()) !!};
+    var no_aggrementGet   = {!! json_encode($no_aggrementGet->toArray()) !!};
 
     // -- excel import to html table --
     const excel_file = document.getElementById("excel_file");
-    excel_file.addEventListener("change",(event)=>{
-        if(
-            ![
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                "application/vnd.ms-excel",
-            ].includes(event.target.files[0].type)
-        ){
-            document.getElementById("excel_data").innerHTML =
-            '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
-            excel_file.value = "";
-            return false;
-        }
-        var reader = new FileReader();
-        reader.readAsArrayBuffer(event.target.files[0]);
-        reader.onload = function () {
+    excel_file.addEventListener("change",(event)=> {
+      function progress_bar_process(percentage, timer) {
+        $('.progress-bar').css('width', percentage + '%');
+        if (percentage > 100) {
+          clearInterval(timer);
+          $('#process').css('display', 'none');
+          $('.progress-bar').css('width', '0%');
+          if (
+              ![
+                  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                  "application/vnd.ms-excel",
+                  "application/wps-office.xlsx"
+              ].includes(event.target.files[0].type)
+          ) {
+              document.getElementById("excel_data").innerHTML =
+              '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+              excel_file.value = "";
+              return false;
+          }
+          var reader = new FileReader();
+          reader.readAsArrayBuffer(event.target.files[0]);
+          reader.onload = function () {
             var data = new Uint8Array(reader.result);
             var work_boox = XLSX.read(data,{type: "array"});
             var sheet_name = work_boox.SheetNames;
@@ -130,81 +157,83 @@
                 work_boox.Sheets[sheet_name[0]],
                 {header: 1}
             );
-                    if(sheet_data.length > 0){
-                        var table_output = '<table class="table table-bordered" id="importTable">';
-                        for(var row = 0; row < sheet_data.length; row++){
-                            table_output += "<tr>";
-
-                            for (var cell = 0; cell < sheet_data[row].length; cell++){
-                                if (row == 0) {
-                                    table_output += "<th>" + sheet_data[row][cell] + "</th>";
-
-                                } else {
-                                    table_output += '<td contenteditable id="table-data-' + cell +'" >' + sheet_data[row][cell] + "</td>";
-
-                                }
-                            }
-                            table_output += "</tr>";
-                        }
-                        table_output += "</table>";
-                        document.getElementById("excel_data").innerHTML = table_output;
-
-                        // check duplicate seller code
-                        sellerCodeID = document.querySelectorAll("#table-data-1");
-                        noAgrementLetterID = document.querySelectorAll("#table-data-2");
-                        for (indexA = 0; indexA < sellerCodeID.length; indexA++) {
-                            var sellerCodeNumberValue = sellerCodeID[indexA].innerText;
-                            var noAgreementLetterNumberValue = noAgrementLetterID[indexA].innerText;
-                            $rowCount = $("#table_seller tr").length;
-                            if($rowCount == 1){
-
-                            }else{
-                              $rowResult = $rowCount - 1;
-                              var allSellerCodeNum = [];
-                              var allNoAgreementLetterNum = [];
-                              for($i = 0; $i < $rowResult; $i++)
-                              {
-                                $sellerCodeNum = $("#table_seller").find("tbody>tr:eq("+ $i +")>td:eq(3)").attr("name");
-                                $noAgreementLetterNum = $("#table_seller").find("tbody>tr:eq("+ $i +")>td:eq(4)").attr("name");
-                                allSellerCodeNum = $sellerCodeNum;
-                                allNoAgreementLetterNum = $noAgreementLetterNum;
-
-                              }
-                              for (let index = 0; index < allSellerCodeNum; index++){
-                                  if(sellerCodeNumberValue == allSellerCodeNum[index]){
-                                      sellerCodeID[indexA].style.backgroundColor = "#e8837d";
-                                      if(noAgreementLetterNumberValue == allNoAgreementLetterNum[index]){
-                                          noAgrementLetterID[indexA].style.backgroundColor = "#e8837d";
-                                      }
-                                  }else if(noAgreementLetterNumberValue == allNoAgreementLetterNum[index]){
-                                      noAgrementLetterID[indexA].style.backgroundColor = "#e8837d";
-                                  } else if ( index == allSellerCodeNum.length){
-
-                                  }
-                              }
-                            }
-                        }
-                    excel_file.value = "";
-
-
-                    }
-        };
+            if (sheet_data.length > 0){
+                var table_output = '<table class="table table-bordered" id="importTable">';
+                for(var row = 0; row < sheet_data.length; row++) {
+                  table_output += "<tr>";
+                  for (var cell = 0; cell < sheet_data[row].length; cell++) {
+                      if (row == 0) {
+                          table_output += "<th>" + sheet_data[row][cell] + "</th>";
+                      }
+                      else {
+                        table_output += '<td contenteditable id="table-data-' + cell +'" >' + sheet_data[row][cell] + "</td>";
+                      }
+                  }
+                  table_output += "</tr>";
+                }
+                table_output += "</table>";
+                document.getElementById("excel_data").innerHTML = table_output;
+                // check duplicate seller code
+                sellerCodeID = document.querySelectorAll("#table-data-1");
+                noAgrementLetterID = document.querySelectorAll("#table-data-2");
+                for (indexA = 0; indexA < sellerCodeID.length; indexA++) {
+                  var sellerCodeNumberValue = sellerCodeID[indexA].innerText;
+                  var noAgreementLetterNumberValue = noAgrementLetterID[indexA].innerText;
+                  if ( sellerCodeGet[sellerCodeGet.findIndex(x => x.seller_code == sellerCodeNumberValue )] != undefined) {
+                    sellerCodeID[indexA].style.backgroundColor = "#e8837d";
+                  }
+                  if ( no_aggrementGet[no_aggrementGet.findIndex(x => x.no_agreement_letter == noAgreementLetterNumberValue )] != undefined ) {
+                    noAgrementLetterID[indexA].style.backgroundColor = "#e8837d";
+                  }
+                }
+                excel_file.value = "";
+            };
+          };
+        }
+      }
+      var percentage = 0;
+      var timer = setInterval(function() {
+        percentage = percentage + 20;
+        progress_bar_process(percentage, timer);
+      }, 1000);
     });
+
+    function progress_bar_process(percentage, timer)
+    {
+      $('.progress-bar').css('width', percentage + '%');
+      if(percentage > 100)
+      {
+        clearInterval(timer);
+        $('#process').css('display', 'none');
+        $('.progress-bar').css('width', '0%');
+        setTimeout(function(){
+        swal({
+              type: 'success',
+              title: 'Data Saved',
+              showConfirmButton: false,
+              timer: 1500
+        }).catch(function(timeout) { });
+        read();
+        $("#importTable tr").remove();
+        $('#importData').modal('hide');
+        }, 5000);
+      }
+    }
+
     // save data import
-    function save_data(){
+    function save_data() {
     var total = 0;
     var jsonTable = $('#importTable tbody tr:has(td)').map(function (){
         var $td = $('td', this);
         total += parseFloat($td.eq(2).text());
         return {
-            seller_name: $td.eq(0).text(),
-            seller_code: $td.eq(1).text(),
-            no_agreement_letter: $td.eq(2).text(),
-            status:$td.eq(3).text()
-
+            seller_name         : $td.eq(0).text(),
+            seller_code         : $td.eq(1).text(),
+            no_agreement_letter : $td.eq(2).text(),
+            status              : $td.eq(3).text()
         }
-
     }).get();
+
       $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
         data = {};
         data = jsonTable;
@@ -225,7 +254,7 @@
         error: function(er){
             if(er.responseText === 'fail'){
                 swal({
-                    type: 'warning',
+                type: 'warning',
                 text: 'Duplicate data or error format',
                 showCloseButton: true,
                 showConfirmButton: false
@@ -233,26 +262,22 @@
 
             } else {
                 try {
-            swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-            read();
-            $('#importData').modal('hide');
-            } catch (error) {
-                swal({
-                type: 'warning',
-                text: 'Duplicate data or error format',
-                showCloseButton: true,
-                showConfirmButton: false
-              }).catch(function(timeout) { });
-
+                    var percentage = 0;
+                    var timer = setInterval(function(){
+                    percentage = percentage + 20;
+                    progress_bar_process(percentage, timer);
+                    }, 1000);
+                } catch (error) {
+                    swal({
+                        type: 'warning',
+                        text: 'Duplicate data or error format',
+                        showCloseButton: true,
+                        showConfirmButton: false
+                    }).catch(function(timeout) { });
+                }
             }
         }
-        }
-      })
+      });
     }
 
 
@@ -265,14 +290,13 @@
 
     // ------ Tampil Data ------
     function read(){
-        enableButton();
+    enableButton();
       $.get("{{ url('item_data_seller') }}", {}, function(data, status) {
         $('#table_seller').DataTable().destroy();
         $('#table_seller').find("#item_data").html(data);
         $('#table_seller').dataTable( {
-            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-
-            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            "pageLength": 50,
+            "dom": '<"top"f>rt<"bottom"><"clear">'
         });
         $('#table_seller').DataTable().draw();
       });
@@ -587,5 +611,63 @@
 
         }
 
-  </script>
-@endsection
+        // Paginate
+        let numberPaginate = 1;
+        $("#next").click(function() {
+            numberPaginate += 1;
+            $.get(`{{ url('item_data_seller?page=${numberPaginate}') }}`, {}, function (data, status) {
+                if (data != "") {
+                    $.ajax({
+                        type: "get",
+                        url: `{{ url('item_data_seller?page=${numberPaginate}') }}`,
+                        data: {
+                            no: no,
+                        },
+                        success: function(datas) {
+                            $('#table_seller').DataTable().destroy();
+                            $('#table_seller').find("#item_data").html(datas);
+                            $('#table_seller').dataTable( {
+                                "pageLength": 50,
+                                "dom": '<"top"f>rt<"bottom"><"clear">'
+                                });
+                            $('#table_seller').DataTable().draw();
+                            currentPage()
+                        }
+                    });
+                }
+                else{
+                    numberPaginate -= 1;
+                }
+            });
+        });
+
+        // previous paginate
+        $( "#previous" ).click(function() {
+            if (numberPaginate > 1) {
+                numberPaginate -= 1;
+                $.ajax({
+                type: "get",
+                url: `{{ url('item_data_seller?page=${numberPaginate}') }}`,
+                data: {
+                    no: no - 100,
+                },
+                success: function(datas) {
+                    $('#table_seller').DataTable().destroy();
+                    $('#table_seller').find("#item_data").html(datas);
+                    $('#table_seller').dataTable( {
+                        "pageLength": 50,
+                        "dom": '<"top"f>rt<"bottom"><"clear">'
+                        });
+                    $('#table_seller').DataTable().draw();
+                    currentPage();
+                }
+                });
+            }
+        });
+
+        // current Page
+        function currentPage(){
+            $("#currentPage").text(numberPaginate);
+        }
+    </script>
+    @endsection

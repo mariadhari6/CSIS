@@ -16,7 +16,7 @@ class TamplateMasterVehicle implements FromCollection
         //
         return new EloquentCollection([
             [
-                'company_id*', 'license_plate*', 'vehicle_id*', 'pool_name*', 'pool_location*'
+                'company_id*', 'license_plate*', 'vehicle_id*', 'pool_name*', 'pool_location*', 'status*'
             ]
         ]);
     }

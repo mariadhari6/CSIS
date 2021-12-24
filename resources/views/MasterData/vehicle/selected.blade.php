@@ -1,4 +1,4 @@
-<button class="btn btn-primary btn-round" id="save-selected" onclick="updateSelected()" >
+<button class="btn btn-primary btn-round" id="save-selected" onclick="updateSelected()">
     <i class="fas fa-"></i>
     Save
 </button>

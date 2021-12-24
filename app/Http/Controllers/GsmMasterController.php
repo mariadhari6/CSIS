@@ -46,11 +46,13 @@ class GsmMasterController extends Controller
         ]);
     }
 
-    public function item_data()
+    public function item_data(Request $request)
     {
-        $GsmMaster = Gsm::orderBy('id', 'DESC')->get();
+        $GsmMaster = Gsm::orderBy('id', 'DESC')->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.GsmMaster.item_data')->with([
-            'GsmMaster' => $GsmMaster
+            'GsmMaster' => $GsmMaster,
+            'no' => $no
         ]);
     }
 
@@ -65,7 +67,7 @@ class GsmMasterController extends Controller
 
     public function item_data_ready()
     {
-        $GsmMaster = Gsm::where('status_gsm', 'Ready')->get();
+        $GsmMaster = Gsm::where('status_gsm', 'Ready')->paginate(50);
         return view('MasterData.GsmMaster.item_data')->with([
             'GsmMaster' => $GsmMaster
         ]);
@@ -73,7 +75,7 @@ class GsmMasterController extends Controller
 
     public function item_data_active()
     {
-        $GsmMaster = Gsm::where('status_gsm', 'Active')->get();
+        $GsmMaster = Gsm::where('status_gsm', 'Active')->paginate(50);
         return view('MasterData.GsmMaster.item_data')->with([
             'GsmMaster' => $GsmMaster
         ]);
@@ -81,7 +83,7 @@ class GsmMasterController extends Controller
 
     public function item_data_terminate()
     {
-        $GsmMaster = Gsm::where('status_gsm', 'Terminate')->get();
+        $GsmMaster = Gsm::where('status_gsm', 'Terminate')->paginate(50);
         return view('MasterData.GsmMaster.item_data')->with([
             'GsmMaster' => $GsmMaster
         ]);
@@ -105,7 +107,7 @@ class GsmMasterController extends Controller
                 $fail = 1;
                 $success = 1;
             }
-        }  
+        }
 
         if ($fail == 1 && $success == 1) {
             return 'fail';
@@ -117,7 +119,7 @@ class GsmMasterController extends Controller
                 } catch (\Throwable $th) {
                     $company = null;
                 }
-              
+
                 $data[$key] = array(
                     'status_gsm'        =>  $value->status_gsm,
                     'gsm_number'        =>  $value->gsm_number,
@@ -249,12 +251,12 @@ class GsmMasterController extends Controller
         //     $dataDelete = GsmTemporary::findOrfail($value->id);
         //     $dataDelete->delete();
         // }
-        
+
         // return $data;
         // return 'a';
         // $jml =  Company::all('company_name')->count();
         // $input = Company::where('company_name', 'Adib')->firstOrFail()->id;
-        // for ($i= 0; $i <= $jml-1; $i++) { 
+        // for ($i= 0; $i <= $jml-1; $i++) {
         //     if( $input == Company::all('company_name')[$i]['company_name']){
         //         $input = Company::all('id')[$i]['id'];
         //         break;
@@ -268,7 +270,7 @@ class GsmMasterController extends Controller
         // $GsmMaster = Gsm::all('gsm_number');
         // $jml =  Gsm::all('gsm_number')->count();
         // $input= 12232;
-        // for ($i= 0; $i <= $jml-1; $i++) { 
+        // for ($i= 0; $i <= $jml-1; $i++) {
         //    if( $input == Gsm::all('gsm_number')[$i]->gsm_number){
         //         $count_vehicle = "data same";
         //         break;
@@ -276,7 +278,7 @@ class GsmMasterController extends Controller
         //        $b = "Save succes";
         //    }
         // }
-        
+
         // return $b . ' | ';
 
         //chart
@@ -285,7 +287,7 @@ class GsmMasterController extends Controller
         // $company = [];
         // $vehicle = [];
         // $count_vehicle = array();
-        
+
         // foreach ($request_complain as $item) {
         //     $company['company'][] = $item->company->company_name;
         //     $vehicle['vehicle'][] = $item->vehicle;
@@ -293,7 +295,7 @@ class GsmMasterController extends Controller
 
         // $count_data_vehicle = array_count_values($vehicle['vehicle']);
 
-        // for ($i=0; $i <= count($vehicle['vehicle']) - 1 ; $i++) { 
+        // for ($i=0; $i <= count($vehicle['vehicle']) - 1 ; $i++) {
         //     $count_vehicle[$i] = $count_data_vehicle[$vehicle['vehicle'][$i]];
         // }
 
@@ -301,7 +303,7 @@ class GsmMasterController extends Controller
         // $vehicle['chart_vehicle'] = json_encode($count_vehicle);
         // return $$vehicle['chart_vehicle'][0];
         // $jumlah_done = RequestComplaint::where('status','=','Done')->count();
-        // $jumlah_total = RequestComplaint::count();    
+        // $jumlah_total = RequestComplaint::count();
         // $presentase = ( $jumlah_done / $jumlah_total ) * 100;
         // return $presentase;
 

@@ -29,12 +29,9 @@
             </button>
           </div>
         <form>
-
           <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-
-
                 <th>
                     <div>
                         <label class="form-check-label">
@@ -58,8 +55,14 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+            {{-- <div class="paginate float-right mt-2">
+                <button class="btn btn-light" id="previous">
+                    Previous
+                </button>
+                <button class="btn btn-secondary" id="currentPage"></button>
+                <button class="btn btn-light" id="next">Next</button>
+            </div> --}}
          </form>
-
         </div>
         </div>
       </div>
@@ -81,6 +84,10 @@
               <input type="file" id="excel_file" />
               <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
               <a  class="btn btn-secondary btn-xs" href="/download_template_pic" style="color:white">Download Template</a>
+              <div percentage class="mt-2 progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="">
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <div id="excel_data" ></div>
@@ -101,69 +108,101 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
       });
-      read()
+      read();
+      currentPage();
     });
+
     const excel_file = document.getElementById("excel_file");
     excel_file.addEventListener("change", (event) => {
-            if (
-        ![
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-          "application/vnd.ms-excel",
-        ].includes(event.target.files[0].type)
-        ) {
-        document.getElementById("excel_data").innerHTML =
-          '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
-        excel_file.value = "";
-        return false;
-      }
-      var reader = new FileReader();
-      reader.readAsArrayBuffer(event.target.files[0]);
-      reader.onload = function (event) {
-        var data = new Uint8Array(reader.result);
-        var work_book = XLSX.read(data, { type: "array" });
-        var sheet_name = work_book.SheetNames;
-        var sheet_data = XLSX.utils.sheet_to_json(
-          work_book.Sheets[sheet_name[0]],
-          { header: 1 }
-        );
-        if (sheet_data.length > 0) {
-            var table_output = '<table class="table table-bordered" id="importTable">';
+      function progress_bar_process(percentage, timer) {
+        $('.progress-bar').css('width', percentage + '%');
+        if (percentage > 100) {
+          clearInterval(timer);
+          $('#process').css('display', 'none');
+          $('.progress-bar').css('width', '0%');
+
+          if (
+              ![
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "application/vnd.ms-excel",
+                "application/wps-office.xlsx"
+              ].includes(event.target.files[0].type)
+            ) {
+              document.getElementById("excel_data").innerHTML =
+                '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+              excel_file.value = "";
+              return false;
+            }
+
+          var reader = new FileReader();
+          reader.readAsArrayBuffer(event.target.files[0]);
+          reader.onload = function (event) {
+            var data = new Uint8Array(reader.result);
+            var work_book = XLSX.read(data, { type: "array" });
+            var sheet_name = work_book.SheetNames;
+            var sheet_data = XLSX.utils.sheet_to_json(
+              work_book.Sheets[sheet_name[0]],
+              { header: 1 }
+            );
+            if (sheet_data.length > 0) {
+                var table_output = '<table class="table table-bordered" id="importTable">';
                 for (var row = 0; row < sheet_data.length; row++) {
-                 table_output += "<tr>";
+                    table_output += "<tr>";
                     for (var cell = 0; cell < sheet_data[row].length; cell++) {
-              if (row == 0) {
-                table_output += "<th>" + sheet_data[row][cell] + "</th>";
-              } else {
-                table_output += '<td contenteditable id="table-data-' + cell + '" >' + sheet_data[row][cell] + "</td>";
+                      if (row == 0) {
+                        table_output += "<th>" + sheet_data[row][cell] + "</th>";
+                      } else {
+                        table_output += '<td contenteditable id="table-data-' + cell + '" >' + sheet_data[row][cell] + "</td>";
+                      }
+                    }
+                    table_output += "</tr>";
+                }
+                table_output += "</table>";
+                document.getElementById("excel_data").innerHTML = table_output;
+            }
+              dateOfBirth = document.querySelectorAll("#table-data-5");
+              for (i = 0; i < dateOfBirth.length; i++) {
+                var excelDate = dateOfBirth[i].innerText;
+                var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+                try {
+                      var converted_date = date.toISOString().split('T')[0];
+                    }
+                    catch(err) {
+                      // var converted_date = 'wrong date format';
+                      dateOfBirth[i].style.backgroundColor = "#e8837d";
+                    }
+                dateOfBirth[i].innerHTML = converted_date;
               }
-            }
-            table_output += "</tr>";
-
-            }
-            table_output += "</table>";
-             document.getElementById("excel_data").innerHTML = table_output;
-
-        }
-        dateOfBirth = document.querySelectorAll("#table-data-5");
-          for (i = 0; i < dateOfBirth.length; i++) {
-            var excelDate = dateOfBirth[i].innerText;
-            var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
-            try {
-                  var converted_date = date.toISOString().split('T')[0];
-                }
-                catch(err) {
-                  // var converted_date = 'wrong date format';
-                  dateOfBirth[i].style.backgroundColor = "#e8837d";
-                }
-            dateOfBirth[i].innerHTML = converted_date;
-          }
-
-
             excel_file.value = "";
-
-
-        };
+          };
+        }
+      }
+      var percentage = 0;
+      var timer = setInterval(function() {
+        percentage = percentage + 20;
+        progress_bar_process(percentage, timer);
+      }, 1000);
     });
+
+    function progress_bar_process(percentage, timer) {
+      $('.progress-bar').css('width', percentage + '%');
+      if(percentage > 100) {
+        clearInterval(timer);
+        $('#process').css('display', 'none');
+        $('.progress-bar').css('width', '0%');
+        setTimeout(function(){
+        swal({
+              type: 'success',
+              title: 'Data Saved',
+              showConfirmButton: false,
+              timer: 1500
+        }).catch(function(timeout) { });
+        read();
+        $("#importTable tr").remove();
+        $('#importData').modal('hide');
+        }, 5000);
+      }
+    }
 
     function save_data() {
         var total = 0;
@@ -224,7 +263,6 @@
                showCloseButton: true,
                 showConfirmButton: false
               }).catch(function(timeout) { });
-
             }
           }
           }
@@ -246,12 +284,9 @@
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
-
             });
         $('#table_id').DataTable().draw();
-
       });
 
     }
@@ -300,8 +335,6 @@
             }
         })
     }
-
-
 
     // -----Proses Delete Data ------
    function destroy(id) {
@@ -585,6 +618,64 @@
 
         }
 
+        // Paginate
+        // let numberPaginate = 1;
+        // $("#next").click(function() {
+        //     numberPaginate += 1;
+        //     $.get(`{{ url('item_data_pic?page=${numberPaginate}') }}`, {}, function (data, status) {
+        //         if (data != "") {
+        //             $.ajax({
+        //                 type: "get",
+        //                 url: `{{ url('item_data_pic?page=${numberPaginate}') }}`,
+        //                 data: {
+        //                     no: no,
+        //                 },
+        //                 success: function(datas) {
+        //                     $('#table_id').DataTable().destroy();
+        //                     $('#table_id').find("#item_data").html(datas);
+        //                     $('#table_id').dataTable( {
+        //                         "pageLength": 50,
+        //                         "dom": '<"top"f>rt<"bottom"><"clear">'
+        //                         });
+        //                     $('#table_id').DataTable().draw();
+        //                     currentPage();
+        //                 }
+        //             });
+        //         }
+        //         else{
+        //             numberPaginate -= 1;
+        //         }
+        //     });
+        // });
+
+        // previous paginate
+        // $( "#previous" ).click(function() {
+        //     if (numberPaginate > 1) {
+        //         numberPaginate -= 1;
+        //         $.ajax({
+        //         type: "get",
+        //         url: `{{ url('item_data_pic?page=${numberPaginate}') }}`,
+        //         data: {
+        //             no: no - 100,
+        //         },
+        //         success: function(datas) {
+        //             $('#table_id').DataTable().destroy();
+        //             $('#table_id').find("#item_data").html(datas);
+        //             $('#table_id').dataTable( {
+        //                 "pageLength": 50,
+        //                 "dom": '<"top"f>rt<"bottom"><"clear">'
+        //                 });
+        //             $('#table_id').DataTable().draw();
+        //             currentPage();
+        //         }
+        //         });
+        //     }
+        // });
+
+        // current Page
+        // function currentPage(){
+        //     $("#currentPage").text(numberPaginate);
+        // }
 
   </script>
 

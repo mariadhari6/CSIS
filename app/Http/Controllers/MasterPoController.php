@@ -10,6 +10,7 @@ use App\Models\MasterPo;
 use App\Models\DetailCustomer;
 use App\Models\Sales;
 use App\Models\Sensor;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -241,20 +242,20 @@ class MasterPoController extends Controller
         // $detail_sensor = DetailCustomer::where('id', 228)->pluck('sensor_all');
         // $explode = explode(' ',$detail_sensor[0]);
         // $temp = array();
-       
-       
+
+
 
         // // $result = array_diff($u, $explode);
         // return $temp;
-        
+
         // $coba = array("675","927");
         // $temp=array("633");
-        
+
         // $result=array_diff($coba,$temp);
 
         // if ($result != null) {
         //     // return $result;
-        //     for ($i=0; $i < count($result) ; $i++) { 
+        //     for ($i=0; $i < count($result) ; $i++) {
         //         return $result[1];
         //         // $sensor = Sensor::where('id', $result[$i])->get();
         //         // print( $sensor[0]);
@@ -264,15 +265,23 @@ class MasterPoController extends Controller
         // }
         // $gsm = Sensor::where('status', 'Used')->get();
         // return $gsm;'
+        // $arr = array();
+        $data = Company::pluck('company_name')->toArray();
+        // array_push($arr, $data);
+        $input = "Naku Logistics Indonesia";
+        if (in_array($input, $data)) {
+            echo 'ada';
+        }
+        else {
+            echo 'gak ada';
+        }
+        // return $data;
 
-        $data = DetailCustomer::groupBy('company_id')->select('company_id')->get();
 
-        return $data;
-        
 
-        
-        
 
-       
+
+
+
     }
 }

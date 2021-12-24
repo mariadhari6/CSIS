@@ -26,11 +26,13 @@ class PicController extends Controller
         ]);
     }
 
-    public function item_data()
+    public function item_data(Request $request)
     {
         $pic = Pic::orderBy('id', 'DESC')->get();
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.pic.item_data')->with([
-            'pic' => $pic
+            'pic'   => $pic,
+            'no'    => $no
         ]);
     }
     public function save_import(Request $request)

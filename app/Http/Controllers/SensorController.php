@@ -18,8 +18,18 @@ class SensorController extends Controller
 {
     public function index()
     {
-        return view('MasterData.sensor.index');
+        $sensor = Sensor::orderBy('id', 'DESC')->get();
+        $sensorSerialGet = $sensor->map(function ($item) {
+            return collect($item->toArray())
+                ->only(['serial_number'])
+                ->all();
+        });
+
+        return view('MasterData.sensor.index')->with([
+            'sensorSerialGet' => $sensorSerialGet
+        ]);
     }
+
     public function add_form()
     {
         $sensor = Sensor::orderBy('sensor_name', 'DESC')->get();
