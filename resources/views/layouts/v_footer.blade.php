@@ -39,8 +39,8 @@
     <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
     <script src="{{asset('template-admin')}}/assets/js/plugin/chart-circle/circles.min.js"></script>
-    <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <script src="{{asset('template-admin')}}/assets/js/ready.js"></script>
+    {{-- <script src="{{asset('template-admin')}}/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script> --}}
+    {{-- <script src="{{asset('template-admin')}}/assets/js/ready.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     {{-- Datatable --}}

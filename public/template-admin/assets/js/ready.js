@@ -3,11 +3,12 @@ $(function () {
 	$('[data-toggle="tooltip"]').tooltip()
 });
 
-jQuery(document).ready(function(){
-    jQuery('.scrollbar-inner').scrollbar();
+
+$(function(){
+   ('.scrollbar-inner').scrollbar();
 });
 
-$(document).ready(function(){
+$(function(){
 
 	var toggle_sidebar = false,
 	toggle_topbar = false,

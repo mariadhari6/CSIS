@@ -329,7 +329,7 @@ font-family:verdana, Helvetica;
     bottom: 20px;
     width:100%;
     overflow: auto;
-    height:450px;
+    height:70vh;
 }
 
 #table_detail_customer thead
@@ -355,7 +355,7 @@ font-family:verdana, Helvetica;
     bottom: 20px;
     width:100%;
     overflow: auto;
-    height:450px;
+    height:70vh;
 }
 
 #table_pemasangan thead
@@ -624,313 +624,266 @@ nav.sidebar-new li.active > a,
 
 /* Home */
 
-.awal{
-    /* background-color: darkblue; */
-    height: 75%;
-}
+/* Home */
+@media screen and (min-width: 600px) {
+    .d_company {
+        background-color: #ff1e32;
+        width: 98%;
+        height: 114%;
+        /* width: 300px; */
+        /* height: 250px; */
+    }
 
-.teks-number{
-    position: auto;
-    height: 25%;
-    padding-left: 3px;
-    padding-right: 3px;
-    /* background-color: lawngreen; */
-}
-.d_company {
-    background-color: #ff1e32;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-   
-}
+    .d_company:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_company:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_company-icon {
+        height: 50px;
+        width: 50px;
+        position: relative;
+        left: 100px;
+        top: 40px;
+    }
 
-.d_company-icon {
-    height: 50px;
-    width: 50px;
-    margin: auto;
-    position: relative;
-    left: 100px;
-    top: 40px;
+    .d_company-teks {
+        position: relative;
+        left: 20px;
+        top: 150px;
+        font-size: 20px;
+    }
 
-}
+    .d_company-number {
+        position: relative;
+        left: 240px;
+        top: 90px;
 
-.d_company-teks {
-    font-size: 25px;
-    float: left;
-}
+        font-size: 25px;
+    }
 
-.d_company-number {
-    font-size: 25px;
-    float: right;
-    
-}
-.d_gps {
-    background-color: #0186ff;
-    width: 100%;
-    height: 120px;
-    border-radius: 10px;
-}
+    .d_gps {
+        background-color: #0186ff;
+        width: 70%;
+        height: 55%;
+        /* width: 200px; */
+        /* height: 120px; */
+        position: relative;
+        right: 6%;
+    }
 
-.d_gps:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_gps:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_gps-icon {
-    position: relative;
-    left: 85px;
-    top: 30px;
-    width: 100px;
-    margin: auto;
-}
+    .d_gps-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 80px;
+        top: 20px;
+    }
 
-.d_gps-teks {
-    float: left;
-    font-size: 25px;
-}
+    .d_gps-teks {
+        position: relative;
+        font-size: 20px;
+        left: 10px;
+        top: 40px;
+    }
 
-.d_gps-number {
-    float: right;
-    font-size: 25px;
-}
+    .d_gps-number {
+        position: relative;
+        left: 140px;
+        bottom: 20px;
+        font-size: 25px;
+    }
 
-.d_sensor {
-    background-color: #0ff861;
-    width: 100%;
-    height: 120px;
-    border-radius: 10px;
-}
+    .d_sensor {
+        background-color: #0ff861;
+        width: 70%;
+        height: 55%;
+        /* width: 200px;
+        height: 120px; */
+        position: relative;
+        /* right: 105px; */
+        right: 39%;
+    }
 
-.d_sensor:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_sensor:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_sensor-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 80px;
-    top: 20px;
-}
+    .d_sensor-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 80px;
+        top: 20px;
+    }
 
-.d_sensor-teks {
-    font-size: 25px;
-    float: left;
-}
+    .d_sensor-teks {
+        position: relative;
+        font-size: 20px;
+        left: 10px;
+        top: 40px;
+    }
 
-.d_sensor-number {
+    .d_sensor-number {
+        position: relative;
+        left: 140px;
+        bottom: 20px;
+        font-size: 25px;
+    }
 
-    font-size: 25px;
-    float: right;
+    .d_vehicle {
+        background-color: #ff2267;
+        width: 147%;
+        height: 53%;
+        position: relative;
+        top: 135px;
+        right: 226%;
+    }
 
-}
+    .d_vehicle:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_vehicle {
-    background-color: #ff2267;
-    width: 100%;
-    height: 120px;
-    border-radius: 10px;
-}
+    .d_vehicle-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 70px;
+        top: 20px;
+    }
 
-.d_vehicle:hover {
-    transform: scale(1.05) translateZ(0);
-}
+    .d_vehicle-teks {
+        position: relative;
+        font-size: 20px;
+        left: 210px;
+        top: -60px;
+    }
 
-.d_vehicle-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 70px;
-    top: 20px;
-}
+    .d_vehicle-number {
+        position: relative;
+        left: 340px;
+        top: -60px;
+        font-size: 25px;
+    }
 
-.d_vehicle-teks {
-    position: relative;
-    font-size: 25px;
-    top: 10px;
+    .d_gsm {
+        background-color: #ffbb02;
+        width: 100%;
+        height: 53%;
+        position: relative;
+        left: 256%;
+        bottom: 38%;
+    }
 
-}
+    .d_gsm:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d_vehicle-number {
-    position: relative;
-    top: 25px;
-    right: 20px;
-    font-size: 25px;
-    float: right;
+    .d_gsm-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 65px;
+        top: 20px;
+    }
 
-}
+    .d_gsm-teks {
+        position: relative;
+        left: 190px;
+        top: -60px;
+        font-size: 20px;
+    }
 
-.column1{
-    /* background-color: green; */
-    width: 25%;
-    padding: 10px;
-    height: 280px;
-    width: 25%;
-   
-}
-.column2{
-    /* background-color: yellow; */
-    width: 33.33%;
-    padding: 15px;
-    height: 280px;
-}
+    .d_gsm-number {
+        position: relative;
+        left: 200px;
+        top: -50px;
+        font-size: 25px;
+    }
 
-.column3{
-    /* background-color: brown; */
-    width: 41%;
-    padding: 10px;
-    height: 280px;
-}
+    .d_RequstComp {
+        background-color: #798aa6;
+        width: 177%;
+        height: 56%;
+        position: relative;
+        /* top: 215px; */
+        left: 146%;
+        bottom: 100%;
+    }
 
-.column4{
-    padding: 5px;
-    width: 50%;  
-}
+    .d_RequstComp:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.column5{
-    padding: 5px;
-    width: 50%; 
-}
-.column6{
-    /* background-color: rgb(125, 139, 0); */
-    width: 50%;
-    height: 100%;
-}
-.column7{
-    /* background-color: darkgoldenrod; */
-    width: 50%;
-    /* height: 100%; */
-}
+    .d_RequstComp-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 100px;
+        right: 100px;
+        top: 20px;
+    }
 
-.b{
-    height: 50%;
-}
+    .d_RequstComp-teks {
+        position: relative;
+        font-size: 20px;
+        left: 270px;
+        top: -60px;
+    }
 
-.a{
-    height: 50%;
-    padding: 5px;
-}
+    .d_RequstComp-number {
+        position: relative;
+        left: 430px;
+        top: -60px;
+        font-size: 25px;
+    }
 
-.c{
-   /* background-color: #555; */
-   height: 50%;
-   padding: 5px;
+    .d_visitAs {
+        background-color: #00c3ff;
+        width: 71%;
+        height: 53%;
+        position: relative;
+        /* top: 215px; */
+        left: 142%;
+        bottom: 38%;
+    }
 
-}
+    .d_visitAs:hover {
+        transform: scale(1.05) translateZ(0);
+    }
 
-.d{
-    position: absolute;
-    bottom: 0px;
-}
+    .d_visitAs-icon {
+        height: 100px;
+        width: 100px;
+        position: relative;
+        left: 35px;
+        top: 20px;
+    }
 
-.d_gsm {
-    background-color: #ffbb02;
-    width: 100%;
-    height: 120px;
-    border-radius: 10px;
-}
+    .d_visitAs-teks {
+        position: relative;
+        left: 120px;
+        top: -50px;
+        font-size: 20px;
+    }
 
-.d_gsm:hover {
-    transform: scale(1.05) translateZ(0);
-}
-
-.d_gsm-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 30px;
-    top: 20px;
-}
-
-.d_gsm-teks {
-    position: relative;
-    font-size: 25px;
-    top: 10px;
-}
-
-.d_gsm-number {
-    position: relative;
-    top: 20px;
-    font-size: 35px;
-
-}
-
-.d_RequstComp {
-    background-color: #798aa6;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-   
-}
-
-.d_RequstComp:hover {
-    transform: scale(1.05) translateZ(0);
-}
-
-.d_RequstComp-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 100px;
-    right: 100px;
-    top: 20px;
-}
-
-.d_RequstComp-teks {
-    position: relative;
-    font-size: 25px;
-    top: 10px;
-}
-
-.d_RequstComp-number {
-    position: relative;
-    top: 25px;
-    right: 55px;
-    font-size: 25px;
-    float: right;
-
-}
-
-.d_visitAs {
-    background-color: #00c3ff;
-    width: 100%;
-    height: 120px;
-    border-radius: 10px;
-}
-
-.d_visitAs:hover {
-    transform: scale(1.05) translateZ(0);
-}
-
-.d_visitAs-icon {
-    height: 100px;
-    width: 100px;
-    position: relative;
-    left: 35px;
-    top: 20px;
-}
-
-.d_visitAs-teks {
-    position: relative;
-    font-size: 25px;
-    top: 10px;
-}
-
-.d_visitAs-number {
-    position: relative;
-    top: 15px;
-    font-size: 35px;
-
+    .d_visitAs-number {
+        position: relative;
+        left: 145px;
+        top: -35px;
+        font-size: 25px;
+    }
 }
 
 /* Table Home */
 .table-home {
-   
+    position:relative;
     text-align: center;
-    
+    top: -150px;
+    left: 100px;
 }
 /* DASHBOARD CUSTOMER */
 
@@ -941,7 +894,7 @@ nav.sidebar-new li.active > a,
     width:100%;
     z-index: 1;
     overflow: auto;
-    height: 460px;
+    height: 70vh;
 }
 
 #table_dashboard_customer thead
@@ -1157,7 +1110,7 @@ nav.sidebar-new li.active > a,
     width:100%;
     z-index: 1;
     overflow: auto;
-    height:450px;
+    height:70vh;
 }
 
 #table_seller thead
@@ -1200,7 +1153,7 @@ nav.sidebar-new li.active > a,
     width:100%;
     z-index: 1;
     overflow: auto;
-    height:450px;
+    height: 70vh;
 }
 
 #table_id thead
@@ -1236,7 +1189,7 @@ nav.sidebar-new li.active > a,
     bottom: 20px;
     width:100%;
     overflow: auto;
-    height:450px;
+    height:70vh;
 }
 
 #table_request thead
@@ -1362,4 +1315,9 @@ nav.sidebar-new li.active > a,
     text-align: center;
 
 }
+
+.search_selectpicker{
+ z-index: 2;
+}
+
 

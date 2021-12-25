@@ -50,7 +50,6 @@
             <table class="table table-responsive data" class="table_id" id="table_id" >
             <thead>
               <tr>
-
                 <th>
                     <div>
                         <label class="form-check-label">
