@@ -8,7 +8,7 @@
     </select>
 </td>
 <td>
-    <select class="select-search search_selectpicker LicencePlate-{{ $details->id }}" id="LicencePlate" name="LicencePlate">
+    <select class="select LicencePlate-{{ $details->id }}" id="LicencePlate" name="LicencePlate">
         <option value="{{$details->licence_plate}}">{{$details->vehicle->license_plate}}</option>
         @foreach ($vehicle as $item)
             <option value="{{ $item->id }}" {{ $details->licence_plate  == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
@@ -54,7 +54,7 @@
     </select>
 </td>
 <td>
-    <select class="select-search_imei search_selectpicker Imei-{{ $details->id }}" id="Imei" name="Imei">
+    <select class="select Imei-{{ $details->id }}" id="Imei" name="Imei">
         <option value="{{$details->imei}}">{{ $details->gps->imei }}</option>
         @foreach ($imei as $item)
             <option value="{{ $item->id }}" {{ $details->imei == $item->id ? 'selected':''}}>{{ $item->imei }}</option>
@@ -78,7 +78,7 @@
     </select>
 </td>
 <td>
-    <select class="select-search_gsm search_selectpicker GSM-{{ $details->id }}" id="GSM" name="GSM">
+    <select class="select GSM-{{ $details->id }}" id="GSM" name="GSM">
         <option value="{{$details->gsm_id}}">{{ $details->gsm->gsm_number }}</option>
         @foreach ($gsm as $item)
         <option value="{{ $item->id }}" {{ $details->gsm_id  == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
@@ -194,14 +194,10 @@
 
 <script>
 
-      $(document).ready(function() {
-    new TomSelect(".select-search",{
-    create: false,
-    sortField: {
-        field: "text",
-        direction: "asc"
-    }
-    });
+    $(document).ready(function() {
+        $('#LicencePlate').select2();
+        $('#Imei').select2();
+        $('#GSM').select2();
     });
 
     $(document).ready(function() {
