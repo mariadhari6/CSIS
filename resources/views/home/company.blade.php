@@ -26,7 +26,7 @@
 
                     <td style="text-align: left">
                         @foreach ($companys->seller as $seller)
-                        {{$seller->seller_id}} <br>
+                        {{$seller->seller->seller_name}} <br>
                         @endforeach
                     </td>
                     <td style="text-align: center">@foreach ( $companys->total_company as $jumlah)
