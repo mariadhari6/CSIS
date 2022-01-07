@@ -180,6 +180,7 @@
     <td><div class="input-div"><input type= "date" class="input" id="Waranty" placeholder="Waranty"></div></td>
     <td>
         <select class="select" name="status_layanan" id="StatusLayanan">
+            <option value="" style="display: none"></option>
             @foreach ($status_layanan as $item)
             <option value="{{ $item->id }}" {{ old('status_layanan') == $item->id ? 'selected':'' }}>{{ $item->service_status_name }}</option>
         @endforeach

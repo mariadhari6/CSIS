@@ -21,10 +21,10 @@
 
                         <td style="text-align: left">
                             @foreach ($companys->seller as $seller)
-                            {{$seller->seller_id}} <br>
+                            {{$seller->seller->seller_name}} <br>
                             @endforeach
                         </td>
-                        <td style="text-align: center">@foreach ( $companys->total_company as $jumlah)
+                        <td style="text-align: right">@foreach ( $companys->total_company as $jumlah)
                             {{$jumlah->total_company}}
                             @endforeach
                         </td>
@@ -33,7 +33,7 @@
                             {{$gps_types['type_gps']}} <br>
                             @endforeach
                         </td>
-                        <td style="text-align: center">
+                        <td style="text-align: right">
                             @foreach ($companys->gps as $gps_types)
                             {{$gps_types['type_total']}} <br>
                             @endforeach
