@@ -2,18 +2,20 @@
     <td></td>
     <td></td>
     <td>
-        <select class="select" id="CompanyId" name="CompanyId">
+        <select class="select" id="CompanyId" name="CompanyId" disabled>
             @foreach ($company as $item)
-                <option value="{{ $item->id }}" {{ old('company_id') == $item->id ? 'selected':'' }}>{{ $item->company_name }}</option>
+            <option value="{{ $item->id }}" {{ old('company_id')==$item->id ? 'selected':'' }}>{{ $item->company_name }}
+            </option>
             @endforeach
         </select>
     </td>
     <td>
         {{-- select-search search_selectpicker --}}
-       <select class="form-control selectpicker" id="LicencePlate" name="LicencePlate" data-live-search="true">
+        <select class="select" id="LicencePlate" name="LicencePlate">
             <option style="display: none"></option>
             @foreach ($vehicle as $item)
-                <option value="{{ $item->id }}" {{ old('license_plate') == $item->id ? 'selected':'' }}>{{ $item->license_plate }}</option>
+            <option value="{{ $item->id }}" {{ old('license_plate')==$item->id ? 'selected':'' }}>{{
+                $item->license_plate }}</option>
             @endforeach
         </select>
     </td>
@@ -21,7 +23,8 @@
         <select class="select" id="VihecleType" name="VihecleType" disabled>
             <option class="hidden" value=""></option>
             @foreach ($vehicle as $item)
-                <option value="{{ $item->id }}" {{ old('vehicle_id') == $item->id ? 'selected':'' }}>{{ $item->vehicle->name }}</option>
+            <option value="{{ $item->id }}" {{ old('vehicle_id')==$item->id ? 'selected':'' }}>{{ $item->vehicle->name
+                }}</option>
             @endforeach
         </select>
     </td>
@@ -29,7 +32,8 @@
         <select class="select" id="PoNumber" name="PoNumber">
             <option class="hidden" value=""></option>
             @foreach ($po as $item)
-            <option value="{{ $item->id }}" {{ old('po_number') == $item->id ? 'selected':'' }}>{{ $item->po_number}}</option>
+            <option value="{{ $item->id }}" {{ old('po_number')==$item->id ? 'selected':'' }}>{{ $item->po_number}}
+            </option>
             @endforeach
         </select>
     </td>
@@ -37,31 +41,33 @@
         <select class="select" id="HargaLayanan" name="HargaLayanan" disabled>
             <option class="hidden" value=""></option>
             @foreach ($po as $item)
-                <option value="{{ $item->id }}" {{ old('harga_layanan') == $item->id ? 'selected':'' }}>{{ $item->harga_layanan}}</option>
+            <option value="{{ $item->id }}" {{ old('harga_layanan')==$item->id ? 'selected':'' }}>{{
+                $item->harga_layanan}}</option>
             @endforeach
         </select>
     </td>
-     <td>
+    <td>
         <select class="select" id="PoDate" name="PoDate" disabled>
-        <option class="hidden" value=""></option>
-        @foreach ($po as $item)
-            <option value="{{ $item->id }}" {{ old('po_date') == $item->id ? 'selected':'' }}>{{ $item->po_date}}</option>
-        @endforeach
-     </select>
+            <option class="hidden" value=""></option>
+            @foreach ($po as $item)
+            <option value="{{ $item->id }}" {{ old('po_date')==$item->id ? 'selected':'' }}>{{ $item->po_date}}</option>
+            @endforeach
+        </select>
 
     <td>
         <select class="select" id="StatusPo" name="StatusPo" disabled>
             <option class="hidden" value=""></option>
             @foreach ($po as $item)
-            <option value="{{ $item->id }}" {{ old('status_po') == $item->id ? 'selected':'' }}>{{ $item->status_po}}</option>
-        @endforeach
+            <option value="{{ $item->id }}" {{ old('status_po')==$item->id ? 'selected':'' }}>{{ $item->status_po}}
+            </option>
+            @endforeach
         </select>
     </td>
     <td>
-        <select class="select-search_imei search_selectpicker" id="Imei" name="Imei">
+        <select class="select" id="Imei" name="Imei">
             <option class="hidden" value=""></option>
             @foreach ($imei as $item)
-                <option value="{{ $item->id }}" {{ old('imei') == $item->id ? 'selected':''}}>{{ $item->imei }}</option>
+            <option value="{{ $item->id }}" {{ old('imei')==$item->id ? 'selected':''}}>{{ $item->imei }}</option>
             @endforeach
         </select>
     </td>
@@ -69,7 +75,7 @@
         <select class="select" id="Merk" name="Merk" disabled>
             <option class="hidden" value=""></option>
             @foreach ($imei as $item)
-                <option value="{{ $item->id }}" {{ old('merk') == $item->id ? 'selected':''}}>{{ $item->merk }}</option>
+            <option value="{{ $item->id }}" {{ old('merk')==$item->id ? 'selected':''}}>{{ $item->merk }}</option>
             @endforeach
         </select>
     </td>
@@ -77,87 +83,97 @@
         <select class="select" id="Type" name="Type" disabled>
             <option class="hidden" value=""></option>
             @foreach ($imei as $item)
-                <option value="{{ $item->id }}" {{ old('type') == $item->id ? 'selected':''}}>{{ $item->type }}</option>
+            <option value="{{ $item->id }}" {{ old('type')==$item->id ? 'selected':''}}>{{ $item->type }}</option>
             @endforeach
         </select>
     </td>
     <td>
-        <select class="select-search_gsm search_selectpicker" id="GSM" name="GSM">
+        <select class="select" id="GSM" name="GSM">
             <option class="hidden" value=""></option>
             @foreach ($gsm as $item)
-                <option value="{{ $item->id }}" {{ old('gsm_id') == $item->id ? 'selected':''}}>{{ $item->gsm_number }}</option>
+            <option value="{{ $item->id }}" {{ old('gsm_id')==$item->id ? 'selected':''}}>{{ $item->gsm_number }}
+            </option>
             @endforeach
         </select>
     </td>
     <td>
         <select class="select" id="Provider" name="Provider" disabled>
             <option class="hidden" value=""></option>
-                @foreach ($gsm as $item)
-                <option value="{{ $item->id }}" {{ old('provider') == $item->id ? 'selected':''}}>{{ $item->provider }}</option>
+            @foreach ($gsm as $item)
+            <option value="{{ $item->id }}" {{ old('provider')==$item->id ? 'selected':''}}>{{ $item->provider }}
+            </option>
             @endforeach
         </select>
     </td>
     <td>
-        <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#exampleModal" id="modal">
+        <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#exampleModal"
+            id="modal">
             Sensor
         </button>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Sensor Input</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <label class="input-group-text" for="SerialNumberSensor">Serial Number</label>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Sensor Input</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="SerialNumberSensor">Serial Number</label>
                             </div>
-                        <select class="form-control selectpicker" id="SerialNumberSensor" name="SerialNumberSensor" data-live-search="true">
-                            <option value=""></option>
-                            @foreach ($sensor as $item)
-                                <option value="{{ $item->id }}" {{ old('serial_number') == $item->id ? 'selected':''}}>{{ $item->serial_number }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <label class="input-group-text" for="SensorName">Name</label>
+                            <select class="form-control selectpicker" id="SerialNumberSensor" name="SerialNumberSensor"
+                                data-live-search="true">
+                                <option value=""></option>
+                                @foreach ($sensor as $item)
+                                <option value="{{ $item->id }}" {{ old('serial_number')==$item->id ? 'selected':''}}>{{
+                                    $item->serial_number }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <select class="custom-select" id="SensorName" name="SensorName" disabled>
-                            <option value=""></option>
-                            @foreach ($sensor as $item)
-                            <option value="{{ $item->id }}" {{ old('sensor_id') == $item->id ? 'selected':''}}>{{ $item->sensor_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <label class="input-group-text" for="MerkSensor">Merk</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="SensorName">Name</label>
+                            </div>
+                            <select class="custom-select" id="SensorName" name="SensorName" disabled>
+                                <option value=""></option>
+                                @foreach ($sensor as $item)
+                                <option value="{{ $item->id }}" {{ old('sensor_id')==$item->id ? 'selected':''}}>{{
+                                    $item->sensor_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <select class="custom-select" id="MerkSensor" name="MerkSensor" disabled>
-                            <option value=""></option>
-                            @foreach ($sensor as $item)
-                                <option value="{{ $item->id }}" {{ old('merk_sensor') == $item->id ? 'selected':''}}>{{ $item->merk_sensor }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="MerkSensor">Merk</label>
+                            </div>
+                            <select class="custom-select" id="MerkSensor" name="MerkSensor" disabled>
+                                <option value=""></option>
+                                @foreach ($sensor as $item)
+                                <option value="{{ $item->id }}" {{ old('merk_sensor')==$item->id ? 'selected':''}}>{{
+                                    $item->merk_sensor }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
 
-                        <button type="button" class="btn btn-success float-right mb-2"  data-dismiss="modal"onclick="send()">Send</button>
-                        <button  type="button" class="btn btn-primary float-right mb-2 mr-2" onclick="add()" >Add</button>
-                        <button  type="button" class="btn btn-danger float-right mb-2 mr-2" id="clear">Clear</button>
-                    </div>
+                            <button type="button" class="btn btn-success float-right mb-2" data-dismiss="modal"
+                                onclick="send()">Send</button>
+                            <button type="button" class="btn btn-primary float-right mb-2 mr-2"
+                                onclick="add()">Add</button>
+                            <button type="button" class="btn btn-danger float-right mb-2 mr-2" id="clear">Clear</button>
+                        </div>
 
-                    <div class="input-group">
-                        <span class="input-group-text">Sensor terpilih</span>
-                        <textarea class="form-control" aria-label="With textarea" id="SensorTerpilih" disabled></textarea>
+                        <div class="input-group">
+                            <span class="input-group-text">Sensor terpilih</span>
+                            <textarea class="form-control" aria-label="With textarea" id="SensorTerpilih"
+                                disabled></textarea>
+                        </div>
                     </div>
                 </div>
-              </div>
             </div>
         </div>
     </td>
@@ -165,7 +181,8 @@
         <select class="select" id="PoolName" name="PoolName" disabled>
             <option class="hidden" value=""></option>
             @foreach ($vehicle as $item)
-                <option value="{{ $item->id }}" {{ old('pool_name') == $item->id ? 'selected':'' }}>{{ $item->pool_name}}</option>
+            <option value="{{ $item->id }}" {{ old('pool_name')==$item->id ? 'selected':'' }}>{{ $item->pool_name}}
+            </option>
             @endforeach
         </select>
     </td>
@@ -173,24 +190,29 @@
         <select class="select" id="PoolLocation" name="PoolLocation" disabled>
             <option class="hidden" value=""></option>
             @foreach ($vehicle as $item)
-                <option value="{{ $item->id }}" {{ old('pool_location') == $item->id ? 'selected':'' }}>{{ $item->pool_location}}</option>
+            <option value="{{ $item->id }}" {{ old('pool_location')==$item->id ? 'selected':'' }}>{{
+                $item->pool_location}}</option>
             @endforeach
         </select>
     </td>
-    <td><div class="input-div"><input type= "date" class="input" id="Waranty" placeholder="Waranty"></div></td>
+    <td>
+        <div class="input-div"><input type="date" class="input" id="Waranty" placeholder="Waranty"></div>
+    </td>
     <td>
         <select class="select" name="status_layanan" id="StatusLayanan">
             <option value="" style="display: none"></option>
             @foreach ($status_layanan as $item)
-            <option value="{{ $item->id }}" {{ old('status_layanan') == $item->id ? 'selected':'' }}>{{ $item->service_status_name }}</option>
-        @endforeach
+            <option value="{{ $item->id }}" {{ old('status_layanan')==$item->id ? 'selected':'' }}>{{
+                $item->service_status_name }}</option>
+            @endforeach
         </select>
     </td>
     <td id="tanggal_aktif">
-        <div class="input-div"><input type="date" class="input" id="TanggalPasang" name="tanggal_pasang" data-toggle="popover" data-placement="bottom" data-content="Please fill out the field" ></div>
+        <div class="input-div"><input type="date" class="input" id="TanggalPasang" name="tanggal_pasang"
+                data-toggle="popover" data-placement="bottom" data-content="Please fill out the field"></div>
     </td>
     <td id="tanggal_non_aktif">
-        <div class="input-div"><input type="date" class="input" id="TanggalNonAktif" ></div>
+        <div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>
     </td>
     <td id="tanggal_reaktivasi">
         <div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div>
@@ -203,14 +225,18 @@
     </td>
 
     <script>
-  $(document).ready(function() {
-    new TomSelect(".select-search",{
-    create: false,
-    sortField: {
-        field: "text",
-        direction: "asc"
-    }
-    });
+        $(document).ready(function() {
+    // new TomSelect(".select-search",{
+    // create: false,
+    // sortField: {
+    //     field: "text",
+    //     direction: "asc"
+    // }
+    // });
+        $('#LicencePlate').select2();
+        $('#GSM').select2();
+        $('#Imei').select2();
+        $('#PoNumber').select2();
     });
 
     $(document).ready(function() {
@@ -513,4 +539,3 @@
 
 
 </tr>
-

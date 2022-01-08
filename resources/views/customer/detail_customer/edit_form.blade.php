@@ -1,7 +1,7 @@
 <td></td>
 <td></td>
 <td>
-    <select class="select CompanyId-{{ $details->id }}" id="CompanyId">
+    <select class="select CompanyId-{{ $details->id }}" id="CompanyId" disabled>
         @foreach ($company as $item)
             <option value="{{ $item->id }}" {{ $item->id ==  $details->company_id  ? 'selected':'' }}>{{ $item->company_name }}</option>
         @endforeach
@@ -198,6 +198,7 @@
         $('#LicencePlate').select2();
         $('#Imei').select2();
         $('#GSM').select2();
+        $('#PoNumber').select2();
     });
 
     $(document).ready(function() {
