@@ -254,6 +254,7 @@ Route::group(['middleware' => ['role:superAdmin']], function () {
     Route::post('/importExcel_GsmMaster', [GsmMasterController::class, 'importExcel'])->name('importExcel_GsmMaster');
     Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
     Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
+    Route::get('/item_data_search_GsmMaster', [GsmMasterController::class, 'item_data_search']);
         // try
         Route::get('/try', [GsmMasterController::class, 'try']);
 

@@ -26,12 +26,15 @@
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
-              <button class="btn btn-success edit_all">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button class="btn btn-danger  delete_all"><i class="fas fa-trash"></i></button>
+                <input type="text" placeholder="Search.." id="search_form">
+                <button class="btn btn-success edit_all">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-danger  delete_all">
+                  <i class="fas fa-trash"></i>
+                </button>
             </div>
-          <table class="table table-responsive data" class="table_id" id="table_id">
+          <table class="mt-2 table table-responsive data" class="table_id" id="table_id">
             <thead>
               <tr>
                 <th class="freeze-header">
@@ -350,10 +353,10 @@
       $.get(value, {}, function(data, status) {
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(data);
-            $('#table_id').dataTable( {
-
+            $('#table_id').dataTable(  {
+              "pageLength": 50,
               "dom": '<"top"f>rt<"bottom"><"clear">'
-              });
+            });
           $('#table_id').DataTable().draw();
         });
       }
@@ -365,13 +368,13 @@
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
             "pageLength": 50,
-            "dom": '<"top"f>rt<"bottom"><"clear">'
+            "dom": '<"top">rt<"bottom"><"clear">'
             });
         $('#table_id').DataTable().draw();
       });
     }
 
-    // Paginate
+    // Paginate --------
     let numberPaginate = 1;
     // next paginate
     $( "#next" ).click(function() {
@@ -429,6 +432,39 @@
         });
       } 
     });
+
+    // Search
+    $(document).ready(function() {
+      $("#search_form").keyup(function() {
+        // alert($(this).val());
+        $.ajax({
+          type: "get",
+          url: `{{ url('item_data_search_GsmMaster') }}`,
+          data: {
+            text: $(this).val(),
+          },
+          success: function(datas) {
+            
+            // console.log(datas);
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": 50,
+                "dom": '<"top">rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+            currentPage()
+          }
+        });
+        
+      });
+    })
+
+    //Paginate Status
+
+
+    //-----------
 
     // current Page
     function currentPage(){

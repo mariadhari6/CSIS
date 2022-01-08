@@ -821,3 +821,13 @@ nav.sidebar-new li.active > a,
         font-size: 25px;
     }
 }
+
+/* input search */
+.search {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}

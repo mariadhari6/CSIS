@@ -65,27 +65,50 @@ class GsmMasterController extends Controller
         // echo $GsmMaster;
     }
 
-    public function item_data_ready()
+    public function item_data_ready(Request $request)
     {
         $GsmMaster = Gsm::where('status_gsm', 'Ready')->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.GsmMaster.item_data')->with([
-            'GsmMaster' => $GsmMaster
+            'GsmMaster' => $GsmMaster,
+            'no' => $no
         ]);
     }
 
-    public function item_data_active()
+    public function item_data_active(Request $request)
     {
         $GsmMaster = Gsm::where('status_gsm', 'Active')->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.GsmMaster.item_data')->with([
-            'GsmMaster' => $GsmMaster
+            'GsmMaster' => $GsmMaster,
+            'no' => $no
         ]);
     }
 
-    public function item_data_terminate()
+    public function item_data_terminate(Request $request)
     {
         $GsmMaster = Gsm::where('status_gsm', 'Terminate')->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.GsmMaster.item_data')->with([
-            'GsmMaster' => $GsmMaster
+            'GsmMaster' => $GsmMaster,
+            'no' => $no
+        ]);
+    }
+
+    public function item_data_search(Request $request)
+    {
+        $query = Gsm::query();
+        $columns = array( 'status_gsm', 'gsm_number', 'company_id', 'serial_number', 'icc_id', 'imsi', 'res_id', 'request_date',
+                        'expired_date', 'active_date', 'terminate_date', 'note', 'provider', 'was_maintenance'
+                        );
+        foreach($columns as $column){
+            $query->orWhere($column, 'LIKE', '%' . $request->text . '%');
+        }
+        $GsmMaster = $query->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.GsmMaster.item_data')->with([
+            'GsmMaster' => $GsmMaster,
+            'no' => $no
         ]);
     }
 
