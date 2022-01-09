@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use carbon\Carbon;
 
 class MasterPoController extends Controller
 {
@@ -239,13 +240,19 @@ class MasterPoController extends Controller
 
     public function check(){
 
-        $detail_sensor = DetailCustomer::where('id', 236)->pluck('sensor_all');
-        $explode = explode(' ',$detail_sensor[0]);
-        // $temp = array();
-        $i = ['485'];
+        $now            = Carbon::now();
+        $month          = date('F', strtotime($now->month));
+        $year           = $now->year;
 
-        $result = array_diff($i, $explode);
-        return $result;
+        return $month;
+
+        // $detail_sensor = DetailCustomer::where('id', 236)->pluck('sensor_all');
+        // $explode = explode(' ',$detail_sensor[0]);
+        // // $temp = array();
+        // $i = ['485'];
+
+        // $result = array_diff($i, $explode);
+        // return $result;
 
 
 

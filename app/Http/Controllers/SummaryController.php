@@ -19,7 +19,7 @@ class SummaryController extends Controller
         $now            = Carbon::now();
         $month          = $now->month;
         $year           = $now->year;
-        $company = Company::orderBy('company_name', 'DESC')->get();
+        $company        = Company::orderBy('company_name', 'DESC')->get();
 
         return view('customer.summary.index')->with([
             'company' => $company,
