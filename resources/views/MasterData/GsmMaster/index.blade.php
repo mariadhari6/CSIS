@@ -16,7 +16,7 @@
                 </button>
                 <div class="float-left mr-2">
                   <select class="form-control input-fixed" id="filter">
-                    <option value="{{ url('item_data_all_GsmMaster') }}">All</option>
+                    <option value="{{ url('item_data_GsmMaster') }}">All</option>
                     <option value="{{ url('item_data_ready_GsmMaster') }}">Ready</option>
                     <option value="{{ url('item_data_active_GsmMaster') }}">Active</option>
                     <option value="{{ url('item_data_terminate_GsmMaster') }}">Terminate</option>
@@ -302,7 +302,7 @@
         data: {
            data   : JSON.stringify(data) ,
           _token  : '{!! csrf_token() !!}'
-        } ,
+        },
         error: function(er) {
           if(er.responseText === 'fail' ){
             // alert("save failed");
@@ -331,7 +331,6 @@
           }
           }
       });
-      
     }
 
     // ---- Close Modal -------
@@ -348,14 +347,18 @@
     });
 
       // ------- filter --------
+      var link = "{{ url('item_data_GsmMaster') }}";
       function filter(value){
+      numberPaginate = 1;
       var value = value;
+      currentPage()
+      link = value.substr();
       $.get(value, {}, function(data, status) {
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(data);
             $('#table_id').dataTable(  {
               "pageLength": 50,
-              "dom": '<"top"f>rt<"bottom"><"clear">'
+              "dom": '<"top">rt<"bottom"><"clear">'
             });
           $('#table_id').DataTable().draw();
         });
@@ -378,43 +381,46 @@
     let numberPaginate = 1;
     // next paginate
     $( "#next" ).click(function() {
-      numberPaginate += 1;
-      $.get(`{{ url('item_data_GsmMaster?page=${numberPaginate}') }}` , {}, function(data, status) {
-        if(data != ""){
-
-        $.ajax({
-          type: "get",
-          url: `{{ url('item_data_GsmMaster?page=${numberPaginate}') }}`,
-          data: {
-            no: no,
-          },
-          success: function(datas) {
-            $('#table_id').DataTable().destroy();
-            $('#table_id').find("#item_data").html(datas);
-            $('#table_id').dataTable( {
-                "pageLength": 50,
-                "dom": '<"top"f>rt<"bottom"><"clear">'
-                // "dom": '<lf<t>ip>'
-                });
-            $('#table_id').DataTable().draw();
-            currentPage()
+      // console.log(link);
+      if (no > 50) {
+        numberPaginate += 1;
+        $.get(`{{ '${link}?page=${numberPaginate}' }}` , {}, function(data, status) {
+          // console.log(no)
+          if(data != ""){
+          $.ajax({
+            type: "get",
+            url: `{{ '${link}?page=${numberPaginate}' }}`,
+            data: {
+              no: no,
+            },
+            success: function(datas) {
+              $('#table_id').DataTable().destroy();
+              $('#table_id').find("#item_data").html(datas);
+              $('#table_id').dataTable( {
+                  "pageLength": 50,
+                  "dom": '<"top">rt<"bottom"><"clear">'
+                  // "dom": '<lf<t>ip>'
+                  });
+              $('#table_id').DataTable().draw();
+              currentPage()
+            }
+          });
+          } else {
+            numberPaginate -= 1;
+            // alert(numberPaginate);
           }
         });
-
-        } else {
-          numberPaginate -= 1;
-          // alert(numberPaginate);
-        }
-      });
+      }
     });
 
     // previous paginate
     $( "#previous" ).click(function() {
+      // alert(numberPaginate)
       if (numberPaginate > 1) {
           numberPaginate -= 1;
           $.ajax({
           type: "get",
-          url: `{{ url('item_data_GsmMaster?page=${numberPaginate}') }}`,
+          url: `{{ '${link}?page=${numberPaginate}' }}`,
           data: {
             no: no - 100,
           },
@@ -423,9 +429,9 @@
             $('#table_id').find("#item_data").html(datas);
             $('#table_id').dataTable( {
                 "pageLength": 50,
-                "dom": '<"top"f>rt<"bottom"><"clear">'
+                "dom": '<"top">rt<"bottom"><"clear">'
                 // "dom": '<lf<t>ip>'
-                });
+            });
             $('#table_id').DataTable().draw();
             currentPage()
           }
