@@ -236,9 +236,6 @@
         $(function(){
             $('.selectpicker').selectpicker();
         });
-    });
-
-    $(document).ready(function() {
 
         $('select[name="SerialNumberSensor"]').on('change', function() {
             var Id = $(this).val();
@@ -360,16 +357,11 @@
             }
         })
 
-
-
     });
 
-
     function add(){
-        // var sensor = document.getElementById("SensorName").value;
+
         var serialnumber = document.getElementById("SerialNumberSensor").value;
-        // var merksensor = document.getElementById("MerkSensor").value;
-        // var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
         var data = serialnumber +" "
         var hasil = document.getElementById("SensorTerpilih").value;
         if (data == hasil) {
@@ -391,7 +383,7 @@
     $('select[name="status_layanan"]').on('change', function(){
 
                 var Id = $(this).val();
-                // alert(Id);
+
                 if(Id == 2) {
 
                     $('#tanggal_pasang').empty();
@@ -425,40 +417,5 @@
                     );
                 }
             });
-
-            //  $('select[name="status_layanan"]').on('change', function(){
-            //     var Id = $(this).val();
-            //     // alert(Id);
-            //     if(Id == 1) {
-            //         $('#tanggal_non_aktif').empty();
-            //         $('#tanggal_non_aktif').append(
-            //             `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif" disabled></div>`
-            //         );
-            //          $('#tanggal_aktif').empty();
-            //         $('#tanggal_aktif').append(
-            //             `<div class="input-div"><input type="date" class="input" value="{{ $details->tanggal_pasang }} id="TanggalPasang"></div>`
-            //         );
-            //          $('#tanggal_reaktivasi').empty();
-            //         $('#tanggal_reaktivasi').append(
-            //             `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi"></div>`
-            //         );
-            //     }
-            //     else{
-            //         $('#tanggal_aktif').empty();
-            //         $('#tanggal_aktif').append(
-            //             `<div class="input-div"><input type="date" class="input" id="TanggalPasang" value="{{ $details->tanggal_pasang }} disabled></div>`
-            //         );
-            //         $('#tanggal_non_aktif').empty();
-            //         $('#tanggal_non_aktif').append(
-            //             `<div class="input-div"><input type="date" class="input" id="TanggalNonAktif"></div>`
-            //         );
-            //         $('#tanggal_reaktivasi').empty();
-            //         $('#tanggal_reaktivasi').append(
-            //             `<div class="input-div"><input type="date" class="input" id="TanggalReaktivasi" disabled></div>`
-            //         );
-            //     }
-            // });
-
-
 
 </script>
