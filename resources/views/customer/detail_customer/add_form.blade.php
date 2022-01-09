@@ -10,7 +10,6 @@
         </select>
     </td>
     <td>
-        {{-- select-search search_selectpicker --}}
         <select class="select" id="LicencePlate" name="LicencePlate">
             <option style="display: none"></option>
             @foreach ($vehicle as $item)
@@ -226,39 +225,11 @@
 
     <script>
         $(document).ready(function() {
-    // new TomSelect(".select-search",{
-    // create: false,
-    // sortField: {
-    //     field: "text",
-    //     direction: "asc"
-    // }
-    // });
-        $('#LicencePlate').select2();
-        $('#GSM').select2();
-        $('#Imei').select2();
-        $('#PoNumber').select2();
-    });
 
-    $(document).ready(function() {
-    new TomSelect(".select-search_imei",{
-    create: false,
-    sortField: {
-        field: "text",
-        direction: "asc"
-    }
-    });
-    });
-
-    $(document).ready(function() {
-    new TomSelect(".select-search_gsm",{
-    create: false,
-    sortField: {
-        field: "text",
-        direction: "asc"
-    }
-    });
-    });
-        $(document).ready(function() {
+            $('#LicencePlate').select2();
+            $('#GSM').select2();
+            $('#Imei').select2();
+            $('#PoNumber').select2();
 
             $(function(){
                 $('.selectpicker').selectpicker();
@@ -287,7 +258,6 @@
             });
 
             $('select[name="GSM"]').on('change', function(){
-
                 var Id = $(this).val();
                 if(Id){
                     $.ajax({
@@ -308,7 +278,6 @@
             });
 
             $('select[name="SerialNumberSensor"]').on('change', function(){
-
                 var Id = $(this).val();
                 if(Id) {
                     $.ajax({
@@ -328,11 +297,9 @@
                     $('select[name="SensorName').empty();
                     $('select[name="MerkSensor').empty();
                 }
-
             });
 
             $('select[name="LicencePlate"]').on('change', function(){
-
                 var Id = $(this).val();
                 if(Id){
                     $.ajax({
@@ -360,7 +327,6 @@
 
 
             $('select[name="PoNumber"]').on('change', function(){
-
                 var Id = $(this).val();
                 if(Id){
                     $.ajax({
@@ -386,123 +352,8 @@
                 }
             });
 
-
-
-
-            // $('select[name="CompanyId"]').on('change', function() {
-            //     var itemID = $(this).val();
-            //     if(itemID) {
-            //         $.ajax({
-            //             url: '/based_company/'+ itemID,
-            //             method: "GET",
-            //             success:function(data) {
-            //                 $('select[name="LicencePlate').empty();
-            //                 $('select[name="LicencePlate').append('<option value=""> </option>');
-            //                     for(var i = 0 ; i < data.length ; i++) {
-            //                         $('select[name="LicencePlate').append('<option value="'+ data[i].id + '"> '+ data[i].license_plate +'</option>');
-            //                     }
-            //             }
-            //         });
-
-
-            //         $.ajax({
-            //             url: '/based_po/'+ itemID,
-            //             method: "GET",
-            //             success:function(data) {
-            //                 $('select[name="PoNumber').empty();
-            //                 $('select[name="PoNumber').append('<option value=""></option>');
-            //                 console.log(data.length)
-            //                     for(var i = 0 ; i < data.length ; i++) {
-
-            //                         $('select[name="PoNumber').append('<option value="'+ data[i].id + '"> '+ data[i].po_number +'</option>');
-            //                     }
-            //             }
-            //         });
-            //     }
-            //     else{
-            //         $('select[name="LicencePlate"]').empty();
-            //         $('select[name="PoNumber').empty();
-            //     }
-
-            // });
-
-
-
-            // $('select[name="SensorName"]').on('change', function() {
-
-            //     var itemID = $(this).val();
-            //     // alert(itemID);
-
-            //     if(itemID) {
-            //         $.ajax({
-            //             url: '/based_sensor/'+ itemID,
-            //             method: "GET",
-            //             success:function(data) {
-            //                 // alert(data.length);
-
-            //                 $('select[name="SerialNumberSensor').empty();
-            //                 $('select[name="SerialNumberSensor').append('<option value=""> </option>');
-            //                     for(var i = 0 ; i < data.length ; i++) {
-            //                         $('select[name="SerialNumberSensor').append('<option value="'+ data[i].serial_number + '"> '+ data[i].serial_number +'</option>');
-            //                          16-Nov-2021   // alert(data[i].serial_number)
-            //                     }
-            //             }
-            //         });
-            //     }
-            //     else{
-            //         $('select[name="SerialNumberSensor"]').empty();
-
-            //     }
-
-            // });
-
-
-
-            $('#clear').click(function(){
-
-                var sensorterpilih =  document.getElementById("SensorTerpilih").value;
-                if (sensorterpilih == ""){
-                    alert("No sensor selected")
-                }else{
-                    $('#SensorTerpilih').empty();
-                }
-            });
-
-        });
-
-
-        function add(){
-
-            // var sensor = document.getElementById("SensorName").value;
-            var serialnumber = document.getElementById("SerialNumberSensor").value;
-            // var merksensor = document.getElementById("MerkSensor").value;
-            // var data = sensor + "(" +" "+ serialnumber +","+ merksensor +")" +" "+" "
-            var data = serialnumber +" "
-            var hasil = document.getElementById("SensorTerpilih").value;
-            if (data == hasil) {
-                alert("ada data yang sama");
-            }else{
-            $("#SensorTerpilih").prepend(data);
-            }
-
-         }
-
-        function send(){
-            var sensorterpilih = document.getElementById("SensorTerpilih").value;
-            if (sensorterpilih == "") {
-                alert("No sensor selected")
-            }
-            else{
-                $('#modal').empty();
-                $('#SensorAll').empty();
-                $('#modal').append('<option value="'+ sensorterpilih + '" id="SensorAll"  data-toggle="modal" data-target="#exampleModal" > '+ sensorterpilih +'</option>');
-            }
-         }
-
-
             $('select[name="status_layanan"]').on('change', function(){
                 var Id = $(this).val();
-                // alert(Id);
                 if(Id == 1) {
                     $('#tanggal_non_aktif').empty();
                     $('#tanggal_non_aktif').append(
@@ -534,8 +385,38 @@
             });
 
 
+            $('#clear').click(function(){
+                var sensorterpilih =  document.getElementById("SensorTerpilih").value;
+                if (sensorterpilih == ""){
+                    alert("No sensor selected")
+                }else {
+                    $('#SensorTerpilih').empty();
+                }
+            });
+
+        });
+
+        function add(){
+            var serialnumber = document.getElementById("SerialNumberSensor").value;
+            var data = serialnumber +" "
+            var hasil = document.getElementById("SensorTerpilih").value;
+            if (data == hasil) {
+                alert("ada data yang sama");
+            }else {
+                $("#SensorTerpilih").prepend(data);
+            }
+        }
+
+        function send(){
+            var sensorterpilih = document.getElementById("SensorTerpilih").value;
+            if (sensorterpilih == "") {
+                alert("No sensor selected")
+            }else {
+                $('#modal').empty();
+                $('#SensorAll').empty();
+                $('#modal').append('<option value="'+ sensorterpilih + '" id="SensorAll"  data-toggle="modal" data-target="#exampleModal" > '+ sensorterpilih +'</option>');
+            }
+        }
 
     </script>
-
-
 </tr>

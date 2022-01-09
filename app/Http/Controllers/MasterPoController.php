@@ -239,9 +239,13 @@ class MasterPoController extends Controller
 
     public function check(){
 
-        // $detail_sensor = DetailCustomer::where('id', 228)->pluck('sensor_all');
-        // $explode = explode(' ',$detail_sensor[0]);
+        $detail_sensor = DetailCustomer::where('id', 236)->pluck('sensor_all');
+        $explode = explode(' ',$detail_sensor[0]);
         // $temp = array();
+        $i = ['485'];
+
+        $result = array_diff($i, $explode);
+        return $result;
 
 
 
@@ -266,15 +270,15 @@ class MasterPoController extends Controller
         // $gsm = Sensor::where('status', 'Used')->get();
         // return $gsm;'
         // $arr = array();
-        $data = Company::pluck('company_name')->toArray();
-        // array_push($arr, $data);
-        $input = "Naku Logistics Indonesia";
-        if (in_array($input, $data)) {
-            echo 'ada';
-        }
-        else {
-            echo 'gak ada';
-        }
+        // $data = Company::pluck('company_name')->toArray();
+        // // array_push($arr, $data);
+        // $input = "Naku Logistics Indonesia";
+        // if (in_array($input, $data)) {
+        //     echo 'ada';
+        // }
+        // else {
+        //     echo 'gak ada';
+        // }
         // return $data;
 
 

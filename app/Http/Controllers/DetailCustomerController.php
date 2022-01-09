@@ -69,7 +69,7 @@ class DetailCustomerController extends Controller
         $company        = Company::orderBy('company_name', 'DESC')->where('id', $id)->get();
         $imei           = Gps::orderBy('imei', 'DESC')->where('status', 'Ready')->get();
         $gsm            = Gsm::orderBy('gsm_number', 'DESC')->where('status_gsm', 'Ready')->get();
-        $sensor         = Sensor::orderBy('serial_number', 'DESC')->where('status', 'Ready')->get();
+        $sensor         = Sensor::orderBy('serial_number', 'ASC')->where('status', 'Ready')->get();
         $vehicle        = Vehicle::orderBy('license_plate', 'DESC')->where('company_id', $id)->where('status', 'Ready')->get();
         $po             = MasterPo::orderBy('po_number', 'DESC')->where('company_id', $id)->where('count', '!=', 0)->get();
         $status_layanan = ServiceStatus::orderBy('service_status_name', 'ASC')->get();
@@ -248,19 +248,26 @@ class DetailCustomerController extends Controller
 
         if ($request_sensor != "") {
             $explode_request = explode(' ', $request_sensor);
-        }
 
-        $result = array_diff($explode_sensor, $explode_request);
-
-        if ($result != null) {
-            for ($i = 0; $i < count($result); $i++) {
-                Sensor::where('id', $result[$i])->update(array('status' => 'Ready'));
+            $result = array_diff($explode_sensor, $explode_request);
+            if ($result != null) {
+                for ($i = 0; $i < count($result); $i++) {
+                    Sensor::where('id', $result[$i])->update(array('status' => 'Ready'));
+                }
             }
 
             for ($i = 0; $i < count($explode_request); $i++) {
                 Sensor::where('id', $explode_request[$i])->update(array('status' => 'Used'));
             }
+
+        } else {
+
+            for ($i=0; $i < count($explode_sensor) ; $i++) {
+                Sensor::where('id', $explode_sensor[$i])->update(array('status' => 'Ready'));
+            }
         }
+
+
 
         $data->company_id            = $request->CompanyId;
         $data->licence_plate         = $request->LicencePlate;
