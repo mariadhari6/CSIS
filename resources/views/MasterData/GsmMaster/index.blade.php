@@ -26,6 +26,7 @@
                   <b> Import</b>
                   <i class="fas fa-file-excel ml-2"></i>
                 </button>
+                {{-- buat form pencarian --}}
                 <input type="text" placeholder="Search.." id="search_form">
                 <button class="btn btn-success edit_all">
                   <i class="fas fa-edit"></i>
@@ -66,9 +67,13 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
+          {{-- memposisikan page paling kiri --}}
           <div class="paginate float-right mt-2">
+            {{-- membuat tombol data sebelumnya --}}
             <button class="btn btn-light" id="previous">Previous</button>
+            {{-- membuat penomoran page --}}
             <button class="btn btn-secondary" id="currentPage"></button>
+            {{-- membuat tombol data selanjutnya --}}
             <button class="btn btn-light" id="next">Next</button>
           </div>
         </div>
@@ -123,6 +128,7 @@
 
       read()
 
+      // panggil fungsi currentPage
       currentPage()
 
     });
@@ -346,8 +352,10 @@
         filter(value);
     });
 
-      // ------- filter --------
+      // membuat variable link untuk digunakan di fitur paginate
       var link = "{{ url('item_data_GsmMaster') }}";
+
+      // ------- filter --------
       function filter(value){
       numberPaginate = 1;
       var value = value;
@@ -370,7 +378,9 @@
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
          $('#table_id').dataTable( {
+           // menampilkan 50 data
             "pageLength": 50,
+            // kolom sesarch dihilangkan
             "dom": '<"top">rt<"bottom"><"clear">'
             });
         $('#table_id').DataTable().draw();
@@ -450,7 +460,8 @@
             text: $(this).val(),
           },
           success: function(datas) {
-            
+            var link = "{{ url('item_data_search_GsmMaster') }}";
+            numberPaginate = 1;
             // console.log(datas);
             $('#table_id').DataTable().destroy();
             $('#table_id').find("#item_data").html(datas);
@@ -474,6 +485,7 @@
 
     // current Page
     function currentPage(){
+      // memasukkan value dari variable numberPaginate ke elemen id currentPage
       $("#currentPage").text(numberPaginate);
     }
 

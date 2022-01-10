@@ -46,13 +46,20 @@ class GsmMasterController extends Controller
         ]);
     }
 
+    // pada function item data dikasih parameter Request $request
+    // untuk menangkap request nomor
     public function item_data(Request $request)
     {
         $GsmMaster = Gsm::orderBy('id', 'DESC')->paginate(50);
+        // paginate 50, artinya akan menampilkan data per-50 per page
         $no = ($request->no === null) ? 1 : $request->no;
+        // $no digunakan untuk penomoran data per page
+        // jika requestnya null maka  $no di isi dgn 1
+        // jika requestnya ada, maka $no di isi request
         return view('MasterData.GsmMaster.item_data')->with([
             'GsmMaster' => $GsmMaster,
             'no' => $no
+            // passing ke view
         ]);
     }
 
