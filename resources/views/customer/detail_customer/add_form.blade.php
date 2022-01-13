@@ -220,7 +220,9 @@
         <button type="submit" class="unstyled-button">
             <i class="fas fa-check add" id="add" onclick="store()"></i>
         </button>
-        <i class="fas fa-times cancel" onclick="cancel()"></i>
+        <button class="unstyled-button">
+            <i class="fas fa-times cancel" onclick="cancel()"></i>
+        </button>
     </td>
 
     <script>

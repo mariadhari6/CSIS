@@ -222,8 +222,12 @@
             data-content="Please fill out the field"></div>
 </td>
 <td class="action sticky-col first-col">
-    <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i><i class="fas fa-times cancel"
-        onclick="cancel()"></i>
+    <button class="unstyled-button">
+        <i class="fas fa-check add" id="edit" onclick="update({{ $details->id}})"></i>
+    </button>
+    <button class="unstyled-button">
+        <i class="fas fa-times cancel"onclick="cancel()"></i>
+    </button>
 </td>
 
 <script>

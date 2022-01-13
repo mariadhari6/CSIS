@@ -2,66 +2,65 @@
 @section('title','Summary')
 @section('title-table', 'Summary Customer')
 @section('content')
-  <?php $no=1;?>
+<?php $no=1;?>
 
-  <div class="row">
+<div class="row">
     <div class="col-sm-4">
         <div class="input-group mb-2 mr-sm-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">Company</div>
-          </div>
-          <select class="form-control" id="company">
-              <option style="display: none"></option>
-            @foreach ($company as $item)
-              <option value="{{ $item->id }}"> {{ $item->company_name}}</option>
-            @endforeach
-          </select>
+            <div class="input-group-prepend">
+                <div class="input-group-text">Company</div>
+            </div>
+            <select class="form-control" id="company">
+                <option style="display: none"></option>
+                @foreach ($company as $item)
+                <option value="{{ $item->id }}"> {{ $item->company_name}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
     <div class="col-sm-4">
-      <div class="input-group mb-2 mr-sm-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text">Month</div>
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">Month</div>
+            </div>
+            <input type="month" class="form-control" id="bulan" value="{{ " $year-$month" }}">
         </div>
-        <input type="month" class="form-control" id="bulan" value="{{ "$year-$month" }}">
-      </div>
     </div>
     <button class="btn btn-primary mb-2" onclick="filter()">Filter</button>
     <button class="btn btn-success mb-2 ml-2" id="export"><i class="fas fa-file-excel"></i> Export</button>
-  </div>
+</div>
 
-  <div class="row">
-      <div class="col-sm-1">
+<div class="row">
+    <div class="col-sm-1">
         <div class="card" style="width:35rem;">
-          <div class="card-body">
-              <div class="table-scroll">
-                  <table class="table table-sm" id="table_summary">
-                      <thead class="fixedheader">
-                        <tr>
-                            <th width="10px">No</th>
-                            <th width="80px">Company</th>
-                            <th width="50px">Total GPS</th>
-                            <th width="50px">Terminate Layanan</th>
-                            <th width="50px">Penambahan Layanan</th>
-                            <th width="30px" id="act">Act</th>
-                        </tr>
-                      </thead>
-                      <tbody id="item_summary">
-                      </tbody>
-                  </table>
-              </div>
-          </div>
+            <div class="card-body">
+                <div class="table-scroll">
+                    <table class="table table-sm" id="table_summary">
+                        <thead class="fixedheader">
+                            <tr>
+                                <th width="10px">No</th>
+                                <th width="80px">Company</th>
+                                <th width="50px">Total GPS</th>
+                                <th width="50px">Terminate Layanan</th>
+                                <th width="50px">Penambahan Layanan</th>
+                                <th width="30px" id="act">Act</th>
+                            </tr>
+                        </thead>
+                        <tbody id="item_summary">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-sm-4">
-          <div class="card data-po">
-              <div class="card-body" id="data-po"></div>
-          </div>
-      </div>
-  </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card data-po">
+            <div class="card-body" id="data-po"></div>
+        </div>
+    </div>
+</div>
 
-  <script>
-
+<script>
     $(document).ready(function() {
       read();
     });
@@ -155,6 +154,6 @@
         $('#act').append("Act");
 
     });
-  </script>
+</script>
 
 @endsection

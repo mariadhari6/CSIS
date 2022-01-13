@@ -240,13 +240,19 @@ class MasterPoController extends Controller
 
     public function check(){
 
-        $now            = Carbon::now();
-        $month          = date('F', strtotime($now->month));
-        $year           = $now->year;
+        // $now            = Carbon::now();
+        // $month          = date('F', strtotime($now->month));
+        // $year           = $now->year;
 
-        return $month;
+        // return $month;
 
-        // $detail_sensor = DetailCustomer::where('id', 236)->pluck('sensor_all');
+        $detail_sensor = DetailCustomer::where('id', 242)->pluck('sensor_all');
+
+        if ( $detail_sensor != "") {
+            echo 'gak ada';
+        }else {
+            echo 'ada';
+        }
         // $explode = explode(' ',$detail_sensor[0]);
         // // $temp = array();
         // $i = ['485'];

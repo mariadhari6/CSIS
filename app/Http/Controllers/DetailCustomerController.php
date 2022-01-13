@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpParser\Node\Stmt\Echo_;
 
 class DetailCustomerController extends Controller
 {
@@ -247,26 +248,40 @@ class DetailCustomerController extends Controller
         }
 
         if ($request_sensor != "") {
-            $explode_request = explode(' ', $request_sensor);
+            $detail_sensor      = DetailCustomer::where('id', $id)->pluck('sensor_all');
+            if ($detail_sensor[0] != null) {
+                $explode_sensor = explode(' ', $detail_sensor[0]);
+                $explode_request = explode(' ', $request_sensor);
 
-            $result = array_diff($explode_sensor, $explode_request);
-            if ($result != null) {
-                for ($i = 0; $i < count($result); $i++) {
-                    Sensor::where('id', $result[$i])->update(array('status' => 'Ready'));
+                $result = array_diff($explode_sensor, $explode_request);
+                if ($result != null) {
+                    for ($i = 0; $i < count($result); $i++) {
+                        Sensor::where('id', $result[$i])->update(array('status' => 'Ready'));
+                    }
+                }
+
+                for ($i = 0; $i < count($explode_request); $i++) {
+                    Sensor::where('id', $explode_request[$i])->update(array('status' => 'Used'));
                 }
             }
+            else {
+                $explode_request = explode(' ', $request_sensor);
+                for ($i = 0; $i < count($explode_request); $i++) {
+                    Sensor::where('id', $explode_request[$i])->update(array('status' => 'Used'));
+                }
 
-            for ($i = 0; $i < count($explode_request); $i++) {
-                Sensor::where('id', $explode_request[$i])->update(array('status' => 'Used'));
             }
 
         } else {
 
-            for ($i=0; $i < count($explode_sensor) ; $i++) {
-                Sensor::where('id', $explode_sensor[$i])->update(array('status' => 'Ready'));
+            $detail_sensor = DetailCustomer::where('id', $id)->pluck('sensor_all');
+            if ($detail_sensor[0] != null) {
+                $explode_sensor = explode(' ', $detail_sensor[0]);
+                for ($i = 0; $i < count($explode_sensor); $i++) {
+                    Sensor::where('id', $explode_sensor[$i])->update(array('status' => 'Ready'));
+                }
             }
         }
-
 
 
         $data->company_id            = $request->CompanyId;

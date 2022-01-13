@@ -1,25 +1,27 @@
-
-    <div class="text-right mt-3" id="selected">
-        <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2" id="add"></i></button>
-        <div class="float-left mr-2">
-            <select class="form-control input-fixed" id="filter">
-                <option value="{{ url('item_data_all_status') }}">All Status Layanan</option>
-                <option value="{{ url('item_data_active') }}">Active</option>
-                <option value="{{ url('item_data_inactive') }}">In Active</option>
-            </select>
-        </div>
-        <a href="/export_detail_cust_company/{{ $company->id }}" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
-            <i class="fas fa-file-export"></i>
-        </a>
-        <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
-            <i class="fas fa-edit"></i>
-        </button>
-        <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
+<div class="text-right mt-3" id="selected">
+    <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2"
+            id="add"></i></button>
+    <div class="float-left mr-2">
+        <select class="form-control input-fixed" id="filter">
+            <option value="{{ url('item_data_all_status') }}">All Status Layanan</option>
+            <option value="{{ url('item_data_active') }}">Active</option>
+            <option value="{{ url('item_data_inactive') }}">In Active</option>
+        </select>
     </div>
+    <a href="/export_detail_cust_company/{{ $company->id }}" class="btn btn-success  mr-2 export" data-toggle="tooltip"
+        title="Export">
+        <i class="fas fa-file-export"></i>
+    </a>
+    <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
+        <i class="fas fa-edit"></i>
+    </button>
+    <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i
+            class="fas fa-trash"></i></button>
+</div>
 
-    <table class="table table-responsive" id="table_detail_customer">
-        <thead>
-          <tr>
+<table class="table table-responsive" id="table_detail_customer">
+    <thead>
+        <tr>
             <th>
                 <label class="form-check-label">
                     <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
@@ -48,15 +50,14 @@
             <th style="min-width: 100px;">Tanggal Non Active*</th>
             <th style="min-width: 100px;">Tanggal Reaktivasi GPS*</th>
             <th scope="col" class="action sticky-col first-col">Action</th>
-          </tr>
-        </thead>
-        <tbody  id="item_data">
-        </tbody>
-    </table>
+        </tr>
+    </thead>
+    <tbody id="item_data">
+    </tbody>
+</table>
 
 
 <script>
-
     $(document).ready(function() {
         read();
     });
@@ -165,7 +166,7 @@
     function destroy(id){
 
         var id = id;
-        
+
         swal({
             title: 'Are you sure?',
             text: "You want delete to this data!",
@@ -181,7 +182,7 @@
                         type: "get",
                         url: "{{ url('destroy_detail') }}/" + id,
                         data: "id=" + id,
-                        success: function(data) {  
+                        success: function(data) {
                             swal({
                                 type: 'success',
                                 title: 'Data Deleted',
@@ -588,4 +589,3 @@
     }
 
 </script>
-
