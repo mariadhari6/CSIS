@@ -495,14 +495,15 @@
 
     // previous paginate
     $( "#previous" ).click(function() {
-      // alert(numberPaginate)
+      // alert(typeof length)
+      // alert(no - length -1)
       if (numberPaginate > 1) {
           numberPaginate -= 1;
           $.ajax({
           type: "get",
           url: `{{ '${link}?page=${numberPaginate}' }}`,
           data: {
-            no: no - no + 1,
+            no: no - (length*2),
           length: length
           },
           success: function(datas) {
@@ -571,7 +572,7 @@
 
     // ---- Tombol Cancel -----
     function cancel() {
-      read()
+      reload()
     }
 
      // ------ Tambah Form Input ------
@@ -984,7 +985,7 @@
             $(".add").show("fast");
             $(".edit_all").show("fast");
             $(".delete_all").show("fast");
-            read();
+            cancel();
         }
 
   </script>
