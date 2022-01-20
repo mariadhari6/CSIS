@@ -47,7 +47,6 @@
                 <th scope="col" class="list">Terminate Date*</th>
                 <th scope="col" class="list">Note</th>
                 <th scope="col" class="action sticky-col first-col">Action</th>
-
               </tr>
             </thead>
             <tbody  id="item_data">
@@ -69,7 +68,7 @@
     });
 
      // filter bulan dan tahun
-     $('#check-btn').click(function() {
+    $('#check-btn').click(function() {
     var date = new Date($('#filter-date').val());
     var month = date.getMonth() + 1;
     var year = date.getFullYear();

@@ -255,6 +255,8 @@ Route::group(['middleware' => ['role:superAdmin']], function () {
     Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
     Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
     Route::get('/item_data_search_GsmMaster', [GsmMasterController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_GsmMaster', [GsmMasterController::class, 'item_data_page_length']);
+    
         // try
         Route::get('/try', [GsmMasterController::class, 'try']);
 
