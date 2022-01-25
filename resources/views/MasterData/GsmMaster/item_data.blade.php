@@ -9,6 +9,7 @@
             </div>
         </td>
         <td id="item-no-{{ $item->id}}" class="numbering">
+            {{-- $no di passing sari controller --}}
             {{ $no++ }}
         </td>
         <td id="item-status_gsm-{{ $item->id}}" class="status" name="{{ $item->status_gsm }}">
@@ -62,7 +63,10 @@
 <script>
         // menangkap $no dari controller, di masukkan ke variabel no
         var no =  {!! json_encode($no) !!};
-        // var old_no = no;
+        // {!! json_encode($no) !!} menjadikan $no dari php ke javascript menjadi variable no
+        // variable no ini fungsinya untuk penomoran,
+        // variable no ini  menyimpan nilai terakhir dari hasil looping.
+        // misal looping sampai 50 maka variable no berisi 50
 </script>
  
 

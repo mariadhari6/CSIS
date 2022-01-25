@@ -71,6 +71,7 @@ class GsmMasterController extends Controller
         $length = ($request->length === null) ? 50 : (int)$request->length;
         $GsmMaster = Gsm::where('status_gsm', 'Ready')->paginate($length);
         $no = ($request->no === null) ? 1 : $request->no;
+        // 
         return view('MasterData.GsmMaster.item_data')->with([
             'GsmMaster' => $GsmMaster,
             'no' => $no

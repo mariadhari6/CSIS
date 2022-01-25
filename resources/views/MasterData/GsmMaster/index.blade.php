@@ -75,6 +75,7 @@
               {{-- <option value="all">All</option> --}}
             </select>
           </div>
+          {{-- untuk cssnya lihat di master.css --}}
           {{-- memposisikan page paling kiri --}}
           <div class="paginate float-right mt-2">
             {{-- membuat tombol data sebelumnya --}}
@@ -388,8 +389,18 @@
          $('#table_id').dataTable( {
            // menampilkan 50 data
             "pageLength": 50,
-            // kolom sesarch dihilangkan
+            // kolom sesarch, paginate, length page dihilangkan
+            // kodingan sebelumnya
+            // "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            // f untuk search, l untuk lengthpage, dan p untuk paginate
+            // kodingan baru
             "dom": '<"top">rt<"bottom"><"clear">'
+            // kenapa seacrh, paginate, dan length paginate dihilangkan
+            // karena tujuanannya untuk meload data ribuan agar tidak leg.\
+            //---------
+            // karena data yg di passiing di controller 50/100/500.
+            // saat melakukan search, tidak akan mencari semua data, hanya mencari data yg di passingkan saja dari controllor
+            // Begitupun length pagae dan paginate
             });
         $('#table_id').DataTable().draw();
       });
@@ -453,16 +464,31 @@
     }
 
     // Paginate --------
-    let numberPaginate = 1;
+    // paginate digunakan untuk membagi halaman perpage, dengan nomor next dan previous
     // next paginate
+    // ini untuk tombol next page table sebelumnya
+    // --------
+    let numberPaginate = 1;
+    // number paginate digunakan untuk, menentukan halaman table keberapa, atau mengisi penomoran halaman table
+    // penomorannya pada koding di bawah
+    // <button class="btn btn-secondary" id="currentPage"></button>
+    // 
+    // ------------
+    // saat id next atau tombol next di tekan
     $( "#next" ).click(function() {
-      // console.log(link);
-      // var old_no = no;
-      // alert(old_no)
+      // jika no lebih dari 50, tombol next bisa di tekan
       if (no > 50) {
+        // jika tombol next di klik
+        // numberpaginate bertambah satu
         numberPaginate += 1;
+        // kodingan di atas sama seperti numberPaginate = numberPaginate + 1
+        // ------------
+        // buat kodingan get, untuk mengeload table
         $.get(`{{ '${link}?page=${numberPaginate}' }}` , {}, function(data, status) {
-          // console.log(no)
+          // ${link} artinya link
+          // link defaultnya {{ url('item_data_GsmMaster') }}
+          // ${numberPaginate} artinya variable numberPaginate
+          // ?page= itu dari defaulnya laravel paginate
           if(data != ""){
           $.ajax({
             type: "get",
@@ -480,7 +506,9 @@
                   // "dom": '<lf<t>ip>'
                   });
               $('#table_id').DataTable().draw();
+              // memanggil fungsi currentpage, untuk mengubah penomoran halaman tanle
               currentPage()
+              // url diisi link saat ini
               url = `{{ '${link}?page=${numberPaginate}' }}`;
               // alert(url)
             }
