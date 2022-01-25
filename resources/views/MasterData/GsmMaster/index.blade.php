@@ -426,6 +426,7 @@
         url: `{{ url('item_data_page_length_GsmMaster') }}`,
         data: {
           no: no - no + 1,
+          // mengirim jumlah length yg akan ditampilkan
           length: length
         },
         success: function(datas) {
@@ -515,6 +516,7 @@
               // memanggil fungsi currentpage, untuk mengubah penomoran halaman tanle
               currentPage()
               // url diisi link saat ini
+              // digunakan utuk mereload jika mengedit atau menghapus data
               url = `{{ '${link}?page=${numberPaginate}' }}`;
               // alert(url)
             }
