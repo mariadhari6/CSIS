@@ -72,7 +72,6 @@
               <option value="50">50</option>
               <option value="100">100</option>
               <option value="1000">1000</option>
-              {{-- <option value="all">All</option> --}}
             </select>
           </div>
           {{-- untuk cssnya lihat di master.css --}}
@@ -408,12 +407,19 @@
 
     // pageLength
     var length = 50;
+    // length digunakan untuk menentukan jumlah data yg akan di tamplikan
+    // length defaultnya 50
     $("#page-length").change(function(){ 
-        // numberPaginate = 1;
+        // ketika jumlah length diubah
+        // <option value="50">50</option>
+        // <option value="100">100</option>
+        // <option value="1000">1000</option>
         length = $(this).val();
+        // length  berisi jumlah length yg diubah
+        // number paginate berubah menjadi 1
         numberPaginate = 1;
+        // lengthdata berisi length yg sudah dijadikan int
         lengthData = parseInt(length);
-        // alert(lengthData_
 
         $.ajax({
         type: "get",
