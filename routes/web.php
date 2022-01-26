@@ -210,6 +210,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::post('/importExcel_seller', [SellerController::class, 'importExcel'])->name('importExcel_seller');
     Route::get('/download_template_seller', [SellerController::class, 'export']);
     Route::get('/export_seller', [SellerController::class, 'export_seller']);
+    Route::get('/item_data_search_Seller', [SellerController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_Seller', [SellerController::class, 'item_data_page_length']);
 
 
 
@@ -255,6 +257,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::post('/save_import_sensor', [SensorController::class, 'save_import']);
     Route::post('/importExcel_sensor', [SensorController::class, 'importExcel'])->name('importExcel_sensor');
     Route::get('/download_template_sensor', [SensorController::class, 'export']);
+    Route::get('/item_data_search_Sensor', [SensorController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_Sensor', [SensorController::class, 'item_data_page_length']);
 
 
 
@@ -305,6 +309,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
     Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
     Route::get('/export_gsm_master', [GsmMasterController::class, 'export_gsm']);
+    Route::get('/item_data_search_GsmMaster', [GsmMasterController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_GsmMaster', [GsmMasterController::class, 'item_data_page_length']);
 
     // try
     Route::get('/try', [GsmMasterController::class, 'try']);
@@ -448,6 +454,9 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::post('/importExcel_masterPo', [MasterPoController::class, 'importExcel'])->name('importExcel_masterPo');
     Route::get('/download_template_masterPo', [MasterPoController::class, 'export']);
     Route::get('/export_MasterPO', [MasterPoController::class, 'export_masterPO']);
+    Route::get('/item_data_search_MasterPo', [MasterPoController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_MasterPo', [MasterPoController::class, 'item_data_page_length']);
+
 
     //Dashboar Visit Assignment
     Route::get('/dashboard_visit_assignment', [DashboardVisitAssignmentController::class, 'index']);
@@ -469,6 +478,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::post('/importExcel_MasterVehicle', [VehicleController::class, 'importExcel'])->name('importExcel_MasterVehicle');
     Route::get('/download_template_MasterVehicle', [VehicleController::class, 'export']);
     Route::get('/export_vehicle', [VehicleController::class, 'export_vehicle']);
+    Route::get('/item_data_search_Vehicle', [VehicleController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_Vehicle', [VehicleController::class, 'item_data_page_length']);
 
     Route::get('/cek', [MasterPoController::class, 'check']);
 

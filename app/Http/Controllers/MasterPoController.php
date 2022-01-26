@@ -23,7 +23,7 @@ class MasterPoController extends Controller
     {
         $company = Company::orderBy('company_name', 'ASC')->get();
         return view('MasterData.MasterPo.index')->with([
-            'company'          => $company
+            'company' => $company
         ]);
     }
     public function add_form()
@@ -35,15 +35,12 @@ class MasterPoController extends Controller
             'master_po'        => $master_po,
             'company'          => $company,
             'sales'          => $sales
-
         ]);
     }
     public function save_import(Request $request)
     {
         $dataRequest = json_decode($request->data);
         foreach ($dataRequest as $key => $value) {
-
-            // try {
             $data = array(
                 'company_id'        => Company::where('company_name', $value->company_id)->firstOrFail()->id,
                 'po_number'         =>  $value->po_number,
@@ -55,18 +52,47 @@ class MasterPoController extends Controller
                 'count'             => $value->jumlah_unit_po,
 
             );
+
             MasterPo::insert($data);
-            // return 'success';
-            // } catch (\Throwable $th) {
-            //     return 'fail';
-            // }
         }
     }
-    public function item_data()
+
+    public function item_data(Request $request)
     {
-        $master_po = MasterPo::orderBy('id', 'DESC')->get();
-        return view('MasterData.MasterPo.item_data', compact('master_po'));
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $master_po = MasterPo::orderBy('id', 'DESC')->paginate($length);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.MasterPo.item_data')->with([
+            'master_po' => $master_po,
+            'no'        => $no
+        ]);
     }
+
+    public function item_data_search(Request $request)
+    {
+        $query = MasterPo::query();
+        $columns = array( 'company_id', 'po_number', 'po_date', 'harga_layanan', 'jumlah_unit_po', 'status_po', 'sales_id', 'count' );
+        foreach($columns as $column){
+            $query->orWhere($column, 'LIKE', '%' . $request->text . '%');
+        }
+        $master_po = $query->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.MasterPo.item_data')->with([
+            'master_po' => $master_po,
+            'no' => $no
+        ]);
+    }
+
+    public function item_data_page_length(Request $request)
+    {
+        $master_po = MasterPo::orderBy('id', 'DESC')->paginate((int)$request->length);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.MasterPo.item_data')->with([
+            'master_po' => $master_po,
+            'no' => $no
+        ]);
+    }
+
     public function store(Request $request)
     {
         $data = array(
@@ -82,62 +108,59 @@ class MasterPoController extends Controller
         MasterPo::insert($data);
     }
 
-
-
-    // public function item_data_rajawali()
-    // {
-    //     $master_po = MasterPo::where('company_id', 'Rajawali')->get();
-    //     return view('MasterData.MasterPo.item_data')->with([
-    //         'master_po' => $master_po
-    //     ]);
-    // }
-
-    // public function item_data_oslog()
-    // {
-    //     $master_po = MasterPo::where('company_id', 'OSLOG')->get();
-    //     return view('master_po.item_data')->with([
-    //         'master_po' => $master_po
-    //     ]);
-    // }
-
-    public function item_data_beli()
+    public function item_data_beli(Request $request)
     {
-        $master_po = MasterPo::where('status_po', 'Beli')->get();
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $master_po = MasterPo::where('status_po', 'Beli')->paginate($length);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.MasterPo.item_data')->with([
-            'master_po' => $master_po
+            'master_po' => $master_po,
+            'no'        => $no
         ]);
     }
 
-    public function item_data_sewa()
+    public function item_data_sewa(Request $request)
     {
-        $master_po = MasterPo::where('status_po', 'Sewa')->get();
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $master_po = MasterPo::where('status_po', 'Sewa')->paginate($length);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.MasterPo.item_data')->with([
-            'master_po' => $master_po
-        ]);
-    }
-    public function item_data_sewa_beli()
-    {
-        $master_po = MasterPo::where('status_po', 'Sewa Beli')->get();
-        return view('MasterData.MasterPo.item_data')->with([
-            'master_po' => $master_po
+            'master_po' => $master_po,
+            'no'        => $no
         ]);
     }
 
-    public function item_data_trial()
+    public function item_data_sewa_beli(Request $request)
     {
-        $master_po = MasterPo::where('status_po', 'Trial')->get();
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $master_po = MasterPo::where('status_po', 'Sewa Beli')->paginate($length);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.MasterPo.item_data')->with([
-            'master_po' => $master_po
+            'master_po' => $master_po,
+            'no'        => $no
         ]);
     }
 
-    public function filter_company($id)
+    public function item_data_trial(Request $request)
     {
-
-
-        $master_po = MasterPo::orderBy('id', 'DESC')->where('company_id', $id)->get();
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $master_po = MasterPo::where('status_po', 'Trial')->paginate($length);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.MasterPo.item_data')->with([
-            'master_po' => $master_po
+            'master_po' => $master_po,
+            'no'        =>$no
+        ]);
+    }
+
+    public function filter_company(Request $request, $id)
+    {
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $master_po = MasterPo::orderBy('id', 'DESC')->where('company_id', $id)->paginate($length);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.MasterPo.item_data')->with([
+            'master_po' => $master_po,
+            'no'        => $no
+
         ]);
     }
 
@@ -150,8 +173,6 @@ class MasterPoController extends Controller
             'master_po'        => $master_po,
             'company'          => $company,
             'sales'          => $sales
-
-
         ]);
     }
 
@@ -172,7 +193,6 @@ class MasterPoController extends Controller
         $data->status_po        = $request->status_po;
         $data->sales_id           = $request->sales_id;
         $data->count           = $request->jumlah_unit_po;
-
 
         $data->save();
     }
@@ -215,17 +235,14 @@ class MasterPoController extends Controller
 
     public function updateSelected(Request $request)
     {
-        MasterPo::where('item_type_id', '=', 1)
-            ->update(['colour' => 'black']);
+        MasterPo::where('item_type_id', '=', 1)->update(['colour' => 'black']);
     }
     public function importExcel(Request $request)
     {
         $file = $request->file('file');
         $nameFile = $file->getClientOriginalName();
         $file->move('DataMasterPo', $nameFile);
-
         Excel::import(new MasterPoImport, public_path('/DataMasterPo/' . $nameFile));
-        // return redirect('/GsmMaster');
     }
 
     public function export()
@@ -238,67 +255,4 @@ class MasterPoController extends Controller
         return Excel::download(new MasterPoExport, 'MasterPo.xlsx');
     }
 
-    public function check(){
-
-        // $now            = Carbon::now();
-        // $month          = date('F', strtotime($now->month));
-        // $year           = $now->year;
-
-        // return $month;
-
-        $detail_sensor = DetailCustomer::where('id', 242)->pluck('sensor_all');
-
-        if ( $detail_sensor != "") {
-            echo 'gak ada';
-        }else {
-            echo 'ada';
-        }
-        // $explode = explode(' ',$detail_sensor[0]);
-        // // $temp = array();
-        // $i = ['485'];
-
-        // $result = array_diff($i, $explode);
-        // return $result;
-
-
-
-        // // $result = array_diff($u, $explode);
-        // return $temp;
-
-        // $coba = array("675","927");
-        // $temp=array("633");
-
-        // $result=array_diff($coba,$temp);
-
-        // if ($result != null) {
-        //     // return $result;
-        //     for ($i=0; $i < count($result) ; $i++) {
-        //         return $result[1];
-        //         // $sensor = Sensor::where('id', $result[$i])->get();
-        //         // print( $sensor[0]);
-        //     }
-        // }else{
-        //     echo 'tidak ada';
-        // }
-        // $gsm = Sensor::where('status', 'Used')->get();
-        // return $gsm;'
-        // $arr = array();
-        // $data = Company::pluck('company_name')->toArray();
-        // // array_push($arr, $data);
-        // $input = "Naku Logistics Indonesia";
-        // if (in_array($input, $data)) {
-        //     echo 'ada';
-        // }
-        // else {
-        //     echo 'gak ada';
-        // }
-        // return $data;
-
-
-
-
-
-
-
-    }
 }

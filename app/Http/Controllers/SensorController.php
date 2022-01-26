@@ -41,11 +41,39 @@ class SensorController extends Controller
         ]);
     }
 
-    public function item_data()
+    public function item_data(Request $request)
     {
-        $sensor = Sensor::orderBy('id', 'DESC')->get();
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $sensor = Sensor::orderBy('id', 'DESC')->paginate($length);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.sensor.item_data')->with([
-            'sensor' => $sensor
+            'sensor' => $sensor,
+            'no'    => $no
+        ]);
+    }
+
+    public function item_data_search(Request $request)
+    {
+        $query = Sensor::query();
+        $columns = array( 'sensor_name', 'merk_sensor', 'serial_number', 'rab_number', 'waranty', 'status' );
+        foreach($columns as $column){
+            $query->orWhere($column, 'LIKE', '%' . $request->text . '%');
+        }
+        $sensor = $query->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.sensor.item_data')->with([
+            'sensor' => $sensor,
+            'no' => $no
+        ]);
+    }
+
+    public function item_data_page_length(Request $request)
+    {
+        $sensor = Sensor::orderBy('id', 'DESC')->paginate((int)$request->length);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.sensor.item_data')->with([
+            'sensor' => $sensor,
+            'no' => $no
         ]);
     }
 

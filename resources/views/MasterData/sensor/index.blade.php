@@ -6,33 +6,34 @@
 
 
 @section('content')
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="text-right" id="selected">
-                    <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
-                        <b>Add</b>
-                        <i class="fas fa-plus ml-2" id="add"></i>
-                    </button>
-                    <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal"
-                        data-target="#importData">
-                        <b> Import</b>
-                        <i class="fas fa-file-excel ml-2"></i>
-                    </button>
-                    <a href="/export_sensor" class="btn btn-success  mr-2 export" data-toggle="tooltip"
-                        title="Delete Selected">
-                        <i class="fas fa-file-export"></i>
-                    </a>
-                    <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-                <form>
-
+<form onsubmit="return false">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right" id="selected">
+                        <button type="button" class="btn btn-primary float-left mr-2 add add-button" id="add">
+                            <b>Add</b>
+                            <i class="fas fa-plus ml-2" id="add"></i>
+                        </button>
+                        <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal"
+                            data-target="#importData">
+                            <b> Import</b>
+                            <i class="fas fa-file-excel ml-2"></i>
+                        </button>
+                        {{-- buat form pencarian --}}
+                        <input type="text" placeholder="Search.." id="search_form">
+                        <a href="/export_sensor" class="btn btn-success  mr-2 export" data-toggle="tooltip"
+                            title="Delete Selected">
+                            <i class="fas fa-file-export"></i>
+                        </a>
+                        <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                     <table class="table table-responsive data" class="table_id" id="table_id">
                         <thead>
                             <tr>
@@ -59,12 +60,27 @@
                             {{-- {{ csrf_field() }} --}}
                         </tbody>
                     </table>
-                </form>
-
+                    <div class="float-left mt-2">
+                        <select class="form-control input-fixed" id="page-length">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="1000">1000</option>
+                        </select>
+                    </div>
+                    {{-- memposisikan page paling kiri --}}
+                    <div class="paginate float-right mt-2">
+                        {{-- membuat tombol data sebelumnya --}}
+                        <button class="btn btn-light" id="previous">Previous</button>
+                        {{-- membuat penomoran page --}}
+                        <button class="btn btn-secondary" id="currentPage"></button>
+                        {{-- membuat tombol data selanjutnya --}}
+                        <button class="btn btn-light" id="next">Next</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 {{-- modal import --}}
 <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
@@ -108,12 +124,13 @@
 
 <script>
     $(document).ready(function() {
-     $.ajaxSetup({
+        $.ajaxSetup({
             headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-      read()
+        read()
+        currentPage()
     });
 
     var sensorNumberGet = {!! json_encode($sensorSerialGet->toArray()) !!};
@@ -280,27 +297,169 @@
     });
     }
 
-     // ---- Close Modal -------
+    // ---- Close Modal -------
     $('#close-modal').click(function() {
-        // deleteTemporary();
-        // read_temporary()
         $('#importData').modal('hide');
     });
+
     // ------ Tampil Data ------
     function read(){
         enableButton();
-      $.get("{{ url('item_data_sensor') }}", {}, function(data, status) {
+        $.get("{{ url('item_data_sensor') }}", {}, function(data, status) {
         $('#table_id').DataTable().destroy();
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
-            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-
-            "dom": '<"top"f>rt<"bottom"lp><"clear">'
-
+            "pageLength": 50,
+            "dom": '<"top">rt<"bottom"><"clear">'
             });
         $('#table_id').DataTable().draw();
       });
     }
+
+    // pageLength
+    var length = 50;
+    $("#page-length").change(function(){
+        length = $(this).val();
+        numberPaginate = 1;
+        lengthData = parseInt(length);
+
+        $.ajax({
+        type: "get",
+        url: `{{ url('item_data_page_length_Sensor') }}`,
+        data: {
+          no: no - no + 1,
+          length: length
+        },
+        success: function(datas) {
+          $('#table_id').DataTable().destroy();
+          $('#table_id').find("#item_data").html(datas);
+          $('#table_id').dataTable({
+              "pageLength": length,
+              "dom": '<"top">rt<"bottom"><"clear">'
+            });
+          $('#table_id').DataTable().draw();
+          currentPage()
+        }
+      });
+    });
+
+    // reload
+    var lengthData = 50;
+    var url =  "{{ url('item_data_sensor') }}";
+    function reload() {
+        enableButton();
+        var reload = true;
+        $.ajax({
+            type: "get",
+            url: `{{ '${url}' }}`,
+            data: {
+            no: no - lengthData,
+            reload: reload
+            },
+            success: function(datas) {
+                $('#table_id').DataTable().destroy();
+                $('#table_id').find("#item_data").html(datas);
+                $('#table_id').dataTable( {
+                    "pageLength": 50,
+                    "dom": '<"top">rt<"bottom"><"clear">'
+                    });
+                $('#table_id').DataTable().draw();
+                currentPage();
+            }
+        });
+    }
+
+    // Paginate --------
+    var link = "{{ url('item_data_sensor') }}";
+    let numberPaginate = 1;
+    $( "#next" ).click(function() {
+        if (no > 50) {
+            numberPaginate += 1;
+            $.get(`{{ '${link}?page=${numberPaginate}' }}` , {}, function(data, status) {
+                if(data != ""){
+                    $.ajax({
+                        type: "get",
+                        url: `{{ '${link}?page=${numberPaginate}' }}`,
+                        data: {
+                        no: no,
+                        length: length
+                        },
+                        success: function(datas) {
+                        $('#table_id').DataTable().destroy();
+                        $('#table_id').find("#item_data").html(datas);
+                        $('#table_id').dataTable( {
+                            "pageLength": length,
+                            "dom": '<"top">rt<"bottom"><"clear">'
+                            });
+                        $('#table_id').DataTable().draw();
+                        currentPage()
+                        url = `{{ '${link}?page=${numberPaginate}' }}`;
+                        }
+                    });
+                }
+                else {
+                }
+            });
+        }
+    });
+
+    // previous paginate
+    $( "#previous" ).click(function() {
+      if (numberPaginate > 1) {
+          numberPaginate -= 1;
+          $.ajax({
+          type: "get",
+          url: `{{ '${link}?page=${numberPaginate}' }}`,
+          data: {
+            no: no - no + 1,
+          length: length
+          },
+          success: function(datas) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": length,
+                "dom": '<"top">rt<"bottom"><"clear">'
+            });
+            $('#table_id').DataTable().draw();
+            currentPage()
+            url = `{{ '${link}?page=${numberPaginate}' }}`;
+          }
+        });
+      }
+    });
+
+    // Search
+    $(document).ready(function() {
+        $("#search_form").keyup(function() {
+            $.ajax({
+                type: "get",
+                url: `{{ url('item_data_search_Sensor') }}`,
+                data: {
+                    text: $(this).val(),
+                },
+                success: function(datas) {
+                    var link = "{{ url('item_data_search_Sensor') }}";
+                    numberPaginate = 1;
+                    $('#table_id').DataTable().destroy();
+                    $('#table_id').find("#item_data").html(datas);
+                    $('#table_id').dataTable( {
+                        "pageLength": 50,
+                        "dom": '<"top">rt<"bottom"><"clear">'
+                    });
+                    $('#table_id').DataTable().draw();
+                    currentPage()
+                }
+            });
+        });
+    })
+
+    function currentPage(){
+      // memasukkan value dari variable numberPaginate ke elemen id currentPage
+      $("#currentPage").text(numberPaginate);
+    }
+
+
     // ---- Tombol Cancel -----
     function cancel() {
       read()
@@ -369,7 +528,7 @@
                             showConfirmButton: false,
                             timer: 1500
                         }).catch(function(timeout) { });
-                        read();
+                        reload();
                     }
                 });
 
@@ -422,7 +581,7 @@
                     showConfirmButton: false,
                     timer: 1500
                 }).catch(function(timeout) { });
-                read();
+                reload();
 
                 }
             });
@@ -471,7 +630,7 @@
                                     timer: 1500
                                 }).catch(function(timeout) { });
                                 $("#master").prop('checked', false);
-                                read();
+                                reload();
 
                                 }
                             });
@@ -545,7 +704,7 @@
                 confirmButtonText: 'Yes Update',
                 showLoaderOnConfirm: true,
             }).then((willDelete) => {
-                $.each(allVals, function(index, value){
+                $.each(allVals, function(index, value) {
                     var sensor_name = $(".sensor_name-"+value).val();
                     var merk_sensor = $(".merk_sensor-"+value).val();
                     var serial_number = $(".serial_number-"+value).val();
@@ -553,42 +712,35 @@
                     var waranty = $(".waranty-"+value).val();
                     var status = $(".status-"+value).val();
                     $.ajax({
-                    type: "get",
-                    url: "{{ url('update_sensor') }}/"+value,
-                    data: {
-                    sensor_name: sensor_name,
-                    merk_sensor:merk_sensor,
-                    serial_number: serial_number,
-                    rab_number: rab_number,
-                    waranty: waranty,
-                    status:status
-                    },
-                    success: function(data) {
-                    swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-
-                                // $(".save").hide();
-                                });
-                                read();
-
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                 $(".import").show("fast");
-                                $(".export").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
-
-                    }
+                        type: "get",
+                        url: "{{ url('update_sensor') }}/"+value,
+                        data: {
+                            sensor_name: sensor_name,
+                            merk_sensor:merk_sensor,
+                            serial_number: serial_number,
+                            rab_number: rab_number,
+                            waranty: waranty,
+                            status:status
+                        },
+                        success: function(data) {
+                            swal({
+                                type: 'success',
+                                title: 'The selected data has been updated',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            reload();
+                            $(".add").show("fast");
+                            $(".edit_all").show("fast");
+                            $(".delete_all").show("fast");
+                            $(".import").show("fast");
+                            $(".export").show("fast");
+                            $(".btn-round").hide("fast");
+                            $(".btn-round").hide("fast");
+                        }
+                    });
                 });
             });
-
-        });
-
-
         }
 
          //--------Proses Batal--------
@@ -624,10 +776,6 @@
           $("[data-toggle= modal]").prop('disabled', false);
 
         }
-
-
-
-
 
 </script>
 @endsection

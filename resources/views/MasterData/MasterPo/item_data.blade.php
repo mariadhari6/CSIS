@@ -1,4 +1,3 @@
-<?php $no=1; ?>
 @foreach ($master_po as $item)
     <tr id="edit-form-{{ $item->id }}">
 
@@ -10,7 +9,7 @@
                 </label>
             </div>
         </td>
-        <td id="item-no-{{ $item->id}}">
+        <td id="item-no-{{ $item->id}}" class="numbering">
             {{ $no++ }}
         </td>
         <td id="item-company_id-{{ $item->id}}">
@@ -46,10 +45,17 @@
         </td>
          <td class="action sticky-col first-col"id="td-button-{{ $item->id }}">
             <div id="button-{{ $item->id }}">
-                <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
-                <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
+                <button class="unstyled-button">
+                    <i class="fas fa-pen edit" onclick="edit({{ $item->id }})"></i>
+                </button>
+                <button class="unstyled-button">
+                    <i class="fas fa-trash delete" onclick="destroy({{ $item->id }})"></i>
+                </button>
             </div>
         </td>
-
     </tr>
 @endforeach
+
+<script>
+    var no =  {!! json_encode($no) !!};
+</script>

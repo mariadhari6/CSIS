@@ -38,14 +38,43 @@ class VehicleController extends Controller
         ]);
     }
 
-    public function item_data()
+    public function item_data(Request $request)
     {
-        $vehicle = Vehicle::orderBy('id', 'DESC')->get();
-
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $vehicle = Vehicle::orderBy('id', 'DESC')->paginate($length);
+        $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.vehicle.item_data')->with([
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
+            'no'      => $no
         ]);
     }
+
+    public function item_data_search(Request $request)
+    {
+        $query = Vehicle::query();
+        $columns = array( 'company_id', 'license_plate', 'vehicle_id', 'pool_name', 'pool_location', 'status');
+        foreach($columns as $column){
+            $query->orWhere($column, 'LIKE', '%' . $request->text . '%');
+        }
+        $vehicle = $query->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.vehicle.item_data')->with([
+            'vehicle' => $vehicle,
+            'no' => $no
+        ]);
+    }
+
+    public function item_data_page_length(Request $request)
+    {
+        $vehicle = Vehicle::orderBy('id', 'DESC')->paginate((int)$request->length);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.vehicle.item_data')->with([
+            'vehicle' => $vehicle,
+            'no' => $no
+        ]);
+    }
+
+
     public function save_import(Request $request)
     {
         $dataRequest = json_decode($request->data);

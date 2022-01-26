@@ -1,31 +1,35 @@
 @extends('layouts.v_main') @section('title','CSIS | Seller')
 @section('title-table', 'Seller') @section('master','show')
 @section('seller','active') @section('content')
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="text-right" id="selected">
-                    <button type="button" class="btn btn-primary float-left mr-2 add" id="add">
-                        <b>Add</b>
-                        <i class="fas fa-plus ml-2"></i>
-                    </button>
-                    <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal"
-                        data-target="#importData">
-                        <b> Import</b>
-                        <i class="fas fa-file-excel ml-2"></i>
-                    </button>
-                    <a href="/export_seller" class="btn btn-success mr-2 export" data-toggle="tooltip" title="Export">
-                        <i class="fas fa-file-export"></i>
-                    </a>
-                    <button class="btn btn-success mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn btn-danger delete_all" data-toggle="tooltip" title="Delete Selected">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-                <form>
+
+<form onsubmit="return false">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right" id="selected">
+                        <button type="button" class="btn btn-primary float-left mr-2 add" id="add">
+                            <b>Add</b>
+                            <i class="fas fa-plus ml-2"></i>
+                        </button>
+                        <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal"
+                            data-target="#importData">
+                            <b> Import</b>
+                            <i class="fas fa-file-excel ml-2"></i>
+                        </button>
+                        {{-- buat form pencarian --}}
+                        <input type="text" placeholder="Search.." id="search_form">
+                        <a href="/export_seller" class="btn btn-success mr-2 export" data-toggle="tooltip"
+                            title="Export">
+                            <i class="fas fa-file-export"></i>
+                        </a>
+                        <button class="btn btn-success mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger delete_all" data-toggle="tooltip" title="Delete Selected">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                     <table class="table table-responsive data" class="table_seller" id="table_seller">
                         <thead>
                             <tr>
@@ -61,6 +65,13 @@
                             --}}
                         </tbody>
                     </table>
+                    <div class="float-left mt-2">
+                        <select class="form-control input-fixed" id="page-length">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="1000">1000</option>
+                        </select>
+                    </div>
                     <div class="paginate float-right mt-2">
                         <button class="btn btn-light" id="previous">
                             Previous
@@ -68,59 +79,59 @@
                         <button class="btn btn-secondary" id="currentPage"></button>
                         <button class="btn btn-light" id="next">Next</button>
                     </div>
-                </form>
-            </div>
-        </div>
-        <!-- Modal Import -->
-        <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData"
-            aria-hidden="true">
-            <div class="modal-dialog-full-width modal-dialog" style="width:
-            1000px; height: 1000px;"" role=" document">
-                <div class="modal-content-full-width modal-content">
-                    <div class="modal-header-full-width modal-header bg-primary">
-                        <h6 class="modal-title">Import data</h6>
-                        <button type="button" class="close" id="close-modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card">
-                            <div class="card-header">
-                                <b>Select Excel File</b>
-                                <br />
-                                <input type="file" id="excel_file" />
-                                <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()">
-                                    Save
-                                </button>
-                                <a class="btn btn-secondary btn-xs" href="/download_template_seller"
-                                    style="color: white">Download Template</a>
-                                <div class="mt-2 progress">
-                                    <div class="
-                                        progress-bar progress-bar-striped
-                                        active
-                                    " role="progressbar" aria-valuemin="0" aria-valuemax="100" style=""></div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div id="excel_data"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer-full-width modal-footer"></div>
                 </div>
             </div>
         </div>
     </div>
+</form>
 
-    <script>
-        $(document).ready(function() {
-      $.ajaxSetup({
-        header:{
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      read();
-      currentPage();
+<!-- Modal Import -->
+<div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
+    <div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role=" document">
+        <div class="modal-content-full-width modal-content">
+            <div class="modal-header-full-width modal-header bg-primary">
+                <h6 class="modal-title">Import data</h6>
+                <button type="button" class="close" id="close-modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        <b>Select Excel File</b>
+                        <br />
+                        <input type="file" id="excel_file" />
+                        <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()">
+                            Save
+                        </button>
+                        <a class="btn btn-secondary btn-xs" href="/download_template_seller"
+                            style="color: white">Download Template</a>
+                        <div class="mt-2 progress">
+                            <div class="
+                        progress-bar progress-bar-striped
+                        active
+                    " role="progressbar" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="excel_data"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer-full-width modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $.ajaxSetup({
+            header:{
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        read();
+        currentPage();
     });
 
     var sellerCodeGet     = {!! json_encode($sellerCodeGet->toArray()) !!};
@@ -222,34 +233,34 @@
 
     // save data import
     function save_data() {
-    var total = 0;
-    var jsonTable = $('#importTable tbody tr:has(td)').map(function (){
-        var $td = $('td', this);
-        total += parseFloat($td.eq(2).text());
-        return {
-            seller_name         : $td.eq(0).text(),
-            seller_code         : $td.eq(1).text(),
-            no_agreement_letter : $td.eq(2).text(),
-            status              : $td.eq(3).text()
-        }
-    }).get();
+        var total = 0;
+        var jsonTable = $('#importTable tbody tr:has(td)').map(function (){
+            var $td = $('td', this);
+            total += parseFloat($td.eq(2).text());
+            return {
+                seller_name         : $td.eq(0).text(),
+                seller_code         : $td.eq(1).text(),
+                no_agreement_letter : $td.eq(2).text(),
+                status              : $td.eq(3).text()
+            }
+        }).get();
 
-      $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
+        $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
         data = {};
         data = jsonTable;
 
         var thLength = $('#importTable th').length;
-      var trLength = $("#importTable td").closest("tr").length;
-      var item = document.querySelectorAll("#table-data-8");
-      var tes = $("#importTable").find("tbody>tr:eq(1)>td:eq(1)").attr("style");
-      var success;
-      $.ajax({
-           type: 'POST',
+        var trLength = $("#importTable td").closest("tr").length;
+        var item = document.querySelectorAll("#table-data-8");
+        var tes = $("#importTable").find("tbody>tr:eq(1)>td:eq(1)").attr("style");
+        var success;
+        $.ajax({
+            type: 'POST',
         dataType: 'JSON',
         url: "{{ url('save_import_seller') }}",
         data: {
-           data   : JSON.stringify(data) ,
-          _token  : '{!! csrf_token() !!}'
+            data   : JSON.stringify(data) ,
+            _token  : '{!! csrf_token() !!}'
         } ,
         error: function(er){
             if(er.responseText === 'fail'){
@@ -258,7 +269,7 @@
                 text: 'Duplicate data or error format',
                 showCloseButton: true,
                 showConfirmButton: false
-              }).catch(function(timeout) { });
+                }).catch(function(timeout) { });
 
             } else {
                 try {
@@ -277,7 +288,7 @@
                 }
             }
         }
-      });
+        });
     }
 
 
@@ -296,9 +307,65 @@
         $('#table_seller').find("#item_data").html(data);
         $('#table_seller').dataTable( {
             "pageLength": 50,
-            "dom": '<"top"f>rt<"bottom"><"clear">'
+            "dom": '<"top">rt<"bottom"><"clear">'
         });
         $('#table_seller').DataTable().draw();
+      });
+    }
+
+    var length = 50;
+    $("#page-length").change(function(){
+        // numberPaginate = 1;
+        length = $(this).val();
+        numberPaginate = 1;
+        lengthData = parseInt(length);
+        // alert(lengthData_
+
+        $.ajax({
+        type: "get",
+        url: `{{ url('item_data_page_length_Seller') }}`,
+        data: {
+          no: no - no + 1,
+          length: length
+        },
+        success: function(datas) {
+          $('#table_seller').DataTable().destroy();
+          $('#table_seller').find("#item_data").html(datas);
+          $('#table_seller').dataTable( {
+              "pageLength": length,
+              "dom": '<"top">rt<"bottom"><"clear">'
+              // "dom": '<lf<t>ip>'
+              });
+          $('#table_seller').DataTable().draw();
+          currentPage()
+        }
+      });
+    });
+
+    // ---- reload Table ---
+    var lengthData = 50;
+    var url =  "{{ url('item_data_seller') }}";
+    function reload() {
+        enableButton();
+    // alert(link)
+    var reload = true;
+      $.ajax({
+        type: "get",
+        url: `{{ '${url}' }}`,
+        data: {
+          no: no - lengthData,
+          reload: reload
+        },
+        success: function(datas) {
+          $('#table_seller').DataTable().destroy();
+          $('#table_seller').find("#item_data").html(datas);
+          $('#table_seller').dataTable( {
+              "pageLength": 50,
+              "dom": '<"top">rt<"bottom"><"clear">'
+            });
+          $('#table_seller').DataTable().draw();
+          currentPage()
+        }
       });
     }
 
@@ -395,279 +462,317 @@
         });
     }
     // ------ Proses Update Data ------
-        function update(id) {
-            var seller_name = $("#seller_name").val();
-            var seller_code = $("#seller_code").val();
-            var no_agreement_letter = $("#no_agreement_letter").val();
-            var status = $("#status").val();
-            var id = id;
-            $.ajax({
+    function update(id) {
+        var seller_name = $("#seller_name").val();
+        var seller_code = $("#seller_code").val();
+        var no_agreement_letter = $("#no_agreement_letter").val();
+        var status = $("#status").val();
+        var id = id;
+        $.ajax({
+            type: "get",
+            url: "{{ url('update_seller') }}/"+id,
+            data: {
+            seller_name: seller_name,
+            seller_code: seller_code,
+            no_agreement_letter: no_agreement_letter,
+            status:status
+            },
+            success: function(data) {
+                swal({
+                type: 'success',
+                title: ' Data Updated',
+                showConfirmButton: false,
+                timer: 1500
+            }).catch(function(timeout) { });
+            read();
+
+            }
+        });
+    }
+
+    // checkbox all
+    $('#master').on('click', function(e) {
+        if($(this).is(':checked',true)){
+            $(".task-select").prop('checked', true);
+        } else {
+            $(".task-select").prop('checked',false);
+        }
+    });
+
+    // Delete All
+    $('.delete_all').on('click', function(){
+        event.preventDefault();
+        var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
+        });
+            if (allVals.length > 0) {
+                var _token = $('input[name="_token"]').val();
+                // alert(allVals);
+                swal({
+                title: 'Are you sure?',
+                text: "You want delete Selected data !",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Delete',
+                showLoaderOnConfirm: true,
+                preConfirm: function() {
+                return new Promise(function(resolve) {
+                    $.ajax({
+                        url: "{{ url('/selectedDelete_seller') }}",
+                        method: "get",
+                        data: {
+                            id: allVals,
+                            _token: _token
+                        },
+                        success: function(data) {
+                                swal({
+                                type: 'success',
+                                title: 'The selected data has been deleted',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).catch(function(timeout) { });
+                            $("#master").prop('checked', false);
+                            read();
+
+                            }
+                        });
+                });
+                },
+                allowOutsideClick: false
+            });
+        }else{
+            alert('Select the row you want to delete')
+        }
+    });
+
+    // Form Edit All
+    $('.edit_all').on('click', function(e){
+        disableButton();
+        $('[data-toggle="tooltip"]').tooltip("hide");
+
+        var allVals = [];
+        var _token = $('input[name="_token"]').val();
+
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
+        });
+        if (allVals.length > 0){
+            // alert(allVals);
+            $(".edit_all").hide("fast");
+            $(".delete_all").hide("fast");
+            $.get("{{ url('selected_seller') }}", {}, function(data, status) {
+                $("#selected").prepend(data)
+            });
+            $.each(allVals, function(index, value){
+                $("#td-checkbox-"+value).hide("fast");
+                $("#td-button-"+value).hide("fast");
+                $("#item-no-"+value).hide("fast");
+                $("#item-seller_name-"+value).hide("fast");
+                $("#item-seller_code-"+value).hide("fast");
+                $("#item-no_agreement_letter-"+value).hide("fast");
+                $("#item-status-"+value).hide("fast");
+                $(".add").hide("fast");
+                $.get("{{ url('show_seller') }}/" + value, {}, function(data, status) {
+                    $("#edit-form-"+value).prepend(data)
+                    $("#master").prop('checked', false);
+                    $(".add").hide();
+                    $(".cancel").hide();
+                    $(".import").hide();
+                    $(".export").hide();
+
+                });
+            });
+        }else{
+            alert('Select the row you want to edit')
+        }
+    });
+
+    // ------ Proses Update Data ------
+    function updateSelected() {
+        var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
+        });
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to do an update?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: '#00FF00',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes Update',
+            showLoaderOnConfirm: true,
+        }).then((willDelete) => {
+            $.each(allVals, function(index, value){
+                var seller_name = $(".seller_name-"+value).val();
+                var seller_code = $(".seller_code-"+value).val();
+                var no_agreement_letter = $(".no_agreement_letter-"+value).val();
+                var status = $(".status-"+value).val();
+                $.ajax({
                 type: "get",
-                url: "{{ url('update_seller') }}/"+id,
+                url: "{{ url('update_seller') }}/"+value,
                 data: {
                 seller_name: seller_name,
                 seller_code: seller_code,
                 no_agreement_letter: no_agreement_letter,
-                status:status
+                status:status,
                 },
                 success: function(data) {
-                  swal({
+                swal({
                     type: 'success',
-                    title: ' Data Updated',
+                    title: 'The selected data has been updated',
                     showConfirmButton: false,
                     timer: 1500
-                }).catch(function(timeout) { });
+
+                // $(".save").hide();
+                });
                 read();
 
+                $(".add").show("fast");
+                $(".edit_all").show("fast");
+                $(".delete_all").show("fast");
+                $(".import").show("fast");
+                $(".export").show("fast");
+                $(".btn-round").hide("fast");
+                $(".btn-round").hide("fast");
                 }
             });
-        }
-        // checkbox all
-        $('#master').on('click', function(e) {
-          if($(this).is(':checked',true)){
-              $(".task-select").prop('checked', true);
-          } else {
-              $(".task-select").prop('checked',false);
-          }
         });
-         // Delete All
-        $('.delete_all').on('click', function(){
-          event.preventDefault();
-            var allVals = [];
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-                if (allVals.length > 0) {
-                    var _token = $('input[name="_token"]').val();
-                    // alert(allVals);
-                    swal({
-                    title: 'Are you sure?',
-                    text: "You want delete Selected data !",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes Delete',
-                    showLoaderOnConfirm: true,
-                    preConfirm: function() {
-                    return new Promise(function(resolve) {
-                        $.ajax({
-                            url: "{{ url('/selectedDelete_seller') }}",
-                            method: "get",
-                            data: {
-                                id: allVals,
-                                _token: _token
-                            },
-                            success: function(data) {
-                                 swal({
-                                    type: 'success',
-                                    title: 'The selected data has been deleted',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).catch(function(timeout) { });
-                                $("#master").prop('checked', false);
-                                read();
-
-                                }
-                            });
-                    });
-                    },
-                    allowOutsideClick: false
-                });
-            }else{
-                alert('Select the row you want to delete')
-            }
         });
+    }
 
-        // Form Edit All
-        $('.edit_all').on('click', function(e){
-            disableButton();
-            $('[data-toggle="tooltip"]').tooltip("hide");
+    //--------Proses Batal--------
+    function cancelUpdateSelected(){
+        $("#save-selected").hide("fast");
+        $("#cancel-selected").hide("fast");
+        $(".add").show("fast");
+        $(".edit_all").show("fast");
+        $(".delete_all").show("fast");
+        $(".import").show("fast");
+        $(".export").show("fast");
+        read();
+    }
 
-            var allVals = [];
-            var _token = $('input[name="_token"]').val();
+    function disableButton() {
 
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-            if (allVals.length > 0){
-                // alert(allVals);
-                $(".edit_all").hide("fast");
-                $(".delete_all").hide("fast");
-                $.get("{{ url('selected_seller') }}", {}, function(data, status) {
-                    $("#selected").prepend(data)
-                });
-                $.each(allVals, function(index, value){
-                    $("#td-checkbox-"+value).hide("fast");
-                    $("#td-button-"+value).hide("fast");
-                    $("#item-no-"+value).hide("fast");
-                    $("#item-seller_name-"+value).hide("fast");
-                    $("#item-seller_code-"+value).hide("fast");
-                    $("#item-no_agreement_letter-"+value).hide("fast");
-                    $("#item-status-"+value).hide("fast");
-                    $(".add").hide("fast");
-                    $.get("{{ url('show_seller') }}/" + value, {}, function(data, status) {
-                        $("#edit-form-"+value).prepend(data)
-                        $("#master").prop('checked', false);
-                        $(".add").hide();
-                        $(".cancel").hide();
-                        $(".import").hide();
-                        $(".export").hide();
+        $('.add').prop('disabled', true);
+        $('.edit_all').prop('disabled', true);
+        $('.delete_all').prop('disabled', true);
+        $('.export').addClass('disabled');
+        $('.edit').addClass('disable');
+        $('.delete').addClass('disable');
+        $("[data-toggle= modal]").prop('disabled', true);
 
-                    });
-                });
-            }else{
-                alert('Select the row you want to edit')
-            }
-        });
+    }
 
-        // ------ Proses Update Data ------
-        function updateSelected() {
-            var allVals = [];
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-            swal({
-                title: "Are you sure?",
-                text: "Do you want to do an update?",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonColor: '#00FF00',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes Update',
-                showLoaderOnConfirm: true,
-            }).then((willDelete) => {
-                $.each(allVals, function(index, value){
-                    var seller_name = $(".seller_name-"+value).val();
-                    var seller_code = $(".seller_code-"+value).val();
-                    var no_agreement_letter = $(".no_agreement_letter-"+value).val();
-                    var status = $(".status-"+value).val();
-                    $.ajax({
-                    type: "get",
-                    url: "{{ url('update_seller') }}/"+value,
-                    data: {
-                    seller_name: seller_name,
-                    seller_code: seller_code,
-                    no_agreement_letter: no_agreement_letter,
-                    status:status,
-                    },
-                    success: function(data) {
-                   swal({
-                        type: 'success',
-                        title: 'The selected data has been updated',
-                        showConfirmButton: false,
-                        timer: 1500
+    function enableButton(){
 
-                    // $(".save").hide();
-                    });
-                    read();
+        $('.add').prop('disabled', false);
+        $('.edit_all').prop('disabled', false);
+        $('.delete_all').prop('disabled', false);
+        $('.edit').removeClass('disable');
+        $('.export').removeClass('disabled');
+        $('.delete').removeClass('disable');
+        $("[data-toggle= modal]").prop('disabled', false);
 
-                    $(".add").show("fast");
-                    $(".edit_all").show("fast");
-                    $(".delete_all").show("fast");
-                    $(".import").show("fast");
-                    $(".export").show("fast");
-                    $(".btn-round").hide("fast");
-                    $(".btn-round").hide("fast");
-                    }
-                });
-            });
-          });
-        }
+    }
 
-         //--------Proses Batal--------
-         function cancelUpdateSelected(){
-            $("#save-selected").hide("fast");
-            $("#cancel-selected").hide("fast");
-            $(".add").show("fast");
-            $(".edit_all").show("fast");
-            $(".delete_all").show("fast");
-            $(".import").show("fast");
-            $(".export").show("fast");
-            read();
-        }
-
-        function disableButton() {
-
-          $('.add').prop('disabled', true);
-          $('.edit_all').prop('disabled', true);
-          $('.delete_all').prop('disabled', true);
-          $('.export').addClass('disabled');
-          $('.edit').addClass('disable');
-          $('.delete').addClass('disable');
-          $("[data-toggle= modal]").prop('disabled', true);
-
-        }
-
-        function enableButton(){
-
-          $('.add').prop('disabled', false);
-          $('.edit_all').prop('disabled', false);
-          $('.delete_all').prop('disabled', false);
-          $('.edit').removeClass('disable');
-          $('.export').removeClass('disabled');
-          $('.delete').removeClass('disable');
-          $("[data-toggle= modal]").prop('disabled', false);
-
-        }
-
-        // Paginate
-        let numberPaginate = 1;
-        $("#next").click(function() {
+    // membuat variable link untuk digunakan di fitur paginate
+    var link = "{{ url('item_data_seller') }}";
+    let numberPaginate = 1;
+    $("#next").click(function() {
+        if (no > 50 ) {
             numberPaginate += 1;
-            $.get(`{{ url('item_data_seller?page=${numberPaginate}') }}`, {}, function (data, status) {
+            $.get(`{{ '${link}?page=${numberPaginate}' }}`, {}, function (data, status) {
                 if (data != "") {
                     $.ajax({
                         type: "get",
-                        url: `{{ url('item_data_seller?page=${numberPaginate}') }}`,
+                        url: `{{ '${link}?page=${numberPaginate}' }}`,
                         data: {
                             no: no,
+                            length: length
                         },
                         success: function(datas) {
                             $('#table_seller').DataTable().destroy();
                             $('#table_seller').find("#item_data").html(datas);
                             $('#table_seller').dataTable( {
                                 "pageLength": 50,
-                                "dom": '<"top"f>rt<"bottom"><"clear">'
+                                "dom": '<"top">rt<"bottom"><"clear">'
                                 });
                             $('#table_seller').DataTable().draw();
                             currentPage()
+                            url = `{{ '${link}?page=${numberPaginate}' }}`;
                         }
                     });
                 }
                 else{
-                    numberPaginate -= 1;
+                    // numberPaginate -= 1;
                 }
             });
-        });
+        }
+    });
 
-        // previous paginate
-        $( "#previous" ).click(function() {
-            if (numberPaginate > 1) {
-                numberPaginate -= 1;
-                $.ajax({
+    // previous paginate
+    $( "#previous" ).click(function() {
+        if (numberPaginate > 1) {
+            numberPaginate -= 1;
+            $.ajax({
+            type: "get",
+            url: `{{ '${link}?page=${numberPaginate}' }}`,
+            data: {
+                no: no - no + 1,
+                length : length
+            },
+            success: function(datas) {
+                $('#table_seller').DataTable().destroy();
+                $('#table_seller').find("#item_data").html(datas);
+                $('#table_seller').dataTable( {
+                    "pageLength": 50,
+                    "dom": '<"top">rt<"bottom"><"clear">'
+                    });
+                $('#table_seller').DataTable().draw();
+                currentPage();
+                url = `{{ '${link}?page=${numberPaginate}' }}`;
+            }
+            });
+        }
+    });
+
+    // current Page
+    function currentPage(){
+        $("#currentPage").text(numberPaginate);
+    }
+
+    // Search
+    $(document).ready(function() {
+        $("#search_form").keyup(function() {
+            // alert($(this).val());
+            $.ajax({
                 type: "get",
-                url: `{{ url('item_data_seller?page=${numberPaginate}') }}`,
+                url: `{{ url('item_data_search_Seller') }}`,
                 data: {
-                    no: no - 100,
+                    text: $(this).val(),
                 },
                 success: function(datas) {
+                    var link = "{{ url('item_data_search_Seller') }}";
+                    numberPaginate = 1;
+                    // console.log(datas);
                     $('#table_seller').DataTable().destroy();
                     $('#table_seller').find("#item_data").html(datas);
                     $('#table_seller').dataTable( {
                         "pageLength": 50,
-                        "dom": '<"top"f>rt<"bottom"><"clear">'
+                        "dom": '<"top">rt<"bottom"><"clear">'
+                        // "dom": '<lf<t>ip>'
                         });
                     $('#table_seller').DataTable().draw();
-                    currentPage();
+                    currentPage()
                 }
-                });
-            }
+            });
         });
+    })
 
-        // current Page
-        function currentPage(){
-            $("#currentPage").text(numberPaginate);
-        }
-    </script>
-    @endsection
+</script>
+@endsection

@@ -80,11 +80,11 @@
     margin-left: 20px;
 }
 
-#table_id {
+/* #table_id {
     position: relative;
     bottom: 0px;
     text-align: center;
-}
+} */
 
 .action {
     /* position: fixed; */
@@ -1105,8 +1105,8 @@ nav.sidebar-new li.active > a,
 
 #table_seller{
     table-layout: auto;
-    position: relative;
-    bottom: 20px;
+    /* position: relative;
+    bottom: 20px; */
     width:100%;
     z-index: 1;
     overflow: auto;
@@ -1148,12 +1148,13 @@ nav.sidebar-new li.active > a,
 
 #table_id{
     table-layout: auto;
-    position: relative;
-    bottom: 20px;
+    /* position: relative; */
+    /* bottom: 20px; */
     width:100%;
     z-index: 1;
     overflow: auto;
     height: 70vh;
+    text-align: center;
 }
 
 #table_id thead
@@ -1321,3 +1322,11 @@ nav.sidebar-new li.active > a,
 }
 
 
+.search {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}

@@ -1,5 +1,3 @@
-<?php $no=1; ?>
-
 @foreach ($vehicle as $item)
 <tr id="edit-form-{{ $item->id }}">
     <td id="td-checkbox-{{ $item->id }}">
@@ -41,3 +39,7 @@
     </td>
 </tr>
 @endforeach
+
+<script>
+    var no =  {!! json_encode($no) !!};
+</script>

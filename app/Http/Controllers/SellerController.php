@@ -43,13 +43,41 @@ class SellerController extends Controller
 
     public function item_data(Request $request)
     {
-        $seller = Seller::orderBy('id', 'DESC')->paginate(50);
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $seller = Seller::orderBy('id', 'DESC')->paginate($length);
         $no = ($request->no === null ) ? 1 : $request->no;
         return view('MasterData.seller.item_data')->with([
             'seller'    => $seller,
             'no'        => $no
         ]);
     }
+
+    public function item_data_search(Request $request){
+
+        $query = Seller::query();
+        $columns = array( 'seller_name', 'seller_code', 'no_agreement_letter', 'status');
+        foreach($columns as $column){
+            $query->orWhere($column, 'LIKE', '%' . $request->text . '%');
+        }
+        $seller = $query->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.seller.item_data')->with([
+            'seller' => $seller,
+            'no' => $no
+        ]);
+    }
+
+    public function item_data_page_length(Request $request)
+    {
+        $seller = Seller::orderBy('id', 'DESC')->paginate((int)$request->length);
+        // dd($request->length);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.GsmMaster.item_data')->with([
+            'seller' => $seller,
+            'no' => $no
+        ]);
+    }
+
 
     public function save_import(Request $request)
     {

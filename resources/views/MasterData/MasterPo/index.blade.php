@@ -5,130 +5,150 @@
 @section('master_po','active')
 
 @section('content')
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-            <div class="text-right" id="selected">
-            <button type="button" class="btn btn-primary float-left mr-2 add add-button">
-              <b>Add</b>
-              <i class="fas fa-plus ml-2"></i>
-              </button>
-              <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData">
-                  <b> Import</b>
-                  <i class="fas fa-file-excel ml-2 "></i>
-              </button>
-               <div class="float-left mr-2">
-                      <div class="input-group-prepend">
-                </div>
-                <select class="form-control input-fixed filter-company " id="filter">
-                    <option value="{{ url('item_data_All_company_master_po') }}">All Company</option>
-                @foreach ($company as $item )
-                    <option value="{{ $item->id }}"> {{ $item->company_name }}</option>
-                @endforeach
-                </select>
-            </div>
-            <div class="float-left mr-2">
-                  <select class="form-control input-fixed" id="filter">
-                  <option value="{{ url('item_data_All_master_po') }}">All Status</option>
-                  <option value="{{ url('item_data_beli_master_po') }}">Beli</option>
-                  <option value="{{ url('item_data_sewa_master_po') }}">Sewa</option>
-                  <option value="{{ url('item_data_sewa_beli_master_po') }}">Sewa Beli</option>
-                  <option value="{{ url('item_data_trial_master_po') }}">Trial</option>
-                </select>
-            </div>
-                <a href="/export_MasterPO" class="btn btn-success  mr-2  export" data-toggle="tooltip" title="Export">
-                <i class="fas fa-file-export"></i>
-                </a>
-                <button class="btn btn-success edit_all" data-toggle="tooltip" title="Edit Selected">
-                <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i class="fas fa-trash"></i></button>
-            </div>
-            <form onsubmit="return false">
-
-            <table class="table table-responsive data" class="table_id" id="table_id" >
-            <thead>
-              <tr>
-                <th>
-                    <div>
-                        <label class="form-check-label">
-                            <input class="form-check-input  select-all-checkbox" type="checkbox" id="master">
-                            <span class="form-check-sign"></span>
-                        </label>
+<form onsubmit="return false">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right" id="selected">
+                        <button type="button" class="btn btn-primary float-left mr-2 add add-button">
+                            <b>Add</b>
+                            <i class="fas fa-plus ml-2"></i>
+                        </button>
+                        <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal"
+                            data-target="#importData">
+                            <b> Import</b>
+                            <i class="fas fa-file-excel ml-2 "></i>
+                        </button>
+                        <div class="float-left mr-2">
+                            <div class="input-group-prepend">
+                            </div>
+                            <select class="form-control input-fixed filter-company ">
+                                <option value="" style="display: none">Company</option>
+                                <option value="{{ url('item_data_All_company_master_po') }}">All Company</option>
+                                @foreach ($company as $item )
+                                <option value="{{ $item->id }}"> {{ $item->company_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="float-left mr-2">
+                            <select class="form-control input-fixed" id="filter_status">
+                                <option value="{{ url('item_data_All_master_po') }}">All Status</option>
+                                <option value="{{ url('item_data_beli_master_po') }}">Beli</option>
+                                <option value="{{ url('item_data_sewa_master_po') }}">Sewa</option>
+                                <option value="{{ url('item_data_sewa_beli_master_po') }}">Sewa Beli</option>
+                                <option value="{{ url('item_data_trial_master_po') }}">Trial</option>
+                            </select>
+                        </div>
+                        {{-- buat form pencarian --}}
+                        <input type="text" placeholder="Search.." id="search_form">
+                        <a href="/export_MasterPO" class="btn btn-success  mr-2  export" data-toggle="tooltip"
+                            title="Export">
+                            <i class="fas fa-file-export"></i>
+                        </a>
+                        <button class="btn btn-success edit_all" data-toggle="tooltip" title="Edit Selected">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger  delete_all" data-toggle="tooltip" title="Delete Selected"><i
+                                class="fas fa-trash"></i></button>
                     </div>
-                </th>
-                <th scope="col" class="action-no">No.</th>
-                <th scope="col" class="list-company">Company*</th>
-                <th scope="col" class="list">PO Number*</th>
-                <th scope="col" class="list">PO Date*</th>
-                <th scope="col" class="list">Harga Layanan*</th>
-                <th scope="col" class="list">Jumlah Unit PO*</th>
-                <th scope="col" class="list">Status PO</th>
-                <th scope="col" class="list">Sales</th>
-                <th scope="col" class="action sticky-col first-col">Action</th>
-
-              </tr>
-            </thead>
-            <tbody  id="item_data">
-              {{-- {{ csrf_field() }} --}}
-            </tbody>
-          </table>
-         </form>
-
-
-          </div>
-        </div>
+                    <table class="table table-responsive data" class="table_id" id="table_id">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div>
+                                        <label class="form-check-label">
+                                            <input class="form-check-input  select-all-checkbox" type="checkbox"
+                                                id="master">
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th scope="col" class="action-no">No.</th>
+                                <th scope="col" class="list-company">Company*</th>
+                                <th scope="col" class="list">PO Number*</th>
+                                <th scope="col" class="list">PO Date*</th>
+                                <th scope="col" class="list">Harga Layanan*</th>
+                                <th scope="col" class="list">Jumlah Unit PO*</th>
+                                <th scope="col" class="list">Status PO</th>
+                                <th scope="col" class="list">Sales</th>
+                                <th scope="col" class="action sticky-col first-col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="item_data">
+                            {{-- {{ csrf_field() }} --}}
+                        </tbody>
+                    </table>
+                    <div class="float-left mt-2">
+                        <select class="form-control input-fixed" id="page-length">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="1000">1000</option>
+                            {{-- <option value="all">All</option> --}}
+                        </select>
+                    </div>
+                    {{-- memposisikan page paling kiri --}}
+                    <div class="paginate float-right mt-2">
+                        {{-- membuat tombol data sebelumnya --}}
+                        <button class="btn btn-light" id="previous">Previous</button>
+                        {{-- membuat penomoran page --}}
+                        <button class="btn btn-secondary" id="currentPage"></button>
+                        {{-- membuat tombol data selanjutnya --}}
+                        <button class="btn btn-light" id="next">Next</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-  </div>
+</form>
 
-  {{-- import excel --}}
-   <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
-		<div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role="document">
-			<div class="modal-content-full-width modal-content">
-				<div class="modal-header-full-width modal-header bg-primary">
-					<h6 class="modal-title">Import data</h6>
-					<button type="button" class="close" id="close-modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-          <div class="card">
-            <div class="card-header">
-              <b>Select Excel File</b>
-              <br>
-              <input type="file" id="excel_file" />
-              <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()" >Save</button>
-              <a  class="btn btn-secondary btn-xs" href="/download_template_masterPo" style="color:white">Download Template</a>
+{{-- import excel --}}
+<div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
+    <div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role=" document">
+        <div class="modal-content-full-width modal-content">
+            <div class="modal-header-full-width modal-header bg-primary">
+                <h6 class="modal-title">Import data</h6>
+                <button type="button" class="close" id="close-modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="card-body">
-              <div id="excel_data" ></div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        <b>Select Excel File</b>
+                        <br>
+                        <input type="file" id="excel_file" />
+                        <button type="button" class="btn btn-success btn-xs" id="send"
+                            onclick="save_data()">Save</button>
+                        <a class="btn btn-secondary btn-xs" href="/download_template_masterPo"
+                            style="color:white">Download Template</a>
+                    </div>
+                    <div class="card-body">
+                        <div id="excel_data"></div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="modal-footer-full-width  modal-footer">
+            </div>
         </div>
-        <div class="modal-footer-full-width  modal-footer">
+    </div>
+</div>
+</div>
 
-        </div>
-        </div>
-			</div>
-		</div>
-	</div>
+<script>
 
-
-
-
-  <script>
-   $(document).ready(function() {
+    $(document).ready(function() {
         $.ajaxSetup({
             headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-      read()
+        read()
+        currentPage()
     });
-     //-- excel export to html tabel---
-         const excel_file = document.getElementById("excel_file");
+
+    //-- excel export to html tabel---
+    const excel_file = document.getElementById("excel_file");
     excel_file.addEventListener("change",(event)=>{
         if(
             ![
@@ -151,46 +171,41 @@
                 work_book.Sheets[sheet_name[0]],
                 {header: 1}
             );
-                    if (sheet_data.length > 0){
-                        var table_output = '<table class="table table-bordered" id="importTable">';
-                        for(var row = 0; row < sheet_data.length; row++) {
-                            table_output += "<tr>";
-
-                            for (var cell = 0; cell < sheet_data[row].length; cell++){
-                                if (row == 0) {
-                                    table_output += "<th>" + sheet_data[row][cell] + "</th>";
-
-                                } else {
-                                    table_output += '<td contenteditable id="table-data-' + cell +'" >' + sheet_data[row][cell] + "</td>";
-                                }
-                            }
-                            table_output += "</tr>";
+            if (sheet_data.length > 0) {
+                var table_output = '<table class="table table-bordered" id="importTable">';
+                for(var row = 0; row < sheet_data.length; row++) {
+                    table_output += "<tr>";
+                    for (var cell = 0; cell < sheet_data[row].length; cell++) {
+                        if (row == 0) {
+                            table_output += "<th>" + sheet_data[row][cell] + "</th>";
                         }
-                        table_output += "</table>";
-
-                        document.getElementById("excel_data").innerHTML = table_output;
-
-                        //check duplicate data
-                         // change PO Date format
-                    po_Date = document.querySelectorAll("#table-data-2");
-                    for (i = 0; i < po_Date.length; i++) {
-                        var excelDate = po_Date[i].innerText;
-                        var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
-                        try{
-                            var converted_date = date.toISOString().split('T')[0];
+                        else {
+                            table_output += '<td contenteditable id="table-data-' + cell +'" >' + sheet_data[row][cell] + "</td>";
                         }
-                        catch(err) {
-                            po_Date[i].style.backgroundColor = "#e8837d";
-                        }
-                        po_Date[i].innerHTML = converted_date;
-
                     }
-
+                    table_output += "</tr>";
                 }
+                table_output += "</table>";
+                document.getElementById("excel_data").innerHTML = table_output;
+                //check duplicate data
+                // change PO Date format
+                po_Date = document.querySelectorAll("#table-data-2");
+                for (i = 0; i < po_Date.length; i++) {
+                    var excelDate = po_Date[i].innerText;
+                    var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+                    try{
+                        var converted_date = date.toISOString().split('T')[0];
+                    }
+                    catch(err) {
+                        po_Date[i].style.backgroundColor = "#e8837d";
+                    }
+                    po_Date[i].innerHTML = converted_date;
+                }
+            }
             excel_file.value = "";
-
         };
     });
+
     // -- save data import  -----
     function save_data() {
         var total = 0;
@@ -204,15 +219,12 @@
               harga_layanan :$td.eq(3).text(),
               jumlah_unit_po:$td.eq(4).text(),
               status_po     :$td.eq(5).text(),
-              sales_id        :$td.eq(6).text()
-
+              sales_id      :$td.eq(6).text()
             }
-
         }).get();
-      $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
+        $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
         data = {};
         data = jsonTable;
-        //
         var thLength = $('#importTable th').length;
         var trLength = $("#importTable td").closest("tr").length;
         var item = document.querySelectorAll("#table-data-8");
@@ -252,7 +264,6 @@
                 showCloseButton: true,
                 showConfirmButton: false
               }).catch(function(timeout) { });
-
             }
           }
           }
@@ -262,14 +273,24 @@
 
      // ---- Close Modal -------
     $('#close-modal').click(function() {
-        // deleteTemporary();
-        // read_temporary()
         $('#importData').modal('hide');
     });
 
      // filter//
-        $('.filter-company').change(function(){
-            var value = $(this).val();
+    $('.filter-company').change(function(){
+        var allCompany = "{{ url('item_data_All_company_master_po') }}" ;
+        var value = $(this).val();
+        if (value == allCompany) {
+            $.get(value, {}, function(data, status) {
+                $('#table_id').DataTable().destroy();
+                $('#table_id').find("#item_data").html(data);
+                    $('#table_id').dataTable( {
+                    "dom": '<"top">rt<"bottom"><"clear">'
+                    });
+                $('#table_id').DataTable().draw();
+            });
+        }
+        else{
             $.ajax({
                 url:"{{ url('/filter_company')}}/" + value,
                 success: function(data, status){
@@ -277,52 +298,204 @@
                 }
             });
             return true;
-        });
+        }
 
-      // ------ Filter change ------
-      $("#filter").change(function(){
-            var value = $(this).val();
-            filter(value);
+    });
+
+    // ------ Filter change ------
+    $("#filter_status").change(function() {
+        var value = $(this).val();
+        filter(value);
+    });
+
+    var link = "{{ url('item_data_master_po') }}";
+    // ------ Filter ------
+    function filter(value) {
+        numberPaginate = 1;
+        var value = value;
+        currentPage()
+        link = value.substr();
+        $.get(value, {}, function(data, status) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(data);
+                $('#table_id').dataTable( {
+                "dom": '<"top">rt<"bottom"><"clear">'
+                });
+            $('#table_id').DataTable().draw();
         });
-        // ------ Filter ------
-        function filter(value){
-      var value = value;
-      $.get(value, {}, function(data, status) {
-          $('#table_id').DataTable().destroy();
-          $('#table_id').find("#item_data").html(data);
-            $('#table_id').dataTable( {
-              "dom": '<"top"f>rt<"bottom"lp><"clear">'
-              });
-          $('#table_id').DataTable().draw();
-        });
-      }
+    }
+
     // ------ Tampil Data ------
     function read(){
         enableButton();
-      $.get("{{ url('item_data_master_po') }}", {}, function(data, status) {
-        $('#table_id').DataTable().destroy();
-        $('#table_id').find("#item_data").html(data);
-        $('#table_id').dataTable( {
-            "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-
-            "dom": '<"top"f>rt<"bottom"lp><"clear">'
-            // "dom": '<lf<t>ip>'
+        $.get("{{ url('item_data_master_po') }}", {}, function(data, status) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(data);
+            $('#table_id').dataTable( {
+                "pageLength": 50,
+                "dom":'<"top">rt<"bottom"><"clear">'
             });
-        $('#table_id').DataTable().draw();
-      });
+            $('#table_id').DataTable().draw();
+        });
     }
+
+    // pageLength
+    var length = 50;
+    $("#page-length").change(function(){
+        length = $(this).val();
+        numberPaginate = 1;
+        lengthData = parseInt(length);
+        $.ajax({
+            type: "get",
+            url: `{{ url('item_data_page_length_MasterPo') }}`,
+            data: {
+                no: no - no + 1,
+                length: length
+            },
+            success: function(datas) {
+                $('#table_id').DataTable().destroy();
+                $('#table_id').find("#item_data").html(datas);
+                $('#table_id').dataTable( {
+                    "pageLength": length,
+                    "dom": '<"top">rt<"bottom"><"clear">'
+                    });
+                $('#table_id').DataTable().draw();
+                currentPage()
+            }
+        });
+    });
+
+    // ---- reload Table ---
+    var lengthData = 50;
+    var url =  "{{ url('item_data_master_po') }}";
+    function reload() {
+        enableButton();
+        var reload = true;
+        $.ajax({
+            type: "get",
+            url: `{{ '${url}' }}`,
+            data: {
+                no: no - lengthData,
+                reload: reload
+            },
+            success: function(datas) {
+                $('#table_id').DataTable().destroy();
+                $('#table_id').find("#item_data").html(datas);
+                $('#table_id').dataTable( {
+                    "pageLength": 50,
+                    "dom": '<"top">rt<"bottom"><"clear">'
+                });
+                $('#table_id').DataTable().draw();
+                currentPage()
+            }
+        });
+    }
+
+    // Paginate
+    let numberPaginate = 1;
+    // next paginate
+    $( "#next" ).click(function() {
+        if (no > 50) {
+            numberPaginate += 1;
+            $.get(`{{ '${link}?page=${numberPaginate}' }}` , {}, function(data, status) {
+                if(data != ""){
+                    $.ajax({
+                        type: "get",
+                        url: `{{ '${link}?page=${numberPaginate}' }}`,
+                        data: {
+                            no: no,
+                            length: length
+                        },
+                        success: function(datas) {
+                            $('#table_id').DataTable().destroy();
+                            $('#table_id').find("#item_data").html(datas);
+                            $('#table_id').dataTable( {
+                                "pageLength": length,
+                                "dom": '<"top">rt<"bottom"><"clear">'
+                                // "dom": '<lf<t>ip>'
+                                });
+                            $('#table_id').DataTable().draw();
+                            currentPage()
+                            url = `{{ '${link}?page=${numberPaginate}' }}`;
+                        }
+                    });
+                }
+                else {
+                }
+            });
+        }
+    });
+
+    // previous paginate
+    $( "#previous" ).click(function() {
+        if (numberPaginate > 1) {
+            numberPaginate -= 1;
+            $.ajax({
+                type: "get",
+                url: `{{ '${link}?page=${numberPaginate}' }}`,
+                data: {
+                    no: no - no + 1,
+                    length: length
+                },
+                success: function(datas) {
+                    $('#table_id').DataTable().destroy();
+                    $('#table_id').find("#item_data").html(datas);
+                    $('#table_id').dataTable( {
+                        "pageLength": length,
+                        "dom": '<"top">rt<"bottom"><"clear">'
+                    });
+                    $('#table_id').DataTable().draw();
+                    currentPage()
+                    url = `{{ '${link}?page=${numberPaginate}' }}`;
+                }
+            });
+        }
+    });
+
+    // Search
+    $(document).ready(function() {
+      $("#search_form").keyup(function() {
+        $.ajax({
+            type: "get",
+            url: `{{ url('item_data_search_MasterPo') }}`,
+            data: {
+                text: $(this).val(),
+            },
+            success: function(datas) {
+                var link = "{{ url('item_data_search_MasterPo') }}";
+                numberPaginate = 1;
+                $('#table_id').DataTable().destroy();
+                $('#table_id').find("#item_data").html(datas);
+                $('#table_id').dataTable( {
+                    "pageLength": 50,
+                    "dom": '<"top">rt<"bottom"><"clear">'
+                    // "dom": '<lf<t>ip>'
+                    });
+                $('#table_id').DataTable().draw();
+                currentPage()
+            }
+        });
+      });
+    })
+
+    // current Page
+    function currentPage() {
+      // memasukkan value dari variable numberPaginate ke elemen id currentPage
+      $("#currentPage").text(numberPaginate);
+    }
+
     // ---- Tombol Cancel -----
     function cancel() {
       read()
     }
      // ------ Tambah Form Input ------
-     $('.add').click(function() {
-         disableButton();
-
+    $('.add').click(function() {
+        disableButton();
         $.get("{{ url('add_form_master_po') }}", {}, function(data, status) {
-          $('#table_id tbody').prepend(data);
+            $('#table_id tbody').prepend(data);
         });
-      });
+    });
+
     // ----- Proses Tambah data ------
     function store() {
         var company_id      = $("#company_id").val();
@@ -345,16 +518,17 @@
               sales_id        :sales_id
             },
             success: function(data) {
-              swal({
-                type: 'success',
-                title: 'Data Saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).catch(function(timeout) { });
-              read();
+                swal({
+                    type: 'success',
+                    title: 'Data Saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).catch(function(timeout) { });
+                read();
             }
         })
     }
+
     // -----Proses Delete Data ------
     function destroy(id) {
         var id = id;
@@ -380,18 +554,19 @@
                             showConfirmButton: false,
                             timer: 1500
                         }).catch(function(timeout) { });
-                        read();
+                        reload();
                     }
                 });
               });
             },
             allowOutsideClick: false
-      });
+        });
     }
+
     // ------ Edit Form Data ------
     function edit(id){
-        disableButton();
 
+        disableButton();
         var id = id;
         $("#td-checkbox-"+id).hide("fast");
         $("#td-button-"+id).hide("fast");
@@ -407,160 +582,166 @@
             $("#edit-form-"+id).prepend(data)
         });
     }
+
     // ------ Proses Update Data ------
-        function update(id) {
-            var company_id = $("#company_id").val();
-            var po_number = $("#po_number").val();
-            var po_date = $("#po_date").val();
-            var harga_layanan = $("#harga_layanan").val();
-            var jumlah_unit_po = $("#jumlah_unit_po").val();
-            var status_po = $("#status_po").val();
-            var sales_id = $("#sales_id").val();
-            var id = id;
-            $.ajax({
-                type: "get",
-                url: "{{ url('update_master_po') }}/"+id,
-                data: {
-                company_id: company_id,
-                po_number: po_number,
-                po_date:po_date,
-                harga_layanan: harga_layanan,
-                jumlah_unit_po: jumlah_unit_po,
-                status_po: status_po,
-                sales_id: sales_id
-                },
-                success: function(data) {
-                  swal({
+    function update(id) {
+        var company_id = $("#company_id").val();
+        var po_number = $("#po_number").val();
+        var po_date = $("#po_date").val();
+        var harga_layanan = $("#harga_layanan").val();
+        var jumlah_unit_po = $("#jumlah_unit_po").val();
+        var status_po = $("#status_po").val();
+        var sales_id = $("#sales_id").val();
+        var id = id;
+        $.ajax({
+            type: "get",
+            url: "{{ url('update_master_po') }}/"+id,
+            data: {
+            company_id: company_id,
+            po_number: po_number,
+            po_date:po_date,
+            harga_layanan: harga_layanan,
+            jumlah_unit_po: jumlah_unit_po,
+            status_po: status_po,
+            sales_id: sales_id
+            },
+            success: function(data) {
+                swal({
                     type: 'success',
                     title: ' Data Updated',
                     showConfirmButton: false,
                     timer: 1500
                 }).catch(function(timeout) { });
-                read();
-                }
+                reload();
+            }
+        });
+    }
+
+    // checkbox all
+    $('#master').on('click', function(e) {
+        if($(this).is(':checked',true)){
+            $(".task-select").prop('checked', true);
+        } else {
+            $(".task-select").prop('checked',false);
+        }
+    });
+
+    // Delete All
+    $('.delete_all').on('click', function() {
+        event.preventDefault();
+        var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
+        });
+        if (allVals.length > 0) {
+            var _token = $('input[name="_token"]').val();
+            swal({
+                title: 'Are you sure?',
+                text: "You want delete Selected data !",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes Delete',
+                showLoaderOnConfirm: true,
+                preConfirm: function() {
+                return new Promise(function(resolve) {
+                    $.ajax({
+                        url: "{{ url('/selectedDelete_master_po') }}",
+                        method: "get",
+                        data: {
+                            id: allVals,
+                            _token: _token
+                        },
+                        success: function(data) {
+                            swal({
+                                type: 'success',
+                                title: 'The selected data has been deleted',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).catch(function(timeout) { });
+                            $("#master").prop('checked', false);
+                            reload();
+                            }
+                    });
+                });
+                },
+                allowOutsideClick: false
             });
         }
-        // checkbox all
-        $('#master').on('click', function(e) {
-          if($(this).is(':checked',true)){
-              $(".task-select").prop('checked', true);
-          } else {
-              $(".task-select").prop('checked',false);
-          }
+        else {
+            alert('Select the row you want to delete')
+        }
+    });
+
+    // Form Edit All
+    $('.edit_all').on('click', function(e){
+        disableButton();
+        $('[data-toggle="tooltip"]').tooltip("hide");
+        var allVals = [];
+        var _token = $('input[name="_token"]').val();
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
         });
-         // Delete All
-        $('.delete_all').on('click', function(){
-          event.preventDefault();
-            var allVals = [];
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
+        if (allVals.length > 0){
+            // alert(allVals);
+            $(".edit_all").hide("fast");
+            $(".delete_all").hide("fast");
+            $.get("{{ url('selected_master_po') }}", {}, function(data, status) {
+                $("#selected").prepend(data)
             });
-                if (allVals.length > 0) {
-                    var _token = $('input[name="_token"]').val();
-                    // alert(allVals);
-                    swal({
-                    title: 'Are you sure?',
-                    text: "You want delete Selected data !",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes Delete',
-                    showLoaderOnConfirm: true,
-                    preConfirm: function() {
-                    return new Promise(function(resolve) {
-                        $.ajax({
-                            url: "{{ url('/selectedDelete_master_po') }}",
-                            method: "get",
-                            data: {
-                                id: allVals,
-                                _token: _token
-                            },
-                            success: function(data) {
-                              swal({
-                                    type: 'success',
-                                    title: 'The selected data has been deleted',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).catch(function(timeout) { });
-                                $("#master").prop('checked', false);
-                                read();
-                                }
-                            });
-                    });
-                    },
-                    allowOutsideClick: false
+            $.each(allVals, function(index, value){
+                $("#td-checkbox-"+value).hide("fast");
+                $("#td-button-"+value).hide("fast");
+                $("#item-no-"+value).hide("fast");
+                $("#item-company_id-"+value).hide("fast");
+                $("#item-po_number-"+value).hide("fast");
+                $("#item-po_date-"+value).hide("fast");
+                $("#item-harga_layanan-"+value).hide("fast");
+                $("#item-jumlah_unit_po-"+value).hide("fast");
+                $("#item-status_po-"+value).hide("fast");
+                $("#item-sales_id-"+value).hide("fast");
+                $(".add").hide("fast");
+                $.get("{{ url('show_master_po') }}/" + value, {}, function(data, status) {
+                    $("#edit-form-"+value).prepend(data)
+                    $("#master").prop('checked', false);
+                    $(".add").hide();
+                    $(".cancel").hide();
+                    $(".import").hide();
+                    $(".export").hide();
                 });
-            }else{
-                alert('Select the row you want to delete')
-            }
+            });
+        }else{
+            alert('Select the row you want to edit')
+        }
+    });
+
+    // ------ Proses Update Data ------
+    function updateSelected() {
+
+        var allVals = [];
+        $(".task-select:checked").each(function() {
+            allVals.push($(this).attr("id"));
         });
-        // Form Edit All
-        $('.edit_all').on('click', function(e){
-             disableButton();
-            $('[data-toggle="tooltip"]').tooltip("hide");
-            var allVals = [];
-            var _token = $('input[name="_token"]').val();
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-            if (allVals.length > 0){
-                // alert(allVals);
-                $(".edit_all").hide("fast");
-                $(".delete_all").hide("fast");
-                $.get("{{ url('selected_master_po') }}", {}, function(data, status) {
-                    $("#selected").prepend(data)
-                });
-                $.each(allVals, function(index, value){
-                    $("#td-checkbox-"+value).hide("fast");
-                    $("#td-button-"+value).hide("fast");
-                    $("#item-no-"+value).hide("fast");
-                    $("#item-company_id-"+value).hide("fast");
-                    $("#item-po_number-"+value).hide("fast");
-                    $("#item-po_date-"+value).hide("fast");
-                    $("#item-harga_layanan-"+value).hide("fast");
-                    $("#item-jumlah_unit_po-"+value).hide("fast");
-                    $("#item-status_po-"+value).hide("fast");
-                    $("#item-sales_id-"+value).hide("fast");
-                    $(".add").hide("fast");
-                    $.get("{{ url('show_master_po') }}/" + value, {}, function(data, status) {
-                        $("#edit-form-"+value).prepend(data)
-                        $("#master").prop('checked', false);
-                         $(".add").hide();
-                        $(".cancel").hide();
-                        $(".import").hide();
-                        $(".export").hide();
-                    });
-                });
-            }else{
-                alert('Select the row you want to edit')
-            }
-        });
-        // ------ Proses Update Data ------
-        function updateSelected() {
-            var allVals = [];
-            $(".task-select:checked").each(function() {
-                allVals.push($(this).attr("id"));
-            });
-            swal({
-                title: "Are you sure?",
-                text: "Do you want to do an update?",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonColor: '#00FF00',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes Update',
-                showLoaderOnConfirm: true,
-            }).then((willDelete) => {
-                $.each(allVals, function(index, value){
-                    var company_id = $(".company_id-"+value).val();
-                    var po_number = $(".po_number-"+value).val();
-                    var po_date = $(".po_date-"+value).val();
-                    var harga_layanan = $(".harga_layanan-"+value).val();
-                    var jumlah_unit_po = $(".jumlah_unit_po-"+value).val();
-                    var status_po = $(".status_po-"+value).val();
-                    var sales_id = $(".sales_id-"+value).val();
-                    $.ajax({
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to do an update?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: '#00FF00',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes Update',
+            showLoaderOnConfirm: true,
+        }).then((willDelete) => {
+            $.each(allVals, function(index, value){
+                var company_id = $(".company_id-"+value).val();
+                var po_number = $(".po_number-"+value).val();
+                var po_date = $(".po_date-"+value).val();
+                var harga_layanan = $(".harga_layanan-"+value).val();
+                var jumlah_unit_po = $(".jumlah_unit_po-"+value).val();
+                var status_po = $(".status_po-"+value).val();
+                var sales_id = $(".sales_id-"+value).val();
+                $.ajax({
                     type: "get",
                     url: "{{ url('update_master_po') }}/"+value,
                     data: {
@@ -573,58 +754,59 @@
                     sales_id: sales_id
                     },
                     success: function(data) {
-                      swal({
-                                    type: 'success',
-                                    title: 'The selected data has been updated',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                // $(".save").hide();
-                                });
-                                read();
-                                $(".add").show("fast");
-                                $(".edit_all").show("fast");
-                                $(".delete_all").show("fast");
-                                 $(".import").show("fast");
-                                 $(".export").show("fast");
-                                $(".btn-round").hide("fast");
-                                $(".btn-round").hide("fast");
+                        swal({
+                            type: 'success',
+                            title: 'The selected data has been updated',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        reload();
+                        $(".add").show("fast");
+                        $(".edit_all").show("fast");
+                        $(".delete_all").show("fast");
+                        $(".import").show("fast");
+                        $(".export").show("fast");
+                        $(".btn-round").hide("fast");
+                        $(".btn-round").hide("fast");
                     }
                 });
             });
         });
-        }
-        //--------Proses Batal--------
-         function cancelUpdateSelected(){
-            $("#save-selected").hide("fast");
-            $("#cancel-selected").hide("fast");
-            $(".add").show("fast");
-            $(".edit_all").show("fast");
-            $(".delete_all").show("fast");
-            read();
-        }
+    }
 
-        function disableButton() {
+    //--------Proses Batal--------
+    function cancelUpdateSelected(){
 
-          $('.add').prop('disabled', true);
-          $('.edit_all').prop('disabled', true);
-          $('.delete_all').prop('disabled', true);
-          $('.export').addClass('disabled');
-          $('.edit').addClass('disable');
-          $('.delete').addClass('disable');
-          $("[data-toggle= modal]").prop('disabled', true);
+        $("#save-selected").hide("fast");
+        $("#cancel-selected").hide("fast");
+        $(".add").show("fast");
+        $(".edit_all").show("fast");
+        $(".delete_all").show("fast");
+        read();
+    }
 
-        }
+    function disableButton() {
 
-        function enableButton(){
+        $('.add').prop('disabled', true);
+        $('.edit_all').prop('disabled', true);
+        $('.delete_all').prop('disabled', true);
+        $('.export').addClass('disabled');
+        $('.edit').addClass('disable');
+        $('.delete').addClass('disable');
+        $("[data-toggle= modal]").prop('disabled', true);
 
-          $('.add').prop('disabled', false);
-          $('.edit_all').prop('disabled', false);
-          $('.delete_all').prop('disabled', false);
-          $('.edit').removeClass('disable');
-          $('.export').removeClass('disabled');
-          $('.delete').removeClass('disable');
-          $("[data-toggle= modal]").prop('disabled', false);
+    }
 
-        }
-  </script>
-   @endsection
+    function enableButton() {
+
+        $('.add').prop('disabled', false);
+        $('.edit_all').prop('disabled', false);
+        $('.delete_all').prop('disabled', false);
+        $('.edit').removeClass('disable');
+        $('.export').removeClass('disabled');
+        $('.delete').removeClass('disable');
+        $("[data-toggle= modal]").prop('disabled', false);
+
+    }
+</script>
+@endsection
