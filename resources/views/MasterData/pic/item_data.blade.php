@@ -1,4 +1,4 @@
-<?php $no=1; ?>
+
 @foreach ($pic as $item)
     <tr id="edit-form-{{ $item->id }}">
 
@@ -11,7 +11,7 @@
                 </label>
             </div>
         </td>
-        <td id="item-no-{{ $item->id}}">
+        <td id="item-no-{{ $item->id}}" class="numbering">
             {{ $no++ }}
         </td>
 
@@ -46,3 +46,6 @@
     </tr>
 @endforeach
 
+<script>
+    var no =  {!! json_encode($no) !!};
+</script>

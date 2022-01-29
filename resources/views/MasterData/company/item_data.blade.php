@@ -1,4 +1,4 @@
-<?php $no=1; ?>
+
 @foreach ($company as $item)
     <tr id="edit-form-{{ $item->id }}">
         <td id="td-checkbox-{{ $item->id }}">
@@ -49,4 +49,10 @@
         </td>
     </tr>
 @endforeach
+<script>
+        // menangkap $no dari controller, di masukkan ke variabel no
+        var no =  {!! json_encode($no) !!};
+        // var old_no = no;
+</script>
+
 

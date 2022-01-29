@@ -60,7 +60,9 @@
 @endforeach
 
 <script>
+        // menangkap $no dari controller, di masukkan ke variabel no
         var no =  {!! json_encode($no) !!};
+        // var old_no = no;
 </script>
 
 

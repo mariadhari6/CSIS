@@ -196,6 +196,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::post('/importExcel_Company', [CompanyController::class, 'importExcel'])->name('importExcel_Company');
     Route::get('/download_template_Company', [CompanyController::class, 'export']);
     Route::get('/export_company', [CompanyController::class, 'export_company']);
+    Route::get('/item_data_search_company', [CompanyController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_company', [CompanyController::class, 'item_data_page_length']);
 
 
 
@@ -215,6 +217,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::post('/importExcel_pic', [PicController::class, 'importExcel'])->name('importExcel_pic');
     Route::get('/download_template_pic', [PicController::class, 'export']);
     Route::get('/export_Pic', [PicController::class, 'export_pic']);
+    Route::get('/item_data_search_pic', [PicController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_pic', [PicController::class, 'item_data_page_length']);
 
 
     // seller
@@ -300,7 +304,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::post('/save_import_gps', [GpsController::class, 'save_import']);
     Route::get('/based_merksensor/{id}', [GpsController::class, 'basedType']);
     Route::get('/export_gps', [GpsController::class, 'export_gps']);
-
+    Route::get('/item_data_search_gps', [GpsController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_gps', [GpsController::class, 'item_data_page_length']);
 
 
 
@@ -327,6 +332,9 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/delete_temporary', [GsmMasterController::class, 'deleteTemporary']);
     Route::get('/download_template_gsm', [GsmMasterController::class, 'export']);
     Route::get('/export_gsm_master', [GsmMasterController::class, 'export_gsm']);
+    Route::get('/item_data_search_GsmMaster', [GsmMasterController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_GsmMaster', [GsmMasterController::class, 'item_data_page_length']);
+
 
     // try
     Route::get('/try', [GsmMasterController::class, 'try']);
@@ -420,6 +428,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/based_pemasangan/{id}', [RequestComplaintController::class, 'basedPemasangan']);
     Route::get('/Dashboard_RequestComplain', [RequestComplaintController::class, 'dashboard']);
     Route::get('/export_request_complaint', [RequestComplaintController::class, 'export_request']);
+    Route::get('/item_data_search_RequestComplain', [RequestComplaintController::class, 'item_data_search']);
+    Route::get('/item_data_page_length_RequestComplain', [RequestComplaintController::class, 'item_data_page_length']);
 
 
 

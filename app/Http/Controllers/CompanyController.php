@@ -16,6 +16,7 @@ class CompanyController extends Controller
 {
     public function index()
     {
+
         return view('MasterData.company.index');
     }
     public function add_form()
@@ -26,11 +27,42 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function item_data()
+    public function item_data(Request $request)
     {
-        $company = Company::orderBy('id', 'DESC')->paginate(50);
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $company = Company::orderBy('id', 'DESC')->paginate($length);
+        $no = ($request->no === null) ? 1 : $request->no;
+
         return view('MasterData.company.item_data')->with([
-            'company' => $company
+            'company' => $company, 'no' => $no
+        ]);
+    }
+
+    public function item_data_search(Request $request)
+    {
+        $query = Company::query();
+        $columns = array(
+            'company_name', 'seller_id', 'customer_code', 'no_agreement_letter_id', 'status'
+        );
+        foreach ($columns as $column) {
+            $query->orWhere($column, 'LIKE', '%' . $request->text . '%');
+        }
+        $company = $query->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.company.item_data')->with([
+            'company' => $company,
+            'no' => $no
+        ]);
+    }
+
+    public function item_data_page_length(Request $request)
+    {
+        $company = Company::orderBy('id', 'DESC')->paginate((int)$request->length);
+        // dd($request->length);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.company.item_data')->with([
+            'company' => $company,
+            'no' => $no
         ]);
     }
     public function save_import(Request $request)

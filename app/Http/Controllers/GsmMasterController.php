@@ -48,7 +48,41 @@ class GsmMasterController extends Controller
 
     public function item_data(Request $request)
     {
-        $GsmMaster = Gsm::orderBy('id', 'DESC')->paginate(50);
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $GsmMaster = Gsm::orderBy('id', 'DESC')->paginate($length);
+        // paginate 50, artinya akan menampilkan data per-50 per page
+        $no = ($request->no === null) ? 1 : $request->no;
+        // $no digunakan untuk penomoran data per page
+        // jika requestnya null maka  $no di isi dgn 1
+        // jika requestnya ada, maka $no di isi request
+        return view('MasterData.GsmMaster.item_data')->with([
+            'GsmMaster' => $GsmMaster,
+            'no' => $no
+            // passing ke view
+        ]);
+    }
+    public function item_data_search(Request $request)
+    {
+        $query = Gsm::query();
+        $columns = array(
+            'status_gsm', 'gsm_number', 'company_id', 'serial_number', 'icc_id', 'imsi', 'res_id', 'request_date',
+            'expired_date', 'active_date', 'terminate_date', 'note', 'provider', 'was_maintenance'
+        );
+        foreach ($columns as $column) {
+            $query->orWhere($column, 'LIKE', '%' . $request->text . '%');
+        }
+        $GsmMaster = $query->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.GsmMaster.item_data')->with([
+            'GsmMaster' => $GsmMaster,
+            'no' => $no
+        ]);
+    }
+
+    public function item_data_page_length(Request $request)
+    {
+        $GsmMaster = Gsm::orderBy('id', 'DESC')->paginate((int)$request->length);
+        // dd($request->length);
         $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.GsmMaster.item_data')->with([
             'GsmMaster' => $GsmMaster,

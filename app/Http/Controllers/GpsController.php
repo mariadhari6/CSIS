@@ -55,7 +55,8 @@ class GpsController extends Controller
 
     public function item_data(Request $request)
     {
-        $gps = Gps::orderBy('id', 'DESC')->paginate(50);
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $gps = Gps::orderBy('id', 'DESC')->paginate($length);
         $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.gps.item_data')->with([
             'gps' => $gps, 'no' => $no
@@ -74,6 +75,34 @@ class GpsController extends Controller
     public function deleteTemporary()
     {
         GpsTemporary::truncate();
+    }
+
+    public function item_data_search(Request $request)
+    {
+        $query = Gps::query();
+        $columns = array(
+            'merk', 'type', 'imei', 'waranty', 'po_date', 'status', 'status_ownership', 'company_id'
+        );
+        foreach ($columns as $column) {
+            $query->orWhere($column, 'LIKE', '%' . $request->text . '%');
+        }
+        $gps = $query->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.gps.item_data')->with([
+            'gps' => $gps,
+            'no' => $no
+        ]);
+    }
+
+    public function item_data_page_length(Request $request)
+    {
+        $gps = Gps::orderBy('id', 'DESC')->paginate((int)$request->length);
+        // dd($request->length);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.gps.item_data')->with([
+            'gps' => $gps,
+            'no' => $no
+        ]);
     }
 
     public function save_import(Request $request)

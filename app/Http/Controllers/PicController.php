@@ -28,11 +28,40 @@ class PicController extends Controller
 
     public function item_data(Request $request)
     {
-        $pic = Pic::orderBy('id', 'DESC')->get();
+        $length = ($request->length === null) ? 50 : (int)$request->length;
+        $pic = Pic::orderBy('id', 'DESC')->paginate($length);
         $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.pic.item_data')->with([
             'pic'   => $pic,
             'no'    => $no
+        ]);
+    }
+
+    public function item_data_search(Request $request)
+    {
+        $query = Pic::query();
+        $columns = array(
+            'company_id', 'pic_name', 'phone', 'email', 'position', 'date_of_birth'
+        );
+        foreach ($columns as $column) {
+            $query->orWhere($column, 'LIKE', '%' . $request->text . '%');
+        }
+        $pic = $query->paginate(50);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.pic.item_data')->with([
+            'pic' => $pic,
+            'no' => $no
+        ]);
+    }
+
+    public function item_data_page_length(Request $request)
+    {
+        $pic = Pic::orderBy('id', 'DESC')->paginate((int)$request->length);
+        // dd($request->length);
+        $no = ($request->no === null) ? 1 : $request->no;
+        return view('MasterData.pic.item_data')->with([
+            'pic' => $pic,
+            'no' => $no
         ]);
     }
     public function save_import(Request $request)
@@ -148,7 +177,7 @@ class PicController extends Controller
         $file->move('DataMasterPic', $nameFile);
 
         Excel::import(new PicImport, public_path('/DataMasterPic/' . $nameFile));
-        // return redirect('/GsmMaster');
+        // return redirect('/pic');
     }
 
     public function export()

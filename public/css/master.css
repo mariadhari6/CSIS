@@ -81,7 +81,8 @@
 }
 
 #table_id {
-    position: relative;
+    /* position: relative;
+    */
     bottom: 0px;
     text-align: center;
 }
@@ -1147,7 +1148,7 @@ nav.sidebar-new li.active > a,
 
 #table_id{
     table-layout: auto;
-    position: relative;
+    /* position: relative; */
     bottom: 20px;
     width:100%;
     z-index: 1;
@@ -1184,7 +1185,7 @@ nav.sidebar-new li.active > a,
 
 #table_request{
     table-layout: auto;
-    position: relative;
+    /* position: relative; */
     bottom: 20px;
     width:100%;
     overflow: auto;
@@ -1319,5 +1320,13 @@ nav.sidebar-new li.active > a,
  z-index: 2;
 }
 
+.search_form{
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
 
 

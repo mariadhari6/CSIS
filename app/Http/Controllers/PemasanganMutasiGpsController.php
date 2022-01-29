@@ -78,8 +78,18 @@ class PemasanganMutasiGpsController extends Controller
     {
         $year = $request->year;
         $month = $request->month;
-        $pemasangan_mutasi_GPS = RequestComplaint::whereIn('task', ['Mutasi Pelepasan GPS', 'Pemasangan GPS', 'Mutasi Pemasangan GPS', 'Mutasi Pelepasan Pemasangan GPS'])->whereMonth('waktu_kesepakatan',  $month)->whereYear('waktu_kesepakatan', $year)->get();
-        // dd($pemasangan_mutasi_GPS);
+        $pemasangan_mutasi_GPS = RequestComplaint::whereIn(
+            'task',
+            [
+                'Mutasi Pelepasan GPS',
+                'Pemasangan GPS',
+                'Mutasi Pemasangan GPS',
+                'Mutasi Pelepasan Pemasangan GPS'
+            ]
+        )
+            ->whereMonth('waktu_kesepakatan',  $month)
+            ->whereYear('waktu_kesepakatan', $year)
+            ->get();
         return view('VisitAssignment.PemasanganMutasiGPS.item_data', compact('pemasangan_mutasi_GPS'));
     }
 

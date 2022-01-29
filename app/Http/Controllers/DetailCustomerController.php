@@ -84,6 +84,86 @@ class DetailCustomerController extends Controller
         ]);
     }
 
+    public function save_import(Request $request)
+    {
+        $dataRequest = json_decode($request->data);
+        $data = [];
+        $fail = 0;
+        $success = 0;
+        foreach ($dataRequest as $key => $value) {
+            try {
+                $company = Company::where('company_name', $value->company_id)->firstOrFail()->id;
+                $licence_plate = Vehicle::where('license_plate', $value->license_plate)->firstOrFail()->id;
+                $vehicle_id = Vehicle::where('vehicle_id', $value->vehicle_id)->firstOrFail()->id;
+                $po_id = MasterPo::where('po_number', $value->po_id)->firstOrFail()->id;
+                $harga_layanan = MasterPo::where('harga_layanan', $value->harga_layanan)->firstOrFail()->id;
+                $po_date = MasterPo::where('po_date', $value->po_date)->firstOrFail()->id;
+                $status_po = MasterPo::where('status_po', $value->status_po)->firstOrFail()->id;
+                $imei = Gps::where('imei', $value->imei)->firstOrFail()->id;
+                $gps_id = Gps::where('merk', $value->gps_id)->firstOrFail()->id;
+                $type = Gps::where('type', $value->gps_id)->firstOrFail()->id;
+                $gsm_id = Gsm::where('gsm_number', $value->gsm_id)->firstOrFail()->id;
+                $provider = Gsm::where('provider', $value->provider)->firstOrFail()->id;
+                $sensor_all = Sensor::where('sensor_name', $value->sensor_all)->firstOrFail()->id;
+                $pool_name = Vehicle::where('pool_name', $value->pool_name)->firstOrFail()->id;
+                $pool_location = Vehicle::where('pool_location', $value->pool_location)->firstOrFail()->id;
+                $status_id = ServiceStatus::where('service_status_name', $value->status_id)->firstOrFail()->id;
+            } catch (\Throwable $th) {
+                $company = null;
+                $licence_plate  = null;
+                $vehicle_id  = null;
+                $po_id  = null;
+                $harga_layanan  = null;
+                $po_date  = null;
+                $status_po  = null;
+                $imei  = null;
+                $gps_id  = null;
+                $type  = null;
+                $gsm_id  = null;
+                $provider  = null;
+                $sensor_all  = null;
+                $pool_name  = null;
+                $pool_location  = null;
+                $status_id  = null;
+            }
+            // try {
+            $data = array(
+                'company_id'        => $company,
+
+                'count'             => $value->jumlah_unit_po,
+                'licence_plate'     => $licence_plate,
+                'vehicle_id'        => $vehicle_id,
+                'po_id'             => $po_id,
+                'harga_layanan'     => $harga_layanan,
+                'po_date'           => $po_date,
+                'status_po'         => $status_po,
+                'imei'              => $imei,
+                'gps_id'            => $gps_id,
+                'type'              => $type,
+                'gsm_id'            => $gsm_id,
+                'provider'          => $provider,
+                'sensor_all'        => $sensor_all,
+                'serial_number_sensor' => $value->serial_number_sensor,
+                'sensor_id'            => $value->sensor_id,
+                'merk_sensor' => $value->merk_sensor,
+                'pool_name' => $pool_name,
+                'pool_location' => $pool_location,
+                'waranty' => $value->waranty,
+                'status_id' => $status_id,
+                'tanggal_pasang' => $value->tanggal_pasang,
+                'tanggal_non_aktif' => $value->tanggal_non_aktif,
+                'tgl_reaktivasi_gps' => $value->tgl_reaktivasi_gps,
+                'jumlah_sensor' => $value->jumlah_sensor
+
+            );
+            DetailCustomer::insert($data);
+            // return 'success';
+            // } catch (\Throwable $th) {
+            //     return 'fail';
+            // }
+        }
+    }
+
     public function store(Request $request)
     {
         $sensor_all     = $request->SensorAll;

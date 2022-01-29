@@ -21,6 +21,7 @@
             <a href="/export_Pic" class="btn btn-success  mr-2 export" data-toggle="tooltip" title="Export">
                 <i class="fas fa-file-export"></i>
             </a>
+                <input type="text" placeholder="Search.." id="search_form">
             <button class="btn btn-success  mr-2 edit_all" data-toggle="tooltip" title="Edit Selected">
               <i class="fas fa-edit"></i>
             </button>
@@ -55,18 +56,29 @@
               {{-- {{ csrf_field() }} --}}
             </tbody>
           </table>
-            {{-- <div class="paginate float-right mt-2">
-                <button class="btn btn-light" id="previous">
-                    Previous
-                </button>
-                <button class="btn btn-secondary" id="currentPage"></button>
-                <button class="btn btn-light" id="next">Next</button>
-            </div> --}}
-         </form>
+          <div class="float-left mt-2">
+            <select class="form-control input-fixed" id="page-length">
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="1000">1000</option>
+              {{-- <option value="all">All</option> --}}
+            </select>
+          </div>
+          {{-- memposisikan page paling kiri --}}
+          <div class="paginate float-right mt-2">
+            {{-- membuat tombol data sebelumnya --}}
+            <button class="btn btn-light" id="previous">Previous</button>
+            {{-- membuat penomoran page --}}
+            <button class="btn btn-secondary" id="currentPage"></button>
+            {{-- membuat tombol data selanjutnya --}}
+            <button class="btn btn-light" id="next">Next</button>
+          </div>
         </div>
         </div>
       </div>
     </div>
+ </form>
+
  <div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
 		<div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role="document">
 			<div class="modal-content-full-width modal-content">
@@ -276,6 +288,10 @@
         // read_temporary()
         $('#importData').modal('hide');
     });
+
+     // membuat variable link untuk digunakan di fitur paginate
+      var link = "{{ url('item_data_pic') }}";
+
     // ------ Tampil Data ------
     function read(){
         enableButton();
@@ -284,17 +300,185 @@
         $('#table_id').find("#item_data").html(data);
         $('#table_id').dataTable( {
             "lengthMenu": [[50, 100, 1000, -1], [50, 100, 1000, "All"]],
-            "dom": '<"top"f>rt<"bottom"lp><"clear">'
+            "dom": '<"top">rt<"bottom"><"clear">'
             });
         $('#table_id').DataTable().draw();
       });
 
     }
 
+     // pageLength
+    var length = 50;
+    $("#page-length").change(function(){
+        // numberPaginate = 1;
+        length = $(this).val();
+        numberPaginate = 1;
+        lengthData = parseInt(length);
+        // alert(lengthData_
+
+        $.ajax({
+        type: "get",
+        url: `{{ url('item_data_page_length_pic') }}`,
+        data: {
+          no: no - no + 1,
+          length: length
+        },
+        success: function(datas) {
+          $('#table_id').DataTable().destroy();
+          $('#table_id').find("#item_data").html(datas);
+          $('#table_id').dataTable( {
+              "pageLength": length,
+              "dom": '<"top">rt<"bottom"><"clear">'
+              // "dom": '<lf<t>ip>'
+              });
+          $('#table_id').DataTable().draw();
+          currentPage()
+        }
+      });
+    });
+
+    // ---- reload Table ---
+    var lengthData = 50;
+    var url =  "{{ url('item_data_pic') }}";
+    function reload() {
+    // alert(link)
+    var reload = true;
+      $.ajax({
+        type: "get",
+        url: `{{ '${url}' }}`,
+        data: {
+          no: no - lengthData,
+          reload: reload
+        },
+        success: function(datas) {
+          $('#table_id').DataTable().destroy();
+          $('#table_id').find("#item_data").html(datas);
+          $('#table_id').dataTable( {
+              "pageLength": 50,
+              "dom": '<"top">rt<"bottom"><"clear">'
+              // "dom": '<lf<t>ip>'
+              });
+          $('#table_id').DataTable().draw();
+          currentPage()
+        }
+      });
+    }
+
+     // Paginate --------
+    let numberPaginate = 1;
+    // next paginate
+    $( "#next" ).click(function() {
+      // console.log(link);
+      // var old_no = no;
+      // alert(old_no)
+      if (no > 50) {
+        numberPaginate += 1;
+        $.get(`{{ '${link}?page=${numberPaginate}' }}` , {}, function(data, status) {
+          // console.log(no)
+          if(data != ""){
+          $.ajax({
+            type: "get",
+            url: `{{ '${link}?page=${numberPaginate}' }}`,
+            data: {
+              no: no,
+              length: length
+            },
+            success: function(datas) {
+              $('#table_id').DataTable().destroy();
+              $('#table_id').find("#item_data").html(datas);
+              $('#table_id').dataTable( {
+                  "pageLength": length,
+                  "dom": '<"top">rt<"bottom"><"clear">'
+                  // "dom": '<lf<t>ip>'
+                  });
+              $('#table_id').DataTable().draw();
+              currentPage()
+              url = `{{ '${link}?page=${numberPaginate}' }}`;
+              // alert(url)
+            }
+          });
+          } else {
+            // numberPaginate -= 1;
+            // alert(numberPaginate);
+          }
+        });
+      }
+    });
+
+    // previous paginate
+    $( "#previous" ).click(function() {
+      // alert(typeof length)
+      // alert(no - length -1)
+      if (numberPaginate > 1) {
+          numberPaginate -= 1;
+          $.ajax({
+          type: "get",
+          url: `{{ '${link}?page=${numberPaginate}' }}`,
+          data: {
+            no: no - (length*2),
+          length: length
+          },
+          success: function(datas) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": length,
+                "dom": '<"top">rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+            });
+            $('#table_id').DataTable().draw();
+            currentPage()
+            url = `{{ '${link}?page=${numberPaginate}' }}`;
+          }
+        });
+      }
+    });
+
+    // Search
+    $(document).ready(function() {
+      $("#search_form").keyup(function() {
+        // alert($(this).val());
+        $.ajax({
+          type: "get",
+          url: `{{ url('item_data_search_pic') }}`,
+          data: {
+            text: $(this).val(),
+          },
+          success: function(datas) {
+            var link = "{{ url('item_data_search_pic') }}";
+            numberPaginate = 1;
+            // console.log(datas);
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": 50,
+                "dom": '<"top">rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+            currentPage()
+          }
+        });
+
+      });
+    })
+
+    //Paginate Status
+
+
+    //-----------
+
+    // current Page
+    function currentPage(){
+      // memasukkan value dari variable numberPaginate ke elemen id currentPage
+      $("#currentPage").text(numberPaginate);
+    }
+
     // ---- Tombol Cancel -----
     function cancel() {
-      read()
+      reload()
     }
+
 
      // ------ Tambah Form Input ------
      $('.add').click(function() {
@@ -330,7 +514,7 @@
                 showConfirmButton: false,
                 timer: 1500
             }).catch(function(timeout) { });
-              read();
+              reload()
 
             }
         })
@@ -377,8 +561,6 @@
         var id = id;
         $("#td-button-"+id).slideUp("fast");
         $("#td-checkbox-"+id).hide("fast");
-
-        $("#item-no-"+id).hide("fast");
         $("#item-company_id-"+id).slideUp("fast");
         $("#item-pic_name-"+id).slideUp("fast");
         $("#item-phone-"+id).slideUp("fast");
@@ -418,7 +600,7 @@
                     showConfirmButton: false,
                     timer: 1500
                 }).catch(function(timeout) { });
-                read();
+                reload();
 
                 }
         })
@@ -467,7 +649,7 @@
                                     timer: 1500
                                 }).catch(function(timeout) { });
                                 $("#master").prop('checked', false);
-                                read();
+                                reload();
 
                                 }
                             });
@@ -564,7 +746,7 @@
 
                       // $(".save").hide();
                       });
-                      read();
+                      reload();
 
                       $(".add").show("fast");
                       $(".edit_all").show("fast");
