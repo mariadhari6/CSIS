@@ -455,6 +455,7 @@
         // lengthData = parseInt(length);
 
         if (length == "all") {
+          length == "all";
           // munculkan modal progress table bar
           $('#progressTableLoad').modal('show'); 
          
@@ -494,7 +495,7 @@
             });
 
             } else {
-
+              
                 $.ajax({
                 type: "get",
                 url: `{{ url('item_data_page_length_GsmMaster') }}`,
@@ -524,20 +525,41 @@
     var url =  "{{ url('item_data_GsmMaster') }}";
     function reload() {
     // alert(link)
+    if (length == "all") {
+        $.ajax({
+          type: "get",
+          url: `{{ '${url}' }}`,
+          data: {
+            no: no - no + 1,
+            length: no,
+            reload: reload
+          },
+          success: function(datas) {
+            $('#table_id').DataTable().destroy();
+            $('#table_id').find("#item_data").html(datas);
+            $('#table_id').dataTable( {
+                "pageLength": no,
+                "dom": '<"top">rt<"bottom"><"clear">'
+                // "dom": '<lf<t>ip>'
+                });
+            $('#table_id').DataTable().draw();
+            currentPage()
+          }
+        });
+    } else {
     var reload = true;
       $.ajax({
         type: "get",
         url: `{{ '${url}' }}`,
         data: {
-          no: no - no + 1,
-          length: no,
+          no: no - lengthData,
           reload: reload
         },
         success: function(datas) {
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(datas);
           $('#table_id').dataTable( {
-              "pageLength": no,
+              "pageLength": 50,
               "dom": '<"top">rt<"bottom"><"clear">'
               // "dom": '<lf<t>ip>'
               });
@@ -545,6 +567,7 @@
           currentPage()
         }
       });
+    }
     }
 
     // Paginate --------
