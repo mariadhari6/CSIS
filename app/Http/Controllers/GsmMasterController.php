@@ -120,7 +120,11 @@ class GsmMasterController extends Controller
 
     public function item_data_page_length(Request $request)
     {
-        $GsmMaster = Gsm::orderBy('id', 'DESC')->paginate((int)$request->length);
+        if ($request->length == "all") {
+            $GsmMaster = Gsm::orderBy('id', 'DESC')->get();
+        } else {
+            $GsmMaster = Gsm::orderBy('id', 'DESC')->paginate((int)$request->length);
+        }
         // dd($request->length);
         $no = ($request->no === null) ? 1 : $request->no;
         return view('MasterData.GsmMaster.item_data')->with([

@@ -72,6 +72,7 @@
               <option value="50">50</option>
               <option value="100">100</option>
               <option value="1000">1000</option>
+              <option value="all">All</option>
             </select>
           </div>
           {{-- untuk cssnya lihat di master.css --}}
@@ -125,6 +126,24 @@
 			</div>
 		</div>
 	</div>
+
+    <!-- Modal Progress Table-->
+  <div class="modal fade" id="progressTableLoad" tabindex="-1" role="dialog" aria-labelledby="progressTableLoadLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title in" id="progressTableLoadLabel">Please Wait</h4>
+          {{-- <h4 class="modal-title hide" id="progressTableLoadLabel">Complete</h4> --}}
+        </div>
+        <div class="modal-body center-block">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="">
+            </div>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
   <script>
     $(document).ready(function() {
@@ -275,6 +294,20 @@
       }
     }
 
+    function progress_bar_process_table(percentage, timer)
+    {
+      $('.progress-bar').css('width', percentage + '%');
+      if(percentage > 100)
+      {
+        clearInterval(timer);
+        $('#process').css('display', 'none');
+        $('.progress-bar').css('width', '0%');
+        setTimeout(function(){
+          
+        }, 5000);
+      }
+    }
+
     // ------- save data import -----
     function save_data() {
       var total = 0;
@@ -419,28 +452,71 @@
         // number paginate berubah menjadi 1
         numberPaginate = 1;
         // lengthdata berisi length yg sudah dijadikan int
-        lengthData = parseInt(length);
+        // lengthData = parseInt(length);
 
-        $.ajax({
-        type: "get",
-        url: `{{ url('item_data_page_length_GsmMaster') }}`,
-        data: {
-          no: no - no + 1,
-          // mengirim jumlah length yg akan ditampilkan
-          length: length
-        },
-        success: function(datas) {
-          $('#table_id').DataTable().destroy();
-          $('#table_id').find("#item_data").html(datas);
-          $('#table_id').dataTable( {
-              "pageLength": length,
-              "dom": '<"top">rt<"bottom"><"clear">'
-              // "dom": '<lf<t>ip>'
-              });
-          $('#table_id').DataTable().draw();
-          currentPage()
-        }
-      });
+        if (length == "all") {
+          // munculkan modal progress table bar
+          $('#progressTableLoad').modal('show'); 
+         
+         
+          // $("#progressTableLoad .close").click()$('#progressTableLoad').modal('hide'); 
+
+
+          $.ajax({
+            type: "get",
+            url: `{{ url('item_data_page_length_GsmMaster') }}`,
+            data: {
+              no: no - no + 1,
+              // mengirim jumlah length yg akan ditampilkan
+              length: length
+            },
+            success: function(datas) {
+              $('#table_id').DataTable().destroy();
+              $('#table_id').find("#item_data").html(datas);
+              $('#table_id').dataTable( {
+                  "pageLength": -1,
+                  "dom": '<"top">rt<"bottom"><"clear">'
+                  // "dom": '<lf<t>ip>'
+                  });
+              $('#table_id').DataTable().draw();
+              currentPage()
+                 // progress bar
+              var percentage = 0;
+              var timer = setInterval(function(){
+              percentage = percentage + 20;
+              progress_bar_process_table(percentage, timer);
+                  //close modal
+              $('#progressTableLoad').data('reenable',true);
+              $('#progressTableLoad').modal('hide');
+              }, 1000);
+
+              }
+            });
+
+            } else {
+
+                $.ajax({
+                type: "get",
+                url: `{{ url('item_data_page_length_GsmMaster') }}`,
+                data: {
+                  no: no - no + 1,
+                  // mengirim jumlah length yg akan ditampilkan
+                  length: length
+                },
+                success: function(datas) {
+                  $('#table_id').DataTable().destroy();
+                  $('#table_id').find("#item_data").html(datas);
+                  $('#table_id').dataTable( {
+                      "pageLength": length,
+                      "dom": '<"top">rt<"bottom"><"clear">'
+                      // "dom": '<lf<t>ip>'
+                      });
+                  $('#table_id').DataTable().draw();
+                  currentPage()
+                  }
+                });
+            }
+
     });
 
     // ---- reload Table ---
@@ -453,14 +529,15 @@
         type: "get",
         url: `{{ '${url}' }}`,
         data: {
-          no: no - lengthData,
+          no: no - no + 1,
+          length: no,
           reload: reload
         },
         success: function(datas) {
           $('#table_id').DataTable().destroy();
           $('#table_id').find("#item_data").html(datas);
           $('#table_id').dataTable( {
-              "pageLength": 50,
+              "pageLength": no,
               "dom": '<"top">rt<"bottom"><"clear">'
               // "dom": '<lf<t>ip>'
               });
@@ -484,7 +561,10 @@
     // saat id next atau tombol next di tekan
     $( "#next" ).click(function() {
       // jika no lebih dari 50, tombol next bisa di tekan
-      if (no > 50) {
+      if(length == "all")
+      {
+
+      } else if (no > 50) {
         // jika tombol next di klik
         // numberpaginate bertambah satu
         numberPaginate += 1;
