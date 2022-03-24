@@ -1,6 +1,7 @@
 @extends('layouts.v_main') @section('title','CSIS | Seller')
 @section('title-table', 'Seller') @section('master','show')
-@section('seller','active') @section('content')
+@section('seller','active')
+ @section('content')
 
 <form onsubmit="return false">
     <div class="row">
@@ -183,7 +184,7 @@
                   table_output += "</tr>";
                 }
                 table_output += "</table>";
-                document.getElementById("excel_data").innerHTML = table_output;
+                document.getElementById("excel_daQta").innerHTML = table_output;
                 // check duplicate seller code
                 sellerCodeID = document.querySelectorAll("#table-data-1");
                 noAgrementLetterID = document.querySelectorAll("#table-data-2");

@@ -1,3 +1,4 @@
+
 <div class="text-right mt-3" id="selected">
     <button type="button" class="btn btn-primary float-left mr-2 add add-button"><b>Add</b><i class="fas fa-plus ml-2"
             id="add"></i></button>
@@ -8,6 +9,10 @@
             <option value="{{ url('item_data_inactive') }}">In Active</option>
         </select>
     </div>
+    <button type="button" class="btn btn-success float-left mr-2 import" data-toggle="modal" data-target="#importData">
+        <b> Import</b>
+        <i class="fas fa-file-excel ml-2"></i>
+    </button>
     <a href="/export_detail_cust_company/{{ $company->id }}" class="btn btn-success  mr-2 export" data-toggle="tooltip"
         title="Export">
         <i class="fas fa-file-export"></i>
@@ -56,11 +61,337 @@
     </tbody>
 </table>
 
+<!-- Modal Import -->
+<div class="modal fade" id="importData" tabindex="-1" role="dialog" aria-labelledby="importData" aria-hidden="true">
+    <div class="modal-dialog-full-width modal-dialog" style="width: 1000px; height: 1000px;"" role=" document">
+        <div class="modal-content-full-width modal-content">
+            <div class="modal-header-full-width modal-header bg-primary">
+                <h6 class="modal-title">Import data</h6>
+                <button type="button" class="close" id="close-modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        <b>Select Excel File</b>
+                        <br />
+                        <input type="file" id="excel_file" />
+                        <button type="button" class="btn btn-success btn-xs" id="send" onclick="save_data()">
+                            Save
+                        </button>
+                        <a class="btn btn-secondary btn-xs" href="/download_template_detailcustomer"
+                            style="color: white">Download Template</a>
+                        <div class="mt-2 progress">
+                            <div class="
+                        progress-bar progress-bar-striped
+                        active
+                    " role="progressbar" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="excel_data"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer-full-width modal-footer"></div>
+        </div>
+    </div>
+</div>
+
 
 <script>
+
     $(document).ready(function() {
+        $.ajaxSetup({
+            header:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         read();
     });
+
+
+    $('#close-modal').click(function() {
+        $('#importData').modal('hide');
+    });
+
+    var licenseArray  = {!! json_encode($licenseArray) !!};
+    var poArray       = {!! json_encode($poArray) !!};
+    var imeiArray     = {!! json_encode($imeiArray) !!};
+    var gsmArray      = {!! json_encode($gsmArray) !!};
+    var sensorArray   = {!! json_encode($sensorArray) !!};
+    // console.log(sensorArray);
+    var companyName  = {!! json_encode($companyName) !!};
+
+    const excel_file = document.getElementById("excel_file");
+    excel_file.addEventListener("change",(event)=> {
+        function progress_bar_process(percentage, timer) {
+            $('.progress-bar').css('width', percentage + '%');
+            if (percentage > 100) {
+                clearInterval(timer);
+                $('#process').css('display', 'none');
+                $('.progress-bar').css('width', '0%');
+                if (
+                    ![
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "application/vnd.ms-excel",
+                        "application/wps-office.xlsx"
+                    ].includes(event.target.files[0].type)
+                ) {
+                    document.getElementById("excel_data").innerHTML =
+                    '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+                    excel_file.value = "";
+                    return false;
+                }
+
+                var reader = new FileReader();
+                reader.readAsArrayBuffer(event.target.files[0]);
+                reader.onload = function () {
+                    var data = new Uint8Array(reader.result);
+                    var work_boox = XLSX.read(data,{type: "array"});
+                    var sheet_name = work_boox.SheetNames;
+                    var sheet_data = XLSX.utils.sheet_to_json(
+                        work_boox.Sheets[sheet_name[0]],
+                        {header: 1}
+                    );
+                    if (sheet_data.length > 0){
+                        var table_output = '<table class="table table-bordered" id="importTable">';
+                        for(var row = 0; row < sheet_data.length; row++) {
+                        table_output += "<tr>";
+                        for (var cell = 0; cell < sheet_data[row].length; cell++) {
+                            if (row == 0) {
+                                table_output += "<th>" + sheet_data[row][cell] + "</th>";
+                            }
+                            else {
+                                table_output += '<td contenteditable id="table-data-' + cell +'" >' + sheet_data[row][cell] + "</td>";
+                            }
+                        }
+                        table_output += "</tr>";
+                        }
+                        table_output += "</table>";
+                        document.getElementById("excel_data").innerHTML = table_output;
+                        company_name        = document.querySelectorAll("#table-data-0");
+                        license_plate       = document.querySelectorAll("#table-data-1");
+                        po_number           = document.querySelectorAll("#table-data-2");
+                        imei                = document.querySelectorAll("#table-data-3");
+                        gsm_number          = document.querySelectorAll("#table-data-4");
+                        sensor              = document.querySelectorAll("#table-data-5");
+                        waranty             = document.querySelectorAll("#table-data-6");
+                        tanggal_pasang      = document.querySelectorAll("#table-data-8");
+                        tanggal_non_aktif   = document.querySelectorAll("#table-data-9");
+                        tanggal_reaktifasi  = document.querySelectorAll("#table-data-10");
+
+                        for (indexA = 0; indexA < license_plate.length; indexA++) {
+                            var companyValue        = company_name[indexA].innerText;
+                            var licenseValue        = license_plate[indexA].innerText;
+                            var poValue             = po_number[indexA].innerText;
+                            var imeiValue           = imei[indexA].innerText;
+                            var gsmValue            = gsm_number[indexA].innerText;
+                            var sensorValue         = sensor[indexA].innerText;
+                            var explode             = sensorValue.split(',');
+                            // console.log(explode);
+
+                            if ( companyName[companyName.findIndex(x => x.company_name == companyValue )] != undefined) {
+
+                                if ( licenseArray[licenseArray.findIndex(x => x.license_plate == licenseValue )] != undefined) {
+                                    license_plate[indexA].style.backgroundColor = "#e8837d";
+                                }
+                                if ( poArray[poArray.findIndex(x => x.po_number == poValue )] != undefined ) {
+                                    po_number[indexA].style.backgroundColor = "#e8837d";
+                                }
+
+                                if ( imeiArray[imeiArray.findIndex(x => x.imei == imeiValue )] != undefined ) {
+                                    imei[indexA].style.backgroundColor = "#e8837d";
+                                }
+
+                                if ( gsmArray[gsmArray.findIndex(x => x.gsm_number == gsmValue )] != undefined ) {
+                                    gsm_number[indexA].style.backgroundColor = "#e8837d";
+                                }
+
+                                for (i = 0; i <  explode.length; i++) {
+                                    if ( sensorArray[sensorArray.findIndex(x => x.serial_number == explode[i] )]) {
+                                        sensor[indexA].style.backgroundColor = "#e8837d";
+                                    }
+                                }
+
+                                for (i = 0; i < waranty.length; i++) {
+                                    var excelDate = waranty[i].innerText;
+                                    if (excelDate == "-") {
+                                        waranty[i].style.backgroundColor = "#fffff";
+
+                                    }
+                                    else{
+                                        var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+                                        try{
+                                            var converted_date = date.toISOString().split('T')[0];
+                                        }
+                                        catch(err) {
+                                            waranty[i].style.backgroundColor = "#e8837d";
+                                        }
+                                        waranty[i].innerHTML = converted_date;
+                                    }
+                                }
+
+                                for (i = 0; i < tanggal_pasang.length; i++) {
+                                    var excelDate = tanggal_pasang[i].innerText;
+                                    if (excelDate == "-") {
+                                        tanggal_pasang[i].style.backgroundColor = "#fffff";
+
+                                    }
+                                    else{
+                                        var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+                                        try{
+                                            var converted_date = date.toISOString().split('T')[0];
+                                        }
+                                        catch(err) {
+                                            tanggal_pasang[i].style.backgroundColor = "#e8837d";
+                                        }
+                                        tanggal_pasang[i].innerHTML = converted_date;
+                                    }
+                                }
+
+                                for (i = 0; i < tanggal_non_aktif.length; i++) {
+                                    var excelDate = tanggal_non_aktif[i].innerText;
+                                    if (excelDate == "-") {
+                                        tanggal_non_aktif[i].style.backgroundColor = "#fffff";
+                                    }
+                                    else{
+                                        var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+                                        try{
+                                            var converted_date = date.toISOString().split('T')[0];
+                                        }
+                                        catch(err) {
+                                            tanggal_non_aktif[i].style.backgroundColor = "#e8837d";
+                                        }
+                                        tanggal_non_aktif[i].innerHTML = converted_date;
+                                    }
+                                }
+
+                                for (i = 0; i < tanggal_reaktifasi.length; i++) {
+                                    var excelDate = tanggal_reaktifasi[i].innerText;
+                                    if (excelDate == "-") {
+                                        tanggal_reaktifasi[i].style.backgroundColor = "#fffff";
+                                    }
+                                    else{
+                                        var date = new Date(Math.round((excelDate - (25567 + 2)) * 86400 * 1000));
+                                        try{
+                                            var converted_date = date.toISOString().split('T')[0];
+                                        }
+                                        catch(err) {
+                                            tanggal_reaktifasi[i].style.backgroundColor = "#e8837d";
+                                        }
+                                        tanggal_reaktifasi[i].innerHTML = converted_date;
+                                    }
+                                }
+
+                                excel_file.value = "";
+                            }
+                            else{
+                                swal({
+                                    type: 'warning',
+                                    text: 'data error',
+                                    showCloseButton: true,
+                                    showConfirmButton: false
+                                }).catch(function(timeout) { });
+                            }
+                        }
+                    };
+                }
+
+            }
+        }
+        var percentage = 0;
+        var timer = setInterval(function() {
+            percentage = percentage + 20;
+            progress_bar_process(percentage, timer);
+        }, 1000);
+    });
+
+
+
+    function progress_bar_process(percentage, timer)
+    {
+      $('.progress-bar').css('width', percentage + '%');
+      if(percentage > 100)
+      {
+        clearInterval(timer);
+        $('#process').css('display', 'none');
+        $('.progress-bar').css('width', '0%');
+        setTimeout(function(){
+        swal({
+              type: 'success',
+              title: 'Data import Saved',
+              showConfirmButton: false,
+              timer: 1500
+        }).catch(function(timeout) { });
+        read();
+        $("#importTable tr").remove();
+        $('#importData').modal('hide');
+        }, 5000);
+      }
+    }
+
+    function save_data() {
+        var total = 0;
+        var jsonTable = $('#importTable tbody tr:has(td)').map(function () {
+            var $td = $('td', this);
+            total += parseFloat($td.eq(2).text());
+            return{
+                company_id          : $td.eq(0).text(),
+                license_plate       : $td.eq(1).text(),
+                po_id               : $td.eq(2).text(),
+                imei                : $td.eq(3).text(),
+                gsm_id              : $td.eq(4).text(),
+                sensor_all          : $td.eq(5).text(),
+                waranty             : $td.eq(6).text(),
+                status_id           : $td.eq(7).text(),
+                tanggal_pasang      : $td.eq(8).text(),
+                tanggal_non_aktif   : $td.eq(9).text(),
+                tgl_reaktivasi_gps  : $td.eq(10).text(),
+            }
+
+        }).get();
+
+      $('#importTable > tfoot > tr > td:nth-child(3)').html(total);
+        data = {};
+        data = jsonTable;
+        //
+        var thLength = $('#importTable th').length;
+        var trLength = $("#importTable td").closest("tr").length;
+        var item = document.querySelectorAll("#table-data-8");
+        var tes = $("#importTable").find("tbody>tr:eq(1)>td:eq(1)").attr("style");
+        var success;
+        $.ajax({
+        method: 'POST',
+        dataType: 'JSON',
+        url: "{{ url('save_import_detailcustomer') }}",
+        data: {
+           data   : JSON.stringify(data) ,
+          _token  : '{!! csrf_token() !!}'
+        },
+        error: function(er) {
+          if(er.responseText === 'fail' ){
+                swal({
+                    type: 'warning',
+                    text: 'Duplicate data or error format',
+                    showCloseButton: true,
+                    showConfirmButton: false
+                }).catch(function(timeout) { });
+                return false;
+          }
+          else {
+                var percentage = 0;
+                var timer = setInterval(function(){
+                    percentage = percentage + 20;
+                    progress_bar_process(percentage, timer);
+                },1000);
+            }
+        }
+    });
+    }
+
+
 
     function read() {
         enableButton();
@@ -589,3 +920,4 @@
     }
 
 </script>
+

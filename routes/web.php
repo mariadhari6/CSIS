@@ -346,6 +346,8 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/item_data_all_status/{id}', [DetailCustomerController::class, 'item_data']);
     Route::get('/item_data_active/{id}', [DetailCustomerController::class, 'Active']);
     Route::get('/item_data_inactive/{id}', [DetailCustomerController::class, 'InActive']);
+    Route::get('/download_template_detailcustomer', [DetailCustomerController::class, 'export']);
+    Route::post('/save_import_detailcustomer', [DetailCustomerController::class, 'save_import']);
 
 
 
@@ -371,7 +373,6 @@ Route::group(['middleware' => ['role:superAdmin|cs|teknisi']], function () {
     Route::get('/based_imei/{id}', [PemasanganMutasiGpsController::class, 'basedImei']);
     Route::get('/based_kendaraanPasang/{id}', [PemasanganMutasiGpsController::class, 'basedKendaraanPasang']);
     Route::get('/export_pemasangan_mutasi_GPS', [PemasanganMutasiGpsController::class, 'export_pemasangan']);
-
 
 
     // Route::get('/dependent_pemasanganmutasi/{id}', [PemasanganMutasiGpsController::class, 'dependentPemasangan']);

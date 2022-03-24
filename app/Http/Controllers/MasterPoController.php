@@ -11,11 +11,13 @@ use App\Models\DetailCustomer;
 use App\Models\Sales;
 use App\Models\Sensor;
 use App\Models\Vehicle;
+use App\Models\ServiceStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use carbon\Carbon;
+use Facade\FlareClient\Http\Exceptions\NotFound;
 
 class MasterPoController extends Controller
 {
@@ -253,6 +255,65 @@ class MasterPoController extends Controller
     public function export_masterPO()
     {
         return Excel::download(new MasterPoExport, 'MasterPo.xlsx');
+    }
+
+    public function check(){
+        // $license_plate = "testing";
+        // $status_id = "Active";
+        // $license_id = Company::where('company_name', $license_plate)->firstOrFail()->id;
+        // $status_id      = ServiceStatus::where('service_status_name', $status_id)->firstOrFail()->id;
+        // return $status_id;
+
+        $sensorArray = array();
+        $DetailCustomer_sensor  = DetailCustomer::pluck('sensor_all');
+        for ($i=0; $i < count($DetailCustomer_sensor) ; $i++) {
+            if ($DetailCustomer_sensor[$i] != null ) {
+                $u = explode(' ', $DetailCustomer_sensor[$i]);
+                array_push($sensorArray, $u[0]);
+            }
+        }
+        // return $sensorArray;
+
+        $sensor = "DOOR-11-21-172,DOOR-11-21-170";
+        if ($sensor != "-") {
+            $explode = explode(',', $sensor);
+            $temp = "";
+            for ($i=0; $i < count($explode) ; $i++) {
+                $sensor_id = Sensor::where("serial_number", $explode[$i])->pluck('id');
+                foreach($sensor_id as $item){
+                    if (in_array($item, $sensorArray)) {
+                        $checkSensor = !null;
+                    }
+                    else {
+                    $checkSensor = null;
+                    }
+                }
+            }
+        }
+
+
+
+
+        if ($checkSensor === null) {
+            echo"null";
+        }
+        else {
+            echo "gak" ;
+        }
+
+
+
+        // for ($i=0; $i < count($sensor_id) ; $i++) {
+        //     if ($sensor_id[$i]['sensor_all'] != null) {
+        //         $i = explode(" ", $sensor_id[$i]['sensor_all']);
+        //         array_push($sensorArray, $i);
+        //     }
+        // }
+
+        // $checkSensor = $sensorArray == $sensor_id;
+        // return $sensor_id;
+
+
     }
 
 }

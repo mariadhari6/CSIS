@@ -167,6 +167,7 @@
               ![
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "application/vnd.ms-excel",
+                "application/wps-office.xlsx"
               ].includes(event.target.files[0].type)
             ) {
               document.getElementById("excel_data").innerHTML =
@@ -304,7 +305,6 @@
       data = {};
       data = jsonTable;
 
-      // console.log(data[0]['status_gsm'])
       var thLength = $('#importTable th').length;
       var trLength = $("#importTable td").closest("tr").length;
       var item = document.querySelectorAll("#table-data-8");

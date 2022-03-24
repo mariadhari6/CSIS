@@ -111,6 +111,7 @@
             ![
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "application/vnd.ms-excel",
+                "application/wps-office.xlsx"
             ].includes(event.target.files[0].type)
         ) {
             document.getElementById("excel_data").innerHTML =

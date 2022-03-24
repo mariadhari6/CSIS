@@ -3,11 +3,11 @@
         <div class="card">
             <div class="card-body">
                 {{-- <h6>Jumlah Company Per Seller</h6> --}}
-                <table class="table table-hover data " class="table_company" id="table_company">
+                <table class="table table-hover " class="table_company" id="table_company">
 
                     <tr>
                         <th scope="col" class="list" style="text-align: left">Company Name</th>
-                        <th scope="col" class="list" style="text-align: left">Seller Name</th>
+                        <th style="text-align: left">Seller Name</th>
                         <th scope="col" class="list" style="text-align: center">Total GPS</th>
                         <th scope="col" class="list">Type GPS</th>
                         <th scope="col" class="list" style="text-align: center">Total Type GPS</th>
@@ -19,13 +19,14 @@
                     <tr>
                         <td style="text-align: left">{{ $companys->company->company_name??''}}</td>
 
-                        <td style="text-align: left">
+                        <td style="text-align: left; min-width: 200px;">
                             @foreach ($companys->seller as $seller)
                             {{$seller->seller->seller_name}} <br>
                             @endforeach
                         </td>
-                        <td style="text-align: right">@foreach ( $companys->total_company as $jumlah)
-                            {{$jumlah->total_company}}
+                        <td style="text-align: right">
+                            @foreach ( $companys->total_company as $jumlah)
+                                {{$jumlah->total_company}}
                             @endforeach
                         </td>
                         <td>
